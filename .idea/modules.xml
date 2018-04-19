@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/dummyproject/TravelWishlist/TravelWishlist.iml" filepath="$PROJECT_DIR$/dummyproject/TravelWishlist/TravelWishlist.iml" />
       <module fileurl="file://$PROJECT_DIR$/mois-assist.iml" filepath="$PROJECT_DIR$/mois-assist.iml" />
     </modules>
   </component>
