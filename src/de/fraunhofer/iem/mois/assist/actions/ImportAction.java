@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.FileSelectedNotifier;
+import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,6 +27,8 @@ public class ImportAction extends AnAction {
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
+
+            SummaryToolWindow.FILE_SELECTED = true;
             File selectedFile = fileChooser.getSelectedFile();
 
             MessageBus messageBus = project.getMessageBus();

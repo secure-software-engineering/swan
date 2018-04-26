@@ -14,6 +14,7 @@ import com.intellij.psi.*;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.Method;
 import de.fraunhofer.iem.mois.assist.ui.MethodDialog;
+import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class AddMethodAction extends AnAction {
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
         final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
 
+
         PsiJavaFile java = (PsiJavaFile) e.getData(LangDataKeys.PSI_FILE);
 
         //Obtain selected method
@@ -34,8 +36,9 @@ public class AddMethodAction extends AnAction {
         final SelectionModel selectionModel = editor.getSelectionModel();
 
         CaretModel caretModel = editor.getCaretModel();
-        Caret caret = caretModel.getCurrentCaret();
 
+        Caret caret = caretModel.getCurrentCaret();
+        //TODO right click where method is and obtain method name
         Method newMethod;
         boolean methodFound = false;
 
@@ -52,19 +55,32 @@ public class AddMethodAction extends AnAction {
                     if (psiMethod.getName().equals(selectionModel.getSelectedText())) {
 
                         methodFound = true;
+                        //TODO obtain fully qualified name for return types
+                        System.out.println("Return: "+psiMethod.getReturnType().getInternalCanonicalText()+"\n" +
+                                psiMethod.getReturnType().getCanonicalText()+"\n"+
+                                psiMethod.getReturnType().getCanonicalText(true));
 
                         //Determine method return type
-                        String returnType = psiMethod.getReturnType().getCanonicalText();
+                        String returnType = psiMethod.getReturnType().getInternalCanonicalText();
+
+
 
                         //Obtain parameters
                         List<String> parameters = new ArrayList<String>();
-                        for (PsiParameter psiParameter : psiMethod.getParameterList().getParameters())
+                        for (PsiParameter psiParameter : psiMethod.getParameterList().getParameters()){
                             parameters.add(psiParameter.getTypeElement().getType().getCanonicalText());
+                            System.out.println(psiParameter.getTypeElement().getType().getCanonicalText());
+
+                        }
+
+                        System.out.println("Name: "+psiClass.getQualifiedName());
 
                         newMethod = new Method(psiClass.getQualifiedName() + "." + psiMethod.getName(), returnType, "", "", "", "", "");
                         newMethod.addParameter(parameters);
                         newMethod.setNewMethod(true);
 
+
+                        System.out.println(newMethod.getSignature(false));
                         MethodDialog methodDialog = new MethodDialog(newMethod, project, JSONFileLoader.getCategories());
                         methodDialog.setTitle("Add Method");
                         methodDialog.pack();
@@ -78,5 +94,15 @@ public class AddMethodAction extends AnAction {
             if (!methodFound)
                 Messages.showMessageDialog(project, Constants.METHOD_NOT_FOUND, "Method Selection", Messages.getInformationIcon());
         }
+    }
+
+    @Override
+    public void update(AnActionEvent event) {
+
+        //Disable/Enable action button
+        if (SummaryToolWindow.FILE_SELECTED)
+            event.getPresentation().setEnabled(true);
+        else
+            event.getPresentation().setEnabled(false);
     }
 }

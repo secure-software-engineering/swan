@@ -33,9 +33,9 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 text.setIcon(null);
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED))
-                    text.setForeground(JBColor.GREEN);
+                    text.setForeground(new JBColor(new Color(1,128,0),new Color(1,128,0)));
                 else if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_DELETED))
-                    text.setForeground(JBColor.RED);
+                    text.setForeground(new JBColor(new Color(178,34,34),new Color(178,34,34)));
 
                 text.setToolTipText(method.getClassName(true));
 

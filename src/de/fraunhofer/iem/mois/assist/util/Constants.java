@@ -51,27 +51,29 @@ public class Constants {
     public final static String URI_NOT_FOUND = "There was an error loading the URI";
     public final static String CONFIRM_METHOD_DELETION = "Are you sure you want to delete this method?";
 
+    //TODO update link to point to online help resources that will be created
     public final static String HELP_LINK = "https://github.com/Sable/soot";
 
 
-    //Susi arguments
-    public final static String SUSI_TRAIN_DIR = "train_dir";
-    public final static String SUSI_SOURCE_DIR = "source_dir";
-    public final static String SUSI_CONFIG_FILE = "configuration_file";
-    public final static String SUSI_OUTPUT_DIR = "output_dir";
-    public final static String SUSI_JAR_DIR = "susi_jar";
-    public final static String SUSI_OUTPUT_FILE = "output_file";
-    public final static String SUSI_OUTPUT_LOG = "output_logs";
-    public final static String SUSI_OUTPUT_MESSAGE = "output_message";
+    //MOIS arguments
+    public final static String MOIS_TRAIN_DIR = "train_dir";
+    public final static String MOIS_SOURCE_DIR = "source_dir"; //Test Library (or the project)
+    public final static String MOIS_CONFIG_FILE = "configuration_file";
+    public final static String MOIS_OUTPUT_DIR = "output_dir";
+    public final static String MOIS_JAR_DIR = "mois_jar";
+    public final static String MOIS_OUTPUT_FILE = "output_file";
+    public final static String MOIS_OUTPUT_LOG = "output_logs";
+    public final static String MOIS_OUTPUT_MESSAGE = "output_message";
 
-    public final static String SUSI_LOG_SUFFIX = "_susiassist_log";
+    public final static String MOIS_LOG_SUFFIX = "_moisassist_log.txt";
+    public final static String OUTPUT_DIR_NAME = "output";
     public final static String OUTPUT_JSON_SUFFIX = "_output.json";
     public final static String OUTPUT_TEXT_SUFFIX = "_output.txt";
 
     public final static String FILTER_CURRENT_FILE_KEY = "file";
     public final static String FILTER_CURRENT_FILE_VALUE = "Current File";
-    public final static String FILTER_CLEAR_KEY = "CLear Filters";
-    public final static String FILTER_CLEAR_VALUE = "CLear Filters";
+    public final static String FILTER_CLEAR_KEY = "Clear Filters";
+    public final static String FILTER_CLEAR_VALUE = "Clear Filters";
     public final static String FILTER_CWE = "CWE";
     public final static String FILTER_TYPE = "Type";
 
@@ -83,21 +85,21 @@ public class Constants {
     public final static String METHOD_DELETED = "deleted";
     public final static String METHOD_ADDED = "added";
     public final static String METHOD_CHANGED = "changed";
+    public final static String MSG_METHOD_RESTORED = "The method was restored.";
 
 
-    public final static String NOTIFICATION_START_SUSI ="Running Susi...";
-    public final static String NOTIFICATION_END_SUSI_SUCCESS ="Susi completed successfully at ";
-    public final static String NOTIFICATION_END_SUSI_FAIL ="There was an error";
+    public final static String NOTIFICATION_START_MOIS ="Running MOIS...";
+    public final static String NOTIFICATION_END_MOIS_SUCCESS ="MOIS completed at ";
+    public final static String NOTIFICATION_END_MOIS_FAIL ="There was an error";
     public final static String NOTIFICATION_NONE ="No new notifications";
-    public final static String NOTIFICATION_SUSI ="View results";
+    public final static String NOTIFICATION_MOIS ="View results";
 
-    /*
-    CONFIGURATION
-     */
+    public final static String TREE_EMPTY = "Select a configuration file using the \"Import\" option";
+    public final static String TREE_FILTERS_EMPTY = "No methods match the filters you've selected";
+    public final static String MOIS_TRAIN_DIR_NAME = "training_libs";
+    public final static String MOIS_JAR_NAME = "mois.jar";
 
-    public final static String SUSI_TRAIN_DIR_PATH = "/Users/oshando/IdeaProjects/iem-attract/02_code/susi/SuSi/SusiLib";
-    public final static String SUSI_JAR_PATH = "/Users/oshando/IdeaProjects/iem-attract/02_code/Susiassist/libs/susi.jar";
-
+    public final static String LAUNCHER_PATH_NOT_SELECTED = "A path was not selected for one of the fields.";
 
 
 }

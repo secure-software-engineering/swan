@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="libs">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/susi.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/json-simple-1.1.1.jar!/" />
+      <root url="file://$PROJECT_DIR$/libs" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libs" recursive="false" />
   </library>
 </component>

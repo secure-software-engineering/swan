@@ -2,82 +2,51 @@ package de.fraunhofer.iem.mois.assist.data;
 
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JSONFileComparator {
 
     private String originalFilePath;
     private String newFilePath;
-    private ArrayList<Method> mergedList;
-
 
     JSONFileComparator(String originalPath, String newPath) {
         originalFilePath = originalPath;
         newFilePath = newPath;
     }
 
-    public ArrayList<Method> compareJSONFile() {
+    public HashMap<String, Method> compareJSONFile() {
 
-        mergedList = new ArrayList<Method>();
+        JSONFileParser fileParser = new JSONFileParser(originalFilePath);
+        HashMap<String, Method> originalList = fileParser.parseJSONFileMap();
 
-        JSONFileParser originalParser = new JSONFileParser(originalFilePath);
-        ArrayList<Method> originalList = originalParser.parseJSONFile();
+        fileParser.setCongFilePath(newFilePath);
+        HashMap<String, Method> updatedList = fileParser.parseJSONFileMap();
 
-        JSONFileParser updatedParser = new JSONFileParser(newFilePath);
-        ArrayList<Method> updatedList = updatedParser.parseJSONFile();
+        //Determine methods that were deleted
+        Set<String> deletedMethods = originalList.keySet().stream()
+                .filter(method -> !updatedList.keySet().contains(method))
+                .collect(Collectors.toSet());
 
+        //Determine methods that were deleted
+        Set<String> addedMethods = updatedList.keySet().stream()
+                .filter(method -> !originalList.keySet().contains(method))
+                .collect(Collectors.toSet());
 
-        for (Method updated : updatedList) {
-            boolean newMethod = true;
-            System.out.println(updated.getClassName(false));
-            for (Method original : originalList) {
-                //   System.out.println(">>> "+original.getClassName(false));
+        for (String methodSignature : deletedMethods) {
 
-                //TODO    if(updated.equals(original))
-                if (updated.getClassName(true).equals(original.getClassName(true))) {
-                    System.out.println(">>Method exists");
-                    newMethod = false;
-                    break;
-
-                }
-            }
-                if (newMethod) {
-                    System.out.println("New: " + updated.getClassName(false));
-                    updated.setUpdateOperation(Constants.METHOD_ADDED);
-                }
-
-                mergedList.add(updated);
-            }
-
-
-        for (Method original : originalList) {
-            boolean deletedMethod = true;
-        //    System.out.println(updated.getClassName(false));
-            for (Method updated : updatedList) {
-                //   System.out.println(">>> "+original.getClassName(false));
-
-                //TODO    if(updated.equals(original))
-                if (updated.getClassName(true).equals(original.getClassName(true))) {
-                    System.out.println(">>Method Deleted");
-                    deletedMethod = false;
-                    break;
-
-                }
-            }
-                if (deletedMethod) {
-                    System.out.println("deleted: " + original.getClassName(false));
-                    original.setUpdateOperation(Constants.METHOD_DELETED);
-                    mergedList.add(original);
-                }
-
-
-
+            Method method = originalList.get(methodSignature);
+            method.setUpdateOperation(Constants.METHOD_DELETED);
+            updatedList.put(methodSignature, method);
         }
 
-        return mergedList;
-    }
+        for (String methodSignature : addedMethods) {
+            Method method = updatedList.get(methodSignature);
+            method.setUpdateOperation(Constants.METHOD_ADDED);
+            updatedList.replace(methodSignature, method);
+        }
 
-    public void compareList(ArrayList<Method> original, ArrayList<Method> updated) {
-
+        return updatedList;
     }
 }

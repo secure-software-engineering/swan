@@ -1,14 +1,13 @@
 package de.fraunhofer.iem.mois.assist.data;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class JSONFileLoader {
 
-    static private ArrayList<Method> methods;
+    static private HashMap<String, Method> methods;
     static private String congFile = "";
+    static public final int NEW_METHOD = 0;
+    static public final int EXISTING_METHOD = 1;
 
     //Get configuration file location
     public static void setConfigurationFile(String path) {
@@ -36,7 +35,7 @@ public class JSONFileLoader {
     public static void loadInitialFile() {
 
         JSONFileParser fileParser = new JSONFileParser(congFile);
-        methods = fileParser.parseJSONFile();
+        methods = fileParser.parseJSONFileMap();
     }
 
     //Compares new JSON file with original file and
@@ -50,20 +49,21 @@ public class JSONFileLoader {
     //Return list of methods as an array
     public static ArrayList<Method> getMethods() {
 
-        return methods;
+        return new ArrayList<>(methods.values());
     }
 
 
     //Return list of methods as an array using categories
     public static ArrayList<Method> getMethods(ArrayList<String> filters, String currentFile, boolean currentFileMode) {
 
-        //TODO use data structure that can search based on keys (method names/signatures)
         if (filters.size() == 0 && currentFileMode) {
-            ArrayList<Method> filteredList = new ArrayList<>();
-            for (Method method : methods) {
 
-                if (method.getClassName(true).contains(currentFile)) {
-                    filteredList.add(method);
+            ArrayList<Method> filteredList = new ArrayList<>();
+
+            for (String methodSignature : methods.keySet()) {
+
+                if (methodSignature.contains(currentFile)) {
+                    filteredList.add(methods.get(methodSignature));
                 }
             }
             return filteredList;
@@ -71,80 +71,56 @@ public class JSONFileLoader {
 
             ArrayList<Method> filteredList = new ArrayList<>();
 
-            for (Method method : methods) {
+            for (String methodSignature : methods.keySet()) {
 
-                if (currentFileMode && !method.getClassName(true).contains(currentFile))
+                if (methodSignature.contains(currentFile))
                     continue;
 
-                for (Category category : method.getCategories()) {
+                for (Category category : methods.get(methodSignature).getCategories()) {
 
                     if (filters.contains(category.toString())) {
-                        filteredList.add(method);
+                        filteredList.add(methods.get(methodSignature));
                         break;
                     }
                 }
             }
             return filteredList;
         } else
-            return methods;
+            return new ArrayList<>(methods.values());
     }
 
     //Return list of categories as a set
     public static Set<Category> getCategories() {
 
-        Set<Category> category = new HashSet<>();
+        Set<Category> categorySet = new HashSet<>();
 
-        for (Method method : methods) {
+        for (Method method : methods.values()) {
 
-            Iterator<Category> val = method.getCategories().iterator();
-
-            while (val.hasNext()) {
-
-                Category cur = val.next();
-
-                if (!category.contains(cur))
-                    category.add(cur);
+            for (Category category : method.getCategories()) {
+                if (!categorySet.contains(category))
+                    categorySet.add(category);
             }
         }
-        return category;
+        return categorySet;
     }
 
     //Add new method to the list
-    public static void addMethod(Method method) {
+    public static int addMethod(Method method) {
 
-        Method originalMethod = null;
-
-        for (Method search : methods) {
-
-            if (search.getClassName(true).equals(method.getClassName(true))) {
-                originalMethod = search;
-            }
-        }
-
-        if (originalMethod == null) {
-            methods.add(method);
+        if (!methods.containsKey(method.getSignature(false))) {
+            methods.replace(method.getSignature(false), method);
+            return EXISTING_METHOD;
         } else {
-            methods.remove(originalMethod);
-            methods.add(method);
+            methods.put(method.getSignature(false), method);
+            return NEW_METHOD;
         }
     }
 
     //Remove method from list
     public static void removeMethod(Method method) {
 
-        System.out.println("Total; "+methods.size());
-        Method originalMethod = null;
-
-        for (Method search : methods) {
-
-            if (search.getClassName(true).equals(method.getClassName(true))) {
-                originalMethod = search;
-            }
-        }
-
-        if (originalMethod != null) {
-            methods.remove(originalMethod);
-            System.out.println("Total; "+methods.size());
+        if (methods.containsKey(method.getSignature(true))) {
+            methods.remove(method.getSignature(true));
         }
     }
 }

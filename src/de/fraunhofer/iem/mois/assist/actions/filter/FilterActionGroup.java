@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Separator;
+import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -27,5 +28,15 @@ public class FilterActionGroup extends ActionGroup {
     @Override
     public boolean isPopup() {
         return true;
+    }
+
+    @Override
+    public void update(AnActionEvent event) {
+
+        //Disable/Enable action button
+        if (SummaryToolWindow.FILE_SELECTED)
+            event.getPresentation().setEnabled(true);
+        else
+            event.getPresentation().setEnabled(false);
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.*;
 public interface PluginIcons {
 
     Icon MOIS_ASSIST = IconLoader.getIcon("/icons/mois_assist.png");
-    Icon IMPORT_ACTION = IconLoader.getIcon("/icons/add.png");
+    Icon IMPORT_ACTION = IconLoader.getIcon("/icons/import.png");
     Icon REFRESH_SUSI = IconLoader.getIcon("/icons/refresh.png");
     Icon HELP_ACTION = IconLoader.getIcon("/icons/help.png");
     Icon FILTER_ACTION = IconLoader.getIcon("/icons/filter.png");

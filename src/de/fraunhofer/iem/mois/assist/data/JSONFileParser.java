@@ -8,17 +8,28 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class JSONFileParser {
 
     private String congFilePath;
-    JSONFileParser(String path){
+
+    JSONFileParser(String path) {
         congFilePath = path;
     }
 
-    public ArrayList<Method> parseJSONFile(){
+    public String getCongFilePath() {
+        return congFilePath;
+    }
+
+    public void setCongFilePath(String congFilePath) {
+        this.congFilePath = congFilePath;
+    }
+
+
+    public HashMap<String, Method> parseJSONFileMap() {
 
         Object obj = null;
 
@@ -34,7 +45,7 @@ public class JSONFileParser {
         JSONObject jsonObject = (JSONObject) obj;
         JSONArray array = (JSONArray) jsonObject.get(Constants.METHOD);
 
-        ArrayList<Method> methods = new ArrayList<Method>();
+        HashMap<String, Method> methods = new HashMap<String, Method>();
 
         Iterator<JSONObject> iterator = array.iterator();
 
@@ -50,6 +61,36 @@ public class JSONFileParser {
             String secLevel = (String) jsonObj.get(Constants.SECURITY_LEVEL);
 
             Method method = new Method(methodName, returnType, discovery, framework, link, comment, secLevel);
+
+            // parse the correct types
+            if (jsonObj.get(Constants.TYPE) != null) {
+
+                JSONArray types = (JSONArray) jsonObj.get(Constants.TYPE);
+
+                if(types.isEmpty())
+                    continue;
+
+                else {
+                    for (String type : (Iterable<String>) types) {
+                        switch (Formatter.capitalizeFirstCharacter(type)) {
+                            case Constants.SOURCE:
+                                method.addCategory(Category.SOURCE);
+                                break;
+                            case Constants.SINK:
+                                method.addCategory(Category.SINK);
+                                break;
+                            case Constants.SANITIZER:
+                                method.addCategory(Category.SANITIZER);
+                                break;
+                            case Constants.AUTHENTICATION:
+                                method.addCategory(Category.AUTHENTICATION);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }}
 
             Method.SecLevel securityLevel = Method.SecLevel.NEUTRAL;
             if (secLevel == null)
@@ -97,33 +138,8 @@ public class JSONFileParser {
                     //TODO manage else case: System.err.println("CWE category does not exist: " + cweId);
                 }
             }
+            methods.put(method.getSignature(true), method);
 
-            // parse the correct types
-            if (jsonObj.get(Constants.TYPE) != null) {
-                JSONArray types = (JSONArray) jsonObj.get(Constants.TYPE);
-                Iterator<String> p = types.iterator();
-                while (p.hasNext()) {
-                    String t = p.next().toString();
-
-                    switch (Formatter.capitalizeFirstCharacter(t)) {
-                        case Constants.SOURCE:
-                            method.addCategory(Category.SOURCE);
-                            break;
-                        case Constants.SINK:
-                            method.addCategory(Category.SINK);
-                            break;
-                        case Constants.SANITIZER:
-                            method.addCategory(Category.SANITIZER);
-                            break;
-                        case Constants.AUTHENTICATION:
-                            method.addCategory(Category.AUTHENTICATION);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-            methods.add(method);
         }
 
         return methods;

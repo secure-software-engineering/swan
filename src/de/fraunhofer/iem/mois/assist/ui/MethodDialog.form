@@ -79,7 +79,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+            </properties>
           </component>
           <component id="95897" class="javax.swing.JLabel">
             <constraints>
@@ -95,7 +97,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+            </properties>
           </component>
           <component id="b703" class="javax.swing.JTextField" binding="methodSignature">
             <constraints>

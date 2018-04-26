@@ -21,7 +21,7 @@ import de.fraunhofer.iem.mois.assist.actions.method.MethodActionGroup;
 import de.fraunhofer.iem.mois.assist.comm.FileSelectedNotifier;
 import de.fraunhofer.iem.mois.assist.comm.FilterNotifier;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
-import de.fraunhofer.iem.mois.assist.comm.SusiNotifier;
+import de.fraunhofer.iem.mois.assist.comm.MoisNotifier;
 import de.fraunhofer.iem.mois.assist.data.Category;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.Method;
@@ -40,8 +40,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 
 public class SummaryToolWindow implements ToolWindowFactory {
@@ -53,6 +56,7 @@ public class SummaryToolWindow implements ToolWindowFactory {
     public static ArrayList<String> TREE_FILTERS;
     public static boolean CURRENT_FILE_FILTER;
     public static boolean RESTORE_METHOD;
+    public static boolean FILE_SELECTED;
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
@@ -61,29 +65,8 @@ public class SummaryToolWindow implements ToolWindowFactory {
 
         JBPanel toolPanel = new JBPanel(new BorderLayout());
 
-        ArrayList<Method> one = new ArrayList<>();
-        ArrayList<Method> two = new ArrayList<>();
-        ArrayList<Method> three = new ArrayList<>();
-
-        Method oneMethod = new Method("com.travelguru.util.UserManagement.hashPassword", "java.lang.String", "manual", "", "", "", "");
-
-        Method twoMethod = new Method("com.travelguru.util.UserManagement.hashPassword", "java.lang.String", "manual", "", "", "", "");
-
-        one.add(oneMethod);
-        two.add(twoMethod);
-        three.add(twoMethod);
-
-
-        if (one.get(0).equals(two.get(0)))
-            System.out.println("One = Two");
-        if (two.get(0).equals(three.get(0)))
-            System.out.println("Two = Three");
-        if (one.get(0).equals(three.get(0)))
-            System.out.println("One = Three");
-
-
         //Toolbar action panel
-        final DefaultActionGroup actions = (DefaultActionGroup)ActionManager.getInstance().getAction("MOIS-Assist.ActionBar");
+        final DefaultActionGroup actions = (DefaultActionGroup) ActionManager.getInstance().getAction("MOIS-Assist.ActionBar");
         final ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("SummaryToolbar", actions, true);
         toolPanel.add(actionToolbar.getComponent(), BorderLayout.PAGE_START);
 
@@ -93,10 +76,12 @@ public class SummaryToolWindow implements ToolWindowFactory {
         methodTree = new Tree();
         methodTree.setCellRenderer(new MethodTreeRenderer());
         methodTree.setModel(treeModel);
+        methodTree.getEmptyText().setText(Constants.TREE_EMPTY);
 
         TREE_FILTERS = new ArrayList<>();
         CURRENT_FILE_FILTER = false;
         RESTORE_METHOD = false;
+        FILE_SELECTED = false;
 
         //TODO exception when no file is open
         Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
@@ -104,7 +89,6 @@ public class SummaryToolWindow implements ToolWindowFactory {
         currentFile = Formatter.getFileNameFromPath(virtualFile.getName());
 
         JBScrollPane scrollPane = new JBScrollPane(methodTree);
-
         toolPanel.add(scrollPane, BorderLayout.CENTER);
 
         //Tool Window Footer
@@ -165,7 +149,7 @@ public class SummaryToolWindow implements ToolWindowFactory {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                if (SwingUtilities.isRightMouseButton(e) || e.isControlDown()) {
+                if ((SwingUtilities.isRightMouseButton(e) || e.isControlDown()) &&!methodTree.isEmpty() ) {
 
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) methodTree.getLastSelectedPathComponent();
                     Object object = node.getUserObject();
@@ -173,7 +157,6 @@ public class SummaryToolWindow implements ToolWindowFactory {
                     if (object instanceof Method) {
 
                         Method updateMethod = (Method) object;
-
                         RESTORE_METHOD = updateMethod.getUpdateOperation().equals(Constants.METHOD_DELETED);
 
                         ActionPopupMenu actionPopupMenu = ActionManager.getInstance().createActionPopupMenu("Method", new MethodActionGroup(updateMethod));
@@ -210,45 +193,41 @@ public class SummaryToolWindow implements ToolWindowFactory {
             }
         });
 
-        //Connect to project's bus and obtain new method that was added
-        bus.connect().subscribe(MethodNotifier.METHOD_ADDED_TOPIC, new MethodNotifier() {
+        //Connect to project's bus and obtain method that was updated or added
+        bus.connect().subscribe(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC, new MethodNotifier() {
 
             @Override
             public void afterAction(Method newMethod) {
 
-                JSONFileLoader.addMethod(newMethod);
+                switch (JSONFileLoader.addMethod(newMethod)) {
 
-                DefaultMutableTreeNode root = (DefaultMutableTreeNode) methodTree.getModel().getRoot();
-                DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(newMethod);
+                    case JSONFileLoader.EXISTING_METHOD:
 
-                for (Category category : newMethod.getCategories()) {
-                    newMethodNode.add(new DefaultMutableTreeNode(category));
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) methodTree.getLastSelectedPathComponent();
+                        node.removeAllChildren();
+
+                        for (Category category : newMethod.getCategories()) {
+                            node.add(new DefaultMutableTreeNode(category));
+                        }
+
+                        treeModel.nodeStructureChanged(node);
+                        break;
+                    case JSONFileLoader.NEW_METHOD:
+                        DefaultMutableTreeNode root = (DefaultMutableTreeNode) methodTree.getModel().getRoot();
+                        DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(newMethod);
+
+                        for (Category category : newMethod.getCategories()) {
+                            newMethodNode.add(new DefaultMutableTreeNode(category));
+                        }
+
+                        treeModel.insertNodeInto(newMethodNode, root, root.getChildCount());
+                        break;
                 }
-
-                treeModel.insertNodeInto(newMethodNode, root, root.getChildCount());
-            }
-        });
-
-        //Connect to project's bus and obtain method that was updated
-        bus.connect().subscribe(MethodNotifier.METHOD_UPDATED_TOPIC, new MethodNotifier() {
-
-            @Override
-            public void afterAction(Method newMethod) {
-
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) methodTree.getLastSelectedPathComponent();
-                node.removeAllChildren();
-
-                for (Category category : newMethod.getCategories()) {
-                    node.add(new DefaultMutableTreeNode(category));
-                }
-
-                treeModel.nodeStructureChanged(node);
             }
         });
 
         //Connect to project bus and obtain method that was deleted
         bus.connect().subscribe(MethodNotifier.METHOD_REMOVED_TOPIC, new MethodNotifier() {
-
             @Override
             public void afterAction(Method newMethod) {
 
@@ -259,37 +238,39 @@ public class SummaryToolWindow implements ToolWindowFactory {
             }
         });
 
-        //Connect to project bus and obtain process builder to start Susi
-        bus.connect().subscribe(SusiNotifier.START_SUSI_PROCESS_TOPIC, new SusiNotifier() {
+        //Update Tool Window to notify user that MOIS is running
+        bus.connect().subscribe(MoisNotifier.START_MOIS_PROCESS_TOPIC, new MoisNotifier() {
             @Override
-            public void launchSusi(HashMap<String, String> values) {
+            public void launchMois(HashMap<String, String> values) {
 
                 JLabel notificationMessage = (JLabel) notificationPanel.getComponent(0);
-                notificationMessage.setText(Constants.NOTIFICATION_START_SUSI);
+                notificationMessage.setText(Constants.NOTIFICATION_START_MOIS);
 
+                //show progress bar
                 notificationPanel.getComponent(1).setVisible(true);
             }
         });
 
-        //Connect to project bus and obtain process builder to start Susi
-        bus.connect().subscribe(SusiNotifier.END_SUSI_PROCESS_TOPIC, new SusiNotifier() {
+        //Update notification button when MOIS completes running
+        bus.connect().subscribe(MoisNotifier.END_MOIS_PROCESS_TOPIC, new MoisNotifier() {
             @Override
-            public void launchSusi(HashMap<String, String> values) {
+            public void launchMois(HashMap<String, String> values) {
 
                 JLabel label = (JLabel) notificationPanel.getComponent(0);
-                label.setText(values.get(Constants.SUSI_OUTPUT_MESSAGE));
+                label.setText(values.get(Constants.MOIS_OUTPUT_MESSAGE));
 
+                //remove progress bar
                 notificationPanel.getComponent(1).setVisible(false);
 
                 JButton viewResults = (JButton) notificationPanel.getComponent(2);
                 viewResults.setIcon(PluginIcons.NOTIFICATION_NEW);
-                viewResults.setToolTipText(Constants.NOTIFICATION_SUSI);
+                viewResults.setToolTipText(Constants.NOTIFICATION_MOIS);
 
                 viewResults.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        SusiResultsDialog resultsDialog = new SusiResultsDialog(project, values);
+                        MoisResultsDialog resultsDialog = new MoisResultsDialog(project, values);
                         resultsDialog.pack();
                         resultsDialog.setSize(550, 350);
                         resultsDialog.setLocationRelativeTo(null);
@@ -310,7 +291,6 @@ public class SummaryToolWindow implements ToolWindowFactory {
 
         //Connect to message bus and filter list when a new file is selected or opened
         bus.connect().subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
-
             @Override
             public void selectionChanged(@NotNull FileEditorManagerEvent event) {
 
@@ -340,7 +320,10 @@ public class SummaryToolWindow implements ToolWindowFactory {
                 root.add(methodNode);
             }
             treeModel.setRoot(root);
-        } else
+        } else {
             treeModel.setRoot(null);
+            methodTree.getEmptyText().setText(Constants.TREE_FILTERS_EMPTY);
+        }
+
     }
 }

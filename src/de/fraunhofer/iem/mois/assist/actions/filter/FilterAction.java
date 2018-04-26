@@ -59,10 +59,10 @@ public class FilterAction extends AnAction {
     @Override
     public void update(AnActionEvent event) {
 
-        //Set/unset icon for filters
-        if (SummaryToolWindow.TREE_FILTERS.contains(filterPair.getValue()) || (filterPair.getKey().equals(Constants.FILTER_CURRENT_FILE_KEY) && SummaryToolWindow.CURRENT_FILE_FILTER))
-            event.getPresentation().setIcon(PluginIcons.SELECTED);
-        else
-            event.getPresentation().setIcon(null);
-    }
+                //Set/unset icon for filters
+                if (SummaryToolWindow.TREE_FILTERS.contains(filterPair.getValue()) || (filterPair.getKey().equals(Constants.FILTER_CURRENT_FILE_KEY) && SummaryToolWindow.CURRENT_FILE_FILTER))
+                    event.getPresentation().setIcon(PluginIcons.SELECTED);
+                else
+                    event.getPresentation().setIcon(null);
+        }
 }

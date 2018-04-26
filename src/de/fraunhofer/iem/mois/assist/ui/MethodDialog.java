@@ -35,7 +35,8 @@ public class MethodDialog extends JDialog {
 
         typeRadioButton.setSelected(true);
 
-        methodSignature.setText(method.getReturnType(false) + " " + method.getClassName(false) + " (" + method.getParameter(false) + ")");
+        methodSignature.setText(method.getSignature(false));
+        methodSignature.setToolTipText(method.getSignature(true));
         methodTypes.setText(StringUtils.join(method.getTypesList(), ", "));
         methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
 
@@ -165,14 +166,9 @@ public class MethodDialog extends JDialog {
         //Notify Summary Tool window that new method was added
         MessageBus messageBus = project.getMessageBus();
 
-        if (addMethod.isNewMethod()) {
-            MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_ADDED_TOPIC);
+            MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
             publisher.afterAction(addMethod);
-        } else {
 
-            MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_TOPIC);
-            publisher.afterAction(addMethod);
-        }
 
         dispose();
     }

@@ -50,13 +50,16 @@
             </action>
 
             <separator/>
-
+            <group id="MOIS-Assist.FilterActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.FilterActionGroup"
+                   text="Filter Methods"
+                   popup="true" icon="PluginIcons.FILTER_ACTION">
+            </group>
             <separator/>
 
             <action id="MOIS-Assist.LaunchSusiAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.LaunchSusiAction"
+                    class="de.fraunhofer.iem.mois.assist.actions.LaunchMoisAction"
                     icon="PluginIcons.REFRESH_SUSI"
-                    text="Refresh Susi">
+                    text="Refresh MOIS">
             </action>
 
             <separator/>
@@ -65,12 +68,6 @@
                     class="de.fraunhofer.iem.mois.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
-        </group>
-
-
-        <group id="MOIS-Assist.FilterActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.FilterActionGroup" text="Filter"
-               popup="true" icon="PluginIcons.FILTER_ACTION">
-            <add-to-group group-id="MOIS-Assist.ActionBar" anchor="after" relative-to-action="MOIS-Assist.ExportAction"/>
         </group>
 
         <group id="MOIS-Assist.MethodActionGroup" class="de.fraunhofer.iem.mois.assist.actions.method.MethodActionGroup" text="Method"

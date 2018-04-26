@@ -4,6 +4,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.JSONWriter;
+import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
+import de.fraunhofer.iem.mois.assist.util.Constants;
+import icons.PluginIcons;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -41,5 +44,15 @@ public class ExportAction extends AnAction {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void update(AnActionEvent event) {
+
+        //Disable/Enable action button
+        if (SummaryToolWindow.FILE_SELECTED)
+            event.getPresentation().setEnabled(true);
+        else
+            event.getPresentation().setEnabled(false);
     }
 }

@@ -3,6 +3,7 @@ package de.fraunhofer.iem.mois.assist.data;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //Defines various properties for the methods.
 
@@ -60,6 +61,13 @@ public class Method extends Object {
             return trimProperty(className);
         else
             return className;
+    }
+
+    //Returns classname for method
+    public String getSignature(boolean isfullyQualifiedName) {
+
+            return getReturnType(isfullyQualifiedName) + " " + getClassName(isfullyQualifiedName) + " (" + getParameter(isfullyQualifiedName) + ")";
+
     }
 
     public void setClassName(String className) {
