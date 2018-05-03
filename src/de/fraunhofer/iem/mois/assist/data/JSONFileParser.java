@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.mois.assist.data;
 
+import com.intellij.openapi.ui.Messages;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.assist.util.Formatter;
 import org.json.simple.JSONArray;
@@ -34,12 +35,10 @@ public class JSONFileParser {
         Object obj = null;
 
         try {
-
             JSONParser jsonParser = new JSONParser();
             obj = jsonParser.parse(new FileReader(congFilePath));
-
         } catch (Exception e) {
-
+            Messages.showWarningDialog(Constants.FILE_LOAD_ERROR, "File Load Error");
         }
 
         JSONObject jsonObject = (JSONObject) obj;
@@ -59,6 +58,9 @@ public class JSONFileParser {
             String link = (String) jsonObj.get(Constants.LINK);
             String comment = (String) jsonObj.get(Constants.COMMENT);
             String secLevel = (String) jsonObj.get(Constants.SECURITY_LEVEL);
+            JSONObject jsonObjDataIn = (JSONObject) jsonObj.get(Constants.DATA_IN);
+            JSONObject jsonObjDataOut = (JSONObject) jsonObj.get(Constants.DATA_OUT);
+
 
             Method method = new Method(methodName, returnType, discovery, framework, link, comment, secLevel);
 
@@ -67,7 +69,7 @@ public class JSONFileParser {
 
                 JSONArray types = (JSONArray) jsonObj.get(Constants.TYPE);
 
-                if(types.isEmpty())
+                if (types.isEmpty())
                     continue;
 
                 else {
@@ -89,8 +91,8 @@ public class JSONFileParser {
                                 break;
                         }
                     }
-
-                }}
+                }
+            }
 
             Method.SecLevel securityLevel = Method.SecLevel.NEUTRAL;
             if (secLevel == null)
@@ -138,10 +140,34 @@ public class JSONFileParser {
                     //TODO manage else case: System.err.println("CWE category does not exist: " + cweId);
                 }
             }
-            methods.put(method.getSignature(true), method);
 
+            // parse dataIn and dataOut
+            if (jsonObjDataIn.get(Constants.PARAMETERS) != null) {
+                method.setDataIn(extractDataInOutObject(jsonObjDataIn));
+            }
+
+            if (jsonObjDataOut.get(Constants.PARAMETERS) != null) {
+                method.setDataOut(extractDataInOutObject(jsonObjDataOut));
+            }
+
+            methods.put(method.getSignature(true), method);
         }
 
         return methods;
     }
+
+    private DataInOut extractDataInOutObject(JSONObject dataObject) {
+
+        JSONArray parameterArray = (JSONArray) dataObject.get(Constants.PARAMETERS);
+
+        List<Integer> parameters = new ArrayList<>();
+
+        for (Object param : parameterArray) {
+
+            if (param instanceof Integer)
+                parameters.add((Integer) param);
+        }
+        return new DataInOut((boolean) dataObject.get(Constants.RETURN_TYPE), parameters);
+    }
 }
+

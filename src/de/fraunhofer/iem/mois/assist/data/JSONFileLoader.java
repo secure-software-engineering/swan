@@ -107,11 +107,12 @@ public class JSONFileLoader {
     //Add new method to the list
     public static int addMethod(Method method) {
 
-        if (!methods.containsKey(method.getSignature(false))) {
-            methods.replace(method.getSignature(false), method);
+
+        if (methods.containsKey(method.getSignature(true))) {
+            methods.replace(method.getSignature(true), method);
             return EXISTING_METHOD;
         } else {
-            methods.put(method.getSignature(false), method);
+            methods.put(method.getSignature(true), method);
             return NEW_METHOD;
         }
     }
@@ -119,8 +120,6 @@ public class JSONFileLoader {
     //Remove method from list
     public static void removeMethod(Method method) {
 
-        if (methods.containsKey(method.getSignature(true))) {
             methods.remove(method.getSignature(true));
-        }
     }
 }

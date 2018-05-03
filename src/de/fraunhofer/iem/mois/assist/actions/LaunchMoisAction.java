@@ -26,12 +26,11 @@ public class LaunchMoisAction extends AnAction {
         //Export changes to configuration files
         JSONWriter exportFile = new JSONWriter();
 
-        //TODO Update export code to export dataIn and dataOut objects correctly
-        /*try {
+        try {
             exportFile.writeToJsonFile(JSONFileLoader.getMethods(), JSONFileLoader.getConfigurationFile(true));
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
         //Launch Dialog
         Window activeWindow = FocusManager.getCurrentManager().getActiveWindow();

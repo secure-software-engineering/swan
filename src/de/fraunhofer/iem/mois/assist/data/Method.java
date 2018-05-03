@@ -21,6 +21,9 @@ public class Method extends Object {
     private String icon;
     private boolean isNewMethod;
     private String updateOperation = "";
+    private DataInOut dataIn;
+    private DataInOut dataOut;
+
 
     public Method() {
 
@@ -223,5 +226,22 @@ public class Method extends Object {
 
     public enum SecLevel {
         HIGH, LOW, NEUTRAL
+    }
+
+
+    public DataInOut getDataIn() {
+        return dataIn;
+    }
+
+    public void setDataIn(DataInOut dataInOut) {
+        this.dataIn = dataInOut;
+    }
+
+    public DataInOut getDataOut() {
+        return dataOut;
+    }
+
+    public void setDataOut(DataInOut dataInOut) {
+        this.dataOut = dataInOut;
     }
 }

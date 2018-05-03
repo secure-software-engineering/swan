@@ -50,7 +50,8 @@ public class Constants {
     public final static String METHOD_NOT_FOUND = "The selected method was not found.";
     public final static String URI_NOT_FOUND = "There was an error loading the URI";
     public final static String CONFIRM_METHOD_DELETION = "Are you sure you want to delete this method?";
-
+    public final static String FILE_LOAD_ERROR = "An error occured loading the file.";
+    public final static String NO_CATEGORY_SELECTED = "No type or CWE was selected for the method.";
     //TODO update link to point to online help resources that will be created
     public final static String HELP_LINK = "https://github.com/Sable/soot";
 

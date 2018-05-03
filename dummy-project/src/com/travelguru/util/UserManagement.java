@@ -18,4 +18,9 @@ public class UserManagement {
 
         return creditCard.replace("3","*");
     }
+
+    public static String configureEmail(String emailAddress, String server) {
+
+        return server;
+    }
 }

@@ -1,10 +1,12 @@
 package de.fraunhofer.iem.mois.assist.ui;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.mois.assist.data.Category;
 import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.util.Constants;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
@@ -163,14 +165,18 @@ public class MethodDialog extends JDialog {
 
     private void onOK() {
 
-        //Notify Summary Tool window that new method was added
-        MessageBus messageBus = project.getMessageBus();
+        if (addMethod.getCategories().size() == 0) {
+
+            Messages.showMessageDialog(Constants.NO_CATEGORY_SELECTED, "Category Selection", Messages.getInformationIcon());
+        } else {
+            //Notify Summary Tool window that new method was added
+            MessageBus messageBus = project.getMessageBus();
 
             MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
             publisher.afterAction(addMethod);
 
-
-        dispose();
+            dispose();
+        }
     }
 
     private void onCancel() {
