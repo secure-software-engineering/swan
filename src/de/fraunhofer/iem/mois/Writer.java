@@ -141,12 +141,31 @@ public class Writer {
 			obj.put(Constants.NAME, method.getClassName().toString());
 			obj.put(Constants.RETURN_TYPE, method.getReturnType());
 			obj.put(Constants.PARAMETERS, method.getParameters());
-			obj.put(Constants.DATA_IN, "");
-			obj.put(Constants.DATA_OUT, "");
+
 			obj.put(Constants.SECURITY_LEVEL, "");
 			obj.put(Constants.DISCOVERY, "automatic");
 			obj.put(Constants.FRAMEWORK, "");
 			obj.put(Constants.LINK, "");
+
+			//DataIn object
+			JSONArray dataInParams = new JSONArray();
+			dataInParams.addAll(method.getDataIn().getParameterIndeces());
+
+			JSONObject dataIn = new JSONObject();
+			dataIn.put(Constants.RETURN_TYPE, method.getDataIn().getReturnValue());
+			dataIn.put(Constants.PARAMETERS, dataInParams);
+
+			//DataOut object
+			JSONArray dataOutParams = new JSONArray();
+			dataOutParams.addAll(method.getDataOut().getParameterIndeces());
+
+			JSONObject dataOut = new JSONObject();
+			dataIn.put(Constants.RETURN_TYPE, method.getDataOut().getReturnValue());
+			dataIn.put(Constants.PARAMETERS, dataOutParams);
+
+			obj.put(Constants.DATA_IN, dataIn);
+			obj.put(Constants.DATA_OUT, dataOut);
+
 
 			JSONArray types = new JSONArray();
 			JSONArray cwes = new JSONArray();

@@ -1,59 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="EclipseModuleManager">
-    <libelement value="jar://$MODULE_DIR$/lib/weka.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/lib/json-simple-1.1.1.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/lib/soot.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/lib/soot-infoflow-trunk.jar!/" />
-    <src_description expected_position="0">
-      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
-    </src_description>
+  <component name="FacetManager">
+    <facet type="Osmorc" name="OSGi">
+      <configuration manifestGenerationMode="Manually" manifestLocation="META-INF/MANIFEST.MF" jarfileLocation="mois.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="false" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
+        <additionalProperties />
+        <additionalJARContents />
+      </configuration>
+    </facet>
   </component>
-  <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/bin" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
-      <library name="weka.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/weka.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://C:/Program Files/Weka-3-6/weka-src.jar" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="json-simple-1.1.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/json-simple-1.1.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="soot.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/soot.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="soot-infoflow-trunk.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/soot-infoflow-trunk.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
   </component>
 </module>
