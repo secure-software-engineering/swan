@@ -213,6 +213,7 @@ public class Learner {
       // Cross evaluation.
       System.out.println("Starting cross evaluation.");
       Evaluation eval = new Evaluation(trainInstances);
+      
       StringBuffer sb = new StringBuffer();
       eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
           sb, new Range(attributes.indexOf(idAttr) + 1

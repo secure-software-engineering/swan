@@ -44,8 +44,14 @@ public class Main {
   private String outputPath;
   private Writer writer;
 
-  private static final boolean classifyCwe = true;
-
+  
+  // Configuration tags for debugging 
+  private static final boolean runSources = true;
+  private static final boolean runSinks = true;
+  private static final boolean runSanitizers = true;
+  private static final boolean runAuthentications = true;
+  private static final boolean runCwes = true;
+  
   private void run(String[] args) throws IOException {
     // Cache the list of classes and the CP.
     System.out.println("***** Loading CP");
@@ -78,18 +84,22 @@ public class Main {
     learner = new Learner(writer);
 
     // Classify.
-    runClassifier(
-        new HashSet<Category>(Arrays.asList(Category.SOURCE, Category.NONE)),
-        false);
-   runClassifier(
-        new HashSet<Category>(Arrays.asList(Category.SINK, Category.NONE)),
-        false);
-    runClassifier(
-        new HashSet<Category>(Arrays.asList(Category.SANITIZER, Category.NONE)),
-        false);
-    runClassifier(new HashSet<Category>(Arrays.asList(
-        Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-        Category.AUTHENTICATION_NEUTRAL, Category.NONE)), false);
+    if(runSources)
+    	runClassifier(
+    			new HashSet<Category>(Arrays.asList(Category.SOURCE, Category.NONE)),
+    			false);
+    if(runSinks)
+    	runClassifier(
+    			new HashSet<Category>(Arrays.asList(Category.SINK, Category.NONE)),
+    			false);
+    if(runSanitizers)
+    	runClassifier(
+    			new HashSet<Category>(Arrays.asList(Category.SANITIZER, Category.NONE)),
+    			false);
+    if(runAuthentications)
+    	runClassifier(new HashSet<Category>(Arrays.asList(
+    			Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+    			Category.AUTHENTICATION_NEUTRAL, Category.NONE)), false);
 
     // Save data from last classification.
     loader.resetMethods();
@@ -98,8 +108,8 @@ public class Main {
     System.out.println("***** Loading 2nd test set");
     loader.pruneNone();
 
-    if (classifyCwe) {
-      // Run classifications for all cwes in JSON file.
+    if (runCwes) {
+       //Run classifications for all cwes in JSON file.
       for (String cweId : parser.cwe()) {
         runClassifier(
             new HashSet<Category>(Arrays

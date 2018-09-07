@@ -255,8 +255,8 @@ public class FeatureHandler {
             Category.NONE)));
     IFeature methodNameContainsLogin = new MethodNameContainsFeature("login");
     addFeature(methodNameContainsLogin,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+        new HashSet<>(Arrays.asList(
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.CWE306, Category.NONE)));
     IFeature methodNameContainsNotLoginPage = new MethodNameContainsFeature("",
         "loginpage");
@@ -265,56 +265,53 @@ public class FeatureHandler {
             Category.CWE863, Category.NONE)));
     IFeature methodNameContainsLogout = new MethodNameContainsFeature("logout");
     addFeature(methodNameContainsLogout,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_TO_LOW,
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodNameContainsConnect = new MethodNameContainsFeature(
         "connect", "disconnect");
     addFeature(methodNameContainsConnect,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+        new HashSet<>(Arrays.asList(
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodNameContainsDisconnect = new MethodNameContainsFeature(
         "disconnect");
     addFeature(methodNameContainsDisconnect,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+        new HashSet<>(Arrays.asList( Category.AUTHENTICATION_TO_LOW,
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodNameContainsBind = new MethodNameContainsFeature("bind",
         "unbind");
     addFeature(methodNameContainsBind,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.NONE)));
     IFeature methodNameContainsUnbind = new MethodNameContainsFeature("unbind");
     addFeature(methodNameContainsUnbind,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
     IFeature methodNameStartsWithIs = new MethodNameStartsWithFeature("is");
     addFeature(methodNameStartsWithIs,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
     IFeature methodNameStartsOpen = new MethodNameStartsWithFeature("open");
     addFeature(methodNameStartsOpen,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.NONE)));
     IFeature methodNameStartsClose = new MethodNameStartsWithFeature("close");
     addFeature(methodNameStartsClose,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+             Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
     IFeature methodNameStartsCreate = new MethodNameStartsWithFeature("create");
     addFeature(methodNameStartsCreate,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.NONE)));
     IFeature methodNameStartsDelete = new MethodNameStartsWithFeature("delete");
     addFeature(methodNameStartsDelete,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+             Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
 
     IFeature nameContaisRead = new MethodNameContainsFeature("read", "thread");
@@ -418,9 +415,9 @@ public class FeatureHandler {
         "Valid");
     addFeature(classNameContainsValid,
         new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)));
+    
     IFeature classNameContainsCheck = new MethodClassContainsNameFeature(
         "Check");
-
     addFeature(classNameContainsCheck,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
@@ -447,7 +444,7 @@ public class FeatureHandler {
         "Connect");
     addFeature(classNameContainsConnect,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature classNameContainsBind = new MethodClassContainsNameFeature("Bind");
     addFeature(classNameContainsBind,
@@ -556,7 +553,7 @@ public class FeatureHandler {
     addFeature(methodInvocationNameAuthori,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-            Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
+            Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodInvocationNameAuthen = new MethodInvocationName(cp,
         "authen");
     addFeature(methodInvocationNameAuthen,
@@ -566,13 +563,13 @@ public class FeatureHandler {
     IFeature methodInvocationNameLogin = new MethodInvocationName(cp, "login");
     addFeature(methodInvocationNameLogin,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_HIGH, 
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodInvocationNameLogout = new MethodInvocationName(cp,
         "logout");
     addFeature(methodInvocationNameLogout,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
+            Category.AUTHENTICATION_TO_LOW,
             Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
     IFeature methodInvocationNameSecurity = new MethodInvocationName(cp,
         "security");
@@ -804,7 +801,7 @@ public class FeatureHandler {
     IFeature methodIsConstructor = new MethodIsConstructor();
     addFeature(methodIsConstructor,
         new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
-            Category.SANITIZER, Category.AUTHENTICATION_TO_LOW,
+            Category.SANITIZER, Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_TO_HIGH,
             Category.AUTHENTICATION_NEUTRAL, Category.CWE078, Category.CWE862,
             Category.CWE863, Category.CWE089, Category.NONE)));
 
