@@ -721,6 +721,26 @@
 	"comment": "Sink"
 },
 {
+	"name": "com.mysql.jdbc.Statement.executeQuery",
+	"return": "java.sql.ResultSet",
+	"parameters": ["java.lang.String"],
+	"dataIn": {
+		"return": false,
+		"parameters": [0]
+	},
+	"dataOut": {
+		"return": false,
+		"parameters": []
+	},
+	"securityLevel": "none",
+	"discovery": "manual",
+	"framework": "java",
+	"link": "",
+	"cwe": ["cwe089"],
+	"type": ["sink"],
+	"comment": "Sink"
+},
+{
 	"name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
 	"return": "java.lang.String",
 	"parameters": ["org.apache.commons.httpclient.UsernamePasswordCredentials"],

@@ -143,6 +143,10 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
+    IFeature resultsetReturnType = new ReturnTypeFeature(cp, "java.sql.ResultSet");
+    addFeature(resultsetReturnType,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.NONE, Category.CWE089)));
+    
 
     // Method modifier.
     IFeature isStaticMethod = new MethodModifierFeature(cp, Modifier.STATIC);
@@ -246,7 +250,7 @@ public class FeatureHandler {
     addFeature(methodNameContainsVerif,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-            Category.NONE)));
+            Category.NONE, Category.SANITIZER)));
     IFeature methodNameContainsPrivilege = new MethodNameContainsFeature(
         "privilege");
     addFeature(methodNameContainsPrivilege,

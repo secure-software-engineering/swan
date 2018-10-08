@@ -111,7 +111,7 @@ public class Util {
     File[] listOfFiles = folder.listFiles();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < listOfFiles.length; i++) {
-      if (listOfFiles[i].getName().endsWith(".jar")) {
+      if (listOfFiles[i].getName().endsWith(".jar") || listOfFiles[i].getName().endsWith(".apk")) {
         if (sb.length() > 0) sb.append(System.getProperty("path.separator"));
         sb.append(listOfFiles[i].getAbsolutePath().toString());
       }

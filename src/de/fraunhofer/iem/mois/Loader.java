@@ -75,6 +75,7 @@ public class Loader {
 
               Method newMethod =
                   new Method(methodName, parameters, returnType, className);
+              System.out.println(newMethod.getSignature());
               methods.add(newMethod);
             }
           }

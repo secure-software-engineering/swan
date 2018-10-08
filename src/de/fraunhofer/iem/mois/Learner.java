@@ -42,6 +42,8 @@ public class Learner {
   private final static String WEKA_LEARNER_ALL = "SMO";
   private long startAnalysisTime;
   private long analysisTime;
+  
+  private final boolean CROSS_EVALUATE=false;
 
   private final Writer writer;
 
@@ -210,21 +212,25 @@ public class Learner {
       System.out.println(
           "Arff data saved at: " + saver.retrieveFile().getCanonicalPath());
 
-      // Cross evaluation.
-      System.out.println("Starting cross evaluation.");
-      Evaluation eval = new Evaluation(trainInstances);
+   // Cross evaluation.
+      if(CROSS_EVALUATE) {
+    	
+          System.out.println("Starting cross evaluation.");
+          Evaluation eval = new Evaluation(trainInstances);
+          
+          StringBuffer sb = new StringBuffer();
+          eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
+              sb, new Range(attributes.indexOf(idAttr) + 1
+                  + ""/* "1-" + (attributes.size() - 1) */),
+              true);
+          System.out.println(sb.toString());
+          System.out.println("Class details: " + eval.toClassDetailsString());
+          for (Category counter : counters.keySet())
+            System.out.println("Cross evaluation finished on a training set of "
+                + counters.get(counter) + " " + counter + ".");
+  
+      }
       
-      StringBuffer sb = new StringBuffer();
-      eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
-          sb, new Range(attributes.indexOf(idAttr) + 1
-              + ""/* "1-" + (attributes.size() - 1) */),
-          true);
-      System.out.println(sb.toString());
-      System.out.println("Class details: " + eval.toClassDetailsString());
-      for (Category counter : counters.keySet())
-        System.out.println("Cross evaluation finished on a training set of "
-            + counters.get(counter) + " " + counter + ".");
-
       // Classification.
       System.out.println("Classification starting.");
       classifier.buildClassifier(trainInstances);
