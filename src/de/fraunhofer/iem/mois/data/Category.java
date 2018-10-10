@@ -15,8 +15,8 @@ public enum Category {
                   false), NONE("none", false),
 
   CWE089("CWE089", true), CWE306("CWE306", true), CWE078("CWE078",
-      true), CWE862("CWE862", true), CWE863("CWE863",
-          true), CWETEST("CWEtest", true), CWE_NONE("none", true);
+      true), CWE862("CWE862", true), CWE863("CWE863", 
+          true), CWETEST("CWEtest", true), CWE079("CWE079",true), CWE_NONE("none", true);
 
   private final String id;
   private final boolean cwe;

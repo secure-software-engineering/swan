@@ -16,7 +16,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://xml.apache.org/xalan-j/apidocs/org/apache/xalan/xsltc/runtime/BasisLibrary.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": "String replacement"
 },
@@ -36,7 +36,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/password/StandardPasswordEncoder.html",
-	"cwe": ["cwe829","cwe311","cwe807"],
+	"cwe": ["cwe863"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -76,7 +76,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/mock/web/portlet/MockPortletRequest.html",
-	"cwe": [],
+	"cwe": ["cwe079"],
 	"type": ["sink"],
 	"comment": "Sink"
 },
@@ -136,7 +136,7 @@
 	"discovery": "manual",
 	"framework": "jsoup",
 	"link": "https://github.com/jhy/jsoup/blob/master/src/main/java/org/jsoup/nodes/Entities.java",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798"],
+	"cwe": ["cwe352","cwe311","cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -276,7 +276,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -576,7 +576,7 @@
 	"discovery": "manual",
 	"framework": "generaljava",
 	"link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": "String manipulation"
 },
@@ -616,7 +616,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletResponseImpl.html",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -1036,7 +1036,7 @@
 	"discovery": "manual",
 	"framework": "pebble",
 	"link": "https://github.com/PebbleTemplates/pebble/blob/master/src/main/java/com/mitchellbosecke/pebble/utils/PathUtils.java",
-	"cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -1096,7 +1096,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -2116,7 +2116,7 @@
 	"discovery": "manual",
 	"framework": "owaspesapi",
 	"link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/Encoder.html",
-	"cwe": ["cwe078","cwe352","cwe311","cwe079","cwe798","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -2176,7 +2176,7 @@
 	"discovery": "manual",
 	"framework": "owaspesapi",
 	"link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/CreditCardValidationRule.html",
-	"cwe": ["cwe352","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -2376,7 +2376,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/spring-security/site/docs/3.2.2.RELEASE/apidocs/org/springframework/security/crypto/codec/Hex.html",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798","cwe807"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -2579,7 +2579,7 @@
 	"discovery": "manual",
 	"framework": "owaspesapi",
 	"link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/Encoder.html",
-	"cwe": ["cwe352","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -2899,7 +2899,7 @@
 	"discovery": "manual",
 	"framework": "owaspesapi",
 	"link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/CreditCardValidationRule.html",
-	"cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3099,7 +3099,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.2/org/apache/commons/lang3/time/FastDateParser.html",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3119,7 +3119,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://xml.apache.org/xalan-j/apidocs/org/apache/xalan/xsltc/compiler/util/Util.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -3179,7 +3179,7 @@
 	"discovery": "manual",
 	"framework": "xmldb",
 	"link": "http://xmldb-org.sourceforge.net/xapi/api/org/xmldb/api/DatabaseManager.html",
-	"cwe": ["cwe311","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe306","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3239,7 +3239,7 @@
 	"discovery": "manual",
 	"framework": "owaspesapi",
 	"link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/",
-	"cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3379,7 +3379,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/util/ValidatorUtils.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -3579,7 +3579,7 @@
 	"discovery": "manual",
 	"framework": "generaljava",
 	"link": "https://github.com/OWASP/java-html-sanitizer/blob/master/src/main/java/org/owasp/html/Encoding.java",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3619,7 +3619,7 @@
 	"discovery": "manual",
 	"framework": "json",
 	"link": "https://github.com/OWASP/json-sanitizer/blob/master/src/main/java/com/google/json/JsonSanitizer.java",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -3639,7 +3639,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletRequestImpl.html",
-	"cwe": [],
+	"cwe": ["cwe089", "cwe078"],
 	"type": ["source"],
 	"comment": "Source training set"
 },
@@ -3699,7 +3699,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -3719,7 +3719,7 @@
 	"discovery": "manual",
 	"framework": "generaljava",
 	"link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },
@@ -3799,7 +3799,7 @@
 	"discovery": "manual",
 	"framework": "apache",
 	"link": "http://grepcode.com/file/repo1.maven.org/maven2/org.apache.axis2/axis2-kernel/1.4/org/apache/axis2/util/Utils.java",
-	"cwe": ["cwe352","cwe079","cwe798"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3879,7 +3879,7 @@
 	"discovery": "manual",
 	"framework": "generaljava",
 	"link": "https://github.com/OWASP/java-html-sanitizer/blob/master/src/main/java/org/owasp/html/HtmlSanitizer.java",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798","cwe306","cwe807"],
+	"cwe": ["cwe079","cwe306"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -3959,7 +3959,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/codec/Utf8.html",
-	"cwe": ["cwe352","cwe311","cwe079","cwe798","cwe807"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -4199,7 +4199,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/spring/docs/3.2.8.RELEASE_to_3.2.9.RELEASE/Spring%20Framework%203.2.8.RELEASE/org/springframework/web/util/OpaqueUriComponents.html",
-	"cwe": ["cwe352","cwe601","cwe079","cwe807"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -4319,7 +4319,7 @@
 	"discovery": "manual",
 	"framework": "spring",
 	"link": "https://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/crypto/codec/Base64.html",
-	"cwe": ["cwe352","cwe311","cwe601","cwe079","cwe022","cwe798","cwe807"],
+	"cwe": ["cwe079"],
 	"type": ["sanitizer"],
 	"comment": ""
 },
@@ -4339,7 +4339,7 @@
 	"discovery": "manual",
 	"framework": "generaljava",
 	"link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-	"cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
+	"cwe": ["cwe078","cwe079","cwe306","cwe089"],
 	"type": ["sink","sanitizer"],
 	"comment": ""
 },

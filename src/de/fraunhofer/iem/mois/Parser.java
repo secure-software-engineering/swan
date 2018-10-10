@@ -240,7 +240,7 @@ public class Parser {
               m.addCategoryTrained(cweCategory);
               cwes.add(cweId);
             } else
-              ; //System.err.println("CWE category does not exist: " + cweId);
+              System.err.println("CWE category does not exist: " + cweId);
           }
         }
 

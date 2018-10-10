@@ -9,6 +9,7 @@ import java.util.Set;
 import de.fraunhofer.iem.mois.data.Category;
 import de.fraunhofer.iem.mois.features.IsImplicitMethod;
 import de.fraunhofer.iem.mois.features.MethodClassContainsNameFeature;
+import de.fraunhofer.iem.mois.features.MethodClassEndsWithNameFeature;
 import de.fraunhofer.iem.mois.features.MethodClassModifierFeature;
 import de.fraunhofer.iem.mois.features.MethodHasParametersFeature;
 import de.fraunhofer.iem.mois.features.MethodHasReturnTypeFeature;
@@ -808,6 +809,14 @@ public class FeatureHandler {
             Category.SANITIZER, Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_TO_HIGH,
             Category.AUTHENTICATION_NEUTRAL, Category.CWE078, Category.CWE862,
             Category.CWE863, Category.CWE089, Category.NONE)));
+    
+    IFeature classEndsWithEncoder = new MethodClassEndsWithNameFeature("Encoder");
+    addFeature(classEndsWithEncoder, new HashSet<>(Arrays.asList(
+            Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE862,
+            Category.CWE863, Category.CWE089, Category.NONE)));
+    IFeature classEndsWithRequest = new MethodClassEndsWithNameFeature("Request");
+    addFeature(classEndsWithRequest, new HashSet<>(Arrays.asList(
+            Category.SINK, Category.CWE079, Category.CWE089, Category.NONE)));
 
     System.out.println("Initialized " + getFeaturesSize() + " features.");
   }
