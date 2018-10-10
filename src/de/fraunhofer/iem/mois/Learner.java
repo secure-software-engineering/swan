@@ -44,7 +44,10 @@ public class Learner {
   private long analysisTime;
   
   private final boolean CROSS_EVALUATE=false;
-
+  private final boolean CLASSIFY=false;
+  
+  private final int CROSS_EVALUATE_ITERATIONS=10;
+  
   private final Writer writer;
 
   public Learner(Writer writer) {
@@ -215,50 +218,58 @@ public class Learner {
    // Cross evaluation.
       if(CROSS_EVALUATE) {
     	
-          System.out.println("Starting cross evaluation.");
-          Evaluation eval = new Evaluation(trainInstances);
-          
-          StringBuffer sb = new StringBuffer();
-          eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
-              sb, new Range(attributes.indexOf(idAttr) + 1
-                  + ""/* "1-" + (attributes.size() - 1) */),
-              true);
-          System.out.println(sb.toString());
-          System.out.println("Class details: " + eval.toClassDetailsString());
-          for (Category counter : counters.keySet())
-            System.out.println("Cross evaluation finished on a training set of "
-                + counters.get(counter) + " " + counter + ".");
-  
+    	  for(int i = 0; i< CROSS_EVALUATE_ITERATIONS; i++)
+    	  {
+    		  System.out.println("Starting cross evaluation (iteration "+i+").");
+              Evaluation eval = new Evaluation(trainInstances);
+              
+              StringBuffer sb = new StringBuffer();
+              eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
+                  sb, new Range(attributes.indexOf(idAttr) + 1
+                      + ""/* "1-" + (attributes.size() - 1) */),
+                  true);
+              System.out.println(sb.toString());
+              System.out.println("Class details: " + eval.toClassDetailsString());
+              for (Category counter : counters.keySet())
+                System.out.println("Cross evaluation finished on a training set of "
+                    + counters.get(counter) + " " + counter + ".");
+    	  }
       }
       
       // Classification.
-      System.out.println("Classification starting.");
-      classifier.buildClassifier(trainInstances);
-      if (WEKA_LEARNER_ALL.equals("J48")) {
-        System.out.println(((J48) (classifier)).graph());
-      }
-      for (int instIdx = 0; instIdx < testInstances.numInstances(); instIdx++) {
-        Instance inst = testInstances.instance(instIdx);
-        assert inst.classIsMissing();
-        Method meth = instanceMethods.get(inst.stringValue(idAttr));
-        double d = classifier.classifyInstance(inst);
-        String cName = testInstances.classAttribute().value((int) d);
-        boolean found = false;
-        for (Category type : categories) {
-          if (cName.equals(type.toString())) {
-            inst.setClassValue(type.toString());
-            meth.setCategoryClassified(type);
-            found = true;
-            break;
+      
+      if(CLASSIFY) {
+    	  System.out.println("Classification starting.");
+          classifier.buildClassifier(trainInstances);
+          if (WEKA_LEARNER_ALL.equals("J48")) {
+            System.out.println(((J48) (classifier)).graph());
           }
-        }
-        if (!found) System.err.println("Unknown class name");
+          for (int instIdx = 0; instIdx < testInstances.numInstances(); instIdx++) {
+            Instance inst = testInstances.instance(instIdx);
+            assert inst.classIsMissing();
+            Method meth = instanceMethods.get(inst.stringValue(idAttr));
+            double d = classifier.classifyInstance(inst);
+            String cName = testInstances.classAttribute().value((int) d);
+            boolean found = false;
+            for (Category type : categories) {
+              if (cName.equals(type.toString())) {
+                inst.setClassValue(type.toString());
+                meth.setCategoryClassified(type);
+                found = true;
+                break;
+              }
+            }
+            if (!found) System.err.println("Unknown class name");
+          }  
+          System.out.println("Finished classification.");
       }
-    } catch (Exception ex) {
+      
+    } 
+    catch (Exception ex) {
       System.err.println("Something went all wonky: " + ex);
       ex.printStackTrace();
     }
-    System.out.println("Finished classification.");
+    
 
     System.out.println("Writing results to files:");
     writer.writeResultsToFiles(outputFile, methods, categories);
