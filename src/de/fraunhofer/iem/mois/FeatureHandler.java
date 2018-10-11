@@ -8,6 +8,7 @@ import java.util.Set;
 
 import de.fraunhofer.iem.mois.data.Category;
 import de.fraunhofer.iem.mois.features.IsImplicitMethod;
+import de.fraunhofer.iem.mois.features.MethodAnonymousClassFeature;
 import de.fraunhofer.iem.mois.features.MethodClassContainsNameFeature;
 import de.fraunhofer.iem.mois.features.MethodClassEndsWithNameFeature;
 import de.fraunhofer.iem.mois.features.MethodClassModifierFeature;
@@ -17,10 +18,12 @@ import de.fraunhofer.iem.mois.features.MethodInnerClassFeature;
 import de.fraunhofer.iem.mois.features.MethodInvocationClassName;
 import de.fraunhofer.iem.mois.features.MethodInvocationName;
 import de.fraunhofer.iem.mois.features.MethodIsConstructor;
+import de.fraunhofer.iem.mois.features.MethodIsRealSetterFeature;
 import de.fraunhofer.iem.mois.features.MethodModifierFeature;
 import de.fraunhofer.iem.mois.features.MethodNameContainsFeature;
 import de.fraunhofer.iem.mois.features.MethodNameEqualsFeature;
 import de.fraunhofer.iem.mois.features.MethodNameStartsWithFeature;
+import de.fraunhofer.iem.mois.features.MethodReturnsConstantFeature;
 import de.fraunhofer.iem.mois.features.ParamTypeMatchesReturnType;
 import de.fraunhofer.iem.mois.features.ParameterContainsTypeOrNameFeature;
 import de.fraunhofer.iem.mois.features.ParameterFlowsToReturn;
@@ -834,6 +837,18 @@ public class FeatureHandler {
     addFeature(innerClassMethod,
         new HashSet<>(Arrays.asList(
             Category.SINK, Category.SOURCE, Category.NONE)));
+    
+    IFeature returnsConstant = new MethodReturnsConstantFeature(cp);
+    addFeature(returnsConstant,
+        new HashSet<>(Arrays.asList(Category.SOURCE, Category.NONE)));
+    
+    IFeature anonymousClass = new MethodAnonymousClassFeature(true);
+    addFeature(anonymousClass,
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.SINK, Category.NONE)));
+    
+    IFeature realSetter = new MethodIsRealSetterFeature(cp);
+    addFeature(anonymousClass,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
     
     System.out.println("Initialized " + getFeaturesSize() + " features.");
   }
