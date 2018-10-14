@@ -43,10 +43,10 @@ public class Learner {
   private long startAnalysisTime;
   private long analysisTime;
   
-  private final boolean CROSS_EVALUATE=false;
-  private final boolean CLASSIFY=true;
+  private final boolean CROSS_EVALUATE=true;
+  private final boolean CLASSIFY=false;
   
-  private final int CROSS_EVALUATE_ITERATIONS=1;
+  private final int CROSS_EVALUATE_ITERATIONS=10;
   
   private final Writer writer;
 
@@ -224,11 +224,11 @@ public class Learner {
               Evaluation eval = new Evaluation(trainInstances);
               
               StringBuffer sb = new StringBuffer();
-              eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337),
+              eval.crossValidateModel(classifier, trainInstances, 10, new Random(1337+i*11),
                   sb, new Range(attributes.indexOf(idAttr) + 1
                       + ""/* "1-" + (attributes.size() - 1) */),
                   true);
-              System.out.println(sb.toString());
+              //System.out.println(sb.toString());
               System.out.println("Class details: " + eval.toClassDetailsString());
               for (Category counter : counters.keySet())
                 System.out.println("Cross evaluation finished on a training set of "
