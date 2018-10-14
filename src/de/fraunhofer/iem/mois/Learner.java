@@ -20,8 +20,11 @@ import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.Logistic;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.rules.JRip;
+import weka.classifiers.rules.OneR;
+import weka.classifiers.trees.DecisionStump;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -198,6 +201,12 @@ public class Learner {
         classifier = new SMO();
       else if (WEKA_LEARNER_ALL.equals("JRip"))
         classifier = new JRip();
+      else if (WEKA_LEARNER_ALL.equals("DecisionStump"))
+          classifier = new DecisionStump();
+      else if (WEKA_LEARNER_ALL.equals("OneR"))
+          classifier = new OneR();
+      else if (WEKA_LEARNER_ALL.equals("Logistic"))
+          classifier = new Logistic();
       else
         throw new Exception("Wrong WEKA learner!");
       System.out.println("Classifier created: " + WEKA_LEARNER_ALL);
@@ -218,6 +227,8 @@ public class Learner {
    // Cross evaluation.
       if(CROSS_EVALUATE) {
     	
+    	  double precision= 0;
+    	  double recall = 0; 
     	  for(int i = 0; i< CROSS_EVALUATE_ITERATIONS; i++)
     	  {
     		  System.out.println("Starting cross evaluation (iteration "+i+").");
@@ -230,10 +241,15 @@ public class Learner {
                   true);
               //System.out.println(sb.toString());
               System.out.println("Class details: " + eval.toClassDetailsString());
+              precision += eval.weightedPrecision();
+              recall += eval.weightedRecall();
+              
               for (Category counter : counters.keySet())
                 System.out.println("Cross evaluation finished on a training set of "
                     + counters.get(counter) + " " + counter + ".");
     	  }
+    	  System.out.println("The precision over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + (precision/CROSS_EVALUATE_ITERATIONS));
+    	  System.out.println("The recall over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + (recall/CROSS_EVALUATE_ITERATIONS));
       }
       
       // Classification.
