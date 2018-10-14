@@ -28,8 +28,10 @@ import de.fraunhofer.iem.mois.features.ParamTypeMatchesReturnType;
 import de.fraunhofer.iem.mois.features.ParameterContainsTypeOrNameFeature;
 import de.fraunhofer.iem.mois.features.ParameterFlowsToReturn;
 import de.fraunhofer.iem.mois.features.ParameterToSinkFeature;
+import de.fraunhofer.iem.mois.features.ReturnTypeContainsNameFeature;
 import de.fraunhofer.iem.mois.features.ReturnTypeFeature;
 import de.fraunhofer.iem.mois.features.SourceToReturnFeature;
+import de.fraunhofer.iem.mois.features.VoidOnMethodFeature;
 import de.fraunhofer.iem.mois.features.MethodClassModifierFeature.ClassModifier;
 import de.fraunhofer.iem.mois.features.MethodModifierFeature.Modifier;
 
@@ -77,14 +79,14 @@ public class FeatureHandler {
     addFeature(hasParamsPerm,
         new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SINK, Category.CWE079,
             Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
-            Category.AUTHENTICATION_TO_LOW, Category.CWE089, Category.NONE)));
+            Category.AUTHENTICATION_TO_LOW, Category.CWE601, Category.CWE089, Category.NONE)));
 
     // Has a return type.
     IFeature hasReturnType = new MethodHasReturnTypeFeature();
     addFeature(hasReturnType,
         new HashSet<>(Arrays.asList(Category.SOURCE,
             Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
-            Category.AUTHENTICATION_TO_LOW, Category.NONE)));
+            Category.AUTHENTICATION_TO_LOW, Category.CWE601, Category.NONE)));
 
     // Parameter types.
     IFeature parameterOfTypeString = new ParameterContainsTypeOrNameFeature(
@@ -132,7 +134,10 @@ public class FeatureHandler {
     addFeature(parameterOfTypeCredential,
         new HashSet<>(Arrays.asList(Category.CWE306, Category.CWE862,
             Category.CWE863, Category.CWE078, Category.NONE)));
-
+    IFeature parameterOfTypeUrl = new ParameterContainsTypeOrNameFeature("url");
+    addFeature(parameterOfTypeUrl, new HashSet<>(
+        Arrays.asList(Category.CWE601, Category.NONE)));
+    
     // Return types.
     IFeature byteArrayReturnType = new ReturnTypeFeature(cp, "byte[]");
     addFeature(byteArrayReturnType,
@@ -217,6 +222,9 @@ public class FeatureHandler {
         "unescape");
     addFeature(methodNameContainsEscape,
         new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)));
+    IFeature methodNameContainsGetParameter = new MethodNameContainsFeature("getParameter");
+        addFeature(methodNameContainsGetParameter,
+            new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
     IFeature methodNameContainsUnescape = new MethodNameContainsFeature(
         "unescape");
     addFeature(methodNameContainsUnescape,
@@ -326,7 +334,7 @@ public class FeatureHandler {
 
     IFeature nameContaisRead = new MethodNameContainsFeature("read", "thread");
     addFeature(nameContaisRead,
-        new HashSet<>(Arrays.asList(Category.SOURCE, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE601, Category.NONE)));
     IFeature nameContainsLoad = new MethodNameContainsFeature("load",
         "payload");
     addFeature(nameContainsLoad,
@@ -367,13 +375,19 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
     IFeature nameContainsSend = new MethodNameContainsFeature("send");
     addFeature(nameContainsSend,
-        new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SINK, Category.CWE601, Category.NONE)));
     IFeature nameContainsHandl = new MethodNameContainsFeature("handl");
     addFeature(nameContainsHandl,
         new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
     IFeature nameEqualsLog = new MethodNameEqualsFeature("log");
     addFeature(nameEqualsLog,
         new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
+    IFeature nameEqualsSendRedirect = new MethodNameEqualsFeature("sendRedirect");
+    addFeature(nameEqualsSendRedirect,
+        new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
+    IFeature nameEqualsSetHeader = new MethodNameEqualsFeature("setHeader");
+    addFeature(nameEqualsSetHeader,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.NONE)));
     IFeature nameContainsRun = new MethodNameContainsFeature("run");
     addFeature(nameContainsRun, new HashSet<>(
         Arrays.asList(Category.SINK, Category.CWE078, Category.NONE)));
@@ -386,6 +400,9 @@ public class FeatureHandler {
     IFeature nameContainsCompile = new MethodNameContainsFeature("compile");
     addFeature(nameContainsCompile,
         new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE)));
+    IFeature nameContainsRedirect = new MethodNameContainsFeature("redirect");
+    addFeature(nameContainsRedirect,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.CWE601, Category.NONE)));
 
     IFeature nameContainsDump = new MethodNameContainsFeature("dump");
     addFeature(nameContainsDump,
@@ -409,6 +426,38 @@ public class FeatureHandler {
         Arrays.asList(Category.CWE862, Category.CWE863, Category.NONE)));
 
     // Class name.
+    IFeature classNameContainsRedirect = new MethodClassContainsNameFeature(
+            "Redirect");
+        addFeature(classNameContainsRedirect,
+            new HashSet<>(Arrays.asList(Category.CWE601, Category.SINK, Category.NONE)));
+    IFeature classNameContainsResponse = new MethodClassContainsNameFeature(
+            "Response");
+        addFeature(classNameContainsResponse,
+            new HashSet<>(Arrays.asList(Category.CWE601, Category.SINK, Category.NONE)));
+    IFeature classNameContainsServlet = new MethodClassContainsNameFeature(
+            "servlet");
+        addFeature(classNameContainsServlet,
+            new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
+    IFeature classNameContainsUrl = new MethodClassContainsNameFeature(
+            "url");
+        addFeature(classNameContainsUrl,
+            new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
+    IFeature classNameContainsCss = new MethodClassContainsNameFeature(
+            "Css");
+        addFeature(classNameContainsCss,
+            new HashSet<>(Arrays.asList(Category.CWE079, Category.NONE)));
+    IFeature classNameContainsDom = new MethodClassContainsNameFeature(
+            "Dom");
+        addFeature(classNameContainsDom,
+            new HashSet<>(Arrays.asList(Category.CWE079, Category.NONE)));
+    IFeature classNameContainsPage = new MethodClassContainsNameFeature(
+            "Page");
+        addFeature(classNameContainsPage,
+            new HashSet<>(Arrays.asList(Category.CWE079, Category.SANITIZER, Category.NONE)));
+    IFeature classNameContainsHtml = new MethodClassContainsNameFeature(
+            "Html");
+        addFeature(classNameContainsHtml,
+            new HashSet<>(Arrays.asList(Category.SINK, Category.SOURCE, Category.CWE079, Category.NONE)));
     IFeature classNameContainsSaniti = new MethodClassContainsNameFeature(
         "Saniti");
     addFeature(classNameContainsSaniti,
@@ -473,7 +522,7 @@ public class FeatureHandler {
         Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE)));
     IFeature classNameContainsWeb = new MethodClassContainsNameFeature("web");
     addFeature(classNameContainsWeb, new HashSet<>(
-        Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.CWE079)));
+        Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.CWE079, Category.CWE601)));
     IFeature classNameContainsNet = new MethodClassContainsNameFeature(".net.");
     addFeature(classNameContainsNet, new HashSet<>(
         Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE)));
@@ -482,7 +531,7 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
             Category.CWE089, Category.NONE)));
     IFeature classNameContainsJdbc = new MethodClassContainsNameFeature("jdbc");
-    addFeature(classNameContainsSql,
+    addFeature(classNameContainsJdbc,
         new HashSet<>(Arrays.asList(Category.SINK,
             Category.CWE089, Category.NONE)));
     IFeature classNameContainsManager = new MethodClassContainsNameFeature(
@@ -525,6 +574,14 @@ public class FeatureHandler {
     IFeature classNameContainsUser = new MethodClassContainsNameFeature("user");
     addFeature(classNameContainsUser, new HashSet<>(
         Arrays.asList(Category.CWE862, Category.CWE863, Category.NONE)));
+    
+    IFeature classNameContainsRequest = new MethodClassContainsNameFeature("Request");
+    addFeature(classNameContainsRequest, new HashSet<>(
+        Arrays.asList(Category.CWE601, Category.NONE)));
+    
+    IFeature classNameContainsHttp = new MethodClassContainsNameFeature("http");
+    addFeature(classNameContainsHttp, new HashSet<>(
+        Arrays.asList(Category.CWE601, Category.NONE)));
 
     // Call to a method.
     IFeature methodInvocationNameSaniti = new MethodInvocationName(cp,
@@ -808,7 +865,7 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
             Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078,
+            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE601,
             Category.NONE)));
 
     // Constructor.
@@ -826,7 +883,10 @@ public class FeatureHandler {
     IFeature classEndsWithRequest = new MethodClassEndsWithNameFeature("Request");
     addFeature(classEndsWithRequest, new HashSet<>(Arrays.asList(
             Category.SINK, Category.CWE079, Category.CWE089, Category.NONE)));
-
+    IFeature classEndsWithRender = new MethodClassEndsWithNameFeature("Render");
+    addFeature(classEndsWithRender, new HashSet<>(Arrays.asList(
+            Category.SINK, Category.CWE079, Category.NONE)));
+    
     IFeature paramTypeMathcesReturn = new ParamTypeMatchesReturnType(cp);
     addFeature(methodIsConstructor,
         new HashSet<>(Arrays.asList(
@@ -847,8 +907,36 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SOURCE,Category.SINK, Category.NONE)));
     
     IFeature realSetter = new MethodIsRealSetterFeature(cp);
-    addFeature(anonymousClass,
+    addFeature(realSetter,
         new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
+    
+    IFeature voidOn = new VoidOnMethodFeature();
+    addFeature(voidOn,
+        new HashSet<>(Arrays.asList(Category.SINK,Category.CWE079, Category.NONE)));
+    
+    IFeature returnContainsDocument = new ReturnTypeContainsNameFeature(cp, "Document");
+    addFeature(returnContainsDocument,
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.CWE079, Category.NONE)));
+    
+    IFeature returnContainsNode = new ReturnTypeContainsNameFeature(cp, "Node");
+    addFeature(returnContainsNode,
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.CWE079, Category.NONE)));
+    
+    IFeature returnContainsUser = new ReturnTypeContainsNameFeature(cp, "User");
+    addFeature(returnContainsUser,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
+    
+    IFeature returnContainsCredential= new ReturnTypeContainsNameFeature(cp, "Credential");
+    addFeature(returnContainsCredential,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,Category.CWE306, Category.CWE862, Category.CWE863, Category.NONE)));
+    
+    IFeature returnContainsServlet = new ReturnTypeContainsNameFeature(cp, "Servlet");
+    addFeature(returnContainsServlet,
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.CWE079,Category.CWE078, Category.NONE)));
+    
+    IFeature returnContainsRequest = new ReturnTypeContainsNameFeature(cp, "Request");
+    addFeature(returnContainsRequest,
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.CWE079, Category.NONE)));
     
     System.out.println("Initialized " + getFeaturesSize() + " features.");
   }

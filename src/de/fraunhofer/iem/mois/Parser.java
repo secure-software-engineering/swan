@@ -72,7 +72,8 @@ public class Parser {
         @Override
         public Type appliesInternal(Method method) {
           SootMethod sm = getSootMethod(method);
-          if (sm == null) return Type.NOT_SUPPORTED;
+          if (sm == null) 
+        	  return Type.NOT_SUPPORTED;
 
           if (sm.isAbstract())
             return Type.FALSE;
@@ -81,7 +82,13 @@ public class Parser {
         }
       };
       Type t = asf.applies(am);
-      if (t == Type.TRUE) purgedMethods.add(am);
+      if (t == Type.TRUE) 
+    	  {
+    	  	purgedMethods.add(am);
+    	  }
+      else 
+    	  System.out.println("Purged method: " + am.getSignature());
+      
     }
     logger.info(methods.size() + " methods purged down to "
         + purgedMethods.size() + ".");

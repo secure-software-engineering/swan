@@ -44,9 +44,9 @@ public class Learner {
   private long analysisTime;
   
   private final boolean CROSS_EVALUATE=false;
-  private final boolean CLASSIFY=false;
+  private final boolean CLASSIFY=true;
   
-  private final int CROSS_EVALUATE_ITERATIONS=10;
+  private final int CROSS_EVALUATE_ITERATIONS=1;
   
   private final Writer writer;
 

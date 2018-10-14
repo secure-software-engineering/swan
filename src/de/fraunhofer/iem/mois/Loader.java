@@ -75,7 +75,7 @@ public class Loader {
 
               Method newMethod =
                   new Method(methodName, parameters, returnType, className);
-              System.out.println(newMethod.getSignature());
+              //System.out.println(newMethod.getSignature());
               methods.add(newMethod);
             }
           }
@@ -91,7 +91,8 @@ public class Loader {
   public void pruneNone() {
     Set<Method> newMethods = new HashSet<Method>();
     for (Method m : methods) {
-      if (!m.getCategoriesClassified().isEmpty()) newMethods.add(m);
+      if (!m.getCategoriesClassified().isEmpty()) 
+    	  newMethods.add(m);
     }
     System.out.println(
         methods.size() + " methods prunned down to " + newMethods.size());
