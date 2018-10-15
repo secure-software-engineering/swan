@@ -38,7 +38,7 @@ import de.fraunhofer.iem.mois.features.MethodModifierFeature.Modifier;
 /**
  * Handles the learner's features.
  *
- * @author Lisa Nguyen Quang Do
+ * @author Lisa Nguyen Quang Do, Goran Piskachev
  *
  */
 
@@ -88,7 +88,7 @@ public class FeatureHandler {
             Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
             Category.AUTHENTICATION_TO_LOW, Category.CWE601, Category.NONE)));
 
-    // Parameter types.
+    // Parameter types (ParameterContainsTypeOrNameFeature).
     IFeature parameterOfTypeString = new ParameterContainsTypeOrNameFeature(
         "java.lang.String");
     addFeature(parameterOfTypeString,
@@ -138,7 +138,7 @@ public class FeatureHandler {
     addFeature(parameterOfTypeUrl, new HashSet<>(
         Arrays.asList(Category.CWE601, Category.NONE)));
     
-    // Return types.
+    // Return types (ReturnTypeFeature).
     IFeature byteArrayReturnType = new ReturnTypeFeature(cp, "byte[]");
     addFeature(byteArrayReturnType,
         new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)));
@@ -214,7 +214,33 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SANITIZER,
             Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
             Category.AUTHENTICATION_TO_LOW, Category.NONE)));
+    IFeature methodNameStartsWithIs = new MethodNameStartsWithFeature("is");
+    addFeature(methodNameStartsWithIs,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
+            Category.NONE)));
+    IFeature methodNameStartsOpen = new MethodNameStartsWithFeature("open");
+    addFeature(methodNameStartsOpen,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
+            Category.AUTHENTICATION_TO_HIGH, 
+            Category.NONE)));
+    IFeature methodNameStartsClose = new MethodNameStartsWithFeature("close");
+    addFeature(methodNameStartsClose,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
+             Category.AUTHENTICATION_TO_LOW,
+            Category.NONE)));
+    IFeature methodNameStartsCreate = new MethodNameStartsWithFeature("create");
+    addFeature(methodNameStartsCreate,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
+            Category.AUTHENTICATION_TO_HIGH, 
+            Category.NONE)));
+    IFeature methodNameStartsDelete = new MethodNameStartsWithFeature("delete");
+    addFeature(methodNameStartsDelete,
+        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
+             Category.AUTHENTICATION_TO_LOW,
+            Category.NONE)));
 
+    
+    // Method Contains Name. 
     IFeature methodNameContainsSaniti = new MethodNameContainsFeature("saniti");
     addFeature(methodNameContainsSaniti,
         new HashSet<>(Arrays.asList(Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE089, Category.NONE)));
@@ -307,30 +333,7 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_LOW,
             Category.NONE)));
-    IFeature methodNameStartsWithIs = new MethodNameStartsWithFeature("is");
-    addFeature(methodNameStartsWithIs,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.NONE)));
-    IFeature methodNameStartsOpen = new MethodNameStartsWithFeature("open");
-    addFeature(methodNameStartsOpen,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, 
-            Category.NONE)));
-    IFeature methodNameStartsClose = new MethodNameStartsWithFeature("close");
-    addFeature(methodNameStartsClose,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-             Category.AUTHENTICATION_TO_LOW,
-            Category.NONE)));
-    IFeature methodNameStartsCreate = new MethodNameStartsWithFeature("create");
-    addFeature(methodNameStartsCreate,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-            Category.AUTHENTICATION_TO_HIGH, 
-            Category.NONE)));
-    IFeature methodNameStartsDelete = new MethodNameStartsWithFeature("delete");
-    addFeature(methodNameStartsDelete,
-        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
-             Category.AUTHENTICATION_TO_LOW,
-            Category.NONE)));
+    
 
     IFeature nameContaisRead = new MethodNameContainsFeature("read", "thread");
     addFeature(nameContaisRead,
@@ -379,15 +382,7 @@ public class FeatureHandler {
     IFeature nameContainsHandl = new MethodNameContainsFeature("handl");
     addFeature(nameContainsHandl,
         new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
-    IFeature nameEqualsLog = new MethodNameEqualsFeature("log");
-    addFeature(nameEqualsLog,
-        new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
-    IFeature nameEqualsSendRedirect = new MethodNameEqualsFeature("sendRedirect");
-    addFeature(nameEqualsSendRedirect,
-        new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
-    IFeature nameEqualsSetHeader = new MethodNameEqualsFeature("setHeader");
-    addFeature(nameEqualsSetHeader,
-        new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.NONE)));
+    
     IFeature nameContainsRun = new MethodNameContainsFeature("run");
     addFeature(nameContainsRun, new HashSet<>(
         Arrays.asList(Category.SINK, Category.CWE078, Category.NONE)));
@@ -425,6 +420,18 @@ public class FeatureHandler {
     addFeature(nameContainsAuthori, new HashSet<>(
         Arrays.asList(Category.CWE862, Category.CWE863, Category.NONE)));
 
+    // Method Name Equals. 
+    IFeature nameEqualsLog = new MethodNameEqualsFeature("log");
+    addFeature(nameEqualsLog,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)));
+    IFeature nameEqualsSendRedirect = new MethodNameEqualsFeature("sendRedirect");
+    addFeature(nameEqualsSendRedirect,
+        new HashSet<>(Arrays.asList(Category.CWE601, Category.NONE)));
+    IFeature nameEqualsSetHeader = new MethodNameEqualsFeature("setHeader");
+    addFeature(nameEqualsSetHeader,
+        new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.NONE)));
+    
+    
     // Class name.
     IFeature classNameContainsRedirect = new MethodClassContainsNameFeature(
             "Redirect");
@@ -876,6 +883,7 @@ public class FeatureHandler {
             Category.AUTHENTICATION_NEUTRAL, Category.CWE078, Category.CWE862,
             Category.CWE863, Category.CWE089, Category.NONE)));
     
+    // Method class ends 
     IFeature classEndsWithEncoder = new MethodClassEndsWithNameFeature("Encoder");
     addFeature(classEndsWithEncoder, new HashSet<>(Arrays.asList(
             Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE862,
@@ -887,8 +895,9 @@ public class FeatureHandler {
     addFeature(classEndsWithRender, new HashSet<>(Arrays.asList(
             Category.SINK, Category.CWE079, Category.NONE)));
     
+    // Parameter Type matches return 
     IFeature paramTypeMathcesReturn = new ParamTypeMatchesReturnType(cp);
-    addFeature(methodIsConstructor,
+    addFeature(paramTypeMathcesReturn,
         new HashSet<>(Arrays.asList(
             Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE862,
             Category.CWE863, Category.CWE089, Category.NONE)));
@@ -914,6 +923,8 @@ public class FeatureHandler {
     addFeature(voidOn,
         new HashSet<>(Arrays.asList(Category.SINK,Category.CWE079, Category.NONE)));
     
+    
+    // ReturnTypeContainsNameFeature 
     IFeature returnContainsDocument = new ReturnTypeContainsNameFeature(cp, "Document");
     addFeature(returnContainsDocument,
         new HashSet<>(Arrays.asList(Category.SOURCE,Category.CWE079, Category.NONE)));
