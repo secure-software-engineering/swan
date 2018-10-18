@@ -138,7 +138,7 @@ public class Writer {
 			if (method.getCategoriesClassified().isEmpty())
 				continue;
 
-			obj.put(Constants.NAME, method.getClassName().toString());
+			obj.put(Constants.NAME, method.getClassName()+"."+method.getMethodName());
 			obj.put(Constants.RETURN_TYPE, method.getReturnType());
 			obj.put(Constants.PARAMETERS, method.getParameters());
 
@@ -160,8 +160,8 @@ public class Writer {
 			dataOutParams.addAll(method.getDataOut().getParameterIndeces());
 
 			JSONObject dataOut = new JSONObject();
-			dataIn.put(Constants.RETURN_TYPE, method.getDataOut().getReturnValue());
-			dataIn.put(Constants.PARAMETERS, dataOutParams);
+			dataOut.put(Constants.RETURN_TYPE, method.getDataOut().getReturnValue());
+			dataOut.put(Constants.PARAMETERS, dataOutParams);
 
 			obj.put(Constants.DATA_IN, dataIn);
 			obj.put(Constants.DATA_OUT, dataOut);
@@ -200,7 +200,7 @@ public class Writer {
 	}
 
 	public void writeResultsQWEL(Set<Method> methods, String outputFile) throws IOException {
-		String path = outputFile.substring(0, outputFile.lastIndexOf('\\')+1);
+		String path = outputFile.substring(0, outputFile.lastIndexOf(File.separator)+1);
 		BufferedWriter w = null;
 		try {
 
@@ -257,7 +257,7 @@ public class Writer {
 	}
 	
 	public void writeResultsSoot(Set<Method> methods, String outputFile) throws IOException {
-		String path = outputFile.substring(0, outputFile.lastIndexOf('\\')+1);
+		String path = outputFile.substring(0, outputFile.lastIndexOf(File.separator)+1);
 		BufferedWriter w = null;
 		try {
 

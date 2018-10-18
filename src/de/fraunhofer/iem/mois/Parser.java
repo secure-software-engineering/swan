@@ -207,7 +207,7 @@ public class Parser {
 
           Iterator<Long> p2 = parameters2.iterator();
           while (p2.hasNext()) {
-            m.getDataIn().getParameterIndeces()
+            m.getDataOut().getParameterIndeces()
                 .add((Integer.parseInt(p2.next().toString())));
           }
         }
