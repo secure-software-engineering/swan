@@ -4,7 +4,7 @@ import de.fraunhofer.iem.mois.IFeature;
 import de.fraunhofer.iem.mois.data.Method;
 
 /**
- * Implicit methods
+ * Implicit methods (e.g. methods from bytecode for access of private fields)
  *
  * @author Lisa Nguyen Quang Do
  *

@@ -872,7 +872,7 @@ public class FeatureHandler {
         new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
             Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE601,
+            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE306, Category.CWE079, Category.CWE601,
             Category.NONE)));
 
     // Constructor.
@@ -905,7 +905,7 @@ public class FeatureHandler {
     IFeature innerClassMethod = new MethodInnerClassFeature(cp, true);
     addFeature(innerClassMethod,
         new HashSet<>(Arrays.asList(
-            Category.SINK, Category.SOURCE, Category.NONE)));
+            Category.SINK, Category.SOURCE, Category.NONE, Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862, Category.CWE863, Category.CWE601 )));
     
     IFeature returnsConstant = new MethodReturnsConstantFeature(cp);
     addFeature(returnsConstant,
@@ -913,7 +913,7 @@ public class FeatureHandler {
     
     IFeature anonymousClass = new MethodAnonymousClassFeature(true);
     addFeature(anonymousClass,
-        new HashSet<>(Arrays.asList(Category.SOURCE,Category.SINK, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SOURCE,Category.SINK, Category.NONE, Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862, Category.CWE863, Category.CWE601)));
     
     IFeature realSetter = new MethodIsRealSetterFeature(cp);
     addFeature(realSetter,
