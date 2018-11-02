@@ -141,14 +141,14 @@ public class FeatureHandler {
     // Return types (ReturnTypeFeature).
     IFeature byteArrayReturnType = new ReturnTypeFeature(cp, "byte[]");
     addFeature(byteArrayReturnType,
-        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.NONE)));
     IFeature stringReturnType = new ReturnTypeFeature(cp, "java.lang.String");
     addFeature(stringReturnType,
-        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.CWE079, Category.CWE078, Category.CWE089, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.CWE079, Category.CWE078, Category.CWE089, Category.NONE)));
     IFeature charSequenceReturnType = new ReturnTypeFeature(cp,
         "java.lang.CharSequence");
     addFeature(charSequenceReturnType,
-        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)));
+        new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.NONE)));
     IFeature booleanReturnType = new ReturnTypeFeature(cp, "boolean");
     addFeature(booleanReturnType,
         new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
