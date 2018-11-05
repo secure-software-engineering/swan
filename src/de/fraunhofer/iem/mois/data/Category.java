@@ -8,11 +8,11 @@ package de.fraunhofer.iem.mois.data;
  */
 
 public enum Category {
-  SOURCE("sources", false), SINK("sinks", false), AUTHENTICATION_TO_HIGH(
-      "authentications_to_high", false), AUTHENTICATION_TO_LOW(
-          "authentications_to_low", false), AUTHENTICATION_NEUTRAL(
-              "authentications_neutral", false), SANITIZER("sanitizers",
-                  false), NONE("none", false),
+    SOURCE(Constants.SOURCE, false), SINK(Constants.SINK, false), AUTHENTICATION_TO_HIGH(
+            Constants.AUTHENTICATION_SAFE, false), AUTHENTICATION_TO_LOW(
+            Constants.AUTHENTICATION_UNSAFE, false), AUTHENTICATION_NEUTRAL(
+            Constants.AUTHENTICATION_NOCHANGE, false), SANITIZER(Constants.SANITIZER,
+            false), NONE(Constants.NONE, false),
 
   CWE089("CWE089", true), CWE306("CWE306", true), CWE078("CWE078",
       true), CWE862("CWE862", true), CWE863("CWE863", 

@@ -123,7 +123,7 @@ public class Main {
     writer.printResultsTXT(loader.methods(), tmpFiles, args[3] + File.separator + "txt" + File.separator + "output.txt");
     writer.writeResultsQWEL(loader.methods(), args[3] + File.separator + "qwel" + File.separator + "output.qwel");
     writer.writeResultsSoot(loader.methods(), args[3] + File.separator + "soot-qwel" + File.separator + "output.sqwel");
-    writer.printResultsJSON(loader.methods(), tmpFiles, args[3] + File.separator + "json" + File.separator + "output.json" );
+    writer.printResultsJSON(loader.methods(), args[3] + File.separator + "json" + File.separator + "output.json" );
   }
 
   private void runClassifier(HashSet<Category> categories, boolean cweMode)

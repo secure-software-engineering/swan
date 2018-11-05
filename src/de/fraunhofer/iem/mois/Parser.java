@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import de.fraunhofer.iem.mois.data.RelevantPart;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -143,6 +144,11 @@ public class Parser {
     }
   }
 
+  public Set<Method> parseFile(String fileName){
+    parse(fileName);
+    return methods;
+  }
+
   @SuppressWarnings("unchecked")
   private void loadMethodsFromJsonArray(JSONArray array, String type) {
 
@@ -217,10 +223,10 @@ public class Parser {
           securityLevel = Method.SecLevel.NEUTRAL;
         else {
           switch (secLevel) {
-          case "high":
+          case Constants.AUTH_SAFE:
             securityLevel = Method.SecLevel.HIGH;
             break;
-          case "low":
+          case Constants.AUTH_UNSAFE:
             securityLevel = Method.SecLevel.LOW;
             break;
           default:
@@ -261,16 +267,16 @@ public class Parser {
           while (p.hasNext()) {
             String t = p.next().toString();
             switch (t) {
-            case "source":
+            case Constants.SOURCE:
               m.addCategoryTrained(Category.SOURCE);
               break;
-            case "sink":
+            case Constants.SINK:
               m.addCategoryTrained(Category.SINK);
               break;
-            case "sanitizer":
+            case Constants.SANITIZER:
               m.addCategoryTrained(Category.SANITIZER);
               break;
-            case "authentication":
+            case Constants.AUTHENTICATION:
               switch (securityLevel) {
               case HIGH:
                 m.addCategoryTrained(Category.AUTHENTICATION_TO_HIGH);
@@ -319,6 +325,20 @@ public class Parser {
 
   public Set<String> cwe() {
     return cwes;
+  }
+
+  private RelevantPart extractDataInOutObject(JSONObject dataObject) {
+
+    JSONArray parameterArray = (JSONArray) dataObject.get(Constants.PARAMETERS);
+
+    List<Integer> parameters = new ArrayList<>();
+
+    for (Object param : parameterArray) {
+
+      if (param instanceof Integer)
+        parameters.add((Integer) param);
+    }
+    return new RelevantPart((boolean) dataObject.get(Constants.RETURN_TYPE), parameters);
   }
 
 }
