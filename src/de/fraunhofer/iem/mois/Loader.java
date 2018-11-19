@@ -84,8 +84,7 @@ public class Loader {
       }
 
     }.applies(new Method("a", "void", "x.y"));
-    System.out.println("Loaded " + (methods.size() - methodCount)
-        + " methods from the test JAR.");
+    //System.out.println("Loaded " + (methods.size() - methodCount)  + " methods from the test JAR.");
   }
 
   public void pruneNone() {
@@ -94,8 +93,7 @@ public class Loader {
       if (!m.getCategoriesClassified().isEmpty()) 
     	  newMethods.add(m);
     }
-    System.out.println(
-        methods.size() + " methods prunned down to " + newMethods.size());
+    //System.out.println(  methods.size() + " methods prunned down to " + newMethods.size());
     methods = newMethods;
   }
 }

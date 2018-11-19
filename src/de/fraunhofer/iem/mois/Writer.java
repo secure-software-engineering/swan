@@ -58,8 +58,8 @@ public class Writer {
 				wr.flush();
 				wr.close();
 
-				if (counters.get(type) != null)
-					System.out.println(counters.get(type) + " " + type.toString() + " written to file: " + fileName);
+				//if (counters.get(type) != null)
+					//System.out.println(counters.get(type) + " " + type.toString() + " written to file: " + fileName);
 			}
 		} finally {
 			if (wr != null)
@@ -107,7 +107,7 @@ public class Writer {
 		wr.flush();
 		wr.close();
 
-		System.out.println(methods.size() + " total methods written to file: " + outputFile);
+		//System.out.println(methods.size() + " total methods written to file: " + outputFile);
 		for (Category type : counters.keySet())
 			if (counters.get(type) != null)
 				System.out.println(counters.get(type) + " " + type.toString() + " written to file: " + outputFile);

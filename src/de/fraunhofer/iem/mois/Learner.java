@@ -49,7 +49,7 @@ public class Learner {
   private final boolean CROSS_EVALUATE=true;
   private final boolean CLASSIFY=false;
   
-  private final int CROSS_EVALUATE_ITERATIONS=10;
+  private final int CROSS_EVALUATE_ITERATIONS=1;
   
   private final Writer writer;
 
@@ -57,15 +57,16 @@ public class Learner {
     this.writer = writer;
   }
 
-  public void classify(Set<Method> trainingSet, Set<Method> testSet,
+  public double classify(Set<Method> trainingSet, Set<Method> testSet,
       Map<Category, Set<IFeature>> features, Set<Category> categories,
       String outputFile, boolean cweMode) throws IOException {
 
+	  double fmeasure=0;
     startAnalysisTime = System.currentTimeMillis();
     Map<Category, Integer> counters = new HashMap<Category, Integer>();
 
     // Collect the possible values.
-    System.out.println("Initializing classifier.");
+    //System.out.println("Initializing classifier.");
     FastVector ordinal = new FastVector();
     ordinal.addElement("true");
     ordinal.addElement("false");
@@ -80,7 +81,7 @@ public class Learner {
 
     // Collect all attributes for the categories we classify into, and create
     // the instance set.
-    System.out.print("Collecting attributes... ");
+    //System.out.print("Collecting attributes... ");
     Map<IFeature, Attribute> featureAttribs =
         new HashMap<IFeature, Attribute>();
     FastVector attributes = new FastVector();
@@ -110,10 +111,10 @@ public class Learner {
     Attribute idAttr = new Attribute("id", methodStrings);
     attributes.addElement(idAttr);
 
-    System.out.println(attributes.size() + " attributes collected.");
+    //System.out.println(attributes.size() + " attributes collected.");
 
     // Set attributes to the train and test instances.
-    System.out.print("Creating instances... ");
+    //System.out.print("Creating instances... ");
     Instances trainInstances = new Instances("trainingmethods", attributes, 0);
     Instances testInstances = new Instances("allmethods", attributes, 0);
     trainInstances.setClass(classAttr);
@@ -183,7 +184,7 @@ public class Learner {
         testInstances.add(inst);
       }
     }
-    System.out.println("Done.");
+    //System.out.println("Done.");
 
     // Create classifier.
     try {
@@ -209,7 +210,7 @@ public class Learner {
           classifier = new Logistic();
       else
         throw new Exception("Wrong WEKA learner!");
-      System.out.println("Classifier created: " + WEKA_LEARNER_ALL);
+     // System.out.println("Classifier created: " + WEKA_LEARNER_ALL);
 
       // Save arff data.
       ArffSaver saver = new ArffSaver();
@@ -221,17 +222,17 @@ public class Learner {
       fileName = fileName.replace(", ", "_");
       saver.setFile(new File("Train_" + fileName + ".arff"));
       saver.writeBatch();
-      System.out.println(
-          "Arff data saved at: " + saver.retrieveFile().getCanonicalPath());
+      //System.out.println( "Arff data saved at: " + saver.retrieveFile().getCanonicalPath());
 
    // Cross evaluation.
       if(CROSS_EVALUATE) {
     	
     	  double precision= 0;
     	  double recall = 0; 
+    	  double f = 0;
     	  for(int i = 0; i< CROSS_EVALUATE_ITERATIONS; i++)
     	  {
-    		  System.out.println("Starting cross evaluation (iteration "+i+").");
+    		  //System.out.println("Starting cross evaluation (iteration "+i+").");
               Evaluation eval = new Evaluation(trainInstances);
               
               StringBuffer sb = new StringBuffer();
@@ -240,22 +241,25 @@ public class Learner {
                       + ""/* "1-" + (attributes.size() - 1) */),
                   true);
               //System.out.println(sb.toString());
-              System.out.println("Class details: " + eval.toClassDetailsString());
+              //System.out.println("Class details: " + eval.toClassDetailsString());
               precision += eval.weightedPrecision();
               recall += eval.weightedRecall();
+              f += eval.weightedFMeasure();
               
-              for (Category counter : counters.keySet())
-                System.out.println("Cross evaluation finished on a training set of "
-                    + counters.get(counter) + " " + counter + ".");
+              //for (Category counter : counters.keySet())
+                //System.out.println("Cross evaluation finished on a training set of " + counters.get(counter) + " " + counter + ".");
     	  }
-    	  System.out.println("The precision over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + (precision/CROSS_EVALUATE_ITERATIONS));
-    	  System.out.println("The recall over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + (recall/CROSS_EVALUATE_ITERATIONS));
+    	  //System.out.println("The precision over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + round((precision/CROSS_EVALUATE_ITERATIONS),4));
+    	  //System.out.println("The recall over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + round((recall/CROSS_EVALUATE_ITERATIONS),4));
+    	  fmeasure = f/CROSS_EVALUATE_ITERATIONS;
+    	  System.out.println("The F-measure over "+ CROSS_EVALUATE_ITERATIONS +" iterations is " + fmeasure);
+    	  
       }
       
       // Classification.
       
       if(CLASSIFY) {
-    	  System.out.println("Classification starting.");
+    	  //System.out.println("Classification starting.");
           classifier.buildClassifier(trainInstances);
           if (WEKA_LEARNER_ALL.equals("J48")) {
             System.out.println(((J48) (classifier)).graph());
@@ -277,7 +281,7 @@ public class Learner {
             }
             if (!found) System.err.println("Unknown class name");
           }  
-          System.out.println("Finished classification.");
+          //System.out.println("Finished classification.");
       }
       
     } 
@@ -287,15 +291,21 @@ public class Learner {
     }
     
 
-    System.out.println("Writing results to files:");
+    //System.out.println("Writing results to files:");
     writer.writeResultsToFiles(outputFile, methods, categories);
     //writer.writeResultsToFilesQWEL(outputFile, methods, categories);
     
     Runtime.getRuntime().gc();
     analysisTime = System.currentTimeMillis() - startAnalysisTime;
-    System.out.println("Time to classify " + categories.toString() + ": "
-        + analysisTime + " ms");
+    //System.out.println("Time to classify " + categories.toString() + ": "+ analysisTime + " ms");
 
+    return fmeasure;
     // writer.writeRIFLSpecification(outputFile, methods);
+  }
+  
+  public double round(double val, int decimals) {
+	  val = val*(10 * decimals);
+	  val = Math.round(val);
+	  return val /(10 * decimals);
   }
 }
