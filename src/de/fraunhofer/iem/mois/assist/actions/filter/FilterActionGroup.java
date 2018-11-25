@@ -10,6 +10,11 @@ import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Actpion group for filters that can be applied to list of methods.
+ * @author Oshando Johnson
+ */
+
 public class FilterActionGroup extends ActionGroup {
 
     @NotNull
@@ -18,6 +23,7 @@ public class FilterActionGroup extends ActionGroup {
 
         return new AnAction[]{
                 new FilterAction(new Pair<>(Constants.FILTER_CURRENT_FILE_KEY, Constants.FILTER_CURRENT_FILE_VALUE)),
+                new FilterAction(new Pair<>(Constants.FILTER_CURRENT_PROJECT_KEY, Constants.FILTER_CURRENT_PROJECT_VALUE)),
                 new Separator(),
                 new CategoryActionGroup(Constants.FILTER_TYPE, true),
                 new CategoryActionGroup(Constants.FILTER_CWE, true),
@@ -34,7 +40,7 @@ public class FilterActionGroup extends ActionGroup {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.FILE_SELECTED)
+        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);
