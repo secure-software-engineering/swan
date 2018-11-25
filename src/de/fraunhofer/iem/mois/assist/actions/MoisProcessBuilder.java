@@ -13,7 +13,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-//Executes Susi with updated configuration file on a separate thread.
+
+/**
+ * Creates process to run MOIS.
+ * @author Oshando Johnson
+ */
+
+
+//Executes MOIS with updated configuration file on a separate thread.
 public class MoisProcessBuilder extends Thread {
 
     private static HashMap<String, String> parameters;
@@ -45,8 +52,7 @@ public class MoisProcessBuilder extends Thread {
                 parameters.get(Constants.MOIS_SOURCE_DIR),
                 parameters.get(Constants.MOIS_TRAIN_DIR),
                 parameters.get(Constants.MOIS_CONFIG_FILE),
-                parameters.get(Constants.MOIS_OUTPUT_DIR) + File.separator + currentTimestamp + Constants.OUTPUT_TEXT_SUFFIX,
-                parameters.get(Constants.MOIS_OUTPUT_DIR) + File.separator + currentTimestamp + Constants.OUTPUT_JSON_SUFFIX);
+                parameters.get(Constants.MOIS_OUTPUT_DIR));
 
         processBuilder.redirectErrorStream(true);
         processBuilder.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
@@ -55,8 +61,8 @@ public class MoisProcessBuilder extends Thread {
         String message = Constants.NOTIFICATION_END_MOIS_SUCCESS + completionTimestamp;
 
         try {
-            Process susiProcess = processBuilder.start();
-            int result = susiProcess.waitFor();
+            Process moisProcess = processBuilder.start();
+            int result = moisProcess.waitFor();
 
             if (result == 0)
                 message = Constants.NOTIFICATION_END_MOIS_SUCCESS + completionTimestamp;

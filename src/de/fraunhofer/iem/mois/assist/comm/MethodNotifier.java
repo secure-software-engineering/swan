@@ -1,7 +1,12 @@
 package de.fraunhofer.iem.mois.assist.comm;
 
 import com.intellij.util.messages.Topic;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
+
+/**
+ * Notification events for methods.
+ * @author Oshando Johnson
+ */
 
 public interface MethodNotifier {
 
@@ -9,5 +14,5 @@ public interface MethodNotifier {
     Topic<MethodNotifier> METHOD_REMOVED_TOPIC = Topic.create("Method Removed",MethodNotifier.class);
 
     //This method will be executed after the action is performed
-    void afterAction(Method method);
+    void afterAction(MethodWrapper method);
 }

@@ -13,6 +13,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 
+/**
+ * Action to import configuration file.
+ *
+ * @author Oshando Johnson
+ */
+
+
 public class ImportAction extends AnAction {
 
     @Override
@@ -20,7 +27,14 @@ public class ImportAction extends AnAction {
 
         final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
 
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
+        File projectPath;
+
+        if (project.getBasePath() == null)
+            projectPath = FileSystemView.getFileSystemView().getDefaultDirectory();
+        else
+            projectPath = new File(project.getBasePath());
+
+        JFileChooser fileChooser = new JFileChooser(projectPath);
         FileNameExtensionFilter jsonFilter = new FileNameExtensionFilter("JSON Files", "json");
         fileChooser.setFileFilter(jsonFilter);
 
@@ -28,7 +42,7 @@ public class ImportAction extends AnAction {
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
 
-            SummaryToolWindow.FILE_SELECTED = true;
+            SummaryToolWindow.CONFIG_FILE_SELECTED = true;
             File selectedFile = fileChooser.getSelectedFile();
 
             MessageBus messageBus = project.getMessageBus();

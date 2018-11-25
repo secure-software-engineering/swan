@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Action to open help page or resources.
+ * @author Oshando Johnson
+ */
+
 public class HelpAction extends AnAction {
 
     @Override

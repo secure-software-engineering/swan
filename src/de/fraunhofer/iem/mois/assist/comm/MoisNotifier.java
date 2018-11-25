@@ -4,6 +4,11 @@ import com.intellij.util.messages.Topic;
 
 import java.util.HashMap;
 
+/**
+ * Notification events for MOIS.
+ * @author Oshando Johnson
+ */
+
 public interface MoisNotifier {
 
     Topic<MoisNotifier> START_MOIS_PROCESS_TOPIC = Topic.create("Start Mois",MoisNotifier.class);

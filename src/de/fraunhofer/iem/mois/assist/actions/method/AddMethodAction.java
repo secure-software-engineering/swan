@@ -1,24 +1,28 @@
 package de.fraunhofer.iem.mois.assist.actions.method;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiParameter;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
-import de.fraunhofer.iem.mois.assist.data.Method;
-import de.fraunhofer.iem.mois.assist.ui.MethodDialog;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Action to add a new method by selecting a class\category.
+ * @author Oshando Johnson
+ */
 
 public class AddMethodAction extends AnAction {
 
@@ -38,7 +42,7 @@ public class AddMethodAction extends AnAction {
 
         Caret caret = caretModel.getCurrentCaret();
         //TODO right click where method is and obtain method name
-        Method newMethod;
+        MethodWrapper newMethod;
         boolean methodFound = false;
 
         if (!JSONFileLoader.isFileSelected())
@@ -64,16 +68,10 @@ public class AddMethodAction extends AnAction {
                             parameters.add(psiParameter.getTypeElement().getType().getCanonicalText());
                         }
 
-                        newMethod = new Method(psiClass.getQualifiedName() + "." + psiMethod.getName(), returnType, "", "", "", "", "");
-                        newMethod.addParameter(parameters);
+                        newMethod = new MethodWrapper(psiMethod.getName(),parameters, returnType, psiClass.getQualifiedName());
                         newMethod.setNewMethod(true);
 
-                        MethodDialog methodDialog = new MethodDialog(newMethod, project, JSONFileLoader.getCategories());
-                        methodDialog.setTitle("Add Method");
-                        methodDialog.pack();
-                        methodDialog.setSize(550,350);
-                        methodDialog.setLocationRelativeTo(null);
-                        methodDialog.setVisible(true);
+                        ActionManager.getInstance().tryToExecute(new UpdateMethodAction(newMethod), e.getInputEvent(), null, "Add Method", false);
                     }
                 }
             }
@@ -87,7 +85,7 @@ public class AddMethodAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.FILE_SELECTED)
+        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

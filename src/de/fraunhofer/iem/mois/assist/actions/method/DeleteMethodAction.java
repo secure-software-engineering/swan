@@ -6,16 +6,22 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
 import javax.swing.*;
 
+/**
+ * Action to delete a method.
+ * @author Oshando Johnson
+ */
+
+
 public class DeleteMethodAction extends AnAction {
 
-    Method deleteMethod;
+    private MethodWrapper deleteMethod;
 
-    DeleteMethodAction(Method method){
+    DeleteMethodAction(MethodWrapper method){
         super("Delete");
         deleteMethod = method;
     }
@@ -25,7 +31,7 @@ public class DeleteMethodAction extends AnAction {
 
         final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
 
-        int confirmation = JOptionPane.showConfirmDialog(null, Constants.CONFIRM_METHOD_DELETION, "Delete Method", JOptionPane.YES_NO_OPTION);
+        int confirmation = JOptionPane.showConfirmDialog(null, Constants.CONFIRM_METHOD_DELETION, Constants.TITLE_DELETE_METHOD, JOptionPane.YES_NO_OPTION);
 
         if (confirmation == JOptionPane.YES_OPTION) {
 

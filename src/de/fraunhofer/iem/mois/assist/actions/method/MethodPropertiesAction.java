@@ -2,14 +2,20 @@ package de.fraunhofer.iem.mois.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.MethodPropertiesDialog;
+import de.fraunhofer.iem.mois.assist.util.Constants;
+
+/**
+ * Action to show additional properties for a method.
+ * @author Oshando Johnson
+ */
 
 public class MethodPropertiesAction extends AnAction{
 
-    private Method method;
+    private MethodWrapper method;
 
-    MethodPropertiesAction(Method method){
+    MethodPropertiesAction(MethodWrapper method){
         super("Properties");
         this.method = method;
     }
@@ -18,7 +24,7 @@ public class MethodPropertiesAction extends AnAction{
     public void actionPerformed(AnActionEvent anActionEvent) {
 
         MethodPropertiesDialog detailsDialog = new MethodPropertiesDialog(method);
-        detailsDialog.setTitle("Method Details");
+        detailsDialog.setTitle(Constants.TITLE_METHOD_PROPERTIES);
         detailsDialog.pack();
         detailsDialog.setSize(550, 350);
         detailsDialog.setLocationRelativeTo(null);

@@ -4,33 +4,38 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Separator;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Groups action that can be used to manage methods.
+ * @author Oshando Johnson
+ */
+
 public class MethodActionGroup extends ActionGroup {
 
-    private Method method;
+    private MethodWrapper methodWrapper;
 
     public MethodActionGroup() {
 
     }
 
-    public MethodActionGroup(Method method) {
+    public MethodActionGroup(MethodWrapper method) {
 
-        this.method = method;
+        this.methodWrapper = method;
     }
 
     @NotNull
     @Override
     public AnAction[] getChildren(@Nullable AnActionEvent anActionEvent) {
         return new AnAction[]{
-                new UpdateMethodAction(method),
-                new RestoreMethodAction(method),
-                new DeleteMethodAction(method),
+                new UpdateMethodAction(methodWrapper),
+                new RestoreMethodAction(methodWrapper),
+                new DeleteMethodAction(methodWrapper),
                 new Separator(),
-                new MethodPropertiesAction(method),};
+                new MethodPropertiesAction(methodWrapper),};
     }
 
     @Override
@@ -42,7 +47,7 @@ public class MethodActionGroup extends ActionGroup {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.FILE_SELECTED)
+        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

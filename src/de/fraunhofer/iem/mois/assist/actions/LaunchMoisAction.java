@@ -6,14 +6,18 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MoisNotifier;
-import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.JSONWriter;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.ui.MoisLauncherDialog;
 
 import javax.swing.FocusManager;
 import java.awt.*;
-import java.io.IOException;
+
+/**
+ * Action to start load dialog for configuring MOIS before running.
+ * @author Oshando Johnson
+ */
+
 
 public class LaunchMoisAction extends AnAction {
 
@@ -26,11 +30,11 @@ public class LaunchMoisAction extends AnAction {
         //Export changes to configuration files
         JSONWriter exportFile = new JSONWriter();
 
-        try {
+      /*  try {
             exportFile.writeToJsonFile(JSONFileLoader.getMethods(), JSONFileLoader.getConfigurationFile(true));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //Launch Dialog
         Window activeWindow = FocusManager.getCurrentManager().getActiveWindow();
@@ -42,8 +46,8 @@ public class LaunchMoisAction extends AnAction {
 
         if (dialog.isConfirmed()) {
 
-            MoisProcessBuilder susiProcessThread = new MoisProcessBuilder(anActionEvent, dialog.getParameters());
-            susiProcessThread.start();
+            MoisProcessBuilder moisProcessThread = new MoisProcessBuilder(anActionEvent, dialog.getParameters());
+            moisProcessThread.start();
             anActionEvent.getPresentation().setEnabled(false);
             MoisNotifier publisher = messageBus.syncPublisher(MoisNotifier.START_MOIS_PROCESS_TOPIC);
             publisher.launchMois(null);
@@ -54,7 +58,7 @@ public class LaunchMoisAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.FILE_SELECTED)
+        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

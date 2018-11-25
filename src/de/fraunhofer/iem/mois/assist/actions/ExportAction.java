@@ -5,13 +5,17 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.JSONWriter;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
-import de.fraunhofer.iem.mois.assist.util.Constants;
-import icons.PluginIcons;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
+
+/**
+ * Action to export updated configuration file.
+ *
+ * @author Oshando Johnson
+ */
 
 public class ExportAction extends AnAction {
     @Override
@@ -32,14 +36,14 @@ public class ExportAction extends AnAction {
             File selectedFile = fileChooser.getSelectedFile();
             filePath = selectedFile.getAbsolutePath();
 
-            if(!filePath.endsWith(FILE_EXTENSION)){
-                filePath+= FILE_EXTENSION;
+            if (!filePath.endsWith(FILE_EXTENSION)) {
+                filePath += FILE_EXTENSION;
             }
 
             JSONWriter exportFile = new JSONWriter();
 
             try {
-                exportFile.writeToJsonFile(JSONFileLoader.getMethods(),filePath);
+                exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -50,7 +54,7 @@ public class ExportAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.FILE_SELECTED)
+        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

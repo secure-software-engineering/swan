@@ -7,15 +7,22 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
+import de.fraunhofer.iem.mois.data.Method;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
+/**
+ * Action to restore a method that was deleted after rerunning MOIS.
+ *
+ * @author Oshando Johnson
+ */
+
 public class RestoreMethodAction extends AnAction {
 
-    private Method method;
+    private MethodWrapper method;
 
-    RestoreMethodAction(Method method) {
+    RestoreMethodAction(MethodWrapper method) {
         super("Restore");
         this.method = method;
     }
@@ -25,14 +32,12 @@ public class RestoreMethodAction extends AnAction {
 
         final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
 
-        method.setUpdateOperation("");
-
         //Notify Summary Tool window that new method was restored
         MessageBus messageBus = project.getMessageBus();
         MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
         publisher.afterAction(method);
 
-        Messages.showMessageDialog(project, Constants.MSG_METHOD_RESTORED, "Restore Method", Messages.getInformationIcon());
+        Messages.showMessageDialog(project, Constants.MSG_METHOD_RESTORED, Constants.TITLE_RESTORE_METHOD, Messages.getInformationIcon());
     }
 
     @Override
