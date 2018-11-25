@@ -1,4 +1,4 @@
-# mois-assist
+# assistMOIS
 IntelliJ IDEA Plug-in for the tool MOIS (Methods of interest for security)
 
 Description: 
@@ -8,7 +8,7 @@ MOIS should be used in combination with other static analyses tools. It helps th
 MOIS detects four types of methods: source, sink, sanitizer, and authentication method. 
 The found methods are further cathegorized according to relevant vulnerabilities (Common Weakness Enummeration  - CWE). Curretntly MOIS supports the following CWEs: CWE89, CWE79, CWE306, CWE862, and CWE863. 
 
-MOIS-Assist provides a GUI support for MOIS. The user is able to interact with the learning process by giving feedback on the methods of interest. 
+AssistMOIS provides a GUI support for MOIS. The user is able to interact with the learning process by giving feedback on the methods of interest. 
 The tool helps users that write static analyses to create list of MOIS for their specific Java libraries. 
 Moreover, users can manually inspect the proper usage of the methods detected by MOIS. 
 

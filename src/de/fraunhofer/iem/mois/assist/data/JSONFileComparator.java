@@ -1,10 +1,14 @@
 package de.fraunhofer.iem.mois.assist.data;
 
-import de.fraunhofer.iem.mois.assist.util.Constants;
-
 import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+/**
+ * Compares initial and new configuration files and outlines differences.
+ * @author Oshando Johnson
+ */
+
 
 public class JSONFileComparator {
 
@@ -16,13 +20,13 @@ public class JSONFileComparator {
         newFilePath = newPath;
     }
 
-    public HashMap<String, Method> compareJSONFile() {
+    public HashMap<String, MethodWrapper> compareJSONFile() {
 
         JSONFileParser fileParser = new JSONFileParser(originalFilePath);
-        HashMap<String, Method> originalList = fileParser.parseJSONFileMap();
+        HashMap<String, MethodWrapper> originalList = fileParser.parseJSONFileMap();
 
         fileParser.setCongFilePath(newFilePath);
-        HashMap<String, Method> updatedList = fileParser.parseJSONFileMap();
+        HashMap<String, MethodWrapper> updatedList = fileParser.parseJSONFileMap();
 
         //Determine methods that were deleted
         Set<String> deletedMethods = originalList.keySet().stream()
@@ -36,14 +40,14 @@ public class JSONFileComparator {
 
         for (String methodSignature : deletedMethods) {
 
-            Method method = originalList.get(methodSignature);
-            method.setUpdateOperation(Constants.METHOD_DELETED);
+            MethodWrapper method = originalList.get(methodSignature);
+         //  method.setUpdateOperation(Constants.METHOD_DELETED);
             updatedList.put(methodSignature, method);
         }
 
         for (String methodSignature : addedMethods) {
-            Method method = updatedList.get(methodSignature);
-            method.setUpdateOperation(Constants.METHOD_ADDED);
+            MethodWrapper method = updatedList.get(methodSignature);
+          //  method.setUpdateOperation(Constants.METHOD_ADDED);
             updatedList.replace(methodSignature, method);
         }
 

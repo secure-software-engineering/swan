@@ -1,10 +1,17 @@
 package de.fraunhofer.iem.mois.assist.data;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.search.GlobalSearchScope;
+import de.fraunhofer.iem.mois.assist.util.Formatter;
+import de.fraunhofer.iem.mois.data.Category;
+
 import java.util.*;
 
 public class JSONFileLoader {
 
-    static private HashMap<String, Method> methods;
+    static private HashMap<String, MethodWrapper> methods;
     static private String congFile = "";
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
@@ -47,38 +54,38 @@ public class JSONFileLoader {
     }
 
     //Return list of methods as an array
-    public static ArrayList<Method> getMethods() {
+    public static ArrayList<MethodWrapper> getMethods() {
 
         return new ArrayList<>(methods.values());
     }
 
 
     //Return list of methods as an array using categories
-    public static ArrayList<Method> getMethods(ArrayList<String> filters, String currentFile, boolean currentFileMode) {
+    public static ArrayList<MethodWrapper> getMethods(ArrayList<String> filters, String currentFile, boolean currentFileMode, boolean currentProjectMode, Project project) {
 
-        if (filters.size() == 0 && currentFileMode) {
+        if (filters.size() == 0 && (currentFileMode || currentProjectMode)) {
 
-            ArrayList<Method> filteredList = new ArrayList<>();
+            ArrayList<MethodWrapper> filteredList = new ArrayList<>();
 
             for (String methodSignature : methods.keySet()) {
 
-                if (methodSignature.contains(currentFile)) {
+                if ((methodSignature.contains(currentFile) && currentFileMode) || (inProject(methods.get(methodSignature).getClassName(true), project) && currentProjectMode)) {
                     filteredList.add(methods.get(methodSignature));
                 }
             }
             return filteredList;
         } else if (filters.size() > 0) {
 
-            ArrayList<Method> filteredList = new ArrayList<>();
+            ArrayList<MethodWrapper> filteredList = new ArrayList<>();
 
             for (String methodSignature : methods.keySet()) {
 
-                if (methodSignature.contains(currentFile))
+                if ((!methodSignature.contains(currentFile) && currentFileMode) || (!inProject(methods.get(methodSignature).getClassName(true), project) && currentProjectMode))
                     continue;
 
                 for (Category category : methods.get(methodSignature).getCategories()) {
 
-                    if (filters.contains(category.toString())) {
+                    if (filters.contains(Formatter.capitalizeFirstCharacter(category.toString()))) {
                         filteredList.add(methods.get(methodSignature));
                         break;
                     }
@@ -94,7 +101,7 @@ public class JSONFileLoader {
 
         Set<Category> categorySet = new HashSet<>();
 
-        for (Method method : methods.values()) {
+        for (MethodWrapper method : methods.values()) {
 
             for (Category category : method.getCategories()) {
                 if (!categorySet.contains(category))
@@ -105,7 +112,7 @@ public class JSONFileLoader {
     }
 
     //Add new method to the list
-    public static int addMethod(Method method) {
+    public static int addMethod(MethodWrapper method) {
 
 
         if (methods.containsKey(method.getSignature(true))) {
@@ -118,8 +125,18 @@ public class JSONFileLoader {
     }
 
     //Remove method from list
-    public static void removeMethod(Method method) {
+    public static void removeMethod(MethodWrapper method) {
 
-            methods.remove(method.getSignature(true));
+        methods.remove(method.getSignature(true));
+    }
+
+    //Check if method is in project
+    private static boolean inProject(String classname, Project project) {
+
+        JavaPsiFacade facade = JavaPsiFacade.getInstance(project);
+        PsiClass psiClass = facade.findClass(classname, GlobalSearchScope.projectScope(project));
+
+        //psiClass.getAllMethods()[0].
+        return psiClass != null;
     }
 }

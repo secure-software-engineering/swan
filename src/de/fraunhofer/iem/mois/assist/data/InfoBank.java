@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.mois.assist.data;
 
+import de.fraunhofer.iem.mois.data.CWE;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -44,7 +45,7 @@ public class InfoBank {
                 String cweName = (String) jsonObj.get("Name");
                 String cweDescription = (String) jsonObj.get("Description");
 
-                CWE cwe = new CWE(cweId, cweName, cweDescription);
+                CWE cwe = new CWE(cweId, cweName, cweDescription, "");
 
                 methods.add(cwe);
             }
