@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>de.fraunhofer.iem.mois.assist</id>
-    <name>MOIS-Assist</name>
+    <name>AssistMOIS</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
@@ -27,22 +27,22 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
 
-        <toolWindow id="MOIS-Assist" anchor="right" factoryClass="de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow" icon="PluginIcons.MOIS_ASSIST"/>
+        <toolWindow id="AssistMOIS" anchor="right" factoryClass="de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow" icon="PluginIcons.MOIS_ASSIST"/>
 
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
 
-        <group id="MOIS-Assist.ActionBar" text="MOIS-Assist" popup="false" >
+        <group id="AssistMOIS.ActionBar" text="AssistMOIS" popup="false" >
 
-            <action id="MOIS-Assist.ImportAction" class="de.fraunhofer.iem.mois.assist.actions.ImportAction"
+            <action id="AssistMOIS.ImportAction" class="de.fraunhofer.iem.mois.assist.actions.ImportAction"
                     text="Import File"
                     icon="PluginIcons.IMPORT_ACTION"
                     description="Import configuration file">
             </action>
 
-            <action id="MOIS-Assist.ExportAction"
+            <action id="AssistMOIS.ExportAction"
                     class="de.fraunhofer.iem.mois.assist.actions.ExportAction"
                     icon="PluginIcons.EXPORT_ACTION"
                     text="Export File"
@@ -50,39 +50,39 @@
             </action>
 
             <separator/>
-            <group id="MOIS-Assist.FilterActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.FilterActionGroup"
+            <group id="AssistMOIS.FilterActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.FilterActionGroup"
                    text="Filter Methods"
                    popup="true" icon="PluginIcons.FILTER_ACTION">
             </group>
             <separator/>
 
-            <action id="MOIS-Assist.LaunchSusiAction"
+            <action id="AssistMOIS.LaunchMOISAction"
                     class="de.fraunhofer.iem.mois.assist.actions.LaunchMoisAction"
-                    icon="PluginIcons.REFRESH_SUSI"
+                    icon="PluginIcons.REFRESH_MOIS"
                     text="Refresh MOIS">
             </action>
 
             <separator/>
 
-            <action id="MOIS-Assist.HelpAction"
+            <action id="AssistMOIS.HelpAction"
                     class="de.fraunhofer.iem.mois.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
         </group>
 
-        <group id="MOIS-Assist.MethodActionGroup" class="de.fraunhofer.iem.mois.assist.actions.method.MethodActionGroup" text="Method"
+        <group id="AssistMOIS.MethodActionGroup" class="de.fraunhofer.iem.mois.assist.actions.method.MethodActionGroup" text="Method"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
 
-        <group id="MOIS-Assist.CategoryActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.CategoryActionGroup" text="Filter"
+        <group id="AssistMOIS.CategoryActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.CategoryActionGroup" text="Filter"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
 
-        <group id="EditorGroup" text="MOIS-Assist" popup="true" icon="PluginIcons.MOIS_ASSIST">
+        <group id="EditorGroup" text="AssistMOIS" popup="true" icon="PluginIcons.MOIS_ASSIST">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <action id="MOIS-Assist.AddMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.AddMethodAction"
+            <action id="AssistMOIS.AddMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.AddMethodAction"
                     text="Add Method" icon="PluginIcons.ADD_METHOD_ACTION">
             </action>
 
