@@ -15,6 +15,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+/**
+ * Provides results after MOIS finishes executing.
+ * @author Oshando Johnson
+ */
+
 public class MoisResultsDialog extends JDialog {
 
     private Project project;

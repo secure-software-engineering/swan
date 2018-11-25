@@ -1,23 +1,11 @@
 package de.fraunhofer.iem.mois.assist.util;
 
+/**
+ * Constants for various classes.
+ * @author Oshando Johnson
+ */
 public class Constants {
 
-    //JSON Attributes
-    public final static String METHOD = "methods";
-    public final static String NAME = "name";
-    public final static String RETURN_TYPE = "return";
-    public final static String PARAMETERS = "parameters";
-    public final static String DATA_IN = "dataIn";
-    public final static String DATA_OUT = "dataOut";
-    public final static String DATA_RETURN_TYPE = "return";
-    public final static String DATA_RETURN_PARAMETER = "parameters";
-    public final static String SECURITY_LEVEL = "securityLevel";
-    public final static String DISCOVERY = "discovery";
-    public final static String FRAMEWORK = "framework";
-    public final static String LINK = "link";
-    public final static String CWE = "cwe";
-    public final static String TYPE = "type";
-    public final static String COMMENT = "comment";
 
     //JSON Attributes labels
     public final static String METHOD_NAME_LABEL = "Method Name";
@@ -30,17 +18,6 @@ public class Constants {
     public final static String CWE_LABEL = "CWE";
     public final static String TYPE_LABEL = "Type";
     public final static String COMMENT_LABEL = "Comment";
-
-    //Method Categories
-    public final static String SOURCE = "Source";
-    public final static String SINK = "Sink";
-    public final static String SANITIZER = "Sanitizer";
-    public final static String AUTHENTICATION = "Authentication";
-    public final static String AUTHENTICATION_HIGH = "Authentications_to_high";
-    public final static String AUTHENTICATION_NEUTRAL = "Authentications_neutral";
-    public final static String AUTHENTICATION_LOW = "Authentications_to_low";
-    public final static String NONE = "None";
-    public final static String TEST = "Test";
 
     //Messages
     public final static String INVALID_FILE_TYPE = "The selected file is invalid. Please select a .json file.";
@@ -72,7 +49,9 @@ public class Constants {
     public final static String OUTPUT_TEXT_SUFFIX = "_output.txt";
 
     public final static String FILTER_CURRENT_FILE_KEY = "file";
-    public final static String FILTER_CURRENT_FILE_VALUE = "Current File";
+    public final static String FILTER_CURRENT_FILE_VALUE = "Current Class";
+    public final static String FILTER_CURRENT_PROJECT_KEY = "project";
+    public final static String FILTER_CURRENT_PROJECT_VALUE = "Current Project";
     public final static String FILTER_CLEAR_KEY = "Clear Filters";
     public final static String FILTER_CLEAR_VALUE = "Clear Filters";
     public final static String FILTER_CWE = "CWE";
@@ -101,6 +80,13 @@ public class Constants {
     public final static String MOIS_JAR_NAME = "mois.jar";
 
     public final static String LAUNCHER_PATH_NOT_SELECTED = "A path was not selected for one of the fields.";
+
+    //Dialog titles
+    public final static String TITLE_ADD_METHOD = "Add Method";
+    public final static String TITLE_UPDATE_METHOD = "Update Method";
+    public final static String TITLE_DELETE_METHOD = "Delete Method";
+    public final static String TITLE_METHOD_PROPERTIES = "Method Properties";
+    public final static String TITLE_RESTORE_METHOD = "Restore Method";
 
 
 }

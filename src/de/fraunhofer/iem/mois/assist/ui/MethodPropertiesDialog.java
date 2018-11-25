@@ -1,9 +1,9 @@
 package de.fraunhofer.iem.mois.assist.ui;
 
-import de.fraunhofer.iem.mois.assist.data.CWE;
 import de.fraunhofer.iem.mois.assist.data.InfoBank;
-import de.fraunhofer.iem.mois.assist.data.Method;
+import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.util.Constants;
+import de.fraunhofer.iem.mois.data.CWE;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
@@ -14,6 +14,11 @@ import javax.swing.table.TableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * Shows additional properties of a method.
+ * @author Oshando Johnson
+ */
+
 public class MethodPropertiesDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -21,7 +26,7 @@ public class MethodPropertiesDialog extends JDialog {
     private JTable table;
     private JTextPane description;
 
-    public MethodPropertiesDialog(Method method) {
+    public MethodPropertiesDialog(MethodWrapper method) {
 
         setContentPane(contentPane);
         setModal(true);
@@ -31,14 +36,15 @@ public class MethodPropertiesDialog extends JDialog {
         Object[] columnNames = {Constants.TABLE_HEADER_PROPERTY, Constants.TABLE_HEADER_VALUE};
         //Table data
         Object[][] values = {{Constants.RETURN_TYPE_LABEL, method.getReturnType(true)},
-                {Constants.METHOD_NAME_LABEL, method.getClassName(true)},
-                {Constants.PARAMETERS, method.getParameter(true)},
-                {Constants.SECURITY_LEVEL_LABEL, method.getSecLevel()},
-                {Constants.DISCOVERY_LABEL, method.getDiscovery()},
-                {Constants.FRAMEWORK_LABEL, method.getFramework()},
+                {Constants.METHOD_NAME_LABEL, method.getMethodName(true)},
+                {Constants.PARAMETER_LABEL, method.getParameter(true)},
+                {Constants.SECURITY_LEVEL_LABEL, method.getMethod().getSecLevel()},
+                {Constants.DISCOVERY_LABEL, method.getMethod().getDiscovery()},
+                {Constants.FRAMEWORK_LABEL, method.getMethod().getFramework()},
                 {Constants.CWE_LABEL, StringUtils.join(method.getCWEList(), ", ")},
                 {Constants.TYPE_LABEL, StringUtils.join(method.getTypesList(), ", ")},
-                {Constants.COMMENT_LABEL, method.getComment()},};
+                {Constants.COMMENT_LABEL, method.getMethod().getComment()},
+        };
 
         TableModel tableModel = new DefaultTableModel(values, columnNames);
 
@@ -62,7 +68,7 @@ public class MethodPropertiesDialog extends JDialog {
                     StringBuilder cweDescription = new StringBuilder();
 
                     for (CWE entry : cwe) {
-                        cweDescription.append("<br/><b>CWE" + entry.getCweId() + " " + entry.getName() + "</b><p><b>Description: </b>" + entry.getDescription() + "</p>");
+                        cweDescription.append("<br/><b>CWE" + entry.getId() + " " + entry.getName() + "</b><p><b>Description: </b>" + entry.getLink() + "</p>");
                     }
 
                     description.setText("<html>" + cweDescription + "</html>");

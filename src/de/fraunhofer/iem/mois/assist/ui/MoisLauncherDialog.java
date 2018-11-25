@@ -13,6 +13,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Dialog to lauch configuration window for MOIS before running the application.
+ * @author Oshando Johnson
+ */
 
 public class MoisLauncherDialog extends JDialog {
 
