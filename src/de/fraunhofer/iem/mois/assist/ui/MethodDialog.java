@@ -32,13 +32,14 @@ public class MethodDialog extends JDialog {
     private JTextField methodSignature;
     private JButton buttonProperty;
     private Project project;
-    private MethodWrapper addMethod;
+    private MethodWrapper method;
     private Category selectedCategory;
     private DefaultListModel<Category> selectedModel, availableModel;
 
-    public MethodDialog(MethodWrapper method, Project project, Set<Category> availableCategories) {
+    public MethodDialog(MethodWrapper m, Project project, Set<Category> availableCategories) {
 
-        addMethod = method;
+       method = m;
+
         this.project = project;
 
         typeRadioButton.setSelected(true);
@@ -184,7 +185,7 @@ public class MethodDialog extends JDialog {
 
     private void onOK() {
 
-        if (addMethod.getCategories().size() == 0) {
+        if (method.getCategories().size() == 0) {
 
             Messages.showMessageDialog(Constants.NO_CATEGORY_SELECTED, "Category Selection", Messages.getInformationIcon());
         } else {
@@ -192,7 +193,7 @@ public class MethodDialog extends JDialog {
             MessageBus messageBus = project.getMessageBus();
 
             MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
-            publisher.afterAction(addMethod);
+            publisher.afterAction(method);
 
             dispose();
         }

@@ -1,16 +1,12 @@
 package de.fraunhofer.iem.mois.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.editor.Caret;
-import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
+import com.intellij.psi.*;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiTypesUtil;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
@@ -21,6 +17,7 @@ import java.util.List;
 
 /**
  * Action to add a new method by selecting a class\category.
+ *
  * @author Oshando Johnson
  */
 
@@ -28,56 +25,73 @@ public class AddMethodAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+
         //Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
         final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
 
-        PsiJavaFile java = (PsiJavaFile) e.getData(LangDataKeys.PSI_FILE);
+        //Get offset for element
+        int offset = editor.getCaretModel().getOffset();
 
-        //Obtain selected method
-        //TODO use signature to prevent problems with overloaded methods
-        final SelectionModel selectionModel = editor.getSelectionModel();
+        PsiJavaFile psiFile;
 
-        CaretModel caretModel = editor.getCaretModel();
+        if (e.getData(LangDataKeys.PSI_FILE) instanceof PsiJavaFile) {
 
-        Caret caret = caretModel.getCurrentCaret();
-        //TODO right click where method is and obtain method name
-        MethodWrapper newMethod;
-        boolean methodFound = false;
+            psiFile = (PsiJavaFile) e.getData(LangDataKeys.PSI_FILE);
 
-        if (!JSONFileLoader.isFileSelected())
-            Messages.showMessageDialog(project, Constants.FILE_NOT_SELECTED, "Method Selection", Messages.getInformationIcon());
-        else if (!selectionModel.hasSelection())
-            Messages.showMessageDialog(project, Constants.METHOD_NOT_SELECTED, "Method Selection", Messages.getInformationIcon());
-        else {
+            if (psiFile != null) {
 
-            //Obtain methods in class
-            for (PsiClass psiClass : java.getClasses()) {
-                for (PsiMethod psiMethod : psiClass.getMethods()) {
+                PsiElement element = psiFile.findElementAt(offset);
 
-                    if (psiMethod.getName().equals(selectionModel.getSelectedText())) {
+                if (element != null) {
 
-                        methodFound = true;
+                    PsiMethod psiMethod = PsiTreeUtil.getParentOfType(element, PsiMethod.class);
+
+                    if (psiMethod != null) {
 
                         //Determine method return type
                         String returnType = psiMethod.getReturnType().getCanonicalText();
 
                         //Obtain parameters
                         List<String> parameters = new ArrayList<String>();
-                        for (PsiParameter psiParameter : psiMethod.getParameterList().getParameters()){
-                            parameters.add(psiParameter.getTypeElement().getType().getCanonicalText());
+                        for (PsiParameter psiParameter : psiMethod.getParameterList().getParameters()) {
+
+                            PsiClass psiClass = PsiTypesUtil.getPsiClass(psiParameter.getType());
+
+                            if (psiClass != null) {
+                                parameters.add(psiClass.getQualifiedName());
+                            } else if (psiParameter.getType() instanceof PsiArrayType) {
+
+
+                                PsiArrayType psiArrayType = (PsiArrayType) psiParameter.getType();
+                                parameters.add(psiArrayType.getCanonicalText());
+                            } else
+                                parameters.add(psiParameter.getType().getCanonicalText());
+
                         }
 
-                        newMethod = new MethodWrapper(psiMethod.getName(),parameters, returnType, psiClass.getQualifiedName());
-                        newMethod.setNewMethod(true);
+                        //Get class
+                        PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);
 
-                        ActionManager.getInstance().tryToExecute(new UpdateMethodAction(newMethod), e.getInputEvent(), null, "Add Method", false);
+                        MethodWrapper method = new MethodWrapper(psiMethod.getName(), parameters, returnType, psiClass.getQualifiedName());
+
+                        if (!JSONFileLoader.methodExists(method.getSignature(true))) {
+                            method.setNewMethod(true);
+                        } else {
+                            method = JSONFileLoader.getMethod(method.getSignature(true));
+                        }
+
+                        ActionManager.getInstance().tryToExecute(new UpdateMethodAction(method), e.getInputEvent(), null, "Add Method", false);
+
+                    } else {
+                        Messages.showMessageDialog(project, Constants.METHOD_NOT_FOUND, "Method Selection", Messages.getInformationIcon());
                     }
+                } else {
+                    Messages.showMessageDialog(project, Constants.ELEMENT_NOT_SELECTED, "Method Selection", Messages.getInformationIcon());
                 }
             }
-
-            if (!methodFound)
-                Messages.showMessageDialog(project, Constants.METHOD_NOT_FOUND, "Method Selection", Messages.getInformationIcon());
+        } else {
+            Messages.showMessageDialog(project, Constants.NOT_JAVA_FILE, "Incorrect File", Messages.getInformationIcon());
         }
     }
 

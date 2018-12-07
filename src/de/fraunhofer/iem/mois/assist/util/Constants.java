@@ -23,7 +23,8 @@ public class Constants {
     public final static String INVALID_FILE_TYPE = "The selected file is invalid. Please select a .json file.";
     public final static String FILE_NOT_SELECTED = "A file was not selected. Select a configuration file.";
 
-    public final static String METHOD_NOT_SELECTED = "No method was selected. Select a valid method from the class.";
+    public final static String ELEMENT_NOT_SELECTED = "Invalid element selected. Select a valid method from the class.";
+    public final static String NOT_JAVA_FILE = "Files can only be added from a Java file.";
     public final static String METHOD_NOT_FOUND = "The selected method was not found.";
     public final static String URI_NOT_FOUND = "There was an error loading the URI";
     public final static String CONFIRM_METHOD_DELETION = "Are you sure you want to delete this method?";

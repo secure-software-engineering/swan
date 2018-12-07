@@ -114,7 +114,6 @@ public class JSONFileLoader {
     //Add new method to the list
     public static int addMethod(MethodWrapper method) {
 
-
         if (methods.containsKey(method.getSignature(true))) {
             methods.replace(method.getSignature(true), method);
             return EXISTING_METHOD;
@@ -122,6 +121,18 @@ public class JSONFileLoader {
             methods.put(method.getSignature(true), method);
             return NEW_METHOD;
         }
+    }
+
+    //Add new method to the list
+    public static boolean methodExists(String methodSignature) {
+
+        return methods.containsKey(methodSignature);
+    }
+
+    //Add new method to the list
+    public static MethodWrapper getMethod(String methodSignature) {
+
+        return methods.get(methodSignature);
     }
 
     //Remove method from list

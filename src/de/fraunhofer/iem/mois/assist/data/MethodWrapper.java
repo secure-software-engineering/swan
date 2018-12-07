@@ -72,13 +72,16 @@ public class MethodWrapper {
     //Returns the list of parameters as a comma separated String based on setting for Fully Qualified Name
     public String getParameter(boolean isFullyQualifiedName) {
 
-        List<String> param = method.getParameters();
+        List<String> param = new ArrayList<>();
 
-        if (!isFullyQualifiedName)
-            for (int counter = 0; counter < param.size(); counter++)
-                param.set(counter, trimProperty(param.get(counter)));
+        if (!isFullyQualifiedName){
+            for ( String parameter: method.getParameters()){
+                param.add(trimProperty(parameter));
+            }
+            return StringUtils.join(param, ", ");
+        }
 
-        return StringUtils.join(param, ", ");
+        return StringUtils.join(method.getParameters(), ", ");
     }
 
     //Returns the return type of the function

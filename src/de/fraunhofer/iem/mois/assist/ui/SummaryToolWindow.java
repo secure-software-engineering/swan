@@ -47,6 +47,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 
 /**
@@ -225,7 +226,14 @@ public class SummaryToolWindow implements ToolWindowFactory {
                     case JSONFileLoader.EXISTING_METHOD:
 
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) methodTree.getLastSelectedPathComponent();
-                        node.removeAllChildren();
+
+                        if (node == null) {
+                            node = searchNode((DefaultMutableTreeNode) treeModel.getRoot(), newMethod.getSignature(true));
+                        }
+
+                        if (node!=null && node.getChildCount() > 0)
+                            node.removeAllChildren();
+
                         treeModel.nodeStructureChanged(addCategoriesToNode(node, newMethod));
 
                         break;
@@ -245,6 +253,7 @@ public class SummaryToolWindow implements ToolWindowFactory {
             public void afterAction(MethodWrapper newMethod) {
 
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) methodTree.getLastSelectedPathComponent();
+
 
                 treeModel.removeNodeFromParent(node);
                 JSONFileLoader.removeMethod(newMethod);
@@ -314,6 +323,33 @@ public class SummaryToolWindow implements ToolWindowFactory {
                 }
             }
         });
+    }
+
+    /**
+     * Searches if a method already exists in the Tree.
+     *
+     * @param root root object of tree
+     * @param method the method that is being searched for
+     * @return returns the node if it's found
+     */
+    private DefaultMutableTreeNode searchNode(DefaultMutableTreeNode root, String method) {
+
+        Enumeration e = root.breadthFirstEnumeration();
+
+        while (e.hasMoreElements()) {
+
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
+
+            if (node.getUserObject() instanceof MethodWrapper) {
+
+                MethodWrapper methodWrapper = (MethodWrapper) node.getUserObject();
+
+                if (method.equals(methodWrapper.getSignature(true))) {
+                    return node;
+                }
+            }
+        }
+        return null;
     }
 
     /**
