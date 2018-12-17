@@ -1,7 +1,8 @@
 package de.fraunhofer.iem.mois.assist.data;
 
+import de.fraunhofer.iem.mois.assist.util.Formatter;
 import de.fraunhofer.iem.mois.data.Category;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class MethodWrapper {
     private String icon;
     private boolean isNewMethod;
     private String updateOperation = "";
-
+    private String markerMessage;
 
     public MethodWrapper() {
 
@@ -61,6 +62,10 @@ public class MethodWrapper {
             return method.getClassName();
     }
 
+    //Returns filename for method
+    public String getFileName() {
+        return getClassName(false) + ".java";
+    }
 
     //Returns classname for method
     public String getSignature(boolean isfullyQualifiedName) {
@@ -74,8 +79,8 @@ public class MethodWrapper {
 
         List<String> param = new ArrayList<>();
 
-        if (!isFullyQualifiedName){
-            for ( String parameter: method.getParameters()){
+        if (!isFullyQualifiedName) {
+            for (String parameter : method.getParameters()) {
                 param.add(trimProperty(parameter));
             }
             return StringUtils.join(param, ", ");
@@ -108,14 +113,15 @@ public class MethodWrapper {
     }
 
     //Returns array list of types that are assigned to the method
-    public ArrayList<String> getTypesList() {
+    public ArrayList<String> getTypesList(boolean capitalize) {
 
         ArrayList<String> typesList = new ArrayList<String>();
 
         for (Category category : method.getCategoriesTrained()) {
-            if (!category.isCwe()) {
+            if (!category.isCwe() && !capitalize) {
                 typesList.add(category.toString());
-            }
+            } else if (!category.isCwe())
+                typesList.add(Formatter.capitalizeFirstCharacter(category.toString()));
         }
 
         return typesList;
@@ -154,5 +160,13 @@ public class MethodWrapper {
         this.updateOperation = updateOperation;
     }
 
+    //TODO Implement control structure to create customised messages
+    public String getMarkerMessage() {
+        return "This is a potential " + StringUtils.join(getTypesList(true), ", ") + " method of sensitive information relevant for " + StringUtils.join(getCWEList(), ", ");
+    }
+
+    public void setMarkerMessage(String markerMessage) {
+        this.markerMessage = markerMessage;
+    }
 
 }

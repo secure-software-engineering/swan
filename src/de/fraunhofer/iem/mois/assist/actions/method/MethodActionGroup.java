@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Separator;
+import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class MethodActionGroup extends ActionGroup {
                 new RestoreMethodAction(methodWrapper),
                 new DeleteMethodAction(methodWrapper),
                 new Separator(),
-                new MethodPropertiesAction(methodWrapper),};
+                new MethodPropertiesAction(methodWrapper)};
     }
 
     @Override
@@ -47,7 +48,7 @@ public class MethodActionGroup extends ActionGroup {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
+        if (JSONFileLoader.isFileSelected())
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

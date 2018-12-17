@@ -30,6 +30,7 @@ public class Constants {
     public final static String CONFIRM_METHOD_DELETION = "Are you sure you want to delete this method?";
     public final static String FILE_LOAD_ERROR = "An error occured loading the file.";
     public final static String NO_CATEGORY_SELECTED = "No type or CWE was selected for the method.";
+    public final static String METHOD_NOT_FOUND_IN_EDITOR = "Method not found in project or cannot be located";
     //TODO update link to point to online help resources that will be created
     public final static String HELP_LINK = "https://github.com/Sable/soot";
 
@@ -75,7 +76,7 @@ public class Constants {
     public final static String NOTIFICATION_NONE ="No new notifications";
     public final static String NOTIFICATION_MOIS ="View results";
 
-    public final static String TREE_EMPTY = "Select a configuration file using the \"Import\" option";
+    public final static String TREE_EMPTY = "Select a configuration file using the \"Import\" button";
     public final static String TREE_FILTERS_EMPTY = "No methods match the filters you've selected";
     public final static String MOIS_TRAIN_DIR_NAME = "training_libs";
     public final static String MOIS_JAR_NAME = "mois.jar";

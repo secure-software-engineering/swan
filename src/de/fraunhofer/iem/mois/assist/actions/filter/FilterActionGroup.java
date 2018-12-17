@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Separator;
+import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import javafx.util.Pair;
@@ -40,7 +41,7 @@ public class FilterActionGroup extends ActionGroup {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
+        if (JSONFileLoader.isFileSelected())
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

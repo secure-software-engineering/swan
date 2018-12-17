@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
-import de.fraunhofer.iem.mois.assist.ui.MethodDialog;
+import de.fraunhofer.iem.mois.assist.ui.dialog.MethodDialog;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 
 /**
@@ -17,7 +17,7 @@ import de.fraunhofer.iem.mois.assist.util.Constants;
 
 public class UpdateMethodAction extends AnAction {
 
-    MethodWrapper method;
+    private MethodWrapper method;
 
     public UpdateMethodAction(MethodWrapper method) {
         super("Update");
@@ -26,7 +26,8 @@ public class UpdateMethodAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
+
+        final Project project = anActionEvent.getProject();
 
         MethodDialog dialog = new MethodDialog(method, project, JSONFileLoader.getCategories());
 
@@ -39,5 +40,15 @@ public class UpdateMethodAction extends AnAction {
         dialog.setSize(550, 350);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+    }
+
+    @Override
+    public void update(AnActionEvent event) {
+
+        //Disable/Enable action button
+        if (JSONFileLoader.isFileSelected())
+            event.getPresentation().setEnabled(true);
+        else
+            event.getPresentation().setEnabled(false);
     }
 }
