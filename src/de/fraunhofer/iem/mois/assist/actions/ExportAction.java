@@ -54,7 +54,7 @@ public class ExportAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
+        if (JSONFileLoader.isFileSelected())
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);

@@ -26,7 +26,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="de.fraunhofer.iem.mois.assist.ui.markers.ErrorLineMarker"/>
         <toolWindow id="AssistMOIS" anchor="right" factoryClass="de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow" icon="PluginIcons.MOIS_ASSIST"/>
 
     </extensions>
@@ -83,7 +84,43 @@
         <group id="EditorGroup" text="AssistMOIS" popup="true" icon="PluginIcons.MOIS_ASSIST">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <action id="AssistMOIS.AddMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.AddMethodAction"
-                    text="Add Method" icon="PluginIcons.ADD_METHOD_ACTION">
+                    text="Add/Update Method" icon="PluginIcons.ADD_METHOD_ACTION">
+            </action>
+
+            <action id="AssistMOIS.RestoreMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.RestoreMethodAction"
+                    text="Restore" >
+            </action>
+
+            <action id="AssistMOIS.DeleteMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.DeleteMethodAction"
+                    text="Delete" >
+            </action>
+
+            <action id="AssistMOIS.MethodPropertiesAction" class="de.fraunhofer.iem.mois.assist.actions.method.MethodPropertiesAction"
+                    text="Properties" >
+            </action>
+
+            <action id="AssistMOIS.MethodListAction" class="de.fraunhofer.iem.mois.assist.actions.method.MethodListAction"
+                    text="View Methods List" >
+            </action>
+            <separator/>
+            <action id="AssistMOIS.ImportAction" class="de.fraunhofer.iem.mois.assist.actions.ImportAction"
+                    text="Import File" icon="PluginIcons.IMPORT_ACTION">
+            </action>
+            <action id="AssistMOIS.ExportAction" class="de.fraunhofer.iem.mois.assist.actions.ExportAction"
+                    text="Export File" icon="PluginIcons.IMPORT_ACTION">
+            </action>
+            <separator/>
+            <action id="AssistMOIS.LaunchMOISAction"
+                    class="de.fraunhofer.iem.mois.assist.actions.LaunchMoisAction"
+                    icon="PluginIcons.REFRESH_MOIS"
+                    text="Run/Rerun MOIS">
+            </action>
+
+            <separator/>
+
+            <action id="AssistMOIS.HelpAction"
+                    class="de.fraunhofer.iem.mois.assist.actions.HelpAction"
+                    text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
 
         </group>

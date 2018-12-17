@@ -42,7 +42,6 @@ public class ImportAction extends AnAction {
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
 
-            SummaryToolWindow.CONFIG_FILE_SELECTED = true;
             File selectedFile = fileChooser.getSelectedFile();
 
             MessageBus messageBus = project.getMessageBus();

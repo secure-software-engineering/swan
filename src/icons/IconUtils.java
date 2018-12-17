@@ -1,8 +1,12 @@
 package icons;
 
+import com.intellij.openapi.util.IconLoader;
 import de.fraunhofer.iem.mois.data.Constants;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Oshando Johnson on 24.10.18
@@ -27,5 +31,29 @@ public class IconUtils {
             default:
                 return PluginIcons.CWE;
         }
+    }
+
+    public static Icon getNodeIcon(ArrayList<String> categoryList) {
+
+        ArrayList<String> iconList = new ArrayList<>();
+
+        if (categoryList.size() == 1)
+            return IconUtils.getIcon(categoryList.get(0));
+
+        for (String category : categoryList) {
+            if (!iconList.contains(category.substring(0, 3))) {
+                iconList.add(category.substring(0, 3));
+            }
+        }
+
+        Collections.sort(iconList, Collections.reverseOrder());
+        String joinedList = StringUtils.join(iconList, "_").toLowerCase();
+
+        Icon icon = IconLoader.findIcon("/icons/" + joinedList + ".png");
+
+        if (icon == null)
+            icon = PluginIcons.DEFAULT;
+
+        return icon;
     }
 }

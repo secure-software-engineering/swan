@@ -43,7 +43,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
 
                 MethodWrapper method = (MethodWrapper) object;
                 text.setText("<html>" + Formatter.trimProperty(method.getMethodName(false)) + " ( ) <font color='gray'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font></html>");
-                text.setIcon(getNodeIcon(method.getTypesList()));
+                text.setIcon(IconUtils.getNodeIcon(method.getTypesList(false)));
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED))
                     text.setForeground(new JBColor(new Color(1, 128, 0), new Color(1, 128, 0)));
@@ -68,27 +68,5 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
         return text;
     }
 
-    private Icon getNodeIcon(ArrayList<String> categoryList) {
 
-        ArrayList<String> iconList = new ArrayList<>();
-
-        if (categoryList.size() == 1)
-            return IconUtils.getIcon(categoryList.get(0));
-
-        for (String category : categoryList) {
-            if (!iconList.contains(category.substring(0, 3))) {
-                iconList.add(category.substring(0, 3));
-            }
-        }
-
-        Collections.sort(iconList, Collections.reverseOrder());
-        String joinedList = StringUtils.join(iconList, "_").toLowerCase();
-
-        Icon icon = IconLoader.findIcon("/icons/" + joinedList + ".png");
-
-        if (icon == null)
-            icon = PluginIcons.DEFAULT;
-
-        return icon;
-    }
 }

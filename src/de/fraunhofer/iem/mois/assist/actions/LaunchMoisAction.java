@@ -6,9 +6,10 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MoisNotifier;
+import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.JSONWriter;
 import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
-import de.fraunhofer.iem.mois.assist.ui.MoisLauncherDialog;
+import de.fraunhofer.iem.mois.assist.ui.dialog.MoisLauncherDialog;
 
 import javax.swing.FocusManager;
 import java.awt.*;
@@ -58,7 +59,7 @@ public class LaunchMoisAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (SummaryToolWindow.CONFIG_FILE_SELECTED)
+        if (JSONFileLoader.isFileSelected())
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);
