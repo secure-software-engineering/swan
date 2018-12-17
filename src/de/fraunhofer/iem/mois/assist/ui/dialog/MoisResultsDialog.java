@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.mois.assist.ui;
+package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
@@ -32,7 +32,7 @@ public class MoisResultsDialog extends JDialog {
     private JTextArea logText;
     private JLabel outputMessage;
 
-    MoisResultsDialog(Project project, HashMap<String, String> values) {
+    public MoisResultsDialog(Project project, HashMap<String, String> values) {
 
         setContentPane(contentPane);
         setTitle("MOIS Results");

@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.mois.assist.ui;
+package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;

@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.mois.assist.ui;
+package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import de.fraunhofer.iem.mois.assist.data.InfoBank;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
@@ -42,7 +42,7 @@ public class MethodPropertiesDialog extends JDialog {
                 {Constants.DISCOVERY_LABEL, method.getMethod().getDiscovery()},
                 {Constants.FRAMEWORK_LABEL, method.getMethod().getFramework()},
                 {Constants.CWE_LABEL, StringUtils.join(method.getCWEList(), ", ")},
-                {Constants.TYPE_LABEL, StringUtils.join(method.getTypesList(), ", ")},
+                {Constants.TYPE_LABEL, StringUtils.join(method.getTypesList(true), ", ")},
                 {Constants.COMMENT_LABEL, method.getMethod().getComment()},
         };
 

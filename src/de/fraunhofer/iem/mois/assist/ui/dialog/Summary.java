@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.mois.assist.ui;
+package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.ui.components.JBPanel;
 

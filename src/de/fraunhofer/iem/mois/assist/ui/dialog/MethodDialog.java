@@ -1,10 +1,11 @@
-package de.fraunhofer.iem.mois.assist.ui;
+package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
+import de.fraunhofer.iem.mois.assist.ui.CategoryRenderer;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.data.Category;
 import org.apache.commons.lang.StringUtils;
@@ -38,7 +39,7 @@ public class MethodDialog extends JDialog {
 
     public MethodDialog(MethodWrapper m, Project project, Set<Category> availableCategories) {
 
-       method = m;
+        method = m;
 
         this.project = project;
 
@@ -46,7 +47,7 @@ public class MethodDialog extends JDialog {
 
         methodSignature.setText(method.getSignature(false));
         methodSignature.setToolTipText(method.getSignature(true));
-        methodTypes.setText(StringUtils.join(method.getTypesList(), ", "));
+        methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
         methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
 
         for (Category category : method.getCategories()) {
@@ -112,7 +113,7 @@ public class MethodDialog extends JDialog {
 
                     selectedModel.addElement(selectedCategory);
                     method.getCategories().add(selectedCategory);
-                    methodTypes.setText(StringUtils.join(method.getTypesList(), ", "));
+                    methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
                     methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
                 }
             }
@@ -131,7 +132,7 @@ public class MethodDialog extends JDialog {
 
                     selectedModel.removeElement(selectedCategory);
                     method.getCategories().remove(selectedCategory);
-                    methodTypes.setText(StringUtils.join(method.getTypesList(), ", "));
+                    methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
                     methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
 
                     availableModel.addElement(selectedCategory);
