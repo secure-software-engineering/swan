@@ -1,9 +1,16 @@
 package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.util.Constants;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,10 +22,11 @@ import java.util.Objects;
 
 /**
  * Dialog to lauch configuration window for MOIS before running the application.
+ *
  * @author Oshando Johnson
  */
 
-public class MoisLauncherDialog extends JDialog {
+public class MoisLauncherDialog extends DialogWrapper {
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -34,29 +42,25 @@ public class MoisLauncherDialog extends JDialog {
     private JTextField trainingTextbox;
     private JButton trainButton;
     private JPanel advancedPanel;
-
-    private boolean confirm = false;
     private HashMap<String, String> parameters = new HashMap<String, String>();
-
     private String defaultTrainDirectory;
     private String moisJarDirecory;
 
-    public MoisLauncherDialog(Window window, Project project, boolean modal) {
+    public MoisLauncherDialog(Project project, boolean modal) {
 
-        super((Frame) window, modal);
+        super(project, modal);
         setTitle("Launch MOIS");
-        setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonOK);
 
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
-        defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() +  Constants.MOIS_TRAIN_DIR_NAME;
+        defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + Constants.MOIS_TRAIN_DIR_NAME;
         moisJarDirecory = Objects.requireNonNull(getClass().getClassLoader().getResource(Constants.MOIS_JAR_NAME)).getPath();
 
         sourceDirTextbox.setText(project.getBasePath());
         configDir.setText(configurationFile.getAbsolutePath());
         outputDir.setText(configurationFile.getParent() + File.separator + Constants.OUTPUT_DIR_NAME);
 
+        init();
         /*
          * Action Listeners for buttons
          */
@@ -129,71 +133,48 @@ public class MoisLauncherDialog extends JDialog {
                 trainingTextbox.setText(fileSelector(JFileChooser.DIRECTORIES_ONLY, trainingTextbox.getText()));
             }
         });
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    @Override
+    protected void doOKAction() {
 
-        //set path for jar directory
-        parameters.put(Constants.MOIS_JAR_DIR, moisJarDirecory);
+        if (isOKActionEnabled()) {
+            //set path for jar directory
+            parameters.put(Constants.MOIS_JAR_DIR, moisJarDirecory);
 
-        //ensure that required fields are populated
-        if (sourceDirTextbox.getText().isEmpty() || configDir.getText().isEmpty()) {
+            //ensure that required fields are populated
+            if (sourceDirTextbox.getText().trim().isEmpty() || configDir.getText().trim().isEmpty()) {
 
-            Messages.showWarningDialog(Constants.LAUNCHER_PATH_NOT_SELECTED, "Missing Path");
-        } else {
-            parameters.put(Constants.MOIS_SOURCE_DIR, sourceDirTextbox.getText());
-            parameters.put(Constants.MOIS_CONFIG_FILE, configDir.getText());
+                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.LAUNCHER_PATH_NOT_SELECTED, MessageType.ERROR, null)
+                        .createBalloon()
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
+            } else if (advancedCheckbox.isSelected() && (trainingTextbox.getText().isEmpty() || outputDir.getText().isEmpty())) {
+
+                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.LAUNCHER_PATH_NOT_SELECTED, MessageType.ERROR, null)
+                        .createBalloon()
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(advancedCheckbox), Balloon.Position.below);
+            } else if (!advancedCheckbox.isSelected()) {
+
+                parameters.put(Constants.MOIS_SOURCE_DIR, sourceDirTextbox.getText());
+                parameters.put(Constants.MOIS_CONFIG_FILE, configDir.getText());
+                parameters.put(Constants.MOIS_TRAIN_DIR, defaultTrainDirectory);
+                parameters.put(Constants.MOIS_OUTPUT_DIR, outputDir.getText());
+                super.doOKAction();
+            } else {
+
+                parameters.put(Constants.MOIS_SOURCE_DIR, sourceDirTextbox.getText());
+                parameters.put(Constants.MOIS_CONFIG_FILE, configDir.getText());
+                parameters.put(Constants.MOIS_TRAIN_DIR, trainingTextbox.getText());
+                parameters.put(Constants.MOIS_OUTPUT_DIR, outputDir.getText());
+                super.doOKAction();
+            }
         }
-
-        //Check if advanced parameters are configured
-        if (advancedCheckbox.isSelected() && (trainingTextbox.getText().isEmpty() || outputDir.getText().isEmpty())) {
-
-            Messages.showWarningDialog(Constants.LAUNCHER_PATH_NOT_SELECTED, "Missing Path");
-
-        } else if (!advancedCheckbox.isSelected()) {
-            parameters.put(Constants.MOIS_TRAIN_DIR, defaultTrainDirectory);
-            parameters.put(Constants.MOIS_OUTPUT_DIR, outputDir.getText());
-            dispose();
-        } else {
-            parameters.put(Constants.MOIS_TRAIN_DIR, trainingTextbox.getText());
-            parameters.put(Constants.MOIS_OUTPUT_DIR, outputDir.getText());
-            dispose();
-        }
-
-        confirm = true;
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+        return contentPane;
     }
 
     //Accept users file or folder selection and send return value
@@ -206,7 +187,7 @@ public class MoisLauncherDialog extends JDialog {
         if (selectionMethod == JFileChooser.FILES_ONLY)
             fileChooser.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
 
-        int returnValue = fileChooser.showOpenDialog(this);
+        int returnValue = fileChooser.showOpenDialog(this.contentPane);
 
         if (returnValue == JFileChooser.APPROVE_OPTION)
             return fileChooser.getSelectedFile().getPath();
@@ -216,9 +197,5 @@ public class MoisLauncherDialog extends JDialog {
 
     public HashMap<String, String> getParameters() {
         return parameters;
-    }
-
-    public boolean isConfirmed() {
-        return confirm;
     }
 }

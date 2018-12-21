@@ -1,14 +1,26 @@
 package de.fraunhofer.iem.mois.assist.ui.dialog;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.mois.assist.actions.method.MethodPropertiesAction;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.ui.CategoryRenderer;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.data.Category;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,11 +31,9 @@ import java.util.Set;
  *
  * @author Oshando Johnson
  */
-public class MethodDialog extends JDialog {
+public class MethodDialog extends DialogWrapper {
 
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
     private JList selectedList;
     private JList availableList;
     private JRadioButton cweRadioButton;
@@ -39,16 +49,21 @@ public class MethodDialog extends JDialog {
 
     public MethodDialog(MethodWrapper m, Project project, Set<Category> availableCategories) {
 
-        method = m;
+        super(project);
 
+        method = m;
         this.project = project;
 
-        typeRadioButton.setSelected(true);
+        if (method.isNewMethod())
+            setTitle(Constants.TITLE_ADD_METHOD);
+        else
+            setTitle(Constants.TITLE_UPDATE_METHOD);
 
         methodSignature.setText(method.getSignature(false));
         methodSignature.setToolTipText(method.getSignature(true));
         methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
         methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
+        typeRadioButton.setSelected(true);
 
         for (Category category : method.getCategories()) {
 
@@ -65,9 +80,9 @@ public class MethodDialog extends JDialog {
         availableList.setCellRenderer(new CategoryRenderer());
         availableList.setModel(availableModel);
 
-        setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        setSize(550, 350);
+        init();
 
         typeRadioButton.addActionListener(new ActionListener() {
             @Override
@@ -142,20 +157,7 @@ public class MethodDialog extends JDialog {
         });
 
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        buttonProperty.addActionListener(new ActionListener() {
+       /* buttonProperty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -166,44 +168,35 @@ public class MethodDialog extends JDialog {
                 detailsDialog.setLocationRelativeTo(null);
                 detailsDialog.setVisible(true);
             }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        });*/
     }
 
-    private void onOK() {
+    @Override
+    protected void doOKAction() {
 
-        if (method.getCategories().size() == 0) {
+        if (isOKActionEnabled()) {
+            if (method.getCategories().size() == 0) {
+                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.NO_CATEGORY_SELECTED, MessageType.ERROR, null)
+                        .createBalloon()
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) selectedList), Balloon.Position.below);
+            } else {
+                //Notify Summary Tool window that new method was added
+                MessageBus messageBus = project.getMessageBus();
 
-            Messages.showMessageDialog(Constants.NO_CATEGORY_SELECTED, "Category Selection", Messages.getInformationIcon());
-        } else {
-            //Notify Summary Tool window that new method was added
-            MessageBus messageBus = project.getMessageBus();
+                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
+                publisher.afterAction(method);
 
-            MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
-            publisher.afterAction(method);
-
-            dispose();
+                dispose();
+            }
         }
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+        return contentPane;
     }
+
 
     //Add categories to the List model
     private DefaultListModel<Category> addCategoriesToModel(Set<Category> categories, boolean showCwe) {

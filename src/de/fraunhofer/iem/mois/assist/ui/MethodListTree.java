@@ -1,6 +1,10 @@
 package de.fraunhofer.iem.mois.assist.ui;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationListener;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.editor.Document;
@@ -9,7 +13,9 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
@@ -32,16 +38,14 @@ import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.assist.util.Formatter;
 import de.fraunhofer.iem.mois.assist.util.PsiTraversal;
 import de.fraunhofer.iem.mois.data.Category;
-import icons.PluginIcons;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -156,8 +160,11 @@ public class MethodListTree extends Tree {
                             }
                         }
 
-                        if (!methodFound)
-                            Messages.showMessageDialog(Constants.METHOD_NOT_FOUND_IN_EDITOR, "Method Not Found", Messages.getInformationIcon());
+                        if (!methodFound) {
+                            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND_IN_EDITOR, MessageType.ERROR, null)
+                                    .createBalloon()
+                                    .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
+                        }
                     }
                 }
             }
@@ -231,9 +238,9 @@ public class MethodListTree extends Tree {
 
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 
-                if(node==null){
+                if (node == null) {
                     node = searchNode((DefaultMutableTreeNode) treeModel.getRoot(), newMethod.getSignature(true));
-            }
+                }
 
                 treeModel.removeNodeFromParent(node);
                 JSONFileLoader.removeMethod(newMethod);
@@ -246,11 +253,8 @@ public class MethodListTree extends Tree {
             @Override
             public void launchMois(HashMap<String, String> values) {
 
-                JLabel notificationMessage = (JLabel) notificationPanel.getComponent(0);
-                notificationMessage.setText(Constants.NOTIFICATION_START_MOIS);
-
-                //show progress bar
-                notificationPanel.getComponent(1).setVisible(true);
+                JSONFileLoader.setReloading(true);
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Reloading MOIS", Constants.NOTIFICATION_START_MOIS, NotificationType.INFORMATION));
             }
         });
 
@@ -259,27 +263,32 @@ public class MethodListTree extends Tree {
             @Override
             public void launchMois(HashMap<String, String> values) {
 
-                JLabel label = (JLabel) notificationPanel.getComponent(0);
-                label.setText(values.get(Constants.MOIS_OUTPUT_MESSAGE));
+                JSONFileLoader.setReloading(false);
+                NotificationType notificationType = NotificationType.INFORMATION;
 
-                //remove progress bar
-                notificationPanel.getComponent(1).setVisible(false);
+                if (!values.get(Constants.MOIS_OUTPUT_MESSAGE).equals(Constants.NOTIFICATION_END_MOIS_SUCCESS)) {
+                    notificationType = NotificationType.ERROR;
+                }
 
-                JButton viewResults = (JButton) notificationPanel.getComponent(2);
-                viewResults.setIcon(PluginIcons.NOTIFICATION_NEW);
-                viewResults.setToolTipText(Constants.NOTIFICATION_MOIS);
-
-                viewResults.addActionListener(new ActionListener() {
+                String message = "<html>" + values.get(Constants.MOIS_OUTPUT_MESSAGE) + "<br><a href='logs'>View Logs</a> or <a href='load'>Load Changes</a></html>";
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Completed", message, notificationType, new NotificationListener() {
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
 
-                        MoisResultsDialog resultsDialog = new MoisResultsDialog(project, values);
-                        resultsDialog.pack();
-                        resultsDialog.setSize(550, 350);
-                        resultsDialog.setLocationRelativeTo(null);
-                        resultsDialog.setVisible(true);
+                        if (hyperlinkEvent.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+
+                            if (hyperlinkEvent.getDescription().equals("logs")) {
+
+                                MoisResultsDialog resultsDialog = new MoisResultsDialog(project, values);
+                                resultsDialog.show();
+
+                            } else if (hyperlinkEvent.getDescription().equals("load")){
+                                JSONFileLoader.loadUpdatedFile(values.get(Constants.MOIS_OUTPUT_FILE));
+                                loadMethods();
+                            }
+                        }
                     }
-                });
+                }));
             }
         });
 

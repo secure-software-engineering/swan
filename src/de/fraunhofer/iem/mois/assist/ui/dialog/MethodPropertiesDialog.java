@@ -1,10 +1,13 @@
 package de.fraunhofer.iem.mois.assist.ui.dialog;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
 import de.fraunhofer.iem.mois.assist.data.InfoBank;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.data.CWE;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,21 +19,18 @@ import java.util.ArrayList;
 
 /**
  * Shows additional properties of a method.
+ *
  * @author Oshando Johnson
  */
 
-public class MethodPropertiesDialog extends JDialog {
+public class MethodPropertiesDialog extends DialogWrapper {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
     private JTable table;
     private JTextPane description;
 
-    public MethodPropertiesDialog(MethodWrapper method) {
+    public MethodPropertiesDialog(Project project, MethodWrapper method) {
 
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        super(project);
 
         //Table Columns
         Object[] columnNames = {Constants.TABLE_HEADER_PROPERTY, Constants.TABLE_HEADER_VALUE};
@@ -51,11 +51,13 @@ public class MethodPropertiesDialog extends JDialog {
         table.setModel(tableModel);
 
         //TODO show description in textArea or description field
-        //    description.setContentType("text/html");
+        //description.setContentType("text/html");
         description.setBorder(null);
-        //  description.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
+        //description.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
         description.setOpaque(true);
 
+        setTitle(Constants.TITLE_METHOD_PROPERTIES);
+        init();
 
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
@@ -75,42 +77,11 @@ public class MethodPropertiesDialog extends JDialog {
                 }
             }
         });
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+        return contentPane;
     }
 }

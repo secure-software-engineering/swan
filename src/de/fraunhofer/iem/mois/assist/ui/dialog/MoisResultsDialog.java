@@ -1,9 +1,15 @@
 package de.fraunhofer.iem.mois.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.FileSelectedNotifier;
 import de.fraunhofer.iem.mois.assist.util.Constants;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,40 +23,40 @@ import java.util.HashMap;
 
 /**
  * Provides results after MOIS finishes executing.
+ *
  * @author Oshando Johnson
  */
 
-public class MoisResultsDialog extends JDialog {
+public class MoisResultsDialog extends DialogWrapper {
 
     private Project project;
     private JPanel contentPane;
-    private JButton buttonLoad;
-    private JButton buttonCancel;
     private JTextField filePath;
     private JButton selectFile;
     private JTextField logPath;
     private JTextArea logText;
-    private JLabel outputMessage;
+    private JScrollPane scrollPane;
 
     public MoisResultsDialog(Project project, HashMap<String, String> values) {
 
-        setContentPane(contentPane);
+        super(project);
         setTitle("MOIS Results");
-        getRootPane().setDefaultButton(buttonLoad);
 
         this.project = project;
 
         filePath.setText(values.get(Constants.MOIS_OUTPUT_FILE));
         logPath.setText(values.get(Constants.MOIS_OUTPUT_LOG));
-        outputMessage.setText(values.get(Constants.MOIS_OUTPUT_MESSAGE));
 
         File logs = new File(values.get(Constants.MOIS_OUTPUT_LOG));
 
         try {
             logText.setText(new String(Files.readAllBytes(Paths.get(logPath.getText()))));
+            logText.setCaretPosition(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        init();
 
         selectFile.addActionListener(new ActionListener() {
             @Override
@@ -75,46 +81,30 @@ public class MoisResultsDialog extends JDialog {
                 }
             }
         });
-
-        buttonLoad.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    @Override
+    protected void doOKAction() {
 
-        MessageBus messageBus = project.getMessageBus();
-        FileSelectedNotifier publisher = messageBus.syncPublisher(FileSelectedNotifier.UPDATED_FILE_NOTIFIER_TOPIC);
-        publisher.notifyFileChange(filePath.getText());
-
-        dispose();
+        if (isOKActionEnabled()) {
+            MessageBus messageBus = project.getMessageBus();
+            FileSelectedNotifier publisher = messageBus.syncPublisher(FileSelectedNotifier.UPDATED_FILE_NOTIFIER_TOPIC);
+            publisher.notifyFileChange(filePath.getText());
+            super.doOKAction();
+        }
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    @NotNull
+    @Override
+    protected Action[] createActions() {
+
+
+        return super.createActions();
+    }
+
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+        return contentPane;
     }
 }
