@@ -1,21 +1,16 @@
 package de.fraunhofer.iem.mois.assist.ui;
 
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.JBColor;
 import de.fraunhofer.iem.mois.assist.data.MethodWrapper;
 import de.fraunhofer.iem.mois.assist.util.Constants;
 import de.fraunhofer.iem.mois.assist.util.Formatter;
 import de.fraunhofer.iem.mois.data.Category;
 import icons.IconUtils;
-import icons.PluginIcons;
-import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Rendering options for a method in the list.

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Actpion group for filters that can be applied to list of methods.
+ * Action group for filters that can be applied to list of methods.
  * @author Oshando Johnson
  */
 

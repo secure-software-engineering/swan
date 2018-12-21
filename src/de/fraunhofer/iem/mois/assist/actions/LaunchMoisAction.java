@@ -4,18 +4,20 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MoisNotifier;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.mois.assist.data.JSONWriter;
-import de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow;
 import de.fraunhofer.iem.mois.assist.ui.dialog.MoisLauncherDialog;
 
 import javax.swing.FocusManager;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * Action to start load dialog for configuring MOIS before running.
+ *
  * @author Oshando Johnson
  */
 
@@ -47,9 +49,6 @@ public class LaunchMoisAction extends AnAction {
 
         if (dialog.isConfirmed()) {
 
-            MoisProcessBuilder moisProcessThread = new MoisProcessBuilder(anActionEvent, dialog.getParameters());
-            moisProcessThread.start();
-            anActionEvent.getPresentation().setEnabled(false);
             MoisNotifier publisher = messageBus.syncPublisher(MoisNotifier.START_MOIS_PROCESS_TOPIC);
             publisher.launchMois(null);
         }
@@ -61,7 +60,5 @@ public class LaunchMoisAction extends AnAction {
         //Disable/Enable action button
         if (JSONFileLoader.isFileSelected())
             event.getPresentation().setEnabled(true);
-        else
-            event.getPresentation().setEnabled(false);
     }
 }

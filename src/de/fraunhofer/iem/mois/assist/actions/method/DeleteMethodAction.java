@@ -2,8 +2,12 @@ package de.fraunhofer.iem.mois.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.mois.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
@@ -39,6 +43,7 @@ public class DeleteMethodAction extends AnAction {
 
         final Project project = anActionEvent.getProject();
 
+
         if (PsiTraversal.isFromEditor(anActionEvent))
             deleteMethod = PsiTraversal.getMethodAtOffset(anActionEvent, false);
 
@@ -51,8 +56,12 @@ public class DeleteMethodAction extends AnAction {
                 MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_REMOVED_TOPIC);
                 publisher.afterAction(deleteMethod);
             }
-        } else
-            Messages.showMessageDialog(project, Constants.METHOD_NOT_FOUND, "Method Selection", Messages.getInformationIcon());
+        } else {
+            final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
+            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND, MessageType.INFO, null)
+                    .createBalloon()
+                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
+        }
     }
 
     @Override

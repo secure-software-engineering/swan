@@ -1,5 +1,8 @@
 package de.fraunhofer.iem.mois.assist.actions.method;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -7,7 +10,10 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.impl.ActionMenuItem;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.popup.Balloon;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.util.EditorPopupHandler;
 import de.fraunhofer.iem.mois.assist.data.JSONFileLoader;
@@ -54,7 +60,10 @@ public class MethodPropertiesAction extends AnAction {
             detailsDialog.setLocationRelativeTo(null);
             detailsDialog.setVisible(true);
         } else {
-            Messages.showMessageDialog(project, Constants.METHOD_NOT_FOUND, "Method Selection", Messages.getInformationIcon());
+            final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
+            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND, MessageType.INFO, null)
+                    .createBalloon()
+                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
         }
     }
 

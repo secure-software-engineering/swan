@@ -47,7 +47,7 @@ public class Constants {
 
     public final static String MOIS_LOG_SUFFIX = "_moisassist_log.txt";
     public final static String OUTPUT_DIR_NAME = "output";
-    public final static String OUTPUT_JSON_SUFFIX = "_output.json";
+    public final static String OUTPUT_JSON_SUFFIX = "output.json";
     public final static String OUTPUT_TEXT_SUFFIX = "_output.txt";
 
     public final static String FILTER_CURRENT_FILE_KEY = "file";
@@ -69,9 +69,8 @@ public class Constants {
     public final static String METHOD_CHANGED = "changed";
     public final static String MSG_METHOD_RESTORED = "The method was restored.";
 
-
-    public final static String NOTIFICATION_START_MOIS ="Running MOIS...";
-    public final static String NOTIFICATION_END_MOIS_SUCCESS ="MOIS completed at ";
+    public final static String NOTIFICATION_START_MOIS ="MOIS refresh started";
+    public final static String NOTIFICATION_END_MOIS_SUCCESS ="MOIS execution completed";
     public final static String NOTIFICATION_END_MOIS_FAIL ="There was an error";
     public final static String NOTIFICATION_NONE ="No new notifications";
     public final static String NOTIFICATION_MOIS ="View results";
@@ -89,6 +88,9 @@ public class Constants {
     public final static String TITLE_DELETE_METHOD = "Delete Method";
     public final static String TITLE_METHOD_PROPERTIES = "Method Properties";
     public final static String TITLE_RESTORE_METHOD = "Restore Method";
+
+    //Notification titles/strings
+    public final static String PLUGIN_GROUP_DISPLAY_ID = "AssistMOIS";
 
 
 }
