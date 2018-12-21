@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 /**
  * Creates process to run MOIS.
+ *
  * @author Oshando Johnson
  */
 
@@ -24,11 +25,11 @@ import java.util.HashMap;
 public class MoisProcessBuilder extends Thread {
 
     private static HashMap<String, String> parameters;
-    private AnActionEvent anActionEvent;
+    private Project project;
 
-    MoisProcessBuilder(AnActionEvent actionEvent, HashMap<String, String> param) {
+    MoisProcessBuilder(Project project, HashMap<String, String> param) {
 
-        anActionEvent = actionEvent;
+        this.project = project;
         parameters = param;
     }
 
@@ -57,15 +58,14 @@ public class MoisProcessBuilder extends Thread {
         processBuilder.redirectErrorStream(true);
         processBuilder.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
 
-        String completionTimestamp = getCurrentTimestamp("HH:mm");
-        String message = Constants.NOTIFICATION_END_MOIS_SUCCESS + completionTimestamp;
+        String message;
 
         try {
             Process moisProcess = processBuilder.start();
             int result = moisProcess.waitFor();
 
             if (result == 0)
-                message = Constants.NOTIFICATION_END_MOIS_SUCCESS + completionTimestamp;
+                message = Constants.NOTIFICATION_END_MOIS_SUCCESS;
             else
                 message = Constants.NOTIFICATION_END_MOIS_FAIL;
 
@@ -76,13 +76,10 @@ public class MoisProcessBuilder extends Thread {
         }
 
         HashMap<String, String> results = new HashMap<String, String>();
-        results.put(Constants.MOIS_OUTPUT_FILE, parameters.get(Constants.MOIS_OUTPUT_DIR) + File.separator + currentTimestamp + Constants.OUTPUT_JSON_SUFFIX);
+        results.put(Constants.MOIS_OUTPUT_FILE, parameters.get(Constants.MOIS_OUTPUT_DIR) + File.separator + "json" + File.separator + Constants.OUTPUT_JSON_SUFFIX);
         results.put(Constants.MOIS_OUTPUT_LOG, parameters.get(Constants.MOIS_OUTPUT_DIR) + File.separator + currentTimestamp + Constants.MOIS_LOG_SUFFIX);
         results.put(Constants.MOIS_OUTPUT_MESSAGE, message);
 
-        anActionEvent.getPresentation().setEnabled(true);
-
-        final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
         MessageBus messageBus = project.getMessageBus();
         MoisNotifier publisher = messageBus.syncPublisher(MoisNotifier.END_MOIS_PROCESS_TOPIC);
         publisher.launchMois(results);

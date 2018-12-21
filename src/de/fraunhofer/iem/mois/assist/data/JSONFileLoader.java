@@ -16,6 +16,10 @@ public class JSONFileLoader {
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
 
+
+
+    static private boolean reloadingMois = false;
+
     //Get configuration file location
     public static void setConfigurationFile(String path) {
 
@@ -149,5 +153,13 @@ public class JSONFileLoader {
 
         //psiClass.getAllMethods()[0].
         return psiClass != null;
+    }
+
+    public static boolean isReloading() {
+        return reloadingMois;
+    }
+
+    public static void setReloading(boolean reloadingMois) {
+        JSONFileLoader.reloadingMois = reloadingMois;
     }
 }

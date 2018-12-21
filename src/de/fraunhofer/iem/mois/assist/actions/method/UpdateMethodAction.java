@@ -28,16 +28,7 @@ public class UpdateMethodAction extends AnAction {
         final Project project = anActionEvent.getProject();
 
         MethodDialog dialog = new MethodDialog(method, project, JSONFileLoader.getCategories());
-
-        if (method.isNewMethod())
-            dialog.setTitle(Constants.TITLE_ADD_METHOD);
-        else
-            dialog.setTitle(Constants.TITLE_UPDATE_METHOD);
-
-        dialog.pack();
-        dialog.setSize(550, 350);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        dialog.show();
     }
 
     @Override

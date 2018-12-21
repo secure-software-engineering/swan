@@ -1,8 +1,11 @@
 package de.fraunhofer.iem.mois.assist.data;
 
-import com.intellij.openapi.ui.Messages;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import de.fraunhofer.iem.mois.Parser;
 import de.fraunhofer.iem.mois.assist.util.Constants;
+import de.fraunhofer.iem.mois.data.Method;
 
 import java.util.HashMap;
 
@@ -29,13 +32,13 @@ public class JSONFileParser {
         Parser parser = new Parser(null);
 
         try {
-            for (de.fraunhofer.iem.mois.data.Method method : parser.parseFile(congFilePath)) {
+            for (Method method : parser.parseFile(congFilePath)) {
 
                 MethodWrapper methodWrapper = new MethodWrapper(method);
                 methods.put(methodWrapper.getSignature(true),methodWrapper );
             }
         } catch (Exception e) {
-            Messages.showWarningDialog(Constants.FILE_LOAD_ERROR, "File Load Error");
+            Notifications.Bus.notify(new Notification("AssistMois", "File Load Error", Constants.FILE_LOAD_ERROR, NotificationType.ERROR));
         }
 
         return methods;

@@ -33,21 +33,20 @@ public class LaunchMoisAction extends AnAction {
         //Export changes to configuration files
         JSONWriter exportFile = new JSONWriter();
 
-      /*  try {
+        try {
             exportFile.writeToJsonFile(JSONFileLoader.getMethods(), JSONFileLoader.getConfigurationFile(true));
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
         //Launch Dialog
-        Window activeWindow = FocusManager.getCurrentManager().getActiveWindow();
+        MoisLauncherDialog dialog = new MoisLauncherDialog(project, true);
+        dialog.show();
 
-        MoisLauncherDialog dialog = new MoisLauncherDialog(activeWindow, project, true);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        if (dialog.getExitCode()==DialogWrapper.OK_EXIT_CODE) {
 
-        if (dialog.isConfirmed()) {
+            MoisProcessBuilder processBuilder = new MoisProcessBuilder(project, dialog.getParameters());
+            processBuilder.start();
 
             MoisNotifier publisher = messageBus.syncPublisher(MoisNotifier.START_MOIS_PROCESS_TOPIC);
             publisher.launchMois(null);
@@ -58,7 +57,9 @@ public class LaunchMoisAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (JSONFileLoader.isFileSelected())
+        if (JSONFileLoader.isReloading() || !JSONFileLoader.isFileSelected())
+            event.getPresentation().setEnabled(false);
+        else
             event.getPresentation().setEnabled(true);
     }
 }

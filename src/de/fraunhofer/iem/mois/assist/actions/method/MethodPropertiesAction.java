@@ -53,12 +53,8 @@ public class MethodPropertiesAction extends AnAction {
             method = PsiTraversal.getMethodAtOffset(anActionEvent, false);
 
         if (method != null) {
-            MethodPropertiesDialog detailsDialog = new MethodPropertiesDialog(method);
-            detailsDialog.setTitle(Constants.TITLE_METHOD_PROPERTIES);
-            detailsDialog.pack();
-            detailsDialog.setSize(550, 350);
-            detailsDialog.setLocationRelativeTo(null);
-            detailsDialog.setVisible(true);
+            MethodPropertiesDialog detailsDialog = new MethodPropertiesDialog(project, method);
+            detailsDialog.show();
         } else {
             final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
             JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND, MessageType.INFO, null)

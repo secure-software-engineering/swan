@@ -41,7 +41,7 @@ public class ExportAction extends AnAction {
             }
 
             JSONWriter exportFile = new JSONWriter();
-
+            //TODO deal with exception
             try {
                 exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
             } catch (IOException e) {
