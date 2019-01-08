@@ -49,10 +49,10 @@ public class Main {
   private static final boolean runSources = true;
   private static final boolean runSinks = true;
   private static final boolean runSanitizers = true;
-  private static final boolean runAuthentications = true;
+  private static final boolean runAuthentications = false;
   private static final boolean runCwes = true;
   
-  private static final boolean runOAT = true; // run one at a time analysis
+  private static final boolean runOAT = false; // run one at a time analysis
   
   private void run(String[] args) throws IOException {
 	  int iterations = 0;
@@ -144,7 +144,7 @@ public class Main {
 		        iter++;
 		      }
 		    }
-		    System.out.println("***** F Measure is " + averageF/iter);
+		    //System.out.println("***** F Measure is " + averageF/iter);
 		    
 		    //System.out.println("***** Writing final results");
 		    Set<String> tmpFiles = Util.getFiles(args[3]);

@@ -14,10 +14,9 @@ public enum Category {
             Constants.AUTHENTICATION_NOCHANGE, false), SANITIZER(Constants.SANITIZER,
             false), NONE(Constants.NONE, false),
 
-  CWE089("CWE089", true), CWE306("CWE306", true), CWE078("CWE078",
+  CWE089("CWE089", true),CWE306("CWE306", true), CWE078("CWE078",
       true), CWE862("CWE862", true), CWE863("CWE863", 
           true), CWE601("CWE601", true), CWETEST("CWEtest", true), CWE079("CWE079",true), CWE_NONE("none", true);
-
   private final String id;
   private final boolean cwe;
 

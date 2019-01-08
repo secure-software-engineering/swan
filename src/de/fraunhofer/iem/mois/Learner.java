@@ -22,6 +22,7 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.Logistic;
 import weka.classifiers.functions.SMO;
+import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.rules.JRip;
 import weka.classifiers.rules.OneR;
 import weka.classifiers.trees.DecisionStump;
@@ -32,6 +33,7 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Range;
 import weka.core.converters.ArffSaver;
+import weka.filters.unsupervised.attribute.Remove;
 
 /**
  * Finds possible sources and sinks in a given set of system methods using a
@@ -46,8 +48,8 @@ public class Learner {
   private long startAnalysisTime;
   private long analysisTime;
   
-  private final boolean CROSS_EVALUATE=true;
-  private final boolean CLASSIFY=false;
+  private final boolean CROSS_EVALUATE=false;
+  private final boolean CLASSIFY=true;
   
   private final int CROSS_EVALUATE_ITERATIONS=1;
   
@@ -61,6 +63,7 @@ public class Learner {
       Map<Category, Set<IFeature>> features, Set<Category> categories,
       String outputFile, boolean cweMode) throws IOException {
 
+	  
 	  double fmeasure=0;
     startAnalysisTime = System.currentTimeMillis();
     Map<Category, Integer> counters = new HashMap<Category, Integer>();
@@ -186,32 +189,36 @@ public class Learner {
     }
     //System.out.println("Done.");
 
+         
+     
+	     
     // Create classifier.
     try {
       // instances.randomize(new Random(1337));
-      Classifier classifier = null;
+    	FilteredClassifier classifier = new FilteredClassifier();
       // (IBK / kNN) vs. SMO vs. (J48 vs. JRIP) vs. NaiveBayes
       // MultiClassClassifier für ClassifierPerformanceEvaluator
       if (WEKA_LEARNER_ALL.equals("BayesNet"))
-        classifier = new BayesNet();
+        classifier.setClassifier(new BayesNet());
       else if (WEKA_LEARNER_ALL.equals("NaiveBayes"))
-        classifier = new NaiveBayes();
+        classifier.setClassifier(new NaiveBayes());
       else if (WEKA_LEARNER_ALL.equals("J48"))
-        classifier = new J48();
+        classifier.setClassifier(new J48());
       else if (WEKA_LEARNER_ALL.equals("SMO"))
-        classifier = new SMO();
+        classifier.setClassifier(new SMO());
       else if (WEKA_LEARNER_ALL.equals("JRip"))
-        classifier = new JRip();
+        classifier.setClassifier(new JRip());
       else if (WEKA_LEARNER_ALL.equals("DecisionStump"))
-          classifier = new DecisionStump();
+          classifier.setClassifier(new DecisionStump());
       else if (WEKA_LEARNER_ALL.equals("OneR"))
-          classifier = new OneR();
+          classifier.setClassifier(new OneR());
       else if (WEKA_LEARNER_ALL.equals("Logistic"))
-          classifier = new Logistic();
+          classifier.setClassifier(new Logistic());
       else
         throw new Exception("Wrong WEKA learner!");
      // System.out.println("Classifier created: " + WEKA_LEARNER_ALL);
 
+      
       // Save arff data.
       ArffSaver saver = new ArffSaver();
       saver.setInstances(trainInstances);
@@ -259,15 +266,23 @@ public class Learner {
       // Classification.
       
       if(CLASSIFY) {
+    	  
+    	  Remove rm = new Remove();      
+      	rm.setAttributeIndicesArray(new int[]{idAttr.index()}); 
+      	classifier.setFilter(rm);   
+    	  
     	  //System.out.println("Classification starting.");
           classifier.buildClassifier(trainInstances);
           if (WEKA_LEARNER_ALL.equals("J48")) {
-            System.out.println(((J48) (classifier)).graph());
+            System.out.println(((classifier)).graph());
           }
           for (int instIdx = 0; instIdx < testInstances.numInstances(); instIdx++) {
             Instance inst = testInstances.instance(instIdx);
             assert inst.classIsMissing();
             Method meth = instanceMethods.get(inst.stringValue(idAttr));
+            
+            
+            
             double d = classifier.classifyInstance(inst);
             String cName = testInstances.classAttribute().value((int) d);
             boolean found = false;
@@ -297,7 +312,7 @@ public class Learner {
     
     Runtime.getRuntime().gc();
     analysisTime = System.currentTimeMillis() - startAnalysisTime;
-    //System.out.println("Time to classify " + categories.toString() + ": "+ analysisTime + " ms");
+    System.out.println("Time to classify " + categories.toString() + ": "+ analysisTime + " ms");
 
     return fmeasure;
     // writer.writeRIFLSpecification(outputFile, methods);
