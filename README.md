@@ -1,4 +1,4 @@
-# mois
+# swan
 Methods of interest for security (MOIS)
 
 Description

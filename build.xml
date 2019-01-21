@@ -1,4 +1,4 @@
-<project default="compile" name="mois">
+<project default="compile" name="swan">
 	  <property file="ant.settings"/>
 	    <target name="settings">
 	        <fail
