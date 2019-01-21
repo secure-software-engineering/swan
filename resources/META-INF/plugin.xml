@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>de.fraunhofer.iem.mois.assist</id>
-    <name>AssistMOIS</name>
+    <id>de.fraunhofer.iem.swan.assist</id>
+    <name>SWAN_Assist</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
@@ -27,99 +27,99 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <codeInsight.lineMarkerProvider language="JAVA"
-                                        implementationClass="de.fraunhofer.iem.mois.assist.ui.markers.ErrorLineMarker"/>
-        <toolWindow id="AssistMOIS" anchor="right" factoryClass="de.fraunhofer.iem.mois.assist.ui.SummaryToolWindow" icon="PluginIcons.MOIS_ASSIST"/>
+                                        implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
+        <toolWindow id="SWAN_Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
 
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
 
-        <group id="AssistMOIS.ActionBar" text="AssistMOIS" popup="false" >
+        <group id="SWAN_Assist.ActionBar" text="SWAN_Assist" popup="false" >
 
-            <action id="AssistMOIS.ImportAction" class="de.fraunhofer.iem.mois.assist.actions.ImportAction"
+            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
                     text="Import File"
                     icon="PluginIcons.IMPORT_ACTION"
                     description="Import configuration file">
             </action>
 
-            <action id="AssistMOIS.ExportAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.ExportAction"
+            <action id="SWAN_Assist.ExportAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
                     icon="PluginIcons.EXPORT_ACTION"
                     text="Export File"
                     description="Export configuration file">
             </action>
 
             <separator/>
-            <group id="AssistMOIS.FilterActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.FilterActionGroup"
+            <group id="SWAN_Assist.FilterActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.FilterActionGroup"
                    text="Filter Methods"
                    popup="true" icon="PluginIcons.FILTER_ACTION">
             </group>
             <separator/>
 
-            <action id="AssistMOIS.LaunchMOISAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.LaunchMoisAction"
-                    icon="PluginIcons.REFRESH_MOIS"
-                    text="Refresh MOIS">
+            <action id="SWAN_Assist.LaunchSWANAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    icon="PluginIcons.REFRESH_SWAN"
+                    text="Refresh SWAN">
             </action>
 
             <separator/>
 
-            <action id="AssistMOIS.HelpAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.HelpAction"
+            <action id="SWAN_Assist.HelpAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
         </group>
 
-        <group id="AssistMOIS.MethodActionGroup" class="de.fraunhofer.iem.mois.assist.actions.method.MethodActionGroup" text="Method"
+        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
 
-        <group id="AssistMOIS.CategoryActionGroup" class="de.fraunhofer.iem.mois.assist.actions.filter.CategoryActionGroup" text="Filter"
+        <group id="SWAN_Assist.CategoryActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.CategoryActionGroup" text="Filter"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
 
-        <group id="EditorGroup" text="AssistMOIS" popup="true" icon="PluginIcons.MOIS_ASSIST">
+        <group id="EditorGroup" text="SWAN_Assist" popup="true" icon="PluginIcons.SWAN_ASSIST">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <action id="AssistMOIS.AddMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.AddMethodAction"
+            <action id="SWAN_Assist.AddMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.AddMethodAction"
                     text="Add/Update Method" icon="PluginIcons.ADD_METHOD_ACTION">
             </action>
 
-            <action id="AssistMOIS.RestoreMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.RestoreMethodAction"
+            <action id="SWAN_Assist.RestoreMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.RestoreMethodAction"
                     text="Restore" >
             </action>
 
-            <action id="AssistMOIS.DeleteMethodAction" class="de.fraunhofer.iem.mois.assist.actions.method.DeleteMethodAction"
+            <action id="SWAN_Assist.DeleteMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.DeleteMethodAction"
                     text="Delete" >
             </action>
 
-            <action id="AssistMOIS.MethodPropertiesAction" class="de.fraunhofer.iem.mois.assist.actions.method.MethodPropertiesAction"
+            <action id="SWAN_Assist.MethodPropertiesAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodPropertiesAction"
                     text="Properties" >
             </action>
 
-            <action id="AssistMOIS.MethodListAction" class="de.fraunhofer.iem.mois.assist.actions.method.MethodListAction"
+            <action id="SWAN_Assist.MethodListAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodListAction"
                     text="View Methods List" >
             </action>
             <separator/>
-            <action id="AssistMOIS.ImportAction" class="de.fraunhofer.iem.mois.assist.actions.ImportAction"
+            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
                     text="Import File" icon="PluginIcons.IMPORT_ACTION">
             </action>
-            <action id="AssistMOIS.ExportAction" class="de.fraunhofer.iem.mois.assist.actions.ExportAction"
+            <action id="SWAN_Assist.ExportAction" class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
                     text="Export File" icon="PluginIcons.IMPORT_ACTION">
             </action>
             <separator/>
-            <action id="AssistMOIS.LaunchMOISAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.LaunchMoisAction"
-                    icon="PluginIcons.REFRESH_MOIS"
-                    text="Run/Rerun MOIS">
+            <action id="SWAN_Assist.LaunchSWANAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    icon="PluginIcons.REFRESH_SWAN"
+                    text="Run/Rerun SWAN">
             </action>
 
             <separator/>
 
-            <action id="AssistMOIS.HelpAction"
-                    class="de.fraunhofer.iem.mois.assist.actions.HelpAction"
+            <action id="SWAN_Assist.HelpAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
 

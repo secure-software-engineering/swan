@@ -1,7 +1,7 @@
 package icons;
 
 import com.intellij.openapi.util.IconLoader;
-import de.fraunhofer.iem.mois.data.Constants;
+import de.fraunhofer.iem.swan.data.Constants;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
