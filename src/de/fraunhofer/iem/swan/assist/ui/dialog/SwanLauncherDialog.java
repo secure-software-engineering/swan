@@ -5,6 +5,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.sun.javafx.PlatformUtil;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +52,13 @@ public class SwanLauncherDialog extends DialogWrapper {
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
         defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + Constants.SWAN_TRAIN_DIR_NAME;
-        swanJarDirecory = Objects.requireNonNull(getClass().getClassLoader().getResource(Constants.SWAN_JAR_NAME)).getPath();
+
+        String jarDir = Objects.requireNonNull(getClass().getClassLoader().getResource(Constants.SWAN_JAR_NAME)).getPath();
+
+        if (PlatformUtil.isWindows() || System.getProperty("os.name").toLowerCase().contains("win"))
+            swanJarDirecory = jarDir.substring(1);
+        else
+            swanJarDirecory = jarDir;
 
         sourceDirTextbox.setText(project.getBasePath());
         configDir.setText(configurationFile.getAbsolutePath());
