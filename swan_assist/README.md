@@ -12,10 +12,6 @@ SWAN_Assist provides a GUI support for SWAN. The user is able to interact with t
 The tool helps users that write static analyses to create list of SWAN for their specific Java libraries. 
 Moreover, users can manually inspect the proper usage of the methods detected by SWAN. 
 
-Contributors:
-* Goran Piskachev (goran.piskachev@iem.fraunhofer.de)
-* Oshando Johnson (oshando@campus.uni-paderborn.de)
-* Lisa Nguyen (lisa.nguyen@uni-paderborn.de)
 
 ## Setting Up the Plugin
 
