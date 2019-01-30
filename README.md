@@ -15,7 +15,7 @@ Moreover, users can manually inspect the proper usage of the methods detected by
 Contributors:
 * Goran Piskachev (goran.piskachev@iem.fraunhofer.de)
 * Lisa Nguyen (lisa.nguyen@uni-paderborn.de)
-* Oshando Johnson (oshando@campus.uni-paderborn.de)
+* Oshando Johnson (oshando@iem.fraunhofer.de)
 * Eric Bodden (eric.bodden@uni-paderborn.de)
 
 
