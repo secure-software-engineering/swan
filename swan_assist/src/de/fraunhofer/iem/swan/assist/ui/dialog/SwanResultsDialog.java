@@ -13,10 +13,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Provides results after SWAN finishes executing.
@@ -37,7 +41,26 @@ public class SwanResultsDialog extends DialogWrapper {
     public SwanResultsDialog(Project project, HashMap<String, String> values) {
 
         super(project);
-        setTitle("SWAN Results");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
+        setTitle(resourceBundle.getString("Results.Title"));
+
+        Properties config = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream(getClass().getClassLoader().getResource("").getPath() + "config.properties");
+            config.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         this.project = project;
 
@@ -68,7 +91,7 @@ public class SwanResultsDialog extends DialogWrapper {
                     File selectedFile = fileChooser.getSelectedFile();
                     String path = selectedFile.getAbsoluteFile().toString();
                     filePath.setText(path);
-                    logPath.setText(path.replace(Constants.OUTPUT_JSON_SUFFIX, Constants.SWAN_LOG_SUFFIX));
+                    logPath.setText(path.replace(config.getProperty("output_json_suffix"), config.getProperty("log_suffix")));
 
                     try {
                         logText.setText(new String(Files.readAllBytes(Paths.get(logPath.getText()))));
@@ -84,9 +107,6 @@ public class SwanResultsDialog extends DialogWrapper {
     protected void doOKAction() {
 
         if (isOKActionEnabled()) {
-            MessageBus messageBus = project.getMessageBus();
-            FileSelectedNotifier publisher = messageBus.syncPublisher(FileSelectedNotifier.UPDATED_FILE_NOTIFIER_TOPIC);
-            publisher.notifyFileChange(filePath.getText());
             super.doOKAction();
         }
     }
@@ -94,7 +114,6 @@ public class SwanResultsDialog extends DialogWrapper {
     @NotNull
     @Override
     protected Action[] createActions() {
-
 
         return super.createActions();
     }

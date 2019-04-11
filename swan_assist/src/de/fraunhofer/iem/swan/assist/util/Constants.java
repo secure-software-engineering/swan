@@ -45,17 +45,6 @@ public class Constants {
     public final static String SWAN_OUTPUT_LOG = "output_logs";
     public final static String SWAN_OUTPUT_MESSAGE = "output_message";
 
-    public final static String SWAN_LOG_SUFFIX = "_swanassist_log.txt";
-    public final static String OUTPUT_DIR_NAME = "output";
-    public final static String OUTPUT_JSON_SUFFIX = "output.json";
-    public final static String OUTPUT_TEXT_SUFFIX = "_output.txt";
-
-    public final static String FILTER_CURRENT_FILE_KEY = "file";
-    public final static String FILTER_CURRENT_FILE_VALUE = "Current Class";
-    public final static String FILTER_CURRENT_PROJECT_KEY = "project";
-    public final static String FILTER_CURRENT_PROJECT_VALUE = "Current Project";
-    public final static String FILTER_CLEAR_KEY = "Clear Filters";
-    public final static String FILTER_CLEAR_VALUE = "Clear Filters";
     public final static String FILTER_CWE = "CWE";
     public final static String FILTER_TYPE = "Type";
 
