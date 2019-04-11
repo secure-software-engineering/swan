@@ -11,31 +11,8 @@ import java.util.ResourceBundle;
  */
 public class Constants {
 
+    public final static ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
-    //JSON Attributes labels
-    public final static String METHOD_NAME_LABEL = "Method Name";
-    public final static String RETURN_TYPE_LABEL = "Return Type";
-    public final static String PARAMETER_LABEL = "Parameter(s)";
-    public final static String SECURITY_LEVEL_LABEL = "Security Level";
-    public final static String DISCOVERY_LABEL = "Discovery";
-    public final static String FRAMEWORK_LABEL = "Framework";
-    public final static String LINK_LABEL = "Link";
-    public final static String CWE_LABEL = "CWE";
-    public final static String TYPE_LABEL = "Type";
-    public final static String COMMENT_LABEL = "Comment";
-
-    //Messages
-    public final static String INVALID_FILE_TYPE = "The selected file is invalid. Please select a .json file.";
-    public final static String FILE_NOT_SELECTED = "A file was not selected. Select a configuration file.";
-
-    public final static String ELEMENT_NOT_SELECTED = "Invalid element selected. Select a valid method from the class.";
-    public final static String NOT_JAVA_FILE = "Files can only be added from a Java file.";
-    public final static String METHOD_NOT_FOUND = "The selected method was not found.";
-    public final static String URI_NOT_FOUND = "There was an error loading the URI";
-    public final static String CONFIRM_METHOD_DELETION = "Are you sure you want to delete this method?";
-    public final static String FILE_LOAD_ERROR = "An error occured loading the file.";
-    public final static String NO_CATEGORY_SELECTED = "No type or CWE was selected for the method.";
-    public final static String METHOD_NOT_FOUND_IN_EDITOR = "Method not found in project or cannot be located";
     //TODO update link to point to online help resources that will be created
     public final static String HELP_LINK = "https://github.com/Sable/soot";
 

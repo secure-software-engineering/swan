@@ -11,8 +11,9 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodPropertiesDialog;
-import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
+
+import java.util.ResourceBundle;
 
 /**
  * Action to show additional properties for a method.
@@ -38,6 +39,7 @@ public class MethodPropertiesAction extends AnAction {
 
         //Get all the required data from data keys
         final Project project = anActionEvent.getProject();
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
         if (PsiTraversal.isFromEditor(anActionEvent))
             method = PsiTraversal.getMethodAtOffset(anActionEvent, false);
@@ -47,7 +49,7 @@ public class MethodPropertiesAction extends AnAction {
             detailsDialog.show();
         } else {
             final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
-            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND, MessageType.INFO, null)
+            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.INFO, null)
                     .createBalloon()
                     .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
         }

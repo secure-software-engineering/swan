@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 
 /**
@@ -34,14 +35,18 @@ public class SwanProcessBuilder extends Thread {
     public void run() {
         super.run();
 
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
+
         String currentTimestamp = getCurrentTimestamp("yyyy-MM-dd-HHmmss");
 
         File outputFolder = new File(parameters.get(Constants.SWAN_OUTPUT_DIR));
         outputFolder.mkdirs();
 
-        File logFile = new File(outputFolder, currentTimestamp + Constants.SWAN_LOG_SUFFIX);
+        File logFile = new File(outputFolder, currentTimestamp + parameters.get(Constants.SWAN_OUTPUT_LOG));
         try {
             logFile.createNewFile();
+            parameters.replace(Constants.SWAN_OUTPUT_LOG, logFile.getPath());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,19 +68,19 @@ public class SwanProcessBuilder extends Thread {
             int result = swanProcess.waitFor();
 
             if (result == 0)
-                message = Constants.NOTIFICATION_END_SWAN_SUCCESS;
+                message = resource.getString("Messages.Notification.Success");
             else
-                message = Constants.NOTIFICATION_END_SWAN_FAIL;
+                message = resource.getString("Messages.Notification.Failure");
 
         } catch (IOException | InterruptedException e) {
 
             e.printStackTrace();
-            message = Constants.NOTIFICATION_END_SWAN_FAIL;
+            message = resource.getString("Messages.Notification.Failure");
         }
 
         HashMap<String, String> results = new HashMap<String, String>();
-        results.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + "json" + File.separator + Constants.OUTPUT_JSON_SUFFIX);
-        results.put(Constants.SWAN_OUTPUT_LOG, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + currentTimestamp + Constants.SWAN_LOG_SUFFIX);
+        results.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_FILE));
+        results.put(Constants.SWAN_OUTPUT_LOG, parameters.get(Constants.SWAN_OUTPUT_LOG));
         results.put(Constants.SWAN_OUTPUT_MESSAGE, message);
 
         MessageBus messageBus = project.getMessageBus();

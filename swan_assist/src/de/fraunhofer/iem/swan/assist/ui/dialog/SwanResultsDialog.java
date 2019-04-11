@@ -2,8 +2,6 @@ package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.assist.comm.FileSelectedNotifier;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -83,7 +82,7 @@ public class SwanResultsDialog extends DialogWrapper {
             public void actionPerformed(ActionEvent actionEvent) {
 
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
-                fileChooser.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+                fileChooser.setFileFilter(new FileNameExtensionFilter(resourceBundle.getString("FileChooser.FileDescription"), resourceBundle.getString("FileChooser.FileExtension")));
 
                 int returnValue = fileChooser.showOpenDialog(null);
 

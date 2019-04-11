@@ -6,7 +6,7 @@ import de.fraunhofer.iem.swan.assist.data.InfoBank;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.CWE;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Shows additional properties of a method.
@@ -31,18 +32,19 @@ public class MethodPropertiesDialog extends DialogWrapper {
 
         super(project);
 
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
         //Table Columns
-        Object[] columnNames = {Constants.TABLE_HEADER_PROPERTY, Constants.TABLE_HEADER_VALUE};
+        Object[] columnNames = {resourceBundle.getString("Properties.Category"),resourceBundle.getString("Properties.Value") };
         //Table data
-        Object[][] values = {{Constants.RETURN_TYPE_LABEL, method.getReturnType(true)},
-                {Constants.METHOD_NAME_LABEL, method.getMethodName(true)},
-                {Constants.PARAMETER_LABEL, method.getParameter(true)},
-                {Constants.SECURITY_LEVEL_LABEL, method.getMethod().getSecLevel()},
-                {Constants.DISCOVERY_LABEL, method.getMethod().getDiscovery()},
-                {Constants.FRAMEWORK_LABEL, method.getMethod().getFramework()},
-                {Constants.CWE_LABEL, StringUtils.join(method.getCWEList(), ", ")},
-                {Constants.TYPE_LABEL, StringUtils.join(method.getTypesList(true), ", ")},
-                {Constants.COMMENT_LABEL, method.getMethod().getComment()},
+        Object[][] values = {{resourceBundle.getString("Properties.Return"), method.getReturnType(true)},
+                {resourceBundle.getString("Properties.Method"), method.getMethodName(true)},
+                {resourceBundle.getString("Properties.Parameters"), method.getParameter(true)},
+                {resourceBundle.getString("Properties.Security"), method.getMethod().getSecLevel()},
+                {resourceBundle.getString("Properties.Discovery"), method.getMethod().getDiscovery()},
+                {resourceBundle.getString("Properties.Framework"), method.getMethod().getFramework()},
+                {resourceBundle.getString("Properties.CWE"), StringUtils.join(method.getCWEList(), ", ")},
+                {resourceBundle.getString("Properties.Type"), StringUtils.join(method.getTypesList(true), ", ")},
+                {resourceBundle.getString("Properties.Comment"), method.getMethod().getComment()},
         };
 
         TableModel tableModel = new DefaultTableModel(values, columnNames);
@@ -55,7 +57,7 @@ public class MethodPropertiesDialog extends DialogWrapper {
         //description.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
         description.setOpaque(true);
 
-        setTitle(Constants.TITLE_METHOD_PROPERTIES);
+        setTitle(resourceBundle.getString("Properties.Title"));
         init();
 
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -69,7 +71,7 @@ public class MethodPropertiesDialog extends DialogWrapper {
                     StringBuilder cweDescription = new StringBuilder();
 
                     for (CWE entry : cwe) {
-                        cweDescription.append("<br/><b>CWE" + entry.getId() + " " + entry.getName() + "</b><p><b>Description: </b>" + entry.getLink() + "</p>");
+                        cweDescription.append("<b>CWE" + entry.getId() + " " + entry.getName() + "</b><p><b>Description: </b>" + entry.getShortName() + "</p>");
                     }
 
                     description.setText("<html>" + cweDescription + "</html>");

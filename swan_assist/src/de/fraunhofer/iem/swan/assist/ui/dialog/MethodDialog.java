@@ -9,13 +9,16 @@ import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.CategoryRenderer;
-import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Category;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
@@ -38,6 +41,7 @@ public class MethodDialog extends DialogWrapper {
     private MethodWrapper method;
     private Category selectedCategory;
     private DefaultListModel<Category> selectedModel, availableModel;
+    private ResourceBundle resourceBundle;
 
     public MethodDialog(MethodWrapper m, Project project, Set<Category> availableCategories) {
 
@@ -46,10 +50,11 @@ public class MethodDialog extends DialogWrapper {
         method = m;
         this.project = project;
 
+        resourceBundle = ResourceBundle.getBundle("dialog_messages");
         if (method.isNewMethod())
-            setTitle(Constants.TITLE_ADD_METHOD);
+            setTitle(resourceBundle.getString("MethodDialog.AddTitle"));
         else
-            setTitle(Constants.TITLE_UPDATE_METHOD);
+            setTitle(resourceBundle.getString("MethodDialog.UpdateTitle"));
 
         methodSignature.setText(method.getSignature(false));
         methodSignature.setToolTipText(method.getSignature(true));
@@ -168,7 +173,7 @@ public class MethodDialog extends DialogWrapper {
 
         if (isOKActionEnabled()) {
             if (method.getCategories().size() == 0) {
-                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.NO_CATEGORY_SELECTED, MessageType.ERROR, null)
+                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.CategoryNotSelected"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) selectedList), Balloon.Position.below);
             } else {

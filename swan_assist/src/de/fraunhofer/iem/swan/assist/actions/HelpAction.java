@@ -6,10 +6,6 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
@@ -19,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ResourceBundle;
 
 /**
  * Action to open help page or resources.
@@ -31,26 +28,23 @@ public class HelpAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
 
-        Project project = e.getData(PlatformDataKeys.PROJECT);
-        final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
-
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
         URI helpUri = null;
+
         try {
             helpUri = new URI(Constants.HELP_LINK);
-        } catch (URISyntaxException e1) {
-            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.URI_NOT_FOUND, MessageType.INFO, null)
-                    .createBalloon()
-                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
-        }
-
-        try {
             Desktop.getDesktop().browse(helpUri);
-        } catch (IOException e1) {
+        } catch (IOException | URISyntaxException exception) {
 
-            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.URI_NOT_FOUND, MessageType.INFO, null)
+            JBPopupFactory.getInstance()
+                    .createHtmlTextBalloonBuilder(resource.getString("Messages.Error.URINotFound"), MessageType.INFO, null)
                     .createBalloon()
-                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
-            Notifications.Bus.notify(new Notification("SWAN_Assist", "Page Not Found", Constants.URI_NOT_FOUND, NotificationType.ERROR));
+                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(e.getDataContext()), Balloon.Position.below);
+
+            Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID,
+                    resource.getString("Messages.Error.PageNotFound"),
+                    resource.getString("Messages.Error.URINotFound"),
+                    NotificationType.ERROR));
         }
     }
 }

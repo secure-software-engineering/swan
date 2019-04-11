@@ -21,7 +21,7 @@
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Configuration File"/>
+              <text resource-bundle="dialog_messages" key="Results.ConfigurationFile"/>
             </properties>
           </component>
           <component id="75439" class="javax.swing.JTextField" binding="filePath">
@@ -37,7 +37,7 @@
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="..."/>
+              <text resource-bundle="dialog_messages" key="FileChooser.SelectDirectory"/>
             </properties>
           </component>
           <component id="d28df" class="javax.swing.JLabel">
@@ -45,7 +45,7 @@
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Ouput Logs"/>
+              <text resource-bundle="dialog_messages" key="Results.Logs"/>
             </properties>
           </component>
           <component id="e424d" class="javax.swing.JTextField" binding="logPath">

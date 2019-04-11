@@ -23,7 +23,6 @@ import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup;
@@ -43,8 +42,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseAdapter;
@@ -61,6 +58,7 @@ public class MethodListTree extends Tree {
     public static ArrayList<Pair<String, String>> TREE_FILTERS;
     public static boolean RESTORE_METHOD;
     private Project project;
+    private ResourceBundle resource;
 
 
     public MethodListTree(Project project) {
@@ -68,11 +66,13 @@ public class MethodListTree extends Tree {
         this.project = project;
         MessageBus bus = project.getMessageBus();
 
+        resource = ResourceBundle.getBundle("dialog_messages");
+
         //TreeList panel and listModel creation
         treeModel = new DefaultTreeModel(null);
         setCellRenderer(new MethodTreeRenderer());
         setModel(treeModel);
-        getEmptyText().setText(Constants.TREE_EMPTY);
+        getEmptyText().setText(resource.getString("Messages.Notification.EmptyTree"));
         setToggleClickCount(0);
 
 
@@ -119,7 +119,9 @@ public class MethodListTree extends Tree {
                             for (PsiClass psiClass : psiJavaFile.getClasses()) {
                                 for (PsiMethod psiMethod : psiClass.getMethods()) {
 
+
                                     if (PsiTraversal.getMethodSignature(psiMethod).equals(method.getSignature(true))) {
+                                        System.out.println(PsiTraversal.getMethodSignature(psiMethod) + ">>>>" + method.getSignature(true));
 
                                         methodFound = true;
                                         FileEditorManager.getInstance(project).openFile(psiJavaFile.getVirtualFile(), true, true);
@@ -130,7 +132,7 @@ public class MethodListTree extends Tree {
                         }
 
                         if (!methodFound) {
-                            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND_IN_EDITOR, MessageType.ERROR, null)
+                            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.ERROR, null)
                                     .createBalloon()
                                     .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
                         }
@@ -222,7 +224,7 @@ public class MethodListTree extends Tree {
             public void launchSwan(HashMap<String, String> values) {
 
                 JSONFileLoader.setReloading(true);
-                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Reloading SWAN", Constants.NOTIFICATION_START_SWAN, NotificationType.INFORMATION));
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.RefreshStarted"), resource.getString("Messages.Notification.RefreshStarted"), NotificationType.INFORMATION));
             }
         });
 
@@ -234,7 +236,7 @@ public class MethodListTree extends Tree {
                 JSONFileLoader.setReloading(false);
                 NotificationType notificationType = NotificationType.INFORMATION;
 
-                if (!values.get(Constants.SWAN_OUTPUT_MESSAGE).equals(Constants.NOTIFICATION_END_SWAN_SUCCESS)) {
+                if (!values.get(Constants.SWAN_OUTPUT_MESSAGE).equals(resource.getString("Messages.Notification.Success"))) {
                     notificationType = NotificationType.ERROR;
                 }
 
@@ -250,7 +252,7 @@ public class MethodListTree extends Tree {
                                 SwanResultsDialog resultsDialog = new SwanResultsDialog(project, values);
                                 resultsDialog.show();
 
-                            } else if (hyperlinkEvent.getDescription().equals("load")){
+                            } else if (hyperlinkEvent.getDescription().equals("load")) {
                                 JSONFileLoader.loadUpdatedFile(values.get(Constants.SWAN_OUTPUT_FILE));
                                 loadMethods();
                             }
@@ -376,7 +378,7 @@ public class MethodListTree extends Tree {
             treeModel.setRoot(root);
         } else {
             treeModel.setRoot(null);
-            getEmptyText().setText(Constants.TREE_FILTERS_EMPTY);
+            getEmptyText().setText(resource.getString("Messages.Notification.NoFilterResults"));
         }
     }
 }

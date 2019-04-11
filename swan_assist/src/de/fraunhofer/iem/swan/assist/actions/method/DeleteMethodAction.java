@@ -12,10 +12,10 @@ import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 
 import javax.swing.*;
+import java.util.ResourceBundle;
 
 /**
  * Action to delete a method.
@@ -42,13 +42,13 @@ public class DeleteMethodAction extends AnAction {
     public void actionPerformed(AnActionEvent anActionEvent) {
 
         final Project project = anActionEvent.getProject();
-
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
         if (PsiTraversal.isFromEditor(anActionEvent))
             deleteMethod = PsiTraversal.getMethodAtOffset(anActionEvent, false);
 
         if (deleteMethod != null) {
-            int confirmation = JOptionPane.showConfirmDialog(null, Constants.CONFIRM_METHOD_DELETION, Constants.TITLE_DELETE_METHOD, JOptionPane.YES_NO_OPTION);
+            int confirmation = JOptionPane.showConfirmDialog(null, resource.getString("Messages.Confirmation.DeleteMethod"), resource.getString("Messages.Title.DeleteMethod"), JOptionPane.YES_NO_OPTION);
 
             if (confirmation == JOptionPane.YES_OPTION) {
 
@@ -58,7 +58,7 @@ public class DeleteMethodAction extends AnAction {
             }
         } else {
             final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
-            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.METHOD_NOT_FOUND, MessageType.INFO, null)
+            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.INFO, null)
                     .createBalloon()
                     .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
         }

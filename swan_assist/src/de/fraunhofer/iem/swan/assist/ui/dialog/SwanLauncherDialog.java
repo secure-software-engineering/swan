@@ -15,8 +15,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Dialog to lauch configuration window for SWAN before running the application.
@@ -31,8 +36,6 @@ public class SwanLauncherDialog extends DialogWrapper {
     private JButton buttonCancel;
     private JTextField sourceDirTextbox;
     private JButton sourceBtn;
-    private JTextField configDir;
-    private JButton configBtn;
     private JTextField outputDir;
     private JButton outputBtn;
     private JCheckBox sourceCheckBox;
@@ -43,17 +46,38 @@ public class SwanLauncherDialog extends DialogWrapper {
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private String defaultTrainDirectory;
     private String swanJarDirecory;
+    private ResourceBundle resourceBundle;
+    private Properties config;
 
     public SwanLauncherDialog(Project project, boolean modal) {
 
         super(project, modal);
-        setTitle("Launch SWAN");
+        resourceBundle = ResourceBundle.getBundle("dialog_messages");
+        setTitle(resourceBundle.getString("Launcher.Title"));
+
+        config = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream(getClass().getClassLoader().getResource("").getPath()+"config.properties");
+            config.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
-        defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + Constants.SWAN_TRAIN_DIR_NAME;
+        defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + config.getProperty("train_dir_name");
 
-        String jarDir = Objects.requireNonNull(getClass().getClassLoader().getResource(Constants.SWAN_JAR_NAME)).getPath();
+        String jarDir = Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("swan_jar_name"))).getPath();
 
         if (PlatformUtil.isWindows() || System.getProperty("os.name").toLowerCase().contains("win"))
             swanJarDirecory = jarDir.substring(1);
@@ -61,8 +85,11 @@ public class SwanLauncherDialog extends DialogWrapper {
             swanJarDirecory = jarDir;
 
         sourceDirTextbox.setText(project.getBasePath());
-        configDir.setText(configurationFile.getAbsolutePath());
-        outputDir.setText(configurationFile.getParent() + File.separator + Constants.OUTPUT_DIR_NAME);
+        outputDir.setText(configurationFile.getParent() + File.separator + config.getProperty("output_dir_name"));
+
+        for (Component component : advancedPanel.getComponents()) {
+            component.setEnabled(advancedCheckbox.isSelected());
+        }
 
         init();
         /*
@@ -76,13 +103,10 @@ public class SwanLauncherDialog extends DialogWrapper {
                 //restore default values
                 if (sourceCheckBox.isSelected()) {
                     sourceDirTextbox.setText(project.getBasePath());
-                    configDir.setText(configurationFile.toString());
                 }
 
                 sourceBtn.setEnabled(!sourceCheckBox.isSelected());
-                configBtn.setEnabled(!sourceCheckBox.isSelected());
                 sourceDirTextbox.setEditable(!sourceCheckBox.isSelected());
-                configDir.setEditable(!sourceCheckBox.isSelected());
             }
         });
 
@@ -90,35 +114,22 @@ public class SwanLauncherDialog extends DialogWrapper {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                advancedPanel.setVisible(advancedCheckbox.isSelected());
+                for (Component component : advancedPanel.getComponents()) {
+                    component.setEnabled(advancedCheckbox.isSelected());
+                }
 
                 if (advancedCheckbox.isSelected()) {
-
-                    contentPane.setPreferredSize(new Dimension(650, 250));
-                    pack();
                     trainingTextbox.setText("");
-                    outputDir.setText(configurationFile.getParent() + File.separator + Constants.OUTPUT_DIR_NAME);
-                } else {
-                    contentPane.setPreferredSize(new Dimension(650, 180));
-                    pack();
+                    outputDir.setText(configurationFile.getParent() + File.separator + config.getProperty("output_dir_name"));
                 }
             }
         });
-
 
         sourceBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 sourceDirTextbox.setText(fileSelector(JFileChooser.DIRECTORIES_ONLY, sourceDirTextbox.getText()));
-            }
-        });
-
-        configBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                configDir.setText(fileSelector(JFileChooser.FILES_ONLY, configDir.getText()));
             }
         });
 
@@ -147,29 +158,32 @@ public class SwanLauncherDialog extends DialogWrapper {
             parameters.put(Constants.SWAN_JAR_DIR, swanJarDirecory);
 
             //ensure that required fields are populated
-            if (sourceDirTextbox.getText().trim().isEmpty() || configDir.getText().trim().isEmpty()) {
+            if (sourceDirTextbox.getText().trim().isEmpty()) {
 
-                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.LAUNCHER_PATH_NOT_SELECTED, MessageType.ERROR, null)
+                JBPopupFactory.getInstance()
+                        .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
             } else if (advancedCheckbox.isSelected() && (trainingTextbox.getText().isEmpty() || outputDir.getText().isEmpty())) {
 
-                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.LAUNCHER_PATH_NOT_SELECTED, MessageType.ERROR, null)
+                JBPopupFactory.getInstance()
+                        .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(advancedCheckbox), Balloon.Position.below);
             } else if (!advancedCheckbox.isSelected()) {
 
                 parameters.put(Constants.SWAN_SOURCE_DIR, sourceDirTextbox.getText());
-                parameters.put(Constants.SWAN_CONFIG_FILE, configDir.getText());
                 parameters.put(Constants.SWAN_TRAIN_DIR, defaultTrainDirectory);
                 parameters.put(Constants.SWAN_OUTPUT_DIR, outputDir.getText());
+                parameters.put(Constants.SWAN_OUTPUT_LOG, config.getProperty("log_suffix"));
+                parameters.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator  + config.getProperty("output_json_suffix"));
                 super.doOKAction();
             } else {
 
                 parameters.put(Constants.SWAN_SOURCE_DIR, sourceDirTextbox.getText());
-                parameters.put(Constants.SWAN_CONFIG_FILE, configDir.getText());
                 parameters.put(Constants.SWAN_TRAIN_DIR, trainingTextbox.getText());
                 parameters.put(Constants.SWAN_OUTPUT_DIR, outputDir.getText());
+                parameters.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator  + config.getProperty("output_json_suffix"));
                 super.doOKAction();
             }
         }
@@ -189,7 +203,7 @@ public class SwanLauncherDialog extends DialogWrapper {
         fileChooser.setSelectedFile(new File(path));
 
         if (selectionMethod == JFileChooser.FILES_ONLY)
-            fileChooser.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+            fileChooser.setFileFilter(new FileNameExtensionFilter(resourceBundle.getString("FileChooser.FileDescription"), resourceBundle.getString("FileChooser.FileExtension")));
 
         int returnValue = fileChooser.showOpenDialog(this.contentPane);
 

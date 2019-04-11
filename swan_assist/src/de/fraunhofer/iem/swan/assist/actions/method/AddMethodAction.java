@@ -10,8 +10,9 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
+
+import java.util.ResourceBundle;
 
 /**
  * Action to add a new method by selecting a class\category.
@@ -25,13 +26,14 @@ public class AddMethodAction extends AnAction {
     public void actionPerformed(AnActionEvent e) {
 
         MethodWrapper method = PsiTraversal.getMethodAtOffset(e, true);
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_properties");
 
         if (method != null) {
 
             ActionManager.getInstance().tryToExecute(new UpdateMethodAction(method), e.getInputEvent(), null, "Add Method", false);
         } else {
             final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
-            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(Constants.ELEMENT_NOT_SELECTED, MessageType.INFO, null)
+            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.ElementNotSelected"), MessageType.INFO, null)
                     .createBalloon()
                     .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);
         }

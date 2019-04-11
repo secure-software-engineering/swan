@@ -8,6 +8,7 @@ import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 public class JSONFileParser {
 
@@ -30,6 +31,7 @@ public class JSONFileParser {
 
         HashMap<String, MethodWrapper> methods = new HashMap<String, MethodWrapper>();
         Parser parser = new Parser(null);
+        ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
         try {
             for (Method method : parser.parseFile(congFilePath)) {
@@ -44,7 +46,7 @@ public class JSONFileParser {
                 methods.put(methodWrapper.getSignature(true), methodWrapper);
             }
         } catch (Exception e) {
-            Notifications.Bus.notify(new Notification("SWAN_Assist", "File Load Error", Constants.FILE_LOAD_ERROR, NotificationType.ERROR));
+            Notifications.Bus.notify(new Notification("SWAN_Assist", resource.getString("Messages.Title.FileLoadError"), resource.getString("Messages.Error.FileLoadError"), NotificationType.ERROR));
         }
 
         return methods;
