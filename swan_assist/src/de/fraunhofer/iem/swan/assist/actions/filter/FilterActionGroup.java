@@ -22,13 +22,15 @@ public class FilterActionGroup extends ActionGroup {
     public AnAction[] getChildren(@Nullable AnActionEvent anActionEvent) {
 
         return new AnAction[]{
-                new FilterAction(new Pair<>(Constants.FILTER_CURRENT_FILE_KEY, Constants.FILTER_CURRENT_FILE_VALUE)),
-                new FilterAction(new Pair<>(Constants.FILTER_CURRENT_PROJECT_KEY, Constants.FILTER_CURRENT_PROJECT_VALUE)),
+                new FilterAction(Constants.FILE_FILTER),
                 new Separator(),
                 new CategoryActionGroup(Constants.FILTER_TYPE, true),
                 new CategoryActionGroup(Constants.FILTER_CWE, true),
                 new Separator(),
-                new FilterAction(new Pair<>(Constants.FILTER_CLEAR_KEY, Constants.FILTER_CLEAR_VALUE))};
+                new FilterAction(Constants.TRAIN_FILTER),
+                new FilterAction(Constants.DELETED_FILTER),
+                new Separator(),
+                new FilterAction(Constants.CLEAR_FILTER)};
     }
 
     @Override

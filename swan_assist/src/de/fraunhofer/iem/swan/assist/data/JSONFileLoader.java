@@ -4,10 +4,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
+import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
+import javafx.util.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JSONFileLoader {
 
@@ -15,9 +20,7 @@ public class JSONFileLoader {
     static private String congFile = "";
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
-
-
-
+    static public final int RESTORED_METHOD = 2;
     static private boolean reloadingSwan = false;
 
     //Get configuration file location
@@ -32,8 +35,7 @@ public class JSONFileLoader {
         if (path)
             return congFile;
         else
-            return congFile.substring(congFile.lastIndexOf("/") + 1, congFile.length());
-
+            return congFile.substring(congFile.lastIndexOf("/") + 1);
     }
 
     //Returns whether or not a configuration file was selected
@@ -63,42 +65,73 @@ public class JSONFileLoader {
         return new ArrayList<>(methods.values());
     }
 
+    //Return list of methods as an array
+    public static HashMap<String, MethodWrapper> getAllMethods() {
+
+        return methods;
+    }
 
     //Return list of methods as an array using categories
-    public static ArrayList<MethodWrapper> getMethods(ArrayList<String> filters, String currentFile, boolean currentFileMode, boolean currentProjectMode, Project project) {
+    public static ArrayList<MethodWrapper> getMethods(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
 
-        if (filters.size() == 0 && (currentFileMode || currentProjectMode)) {
+        if (filters.size() > 0) {
 
-            ArrayList<MethodWrapper> filteredList = new ArrayList<>();
+            //case where file selected but no categories .
+            if (filters.size() == 1 && filters.contains(Constants.FILE_FILTER)) {
 
-            for (String methodSignature : methods.keySet()) {
+                ArrayList<MethodWrapper> filteredList = new ArrayList<>();
 
-                if ((methodSignature.contains(currentFile) && currentFileMode) || (inProject(methods.get(methodSignature).getClassName(true), project) && currentProjectMode)) {
-                    filteredList.add(methods.get(methodSignature));
-                }
-            }
-            return filteredList;
-        } else if (filters.size() > 0) {
-
-            ArrayList<MethodWrapper> filteredList = new ArrayList<>();
-
-            for (String methodSignature : methods.keySet()) {
-
-                if ((!methodSignature.contains(currentFile) && currentFileMode) || (!inProject(methods.get(methodSignature).getClassName(true), project) && currentProjectMode))
-                    continue;
-
-                for (Category category : methods.get(methodSignature).getCategories()) {
-
-                    if (filters.contains(Formatter.capitalizeFirstCharacter(category.toString()))) {
+                for (String methodSignature : methods.keySet()) {
+                    if (methodSignature.contains(currentFile)) {
                         filteredList.add(methods.get(methodSignature));
-                        break;
                     }
                 }
+                return filteredList;
+            } else {
+                //case where file is selected and categories
+                return filterList(filters, currentFile);
+            }
+        } else {
+            ArrayList<MethodWrapper> filteredList = new ArrayList<>();
+
+            for (MethodWrapper method : methods.values()) {
+
+
+                if (method.getUpdateOperation().equals(Constants.METHOD_DELETED) || method.isTrainingMethod())
+                    continue;
+
+                System.out.println(method.getSignature(true));
+                filteredList.add(method);
             }
             return filteredList;
-        } else
-            return new ArrayList<>(methods.values());
+        }
     }
+
+    private static ArrayList<MethodWrapper> filterList(ArrayList<Pair<String, String>> filters, String currentFile) {
+        ArrayList<MethodWrapper> filteredList = new ArrayList<>();
+
+        for (String methodSignature : methods.keySet()) {
+
+            if ((filters.contains(Constants.FILE_FILTER) && !methodSignature.contains(currentFile))
+                    || (!filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED))
+                    || (methods.get(methodSignature).isTrainingMethod() && !filters.contains(Constants.TRAIN_FILTER)))
+                continue;
+
+            for (Category category : methods.get(methodSignature).getCategories()) {
+
+                if ((filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED))
+                        || filters.contains(new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString())))
+                        || filters.contains(new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString())))
+                        || (methods.get(methodSignature).isTrainingMethod() && filters.contains(Constants.TRAIN_FILTER))) {
+
+                    filteredList.add(methods.get(methodSignature));
+                    break;
+                }
+            }
+        }
+        return filteredList;
+    }
+
 
     //Return list of categories as a set
     public static Set<Category> getCategories() {
@@ -127,13 +160,13 @@ public class JSONFileLoader {
         }
     }
 
-    //Add new method to the list
+    //Check if method exists in list
     public static boolean methodExists(String methodSignature) {
 
         return methods.containsKey(methodSignature);
     }
 
-    //Add new method to the list
+    //Returns method for the specified signature
     public static MethodWrapper getMethod(String methodSignature) {
 
         return methods.get(methodSignature);

@@ -4,7 +4,6 @@ import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import org.apache.commons.lang3.StringUtils;
 import de.fraunhofer.iem.swan.data.Method;
-
 import java.util.*;
 
 /**
@@ -19,6 +18,7 @@ public class MethodWrapper {
     private List<String> parameters = new ArrayList<String>();
     private String icon;
     private boolean isNewMethod;
+    private boolean isTrainingMethod;
     private String updateOperation = "";
     private String markerMessage;
 
@@ -122,7 +122,7 @@ public class MethodWrapper {
             if (!category.isCwe() && !capitalize) {
                 typesList.add(category.toString());
             } else if (!category.isCwe())
-                typesList.add(Formatter.capitalizeFirstCharacter(category.toString()));
+                typesList.add(Formatter.toTitleCase(category.toString()));
         }
 
         return typesList;
@@ -157,6 +157,13 @@ public class MethodWrapper {
         return updateOperation;
     }
 
+    public boolean isTrainingMethod() {
+        return isTrainingMethod;
+    }
+
+    public void setTrainingMethod(boolean trainingMethod) {
+        isTrainingMethod = trainingMethod;
+    }
     public void setUpdateOperation(String updateOperation) {
         this.updateOperation = updateOperation;
     }

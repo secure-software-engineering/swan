@@ -40,9 +40,9 @@ public class CategoryActionGroup extends ActionGroup {
             for (Category category : JSONFileLoader.getCategories()) {
 
                 if (category.isCwe())
-                    cweFilter.add(new FilterAction(new Pair<>(Constants.FILTER_CWE, Formatter.capitalizeFirstCharacter(category.toString()))));
+                    cweFilter.add(new FilterAction(new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString()))));
                 else
-                    typeFilter.add(new FilterAction(new Pair<>(Constants.FILTER_TYPE, Formatter.capitalizeFirstCharacter(category.toString()))));
+                    typeFilter.add(new FilterAction(new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString()))));
             }
         }
 

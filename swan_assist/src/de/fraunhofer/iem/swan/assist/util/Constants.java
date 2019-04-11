@@ -1,7 +1,12 @@
 package de.fraunhofer.iem.swan.assist.util;
 
+import javafx.util.Pair;
+
+import java.util.ResourceBundle;
+
 /**
  * Constants for various classes.
+ *
  * @author Oshando Johnson
  */
 public class Constants {
@@ -48,9 +53,10 @@ public class Constants {
     public final static String FILTER_CWE = "CWE";
     public final static String FILTER_TYPE = "Type";
 
-    //Details ToolWindow
-    public final static String TABLE_HEADER_PROPERTY = "Method Property";
-    public final static String TABLE_HEADER_VALUE = "Value";
+    public final static Pair<String, String> FILE_FILTER = new Pair<>("file", resource.getString("Filter.File"));
+    public final static Pair<String, String> TRAIN_FILTER = new Pair<>("training", resource.getString("Filter.Training"));
+    public final static Pair<String, String> DELETED_FILTER = new Pair<>("deleted", resource.getString("Filter.Deleted"));
+    public final static Pair<String, String> CLEAR_FILTER = new Pair<>("clear", resource.getString("Filter.Clear"));
 
     //Update operations
     public final static String METHOD_DELETED = "deleted";

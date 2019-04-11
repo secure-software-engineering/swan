@@ -38,6 +38,7 @@ import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import de.fraunhofer.iem.swan.data.Category;
+import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -48,9 +49,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * @author Oshando Johnson on 14.12.18
@@ -59,11 +58,8 @@ public class MethodListTree extends Tree {
 
     private DefaultTreeModel treeModel;
     private String currentFile;
-    private JBPanel notificationPanel;
-    public static ArrayList<String> TREE_FILTERS;
-    public static boolean CURRENT_FILE_FILTER;
+    public static ArrayList<Pair<String, String>> TREE_FILTERS;
     public static boolean RESTORE_METHOD;
-    public static boolean CURRENT_PROJECT_FILTER;
     private Project project;
 
 
@@ -74,42 +70,15 @@ public class MethodListTree extends Tree {
 
         //TreeList panel and listModel creation
         treeModel = new DefaultTreeModel(null);
-
-        //methodTree = new Tree();
         setCellRenderer(new MethodTreeRenderer());
         setModel(treeModel);
         getEmptyText().setText(Constants.TREE_EMPTY);
         setToggleClickCount(0);
 
+
         TREE_FILTERS = new ArrayList<>();
-        CURRENT_FILE_FILTER = false;
         RESTORE_METHOD = false;
-        CURRENT_PROJECT_FILTER = false;
-
-        //TODO exception when no file is open
-        Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
-        VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(document);
-        currentFile = Formatter.getFileNameFromPath(virtualFile.getName());
-
-        //Action listener for tree
-        addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
-
-                if (node != null) {
-
-                    Object object = node.getUserObject();
-
-                    if (object instanceof MethodWrapper) {
-                        MethodWrapper method = (MethodWrapper) object;
-
-
-                    }
-                }
-            }
-        });
+        currentFile = "";
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -124,7 +93,7 @@ public class MethodListTree extends Tree {
 
                         MethodWrapper method = (MethodWrapper) object;
 
-                        //   RESTORE_METHOD = method.getUpdateOperation().equals(Constants.METHOD_DELETED);
+                        RESTORE_METHOD = method.getUpdateOperation().equals(Constants.METHOD_DELETED);
 
                         ActionPopupMenu actionPopupMenu = ActionManager.getInstance().createActionPopupMenu("Method", new MethodActionGroup(method));
                         actionPopupMenu.getComponent().show(e.getComponent(), e.getX(), e.getY());
@@ -205,7 +174,6 @@ public class MethodListTree extends Tree {
                 switch (JSONFileLoader.addMethod(newMethod)) {
 
                     case JSONFileLoader.EXISTING_METHOD:
-
 
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 
@@ -295,8 +263,27 @@ public class MethodListTree extends Tree {
         //Connect to project bus and obtain filter for Method Tree
         bus.connect().subscribe(FilterNotifier.FILTER_SELECTED_TOPIC, new FilterNotifier() {
             @Override
-            public void updateFilter(String value) {
+            public void updateFilter(Pair<String, String> value) {
 
+                if (value.equals(Constants.CLEAR_FILTER))
+                    TREE_FILTERS.clear();
+                else if (TREE_FILTERS.contains(value))
+                    TREE_FILTERS.remove(value);
+                else
+                    TREE_FILTERS.add(value);
+
+                if (TREE_FILTERS.contains(Constants.FILE_FILTER)) {
+
+                    try {
+
+                        Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
+                        VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(document);
+                        currentFile = Formatter.getFileNameFromPath(Objects.requireNonNull(virtualFile).getName());
+                    } catch (NullPointerException e) {
+
+                        currentFile = "";
+                    }
+                }
                 loadMethods();
             }
         });
@@ -306,14 +293,16 @@ public class MethodListTree extends Tree {
             @Override
             public void selectionChanged(@NotNull FileEditorManagerEvent event) {
 
-                if (CURRENT_FILE_FILTER) {
-                    currentFile = Formatter.getFileNameFromPath(event.getNewFile().getName());
+                if (TREE_FILTERS.contains(Constants.FILE_FILTER)) {
+                    if (event.getNewFile() != null) {
+                        currentFile = Formatter.getFileNameFromPath(event.getNewFile().getName());
+                    } else
+                        currentFile = "";
 
                     loadMethods();
                 }
             }
         });
-
     }
 
     /**
@@ -375,7 +364,7 @@ public class MethodListTree extends Tree {
      */
     private void loadMethods() {
 
-        ArrayList<MethodWrapper> methods = JSONFileLoader.getMethods(TREE_FILTERS, currentFile, CURRENT_FILE_FILTER, CURRENT_PROJECT_FILTER, project);
+        ArrayList<MethodWrapper> methods = JSONFileLoader.getMethods(TREE_FILTERS, currentFile, project);
 
         if (methods.size() > 0) {
 
