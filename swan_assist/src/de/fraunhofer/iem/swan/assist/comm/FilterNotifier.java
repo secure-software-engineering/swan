@@ -1,6 +1,7 @@
 package de.fraunhofer.iem.swan.assist.comm;
 
 import com.intellij.util.messages.Topic;
+import javafx.util.Pair;
 
 /**
  * Notification events for filters.
@@ -11,5 +12,5 @@ public interface FilterNotifier {
 
     Topic<FilterNotifier> FILTER_SELECTED_TOPIC = Topic.create("Filter Selected",FilterNotifier.class);
 
-    void updateFilter(String value);
+    void updateFilter(Pair<String, String> value);
 }

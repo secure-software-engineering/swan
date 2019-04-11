@@ -28,7 +28,7 @@ public class CategoryRenderer extends JLabel implements ListCellRenderer<Categor
         }
 
         setIcon(IconUtils.getIcon(category.toString()));
-        setText(Formatter.capitalizeFirstCharacter(category.toString()));
+        setText(Formatter.toTitleCase(category.toString()));
         setBorder(BorderFactory.createEmptyBorder(3, 4, 2, 0));
         setOpaque(true);
 

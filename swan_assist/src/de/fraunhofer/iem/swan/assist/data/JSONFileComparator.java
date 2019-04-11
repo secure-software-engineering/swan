@@ -1,5 +1,7 @@
 package de.fraunhofer.iem.swan.assist.data;
 
+import de.fraunhofer.iem.swan.assist.util.Constants;
+
 import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,7 +35,7 @@ public class JSONFileComparator {
                 .filter(method -> !updatedList.keySet().contains(method))
                 .collect(Collectors.toSet());
 
-        //Determine methods that were deleted
+        //Determine methods that were added
         Set<String> addedMethods = updatedList.keySet().stream()
                 .filter(method -> !originalList.keySet().contains(method))
                 .collect(Collectors.toSet());
@@ -41,13 +43,13 @@ public class JSONFileComparator {
         for (String methodSignature : deletedMethods) {
 
             MethodWrapper method = originalList.get(methodSignature);
-         //  method.setUpdateOperation(Constants.METHOD_DELETED);
+            method.setUpdateOperation(Constants.METHOD_DELETED);
             updatedList.put(methodSignature, method);
         }
 
         for (String methodSignature : addedMethods) {
             MethodWrapper method = updatedList.get(methodSignature);
-          //  method.setUpdateOperation(Constants.METHOD_ADDED);
+            method.setUpdateOperation(Constants.METHOD_ADDED);
             updatedList.replace(methodSignature, method);
         }
 

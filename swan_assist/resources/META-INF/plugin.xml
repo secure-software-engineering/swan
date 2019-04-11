@@ -1,19 +1,12 @@
 <idea-plugin>
     <id>de.fraunhofer.iem.swan.assist</id>
     <name>SWAN_Assist</name>
-    <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
+    <version>2.0</version>
+    <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
-    <description><![CDATA[
-      IDE support for the identification of configured methods for static analyses<br>
-      <em>most HTML tags may be used</em>
-    ]]></description>
+    <description>IDE support for the identification of configured methods for static analyses</description>
 
-    <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
-    ]]>
-    </change-notes>
+    <change-notes>Initial release of the SWAN_Assist plugin.</change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="145.0"/>
@@ -103,14 +96,14 @@
                     text="View Methods List" >
             </action>
             <separator/>
-            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
+            <action id="SWAN_Assist.Editor.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
                     text="Import File" icon="PluginIcons.IMPORT_ACTION">
             </action>
-            <action id="SWAN_Assist.ExportAction" class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
-                    text="Export File" icon="PluginIcons.IMPORT_ACTION">
+            <action id="SWAN_Assist.Editor.ExportAction" class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
+                    text="Export File" icon="PluginIcons.EXPORT_ACTION">
             </action>
             <separator/>
-            <action id="SWAN_Assist.LaunchSWANAction"
+            <action id="SWAN_Assist.Editor.LaunchSWANAction"
                     class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
                     icon="PluginIcons.REFRESH_SWAN"
                     text="Run/Rerun SWAN">
@@ -118,7 +111,7 @@
 
             <separator/>
 
-            <action id="SWAN_Assist.HelpAction"
+            <action id="SWAN_Assist.Editor.HelpAction"
                     class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
