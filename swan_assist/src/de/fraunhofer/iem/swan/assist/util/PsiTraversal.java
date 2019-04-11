@@ -10,8 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiTypesUtil;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import org.apache.commons.lang.StringUtils;
-
+import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import java.util.List;
  */
 public class PsiTraversal {
 
-    public static List<String> getParameters(PsiMethod psiMethod) {
+    private static List<String> getParameters(PsiMethod psiMethod) {
 
         List<String> parameters = new ArrayList<String>();
         for (PsiParameter psiParameter : psiMethod.getParameterList().getParameters()) {
@@ -33,10 +32,10 @@ public class PsiTraversal {
                 parameters.add(psiClass.getQualifiedName());
             } else if (psiParameter.getType() instanceof PsiArrayType) {
 
-
                 PsiArrayType psiArrayType = (PsiArrayType) psiParameter.getType();
                 parameters.add(psiArrayType.getCanonicalText());
             } else
+
                 parameters.add(psiParameter.getType().getCanonicalText());
 
         }

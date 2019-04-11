@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.assist.util;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import de.fraunhofer.iem.swan.data.Method;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Formatter {
 
-    public static String capitalizeFirstCharacter(String text){
+    public static String toTitleCase(String text){
 
         return text.substring(0,1).toUpperCase()+text.substring(1);
     }
