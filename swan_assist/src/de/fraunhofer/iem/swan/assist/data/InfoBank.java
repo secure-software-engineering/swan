@@ -45,6 +45,7 @@ public class InfoBank {
                 String cweName = (String) jsonObj.get("Name");
                 String cweDescription = (String) jsonObj.get("Description");
 
+                System.out.println(cweId+ " "+cweDescription);
                 CWE cwe = new CWE(cweId, cweName, cweDescription, "");
 
                 methods.add(cwe);

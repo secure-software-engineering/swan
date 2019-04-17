@@ -7,6 +7,7 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
+import de.fraunhofer.iem.swan.assist.comm.SuggestedNotifier;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.CategoryRenderer;
 import de.fraunhofer.iem.swan.data.Category;
@@ -18,14 +19,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Dialog that shows current configuration for method and allows updates.
  *
  * @author Oshando Johnson
  */
+
+
 public class MethodDialog extends DialogWrapper {
 
     private JPanel contentPane;
@@ -35,51 +37,65 @@ public class MethodDialog extends DialogWrapper {
     private JRadioButton typeRadioButton;
     private JTextField methodTypes;
     private JTextField methodCwes;
-    private JTextField methodSignature;
+    private JComboBox signatureCbx;
     private JButton buttonProperty;
     private Project project;
     private MethodWrapper method;
     private Category selectedCategory;
     private DefaultListModel<Category> selectedModel, availableModel;
     private ResourceBundle resourceBundle;
+    private Set<Category> availableCategories;
+    private Set<Category> selectedCategories;
+    private HashMap<String, Set<Category>> originalMethods;
+    private HashMap<String, MethodWrapper> methods;
 
-    public MethodDialog(MethodWrapper m, Project project, Set<Category> availableCategories) {
+    public MethodDialog(HashMap<String, MethodWrapper> methods, String signature, Project project, Set<Category> categories) {
 
         super(project);
 
-        method = m;
         this.project = project;
+        availableCategories = new HashSet<>(categories);
+        selectedList.setCellRenderer(new CategoryRenderer());
+        availableList.setCellRenderer(new CategoryRenderer());
+
+        originalMethods = new HashMap<>();
+
+        this.methods = methods;
+        for (MethodWrapper methodWrapper : methods.values())
+            signatureCbx.addItem(methodWrapper);
+
+        updateFields(signature, categories);
 
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
-        if (method.isNewMethod())
-            setTitle(resourceBundle.getString("MethodDialog.AddTitle"));
-        else
-            setTitle(resourceBundle.getString("MethodDialog.UpdateTitle"));
 
-        methodSignature.setText(method.getSignature(false));
-        methodSignature.setToolTipText(method.getSignature(true));
-        methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
-        methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
-        typeRadioButton.setSelected(true);
+        switch (method.getStatus()) {
 
-        for (Category category : method.getCategories()) {
-
-            if (availableCategories.contains(category)) {
-                availableCategories.remove(category);
-            }
+            case SUGGESTED:
+                setTitle(resourceBundle.getString("MethodDialog.SuggestTitle"));
+                break;
+            case NEW:
+                setTitle(resourceBundle.getString("MethodDialog.AddTitle"));
+                break;
+            default:
+                setTitle(resourceBundle.getString("MethodDialog.UpdateTitle"));
+                break;
         }
-
-        selectedModel = addCategoriesToModel(method.getCategories(), false);
-        selectedList.setCellRenderer(new CategoryRenderer());
-        selectedList.setModel(selectedModel);
-
-        availableModel = addCategoriesToModel(availableCategories, false);
-        availableList.setCellRenderer(new CategoryRenderer());
-        availableList.setModel(availableModel);
 
         setModal(true);
         setSize(550, 350);
         init();
+
+        signatureCbx.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JComboBox comboBox = (JComboBox) e.getSource();
+
+                MethodWrapper selectedItem = (MethodWrapper) comboBox.getSelectedItem();
+
+                updateFields(selectedItem.getSignature(true), categories);
+            }
+        });
 
         typeRadioButton.addActionListener(new ActionListener() {
             @Override
@@ -142,17 +158,24 @@ public class MethodDialog extends DialogWrapper {
                     JList value = (JList) e.getSource();
                     selectedCategory = (Category) value.getSelectedValue();
 
-                    selectedModel.removeElement(selectedCategory);
-                    method.getCategories().remove(selectedCategory);
-                    methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
-                    methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
+                    if (method.getTypesList(false).size() == 1 && !selectedCategory.isCwe()) {
+                        JBPopupFactory.getInstance()
+                                .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.CategoryNotSelected"), MessageType.ERROR, null)
+                                .createBalloon()
+                                .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) selectedList), Balloon.Position.below);
+                    } else {
 
-                    availableModel.addElement(selectedCategory);
-                    availableCategories.add(selectedCategory);
+                        selectedModel.removeElement(selectedCategory);
+                        method.getCategories().remove(selectedCategory);
+                        methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
+                        methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
+
+                        availableModel.addElement(selectedCategory);
+                        availableCategories.add(selectedCategory);
+                    }
                 }
             }
         });
-
 
        /* buttonProperty.addActionListener(new ActionListener() {
             @Override
@@ -168,14 +191,85 @@ public class MethodDialog extends DialogWrapper {
         });*/
     }
 
+    private void updateFields(String signature, Set<Category> categories) {
+
+        //Clone categories for method
+        method = methods.get(signature);
+        originalMethods.put(method.getSignature(true), copyCategories(method.getCategories()));
+
+        signatureCbx.setSelectedItem(method);
+        signatureCbx.setToolTipText(method.getSignature(true));
+
+        availableCategories = new HashSet<>(categories);
+
+        methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
+        methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
+        typeRadioButton.setSelected(true);
+
+        selectedCategories = new HashSet<>(method.getCategories());
+
+        for (Category category : selectedCategories) {
+
+            if (availableCategories.contains(category)) {
+                availableCategories.remove(category);
+            }
+        }
+
+        selectedModel = addCategoriesToModel(selectedCategories, false);
+        selectedList.setModel(selectedModel);
+
+        availableModel = addCategoriesToModel(availableCategories, false);
+        availableList.setModel(availableModel);
+
+    }
+
+    @Override
+    public void doCancelAction() {
+
+        for (String signature : originalMethods.keySet()) {
+
+            methods.get(signature).setCategories(originalMethods.get(signature));
+        }
+        super.doCancelAction();
+
+    }
+
+    private Set<Category> copyCategories(Set<Category> categories) {
+
+        Set<Category> copy = new HashSet<>();
+
+        for (Category category : categories) {
+            copy.add(category);
+        }
+        return copy;
+    }
+
     @Override
     protected void doOKAction() {
 
         if (isOKActionEnabled()) {
-            if (method.getCategories().size() == 0) {
-                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.CategoryNotSelected"), MessageType.ERROR, null)
-                        .createBalloon()
-                        .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) selectedList), Balloon.Position.below);
+            if (method.getStatus() == MethodWrapper.MethodStatus.SUGGESTED) {
+
+                boolean categorySelected = true;
+
+                for (MethodWrapper method : methods.values()) {
+                    if (method.getCategories().isEmpty()) {
+                        categorySelected = false;
+                        showErrorMessage("Messages.Error.SuggestedCategoryNotSelected", signatureCbx);
+                        break;
+                    }
+                }
+
+                if (categorySelected) {
+                    MessageBus messageBus = project.getMessageBus();
+
+                    SuggestedNotifier publisher = messageBus.syncPublisher(SuggestedNotifier.METHOD_SUGGESTED_TOPIC);
+                    publisher.afterAction(new ArrayList<>(methods.values()));
+                    super.doOKAction();
+                }
+            } else if (method.getCategories().size() == 0) {
+
+                showErrorMessage("Messages.Error.CategoryNotSelected", selectedList);
             } else {
                 //Notify Summary Tool window that new method was added
                 MessageBus messageBus = project.getMessageBus();
@@ -183,9 +277,16 @@ public class MethodDialog extends DialogWrapper {
                 MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
                 publisher.afterAction(method);
 
-                dispose();
+                super.doOKAction();
             }
         }
+    }
+
+    private void showErrorMessage(String message, JComponent location) {
+        JBPopupFactory.getInstance()
+                .createHtmlTextBalloonBuilder(resourceBundle.getString(message), MessageType.ERROR, null)
+                .createBalloon()
+                .show(JBPopupFactory.getInstance().guessBestPopupLocation(location), Balloon.Position.below);
     }
 
     @Nullable

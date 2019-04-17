@@ -13,14 +13,25 @@ import java.util.*;
  */
 public class MethodWrapper {
 
+    public enum MethodStatus {
+        NONE,
+        NEW,
+        EXISTING,
+        RESTORED,
+        DELETED,
+        SUGGESTED,
+        TRAINING
+    }
+
     private Method method;
     private Set<Category> categories = new HashSet<Category>();
     private List<String> parameters = new ArrayList<String>();
     private String icon;
-    private boolean isNewMethod;
     private boolean isTrainingMethod;
     private String updateOperation = "";
     private String markerMessage;
+
+    private MethodStatus status;
 
     public MethodWrapper() {
 
@@ -28,12 +39,14 @@ public class MethodWrapper {
 
     public MethodWrapper(Method method) {
         this.method = method;
+        status = MethodStatus.NONE;
     }
 
     public MethodWrapper(String methodName, List<String> parameters, String returnType,
                          String className) {
 
         this.method = new Method(methodName, parameters, returnType, className);
+        status = MethodStatus.NONE;
 
     }
 
@@ -136,6 +149,10 @@ public class MethodWrapper {
         return method.getCategoriesTrained();
     }
 
+    public void setCategories(Set<Category> categories) {
+
+       method.setCategoriesTrained(categories);
+    }
 
     public String getIcon() {
         return icon;
@@ -143,14 +160,6 @@ public class MethodWrapper {
 
     public void setIcon(String iconName) {
         this.icon = iconName;
-    }
-
-    public boolean isNewMethod() {
-        return isNewMethod;
-    }
-
-    public void setNewMethod(boolean newMethod) {
-        isNewMethod = newMethod;
     }
 
     public String getUpdateOperation() {
@@ -177,4 +186,15 @@ public class MethodWrapper {
         this.markerMessage = markerMessage;
     }
 
+    public MethodStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MethodStatus status) {
+        this.status = status;
+    }
+
+    public String toString(){
+        return getSignature(false);
+    }
 }

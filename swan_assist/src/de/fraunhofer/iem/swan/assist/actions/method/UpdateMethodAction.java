@@ -7,6 +7,8 @@ import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 
+import java.util.HashMap;
+
 /**
  * Action to add update the selected method.
  *
@@ -27,7 +29,16 @@ public class UpdateMethodAction extends AnAction {
 
         final Project project = anActionEvent.getProject();
 
-        MethodDialog dialog = new MethodDialog(method, project, JSONFileLoader.getCategories());
+        MethodDialog dialog = null;
+
+        if (method.getStatus()== MethodWrapper.MethodStatus.NEW){
+
+            HashMap<String,MethodWrapper> methods = new HashMap<>();
+            methods.put(method.getSignature(true),method);
+            dialog = new MethodDialog(methods, method.getSignature(true), project, JSONFileLoader.getCategories());
+        } else
+            dialog = new MethodDialog(JSONFileLoader.getAllMethods(), method.getSignature(true), project, JSONFileLoader.getCategories());
+
         dialog.show();
     }
 

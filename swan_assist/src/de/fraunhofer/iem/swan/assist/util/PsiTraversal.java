@@ -80,7 +80,6 @@ public class PsiTraversal {
                         PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);
 
                         MethodWrapper method = new MethodWrapper(psiMethod.getName(), PsiTraversal.getParameters(psiMethod), returnType, psiClass.getQualifiedName());
-                        method.setNewMethod(true);
 
                         return method;
                     } else {

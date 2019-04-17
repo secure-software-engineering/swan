@@ -26,13 +26,15 @@ public class AddMethodAction extends AnAction {
     public void actionPerformed(AnActionEvent e) {
 
         MethodWrapper method = PsiTraversal.getMethodAtOffset(e, true);
-        ResourceBundle resource = ResourceBundle.getBundle("dialog_properties");
 
         if (method != null) {
 
+            method.setStatus(MethodWrapper.MethodStatus.NEW);
             ActionManager.getInstance().tryToExecute(new UpdateMethodAction(method), e.getInputEvent(), null, "Add Method", false);
         } else {
             final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
+
+            ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
             JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.ElementNotSelected"), MessageType.INFO, null)
                     .createBalloon()
                     .show(JBPopupFactory.getInstance().guessBestPopupLocation(editor), Balloon.Position.below);

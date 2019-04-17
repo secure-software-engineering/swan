@@ -18,9 +18,7 @@ public interface PluginIcons {
     Icon FILTER_ACTION = IconLoader.getIcon("/icons/filter.png");
     Icon ADD_METHOD_ACTION = IconLoader.getIcon("/icons/add.png");
     Icon EXPORT_ACTION = IconLoader.getIcon("/icons/export.png");
-
-    Icon NOTIFICATION_NONE = IconLoader.getIcon("/icons/notification_none.png");
-    Icon NOTIFICATION_NEW = IconLoader.getIcon("/icons/notification.png");
+    Icon SUGGEST_ACTION = IconLoader.getIcon("/icons/suggest.png");
 
     Icon SOURCE = IconLoader.getIcon("/icons/sou.png");
     Icon SANITIZER = IconLoader.getIcon("/icons/san.png");
