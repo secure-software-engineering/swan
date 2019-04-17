@@ -2,19 +2,14 @@ package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import de.fraunhofer.iem.swan.assist.data.InfoBank;
+import com.intellij.ui.table.JBTable;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.util.Constants;
-import de.fraunhofer.iem.swan.data.CWE;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -25,8 +20,7 @@ import java.util.ResourceBundle;
 
 public class MethodPropertiesDialog extends DialogWrapper {
     private JPanel contentPane;
-    private JTable table;
-    private JTextPane description;
+    private JBTable table;
 
     public MethodPropertiesDialog(Project project, MethodWrapper method) {
 
@@ -34,7 +28,7 @@ public class MethodPropertiesDialog extends DialogWrapper {
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
         //Table Columns
-        Object[] columnNames = {resourceBundle.getString("Properties.Category"),resourceBundle.getString("Properties.Value") };
+        Object[] columnNames = {resourceBundle.getString("Properties.Category"), resourceBundle.getString("Properties.Value") };
         //Table data
         Object[][] values = {{resourceBundle.getString("Properties.Return"), method.getReturnType(true)},
                 {resourceBundle.getString("Properties.Method"), method.getMethodName(true)},
@@ -50,34 +44,12 @@ public class MethodPropertiesDialog extends DialogWrapper {
         TableModel tableModel = new DefaultTableModel(values, columnNames);
 
         table.setModel(tableModel);
+        table.getColumnModel().getColumn(0).setMinWidth(10);
+        table.getColumnModel().getColumn(1).setMinWidth(300);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-        //TODO show description in textArea or description field
-        //description.setContentType("text/html");
-        description.setBorder(null);
-        //description.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
-        description.setOpaque(true);
-
-        setTitle(resourceBundle.getString("Properties.Title"));
         init();
-
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-
-                if (table.getValueAt(table.getSelectedRow(), 0).toString().contains(Constants.FILTER_CWE)) {
-
-                    InfoBank info = new InfoBank();
-                    ArrayList<CWE> cwe = info.getCWEDetails(table.getValueAt(table.getSelectedRow(), 1).toString());
-
-                    StringBuilder cweDescription = new StringBuilder();
-
-                    for (CWE entry : cwe) {
-                        cweDescription.append("<b>CWE" + entry.getId() + " " + entry.getName() + "</b><p><b>Description: </b>" + entry.getShortName() + "</p>");
-                    }
-
-                    description.setText("<html>" + cweDescription + "</html>");
-                }
-            }
-        });
+        setTitle(resourceBundle.getString("Properties.Title"));
     }
 
     @Nullable

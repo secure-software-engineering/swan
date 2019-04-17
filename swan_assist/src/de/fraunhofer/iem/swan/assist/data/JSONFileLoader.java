@@ -23,6 +23,7 @@ public class JSONFileLoader {
     static public final int RESTORED_METHOD = 2;
     static private boolean reloadingSwan = false;
 
+
     //Get configuration file location
     public static void setConfigurationFile(String path) {
 

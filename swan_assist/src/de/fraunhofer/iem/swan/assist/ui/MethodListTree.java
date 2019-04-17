@@ -26,10 +26,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup;
-import de.fraunhofer.iem.swan.assist.comm.FileSelectedNotifier;
-import de.fraunhofer.iem.swan.assist.comm.FilterNotifier;
-import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
-import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
+import de.fraunhofer.iem.swan.assist.comm.*;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.dialog.SwanResultsDialog;
@@ -190,13 +187,24 @@ public class MethodListTree extends Tree {
 
                         break;
                     case JSONFileLoader.NEW_METHOD:
-                        DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
-                        DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(newMethod);
 
-                        treeModel.insertNodeInto(addCategoriesToNode(newMethodNode, newMethod), root, root.getChildCount());
+                        addNode(newMethod);
                         break;
                 }
 
+                DaemonCodeAnalyzer.getInstance(project).restart();
+            }
+        });
+
+        bus.connect().subscribe(SuggestedNotifier.METHOD_SUGGESTED_TOPIC, new SuggestedNotifier() {
+            @Override
+            public void afterAction(ArrayList<MethodWrapper> methods) {
+
+                System.out.println("n=mi get "+methods.size());
+                for(MethodWrapper method: methods){
+                    JSONFileLoader.addMethod(method);
+                    addNode(method);
+                }
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
         });
@@ -332,6 +340,13 @@ public class MethodListTree extends Tree {
             }
         }
         return null;
+    }
+
+    private void addNode(MethodWrapper method){
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
+        DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(method);
+
+        treeModel.insertNodeInto(addCategoriesToNode(newMethodNode, method), root, root.getChildCount());
     }
 
     /**

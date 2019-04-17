@@ -7,6 +7,7 @@ import icons.IconUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
  * Rendering options for a category show in the list.
@@ -27,8 +28,17 @@ public class CategoryRenderer extends JLabel implements ListCellRenderer<Categor
             setForeground(JBColor.BLACK);
         }
 
+        if (category.isCwe()) {
+
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
+
+            setText("<html>" + Formatter.toTitleCase(category.toString()) + " <font color='gray'>" + resourceBundle.getString(category.toString() + ".Name") + "</font></html>");
+            setToolTipText("<html>" + "<b>" + Formatter.toTitleCase(category.toString()) + "</b> " + resourceBundle.getString(category.toString() + ".FullName") + "</html>");
+        } else {
+            setText(Formatter.toTitleCase(category.toString()));
+        }
+
         setIcon(IconUtils.getIcon(category.toString()));
-        setText(Formatter.toTitleCase(category.toString()));
         setBorder(BorderFactory.createEmptyBorder(3, 4, 2, 0));
         setOpaque(true);
 
