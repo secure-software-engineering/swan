@@ -7,11 +7,15 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
@@ -107,6 +111,7 @@ public class MethodListTree extends Tree {
 
                         //Get PSI element location
                         PsiFile[] files = FilenameIndex.getFilesByName(project, method.getFileName(), GlobalSearchScope.allScope(project));
+
                         boolean methodFound = false;
 
                         for (PsiFile file : files) {
@@ -116,9 +121,7 @@ public class MethodListTree extends Tree {
                             for (PsiClass psiClass : psiJavaFile.getClasses()) {
                                 for (PsiMethod psiMethod : psiClass.getMethods()) {
 
-
-                                    if (PsiTraversal.getMethodSignature(psiMethod).equals(method.getSignature(true))) {
-                                        System.out.println(PsiTraversal.getMethodSignature(psiMethod) + ">>>>" + method.getSignature(true));
+                                    if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), method.getSignature(true))) {
 
                                         methodFound = true;
                                         FileEditorManager.getInstance(project).openFile(psiJavaFile.getVirtualFile(), true, true);
@@ -147,9 +150,20 @@ public class MethodListTree extends Tree {
             @Override
             public void notifyFileChange(String fileName) {
 
-                JSONFileLoader.setConfigurationFile(fileName);
-                JSONFileLoader.loadInitialFile();
-                loadMethods();
+                ProgressManager.getInstance().run(new Task.Backgroundable(project, resource.getString("Status.ImportFile")) {
+                    @Override
+                    public void run(@NotNull ProgressIndicator progressIndicator) {
+
+                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                            public void run() {
+                                JSONFileLoader.setConfigurationFile(fileName);
+                                JSONFileLoader.loadInitialFile();
+                                loadMethods();
+                            }
+                        });
+                    }
+                });
+
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
         });
@@ -159,8 +173,20 @@ public class MethodListTree extends Tree {
             @Override
             public void notifyFileChange(String fileName) {
 
-                JSONFileLoader.loadUpdatedFile(fileName);
-                loadMethods();
+                ProgressManager.getInstance().run(new Task.Backgroundable(project, resource.getString("Status.ImportFile")) {
+                    @Override
+                    public void run(@NotNull ProgressIndicator progressIndicator) {
+
+                        ApplicationManager.getApplication().runReadAction(new Runnable() {
+                            public void run() {
+                                JSONFileLoader.loadUpdatedFile(fileName);
+                                loadMethods();
+                            }
+                        });
+                    }
+                });
+
+                DaemonCodeAnalyzer.getInstance(project).restart();
             }
         });
 
@@ -200,8 +226,7 @@ public class MethodListTree extends Tree {
             @Override
             public void afterAction(ArrayList<MethodWrapper> methods) {
 
-                System.out.println("n=mi get "+methods.size());
-                for(MethodWrapper method: methods){
+                for (MethodWrapper method : methods) {
                     JSONFileLoader.addMethod(method);
                     addNode(method);
                 }
@@ -342,7 +367,7 @@ public class MethodListTree extends Tree {
         return null;
     }
 
-    private void addNode(MethodWrapper method){
+    private void addNode(MethodWrapper method) {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
         DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(method);
 
