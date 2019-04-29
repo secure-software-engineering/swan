@@ -15,7 +15,6 @@ import de.fraunhofer.iem.swan.assist.ui.dialog.SwanLauncherDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class LaunchSwanAction extends AnAction {
         InputStream input = null;
 
         try {
-            input = new FileInputStream(getClass().getClassLoader().getResource("").getPath()+"config.properties");
+            input = getClass().getClassLoader().getResourceAsStream("config.properties");
             config.load(input);
         } catch (IOException e) {
             e.printStackTrace();

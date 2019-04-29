@@ -101,7 +101,6 @@ public class JSONFileLoader {
                 if (method.getUpdateOperation().equals(Constants.METHOD_DELETED) || method.isTrainingMethod())
                     continue;
 
-                System.out.println(method.getSignature(true));
                 filteredList.add(method);
             }
             return filteredList;

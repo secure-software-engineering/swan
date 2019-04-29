@@ -13,6 +13,7 @@ import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Methods to find PSI methods using the PSI object or event.
@@ -97,7 +98,15 @@ public class PsiTraversal {
 
         PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);
 
-        return psiMethod.getReturnType().getCanonicalText() + " " +
+        String returnType ="";
+        if(psiMethod.getReturnType()!=null){
+            if(psiMethod.getReturnType() instanceof PsiPrimitiveType)
+                returnType = ((PsiPrimitiveType) psiMethod.getReturnType()).getName();
+            else
+                returnType = psiMethod.getReturnType().getCanonicalText();
+        }
+
+        return  returnType+ " " +
                 psiClass.getQualifiedName() + "." + psiMethod.getName() + " (" +
                 StringUtils.join(getParameters(psiMethod), ", ") + ")";
     }
