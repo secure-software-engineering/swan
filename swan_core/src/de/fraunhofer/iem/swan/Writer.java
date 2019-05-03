@@ -122,7 +122,6 @@ public class Writer {
 
         Map<Category, Integer> counters = new HashMap<Category, Integer>();
 
-
         File file = new File(outputFile.substring(0, outputFile.lastIndexOf(File.separator)));
         if (!file.exists())
             file.mkdir();
@@ -138,7 +137,7 @@ public class Writer {
         for (Method method : methods) {
 
             JSONObject obj = new JSONObject();
-            if (method.getCategoriesTrained().isEmpty())
+            if (method.getCategoriesClassified().isEmpty())
                 continue;
 
             obj.put(Constants.NAME, method.getClassName() + "." + method.getMethodName());
@@ -184,7 +183,7 @@ public class Writer {
             JSONArray types = new JSONArray();
             JSONArray cwes = new JSONArray();
 
-            for (Category category : method.getCategoriesTrained()) {
+            for (Category category : method.getCategoriesClassified()) {
 
                 if (category.isCwe())
                     cwes.add(category.toString());
