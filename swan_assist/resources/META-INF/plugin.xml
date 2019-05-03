@@ -53,8 +53,11 @@
             <action id="SWAN_Assist.LaunchSWANAction"
                     class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
                     icon="PluginIcons.REFRESH_SWAN"
-                    text="Refresh SWAN">
+                    text="Reload SWAN">
             </action>
+
+            <action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.SuggestAction" text="Suggest Methods"
+                    description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/>
 
             <separator/>
 
@@ -74,8 +77,8 @@
 
         </group>
 
-        <group id="EditorGroup" text="SWAN_Assist" popup="true" icon="PluginIcons.SWAN_ASSIST">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        <group id="EditorGroup" text="SWAN-Assist" popup="true" icon="PluginIcons.SWAN_ASSIST">
+            <add-to-group group-id="EditorPopupMenu" />
             <action id="SWAN_Assist.AddMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.AddMethodAction"
                     text="Add/Update Method" icon="PluginIcons.ADD_METHOD_ACTION">
             </action>
@@ -85,7 +88,7 @@
             </action>
 
             <action id="SWAN_Assist.DeleteMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.DeleteMethodAction"
-                    text="Delete" >
+                    text="Delete">
             </action>
 
             <action id="SWAN_Assist.MethodPropertiesAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodPropertiesAction"
@@ -117,6 +120,7 @@
             </action>
 
         </group>
+
 
     </actions>
 
