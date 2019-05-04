@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.data;
 
 import com.intellij.notification.Notification;
@@ -10,23 +17,41 @@ import de.fraunhofer.iem.swan.data.Method;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+/**
+ * Parses JSON file and returns methods.
+ */
 public class JSONFileParser {
 
     private String congFilePath;
 
+    /**
+     * Initializes parser with file path.
+     * @param path Path of configuration file
+     */
     public JSONFileParser(String path) {
         congFilePath = path;
     }
 
+    /**
+     * Returns file path for configuration file
+     * @return File path as a string.
+     */
     public String getCongFilePath() {
         return congFilePath;
     }
 
+    /**
+     * Set configuration file path
+     * @param congFilePath Configuration file path
+     */
     public void setCongFilePath(String congFilePath) {
         this.congFilePath = congFilePath;
     }
 
-
+    /**
+     * Parses file and returns method.
+     * @return HashMap of methods
+     */
     public HashMap<String, MethodWrapper> parseJSONFileMap() {
 
         HashMap<String, MethodWrapper> methods = new HashMap<String, MethodWrapper>();

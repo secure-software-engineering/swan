@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.ui.JBColor;
@@ -10,11 +17,8 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * Rendering options for a category show in the list.
- *
- * @author Oshando Johnson
+ * Renders how categories should be displayed in the list.
  */
-
 public class CategoryRenderer extends JLabel implements ListCellRenderer<Category> {
 
     @Override

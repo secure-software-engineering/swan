@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.filter;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
@@ -17,6 +24,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class FilterActionGroup extends ActionGroup {
 
+    /**
+     * Creates list of filters.
+     * @param anActionEvent source event
+     * @return An array of filters that can be applied to the list
+     */
     @NotNull
     @Override
     public AnAction[] getChildren(@Nullable AnActionEvent anActionEvent) {
@@ -38,6 +50,10 @@ public class FilterActionGroup extends ActionGroup {
         return true;
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

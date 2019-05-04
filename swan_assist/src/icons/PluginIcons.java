@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package icons;
 
 import com.intellij.openapi.util.IconLoader;
@@ -6,9 +13,7 @@ import javax.swing.*;
 
 /**
  * Icons for various buttons and toolbars.
- * @author Oshando Johnson
  */
-
 public interface PluginIcons {
 
     Icon SWAN_ASSIST = IconLoader.getIcon("/icons/swan_assist.png");

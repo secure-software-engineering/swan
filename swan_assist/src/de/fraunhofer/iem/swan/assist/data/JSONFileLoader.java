@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.data;
 
 import com.intellij.openapi.project.Project;
@@ -14,6 +21,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Loads JSON configuration file and manipulates data.
+ */
 public class JSONFileLoader {
 
     static private HashMap<String, MethodWrapper> methods;
@@ -24,13 +34,21 @@ public class JSONFileLoader {
     static private boolean reloadingSwan = false;
 
 
-    //Get configuration file location
+
+    /**
+     * Set configuration file location
+     * @param path Configuration file path.
+     */
     public static void setConfigurationFile(String path) {
 
         congFile = path;
     }
 
-    //Get configuration file location
+    /**
+     * Returns configuration file path or file name
+     * @param path Condition determines if the path or just the filename should be returned.
+     * @return Returns either the filename or file path.
+     */
     public static String getConfigurationFile(boolean path) {
 
         if (path)
@@ -39,20 +57,27 @@ public class JSONFileLoader {
             return congFile.substring(congFile.lastIndexOf("/") + 1);
     }
 
-    //Returns whether or not a configuration file was selected
+    /**
+     * Returns whether or not a configuration file was selected
+     */
     public static boolean isFileSelected() {
 
         return !getConfigurationFile(true).isEmpty();
     }
 
-    //Import configuration details from JSON file
+    /**
+     * Import configuration details from JSON file
+     */
     public static void loadInitialFile() {
 
         JSONFileParser fileParser = new JSONFileParser(congFile);
         methods = fileParser.parseJSONFileMap();
     }
 
-    //Compares new JSON file with original file and
+    /**
+     * Compares new JSON file with original file and updates list with merged results
+     * @param newFilePath File path of new configuration file
+     */
     public static void loadUpdatedFile(String newFilePath) {
 
         JSONFileComparator fileComparator = new JSONFileComparator(congFile, newFilePath);
@@ -60,19 +85,29 @@ public class JSONFileLoader {
         setConfigurationFile(newFilePath);
     }
 
-    //Return list of methods as an array
+    /**
+     * Return list of methods as an array list
+     */
     public static ArrayList<MethodWrapper> getMethods() {
 
         return new ArrayList<>(methods.values());
     }
 
-    //Return list of methods as an array
+    /**
+     * Return list of methods as an HashMap
+     */
     public static HashMap<String, MethodWrapper> getAllMethods() {
 
         return methods;
     }
 
-    //Return list of methods as an array using categories
+    /**
+     * Returns all methods based on the filters and or current file that's selected.
+     * @param filters Filters that should be applied to the methods returned.
+     * @param currentFile Current active file opened in the IDE's editor.
+     * @param project Active project in IDE.
+     * @return Returns an array list of the methods that meet the specified criteria.
+     */
     public static ArrayList<MethodWrapper> getMethods(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
 
         if (filters.size() > 0) {
@@ -107,6 +142,12 @@ public class JSONFileLoader {
         }
     }
 
+    /**
+     * Filters method methods using the filters provided.
+     * @param filters Filters that should be applied to the methods returned.
+     * @param currentFile Current active file opened in the IDE's editor.
+     * @return Methods matching the filtering criteria.
+     */
     private static ArrayList<MethodWrapper> filterList(ArrayList<Pair<String, String>> filters, String currentFile) {
         ArrayList<MethodWrapper> filteredList = new ArrayList<>();
 
@@ -132,8 +173,10 @@ public class JSONFileLoader {
         return filteredList;
     }
 
-
-    //Return list of categories as a set
+    /**
+     * Return list of categories.
+     * @return Set of categories used by methods.
+     */
     public static Set<Category> getCategories() {
 
         Set<Category> categorySet = new HashSet<>();
@@ -148,7 +191,11 @@ public class JSONFileLoader {
         return categorySet;
     }
 
-    //Add new method to the list
+    /**
+     * Add new method to the list
+     * @param method Method to be added to the list
+     * @return Returns whether the method is new or existing.
+     */
     public static int addMethod(MethodWrapper method) {
 
         if (methods.containsKey(method.getSignature(true))) {
@@ -160,25 +207,45 @@ public class JSONFileLoader {
         }
     }
 
-    //Check if method exists in list
+    /**
+     * Checks if method exists in list
+     * @param methodSignature Method signature of method being searched for.
+     * @return Returns whether or not the method exists.
+     */
     public static boolean methodExists(String methodSignature) {
 
         return methods.containsKey(methodSignature);
     }
 
     //Returns method for the specified signature
+
+    /**
+     * Returns an instance of the method
+     * @param methodSignature Method Signature of requested method.
+     * @return Instance of the method
+     */
     public static MethodWrapper getMethod(String methodSignature) {
 
         return methods.get(methodSignature);
     }
 
     //Remove method from list
+
+    /**
+     * Remove method from list
+     * @param method Method to be removed
+     */
     public static void removeMethod(MethodWrapper method) {
 
         methods.remove(method.getSignature(true));
     }
 
-    //Check if method is in project
+    /**
+     * Check if method is used in project
+     * @param classname Method's classname
+     * @param project Instance of project
+     * @return Returns whether or not the method is used in the project
+     */
     private static boolean inProject(String classname, Project project) {
 
         JavaPsiFacade facade = JavaPsiFacade.getInstance(project);
@@ -188,10 +255,18 @@ public class JSONFileLoader {
         return psiClass != null;
     }
 
+    /**
+     * Gives the status of SWAN
+     * @return Returns whether or not SWAN is reloading
+     */
     public static boolean isReloading() {
         return reloadingSwan;
     }
 
+    /**
+     * Set the status of SWAN
+     * @param reloadingSwan Status of SWAN - reloading or not
+     */
     public static void setReloading(boolean reloadingSwan) {
         JSONFileLoader.reloadingSwan = reloadingSwan;
     }

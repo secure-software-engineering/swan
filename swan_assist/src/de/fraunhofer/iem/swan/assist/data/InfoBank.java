@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.data;
 
 import de.fraunhofer.iem.swan.data.CWE;
@@ -9,6 +16,9 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Retrieves
+ */
 public class InfoBank {
 
     ArrayList<CWE> methods;

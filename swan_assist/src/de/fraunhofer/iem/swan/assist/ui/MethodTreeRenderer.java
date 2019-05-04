@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.ui.JBColor;
@@ -14,9 +21,7 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * Rendering options for a method in the list.
- *
- * @author Oshando Johnson
+ * Renders how methods should be displayed in the list.
  */
 
 public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {

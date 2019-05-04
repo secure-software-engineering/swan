@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui.markers;
 
 import com.intellij.codeHighlighting.Pass;
@@ -24,8 +31,6 @@ import java.util.List;
 /**
  * Queries the list of methods that have been annotated and creates
  * gutter icons for them.
- *
- * @author Oshando Johnson on 12.12.18
  */
 public class ErrorLineMarker implements LineMarkerProvider {
     @Nullable

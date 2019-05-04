@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -12,11 +19,14 @@ import java.io.IOException;
 
 /**
  * Action to export updated configuration file.
- *
- * @author Oshando Johnson
  */
 
 public class ExportAction extends AnAction {
+
+    /**
+     * Obtains list of methods and creates new JSON file in the location specified by the user.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -49,6 +59,10 @@ public class ExportAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.data;
 
 import de.fraunhofer.iem.swan.assist.util.Constants;
@@ -8,20 +15,26 @@ import java.util.stream.Collectors;
 
 /**
  * Compares initial and new configuration files and outlines differences.
- * @author Oshando Johnson
  */
-
-
 public class JSONFileComparator {
 
     private String originalFilePath;
     private String newFilePath;
 
+    /**
+     * Initialises comparator object.
+     * @param originalPath Path of initial configuration file.
+     * @param newPath Path of the updated configuration file.
+     */
     JSONFileComparator(String originalPath, String newPath) {
         originalFilePath = originalPath;
         newFilePath = newPath;
     }
 
+    /**
+     * Compares the JSON files and returns a combined list with the classification of each method.
+     * @return HashMap of the methods from both configuration files.
+     */
     public HashMap<String, MethodWrapper> compareJSONFile() {
 
         JSONFileParser fileParser = new JSONFileParser(originalFilePath);

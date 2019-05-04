@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.filter;
 
 
@@ -12,25 +19,34 @@ import icons.PluginIcons;
 import javafx.util.Pair;
 
 /**
- * Action to filter list of methods.
- *
- * @author Oshando Johnson
+ * Plugin action to filter method list.
  */
 
 public class FilterAction extends AnAction {
 
     private Pair<String, String> filterPair;
 
+    /**
+     * Initializes action.
+     */
     public FilterAction() {
 
     }
 
+    /**
+     * Initializes action using the key-value pair.
+     * @param filter name and type of the filter
+     */
     public FilterAction(Pair<String, String> filter) {
         super(filter.getValue());
 
         filterPair = filter;
     }
 
+    /**
+     * Listener for filter actions.
+     * @param e source event
+     */
     @Override
     public void actionPerformed(AnActionEvent e) {
 
@@ -41,7 +57,10 @@ public class FilterAction extends AnAction {
         filterNotifier.updateFilter(filterPair);
     }
 
-
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

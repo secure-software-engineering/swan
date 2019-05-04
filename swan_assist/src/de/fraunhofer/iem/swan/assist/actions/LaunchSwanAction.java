@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -23,14 +30,14 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * Action to start load dialog for configuring SWAN before running.
- *
- * @author Oshando Johnson
+ * Action opens dialog for user to set parameters for running SWAN. After which thread is created to run SWAN.
  */
-
-
 public class LaunchSwanAction extends AnAction {
 
+    /**
+     * Obtains application parameters from user, exports updated JSON file and starts thread to run SWAN.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -93,6 +100,10 @@ public class LaunchSwanAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

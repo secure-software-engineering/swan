@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
@@ -23,8 +30,6 @@ import java.util.ResourceBundle;
 
 /**
  * Provides results after SWAN finishes executing.
- *
- * @author Oshando Johnson
  */
 
 public class SwanResultsDialog extends DialogWrapper {
@@ -37,6 +42,11 @@ public class SwanResultsDialog extends DialogWrapper {
     private JTextArea logText;
     private JScrollPane scrollPane;
 
+    /**
+     * Initializes dialog with provided arguments
+     * @param project Active project in IDE
+     * @param values HashMap of output file, logs and other values for the SWAN run.
+     */
     public SwanResultsDialog(Project project, HashMap<String, String> values) {
 
         super(project);

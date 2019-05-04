@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -10,20 +17,26 @@ import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 import java.util.HashMap;
 
 /**
- * Action to add update the selected method.
- *
- * @author Oshando Johnson
+ * Action to add or update a selected method.
  */
 
 public class UpdateMethodAction extends AnAction {
 
     private MethodWrapper method;
 
+    /**
+     * Initialize the action with the method.
+     * @param method Method that should be updated or added.
+     */
     public UpdateMethodAction(MethodWrapper method) {
         super("Update");
         this.method = method;
     }
 
+    /**
+     * Determines if the method is new or not and then creates dialog with method details.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -42,6 +55,10 @@ public class UpdateMethodAction extends AnAction {
         dialog.show();
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

@@ -1,5 +1,11 @@
-package de.fraunhofer.iem.swan.assist.actions;
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
 
+package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -18,13 +24,14 @@ import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 
 /**
- * Action to open help page or resources.
- *
- * @author Oshando Johnson
+ * Action to open help page and/or plugin resources.
  */
-
 public class HelpAction extends AnAction {
 
+    /**
+     * Opens help page in user's default browser
+     * @param e source event
+     */
     @Override
     public void actionPerformed(AnActionEvent e) {
 

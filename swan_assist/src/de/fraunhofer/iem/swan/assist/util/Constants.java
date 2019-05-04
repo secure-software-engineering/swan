@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.util;
 
 import javafx.util.Pair;
@@ -6,8 +13,6 @@ import java.util.ResourceBundle;
 
 /**
  * Constants for various classes.
- *
- * @author Oshando Johnson
  */
 public class Constants {
 

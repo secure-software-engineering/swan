@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
@@ -23,11 +30,7 @@ import java.util.*;
 
 /**
  * Dialog that shows current configuration for method and allows updates.
- *
- * @author Oshando Johnson
  */
-
-
 public class MethodDialog extends DialogWrapper {
 
     private JPanel contentPane;
@@ -49,6 +52,13 @@ public class MethodDialog extends DialogWrapper {
     private HashMap<String, Set<Category>> originalMethods;
     private HashMap<String, MethodWrapper> methods;
 
+    /**
+     * Initializes dialog to show method properties
+     * @param methods Method data that will be shown in dialog
+     * @param signature Method Signature
+     * @param project Active project
+     * @param categories List of all possible method categories
+     */
     public MethodDialog(HashMap<String, MethodWrapper> methods, String signature, Project project, Set<Category> categories) {
 
         super(project);
@@ -191,6 +201,11 @@ public class MethodDialog extends DialogWrapper {
         });*/
     }
 
+    /**
+     * Loads method details in the dialog
+     * @param signature Method signature
+     * @param categories List of all possible method categories
+     */
     private void updateFields(String signature, Set<Category> categories) {
 
         //Clone categories for method
@@ -234,6 +249,11 @@ public class MethodDialog extends DialogWrapper {
 
     }
 
+    /**
+     * Deep copy of method categories
+     * @param categories Method categories
+     * @return New Set of method categories
+     */
     private Set<Category> copyCategories(Set<Category> categories) {
 
         Set<Category> copy = new HashSet<>();
@@ -282,6 +302,11 @@ public class MethodDialog extends DialogWrapper {
         }
     }
 
+    /**
+     * Shows error message
+     * @param message Message
+     * @param location Where on screen the message should be shown
+     */
     private void showErrorMessage(String message, JComponent location) {
         JBPopupFactory.getInstance()
                 .createHtmlTextBalloonBuilder(resourceBundle.getString(message), MessageType.ERROR, null)
@@ -295,8 +320,12 @@ public class MethodDialog extends DialogWrapper {
         return contentPane;
     }
 
-
-    //Add categories to the List model
+    /**
+     * Add categories to the List model
+     * @param categories Method categories
+     * @param showCwe Condition to show CWEs or not
+     * @return return List Model for List
+     */
     private DefaultListModel<Category> addCategoriesToModel(Set<Category> categories, boolean showCwe) {
 
         DefaultListModel<Category> model = new DefaultListModel<Category>();

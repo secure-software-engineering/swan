@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.filter;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
@@ -14,20 +21,32 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 /**
- * Groups actions that process categories.
- *
- * @author Oshando Johnson
+ * Manages group of categories that is used for filtering.
  */
-
 public class CategoryActionGroup extends ActionGroup {
 
+    /**
+     * Creates new category action group.
+     */
     public CategoryActionGroup() {
     }
 
+    /**
+     * Creates new category action group.
+     *
+     * @param name  the name of the category
+     * @param popup whether or not the group is a popup menu
+     */
     public CategoryActionGroup(String name, boolean popup) {
         super(name, popup);
     }
 
+    /**
+     * Obtains all supported types and CWEs and builds filter groups.
+     *
+     * @param anActionEvent event that triggered the action
+     * @return An array of categories that should be added to the menu.
+     */
     @NotNull
     @Override
     public AnAction[] getChildren(@Nullable AnActionEvent anActionEvent) {

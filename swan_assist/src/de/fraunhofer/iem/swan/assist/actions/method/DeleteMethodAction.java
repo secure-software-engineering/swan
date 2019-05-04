@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -18,26 +25,34 @@ import javax.swing.*;
 import java.util.ResourceBundle;
 
 /**
- * Action to delete a method.
- *
- * @author Oshando Johnson
+ * Action to delete a method from the list.
  */
-
 
 public class DeleteMethodAction extends AnAction {
 
     private MethodWrapper deleteMethod;
 
+    /**
+     * Initializes the action
+     */
     public DeleteMethodAction() {
         super("Delete");
         deleteMethod = null;
     }
 
+    /**
+     * Intitializes the action
+     * @param method that will be deleted
+     */
     public DeleteMethodAction(MethodWrapper method) {
         super("Delete");
         deleteMethod = method;
     }
 
+    /**
+     * Obtain method, if it was not passed, and then send notification about the method that should be deleted.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -64,6 +79,10 @@ public class DeleteMethodAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

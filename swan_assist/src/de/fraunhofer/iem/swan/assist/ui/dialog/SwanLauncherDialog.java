@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
@@ -24,9 +31,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Dialog to lauch configuration window for SWAN before running the application.
- *
- * @author Oshando Johnson
+ * Dialog to launch configuration window for SWAN before running the application.
  */
 
 public class SwanLauncherDialog extends DialogWrapper {
@@ -49,6 +54,11 @@ public class SwanLauncherDialog extends DialogWrapper {
     private ResourceBundle resourceBundle;
     private Properties config;
 
+    /**
+     * Initializes dialog to launch SWAN.
+     * @param project Active project in the editor
+     * @param modal Modal setting for dialog
+     */
     public SwanLauncherDialog(Project project, boolean modal) {
 
         super(project, modal);
@@ -195,7 +205,12 @@ public class SwanLauncherDialog extends DialogWrapper {
         return contentPane;
     }
 
-    //Accept users file or folder selection and send return value
+    /**
+     * Accept users file or folder selection and send return value
+     * @param selectionMethod Selection method that should be used by File chooser
+     * @param path Default path
+     * @return Returns default path or path selected by the user.
+     */
     private String fileSelector(int selectionMethod, String path) {
 
         JFileChooser fileChooser = new JFileChooser();
@@ -213,6 +228,10 @@ public class SwanLauncherDialog extends DialogWrapper {
             return path;
     }
 
+    /**
+     * Returns parameters
+     * @return HashMap of parameters used to run SWAN,
+     */
     public HashMap<String, String> getParameters() {
         return parameters;
     }

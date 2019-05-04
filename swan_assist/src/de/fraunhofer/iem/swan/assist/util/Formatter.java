@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.util;
 
 import org.apache.commons.lang3.StringUtils;
@@ -7,7 +14,6 @@ import java.util.List;
 
 /**
  * Functions to format data.
- * @author Oshando Johnson
  */
 
 public class Formatter {

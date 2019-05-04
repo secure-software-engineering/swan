@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.openapi.project.Project;
@@ -12,26 +19,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
 /**
- * Creates process to run SWAN.
- *
- * @author Oshando Johnson
+ * Creates process to run SWAN on a separate thread.
  */
-
-
-//Executes SWAN with updated configuration file on a separate thread.
 public class SwanProcessBuilder extends Thread {
 
     private static HashMap<String, String> parameters;
     private Project project;
 
+    /**
+     * Initializes builder.
+     * @param project Project on which the plugin is being used with
+     * @param param Parameters that will be used as program arguments
+     */
     SwanProcessBuilder(Project project, HashMap<String, String> param) {
 
         this.project = project;
         parameters = param;
     }
 
+    /**
+     * Sets up process to run the application and also send notification to subscribers when finished.
+     */
     public void run() {
         super.run();
 
@@ -88,6 +97,11 @@ public class SwanProcessBuilder extends Thread {
         publisher.launchSwan(results);
     }
 
+    /**
+     * Get the timestamp in a specified format.
+     * @param dateFormat Date format that should be used.
+     * @return Formatted date
+     */
     private String getCurrentTimestamp(String dateFormat) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);

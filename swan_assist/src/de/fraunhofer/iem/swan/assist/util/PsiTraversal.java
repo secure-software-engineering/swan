@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.util;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -17,11 +24,14 @@ import java.util.Objects;
 
 /**
  * Methods to find PSI methods using the PSI object or event.
- *
- * @author Oshando Johnson on 12.12.18
  */
 public class PsiTraversal {
 
+    /**
+     * Returns list of parameters for the PSI method
+     * @param psiMethod PSI method
+     * @return List of parameters
+     */
     private static List<String> getParameters(PsiMethod psiMethod) {
 
         List<String> parameters = new ArrayList<String>();
@@ -43,6 +53,11 @@ public class PsiTraversal {
         return parameters;
     }
 
+    /**
+     * Determines if action originated from the editor
+     * @param anActionEvent Source event
+     * @return Returns whether or not action originated in the editor
+     */
     public static boolean isFromEditor(AnActionEvent anActionEvent) {
 
         if (anActionEvent.getInputEvent().getSource() instanceof ActionMenuItem) {
@@ -54,6 +69,12 @@ public class PsiTraversal {
         return false;
     }
 
+    /**
+     * Returns the method at a particular offset in the editor
+     * @param anActionEvent Source event
+     * @param createIfNotFound Option to create the method if it wasn't found
+     * @return Returns MethodWrapper object for method
+     */
     public static MethodWrapper getMethodAtOffset(AnActionEvent anActionEvent, boolean createIfNotFound) {
 
         final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
@@ -93,7 +114,11 @@ public class PsiTraversal {
         return null;
     }
 
-
+    /**
+     * Returns method signature for a PSI method
+     * @param psiMethod PSI Method
+     * @return Method signature
+     */
     public static String getMethodSignature(PsiMethod psiMethod) {
 
         PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);

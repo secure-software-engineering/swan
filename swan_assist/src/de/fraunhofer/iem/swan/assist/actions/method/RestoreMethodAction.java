@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -16,23 +23,31 @@ import java.util.ResourceBundle;
 
 /**
  * Action to restore a method that was deleted after rerunning SWAN.
- *
- * @author Oshando Johnson
  */
 
 public class RestoreMethodAction extends AnAction {
 
     private MethodWrapper method;
 
-
+    /**
+     * Initializes action
+     */
     public RestoreMethodAction() {
     }
 
+    /**
+     * Initializes action using method.
+     * @param method Method that will be restored.
+     */
     public RestoreMethodAction(MethodWrapper method) {
         super("Restore");
         this.method = method;
     }
 
+    /**
+     * Obtains method, if not provided, and then sends notification to restore method.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -57,6 +72,10 @@ public class RestoreMethodAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

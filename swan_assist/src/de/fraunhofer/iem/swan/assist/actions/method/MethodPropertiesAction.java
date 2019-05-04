@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -16,9 +23,7 @@ import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import java.util.ResourceBundle;
 
 /**
- * Action to show additional properties for a method.
- *
- * @author Oshando Johnson
+ * Action opens a dialog and shows additional method properties.
  */
 
 public class MethodPropertiesAction extends AnAction {
@@ -29,11 +34,19 @@ public class MethodPropertiesAction extends AnAction {
         this.method = null;
     }
 
+    /**
+     * Initializes action using the method.
+     * @param method The properties of this method will be loaded.
+     */
     public MethodPropertiesAction(MethodWrapper method) {
         super("Properties");
         this.method = method;
     }
 
+    /**
+     * Obtains method, if not provided, and then launches dialog that shows properties.
+     * @param anActionEvent source event
+     */
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
@@ -55,6 +68,10 @@ public class MethodPropertiesAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

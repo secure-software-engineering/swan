@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package icons;
 
 import com.intellij.openapi.util.IconLoader;
@@ -8,10 +15,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @author Oshando Johnson on 24.10.18
+ * Determines icon for method
  */
 public class IconUtils {
 
+    /**
+     * Returns icon based on identifier
+     * @param id Method Type
+     * @return Icon for method
+     */
     public static Icon getIcon(String id) {
 
         switch (id) {
@@ -32,6 +44,11 @@ public class IconUtils {
         }
     }
 
+    /**
+     * Returns icon for method based on its categories
+     * @param categoryList List of categories
+     * @return Method's icon
+     */
     public static Icon getNodeIcon(ArrayList<String> categoryList) {
 
         ArrayList<String> iconList = new ArrayList<>();

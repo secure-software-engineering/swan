@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -17,10 +24,7 @@ import java.awt.*;
 
 /**
  * Tool Window implementation for the Plugin.
- *
- * @author Oshando Johnson
  */
-
 public class SummaryToolWindow implements ToolWindowFactory {
 
     @Override

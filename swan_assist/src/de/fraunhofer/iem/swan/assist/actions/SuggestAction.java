@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -14,9 +21,13 @@ import java.util.HashMap;
  */
 public class SuggestAction extends AnAction {
 
+    /**
+     * Obtains suggested methods from SWAN and loads them in a dialog for user classification.
+     * @param e source event
+     */
     @Override
     public void actionPerformed(AnActionEvent e) {
-        // TODO: insert action logic here
+        // TODO: implement logic to obtain methods from SWAN
 
         HashMap<String,MethodWrapper> suggestedMethods = new HashMap<>();
 
@@ -33,6 +44,10 @@ public class SuggestAction extends AnAction {
         dialog.show();
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

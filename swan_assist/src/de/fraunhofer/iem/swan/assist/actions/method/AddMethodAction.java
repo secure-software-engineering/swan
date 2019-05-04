@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.actions.method;
 
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -15,13 +22,16 @@ import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import java.util.ResourceBundle;
 
 /**
- * Action to add a new method by selecting a class\category.
- *
- * @author Oshando Johnson
+ * Action to add a new method from the editor.
  */
 
 public class AddMethodAction extends AnAction {
 
+    /**
+     * After add action is selected, the method properties are obtained using PSI and the new method is created.
+     * A dialog appears where the user can select the types and categories. Notifiation is then created for new method.
+     * @param e
+     */
     @Override
     public void actionPerformed(AnActionEvent e) {
 
@@ -41,6 +51,10 @@ public class AddMethodAction extends AnAction {
         }
     }
 
+    /**
+     * Controls whether the action is enabled or disabled
+     * @param event source  event
+     */
     @Override
     public void update(AnActionEvent event) {
 

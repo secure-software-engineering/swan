@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
@@ -50,7 +57,7 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 
 /**
- * @author Oshando Johnson on 14.12.18
+ * Manages content and interactions of method list tree
  */
 public class MethodListTree extends Tree {
 
@@ -61,7 +68,10 @@ public class MethodListTree extends Tree {
     private Project project;
     private ResourceBundle resource;
 
-
+    /**
+     * Initialises method list tree
+     * @param project Active project in IDE
+     */
     public MethodListTree(Project project) {
 
         this.project = project;
@@ -367,6 +377,10 @@ public class MethodListTree extends Tree {
         return null;
     }
 
+    /**
+     * Add new node to tree
+     * @param method New method to be added
+     */
     private void addNode(MethodWrapper method) {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
         DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(method);
@@ -376,7 +390,6 @@ public class MethodListTree extends Tree {
 
     /**
      * Extracts categories from method and adds them to the DefaultMutableTreeNode node.
-     *
      * @param method the method that is being added to the tree
      * @return the node object with the categories as children
      */
@@ -386,7 +399,6 @@ public class MethodListTree extends Tree {
 
     /**
      * Extracts categories from method and adds them to the DefaultMutableTreeNode node.
-     *
      * @param node   method to be added to tree
      * @param method the method that is being added to the tree
      * @return the node object with the categories as children

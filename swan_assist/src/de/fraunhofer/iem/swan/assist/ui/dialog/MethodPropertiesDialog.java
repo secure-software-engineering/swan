@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
+ *
+ * Contributors:
+ * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
+ ******************************************************************************/
+
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
 import com.intellij.openapi.project.Project;
@@ -14,14 +21,17 @@ import java.util.ResourceBundle;
 
 /**
  * Shows additional properties of a method.
- *
- * @author Oshando Johnson
  */
 
 public class MethodPropertiesDialog extends DialogWrapper {
     private JPanel contentPane;
     private JBTable table;
 
+    /**
+     * Initializes the dialog using the given arguments
+     * @param project Active project in IDE
+     * @param method Method for which properties should be loaded
+     */
     public MethodPropertiesDialog(Project project, MethodWrapper method) {
 
         super(project);
