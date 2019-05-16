@@ -21,7 +21,6 @@ import de.fraunhofer.iem.swan.data.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.AbstractSootFeature;
 import soot.SootMethod;
-import soot.jimple.infoflow.source.data.SourceSinkDefinition;
 
 /**
  * Loads methods from file or jars.
@@ -257,8 +256,14 @@ public class Parser {
           }
         }
 
-        SourceSinkDefinition ssd = new SourceSinkDefinition(m);
-        Method method = (Method) ssd.getMethod();
+
+		// Note by Ingo Budde:
+		// I modified the following lines to get rid of soot-infoflow dependency.
+		// It seems that the SourceSinkDefinition is not used here.
+
+		// SourceSinkDefinition ssd = new SourceSinkDefinition(m);
+		// Method method = (Method) ssd.getMethod();
+		Method method = m;
 
         // parse the correct types
         if (jsonObj.get(Constants.TYPE) != null) {
