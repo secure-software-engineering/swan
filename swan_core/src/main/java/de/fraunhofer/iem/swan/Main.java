@@ -61,6 +61,8 @@ public class Main {
 			// System.out.println("Done.");
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -89,8 +91,9 @@ public class Main {
 	 * @param outputDir       Directory where the output should be written.
 	 * @throws IOException In case an error occurs during the preparation or
 	 *                     execution of the analysis.
+	 * @throws InterruptedException 
 	 */
-	public void run(String sourceDir, String outputDir) throws IOException {
+	public void run(String sourceDir, String outputDir) throws IOException, InterruptedException {
 		run(sourceDir, null, null, outputDir);
 	}
 
@@ -108,8 +111,9 @@ public class Main {
 	 * @param outputDir       Directory where the output should be written.
 	 * @throws IOException In case an error occurs during the preparation or
 	 *                     execution of the analysis.
+	 * @throws InterruptedException 
 	 */
-	public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir) throws IOException {
+	public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir) throws IOException, InterruptedException {
 
 		// This helper object keeps track of created temporary directories and files to
 		// to be deleted before exiting the
@@ -138,7 +142,7 @@ public class Main {
 	}
 
 	private void internalRun(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
-			throws IOException {
+			throws IOException, InterruptedException {
 
 		int iterations = 0;
 		if (runOAT)
@@ -236,7 +240,7 @@ public class Main {
 
 	}
 
-	private double runClassifier(HashSet<Category> categories, boolean cweMode) throws IOException {
+	private double runClassifier(HashSet<Category> categories, boolean cweMode) throws IOException, InterruptedException {
 		parser.resetMethods();
 		loader.resetMethods();
 		// System.out.println("***** Starting classification for " +
