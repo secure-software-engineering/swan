@@ -1,15 +1,21 @@
 package de.fraunhofer.iem.swan;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Random;
+import java.util.Set;
 
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
@@ -53,7 +59,7 @@ public class Learner {
 
     public double classify(Set<Method> trainingSet, Set<Method> testSet,
                            Map<Category, Set<IFeature>> features, Set<Category> categories,
-                           String outputFile, boolean cweMode) throws IOException {
+                           String outputFile, boolean cweMode) throws IOException, InterruptedException {
 
 
         double fmeasure = 0;
@@ -317,6 +323,9 @@ public class Learner {
         writer.writeResultsToFiles(outputFile, methods, categories);
         //writer.writeResultsToFilesQWEL(outputFile, methods, categories);
 
+        if (Thread.currentThread().isInterrupted()) {
+        	throw new InterruptedException();
+        }
         Runtime.getRuntime().gc();
         analysisTime = System.currentTimeMillis() - startAnalysisTime;
         System.out.println("Time to classify " + categories.toString() + ": " + analysisTime + " ms");
