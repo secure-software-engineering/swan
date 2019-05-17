@@ -80,9 +80,11 @@ public class Util {
     Set<String> classes = new HashSet<String>();
     File folder = new File(dir);
     File[] listOfFiles = folder.listFiles();
-    for (int i = 0; i < listOfFiles.length; i++) {
-      if (listOfFiles[i].getName().endsWith(".jar"))
-        classes.addAll(getAllClassesFromJar(listOfFiles[i].getAbsolutePath()));
+    if (listOfFiles != null) {
+      for (int i = 0; i < listOfFiles.length; i++) {
+        if (listOfFiles[i].getName().endsWith(".jar"))
+          classes.addAll(getAllClassesFromJar(listOfFiles[i].getAbsolutePath()));
+      }
     }
     return classes;
   }
@@ -110,10 +112,14 @@ public class Util {
     File folder = new File(dir);
     File[] listOfFiles = folder.listFiles();
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < listOfFiles.length; i++) {
-      if (listOfFiles[i].getName().endsWith(".jar") || listOfFiles[i].getName().endsWith(".apk")) {
-        if (sb.length() > 0) sb.append(System.getProperty("path.separator"));
-        sb.append(listOfFiles[i].getAbsolutePath().toString());
+    if (listOfFiles != null) {
+      for (int i = 0; i < listOfFiles.length; i++) {
+        if (listOfFiles[i].getName().endsWith(".jar") || listOfFiles[i].getName().endsWith(".apk")) {
+          if (sb.length() > 0) {
+        	sb.append(System.getProperty("path.separator"));
+          }
+          sb.append(listOfFiles[i].getAbsolutePath().toString());
+        }
       }
     }
     return sb.toString();
