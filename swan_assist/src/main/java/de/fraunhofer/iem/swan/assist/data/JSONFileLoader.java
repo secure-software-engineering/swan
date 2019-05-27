@@ -33,8 +33,6 @@ public class JSONFileLoader {
     static public final int RESTORED_METHOD = 2;
     static private boolean reloadingSwan = false;
 
-
-
     /**
      * Set configuration file location
      * @param path Configuration file path.

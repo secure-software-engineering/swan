@@ -74,7 +74,7 @@ public class LaunchSwanAction extends AnAction {
             HashMap<String, MethodWrapper> methods = JSONFileLoader.getAllMethods();
 
             //Load training methods
-            String trainingFile = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + config.getProperty("train_config_file");
+            String trainingFile = Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("train_config_file"))).getPath() ;
             JSONFileParser fileParser = new JSONFileParser(trainingFile);
             HashMap<String, MethodWrapper> trainingMethods = fileParser.parseJSONFileMap();
 

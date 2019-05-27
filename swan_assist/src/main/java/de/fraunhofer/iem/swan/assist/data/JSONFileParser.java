@@ -55,7 +55,7 @@ public class JSONFileParser {
     public HashMap<String, MethodWrapper> parseJSONFileMap() {
 
         HashMap<String, MethodWrapper> methods = new HashMap<String, MethodWrapper>();
-        Parser parser = new Parser(null);
+        Parser parser = new Parser(congFilePath);
         ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
         try {

@@ -57,7 +57,7 @@ public class SwanResultsDialog extends DialogWrapper {
         InputStream input = null;
 
         try {
-            input = new FileInputStream(getClass().getClassLoader().getResource("").getPath() + "config.properties");
+            input = getClass().getClassLoader().getResourceAsStream("config.properties");
             config.load(input);
         } catch (IOException e) {
             e.printStackTrace();

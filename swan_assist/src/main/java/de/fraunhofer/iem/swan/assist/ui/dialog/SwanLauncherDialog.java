@@ -7,6 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
+import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
@@ -25,6 +26,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Properties;
@@ -69,7 +72,7 @@ public class SwanLauncherDialog extends DialogWrapper {
         InputStream input = null;
 
         try {
-            input = new FileInputStream(getClass().getClassLoader().getResource("").getPath()+"config.properties");
+            input = getClass().getClassLoader().getResourceAsStream("config.properties");
             config.load(input);
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,9 +88,16 @@ public class SwanLauncherDialog extends DialogWrapper {
 
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
-        defaultTrainDirectory = Objects.requireNonNull(getClass().getClassLoader().getResource("")).getPath() + config.getProperty("train_dir_name");
+        Path path = Paths.get(PathManager.getJarPathForClass(SwanLauncherDialog.class));
+        String jarDirectory = path.getParent().toString();
 
-        String jarDir = Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("swan_jar_name"))).getPath();
+        //  trainingTextbox.setText(jarDirectory);
+
+        defaultTrainDirectory = jarDirectory+File.separator+"training_libs";//Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("train_dir_name"))).getPath();
+
+        //trainingTextbox.setText(com.intellij.openapi.application.PathManager.getJarPathForClass(SwanLauncherDialog.class));
+
+        String jarDir = jarDirectory+File.separator+"swan_core.jar";// config.getProperty("swan_jar_name");//Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("swan_jar_name"))).getPath();
 
         if (PlatformUtil.isWindows() || System.getProperty("os.name").toLowerCase().contains("win"))
             swanJarDirecory = jarDir.substring(1);
@@ -193,6 +203,7 @@ public class SwanLauncherDialog extends DialogWrapper {
                 parameters.put(Constants.SWAN_SOURCE_DIR, sourceDirTextbox.getText());
                 parameters.put(Constants.SWAN_TRAIN_DIR, trainingTextbox.getText());
                 parameters.put(Constants.SWAN_OUTPUT_DIR, outputDir.getText());
+                parameters.put(Constants.SWAN_OUTPUT_LOG, config.getProperty("log_suffix"));
                 parameters.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator  + config.getProperty("output_json_suffix"));
                 super.doOKAction();
             }

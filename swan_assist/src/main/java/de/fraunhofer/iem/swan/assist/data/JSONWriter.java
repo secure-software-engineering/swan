@@ -35,6 +35,6 @@ public class JSONWriter {
         }
 
         Writer writer = new Writer();
-        writer.printResultsJSON(methodSet, outputPath);
+        writer.outputJSONFile(methodSet, outputPath);
     }
 }
