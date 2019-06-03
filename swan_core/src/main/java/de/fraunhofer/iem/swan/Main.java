@@ -82,16 +82,15 @@ public class Main {
 
 	private static final boolean runOAT = false; // run one at a time analysis
 
-
 	/**
 	 * This method executes the analysis and can also be called from outside by
 	 * clients. It uses the builtin training data.
 	 * 
-	 * @param sourceDir       This is the actual user library being evaluated.
-	 * @param outputDir       Directory where the output should be written.
-	 * @throws IOException In case an error occurs during the preparation or
-	 *                     execution of the analysis.
-	 * @throws InterruptedException 
+	 * @param sourceDir This is the actual user library being evaluated.
+	 * @param outputDir Directory where the output should be written.
+	 * @throws IOException          In case an error occurs during the preparation
+	 *                              or execution of the analysis.
+	 * @throws InterruptedException
 	 */
 	public void run(String sourceDir, String outputDir) throws IOException, InterruptedException {
 		run(sourceDir, null, null, outputDir);
@@ -103,17 +102,18 @@ public class Main {
 	 * 
 	 * @param sourceDir       This is the actual user library being evaluated.
 	 * @param trainSourceCode Directory with all JAR Files or source code of the
-	 *                        Train Data to learn from. If this is <null>, then the
-	 *                        builtin traindata is used.
+	 *                        Train Data to learn from. If this is
+	 *                        <code>null</code>, then the builtin traindata is used.
 	 * @param trainJson       Path to the train data file (JSON), which includes
-	 *                        method signatures.If this is <null>, then the builtin
-	 *                        json file is used.
+	 *                        method signatures.If this is <code>null</code>, then
+	 *                        the builtin json file is used.
 	 * @param outputDir       Directory where the output should be written.
-	 * @throws IOException In case an error occurs during the preparation or
-	 *                     execution of the analysis.
-	 * @throws InterruptedException 
+	 * @throws IOException          In case an error occurs during the preparation
+	 *                              or execution of the analysis.
+	 * @throws InterruptedException
 	 */
-	public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir) throws IOException, InterruptedException {
+	public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
+			throws IOException, InterruptedException {
 
 		// This helper object keeps track of created temporary directories and files to
 		// to be deleted before exiting the
@@ -240,7 +240,8 @@ public class Main {
 
 	}
 
-	private double runClassifier(HashSet<Category> categories, boolean cweMode) throws IOException, InterruptedException {
+	private double runClassifier(HashSet<Category> categories, boolean cweMode)
+			throws IOException, InterruptedException {
 		parser.resetMethods();
 		loader.resetMethods();
 		// System.out.println("***** Starting classification for " +

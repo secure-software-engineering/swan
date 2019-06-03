@@ -69,8 +69,6 @@ public class FeatureHandler {
    * 
    * @param disable indicates the id of the feature instance that should be excluded. 
    * Used for the One-at-a-time analysis. 0 is for all features enables. 
-   * 
-   * @return The generated feature set.
    */
   public void initializeFeatures(int disable) {
     featuresMap = new HashMap<Category, Set<IFeature>>();

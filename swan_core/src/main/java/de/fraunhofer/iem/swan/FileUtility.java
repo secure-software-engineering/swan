@@ -109,10 +109,10 @@ public class FileUtility {
 	 * this application's jar file. If it is not directly accessable from the
 	 * filesystem, it is copied to a temporary location.
 	 * 
-	 * @param resourceLocation     The location of the file within the jar file.
-	 * @param destinationDirectory The directory to place the file in, in case it
-	 *                             needs to be copied. If <code>null</code>, a new
-	 *                             temporary file is created and used.
+	 * @param resourceLocation The location of the file within the jar file.
+	 * @param destinationFile  The destination to place the file, in case it needs
+	 *                         to be copied. If <code>null</code>, a new temporary
+	 *                         file is created and used.
 	 * @return The File describing the location of the provided file.
 	 * @throws IOException When an error occurs while copying the file.
 	 */
