@@ -21,41 +21,30 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			boolean correctNumberOfArguments = args.length >= 2 && args.length <= 4;
-			if (!correctNumberOfArguments) {
+			if (args.length != 4) {
 				System.err.println("");
 				System.err.println(
-						"Usage: java de.fraunhofer.iem.swan.Main <source-dir> [<train-sourcecode>] [<train-json>] <output-dir>\n");
+						"Usage: java de.fraunhofer.iem.swan.Main <source-dir> <train-sourcecode> <train-json> <output-dir>\n");
 				System.err.println("<source-dir>:\tDirectory with all JAR files or source code of the Test Data.");
 				System.err.println("\t\tThis is the actual user library being evaluated.\n");
 				System.err.println(
-						"<train-sourcecode>: Directory with all JAR Files or source code of the Train Data to learn from.");
+						"<train-sourcecode>: Directory with all JAR Files or source code of the Train Data to learn from");
 				System.err.println(
-						"\t\tThis is an optional parameter. If it is not specified, the builtin traindata is used.\n");
+						"\t\tNote: This can be set to \"internal\" without quotes, to use the internal train sourcecode that is bundled in this jar.\n");
 				System.err
 						.println("<train-json>: Path to the train data file (JSON), which includes method signatures.");
 				System.err.println(
-						"\t\tThis is an optional parameter. If it is not specified, the builtin json file is used.\n");
+						"\t\tNote: This can be set to \"internal\" (without quotes), to use the internal train data file that is bundled in this jar.\n");
 				System.err.println("<output-dir>:\tDirectory where the output should be written.\n");
 				return;
 			}
 
 			// Get configuration options from command line arguments.
 			String sourceDir = args[0];
-			String trainSourceCode = null;
-			String trainJson = null;
-			String outputDir = args[args.length - 1];
-
-			// Train Sourcecode (extract from JAR, if not specified)
-			if (args.length >= 3) {
-				trainSourceCode = args[1];
-			}
-
-			// Train JSON (extract from JAR, if not specified)
-			if (args.length == 4) {
-				trainJson = args[2];
-			}
-
+			String trainSourceCode = args[1].equals("internal") ? null : args[1];
+			String trainJson = args[2].equals("internal") ? null : args[2];
+			String outputDir = args[3];
+			
 			Main main = new Main();
 			main.run(sourceDir, trainSourceCode, trainJson, outputDir);
 			// System.out.println("Done.");
