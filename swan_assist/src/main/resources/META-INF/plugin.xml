@@ -43,10 +43,10 @@
             <action id="SWAN_Assist.LaunchSWANAction"
                     class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
                     icon="PluginIcons.REFRESH_SWAN"
-                    text="Reload SWAN">
+                    text="Load or Reload SWAN">
             </action>
 
-            <action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.SuggestAction" text="Suggest Methods"
+            <action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.suggest.SuggestAction" text="Suggest Methods"
                     description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/>
 
             <separator/>
