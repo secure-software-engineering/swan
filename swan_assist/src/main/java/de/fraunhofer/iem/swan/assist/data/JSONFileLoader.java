@@ -73,14 +73,20 @@ public class JSONFileLoader {
     }
 
     /**
-     * Compares new JSON file with original file and updates list with merged results
+     * Compares new JSON file with original file and updates list with merged results. Loads new file
+     * is a JSON file was not selected.
      * @param newFilePath File path of new configuration file
      */
     public static void loadUpdatedFile(String newFilePath) {
 
-        JSONFileComparator fileComparator = new JSONFileComparator(congFile, newFilePath);
-        methods = fileComparator.compareJSONFile();
-        setConfigurationFile(newFilePath);
+        if(isFileSelected()){
+            JSONFileComparator fileComparator = new JSONFileComparator(congFile, newFilePath);
+            methods = fileComparator.compareJSONFile();
+            setConfigurationFile(newFilePath);
+        }else{
+            setConfigurationFile(newFilePath);
+            loadInitialFile();
+        }
     }
 
     /**
@@ -215,8 +221,6 @@ public class JSONFileLoader {
         return methods.containsKey(methodSignature);
     }
 
-    //Returns method for the specified signature
-
     /**
      * Returns an instance of the method
      * @param methodSignature Method Signature of requested method.
@@ -226,8 +230,6 @@ public class JSONFileLoader {
 
         return methods.get(methodSignature);
     }
-
-    //Remove method from list
 
     /**
      * Remove method from list
