@@ -37,6 +37,10 @@ public class Parser {
     protected Set<Method> methods = new HashSet<Method>();
     private Set<String> cwes = new HashSet<String>();
 
+    public Parser() {
+        this.trainingCp = null;
+    }
+
     public Parser(String trainingCp) {
         this.trainingCp = trainingCp;
     }
@@ -122,15 +126,15 @@ public class Parser {
             parse(file);
     }
 
-    private void parse(String fileName) {
+    public void parse(String fileName) {
         try {
-            parse(new FileReader(fileName));
+            parseStream(new FileReader(fileName));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void parse(InputStreamReader streamReader) {
+    public void parseStream(InputStreamReader streamReader) {
 
         JSONParser parser = new JSONParser();
         Object obj = null;
@@ -149,12 +153,6 @@ public class Parser {
         // create all cwes
         // if (cwesList != null) loadMethodsFromJsonArray(cwesList, "cwes");
         if (methodsList != null) loadMethodsFromJsonArray(methodsList, "methods");
-    }
-
-
-    public Set<Method> parseFile(String fileName) {
-        parse(fileName);
-        return methods;
     }
 
     @SuppressWarnings("unchecked")
