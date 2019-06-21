@@ -9,11 +9,11 @@ package de.fraunhofer.iem.swan.assist.actions;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.swan.Main;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -46,51 +46,36 @@ public class SwanProcessBuilder extends Thread {
 
         ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
 
-        String currentTimestamp = getCurrentTimestamp("yyyy-MM-dd-HHmmss");
+        String currentTimestamp = getCurrentTimestamp();
 
         File outputFolder = new File(parameters.get(Constants.SWAN_OUTPUT_DIR));
-        outputFolder.mkdirs();
+
+        if(!outputFolder.exists())
+            outputFolder.mkdir();
 
         File logFile = new File(outputFolder, currentTimestamp + parameters.get(Constants.SWAN_OUTPUT_LOG));
         try {
             logFile.createNewFile();
             parameters.replace(Constants.SWAN_OUTPUT_LOG, logFile.getPath());
 
+            FileOutputStream fileOutputStream = new FileOutputStream(logFile.getAbsolutePath());
+
+            System.setOut(new PrintStream(fileOutputStream));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar",
-                parameters.get(Constants.SWAN_JAR_DIR),
-                parameters.get(Constants.SWAN_SOURCE_DIR),
+        Main.main(new String[]{parameters.get(Constants.SWAN_SOURCE_DIR),
                 parameters.get(Constants.SWAN_TRAIN_DIR),
                 parameters.get(Constants.SWAN_CONFIG_FILE),
-                parameters.get(Constants.SWAN_OUTPUT_DIR));
+                parameters.get(Constants.SWAN_OUTPUT_DIR)});
 
-        processBuilder.redirectErrorStream(true);
-        processBuilder.redirectOutput(ProcessBuilder.Redirect.appendTo(logFile));
-
-        String message;
-
-        try {
-            Process swanProcess = processBuilder.start();
-            int result = swanProcess.waitFor();
-
-            if (result == 0)
-                message = resource.getString("Messages.Notification.Success");
-            else
-                message = resource.getString("Messages.Notification.Failure");
-
-        } catch (IOException | InterruptedException e) {
-
-            e.printStackTrace();
-            message = resource.getString("Messages.Notification.Failure");
-        }
+        System.setOut(System.out);
 
         HashMap<String, String> results = new HashMap<String, String>();
         results.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_FILE));
         results.put(Constants.SWAN_OUTPUT_LOG, parameters.get(Constants.SWAN_OUTPUT_LOG));
-        results.put(Constants.SWAN_OUTPUT_MESSAGE, message);
 
         MessageBus messageBus = project.getMessageBus();
         SwanNotifier publisher = messageBus.syncPublisher(SwanNotifier.END_SWAN_PROCESS_TOPIC);
@@ -99,12 +84,11 @@ public class SwanProcessBuilder extends Thread {
 
     /**
      * Get the timestamp in a specified format.
-     * @param dateFormat Date format that should be used.
      * @return Formatted date
      */
-    private String getCurrentTimestamp(String dateFormat) {
+    private String getCurrentTimestamp() {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HHmmss");
         return LocalDateTime.now().format(formatter);
     }
 }

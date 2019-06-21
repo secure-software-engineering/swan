@@ -14,8 +14,10 @@ import de.fraunhofer.iem.swan.Parser;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * Parses JSON file and returns methods.
@@ -30,6 +32,13 @@ public class JSONFileParser {
      */
     public JSONFileParser(String path) {
         congFilePath = path;
+    }
+
+    /**
+     * Default constructor
+     */
+    public JSONFileParser() {
+
     }
 
     /**
@@ -54,12 +63,30 @@ public class JSONFileParser {
      */
     public HashMap<String, MethodWrapper> parseJSONFileMap() {
 
-        HashMap<String, MethodWrapper> methods = new HashMap<String, MethodWrapper>();
         Parser parser = new Parser(congFilePath);
+        parser.parse(congFilePath);
+
+       return parseMethods(parser.methods());
+    }
+
+    /**
+     * Parses file and returns method.
+     * @return HashMap of methods
+     */
+    public HashMap<String, MethodWrapper> parseJSONFileStream(InputStreamReader streamReader) {
+
+        Parser parser = new Parser();
+        parser.parseStream(streamReader);
+        return parseMethods(parser.methods());
+    }
+
+    private HashMap<String, MethodWrapper> parseMethods(Set<Method> methodsSet){
+
         ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");
+        HashMap<String, MethodWrapper> methods = new HashMap<String, MethodWrapper>();
 
         try {
-            for (Method method : parser.parseFile(congFilePath)) {
+            for (Method method :methodsSet ) {
 
                 MethodWrapper methodWrapper = new MethodWrapper(method);
 

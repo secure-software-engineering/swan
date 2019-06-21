@@ -40,11 +40,13 @@ import de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup;
 import de.fraunhofer.iem.swan.assist.comm.*;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
+import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 import de.fraunhofer.iem.swan.assist.ui.dialog.SwanResultsDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.data.Method;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +72,7 @@ public class MethodListTree extends Tree {
 
     /**
      * Initialises method list tree
+     *
      * @param project Active project in IDE
      */
     public MethodListTree(Project project) {
@@ -98,55 +101,62 @@ public class MethodListTree extends Tree {
                 if ((SwingUtilities.isRightMouseButton(e) || (e.isControlDown()) && !isEmpty())) {
 
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
-                    Object object = node.getUserObject();
 
-                    if (object instanceof MethodWrapper) {
+                    if (node != null) {
 
-                        MethodWrapper method = (MethodWrapper) object;
+                        Object object = node.getUserObject();
 
-                        RESTORE_METHOD = method.getUpdateOperation().equals(Constants.METHOD_DELETED);
+                        if (object instanceof MethodWrapper) {
 
-                        ActionPopupMenu actionPopupMenu = ActionManager.getInstance().createActionPopupMenu("Method", new MethodActionGroup(method));
-                        actionPopupMenu.getComponent().show(e.getComponent(), e.getX(), e.getY());
+                            MethodWrapper method = (MethodWrapper) object;
+
+                            RESTORE_METHOD = method.getUpdateOperation().equals(Constants.METHOD_DELETED);
+
+                            ActionPopupMenu actionPopupMenu = ActionManager.getInstance().createActionPopupMenu("Method", new MethodActionGroup(method));
+                            actionPopupMenu.getComponent().show(e.getComponent(), e.getX(), e.getY());
+                        }
                     }
 
                 } else if (e.getClickCount() == 2) {
 
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
-                    Object object = node.getUserObject();
+                    if (node != null) {
+                        Object object = node.getUserObject();
 
-                    if (object instanceof MethodWrapper) {
+                        if (object instanceof MethodWrapper) {
 
-                        MethodWrapper method = (MethodWrapper) object;
+                            MethodWrapper method = (MethodWrapper) object;
 
-                        //Get PSI element location
-                        PsiFile[] files = FilenameIndex.getFilesByName(project, method.getFileName(), GlobalSearchScope.allScope(project));
+                            //Get PSI element location
+                            PsiFile[] files = FilenameIndex.getFilesByName(project, method.getFileName(), GlobalSearchScope.allScope(project));
 
-                        boolean methodFound = false;
+                            boolean methodFound = false;
 
-                        for (PsiFile file : files) {
+                            for (PsiFile file : files) {
 
-                            PsiJavaFile psiJavaFile = (PsiJavaFile) file;
+                                PsiJavaFile psiJavaFile = (PsiJavaFile) file;
 
-                            for (PsiClass psiClass : psiJavaFile.getClasses()) {
-                                for (PsiMethod psiMethod : psiClass.getMethods()) {
+                                for (PsiClass psiClass : psiJavaFile.getClasses()) {
+                                    for (PsiMethod psiMethod : psiClass.getMethods()) {
 
-                                    if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), method.getSignature(true))) {
+                                        if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), method.getSignature(true))) {
 
-                                        methodFound = true;
-                                        FileEditorManager.getInstance(project).openFile(psiJavaFile.getVirtualFile(), true, true);
-                                        FileEditorManager.getInstance(project).getSelectedTextEditor().getCaretModel().moveToOffset(psiMethod.getTextOffset());
+                                            methodFound = true;
+                                            FileEditorManager.getInstance(project).openFile(psiJavaFile.getVirtualFile(), true, true);
+                                            FileEditorManager.getInstance(project).getSelectedTextEditor().getCaretModel().moveToOffset(psiMethod.getTextOffset());
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        if (!methodFound) {
-                            JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.ERROR, null)
-                                    .createBalloon()
-                                    .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
+                            if (!methodFound) {
+                                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.ERROR, null)
+                                        .createBalloon()
+                                        .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
+                            }
                         }
                     }
+
                 }
             }
         });
@@ -279,12 +289,11 @@ public class MethodListTree extends Tree {
                 JSONFileLoader.setReloading(false);
                 NotificationType notificationType = NotificationType.INFORMATION;
 
-                if (!values.get(Constants.SWAN_OUTPUT_MESSAGE).equals(resource.getString("Messages.Notification.Success"))) {
-                    notificationType = NotificationType.ERROR;
-                }
+                String message = "<html>"
+                        + resource.getString("Messages.Notification.Completed")
+                        + "<br><a href='logs'>View Logs</a> or <a href='load'>Load Changes</a></html>";
 
-                String message = "<html>" + values.get(Constants.SWAN_OUTPUT_MESSAGE) + "<br><a href='logs'>View Logs</a> or <a href='load'>Load Changes</a></html>";
-                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Completed", message, notificationType, new NotificationListener() {
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Notification.Title.Completed"), message, notificationType, new NotificationListener() {
                     @Override
                     public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
 
@@ -298,6 +307,52 @@ public class MethodListTree extends Tree {
                             } else if (hyperlinkEvent.getDescription().equals("load")) {
                                 JSONFileLoader.loadUpdatedFile(values.get(Constants.SWAN_OUTPUT_FILE));
                                 loadMethods();
+                            }
+                        }
+                    }
+                }));
+            }
+        });
+
+
+        //Update Tool Window to notify user that SWAN is running
+        bus.connect().subscribe(SuggestNotifier.START_SUGGEST_TOPIC, new SuggestNotifier() {
+            @Override
+            public void setStartSuggestTopic() {
+                JSONFileLoader.setReloading(true);
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.SuggestStarted"), resource.getString("Messages.Notification.SuggestStarted"), NotificationType.INFORMATION));
+
+            }
+
+            @Override
+            public void setEndSuggestTopic(Set<Method> values) {
+                JSONFileLoader.setReloading(false);
+
+                NotificationType notificationType = NotificationType.INFORMATION;
+
+                String message = "<html>" + resource.getString("Messages.Notification.Suggest.Successful") + "<br><a href='methods'>View methods</a></html>";
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Completed", message, notificationType, new NotificationListener() {
+                    @Override
+                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
+
+                        if (hyperlinkEvent.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+
+                            if (hyperlinkEvent.getDescription().equals("methods")) {
+
+                                HashMap<String,MethodWrapper> suggestedMethods = new HashMap<>();
+
+                                for(Method m: values){
+
+                                   MethodWrapper methodWrapper = new MethodWrapper(m);
+                                   methodWrapper.setStatus(MethodWrapper.MethodStatus.SUGGESTED);
+
+                                   suggestedMethods.put(methodWrapper.getSignature(true), methodWrapper);
+                                }
+
+                                MethodDialog dialog  = new MethodDialog(suggestedMethods, (String)suggestedMethods.keySet().toArray()[0], project, JSONFileLoader.getCategories());
+                                dialog.show();
+
+
                             }
                         }
                     }
@@ -379,6 +434,7 @@ public class MethodListTree extends Tree {
 
     /**
      * Add new node to tree
+     *
      * @param method New method to be added
      */
     private void addNode(MethodWrapper method) {
@@ -390,6 +446,7 @@ public class MethodListTree extends Tree {
 
     /**
      * Extracts categories from method and adds them to the DefaultMutableTreeNode node.
+     *
      * @param method the method that is being added to the tree
      * @return the node object with the categories as children
      */
@@ -399,6 +456,7 @@ public class MethodListTree extends Tree {
 
     /**
      * Extracts categories from method and adds them to the DefaultMutableTreeNode node.
+     *
      * @param node   method to be added to tree
      * @param method the method that is being added to the tree
      * @return the node object with the categories as children

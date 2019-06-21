@@ -20,20 +20,20 @@ import de.fraunhofer.iem.swan.assist.data.JSONWriter;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.dialog.SwanLauncherDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import de.fraunhofer.iem.swan.data.Method;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Properties;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * Action opens dialog for user to set parameters for running SWAN. After which thread is created to run SWAN.
  */
 public class LaunchSwanAction extends AnAction {
 
+    protected Set<Method> methods = new HashSet<Method>();
     /**
      * Obtains application parameters from user, exports updated JSON file and starts thread to run SWAN.
      * @param anActionEvent source event
@@ -70,27 +70,35 @@ public class LaunchSwanAction extends AnAction {
 
             HashMap<String, String> swanParameters = dialog.getParameters();
 
-            //Merge current list with training methods
-            HashMap<String, MethodWrapper> methods = JSONFileLoader.getAllMethods();
+            if(JSONFileLoader.isFileSelected()) {
+                //Merge current list with training methods
+                HashMap<String, MethodWrapper> methods = JSONFileLoader.getAllMethods();
 
-            //Load training methods
-            String trainingFile = Objects.requireNonNull(getClass().getClassLoader().getResource(config.getProperty("train_config_file"))).getPath() ;
-            JSONFileParser fileParser = new JSONFileParser(trainingFile);
-            HashMap<String, MethodWrapper> trainingMethods = fileParser.parseJSONFileMap();
+                InputStream stream = getClass().getClassLoader().getResourceAsStream(config.getProperty("train_config_file"));
+                HashMap<String, MethodWrapper> trainingMethods = new HashMap<>();
 
-            HashMap<String, MethodWrapper> mergedMethods = new HashMap<>(methods);
-            mergedMethods.putAll(trainingMethods);
+                if (stream != null) {
 
-            //Export changes to configuration files
-            JSONWriter exportFile = new JSONWriter();
-            String newConfigFile = swanParameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("input_json_suffix");
-            try {
-                exportFile.writeToJsonFile(new ArrayList<>(mergedMethods.values()), newConfigFile);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    JSONFileParser fileParser = new JSONFileParser();
+                    trainingMethods = fileParser.parseJSONFileStream(new InputStreamReader(stream));
+                }
+
+                HashMap<String, MethodWrapper> mergedMethods = new HashMap<>(methods);
+                mergedMethods.putAll(trainingMethods);
+
+                //Export changes to configuration files
+                JSONWriter exportFile = new JSONWriter();
+                String newConfigFile = swanParameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("input_json_suffix");
+                try {
+                    exportFile.writeToJsonFile(new ArrayList<>(mergedMethods.values()), newConfigFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                swanParameters.put(Constants.SWAN_CONFIG_FILE, newConfigFile);
             }
-
-            swanParameters.put(Constants.SWAN_CONFIG_FILE, newConfigFile);
+            else{
+                swanParameters.put(Constants.SWAN_CONFIG_FILE, config.getProperty("swan_default_param_value"));
+            }
 
             SwanProcessBuilder processBuilder = new SwanProcessBuilder(project, dialog.getParameters());
             processBuilder.start();
@@ -108,7 +116,7 @@ public class LaunchSwanAction extends AnAction {
     public void update(AnActionEvent event) {
 
         //Disable/Enable action button
-        if (JSONFileLoader.isReloading() || !JSONFileLoader.isFileSelected())
+        if (JSONFileLoader.isReloading())
             event.getPresentation().setEnabled(false);
         else
             event.getPresentation().setEnabled(true);
