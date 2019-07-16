@@ -10,7 +10,7 @@ import de.fraunhofer.iem.swan.data.Method;
  *
  */
 
-public class MethodHasReturnTypeFeature implements IFeature {
+public class MethodHasReturnTypeFeature extends WeightedFeature implements IFeature {
 
   public MethodHasReturnTypeFeature() {}
 

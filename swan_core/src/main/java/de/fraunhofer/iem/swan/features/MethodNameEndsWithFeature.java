@@ -9,7 +9,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Siegfried Rasthofer
  *
  */
-public class MethodNameEndsWithFeature implements IFeature {
+public class MethodNameEndsWithFeature extends WeightedFeature implements IFeature {
 
   private final String endsWith;
 

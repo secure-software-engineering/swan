@@ -10,7 +10,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Steven Arzt
  *
  */
-public class VoidOnMethodFeature implements IFeature {
+public class VoidOnMethodFeature extends WeightedFeature implements IFeature {
 
   public VoidOnMethodFeature() {}
 

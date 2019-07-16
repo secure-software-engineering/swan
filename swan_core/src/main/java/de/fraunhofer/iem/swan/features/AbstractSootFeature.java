@@ -14,7 +14,7 @@ import soot.SootClass;
 import soot.SootMethod;
 import soot.options.Options;
 
-public abstract class AbstractSootFeature implements IFeature {
+public abstract class AbstractSootFeature extends WeightedFeature implements IFeature {
 
   private static boolean SOOT_INITIALIZED = false;
 

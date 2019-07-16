@@ -9,7 +9,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Lisa Nguyen Quang Do
  *
  */
-public class IsImplicitMethod implements IFeature {
+public class IsImplicitMethod extends WeightedFeature implements IFeature {
 
   @Override
   public Type applies(Method method) {
@@ -21,4 +21,13 @@ public class IsImplicitMethod implements IFeature {
     return "<Implicit method>";
   }
 
+  @Override
+  public void setWeight(int weight) {
+    super.setWeight(weight);
+  }
+
+  @Override
+  public int getWeight() {
+    return super.getWeight();
+  }
 }

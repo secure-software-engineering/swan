@@ -8,7 +8,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * 
  * @author Siegfried Rasthofer
  */
-public class BaseNameOfClassPackageName implements IFeature {
+public class BaseNameOfClassPackageName extends WeightedFeature implements IFeature {
   private final String baseNameOfClassPackageName;
 
   public BaseNameOfClassPackageName(String baseNameOfClassPackageName) {

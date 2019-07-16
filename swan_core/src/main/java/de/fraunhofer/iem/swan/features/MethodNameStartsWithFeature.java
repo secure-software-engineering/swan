@@ -9,7 +9,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Steven Arzt
  *
  */
-public class MethodNameStartsWithFeature implements IFeature {
+public class MethodNameStartsWithFeature extends WeightedFeature implements IFeature {
 
   private final String startsWith;
 
