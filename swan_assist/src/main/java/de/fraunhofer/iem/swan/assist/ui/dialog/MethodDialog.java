@@ -14,7 +14,6 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
-import de.fraunhofer.iem.swan.assist.comm.SuggestedNotifier;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.CategoryRenderer;
 import de.fraunhofer.iem.swan.data.Category;
@@ -283,8 +282,8 @@ public class MethodDialog extends DialogWrapper {
                 if (categorySelected) {
                     MessageBus messageBus = project.getMessageBus();
 
-                    SuggestedNotifier publisher = messageBus.syncPublisher(SuggestedNotifier.METHOD_SUGGESTED_TOPIC);
-                    publisher.afterAction(new ArrayList<>(methods.values()));
+                    MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
+                    publisher.afterSuggestAction(new ArrayList<>(methods.values()));
                     super.doOKAction();
                 }
             } else if (method.getCategories().size() == 0) {
@@ -294,8 +293,8 @@ public class MethodDialog extends DialogWrapper {
                 //Notify Summary Tool window that new method was added
                 MessageBus messageBus = project.getMessageBus();
 
-                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
-                publisher.afterAction(method);
+                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
+                publisher.addNewExistingMethod(method);
 
                 super.doOKAction();
             }

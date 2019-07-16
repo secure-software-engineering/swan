@@ -69,6 +69,7 @@ public class MethodListTree extends Tree {
     private String currentFile;
     public static ArrayList<Pair<String, String>> TREE_FILTERS;
     public static boolean RESTORE_METHOD;
+    public static Set<String> suggestedMethodsList;
     private Project project;
     private ResourceBundle resource;
 
@@ -95,6 +96,9 @@ public class MethodListTree extends Tree {
         TREE_FILTERS = new ArrayList<>();
         RESTORE_METHOD = false;
         currentFile = "";
+
+
+        suggestedMethodsList = new HashSet<>();
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -241,12 +245,26 @@ public class MethodListTree extends Tree {
             }
 
             @Override
-            public void afterAction(ArrayList<MethodWrapper> methods) {
+            public void afterSuggestAction(ArrayList<MethodWrapper> methods) {
+
+                HashMap<String, MethodWrapper> suggestedMethods = new HashMap<>();
 
                 for (MethodWrapper method : methods) {
                     JSONFileLoader.addMethod(method);
                     addNode(method);
+                    suggestedMethods.put(method.getSignature(true), method);
                 }
+
+                TrainingFileManager trainingFileManager = new TrainingFileManager(project);
+
+                if(trainingFileManager.exportNew(suggestedMethods, PropertiesComponent.getInstance(project).getValue(Constants.SWAN_OUTPUT_DIR))){
+
+                    PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_FILE_SUGGESTED,trainingFileManager.getTrainingFile());
+
+                    NotificationType notificationType = NotificationType.INFORMATION;
+                    Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.Suggest.NewTrainingFile"), PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_FILE_SUGGESTED), notificationType));
+                }
+
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
 
