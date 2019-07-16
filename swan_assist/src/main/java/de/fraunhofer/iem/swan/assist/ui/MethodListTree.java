@@ -8,6 +8,7 @@
 package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
@@ -40,6 +41,7 @@ import de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup;
 import de.fraunhofer.iem.swan.assist.comm.*;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
+import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 import de.fraunhofer.iem.swan.assist.ui.dialog.SwanResultsDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
@@ -166,9 +168,9 @@ public class MethodListTree extends Tree {
          */
 
         //Connect to project bus and subscribe Load File action
-        bus.connect().subscribe(FileSelectedNotifier.INITIAL_FILE_NOTIFIER_TOPIC, new FileSelectedNotifier() {
+        bus.connect().subscribe(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC, new ConfigurationFileNotifier() {
             @Override
-            public void notifyFileChange(String fileName) {
+            public void loadInitialFile(String fileName) {
 
                 ProgressManager.getInstance().run(new Task.Backgroundable(project, resource.getString("Status.ImportFile")) {
                     @Override
@@ -186,12 +188,9 @@ public class MethodListTree extends Tree {
 
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
-        });
 
-        //Connect to project bus and obtain updated configuration file path
-        bus.connect().subscribe(FileSelectedNotifier.UPDATED_FILE_NOTIFIER_TOPIC, new FileSelectedNotifier() {
             @Override
-            public void notifyFileChange(String fileName) {
+            public void loadUpdatedFile(String fileName) {
 
                 ProgressManager.getInstance().run(new Task.Backgroundable(project, resource.getString("Status.ImportFile")) {
                     @Override
@@ -211,10 +210,10 @@ public class MethodListTree extends Tree {
         });
 
         //Connect to project's bus and obtain method that was updated or added
-        bus.connect().subscribe(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC, new MethodNotifier() {
+        bus.connect().subscribe(MethodNotifier.ADD_UPDATE_DELETE_METHOD, new MethodNotifier() {
 
             @Override
-            public void afterAction(MethodWrapper newMethod) {
+            public void addNewExistingMethod(MethodWrapper newMethod) {
 
                 switch (JSONFileLoader.addMethod(newMethod)) {
 
@@ -240,9 +239,7 @@ public class MethodListTree extends Tree {
 
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
-        });
 
-        bus.connect().subscribe(SuggestedNotifier.METHOD_SUGGESTED_TOPIC, new SuggestedNotifier() {
             @Override
             public void afterAction(ArrayList<MethodWrapper> methods) {
 
@@ -252,12 +249,9 @@ public class MethodListTree extends Tree {
                 }
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
-        });
 
-        //Connect to project bus and obtain method that was deleted
-        bus.connect().subscribe(MethodNotifier.METHOD_REMOVED_TOPIC, new MethodNotifier() {
             @Override
-            public void afterAction(MethodWrapper newMethod) {
+            public void removeMethod(MethodWrapper newMethod) {
 
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) getLastSelectedPathComponent();
 
@@ -268,6 +262,11 @@ public class MethodListTree extends Tree {
                 treeModel.removeNodeFromParent(node);
                 JSONFileLoader.removeMethod(newMethod);
                 DaemonCodeAnalyzer.getInstance(project).restart();
+            }
+
+            @Override
+            public void restoreMethod(MethodWrapper method) {
+
             }
         });
 
@@ -305,8 +304,9 @@ public class MethodListTree extends Tree {
                                 resultsDialog.show();
 
                             } else if (hyperlinkEvent.getDescription().equals("load")) {
-                                JSONFileLoader.loadUpdatedFile(values.get(Constants.SWAN_OUTPUT_FILE));
-                                loadMethods();
+
+                                ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
+                                fileNotifier.loadUpdatedFile(values.get(Constants.SWAN_OUTPUT_FILE));
                             }
                         }
                     }
@@ -315,44 +315,42 @@ public class MethodListTree extends Tree {
         });
 
 
-        //Update Tool Window to notify user that SWAN is running
-        bus.connect().subscribe(SuggestNotifier.START_SUGGEST_TOPIC, new SuggestNotifier() {
+        //Notify user that Suggest method process started or that the methods were generated
+        bus.connect().subscribe(SuggestNotifier.SUGGEST_METHOD_TOPIC, new SuggestNotifier() {
+
             @Override
-            public void setStartSuggestTopic() {
+            public void startSuggestMethod() {
                 JSONFileLoader.setReloading(true);
                 Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.SuggestStarted"), resource.getString("Messages.Notification.SuggestStarted"), NotificationType.INFORMATION));
 
             }
 
             @Override
-            public void setEndSuggestTopic(Set<Method> values) {
+            public void endSuggestMethod(Set<MethodWrapper> values) {
                 JSONFileLoader.setReloading(false);
+
+                for (MethodWrapper method : values)
+                    suggestedMethodsList.add(method.getSignature(true));
 
                 NotificationType notificationType = NotificationType.INFORMATION;
 
-                String message = "<html>" + resource.getString("Messages.Notification.Suggest.Successful") + "<br><a href='methods'>View methods</a></html>";
-                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Completed", message, notificationType, new NotificationListener() {
+                String message = "<html>" + resource.getString("Messages.Notification.Suggest.Completed") + "</html>";
+                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.Suggest.Completed"), message, notificationType, new NotificationListener() {
                     @Override
                     public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
 
                         if (hyperlinkEvent.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 
-                            if (hyperlinkEvent.getDescription().equals("methods")) {
+                            if (hyperlinkEvent.getDescription().equals(resource.getString("Messages.Notification.Suggest.Link"))) {
 
-                                HashMap<String,MethodWrapper> suggestedMethods = new HashMap<>();
+                                HashMap<String, MethodWrapper> suggestedMethods = new HashMap<>();
 
-                                for(Method m: values){
-
-                                   MethodWrapper methodWrapper = new MethodWrapper(m);
-                                   methodWrapper.setStatus(MethodWrapper.MethodStatus.SUGGESTED);
-
-                                   suggestedMethods.put(methodWrapper.getSignature(true), methodWrapper);
+                                for (MethodWrapper method : values) {
+                                    suggestedMethods.put(method.getSignature(true), method);
                                 }
 
-                                MethodDialog dialog  = new MethodDialog(suggestedMethods, (String)suggestedMethods.keySet().toArray()[0], project, JSONFileLoader.getCategories());
+                                MethodDialog dialog = new MethodDialog(suggestedMethods, (String) suggestedMethods.keySet().toArray()[0], project, JSONFileLoader.getCategories());
                                 dialog.show();
-
-
                             }
                         }
                     }

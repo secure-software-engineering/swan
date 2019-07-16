@@ -7,6 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -54,6 +55,7 @@ public class SwanLauncherDialog extends DialogWrapper {
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
+    private Project project;
 
     /**
      * Initializes dialog to launch SWAN.
@@ -64,6 +66,7 @@ public class SwanLauncherDialog extends DialogWrapper {
     public SwanLauncherDialog(Project project, boolean modal) {
 
         super(project, modal);
+        this.project  = project;
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
         setTitle(resourceBundle.getString("Launcher.Title"));
 
@@ -186,6 +189,7 @@ public class SwanLauncherDialog extends DialogWrapper {
     private void setParameters(){
         parameters.put(Constants.SWAN_SOURCE_DIR, sourceDirTextbox.getText());
         parameters.put(Constants.SWAN_OUTPUT_DIR, outputDir.getText());
+        PropertiesComponent.getInstance(project).setValue(Constants.SWAN_OUTPUT_DIR,outputDir.getText());
         parameters.put(Constants.SWAN_OUTPUT_LOG, config.getProperty("log_suffix"));
         parameters.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("output_json_suffix"));
         super.doOKAction();

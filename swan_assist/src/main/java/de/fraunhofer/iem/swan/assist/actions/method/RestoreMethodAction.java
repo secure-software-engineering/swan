@@ -66,8 +66,8 @@ public class RestoreMethodAction extends AnAction {
                 //Notify Summary Tool window that new method was restored
                 method.setUpdateOperation(null);
                 MessageBus messageBus = project.getMessageBus();
-                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_UPDATED_ADDED_TOPIC);
-                publisher.afterAction(method);
+                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
+                publisher.restoreMethod(method);
             }
         }
     }

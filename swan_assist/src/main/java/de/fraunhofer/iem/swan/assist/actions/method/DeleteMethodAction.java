@@ -68,8 +68,8 @@ public class DeleteMethodAction extends AnAction {
             if (confirmation == JOptionPane.YES_OPTION) {
 
                 MessageBus messageBus = project.getMessageBus();
-                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.METHOD_REMOVED_TOPIC);
-                publisher.afterAction(deleteMethod);
+                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
+                publisher.removeMethod(deleteMethod);
             }
         } else {
             final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
