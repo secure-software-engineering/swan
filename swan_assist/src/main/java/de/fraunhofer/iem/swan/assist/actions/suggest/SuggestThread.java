@@ -70,9 +70,8 @@ public class SuggestThread extends Thread {
         boolean methodPairFound = false;
 
         //Get training methods
-        Set<String> trainingMethods = new HashSet<>();
         TrainingFileManager trainingFileManager = new TrainingFileManager(project);
-        trainingMethods = trainingFileManager.getTrainingMethods().keySet();
+        Set<String> trainingMethods = new HashSet<>(trainingFileManager.getTrainingMethods().keySet());
         trainingMethods.addAll(MethodListTree.suggestedMethodsList);
 
         while (!methodPairFound) {
@@ -81,12 +80,8 @@ public class SuggestThread extends Thread {
 
             if (methodPair != null) {
 
-                System.out.println("SUGMET: " + methodPair.getMethod1().getSignature(true) + " " + methodPair.getMethod2().getSignature(true));
-
                 if (trainingMethods.contains(methodPair.getMethod1().getSignature(true)) ||
                         trainingMethods.contains(methodPair.getMethod2().getSignature(true))) {
-
-                    System.out.println("skipping: " + methodPair.getMethod1().getSignature(true) + "\n" + methodPair.getMethod2().getSignature(true));
                     continue;
                 }
 
@@ -94,7 +89,6 @@ public class SuggestThread extends Thread {
                 suggestedMethods.add(methodPair.getMethod1());
                 methodPair.getMethod2().setStatus(MethodWrapper.MethodStatus.SUGGESTED);
                 suggestedMethods.add(methodPair.getMethod2());
-                System.out.println("adding: ");
                 methodPairFound = true;
             }
         }
