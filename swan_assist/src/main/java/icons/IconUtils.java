@@ -65,10 +65,13 @@ public class IconUtils {
         Collections.sort(iconList, Collections.reverseOrder());
         String joinedList = StringUtils.join(iconList, "_").toLowerCase();
 
-        Icon icon = IconLoader.findIcon("/icons/" + joinedList + ".png");
+        Icon icon;
 
-        if (icon == null)
+        try{
+             icon = IconLoader.findIcon("/icons/" + joinedList + ".png");
+        }catch (Exception e){
             icon = PluginIcons.DEFAULT;
+        }
 
         return icon;
     }

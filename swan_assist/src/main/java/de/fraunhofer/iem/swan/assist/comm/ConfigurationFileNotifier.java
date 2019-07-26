@@ -12,15 +12,16 @@ import com.intellij.util.messages.Topic;
 /**
  * Notifier for file operation events.
  */
-public interface FileSelectedNotifier {
+public interface ConfigurationFileNotifier {
 
-    Topic<FileSelectedNotifier> INITIAL_FILE_NOTIFIER_TOPIC = Topic.create("Configuration file selected",FileSelectedNotifier.class);
-    Topic<FileSelectedNotifier> UPDATED_FILE_NOTIFIER_TOPIC = Topic.create("Updated configuration file selected",FileSelectedNotifier.class);
+    Topic<ConfigurationFileNotifier> FILE_NOTIFIER_TOPIC = Topic.create("Configuration file selected", ConfigurationFileNotifier.class);
 
     /**
      * This method will be executed after a file as been selected
      * @param fileName Name of configuration file
      */
-    void notifyFileChange(String fileName);
+    void loadUpdatedFile(String fileName);
+
+    void loadInitialFile(String fileName);
 
 }

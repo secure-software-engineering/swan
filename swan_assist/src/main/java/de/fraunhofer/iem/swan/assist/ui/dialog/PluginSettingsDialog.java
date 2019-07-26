@@ -7,13 +7,12 @@
 
 package de.fraunhofer.iem.swan.assist.ui.dialog;
 
-import com.intellij.openapi.application.PathManager;
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.sun.javafx.PlatformUtil;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import org.jetbrains.annotations.Nullable;
@@ -23,13 +22,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -37,7 +32,7 @@ import java.util.ResourceBundle;
  * Dialog to launch configuration window for SWAN before running the application.
  */
 
-public class SwanLauncherDialog extends DialogWrapper {
+public class PluginSettingsDialog extends DialogWrapper {
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -46,14 +41,14 @@ public class SwanLauncherDialog extends DialogWrapper {
     private JButton sourceBtn;
     private JTextField outputDir;
     private JButton outputBtn;
-    private JCheckBox sourceCheckBox;
-    private JCheckBox advancedCheckbox;
     private JTextField trainingTextbox;
     private JButton trainButton;
-    private JPanel advancedPanel;
+    private JPanel trainingPanel;
+    private JCheckBox trainingPathCheckbox;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
+    private Project project;
 
     /**
      * Initializes dialog to launch SWAN.
@@ -61,9 +56,10 @@ public class SwanLauncherDialog extends DialogWrapper {
      * @param project Active project in the editor
      * @param modal   Modal setting for dialog
      */
-    public SwanLauncherDialog(Project project, boolean modal) {
+    public PluginSettingsDialog(Project project, boolean modal) {
 
         super(project, modal);
+        this.project = project;
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
         setTitle(resourceBundle.getString("Launcher.Title"));
 
@@ -87,11 +83,30 @@ public class SwanLauncherDialog extends DialogWrapper {
 
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
-        sourceDirTextbox.setText(project.getBasePath());
-        outputDir.setText(project.getBasePath() + File.separator + config.getProperty("output_dir_name"));
+        //Use value for source path, if available. Otherwise set the default path
+        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
+            sourceDirTextbox.setText(project.getBasePath());
+        else
+            sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
-        for (Component component : advancedPanel.getComponents()) {
-            component.setEnabled(advancedCheckbox.isSelected());
+        //Use value for the output path, if available. Otherwise set the default path
+        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
+            outputDir.setText(project.getBasePath() + File.separator + config.getProperty("output_dir_name"));
+        else
+            outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
+
+        //Set value for using training path
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.DEFAULT_TRAINING_PATH)) {
+
+            trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH));
+        }
+
+        for (Component component : trainingPanel.getComponents()) {
+            component.setEnabled(!trainingPathCheckbox.isSelected());
+        }
+
+        if(PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)){
+            trainingTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_DIRECTORY));
         }
 
         init();
@@ -99,31 +114,16 @@ public class SwanLauncherDialog extends DialogWrapper {
          * Action Listeners for buttons
          */
 
-        sourceCheckBox.addActionListener(new ActionListener() {
+
+        trainingPathCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //restore default values
-                if (sourceCheckBox.isSelected()) {
-                    sourceDirTextbox.setText(project.getBasePath());
-                }
+                System.out.println(trainingPathCheckbox.isSelected());
+                PropertiesComponent.getInstance(project).setValue(Constants.DEFAULT_TRAINING_PATH, trainingPathCheckbox.isSelected());
 
-                sourceBtn.setEnabled(!sourceCheckBox.isSelected());
-                sourceDirTextbox.setEditable(!sourceCheckBox.isSelected());
-            }
-        });
-
-        advancedCheckbox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                for (Component component : advancedPanel.getComponents()) {
-                    component.setEnabled(advancedCheckbox.isSelected());
-                }
-
-                if (advancedCheckbox.isSelected()) {
-                    trainingTextbox.setText("");
-                    outputDir.setText(configurationFile.getParent() + File.separator + config.getProperty("output_dir_name"));
+                for (Component component : trainingPanel.getComponents()) {
+                    component.setEnabled(!trainingPathCheckbox.isSelected());
                 }
             }
         });
@@ -159,35 +159,41 @@ public class SwanLauncherDialog extends DialogWrapper {
         if (isOKActionEnabled()) {
 
             //ensure that required fields are populated
-            if (sourceDirTextbox.getText().trim().isEmpty()) {
+            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()) {
 
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
-            } else if (advancedCheckbox.isSelected() && (trainingTextbox.getText().isEmpty() || outputDir.getText().isEmpty())) {
+            } else if (!trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
 
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
-                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(advancedCheckbox), Balloon.Position.below);
-            } else if (!advancedCheckbox.isSelected()) {
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
+            } else if (!trainingPathCheckbox.isSelected()) {
 
-                parameters.put(Constants.SWAN_TRAIN_DIR, config.getProperty("swan_default_param_value"));
-               setParameters();
+                parameters.put(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
+                PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
+
+                setParameters();
             } else {
 
-                parameters.put(Constants.SWAN_TRAIN_DIR, trainingTextbox.getText());
+                parameters.put(Constants.TRAIN_DIRECTORY, config.getProperty("swan_default_param_value"));
                 setParameters();
             }
         }
     }
 
-    private void setParameters(){
-        parameters.put(Constants.SWAN_SOURCE_DIR, sourceDirTextbox.getText());
-        parameters.put(Constants.SWAN_OUTPUT_DIR, outputDir.getText());
-        parameters.put(Constants.SWAN_OUTPUT_LOG, config.getProperty("log_suffix"));
-        parameters.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("output_json_suffix"));
+    private void setParameters() {
+        parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
+        parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
+        parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));
+        parameters.put(Constants.OUTPUT_FILE, parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("output_json_suffix"));
+
+        PropertiesComponent.getInstance(project).setValue(Constants.OUTPUT_DIRECTORY, outputDir.getText());
+        PropertiesComponent.getInstance(project).setValue(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
+
         super.doOKAction();
     }
 

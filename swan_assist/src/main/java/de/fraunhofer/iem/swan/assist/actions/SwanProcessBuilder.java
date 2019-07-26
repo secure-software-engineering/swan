@@ -48,15 +48,15 @@ public class SwanProcessBuilder extends Thread {
 
         String currentTimestamp = getCurrentTimestamp();
 
-        File outputFolder = new File(parameters.get(Constants.SWAN_OUTPUT_DIR));
+        File outputFolder = new File(parameters.get(Constants.OUTPUT_DIRECTORY));
 
         if(!outputFolder.exists())
             outputFolder.mkdir();
 
-        File logFile = new File(outputFolder, currentTimestamp + parameters.get(Constants.SWAN_OUTPUT_LOG));
+        File logFile = new File(outputFolder, currentTimestamp + parameters.get(Constants.OUTPUT_LOG));
         try {
             logFile.createNewFile();
-            parameters.replace(Constants.SWAN_OUTPUT_LOG, logFile.getPath());
+            parameters.replace(Constants.OUTPUT_LOG, logFile.getPath());
 
             FileOutputStream fileOutputStream = new FileOutputStream(logFile.getAbsolutePath());
 
@@ -66,16 +66,16 @@ public class SwanProcessBuilder extends Thread {
             e.printStackTrace();
         }
 
-        Main.main(new String[]{parameters.get(Constants.SWAN_SOURCE_DIR),
-                parameters.get(Constants.SWAN_TRAIN_DIR),
-                parameters.get(Constants.SWAN_CONFIG_FILE),
-                parameters.get(Constants.SWAN_OUTPUT_DIR)});
+        Main.main(new String[]{parameters.get(Constants.SOURCE_DIRECTORY),
+                parameters.get(Constants.TRAIN_DIRECTORY),
+                parameters.get(Constants.CONFIGURATION_FILE),
+                parameters.get(Constants.OUTPUT_DIRECTORY)});
 
         System.setOut(System.out);
 
         HashMap<String, String> results = new HashMap<String, String>();
-        results.put(Constants.SWAN_OUTPUT_FILE, parameters.get(Constants.SWAN_OUTPUT_FILE));
-        results.put(Constants.SWAN_OUTPUT_LOG, parameters.get(Constants.SWAN_OUTPUT_LOG));
+        results.put(Constants.OUTPUT_FILE, parameters.get(Constants.OUTPUT_FILE));
+        results.put(Constants.OUTPUT_LOG, parameters.get(Constants.OUTPUT_LOG));
 
         MessageBus messageBus = project.getMessageBus();
         SwanNotifier publisher = messageBus.syncPublisher(SwanNotifier.END_SWAN_PROCESS_TOPIC);

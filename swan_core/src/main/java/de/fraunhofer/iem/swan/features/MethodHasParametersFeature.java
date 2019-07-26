@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.features;
 import de.fraunhofer.iem.swan.IFeature;
 import de.fraunhofer.iem.swan.data.Method;
 
-public class MethodHasParametersFeature implements IFeature {
+public class MethodHasParametersFeature extends WeightedFeature implements IFeature {
 
   public MethodHasParametersFeature() {}
 

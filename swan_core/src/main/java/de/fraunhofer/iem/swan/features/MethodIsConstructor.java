@@ -9,7 +9,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Lisa Nguyen Quang Do
  *
  */
-public class MethodIsConstructor implements IFeature {
+public class MethodIsConstructor extends WeightedFeature implements IFeature {
 
   @Override
   public Type applies(Method method) {

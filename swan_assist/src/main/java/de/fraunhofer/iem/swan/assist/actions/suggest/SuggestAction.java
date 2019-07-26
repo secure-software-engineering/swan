@@ -5,20 +5,19 @@
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
  ******************************************************************************/
 
-package de.fraunhofer.iem.swan.assist.actions;
+package de.fraunhofer.iem.swan.assist.actions.suggest;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.project.Project;
+import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.swan.assist.comm.SuggestNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
+import de.fraunhofer.iem.swan.assist.data.PropertiesManager;
+import de.fraunhofer.iem.swan.assist.util.Constants;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
-/**
- * @author Oshando Johnson on 2019-04-11
- */
 public class SuggestAction extends AnAction {
 
     /**
@@ -27,25 +26,25 @@ public class SuggestAction extends AnAction {
      */
     @Override
     public void actionPerformed(AnActionEvent e) {
-        // TODO: implement logic to obtain methods from SWAN
 
-        HashMap<String,MethodWrapper> suggestedMethods = new HashMap<>();
+        final Project project = e.getRequiredData(CommonDataKeys.PROJECT);
+        MessageBus messageBus = project.getMessageBus();
 
-        MethodWrapper m1 = new MethodWrapper("getPassport", Arrays.asList("java.lang.String"), "java.lang.String", "de.fraunhofer.Test");
-        m1.setStatus(MethodWrapper.MethodStatus.SUGGESTED);
+        //Set output directory for plugin, if not set
+        PropertiesManager.setProjectOutputPath(project);
 
-        MethodWrapper m2 = new MethodWrapper("deleteApplication", Arrays.asList("java.lang.String"), "void", "de.fraunhofer.Test");
-        m2.setStatus(MethodWrapper.MethodStatus.SUGGESTED);
+        SuggestThread suggestThread = new SuggestThread(project,
+                PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE),
+                PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
+        suggestThread.start();
 
-        suggestedMethods.put(m1.getSignature(true),m1);
-        suggestedMethods.put(m2.getSignature(true),m2);
-
-        MethodDialog dialog  = new MethodDialog(suggestedMethods, m1.getSignature(true), e.getProject(), JSONFileLoader.getCategories());
-        dialog.show();
+        SuggestNotifier suggestNotifier = messageBus.syncPublisher(SuggestNotifier.SUGGEST_METHOD_TOPIC);
+        suggestNotifier.startSuggestMethod();
     }
 
     /**
      * Controls whether the action is enabled or disabled
+     *
      * @param event source  event
      */
     @Override

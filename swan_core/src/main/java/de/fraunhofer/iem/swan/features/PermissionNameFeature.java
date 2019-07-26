@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.features;
 import de.fraunhofer.iem.swan.IFeature;
 import de.fraunhofer.iem.swan.data.Method;
 
-public class PermissionNameFeature implements IFeature {
+public class PermissionNameFeature extends WeightedFeature implements IFeature {
 
   private final String permission;
 

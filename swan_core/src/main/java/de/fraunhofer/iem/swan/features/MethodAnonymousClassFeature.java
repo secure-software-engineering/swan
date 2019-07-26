@@ -11,7 +11,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Siegfried Rasthofer
  *
  */
-public class MethodAnonymousClassFeature implements IFeature {
+public class MethodAnonymousClassFeature extends WeightedFeature implements IFeature {
 
   private final boolean anonymousClass;
 

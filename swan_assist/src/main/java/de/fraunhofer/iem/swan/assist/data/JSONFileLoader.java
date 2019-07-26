@@ -7,6 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.data;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
@@ -16,10 +17,7 @@ import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Loads JSON configuration file and manipulates data.
@@ -35,15 +33,18 @@ public class JSONFileLoader {
 
     /**
      * Set configuration file location
+     *
      * @param path Configuration file path.
      */
-    public static void setConfigurationFile(String path) {
+    public static void setConfigurationFile(String path, Project project) {
 
         congFile = path;
+        PropertiesComponent.getInstance(project).setValue(Constants.CONFIGURATION_FILE, path);
     }
 
     /**
      * Returns configuration file path or file name
+     *
      * @param path Condition determines if the path or just the filename should be returned.
      * @return Returns either the filename or file path.
      */
@@ -75,16 +76,17 @@ public class JSONFileLoader {
     /**
      * Compares new JSON file with original file and updates list with merged results. Loads new file
      * is a JSON file was not selected.
+     *
      * @param newFilePath File path of new configuration file
      */
-    public static void loadUpdatedFile(String newFilePath) {
+    public static void loadUpdatedFile(String newFilePath, Project project) {
 
-        if(isFileSelected()){
+        if (isFileSelected()) {
             JSONFileComparator fileComparator = new JSONFileComparator(congFile, newFilePath);
             methods = fileComparator.compareJSONFile();
-            setConfigurationFile(newFilePath);
-        }else{
-            setConfigurationFile(newFilePath);
+            setConfigurationFile(newFilePath, project);
+        } else {
+            setConfigurationFile(newFilePath, project);
             loadInitialFile();
         }
     }
@@ -107,9 +109,10 @@ public class JSONFileLoader {
 
     /**
      * Returns all methods based on the filters and or current file that's selected.
-     * @param filters Filters that should be applied to the methods returned.
+     *
+     * @param filters     Filters that should be applied to the methods returned.
      * @param currentFile Current active file opened in the IDE's editor.
-     * @param project Active project in IDE.
+     * @param project     Active project in IDE.
      * @return Returns an array list of the methods that meet the specified criteria.
      */
     public static ArrayList<MethodWrapper> getMethods(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
@@ -148,7 +151,8 @@ public class JSONFileLoader {
 
     /**
      * Filters method methods using the filters provided.
-     * @param filters Filters that should be applied to the methods returned.
+     *
+     * @param filters     Filters that should be applied to the methods returned.
      * @param currentFile Current active file opened in the IDE's editor.
      * @return Methods matching the filtering criteria.
      */
@@ -179,6 +183,7 @@ public class JSONFileLoader {
 
     /**
      * Return list of categories.
+     *
      * @return Set of categories used by methods.
      */
     public static Set<Category> getCategories() {
@@ -197,6 +202,7 @@ public class JSONFileLoader {
 
     /**
      * Add new method to the list
+     *
      * @param method Method to be added to the list
      * @return Returns whether the method is new or existing.
      */
@@ -213,6 +219,7 @@ public class JSONFileLoader {
 
     /**
      * Checks if method exists in list
+     *
      * @param methodSignature Method signature of method being searched for.
      * @return Returns whether or not the method exists.
      */
@@ -223,6 +230,7 @@ public class JSONFileLoader {
 
     /**
      * Returns an instance of the method
+     *
      * @param methodSignature Method Signature of requested method.
      * @return Instance of the method
      */
@@ -233,6 +241,7 @@ public class JSONFileLoader {
 
     /**
      * Remove method from list
+     *
      * @param method Method to be removed
      */
     public static void removeMethod(MethodWrapper method) {
@@ -242,8 +251,9 @@ public class JSONFileLoader {
 
     /**
      * Check if method is used in project
+     *
      * @param classname Method's classname
-     * @param project Instance of project
+     * @param project   Instance of project
      * @return Returns whether or not the method is used in the project
      */
     private static boolean inProject(String classname, Project project) {
@@ -257,6 +267,7 @@ public class JSONFileLoader {
 
     /**
      * Gives the status of SWAN
+     *
      * @return Returns whether or not SWAN is reloading
      */
     public static boolean isReloading() {
@@ -265,6 +276,7 @@ public class JSONFileLoader {
 
     /**
      * Set the status of SWAN
+     *
      * @param reloadingSwan Status of SWAN - reloading or not
      */
     public static void setReloading(boolean reloadingSwan) {

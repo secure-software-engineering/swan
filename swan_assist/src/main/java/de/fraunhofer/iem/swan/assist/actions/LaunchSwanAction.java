@@ -15,18 +15,18 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
-import de.fraunhofer.iem.swan.assist.data.JSONFileParser;
-import de.fraunhofer.iem.swan.assist.data.JSONWriter;
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.ui.dialog.SwanLauncherDialog;
+import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
+import de.fraunhofer.iem.swan.assist.ui.dialog.PluginSettingsDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * Action opens dialog for user to set parameters for running SWAN. After which thread is created to run SWAN.
@@ -34,8 +34,10 @@ import java.util.*;
 public class LaunchSwanAction extends AnAction {
 
     protected Set<Method> methods = new HashSet<Method>();
+
     /**
      * Obtains application parameters from user, exports updated JSON file and starts thread to run SWAN.
+     *
      * @param anActionEvent source event
      */
     @Override
@@ -63,42 +65,20 @@ public class LaunchSwanAction extends AnAction {
         }
 
         //Launch Dialog
-        SwanLauncherDialog dialog = new SwanLauncherDialog(project, true);
+        PluginSettingsDialog dialog = new PluginSettingsDialog(project, true);
         dialog.show();
 
         if (dialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
 
             HashMap<String, String> swanParameters = dialog.getParameters();
 
-            if(JSONFileLoader.isFileSelected()) {
-                //Merge current list with training methods
-                HashMap<String, MethodWrapper> methods = JSONFileLoader.getAllMethods();
+            String outputPath = swanParameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("input_json_suffix");
+            TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
-                InputStream stream = getClass().getClassLoader().getResourceAsStream(config.getProperty("train_config_file"));
-                HashMap<String, MethodWrapper> trainingMethods = new HashMap<>();
-
-                if (stream != null) {
-
-                    JSONFileParser fileParser = new JSONFileParser();
-                    trainingMethods = fileParser.parseJSONFileStream(new InputStreamReader(stream));
-                }
-
-                HashMap<String, MethodWrapper> mergedMethods = new HashMap<>(methods);
-                mergedMethods.putAll(trainingMethods);
-
-                //Export changes to configuration files
-                JSONWriter exportFile = new JSONWriter();
-                String newConfigFile = swanParameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("input_json_suffix");
-                try {
-                    exportFile.writeToJsonFile(new ArrayList<>(mergedMethods.values()), newConfigFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                swanParameters.put(Constants.SWAN_CONFIG_FILE, newConfigFile);
-            }
-            else{
-                swanParameters.put(Constants.SWAN_CONFIG_FILE, config.getProperty("swan_default_param_value"));
-            }
+            if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
+                swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
+            else
+                swanParameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
             SwanProcessBuilder processBuilder = new SwanProcessBuilder(project, dialog.getParameters());
             processBuilder.start();
@@ -110,6 +90,7 @@ public class LaunchSwanAction extends AnAction {
 
     /**
      * Controls whether the action is enabled or disabled
+     *
      * @param event source  event
      */
     @Override

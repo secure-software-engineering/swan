@@ -12,7 +12,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.assist.comm.FileSelectedNotifier;
+import de.fraunhofer.iem.swan.assist.comm.ConfigurationFileNotifier;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -51,8 +51,8 @@ public class ImportAction extends AnAction {
             File selectedFile = fileChooser.getSelectedFile();
 
             MessageBus messageBus = project.getMessageBus();
-            FileSelectedNotifier publisher = messageBus.syncPublisher(FileSelectedNotifier.INITIAL_FILE_NOTIFIER_TOPIC);
-            publisher.notifyFileChange(selectedFile.getAbsoluteFile().toString());
+            ConfigurationFileNotifier publisher = messageBus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
+            publisher.loadInitialFile(selectedFile.getAbsoluteFile().toString());
         }
     }
 }

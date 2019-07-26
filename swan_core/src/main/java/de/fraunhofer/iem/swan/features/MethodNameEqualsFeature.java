@@ -8,7 +8,7 @@ import de.fraunhofer.iem.swan.data.Method;
  *
  * @author Lisa Nguyen Quang Do
  */
-public class MethodNameEqualsFeature implements IFeature {
+public class MethodNameEqualsFeature extends WeightedFeature implements IFeature {
 
   private final String contains;
 

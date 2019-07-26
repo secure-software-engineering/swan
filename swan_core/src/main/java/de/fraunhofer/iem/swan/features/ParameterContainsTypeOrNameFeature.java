@@ -11,7 +11,7 @@ import de.fraunhofer.iem.swan.data.Method;
  * @author Steven Arzt
  *
  */
-public class ParameterContainsTypeOrNameFeature implements IFeature {
+public class ParameterContainsTypeOrNameFeature extends WeightedFeature implements IFeature {
 
   private final String insideName;
 
