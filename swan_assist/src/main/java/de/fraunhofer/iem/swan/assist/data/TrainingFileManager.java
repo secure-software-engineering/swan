@@ -51,17 +51,17 @@ public class TrainingFileManager {
         //Check if training file was set and if it exists
         if (PropertiesComponent.getInstance(currentProject).isValueSet(Constants.TRAIN_FILE_SUGGESTED)) {
 
-            File trainFile = new File(PropertiesComponent.getInstance(currentProject).getValue(Constants.SWAN_OUTPUT_DIR));
+            File trainFile = new File(PropertiesManager.setProjectOutputPath(currentProject));
 
             if (!trainFile.exists())
-                PropertiesComponent.getInstance(currentProject).unsetValue(Constants.SWAN_OUTPUT_DIR);
+                PropertiesComponent.getInstance(currentProject).unsetValue(Constants.OUTPUT_DIRECTORY);
             else {
                 JSONFileParser fileParser = new JSONFileParser(PropertiesComponent.getInstance(currentProject).getValue(Constants.TRAIN_FILE_SUGGESTED));
                 methods = fileParser.parseJSONFileMap();
             }
         }
 
-        //If training file was not found, thedefault training file will be used
+        //If training file was not found, the default training file will be used
         if (methods.isEmpty()) {
             InputStream stream = getClass().getClassLoader().getResourceAsStream(config.getProperty("train_config_file"));
 

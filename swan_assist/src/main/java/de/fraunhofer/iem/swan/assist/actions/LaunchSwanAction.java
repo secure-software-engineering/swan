@@ -16,7 +16,7 @@ import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
-import de.fraunhofer.iem.swan.assist.ui.dialog.SwanLauncherDialog;
+import de.fraunhofer.iem.swan.assist.ui.dialog.PluginSettingsDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
@@ -65,20 +65,20 @@ public class LaunchSwanAction extends AnAction {
         }
 
         //Launch Dialog
-        SwanLauncherDialog dialog = new SwanLauncherDialog(project, true);
+        PluginSettingsDialog dialog = new PluginSettingsDialog(project, true);
         dialog.show();
 
         if (dialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
 
             HashMap<String, String> swanParameters = dialog.getParameters();
 
-            String outputPath = swanParameters.get(Constants.SWAN_OUTPUT_DIR) + File.separator + config.getProperty("input_json_suffix");
+            String outputPath = swanParameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("input_json_suffix");
             TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
             if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
-                swanParameters.put(Constants.SWAN_CONFIG_FILE, outputPath);
+                swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
             else
-                swanParameters.put(Constants.SWAN_CONFIG_FILE, config.getProperty("swan_default_param_value"));
+                swanParameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
             SwanProcessBuilder processBuilder = new SwanProcessBuilder(project, dialog.getParameters());
             processBuilder.start();

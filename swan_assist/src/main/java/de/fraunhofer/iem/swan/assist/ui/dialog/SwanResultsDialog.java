@@ -19,7 +19,6 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -73,10 +72,10 @@ public class SwanResultsDialog extends DialogWrapper {
 
         this.project = project;
 
-        filePath.setText(values.get(Constants.SWAN_OUTPUT_FILE));
-        logPath.setText(values.get(Constants.SWAN_OUTPUT_LOG));
+        filePath.setText(values.get(Constants.OUTPUT_FILE));
+        logPath.setText(values.get(Constants.OUTPUT_LOG));
 
-        File logs = new File(values.get(Constants.SWAN_OUTPUT_LOG));
+        File logs = new File(values.get(Constants.OUTPUT_LOG));
 
         try {
             logText.setText(new String(Files.readAllBytes(Paths.get(logPath.getText()))));

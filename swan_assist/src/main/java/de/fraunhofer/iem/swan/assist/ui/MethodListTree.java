@@ -48,7 +48,6 @@ import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -92,11 +91,9 @@ public class MethodListTree extends Tree {
         getEmptyText().setText(resource.getString("Messages.Notification.EmptyTree"));
         setToggleClickCount(0);
 
-
         TREE_FILTERS = new ArrayList<>();
         RESTORE_METHOD = false;
         currentFile = "";
-
 
         suggestedMethodsList = new HashSet<>();
 
@@ -182,7 +179,7 @@ public class MethodListTree extends Tree {
 
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
-                                JSONFileLoader.setConfigurationFile(fileName);
+                                JSONFileLoader.setConfigurationFile(fileName, project);
                                 JSONFileLoader.loadInitialFile();
                                 loadMethods();
                             }
@@ -202,7 +199,7 @@ public class MethodListTree extends Tree {
 
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
-                                JSONFileLoader.loadUpdatedFile(fileName);
+                                JSONFileLoader.loadUpdatedFile(fileName, project);
                                 loadMethods();
                             }
                         });
@@ -257,7 +254,7 @@ public class MethodListTree extends Tree {
 
                 TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
-                if(trainingFileManager.exportNew(suggestedMethods, PropertiesComponent.getInstance(project).getValue(Constants.SWAN_OUTPUT_DIR))){
+                if(trainingFileManager.exportNew(suggestedMethods, PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY))){
 
                     PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_FILE_SUGGESTED,trainingFileManager.getTrainingFile());
 
@@ -324,7 +321,7 @@ public class MethodListTree extends Tree {
                             } else if (hyperlinkEvent.getDescription().equals("load")) {
 
                                 ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
-                                fileNotifier.loadUpdatedFile(values.get(Constants.SWAN_OUTPUT_FILE));
+                                fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
                             }
                         }
                     }

@@ -34,8 +34,8 @@ public class SuggestAction extends AnAction {
         PropertiesManager.setProjectOutputPath(project);
 
         SuggestThread suggestThread = new SuggestThread(project,
-                PropertiesComponent.getInstance(project).getValue(Constants.SWAN_CONFIG_FILE),
-                PropertiesComponent.getInstance(project).getValue(Constants.SWAN_SOURCE_DIR));
+                PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE),
+                PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
         suggestThread.start();
 
         SuggestNotifier suggestNotifier = messageBus.syncPublisher(SuggestNotifier.SUGGEST_METHOD_TOPIC);

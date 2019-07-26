@@ -21,17 +21,17 @@ public class Constants {
     //TODO update link to point to online help resources that will be created
     public final static String HELP_LINK = "https://github.com/secure-software-engineering/swan";
 
+    public final static String PLUGIN_ID = "de.fraunhofer.swan.assist.";
     //SWAN arguments
-    public final static String SWAN_TRAIN_DIR = "train_dir";
-    public final static String SWAN_SOURCE_DIR = "source_dir"; //Test Library (or the project)
-    public final static String SWAN_CONFIG_FILE = "configuration_file";
-    public final static String SWAN_OUTPUT_DIR = "swan_output_dir";
-    public final static String SWAN_JAR_DIR = "swan_core.jar";
-    public final static String SWAN_OUTPUT_FILE = "output_file";
-    public final static String SWAN_OUTPUT_LOG = "output_logs";
-    public final static String SWAN_OUTPUT_MESSAGE = "output_message";
-    public final static String TRAIN_FILE_SUGGESTED = "file_suggested_methods";
+    public final static String TRAIN_DIRECTORY = PLUGIN_ID + "trainingPath";
+    public final static String SOURCE_DIRECTORY = PLUGIN_ID + "projectJarFiles"; //Test Library (or the project)
+    public final static String CONFIGURATION_FILE = PLUGIN_ID + "configurationFile";
+    public final static String OUTPUT_DIRECTORY = PLUGIN_ID + "outputPath";
+    public final static String OUTPUT_FILE = PLUGIN_ID + "outputFile";
+    public final static String OUTPUT_LOG = PLUGIN_ID + "outputLogs";
+    public final static String TRAIN_FILE_SUGGESTED = PLUGIN_ID + "file_suggested_methods";
 
+    public final static String DEFAULT_TRAINING_PATH = PLUGIN_ID + "defaultTrainingPath";
 
     public final static String FILTER_CWE = "CWE";
     public final static String FILTER_TYPE = "Type";
