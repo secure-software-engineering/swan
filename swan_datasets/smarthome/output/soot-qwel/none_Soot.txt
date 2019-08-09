@@ -1,0 +1,289 @@
+***__sources__*** 
+
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.lang.String readLabel(NodeIterator)> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.PercentType getBlue()> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: org.eclipse.smarthome.core.thing.Bridge getBridge()> 
+<org.eclipse.smarthome.core.items.ManagedItemProvider: java.lang.String getKey(org.eclipse.smarthome.core.items.Item)> 
+<org.eclipse.smarthome.core.thing.type.ThingType: java.util.List getChannelDefinitions()> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.PercentType getSaturation()> 
+<org.eclipse.smarthome.core.scheduler.internal.SchedulerActivator: org.osgi.framework.BundleContext getContext()> 
+<org.eclipse.smarthome.core.items.ManagedItemProvider: java.lang.Object getKey(java.lang.Object)> 
+<org.eclipse.smarthome.core.library.items.DateTimeItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.thing.binding.BaseBridgeHandler: org.eclipse.smarthome.core.thing.Thing getThingByUID(org.eclipse.smarthome.core.thing.ThingUID)> 
+<org.eclipse.smarthome.core.transform.internal.TransformationActivator: org.osgi.framework.BundleContext getContext()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptError: int getColumnNumber()> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.PercentType getBrightness()> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry: java.util.Set getBoundChannels(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: java.util.List getChannels()> 
+<org.eclipse.smarthome.core.thing.util.ThingHelper: java.util.List getItemFactories()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoImpl: java.lang.String getDescription()> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: org.eclipse.smarthome.core.thing.Thing getThing()> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.thing.internal.console.ThingConsoleCommandExtension: java.util.List getUsages()> 
+<org.eclipse.smarthome.core.thing.link.ManagedItemChannelLinkProvider: java.lang.Object getKey(java.lang.Object)> 
+<org.eclipse.smarthome.core.thing.type.ChannelDefinition: org.eclipse.smarthome.core.thing.type.ChannelType getType()> 
+<org.eclipse.smarthome.core.thing.UID: java.lang.String getSegment(int)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: java.lang.Object getConfigAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoConverter: java.net.URI readConfigDescriptionURI(NodeIterator)> 
+<org.eclipse.smarthome.core.library.items.ContactItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.library.items.ContactItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ChannelTypeXmlResult: ConfigDescription getConfigDescription()> 
+<org.eclipse.smarthome.core.library.items.SwitchItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: org.eclipse.smarthome.core.thing.ThingUID getUID()> 
+<org.eclipse.smarthome.core.thing.type.ThingType: java.util.List getSupportedBridgeTypeUIDs()> 
+<org.eclipse.smarthome.core.internal.items.ItemRegistryImpl: org.eclipse.smarthome.core.items.Item getItem(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.console.LinkConsoleCommandExtension: java.util.List getUsages()> 
+<org.eclipse.smarthome.core.thing.type.AbstractDescriptionType: java.net.URI getConfigDescriptionURI()> 
+<org.eclipse.smarthome.core.thing.ManagedThingProvider: org.eclipse.smarthome.core.thing.ThingUID getKey(org.eclipse.smarthome.core.thing.Thing)> 
+<org.eclipse.smarthome.core.thing.ThingUID: java.lang.String getThingTypeId()> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.net.URI readConfigDescriptionURI(NodeIterator)> 
+<org.eclipse.smarthome.core.library.items.NumberItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.items.GenericItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: Configuration getConfig()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ThingTypeXmlResult: ConfigDescription getConfigDescription()> 
+<org.eclipse.smarthome.core.thing.type.AbstractDescriptionType: java.lang.String getLabel()> 
+<org.eclipse.smarthome.core.thing.Channel: Configuration getConfiguration()> 
+<org.eclipse.smarthome.core.thing.ThingUID: org.eclipse.smarthome.core.thing.ThingTypeUID getThingTypeUID()> 
+<org.eclipse.smarthome.core.library.types.HSBType: java.util.SortedMap getConstituents()> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLink: java.lang.String getID()> 
+<org.eclipse.smarthome.core.thing.ChannelUID: java.lang.String getThingTypeId()> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLink: java.lang.String getItemName()> 
+<org.eclipse.smarthome.core.common.registry.AbstractManagedProvider: java.lang.String getKeyAsString(java.lang.Object)> 
+<org.eclipse.smarthome.core.thing.util.ThingHelper: org.eclipse.smarthome.core.items.ManagedItemProvider getManagedItemProvider()> 
+<org.eclipse.smarthome.core.library.items.ColorItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.library.items.ImageItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.PercentType getGreen()> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.lang.String getID(java.util.Map)> 
+<org.eclipse.smarthome.core.items.ManagedItemProvider: java.lang.String getStorageName()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoImpl: java.lang.String getId()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptError: int getLength()> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory: org.eclipse.smarthome.core.thing.type.ThingType getThingTypeByUID(org.eclipse.smarthome.core.thing.ThingTypeUID)> 
+<org.eclipse.smarthome.core.thing.ChannelUID: java.lang.String getThingId()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptError: int getLineNumber()> 
+<org.eclipse.smarthome.core.thing.type.ChannelTypeUID: int getMinimalNumberOfSegments()> 
+<org.eclipse.smarthome.core.thing.type.ThingTypeRegistry: java.util.List getThingTypes()> 
+<org.eclipse.smarthome.core.internal.items.ItemRegistryImpl: java.util.Collection getItems()> 
+<org.eclipse.smarthome.core.thing.ThingUID: java.lang.String[] getArray(java.lang.String,java.lang.String,java.lang.String,java.util.List,java.lang.String)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: int getPageNumber()> 
+<org.eclipse.smarthome.core.thing.link.ManagedItemChannelLinkProvider: java.lang.String getStorageName()> 
+<org.eclipse.smarthome.core.internal.CoreActivator: org.osgi.framework.BundleContext getContext()> 
+<org.eclipse.smarthome.core.internal.items.ItemRegistryImpl: java.util.Collection getItems(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.type.ThingTypeRegistry: java.util.List getThingTypes(java.lang.String)> 
+<org.eclipse.smarthome.core.scriptengine.ScriptException: java.lang.String getMessage()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoXmlResult: org.eclipse.smarthome.core.binding.BindingInfo getBindingInfo()> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria$Ordering getOrdering()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptExecutionThread: java.lang.Object getResult()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptError: java.lang.String getMessage()> 
+<org.eclipse.smarthome.core.thing.UID: java.lang.String getBindingId()> 
+<org.eclipse.smarthome.core.library.items.SwitchItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ChannelTypeXmlResult: org.eclipse.smarthome.core.thing.type.ChannelType getChannelType()> 
+<org.eclipse.smarthome.core.scriptengine.ScriptException: java.util.List getErrors()> 
+<org.eclipse.smarthome.core.library.items.ContactItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoImpl: java.lang.String getName()> 
+<org.eclipse.smarthome.core.thing.ThingTypeUID: java.lang.String getId()> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: java.util.Date getEndDate()> 
+<org.eclipse.smarthome.core.thing.util.ThingHelper: org.eclipse.smarthome.core.items.ItemFactory getItemFactoryForItemType(java.util.List,java.lang.String)> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoConverter: ConfigDescription readConfigDescription(NodeIterator)> 
+<org.eclipse.smarthome.core.thing.ThingUID: java.lang.String[] getArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String[])> 
+<org.eclipse.smarthome.core.library.items.ColorItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.thing.type.ChannelTypeUID: java.lang.String getId()> 
+<org.eclipse.smarthome.core.thing.internal.Activator: org.osgi.framework.BundleContext getContext()> 
+<org.eclipse.smarthome.core.items.GenericItem: java.lang.String getName()> 
+<org.eclipse.smarthome.core.items.GroupItem: org.eclipse.smarthome.core.items.GenericItem getBaseItem()> 
+<org.eclipse.smarthome.core.thing.ThingTypeUID: int getMinimalNumberOfSegments()> 
+<org.eclipse.smarthome.core.items.GroupItem: java.util.List getMembers()> 
+<org.eclipse.smarthome.core.common.registry.AbstractRegistry: java.util.Collection getAll()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ThingTypeConverter: java.util.List readSupportedBridgeTypeUIDs(NodeIterator,UnmarshallingContext)> 
+<org.eclipse.smarthome.core.thing.ChannelUID: java.lang.String[] getArray(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.util.List)> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.lang.Object[] getConfigDescriptionObjects(NodeIterator)> 
+<org.eclipse.smarthome.core.thing.ThingUID: java.lang.String getId()> 
+<org.eclipse.smarthome.core.thing.ChannelUID: java.lang.String getId()> 
+<org.eclipse.smarthome.core.library.items.NumberItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.types.State getState()> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: java.lang.String getItemName()> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory: java.util.Dictionary getServiceProperties(org.eclipse.smarthome.core.thing.Thing,org.eclipse.smarthome.core.thing.binding.ThingHandler)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: int getPageSize()> 
+<org.eclipse.smarthome.core.scriptengine.internal.extensions.ScriptEngineConsoleCommandExtension: java.util.List getUsages()> 
+<org.eclipse.smarthome.core.library.items.StringItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.items.GroupItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.thing.Channel: org.eclipse.smarthome.core.thing.ChannelUID getUID()> 
+<org.eclipse.smarthome.core.thing.type.AbstractDescriptionType: java.lang.String getDescription()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoImpl: java.net.URI getConfigDescriptionURI()> 
+<org.eclipse.smarthome.core.transform.TransformationHelper: org.eclipse.smarthome.core.transform.TransformationService getTransformationService(org.osgi.framework.BundleContext,java.lang.String)> 
+<org.eclipse.smarthome.core.items.GroupItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.DecimalType getHue()> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory: java.util.Map getServiceProperties(org.eclipse.smarthome.core.thing.binding.ThingHandler)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: java.util.Date getBeginDate()> 
+<org.eclipse.smarthome.core.library.types.RawType: byte[] getBytes()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ThingTypeConverter: java.util.List readChannelTypeDefinitions(NodeIterator)> 
+<org.eclipse.smarthome.core.library.items.ColorItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.thing.ManagedThingProvider: java.lang.String getStorageName()> 
+<org.eclipse.smarthome.core.library.CoreItemFactory: java.lang.String[] getSupportedItemTypes()> 
+<org.eclipse.smarthome.core.items.GroupItem: java.util.List getAllMembers()> 
+<org.eclipse.smarthome.core.internal.items.ItemRegistryImpl: org.eclipse.smarthome.core.items.Item getItemByPattern(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.BridgeImpl: java.util.List getThings()> 
+<org.eclipse.smarthome.core.thing.type.ChannelType: org.eclipse.smarthome.core.thing.type.ChannelTypeUID getUID()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ChannelTypeConverter: java.lang.String readItemType(NodeIterator)> 
+<org.eclipse.smarthome.core.items.ManagedItemProvider: org.eclipse.smarthome.core.items.GenericItem createItem(java.lang.String,java.lang.String)> 
+<org.eclipse.smarthome.core.thing.UID: java.lang.String[] getSegments()> 
+<org.eclipse.smarthome.core.thing.type.ChannelDefinition: java.lang.String getId()> 
+<org.eclipse.smarthome.core.thing.type.ThingType: java.lang.String getBindingId()> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: Configuration getConfiguration()> 
+<org.eclipse.smarthome.core.events.AbstractEventSubscriber: java.util.List getSourceFilterList()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoXmlProviderFactory: XmlDocumentProvider createDocumentProvider(org.osgi.framework.Bundle)> 
+<org.eclipse.smarthome.core.library.items.DimmerItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.thing.Channel: java.lang.String getAcceptedItemType()> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: org.eclipse.smarthome.core.thing.ThingStatus getStatus()> 
+<org.eclipse.smarthome.core.library.items.ImageItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.thing.util.ThingHelper: org.eclipse.smarthome.core.thing.link.ManagedItemChannelLinkProvider getManagedItemChannelLinkProvider()> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.lang.String getUID(java.util.Map,UnmarshallingContext)> 
+<org.eclipse.smarthome.core.items.GenericItem: org.eclipse.smarthome.core.types.State getState()> 
+<org.eclipse.smarthome.core.library.types.HSBType: org.eclipse.smarthome.core.library.types.PercentType getRed()> 
+<org.eclipse.smarthome.core.items.GenericItem: java.util.List getGroupNames()> 
+<org.eclipse.smarthome.core.thing.type.ThingType: org.eclipse.smarthome.core.thing.ThingTypeUID getUID()> 
+<org.eclipse.smarthome.core.thing.ChannelUID: int getMinimalNumberOfSegments()> 
+<org.eclipse.smarthome.core.thing.type.ChannelType: java.lang.String getItemType()> 
+<org.eclipse.smarthome.core.thing.internal.ThingRegistryImpl: org.eclipse.smarthome.core.thing.Thing getByUID(org.eclipse.smarthome.core.thing.ThingUID)> 
+<org.eclipse.smarthome.core.library.types.DateTimeType: java.util.Calendar getCalendar()> 
+<org.eclipse.smarthome.core.thing.link.ManagedItemChannelLinkProvider: java.lang.String getKey(org.eclipse.smarthome.core.thing.link.ItemChannelLink)> 
+<org.eclipse.smarthome.core.thing.binding.BaseBridgeHandler: org.eclipse.smarthome.core.thing.Bridge getThing()> 
+<org.eclipse.smarthome.core.items.ItemNotUniqueException: java.util.Collection getMatchingItems()> 
+<org.eclipse.smarthome.core.transform.internal.TransformationActionService: java.lang.String getActionClassName()> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoXmlResult: ConfigDescription getConfigDescription()> 
+<org.eclipse.smarthome.core.thing.xml.internal.ThingTypeXmlProviderFactory: XmlDocumentProvider createDocumentProvider(org.osgi.framework.Bundle)> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry: java.util.Set getBoundThings(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.ThingUID: int getMinimalNumberOfSegments()> 
+<org.eclipse.smarthome.core.items.GroupItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.library.items.StringItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.library.items.DimmerItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: java.lang.String getName()> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry: java.lang.String getBoundItem(org.eclipse.smarthome.core.thing.ChannelUID)> 
+<org.eclipse.smarthome.core.binding.xml.internal.BindingInfoImpl: java.lang.String getAuthor()> 
+<org.eclipse.smarthome.core.thing.type.ThingTypeRegistry: org.eclipse.smarthome.core.thing.type.ThingType getThingType(org.eclipse.smarthome.core.thing.ThingTypeUID)> 
+<org.eclipse.smarthome.core.items.GenericItem: java.lang.String getType()> 
+<org.eclipse.smarthome.core.thing.ChannelUID: java.util.List getBridgeIds()> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria$Operator getOperator()> 
+<org.eclipse.smarthome.core.thing.ManagedThingProvider: java.lang.Object getKey(java.lang.Object)> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.thing.type.AbstractDescriptionType: org.eclipse.smarthome.core.thing.UID getUID()> 
+<org.eclipse.smarthome.core.binding.BindingInfoRegistry: java.util.List getBindingInfos()> 
+<org.eclipse.smarthome.core.thing.xml.internal.XmlThingTypeProvider: java.util.Collection getThingTypes()> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: ConfigDescription readConfigDescription(NodeIterator)> 
+<org.eclipse.smarthome.core.library.types.HSBType: int getRGB()> 
+<org.eclipse.smarthome.core.thing.xml.internal.AbstractDescriptionTypeConverter: java.lang.String readDescription(NodeIterator)> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLink: org.eclipse.smarthome.core.thing.ChannelUID getChannelUID()> 
+<org.eclipse.smarthome.core.thing.ThingUID: java.util.List getBridgeIds()> 
+<org.eclipse.smarthome.core.library.items.StringItem: org.eclipse.smarthome.core.types.State getStateAs(java.lang.Class)> 
+<org.eclipse.smarthome.core.library.items.DateTimeItem: java.util.List getAcceptedCommandTypes()> 
+<org.eclipse.smarthome.core.library.items.DimmerItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.library.items.SwitchItem: java.util.List getAcceptedDataTypes()> 
+<org.eclipse.smarthome.core.thing.ChannelUID: org.eclipse.smarthome.core.thing.ThingUID getThingUID()> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: org.eclipse.smarthome.core.thing.ThingTypeUID getThingTypeUID()> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: org.eclipse.smarthome.core.thing.ThingUID getBridgeUID()> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: org.eclipse.smarthome.core.thing.binding.ThingHandler getHandler()> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: org.eclipse.smarthome.core.thing.Thing getThing(org.eclipse.smarthome.core.thing.ThingUID)> 
+<org.eclipse.smarthome.core.transform.internal.TransformationActionService: java.lang.Class getActionClass()> 
+<org.eclipse.smarthome.core.common.registry.AbstractManagedProvider: java.util.Collection getAll()> 
+
+
+***__sinks__*** 
+
+<org.eclipse.smarthome.core.library.items.DimmerItem: void setState(org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: void send(org.eclipse.smarthome.core.library.types.UpDownType)> 
+<org.eclipse.smarthome.core.library.items.DimmerItem: void send(org.eclipse.smarthome.core.library.types.PercentType)> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: void receiveUpdate(java.lang.String,org.eclipse.smarthome.core.types.State,java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.console.ThingConsoleCommandExtension: void execute(java.lang.String[],Console)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: void updateState(java.lang.String,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.library.items.ColorItem: void setState(org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.thing.internal.console.LinkConsoleCommandExtension: void setManagedItemChannelLinkProvider(org.eclipse.smarthome.core.thing.link.ManagedItemChannelLinkProvider)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setOperator(org.eclipse.smarthome.core.persistence.FilterCriteria$Operator)> 
+<org.eclipse.smarthome.core.thing.internal.BridgeImpl: void setStatus(org.eclipse.smarthome.core.thing.ThingStatus)> 
+<org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry: void setThingRegistry(org.eclipse.smarthome.core.thing.ThingRegistry)> 
+<org.eclipse.smarthome.core.items.GenericItem: void setEventPublisher(org.eclipse.smarthome.core.events.EventPublisher)> 
+<org.eclipse.smarthome.core.internal.events.EventPublisherImpl: void sendCommand(java.lang.String,org.eclipse.smarthome.core.types.Command)> 
+<org.eclipse.smarthome.core.common.registry.AbstractManagedProvider: java.lang.Object update(java.lang.Object)> 
+<org.eclipse.smarthome.core.library.items.NumberItem: void send(org.eclipse.smarthome.core.library.types.DecimalType)> 
+<org.eclipse.smarthome.core.autoupdate.internal.AutoUpdateBinding: void setItemRegistry(org.eclipse.smarthome.core.items.ItemRegistry)> 
+<org.eclipse.smarthome.core.items.GenericItem: void send(org.eclipse.smarthome.core.types.RefreshType)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: void setBundleContext(org.osgi.framework.BundleContext)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setChannels(java.util.List)> 
+<org.eclipse.smarthome.core.events.AbstractEventSubscriber: void receiveUpdate(java.lang.String,org.eclipse.smarthome.core.types.State,java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setConfiguration(Configuration)> 
+<org.eclipse.smarthome.core.thing.xml.internal.XmlThingTypeProvider: void addThingType(org.osgi.framework.Bundle,org.eclipse.smarthome.core.thing.type.ThingType)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setBridgeUID(org.eclipse.smarthome.core.thing.ThingUID)> 
+<org.eclipse.smarthome.core.thing.internal.console.LinkConsoleCommandExtension: void setItemChannelLinkRegistry(org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setOrdering(org.eclipse.smarthome.core.persistence.FilterCriteria$Ordering)> 
+<org.eclipse.smarthome.core.autoupdate.internal.AutoUpdateBinding: void postUpdate(java.lang.String,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.common.registry.AbstractRegistry: void updated(org.eclipse.smarthome.core.common.registry.Provider,java.lang.Object,java.lang.Object)> 
+<org.eclipse.smarthome.core.library.items.StringItem: void send(org.eclipse.smarthome.core.library.types.StringType)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: void handleUpdate(org.eclipse.smarthome.core.thing.ChannelUID,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.thing.xml.internal.XmlThingTypeProvider: void removeAllThingTypes(org.osgi.framework.Bundle)> 
+<org.eclipse.smarthome.core.thing.internal.console.ThingConsoleCommandExtension: void setManagedThingProvider(org.eclipse.smarthome.core.thing.ManagedThingProvider)> 
+<org.eclipse.smarthome.core.internal.items.ItemUpdater: void receiveUpdate(java.lang.String,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void channelUpdated(org.eclipse.smarthome.core.thing.ChannelUID,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.library.items.SwitchItem: void send(org.eclipse.smarthome.core.library.types.OnOffType)> 
+<org.eclipse.smarthome.core.autoupdate.internal.AutoUpdateBinding: void setEventPublisher(org.eclipse.smarthome.core.events.EventPublisher)> 
+<org.eclipse.smarthome.core.internal.items.ItemRegistryImpl: void setEventPublisher(org.eclipse.smarthome.core.events.EventPublisher)> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: void setItemChannelLinkRegistry(org.eclipse.smarthome.core.thing.link.ItemChannelLinkRegistry)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setHandler(org.eclipse.smarthome.core.thing.binding.ThingHandler)> 
+<org.eclipse.smarthome.core.items.GenericItem: void internalSend(org.eclipse.smarthome.core.types.Command)> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: void send(org.eclipse.smarthome.core.library.types.StopMoveType)> 
+<org.eclipse.smarthome.core.items.GenericItem: void setState(org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: void send(org.eclipse.smarthome.core.library.types.PercentType)> 
+<org.eclipse.smarthome.core.internal.events.EventPublisherImpl: void sendCommand(java.lang.String,org.eclipse.smarthome.core.types.Command,java.lang.String)> 
+<org.eclipse.smarthome.core.scriptengine.internal.extensions.ScriptEngineConsoleCommandExtension: void execute(java.lang.String[],Console)> 
+<org.eclipse.smarthome.core.library.items.RollershutterItem: void setState(org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.internal.events.EventPublisherImpl: void postUpdate(java.lang.String,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setState(org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setName(java.lang.String)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setStatus(org.eclipse.smarthome.core.thing.ThingStatus)> 
+<org.eclipse.smarthome.core.thing.internal.ThingRegistryImpl: void notifyListenersAboutUpdatedElement(org.eclipse.smarthome.core.thing.Thing,org.eclipse.smarthome.core.thing.Thing)> 
+<org.eclipse.smarthome.core.items.GroupItem: void send(org.eclipse.smarthome.core.types.Command)> 
+<org.eclipse.smarthome.core.internal.events.EventPublisherImpl: void setEventAdmin(org.osgi.service.event.EventAdmin)> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: void setThingRegistry(org.eclipse.smarthome.core.thing.ThingRegistry)> 
+<org.eclipse.smarthome.core.library.items.DateTimeItem: void send(org.eclipse.smarthome.core.library.types.DateTimeType)> 
+<org.eclipse.smarthome.core.scriptengine.ScriptException: void setScriptText(java.lang.String)> 
+<org.eclipse.smarthome.core.service.AbstractActiveService: void setProperlyConfigured(boolean)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setItemName(java.lang.String)> 
+<org.eclipse.smarthome.core.items.GroupItem: void internalSend(org.eclipse.smarthome.core.types.Command)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setBeginDate(java.util.Date)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: void thingUpdated(org.eclipse.smarthome.core.thing.Thing)> 
+<org.eclipse.smarthome.core.events.AbstractEventSubscriber: void receiveUpdate(java.lang.String,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.internal.items.ItemUpdater: void receiveCommand(java.lang.String,org.eclipse.smarthome.core.types.Command)> 
+<org.eclipse.smarthome.core.library.items.ColorItem: void send(org.eclipse.smarthome.core.library.types.HSBType)> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: void thingUpdated(org.eclipse.smarthome.core.thing.Thing,org.eclipse.smarthome.core.thing.internal.ThingTracker$ThingTrackerEvent)> 
+<org.eclipse.smarthome.core.thing.internal.ThingImpl: void setId(org.eclipse.smarthome.core.thing.ThingUID)> 
+<org.eclipse.smarthome.core.thing.binding.BaseThingHandler: void updateState(org.eclipse.smarthome.core.thing.ChannelUID,org.eclipse.smarthome.core.types.State)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setPageNumber(int)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setEndDate(java.util.Date)> 
+<org.eclipse.smarthome.core.thing.internal.console.ThingConsoleCommandExtension: void setThingRegistry(org.eclipse.smarthome.core.thing.ThingRegistry)> 
+<org.eclipse.smarthome.core.scriptengine.internal.extensions.ScriptEngineConsoleCommandExtension: void setScriptEngine(org.eclipse.smarthome.core.scriptengine.ScriptEngine)> 
+<org.eclipse.smarthome.core.thing.internal.console.LinkConsoleCommandExtension: void execute(java.lang.String[],Console)> 
+<org.eclipse.smarthome.core.thing.internal.ThingManager: void setEventPublisher(org.eclipse.smarthome.core.events.EventPublisher)> 
+<org.eclipse.smarthome.core.persistence.FilterCriteria: org.eclipse.smarthome.core.persistence.FilterCriteria setPageSize(int)> 
+<org.eclipse.smarthome.core.internal.items.ItemUpdater: void setItemRegistry(org.eclipse.smarthome.core.items.ItemRegistry)> 
+<org.eclipse.smarthome.core.internal.events.EventPublisherImpl: void postUpdate(java.lang.String,org.eclipse.smarthome.core.types.State,java.lang.String)> 
+<org.eclipse.smarthome.core.common.registry.AbstractManagedProvider: void setStorageService(org.eclipse.smarthome.core.storage.StorageService)> 
+
+
+***__authentications_to_high__*** 
+
+
+
+***__authentications_to_low__*** 
+
+
+
+***__authentications_neutral__*** 
+
+
+
+***__sanitizers__*** 
+
+
+
+***__none__*** 
+
+
+

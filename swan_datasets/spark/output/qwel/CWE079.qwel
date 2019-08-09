@@ -1,0 +1,157 @@
+methods CWE079_sources [ 
+java.net.URL spark.utils.ResourceUtils.getURL(java.lang.String); 
+spark.resource.AbstractFileResolvingResource spark.resource.ExternalResourceHandler.getResource(java.lang.String); 
+void spark.Spark.get(java.lang.String,spark.Route); 
+java.io.File spark.utils.ResourceUtils.getFile(java.net.URI); 
+void spark.Routable.get(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+java.lang.String spark.resource.ClassPathResource.getDescription(); 
+spark.ExceptionHandlerImpl spark.ExceptionMapper.getHandler(java.lang.Class); 
+spark.Request spark.RequestResponseFactory.create(javax.servlet.http.HttpServletRequest); 
+spark.CustomErrorPages spark.CustomErrorPages.getInstance(); 
+java.lang.String spark.HaltException.getBody(); 
+java.lang.String spark.servlet.FilterTools.getRelativePath(javax.servlet.http.HttpServletRequest,java.lang.String); 
+spark.resource.AbstractFileResolvingResource spark.resource.ClassPathResourceHandler.getResource(java.lang.String); 
+java.io.File spark.utils.ResourceUtils.getFile(java.net.URL,java.lang.String); 
+java.lang.ClassLoader spark.utils.ClassUtils.getDefaultClassLoader(); 
+java.lang.String spark.RouteImpl.getAcceptType(); 
+java.lang.Object spark.routematch.RouteMatch.getTarget(); 
+java.io.File spark.resource.AbstractResource.getFileForLastModifiedCheck(); 
+java.io.File spark.resource.AbstractFileResolvingResource.getFile(); 
+java.lang.Object spark.embeddedserver.jetty.websocket.WebSocketHandlerInstanceWrapper.getHandler(); 
+void spark.Service.get(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+java.lang.String spark.resource.ClassPathResource.getFilename(); 
+java.lang.String spark.RouteImpl.getPath(); 
+java.util.List spark.Request.getSplat(java.util.List,java.util.List); 
+void spark.Routable.get(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Routable.get(java.lang.String,spark.Route,spark.ResponseTransformer); 
+spark.QueryParamsMap spark.QueryParamsMap.get(java.lang.String[]); 
+java.net.URL spark.resource.AbstractResource.getURL(); 
+void spark.Routable.get(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+java.net.URI spark.resource.AbstractResource.getURI(); 
+spark.resource.AbstractFileResolvingResource spark.resource.AbstractResourceHandler.getResource(javax.servlet.http.HttpServletRequest); 
+java.io.File spark.resource.AbstractFileResolvingResource.getFileForLastModifiedCheck(); 
+void spark.Spark.get(java.lang.String,java.lang.String,spark.Route); 
+java.lang.String spark.servlet.FilterTools.getFilterPath(javax.servlet.FilterConfig); 
+void spark.Service.get(java.lang.String,spark.Route); 
+void spark.Redirect.get(java.lang.String,java.lang.String,spark.Redirect$Status); 
+java.net.URL spark.resource.ClassPathResource.getURL(); 
+spark.Request spark.RequestResponseFactory.create(spark.routematch.RouteMatch,javax.servlet.http.HttpServletRequest); 
+javax.servlet.ServletInputStream spark.embeddedserver.jetty.HttpRequestWrapper.getInputStream(); 
+java.lang.Object spark.ModelAndView.getModel(); 
+void spark.Redirect.get(java.lang.String,java.lang.String); 
+java.lang.String spark.http.matching.MatcherFilter.getHttpMethodFrom(javax.servlet.http.HttpServletRequest); 
+java.util.Map spark.route.Routes.getAcceptedMimeTypes(java.util.List); 
+java.lang.String spark.FilterImpl.getAcceptType(); 
+java.io.InputStream spark.resource.ClassPathResource.getInputStream(); 
+spark.servlet.SparkApplication spark.servlet.SparkFilter.getApplication(javax.servlet.FilterConfig); 
+java.lang.Object spark.CustomErrorPages.getFor(int,spark.Request,spark.Response); 
+java.io.InputStream spark.resource.ExternalResource.getInputStream(); 
+void spark.Spark.get(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+int spark.HaltException.getStatusCode(); 
+java.lang.String spark.routematch.RouteMatch.getAcceptType(); 
+java.lang.String spark.resource.ClassPathResource.getPath(); 
+void spark.Service.get(java.lang.String,java.lang.String,spark.Route); 
+java.lang.Object spark.embeddedserver.jetty.websocket.WebSocketHandlerClassWrapper.getHandler(); 
+void spark.Service.get(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+java.lang.String spark.resource.ExternalResource.getPath(); 
+java.lang.String spark.resource.AbstractResource.getFilename(); 
+java.lang.String spark.ModelAndView.getViewName(); 
+java.util.Map spark.QueryParamsMap.getQueryMap(); 
+java.lang.String spark.routematch.RouteMatch.getMatchUri(); 
+spark.Request spark.http.matching.RequestWrapper.getDelegate(); 
+java.lang.String spark.FilterImpl.getPath(); 
+spark.servlet.SparkApplication[] spark.servlet.SparkFilter.getApplications(javax.servlet.FilterConfig); 
+java.io.File spark.resource.AbstractResource.getFile(); 
+void spark.Spark.get(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+spark.ExceptionMapper spark.ExceptionMapper.getInstance(); 
+java.lang.String spark.Service.getPaths(); 
+java.lang.String[] spark.QueryParamsMap.parseKey(java.lang.String); 
+void spark.QueryParamsMap.loadQueryString(java.util.Map); 
+spark.servlet.SparkApplication spark.servlet.SparkFilter.getApplication(java.lang.String); 
+java.io.File spark.utils.ResourceUtils.getFile(java.net.URI,java.lang.String); 
+java.lang.String spark.resource.ExternalResource.getFilename(); 
+spark.Response spark.http.matching.ResponseWrapper.getDelegate(); 
+void spark.Service.get(java.lang.String,spark.Route,spark.ResponseTransformer); 
+java.lang.String spark.routematch.RouteMatch.getRequestURI(); 
+java.lang.String spark.utils.StringUtils.getFilename(java.lang.String); 
+void spark.Spark.get(java.lang.String,spark.Route,spark.ResponseTransformer); 
+spark.route.Routes spark.route.ServletRoutes.get(); 
+java.io.File spark.utils.ResourceUtils.getFile(java.lang.String); 
+java.lang.String spark.staticfiles.MimeType.getMimeType(java.lang.String); 
+spark.http.matching.RequestWrapper spark.http.matching.RequestWrapper.create(); 
+java.util.Map spark.Request.getParams(java.util.List,java.util.List); 
+void spark.Routable.get(java.lang.String,java.lang.String,spark.Route); 
+spark.Service spark.Spark.getInstance(); 
+void spark.Spark.get(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+java.lang.String spark.resource.ExternalResource.getDescription(); 
+void spark.Routable.get(java.lang.String,spark.Route); 
+spark.route.HttpMethod spark.route.HttpMethod.get(java.lang.String); 
+java.lang.String[] spark.QueryParamsMap.getValues(); 
+void spark.QueryParamsMap.loadKeys(java.lang.String,java.lang.String[]); 
+java.lang.String spark.CustomErrorPages.getDefaultFor(int); 
+java.net.URL spark.resource.ExternalResource.getURL(); 
+spark.ExceptionHandlerImpl spark.ExceptionMapper.getHandler(java.lang.Exception); 
+void spark.Service.get(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+java.io.File spark.utils.ResourceUtils.getFile(java.net.URL); 
+java.lang.Object spark.http.matching.Body.get(); 
+org.eclipse.jetty.servlet.ServletContextHandler spark.embeddedserver.jetty.websocket.WebSocketServletContextHandlerFactory.create(java.util.Map,java.util.Optional); 
+]
+methods CWE079_sinks [ 
+void spark.Spark.setSecure(java.lang.String,java.lang.String,java.lang.String,java.lang.String); 
+void spark.http.matching.ResponseWrapper.setDelegate(spark.Response); 
+void spark.serialization.DefaultSerializer.process(java.io.OutputStream,java.lang.Object); 
+void spark.Service.addWebSocketHandler(java.lang.String,spark.embeddedserver.jetty.websocket.WebSocketHandlerWrapper); 
+void spark.serialization.Serializer.setNext(spark.serialization.Serializer); 
+void spark.route.SimpleRouteMatcher.parseValidateAddRoute(java.lang.String,java.lang.String,java.lang.Object); 
+void spark.Response.redirect(java.lang.String,int); 
+spark.utils.MimeParse$FitnessAndQuality spark.utils.MimeParse.fitnessAndQualityParsed(java.lang.String,java.util.Collection); 
+spark.utils.MimeParse$ParseResults spark.utils.MimeParse.parseMediaRange(java.lang.String); 
+void spark.staticfiles.StaticFilesConfiguration.setExpireTimeSeconds(long); 
+void spark.Service.webSocket(java.lang.String,java.lang.Class); 
+void spark.Service.webSocket(java.lang.String,java.lang.Object); 
+byte[] spark.utils.IOUtils.toByteArray(java.io.InputStream); 
+void spark.serialization.BytesSerializer.process(java.io.OutputStream,java.lang.Object); 
+void spark.Spark.setPort(int); 
+void spark.http.matching.Body.set(java.lang.Object); 
+void spark.Response.redirect(java.lang.String); 
+java.lang.String spark.utils.StringUtils.replace(java.lang.String,java.lang.String,java.lang.String); 
+long spark.utils.IOUtils.copyLarge(java.io.Reader,java.io.Writer); 
+void spark.http.matching.RequestWrapper.setDelegate(spark.Request); 
+void spark.Spark.setIpAddress(java.lang.String); 
+long spark.utils.IOUtils.copyLarge(java.io.InputStream,java.io.OutputStream); 
+]
+methods CWE079_authentications_to_high [ 
+void spark.Routable.connect(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+void spark.Routable.connect(java.lang.String,java.lang.String,spark.Route); 
+void spark.Spark.connect(java.lang.String,spark.Route); 
+org.eclipse.jetty.server.HttpConnectionFactory spark.embeddedserver.jetty.SocketConnectorFactory.createHttpConnectionFactory(); 
+void spark.Routable.connect(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Service.connect(java.lang.String,spark.Route); 
+void spark.Spark.connect(java.lang.String,spark.Route,spark.ResponseTransformer); 
+org.eclipse.jetty.server.ServerConnector spark.embeddedserver.jetty.SocketConnectorFactory.createSecureSocketConnector(org.eclipse.jetty.server.Server,java.lang.String,int,spark.ssl.SslStores); 
+void spark.embeddedserver.jetty.SocketConnectorFactory.initializeConnector(org.eclipse.jetty.server.ServerConnector,java.lang.String,int); 
+void spark.resource.AbstractFileResolvingResource.customizeConnection(java.net.HttpURLConnection); 
+void spark.Routable.connect(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Service.connect(java.lang.String,spark.Route,spark.ResponseTransformer); 
+void spark.Spark.connect(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Spark.connect(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+void spark.Spark.connect(java.lang.String,java.lang.String,spark.Route); 
+org.eclipse.jetty.server.ServerConnector spark.embeddedserver.jetty.SocketConnectorFactory.createSocketConnector(org.eclipse.jetty.server.Server,java.lang.String,int); 
+void spark.Service.connect(java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Routable.connect(java.lang.String,spark.Route); 
+void spark.Service.connect(java.lang.String,java.lang.String,spark.Route,spark.ResponseTransformer); 
+void spark.Routable.connect(java.lang.String,spark.Route,spark.ResponseTransformer); 
+void spark.Spark.connect(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+void spark.Service.connect(java.lang.String,java.lang.String,spark.Route); 
+void spark.resource.AbstractFileResolvingResource.customizeConnection(java.net.URLConnection); 
+void spark.Service.connect(java.lang.String,java.lang.String,spark.TemplateViewRoute,spark.TemplateEngine); 
+]
+methods CWE079_authentications_to_low [ 
+]
+methods CWE079_authentications_neutral [ 
+]
+methods CWE079_sanitizers [ 
+java.lang.String spark.utils.StringUtils.replace(java.lang.String,java.lang.String,java.lang.String); 
+]
+methods CWE079_none [ 
+]

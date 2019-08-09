@@ -1,0 +1,2 @@
+<org.apache.cordova.NetworkManager: java.lang.String getConnectionInfo(android.net.NetworkInfo)> 
+<org.apache.cordova.NetworkManager: void updateConnectionInfo(android.net.NetworkInfo)> 

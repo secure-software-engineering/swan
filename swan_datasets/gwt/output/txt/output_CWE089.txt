@@ -1,0 +1,5 @@
+<elemental.js.html.JsIDBDatabase: elemental.html.IDBObjectStore createObjectStore(java.lang.String,elemental.util.Mappable)> 
+<elemental.js.html.JsIDBDatabase: elemental.util.Indexable getObjectStoreNames()> 
+<com.google.gwt.safehtml.shared.UriUtils: java.lang.String sanitizeUri(java.lang.String)> 
+<com.google.gwt.safehtml.shared.SimpleHtmlSanitizer: java.lang.String simpleSanitize(java.lang.String)> 
+<elemental.js.html.JsIDBDatabase: elemental.html.IDBObjectStore createObjectStore(java.lang.String)> 

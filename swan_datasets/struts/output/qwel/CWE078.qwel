@@ -1,0 +1,14 @@
+methods CWE078_sources [ 
+]
+methods CWE078_sinks [ 
+]
+methods CWE078_authentications_to_high [ 
+]
+methods CWE078_authentications_to_low [ 
+]
+methods CWE078_authentications_neutral [ 
+]
+methods CWE078_sanitizers [ 
+]
+methods CWE078_none [ 
+]

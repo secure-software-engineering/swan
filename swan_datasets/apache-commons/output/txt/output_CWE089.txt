@@ -1,0 +1,9 @@
+<org.apache.xalan.lib.sql.SQLQueryParser: org.apache.xalan.lib.sql.SQLQueryParser parse(org.apache.xalan.lib.sql.XConnection,java.lang.String,int)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.Class loadClass(java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.String getName()> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.Object getObject(java.sql.ResultSet,java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty createDynaProperty(java.sql.ResultSetMetaData,int)> 
+<org.apache.xalan.lib.sql.SQLDocument: void execute(org.apache.xalan.lib.sql.XConnection,org.apache.xalan.lib.sql.SQLQueryParser)> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty[] getDynaProperties()> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty getDynaProperty(java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.String getColumnName(java.lang.String)> 

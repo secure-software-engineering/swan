@@ -1,0 +1,2 @@
+<org.apache.cordova.FileUtils: java.lang.String getMimeType(java.lang.String)> 
+<org.apache.cordova.InAppBrowser: java.lang.String updateUrl(java.lang.String)> 

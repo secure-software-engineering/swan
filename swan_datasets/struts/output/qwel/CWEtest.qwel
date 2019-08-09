@@ -1,0 +1,14 @@
+methods CWEtest_sources [ 
+]
+methods CWEtest_sinks [ 
+]
+methods CWEtest_authentications_to_high [ 
+]
+methods CWEtest_authentications_to_low [ 
+]
+methods CWEtest_authentications_neutral [ 
+]
+methods CWEtest_sanitizers [ 
+]
+methods CWEtest_none [ 
+]

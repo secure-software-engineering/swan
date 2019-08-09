@@ -1,0 +1,14 @@
+methods CWE306_sources [ 
+]
+methods CWE306_sinks [ 
+]
+methods CWE306_authentications_to_high [ 
+]
+methods CWE306_authentications_to_low [ 
+]
+methods CWE306_authentications_neutral [ 
+]
+methods CWE306_sanitizers [ 
+]
+methods CWE306_none [ 
+]

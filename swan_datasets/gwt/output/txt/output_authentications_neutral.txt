@@ -1,0 +1,2 @@
+<com.google.gwt.thirdparty.guava.common.collect.Range: boolean isConnected(com.google.gwt.thirdparty.guava.common.collect.Range)> 
+<com.google.gwt.junit.JUnitMessageQueue: int getNumConnectedClients()> 
