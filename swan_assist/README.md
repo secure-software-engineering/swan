@@ -15,30 +15,37 @@ Moreover, users can manually inspect the proper usage of the methods detected by
 
 ## Setting Up the Plugin
 
-Import the project using either of the following methods:
-##### Cloning Project from the Repository
-1) Select the *File>Project from Version Control>Git* option, enter the repository’s URL and then select *Clone* to import the project.
-2) Go to *File>Project Structure* to edit the project settings. 
-    3) For the project's SDK, select the *IntelliJ IDEA IU-** option.
-    4) Select *Modules* from the left panel and use the *Add* button to add a new project module. In the window that appears, select *IntelliJ Platform Plugin* from the left panel and select *OK*. Select a name for the module and ensure that the *Content Root* and *Module File Location* point to the project's root folder and select *Finish*. If a default module was generated while importing the project, you can remove it.
-    5) Select Libraries from the left panel, select the *Add* button and select Java. Select the ``/libs`` folder in the window that appears and select *Open*.
+The project can be downloaded using any of the methods below.  the project using either of the following methods:
+##### Method 1: Cloning Project 
+1) Select the **File>Project from Version Control>Git** option, enter the repository’s URL and then select **Clone** to import the project.
+2) Go to **File>Project Structure** to edit the project settings. 
+    3) For **Project SDK**, select the most recent Java SDK version.
+    4) Select **Modules** from the left panel/
+        1) Click the **Add** button and then **Import Module**. 
+        2) In the window that appears, open the ``/swan_assist`` directory of the project.
 
-##### Downloading and Importing Project
-1) Download the project from Github and then use the *File>Project from Existing Resources* from the menu to import the project. Select the downloaded project's root folder and select *Open*.
-2) Select the option to *Create Project from existing sources* and then proceed.
-3) At the step to select the project's source files, deselect the ``test-project/src`` entry, if it was automatically selected. The project libraries will be automatically detected and a module will also be created.
-4) Validate that the project was imported correctly and the module was correctly created. If there are issues, follow the steps in step 2 in the above section.
+##### Method 2: Downloading Project
+1) Download the project from Github and then use the **File>Project from Existing Resources** from the menu to import the project. 
+2) Select the ``/swan_assist`` directory in the downloaded project's root folder and select **Open**.
+
+##### Importing Project Module
+After following the steps of either Method 1 or 2, the **Import Module** dialog will appear. Follow the steps below to setup the project module.
+1) Select **Import module from external module** and then the **Gradle** option.
+2) Select the **Use auto-import** option. 
+3) If the correct Gradle JVM isn’t selected, you can change it. 
+
+The module should then be built. 
+
 
 ## Running the Plugin
-To run the plugin, select the *Run Configuration* drop down menu and select *Edit Configurations*. Ensure that the module that was created previously is selected and press Ok. You should now be able to run the project.
+To run the plugin:
 
-A separate instance of IntelliJ will be launched. Use the open option to select the project found in ``/example-project`` directory. You may need to setup a project SDK for the project if one isn’t automatically configured. You should then be able to run the test project.
+1) Select the **Run Configuration** drop down menu and select **Edit Configurations** or from the **Run** menu select **Edit Configurations**. 
+2) Click the **Add** button and select **Gradle**. 
+3) Select the **swan_assist** Gradle module that was just created and enter ``:runIde`` as the value for **Tasks** - this tasks will run the plugin in a new instance of IntelliJ. 
+4) When the new instance of IntelliJ launches, use the open option to select the project found in ``/test-project`` directory. You may need to set a project SDK, if one isn’t automatically configured. 
 
 Logs for the plugin will appear in the initial instance of IntelliJ.
 
-## Building the Plugin
-To build the plugin, select the  "Prepare Plugin Module '...' For Deployment" option from the Build menu. This will generate the a zip file that contains the plugin's jars and resources in the project's root directory.
 
-## Installing the Plugin
-To install the plugin, go Preferences and select "Plugins" from the sidebar. Select the "Install Plugin from disk" button, locate the plugin file and select it. You will need to restart IntelliJ for the plugin to work. 
 

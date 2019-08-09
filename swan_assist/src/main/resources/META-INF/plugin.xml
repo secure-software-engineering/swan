@@ -1,0 +1,115 @@
+<idea-plugin>
+    <id>de.fraunhofer.swan_assist</id>
+    <name>SWAN_Assist</name>
+    <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
+
+    <description>IDE support for the identification of configured methods for static analyses</description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
+        <toolWindow id="SWAN_Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
+    </extensions>
+
+    <actions>
+        <group id="SWAN_Assist.ActionBar" text="SWAN_Assist" popup="false" >
+
+            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
+                    text="Import File"
+                    icon="PluginIcons.IMPORT_ACTION"
+                    description="Import configuration file">
+            </action>
+
+            <action id="SWAN_Assist.ExportAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
+                    icon="PluginIcons.EXPORT_ACTION"
+                    text="Export File"
+                    description="Export configuration file">
+            </action>
+
+            <separator/>
+            <group id="SWAN_Assist.FilterActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.FilterActionGroup"
+                   text="Filter Methods"
+                   popup="true" icon="PluginIcons.FILTER_ACTION">
+            </group>
+            <separator/>
+
+            <action id="SWAN_Assist.LaunchSWANAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    icon="PluginIcons.REFRESH_SWAN"
+                    text="Load or Reload SWAN">
+            </action>
+
+            <action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.suggest.SuggestAction" text="Suggest Methods"
+                    description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/>
+
+            <separator/>
+
+            <action id="SWAN_Assist.HelpAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
+                    text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
+            </action>
+        </group>
+
+        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method"
+               popup="true" icon="PluginIcons.FILTER_ACTION">
+
+        </group>
+
+        <group id="SWAN_Assist.CategoryActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.CategoryActionGroup" text="Filter"
+               popup="true" icon="PluginIcons.FILTER_ACTION">
+
+        </group>
+
+        <group id="EditorGroup" text="SWAN-Assist" popup="true" icon="PluginIcons.SWAN_ASSIST">
+            <add-to-group group-id="EditorPopupMenu" />
+            <action id="SWAN_Assist.AddMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.AddMethodAction"
+                    text="Add/Update Method" icon="PluginIcons.ADD_METHOD_ACTION">
+            </action>
+
+            <action id="SWAN_Assist.RestoreMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.RestoreMethodAction"
+                    text="Restore" >
+            </action>
+
+            <action id="SWAN_Assist.DeleteMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.DeleteMethodAction"
+                    text="Delete">
+            </action>
+
+            <action id="SWAN_Assist.MethodPropertiesAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodPropertiesAction"
+                    text="Properties" >
+            </action>
+
+            <action id="SWAN_Assist.MethodListAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodListAction"
+                    text="View Methods List" >
+            </action>
+            <separator/>
+            <action id="SWAN_Assist.Editor.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
+                    text="Import File" icon="PluginIcons.IMPORT_ACTION">
+            </action>
+            <action id="SWAN_Assist.Editor.ExportAction" class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
+                    text="Export File" icon="PluginIcons.EXPORT_ACTION">
+            </action>
+            <separator/>
+            <action id="SWAN_Assist.Editor.LaunchSWANAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    icon="PluginIcons.REFRESH_SWAN"
+                    text="Run/Rerun SWAN">
+            </action>
+
+            <separator/>
+
+            <action id="SWAN_Assist.Editor.HelpAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
+                    text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
+            </action>
+
+        </group>
+    </actions>
+
+</idea-plugin>
