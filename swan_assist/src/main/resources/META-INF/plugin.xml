@@ -11,6 +11,8 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
+    <idea-version since-build="181"/>
+
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
