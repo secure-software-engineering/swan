@@ -96,13 +96,10 @@ public class PluginSettingsDialog extends DialogWrapper {
             outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
 
         //Set value for using training path
-        if (PropertiesComponent.getInstance(project).isValueSet(Constants.DEFAULT_TRAINING_PATH)) {
-
-            trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH));
-        }
+        trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH, false ));
 
         for (Component component : trainingPanel.getComponents()) {
-            component.setEnabled(!trainingPathCheckbox.isSelected());
+            component.setEnabled(trainingPathCheckbox.isSelected());
         }
 
         if(PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)){
@@ -123,7 +120,7 @@ public class PluginSettingsDialog extends DialogWrapper {
                 PropertiesComponent.getInstance(project).setValue(Constants.DEFAULT_TRAINING_PATH, trainingPathCheckbox.isSelected());
 
                 for (Component component : trainingPanel.getComponents()) {
-                    component.setEnabled(!trainingPathCheckbox.isSelected());
+                    component.setEnabled(trainingPathCheckbox.isSelected());
                 }
             }
         });
@@ -165,13 +162,13 @@ public class PluginSettingsDialog extends DialogWrapper {
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
-            } else if (!trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
+            } else if (trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
 
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
-            } else if (!trainingPathCheckbox.isSelected()) {
+            } else if (trainingPathCheckbox.isSelected()) {
 
                 parameters.put(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
                 PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
