@@ -1,24 +1,18 @@
 package de.fraunhofer.iem.swan;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
+import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.data.Constants;
+import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.data.XMLParser;
+import javafx.util.Pair;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Constants;
-import de.fraunhofer.iem.swan.data.Method;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.*;
+import java.util.*;
 
 public class Writer {
 
@@ -240,6 +234,41 @@ public class Writer {
         wr.close();
     }
 
+    public void writeResultsQwelXML(Set<Method> methods, String outputFile) {
+
+        File file = new File(outputFile.substring(0, outputFile.lastIndexOf(File.separator)));
+        if (!file.exists())
+            file.mkdir();
+
+        LinkedHashMap<String, Pair<String, String>> methodList = new LinkedHashMap();
+        StringBuilder sourcesList = new StringBuilder();
+        StringBuilder sinksList = new StringBuilder();
+
+        int counter = 3;
+
+        for (Method method : methods) {
+
+            if (method.getCategoriesClassified().toString().contains(Constants.SOURCE)) {
+                sourcesList.append("/" + counter + " ");
+                methodList.put("m" + counter, new Pair(Constants.SOURCE, method.getTrimmedSignature()));
+                counter++;
+            }
+
+            if (method.getCategoriesClassified().toString().contains(Constants.SINK)) {
+                sinksList.append("/" + counter + " ");
+                methodList.put("m" + counter, new Pair(Constants.SINK, method.getTrimmedSignature()));
+                counter++;
+            }
+        }
+
+        XMLParser xmlParser = new XMLParser();
+        try {
+            xmlParser.generateXML(outputFile, methodList, sourcesList.toString(), sinksList.toString());
+        } catch (TransformerException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void writeResultsQWELLegacy(Set<Method> methods, String outputFile) throws IOException {
         String path = outputFile.substring(0, outputFile.lastIndexOf(File.separator) + 1);
         BufferedWriter w = null;
@@ -378,5 +407,4 @@ public class Writer {
                 w.close();
         }
     }
-
 }

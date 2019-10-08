@@ -235,6 +235,11 @@ public class Method {
 		return this.subSignature;
 	}
 
+	public String getTrimmedSignature(){
+
+		String signature = getSignature();
+		return signature.substring(1, signature.length()-1 );
+	}
 	public String getSignature() {
 		if (signature != null)
 			return signature;
