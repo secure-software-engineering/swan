@@ -3,7 +3,12 @@
     <name>SWAN_Assist</name>
     <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
-    <description>IDE support for the identification of configured methods for static analyses</description>
+    <description> SWAN_Assist provides a GUI support for SWAN -a machine-learning approach for detection of
+        methods of interest for security in Java libraries. The user is able to interact with the learning
+        process by giving feedback on the methods of interest. The tool helps users that write static analyses
+        to create list of security methods for weakness detection for their specific Java libraries.
+        Users can manually inspect the proper usage of the methods detected by SWAN.
+    </description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -11,7 +16,7 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
-    <idea-version since-build="192"/>
+    <idea-version since-build="181"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
