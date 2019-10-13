@@ -16,6 +16,7 @@ import java.util.Set;
 
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.util.SwanConfig;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
@@ -214,22 +215,8 @@ public class Learner {
                 throw new Exception("Wrong WEKA learner!");
             // System.out.println("Classifier created: " + WEKA_LEARNER_ALL);
 
-            Properties config = new Properties();
-            InputStream input = getClass().getClassLoader().getResourceAsStream("swan_core_config.properties");;
-
-            try {
-                config.load(input);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (input != null) {
-                    try {
-                        input.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            SwanConfig swanConfig = new SwanConfig();
+            Properties config = swanConfig.getConfig();
 
             if (Boolean.parseBoolean(config.getProperty("output_train_arff_data"))) {
                 // Save arff data.
@@ -242,7 +229,6 @@ public class Learner {
                 fileName = fileName.replace(", ", "_");
                 saver.setFile(new File("Train_" + fileName + ".arff"));
                 saver.writeBatch();
-
             }
 
             //System.out.println( "Arff data saved at: " + saver.retrieveFile().getCanonicalPath());

@@ -1,13 +1,11 @@
 package de.fraunhofer.iem.swan;
 
+import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.util.SwanConfig;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import de.fraunhofer.iem.swan.data.Category;
+import java.util.*;
 
 /**
  * Runner for SWAN
@@ -215,18 +213,21 @@ public class Main {
             }
             // System.out.println("***** F Measure is " + averageF/iter);
 
+            SwanConfig swanConfig = new SwanConfig();
+            Properties config = swanConfig.getConfig();
+            String fileName = config.getProperty("output_file_name");
+
             // System.out.println("***** Writing final results");
 //			Set<String> tmpFiles = Util.getFiles(outputDir);
             writer.printResultsTXT(loader.methods(),
-                    outputDir + File.separator + "txt" + File.separator + "output.txt");
+                    outputDir + File.separator + "txt" + File.separator + fileName + ".txt");
             writer.writeResultsQWEL(loader.methods(),
-                    outputDir + File.separator + "qwel" + File.separator + "output.qwel");
+                    outputDir + File.separator + "qwel" + File.separator + fileName + ".qwel");
             writer.writeResultsSoot(loader.methods(),
-                    outputDir + File.separator + "soot-qwel" + File.separator + "output.sqwel");
-            writer.printResultsJSON(loader.methods(), outputDir + File.separator + "output.json");
-            writer.writeResultsQwelXML(loader.methods(), outputDir + File.separator + "xml" + File.separator + "output.xml");
+                    outputDir + File.separator + "soot-qwel" + File.separator + fileName + ".sqwel");
+            writer.printResultsJSON(loader.methods(), outputDir + File.separator + fileName + ".json");
+            writer.writeResultsQwelXML(loader.methods(), outputDir + File.separator + fileName + ".xml");
         }
-
     }
 
     private double runClassifier(HashSet<Category> categories, boolean cweMode)
