@@ -1,242 +1,243 @@
 package de.fraunhofer.iem.swan;
 
+import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.util.SwanConfig;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import de.fraunhofer.iem.swan.data.Category;
+import java.util.*;
 
 /**
  * Runner for SWAN
  *
  * @author Lisa Nguyen Quang Do
- *
  */
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		try {
-			if (args.length != 4) {
-				System.err.println("");
-				System.err.println(
-						"Usage: java de.fraunhofer.iem.swan.Main <source-dir> <train-sourcecode> <train-json> <output-dir>\n");
-				System.err.println("<source-dir>:\tDirectory with all JAR files or source code of the Test Data.");
-				System.err.println("\t\tThis is the actual user library being evaluated.\n");
-				System.err.println(
-						"<train-sourcecode>: Directory with all JAR Files or source code of the Train Data to learn from");
-				System.err.println(
-						"\t\tNote: This can be set to \"internal\" without quotes, to use the internal train sourcecode that is bundled in this jar.\n");
-				System.err
-						.println("<train-json>: Path to the train data file (JSON), which includes method signatures.");
-				System.err.println(
-						"\t\tNote: This can be set to \"internal\" (without quotes), to use the internal train data file that is bundled in this jar.\n");
-				System.err.println("<output-dir>:\tDirectory where the output should be written.\n");
-				return;
-			}
+        try {
+            if (args.length != 4) {
+                System.err.println("");
+                System.err.println(
+                        "Usage: java de.fraunhofer.iem.swan.Main <source-dir> <train-sourcecode> <train-json> <output-dir>\n");
+                System.err.println("<source-dir>:\tDirectory with all JAR files or source code of the Test Data.");
+                System.err.println("\t\tThis is the actual user library being evaluated.\n");
+                System.err.println(
+                        "<train-sourcecode>: Directory with all JAR Files or source code of the Train Data to learn from");
+                System.err.println(
+                        "\t\tNote: This can be set to \"internal\" without quotes, to use the internal train sourcecode that is bundled in this jar.\n");
+                System.err
+                        .println("<train-json>: Path to the train data file (JSON), which includes method signatures.");
+                System.err.println(
+                        "\t\tNote: This can be set to \"internal\" (without quotes), to use the internal train data file that is bundled in this jar.\n");
+                System.err.println("<output-dir>:\tDirectory where the output should be written.\n");
+                return;
+            }
 
-			// Get configuration options from command line arguments.
-			String sourceDir = args[0];
-			String trainSourceCode = args[1].equals("internal") ? null : args[1];
-			String trainJson = args[2].equals("internal") ? null : args[2];
-			String outputDir = args[3];
-			
-			Main main = new Main();
-			main.run(sourceDir, trainSourceCode, trainJson, outputDir);
-			// System.out.println("Done.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+            // Get configuration options from command line arguments.
+            String sourceDir = args[0];
+            String trainSourceCode = args[1].equals("internal") ? null : args[1];
+            String trainJson = args[2].equals("internal") ? null : args[2];
+            String outputDir = args[3];
 
-	private Learner learner;
-	private Loader loader;
-	private Parser parser;
-	private FeatureHandler featureHandler;
-	private String outputPath;
-	private Writer writer;
+            Main main = new Main();
+            main.run(sourceDir, trainSourceCode, trainJson, outputDir);
+            // System.out.println("Done.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-	// Configuration tags for debugging
-	private static final boolean runSources = true;
-	private static final boolean runSinks = true;
-	private static final boolean runSanitizers = true;
-	private static final boolean runAuthentications = false;
-	private static final boolean runCwes = true;
+    private Learner learner;
+    private Loader loader;
+    private Parser parser;
+    private FeatureHandler featureHandler;
+    private String outputPath;
+    private Writer writer;
 
-	private static final boolean runOAT = false; // run one at a time analysis
+    // Configuration tags for debugging
+    private static final boolean runSources = true;
+    private static final boolean runSinks = true;
+    private static final boolean runSanitizers = true;
+    private static final boolean runAuthentications = false;
+    private static final boolean runCwes = true;
 
-	/**
-	 * This method executes the analysis and can also be called from outside by
-	 * clients. It uses the builtin training data.
-	 * 
-	 * @param sourceDir This is the actual user library being evaluated.
-	 * @param outputDir Directory where the output should be written.
-	 * @throws IOException          In case an error occurs during the preparation
-	 *                              or execution of the analysis.
-	 * @throws InterruptedException
-	 */
-	public void run(String sourceDir, String outputDir) throws IOException, InterruptedException {
-		run(sourceDir, null, null, outputDir);
-	}
+    private static final boolean runOAT = false; // run one at a time analysis
 
-	/**
-	 * This method executes the analysis and can also be called from outside by
-	 * clients.
-	 * 
-	 * @param sourceDir       This is the actual user library being evaluated.
-	 * @param trainSourceCode Directory with all JAR Files or source code of the
-	 *                        Train Data to learn from. If this is
-	 *                        <code>null</code>, then the builtin traindata is used.
-	 * @param trainJson       Path to the train data file (JSON), which includes
-	 *                        method signatures.If this is <code>null</code>, then
-	 *                        the builtin json file is used.
-	 * @param outputDir       Directory where the output should be written.
-	 * @throws IOException          In case an error occurs during the preparation
-	 *                              or execution of the analysis.
-	 * @throws InterruptedException
-	 */
-	public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
-			throws IOException, InterruptedException {
+    /**
+     * This method executes the analysis and can also be called from outside by
+     * clients. It uses the builtin training data.
+     *
+     * @param sourceDir This is the actual user library being evaluated.
+     * @param outputDir Directory where the output should be written.
+     * @throws IOException          In case an error occurs during the preparation
+     *                              or execution of the analysis.
+     * @throws InterruptedException
+     */
+    public void run(String sourceDir, String outputDir) throws IOException, InterruptedException {
+        run(sourceDir, null, null, outputDir);
+    }
 
-		// This helper object keeps track of created temporary directories and files to
-		// to be deleted before exiting the
-		// application.
-		FileUtility fileUtility = new FileUtility();
+    /**
+     * This method executes the analysis and can also be called from outside by
+     * clients.
+     *
+     * @param sourceDir       This is the actual user library being evaluated.
+     * @param trainSourceCode Directory with all JAR Files or source code of the
+     *                        Train Data to learn from. If this is
+     *                        <code>null</code>, then the builtin traindata is used.
+     * @param trainJson       Path to the train data file (JSON), which includes
+     *                        method signatures.If this is <code>null</code>, then
+     *                        the builtin json file is used.
+     * @param outputDir       Directory where the output should be written.
+     * @throws IOException          In case an error occurs during the preparation
+     *                              or execution of the analysis.
+     * @throws InterruptedException
+     */
+    public void run(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
+            throws IOException, InterruptedException {
 
-		if (trainJson == null) {
-			trainJson = fileUtility.getResourceFile("/input/TrainDataMethods/configurationmethods.json")
-					.getAbsolutePath();
-		}
+        // This helper object keeps track of created temporary directories and files to
+        // to be deleted before exiting the
+        // application.
+        FileUtility fileUtility = new FileUtility();
 
-		if (trainSourceCode == null) {
-			trainSourceCode = fileUtility.getResourceDirectory("/input/TrainDataLibs").getAbsolutePath();
-		}
+        if (trainJson == null) {
+            trainJson = fileUtility.getResourceFile("/input/TrainDataMethods/configurationmethods.json")
+                    .getAbsolutePath();
+        }
 
-		try {
+        if (trainSourceCode == null) {
+            trainSourceCode = fileUtility.getResourceDirectory("/input/TrainDataLibs").getAbsolutePath();
+        }
 
-			internalRun(sourceDir, trainSourceCode, trainJson, outputDir);
+        try {
 
-		} finally {
+            internalRun(sourceDir, trainSourceCode, trainJson, outputDir);
 
-			// Delete temporary files and folders that have been created.
-			fileUtility.dispose();
-		}
+        } finally {
 
-	}
+            // Delete temporary files and folders that have been created.
+            fileUtility.dispose();
+        }
 
-	private void internalRun(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
-			throws IOException, InterruptedException {
+    }
 
-		int iterations = 0;
-		if (runOAT)
-			iterations = 206; // number of features //TODO: improve code: better borders here.
+    private void internalRun(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
+            throws IOException, InterruptedException {
 
-		// for OAT analysis. Each feature is disabled once.
-		for (int i = 0; i <= iterations; i++) {
-			if (i == 0)
-				System.out.println("***** Running with all features.");
-			else {
-				System.out.println("***** Running without " + i + "th feature");
-			}
-			// Cache the list of classes and the CP.
-			// System.out.println("***** Loading CP");
-			Set<String> testClasses = Util.getAllClassesFromDirectory(sourceDir);
-			String testCp = Util.buildCP(sourceDir);
-			String trainingCp = Util.buildCP(trainSourceCode);
-			outputPath = outputDir;
-			// System.out.println("Training set cp: " + trainingCp + "\nTest set cp: " +
-			// testCp);
+        int iterations = 0;
+        if (runOAT)
+            iterations = 206; // number of features //TODO: improve code: better borders here.
 
-			// Cache the features.
-			// System.out.println("***** Loading features");
-			featureHandler = new FeatureHandler(trainingCp + System.getProperty("path.separator") + testCp);
-			featureHandler.initializeFeatures(i); // use 0 for all feature instances
+        // for OAT analysis. Each feature is disabled once.
+        for (int i = 0; i <= iterations; i++) {
+            if (i == 0)
+                System.out.println("***** Running with all features.");
+            else {
+                System.out.println("***** Running without " + i + "th feature");
+            }
+            // Cache the list of classes and the CP.
+            // System.out.println("***** Loading CP");
+            Set<String> testClasses = Util.getAllClassesFromDirectory(sourceDir);
+            String testCp = Util.buildCP(sourceDir);
+            String trainingCp = Util.buildCP(trainSourceCode);
+            outputPath = outputDir;
+            // System.out.println("Training set cp: " + trainingCp + "\nTest set cp: " +
+            // testCp);
 
-			// Cache the methods from the training set.
-			// System.out.println("***** Loading train data");
-			parser = new Parser(trainingCp);
-			parser.loadTrainingSet(Collections.singleton(trainJson));
+            // Cache the features.
+            // System.out.println("***** Loading features");
+            featureHandler = new FeatureHandler(trainingCp + System.getProperty("path.separator") + testCp);
+            featureHandler.initializeFeatures(i); // use 0 for all feature instances
 
-			// Cache the methods from the testing set.
-			// System.out.println("***** Loading test data");
-			loader = new Loader(testCp);
-			loader.loadTestSet(testClasses, parser.methods());
+            // Cache the methods from the training set.
+            // System.out.println("***** Loading train data");
+            parser = new Parser(trainingCp);
+            parser.loadTrainingSet(Collections.singleton(trainJson));
 
-			// Prepare classifier.
-			// System.out.println("***** Preparing classifier");
-			writer = new Writer(loader.methods());
-			learner = new Learner(writer);
+            // Cache the methods from the testing set.
+            // System.out.println("***** Loading test data");
+            loader = new Loader(testCp);
+            loader.loadTestSet(testClasses, parser.methods());
 
-			double averageF = 0;
-			int iter = 0;
-			// Classify.
-			if (runSources) {
-				averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SOURCE, Category.NONE)), false);
-				iter++;
-			}
-			if (runSinks) {
-				averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SINK, Category.NONE)), false);
-				iter++;
-			}
+            // Prepare classifier.
+            // System.out.println("***** Preparing classifier");
+            writer = new Writer(loader.methods());
+            learner = new Learner(writer);
 
-			if (runSanitizers) {
-				averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SANITIZER, Category.NONE)),
-						false);
-				iter++;
-			}
+            double averageF = 0;
+            int iter = 0;
+            // Classify.
+            if (runSources) {
+                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SOURCE, Category.NONE)), false);
+                iter++;
+            }
+            if (runSinks) {
+                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SINK, Category.NONE)), false);
+                iter++;
+            }
 
-			if (runAuthentications) {
-				averageF += runClassifier(
-						new HashSet<Category>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,
-								Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_NEUTRAL, Category.NONE)),
-						false);
-				iter++;
-			}
-			// Save data from last classification.
-			loader.resetMethods();
+            if (runSanitizers) {
+                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SANITIZER, Category.NONE)),
+                        false);
+                iter++;
+            }
 
-			// Cache the methods from the second test set.
-			// System.out.println("***** Loading 2nd test set");
-			loader.pruneNone();
+            if (runAuthentications) {
+                averageF += runClassifier(
+                        new HashSet<Category>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,
+                                Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_NEUTRAL, Category.NONE)),
+                        false);
+                iter++;
+            }
+            // Save data from last classification.
+            loader.resetMethods();
 
-			if (runCwes) {
-				// Run classifications for all cwes in JSON file.
-				for (String cweId : parser.cwe()) {
-					averageF += runClassifier(
-							new HashSet<Category>(Arrays.asList(Category.getCategoryForCWE(cweId), Category.NONE)),
-							true);
-					iter++;
-				}
-			}
-			// System.out.println("***** F Measure is " + averageF/iter);
+            // Cache the methods from the second test set.
+            // System.out.println("***** Loading 2nd test set");
+            loader.pruneNone();
 
-			// System.out.println("***** Writing final results");
+            if (runCwes) {
+                // Run classifications for all cwes in JSON file.
+                for (String cweId : parser.cwe()) {
+                    averageF += runClassifier(
+                            new HashSet<Category>(Arrays.asList(Category.getCategoryForCWE(cweId), Category.NONE)),
+                            true);
+                    iter++;
+                }
+            }
+            // System.out.println("***** F Measure is " + averageF/iter);
+
+            SwanConfig swanConfig = new SwanConfig();
+            Properties config = swanConfig.getConfig();
+            String fileName = config.getProperty("output_file_name");
+
+            // System.out.println("***** Writing final results");
 //			Set<String> tmpFiles = Util.getFiles(outputDir);
-			writer.printResultsTXT(loader.methods(),
-					outputDir + File.separator + "txt" + File.separator + "output.txt");
-			writer.writeResultsQWEL(loader.methods(),
-					outputDir + File.separator + "qwel" + File.separator + "output.qwel");
-			writer.writeResultsSoot(loader.methods(),
-					outputDir + File.separator + "soot-qwel" + File.separator + "output.sqwel");
-			writer.printResultsJSON(loader.methods(), outputDir + File.separator + "output.json");
-		}
+            writer.printResultsTXT(loader.methods(),
+                    outputDir + File.separator + "txt" + File.separator + fileName + ".txt");
+            writer.writeResultsQWEL(loader.methods(),
+                    outputDir + File.separator + "qwel" + File.separator + fileName + ".qwel");
+            writer.writeResultsSoot(loader.methods(),
+                    outputDir + File.separator + "soot-qwel" + File.separator + fileName + ".sqwel");
+            writer.printResultsJSON(loader.methods(), outputDir + File.separator + fileName + ".json");
+            writer.writeResultsQwelXML(loader.methods(), outputDir + File.separator + fileName + ".xml");
+        }
+    }
 
-	}
-
-	private double runClassifier(HashSet<Category> categories, boolean cweMode)
-			throws IOException, InterruptedException {
-		parser.resetMethods();
-		loader.resetMethods();
-		// System.out.println("***** Starting classification for " +
-		// categories.toString());
-		return learner.classify(parser.methods(), loader.methods(), featureHandler.features(), categories,
-				outputPath + File.separator + "txt" + File.separator + "output.txt", cweMode);
-	}
+    private double runClassifier(HashSet<Category> categories, boolean cweMode)
+            throws IOException, InterruptedException {
+        parser.resetMethods();
+        loader.resetMethods();
+        // System.out.println("***** Starting classification for " +
+        // categories.toString());
+        return learner.classify(parser.methods(), loader.methods(), featureHandler.features(), categories,
+                outputPath + File.separator + "txt" + File.separator + "output.txt", cweMode);
+    }
 
 }

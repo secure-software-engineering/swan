@@ -1,15 +1,21 @@
 <idea-plugin>
-    <id>de.fraunhofer.swan_assist</id>
+    <id>de.fraunhofer.iem.swan_assist</id>
     <name>SWAN_Assist</name>
     <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
-    <description>IDE support for the identification of configured methods for static analyses</description>
+    <description> SWAN_Assist provides a GUI support for SWAN -a machine-learning approach for detection of
+        methods of interest for security in Java libraries. The user is able to interact with the learning
+        process by giving feedback on the methods of interest. The tool helps users that write static analyses
+        to create list of security methods for weakness detection for their specific Java libraries.
+        Users can manually inspect the proper usage of the methods detected by SWAN.
+    </description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable plugin in all products
+    <!-- uncomment to enable plugin in all products-->
     <depends>com.intellij.modules.lang</depends>
-    -->
+    <depends>com.intellij.modules.java</depends>
+
 
     <idea-version since-build="181"/>
 
@@ -17,6 +23,8 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
         <toolWindow id="SWAN_Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
+        <applicationService serviceInterface="de.fraunhofer.iem.swan.assist.ui.LoggerService"
+                            serviceImplementation="de.fraunhofer.iem.swan.assist.ui.impl.LoggerServiceImpl"/>
     </extensions>
 
     <actions>
@@ -59,7 +67,7 @@
             </action>
         </group>
 
-        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method"
+        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method Options"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
@@ -88,7 +96,7 @@
             </action>
 
             <action id="SWAN_Assist.MethodListAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodListAction"
-                    text="View Methods List" >
+                    text="View Methods List">
             </action>
             <separator/>
             <action id="SWAN_Assist.Editor.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"

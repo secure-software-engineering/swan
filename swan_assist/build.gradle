@@ -1,33 +1,33 @@
 plugins {
-    id 'java'
     id 'org.jetbrains.intellij' version '0.4.8'
+    id 'java'
 }
 
 group 'de.fraunhofer'
-version '1.0-SNAPSHOT'
+version '1.1'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
-    compile group:'de.upb.cs.swt', name: 'swan_core', version: '1.3.0'
+    compile group:'de.upb.cs.swt', name: 'swan_core', version: '1.4.0'
     compile group: 'ca.mcgill.sable', name: 'soot', version: '3.3.0'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
     compile group: 'org.slf4j', name: 'slf4j-simple', version : '1.7.5'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 intellij {
     version '2018.3.6'
-    intellij.updateSinceUntilBuild false
 }
 
 patchPluginXml {
-    changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+    changeNotes "Initial release of the SWAN_Assist plugin: <br>add, delete and update methods of interest list" +
+            "<br>- suggest methods" +
+            "<br>- filter list" +
+            "<br>- import and export configuration file"
 }
