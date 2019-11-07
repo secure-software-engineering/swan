@@ -12,35 +12,6 @@
       },
       "framework":"",
       "discovery":"",
-      "name":"com.example.scheduler.testproject.Utils.hashPassword",
-      "link":"",
-      "comment":"",
-      "type":[
-        "sanitizer"
-      ],
-      "parameters":[
-        "java.lang.String"
-      ],
-      "return":"java.lang.String",
-      "dataIn":{
-        "parameters":[
-
-        ],
-        "return":false
-      }
-    },
-    {
-      "securityLevel":"none",
-      "cwe":[
-      ],
-      "dataOut":{
-        "parameters":[
-
-        ],
-        "return":false
-      },
-      "framework":"",
-      "discovery":"",
       "name":"com.example.scheduler.testproject.LogUtils.logRecord",
       "link":"",
       "comment":"",
@@ -716,7 +687,7 @@
       },
       "framework":"",
       "discovery":"",
-      "name":"com.example.scheduler.testproject.ExampleSQLiOpenRedirect.encodeforSQL",
+      "name":"com.example.scheduler.testproject.Utils.encodeForSQL",
       "link":"",
       "comment":"",
       "type":[
