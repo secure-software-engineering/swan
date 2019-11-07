@@ -13,37 +13,51 @@ The tool helps users that write static analyses to create list of SWAN for their
 Moreover, users can manually inspect the proper usage of the methods detected by SWAN. 
 
 
-## Setting Up the Plugin
+## Downloading the Project
 
-The project can be downloaded using any of the methods below.  the project using either of the following methods:
-##### Method 1: Cloning Project 
-1) Select the **File>Project from Version Control>Git** option, enter the repository’s URL and then select **Clone** to import the project.
-2) Go to **File>Project Structure** to edit the project settings. 
-    3) For **Project SDK**, select the most recent Java SDK version.
-    4) Select **Modules** from the left panel/
-        1) Click the **Add** button and then **Import Module**. 
-        2) In the window that appears, open the ``/swan_assist`` directory of the project.
+The project can be downloaded using either of the following methods:
 
-##### Method 2: Downloading Project
-1) Download the project from Github and then use the **File>Project from Existing Resources** from the menu to import the project. 
-2) Select the ``/swan_assist`` directory in the downloaded project's root folder and select **Open**.
+##### Method 1: Cloning the Project 
+1) Select the **File>Project from Version Control>Git** option, enter the repository’s URL and then select **Clone** to import the project. The project will contain the following directories: ``swan_core`` (SWAN core application), ``swan_assist`` (IntelliJ Plugin) and ``swan_datasets`` (datasets for the research paper).
+2) To configure the project settings and modules, go to **File>Project Structure**. 
+3) For **Project SDK**, select the corresponding Java SDK version.
+4) Select **Modules** from the left panel and remove the existing module that was automatically created.
+5) Click the **Add** button and then **Import Module** to create the SWAN Core module. Follow the steps in the [Setting up the Project Modules](https://github.com/secure-software-engineering/swan/tree/master/swan_assist#setting-up-the-project-modules) section to finish configuring the core module as well as the plugin module.
 
-##### Importing Project Module
-After following the steps of either Method 1 or 2, the **Import Module** dialog will appear. Follow the steps below to setup the project module.
-1) Select **Import module from external module** and then the **Gradle** option.
-2) Select the **Use auto-import** option. 
-3) If the correct Gradle JVM isn’t selected, you can change it. 
+		
+##### Method 2: Downloading Project ZIP
+1) Download and extract the project resources from GitHub.
+2) In Intellij, use the **File>Project from Existing Resources** to import the project modules. This can also be done from the IntelliJ start screen.  
+3) Follow the steps in the [Setting up the Project Modules](https://github.com/secure-software-engineering/swan/tree/master/swan_assist#setting-up-the-project-modules) section to finish configuring the core module as well as the plugin module.
 
-The module should then be built. 
+## Setting up the Project Modules
 
+##### SWAN Core
+1) In the window that appears, open the ``/swan_core`` directory of the project. 
+2) Select the **Import module from external Model** radio button and also select **Maven**. 
+3) The default settings in the dialogs that appear can be used. 
+4) Close the **Project Settings** dialog so that IntelliJ will index the new project module.
+
+##### SWAN Assist
+1) Return to the **Project Structure** dialog and Select **Modules** from the left panel.
+2) Click the **Add** button and then **Import Module**. 
+3) In the window that appears, open the ``/swan_assist`` directory. Select the **Import module from external Model** radio button and also select **Gradle**. 
+4) The default settings in the dialogs that appear can be used. The plugin module should now be indexed. 
+
+The core and plugin modules should now be imported. 
 
 ## Running the Plugin
-To run the plugin:
 
-1) Select the **Run Configuration** drop down menu and select **Edit Configurations** or from the **Run** menu select **Edit Configurations**. 
+The plugin uses ``swan_core`` dependency from [Maven Central](https://mvnrepository.com/artifact/de.upb.cs.swt/swan_core). If the version in the plugin's ``build.gradle`` file is not available on Maven Central, perform the following steps:
+1) Run the Maven ``install`` command of the ``swan_core`` project from the console or using the Maven Plugin.
+2) Add ``mavenLocal()`` in the ``repositories`` section of the ``build.gradle`` file. The locally installed library can now be use by the plugin.
+
+##### To run the plugin:
+
+1) Select the **Run Configuration** drop down menu and select **Edit Configurations** or from the **Run** menu, select **Edit Configurations**. 
 2) Click the **Add** button and select **Gradle**. 
-3) Select the **swan_assist** Gradle module that was just created and enter ``:runIde`` as the value for **Tasks** - this tasks will run the plugin in a new instance of IntelliJ. 
-4) When the new instance of IntelliJ launches, use the open option to select the project found in ``/test-project`` directory. You may need to set a project SDK, if one isn’t automatically configured. 
+3) Select the **swan_assist** Gradle module that was just created and enter ``:runIde`` as the value for **Tasks** - this task will run the plugin in a new instance of IntelliJ. The plugin can also be executed using the Gradle Plugin in IntelliJ: Open the Gradle Tool Window, expand the ``intellij`` task and double click on ``runIde``. The other tasks can be used as necessary.
+4) When the new instance of IntelliJ launches, use the open option to select the project found in ``/test-project`` directory. You may need to set a project SDK, if one isn’t automatically configured for the project. 
 
 Logs for the plugin will appear in the initial instance of IntelliJ.
 
