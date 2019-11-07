@@ -12,9 +12,10 @@
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable plugin in all products
+    <!-- uncomment to enable plugin in all products-->
     <depends>com.intellij.modules.lang</depends>
-    -->
+    <depends>com.intellij.modules.java</depends>
+
 
     <idea-version since-build="181"/>
 
@@ -66,7 +67,7 @@
             </action>
         </group>
 
-        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method"
+        <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method Options"
                popup="true" icon="PluginIcons.FILTER_ACTION">
 
         </group>
@@ -95,7 +96,7 @@
             </action>
 
             <action id="SWAN_Assist.MethodListAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodListAction"
-                    text="View Methods List" >
+                    text="View Methods List">
             </action>
             <separator/>
             <action id="SWAN_Assist.Editor.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
