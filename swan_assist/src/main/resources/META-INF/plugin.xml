@@ -48,6 +48,11 @@
                    text="Filter Methods"
                    popup="true" icon="PluginIcons.FILTER_ACTION">
             </group>
+            <action id="SWAN_Assist.ExpandAll" class="de.fraunhofer.iem.swan.assist.actions.ExpandAllAction"
+                    text="Expand All"
+                    icon="PluginIcons.EXPAND"
+                    description="Expand or collapse the method tree">
+            </action>
             <separator/>
 
             <action id="SWAN_Assist.LaunchSWANAction"
