@@ -1,9 +1,9 @@
 <idea-plugin>
     <id>de.fraunhofer.iem.swan_assist</id>
-    <name>SWAN_Assist</name>
+    <name>SWAN-Assist</name>
     <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
 
-    <description> SWAN_Assist provides a GUI support for SWAN -a machine-learning approach for detection of
+    <description>SWAN-Assist provides a GUI support for SWAN -a machine-learning approach for detection of
         methods of interest for security in Java libraries. The user is able to interact with the learning
         process by giving feedback on the methods of interest. The tool helps users that write static analyses
         to create list of security methods for weakness detection for their specific Java libraries.
@@ -22,9 +22,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
-        <toolWindow id="SWAN_Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
-        <applicationService serviceInterface="de.fraunhofer.iem.swan.assist.ui.LoggerService"
-                            serviceImplementation="de.fraunhofer.iem.swan.assist.ui.impl.LoggerServiceImpl"/>
+        <toolWindow id="SWAN-Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
     </extensions>
 
     <actions>
@@ -56,9 +54,9 @@
             <separator/>
 
             <action id="SWAN_Assist.LaunchSWANAction"
-                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
                     icon="PluginIcons.REFRESH_SWAN"
-                    text="Load or Reload SWAN">
+                    text="Run Analysis">
             </action>
 
             <action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.suggest.SuggestAction" text="Suggest Methods"
@@ -112,9 +110,9 @@
             </action>
             <separator/>
             <action id="SWAN_Assist.Editor.LaunchSWANAction"
-                    class="de.fraunhofer.iem.swan.assist.actions.LaunchSwanAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
                     icon="PluginIcons.REFRESH_SWAN"
-                    text="Run/Rerun SWAN">
+                    text="Run Analysis">
             </action>
 
             <separator/>
@@ -123,7 +121,6 @@
                     class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
                     text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
             </action>
-
         </group>
     </actions>
 
