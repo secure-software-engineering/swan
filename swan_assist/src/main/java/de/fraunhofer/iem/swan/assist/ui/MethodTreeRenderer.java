@@ -13,6 +13,9 @@ import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import icons.IconUtils;
+import icons.PluginIcons;
+import javafx.util.Pair;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -42,7 +45,14 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
             if (object instanceof MethodWrapper) {
 
                 MethodWrapper method = (MethodWrapper) object;
-                text.setText("<html><font color='gray'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + Formatter.trimProperty(method.getMethodName(false)) + "</b> ( )</html>");
+
+                String methodName = Formatter.trimProperty(method.getMethodName(false));
+
+                if(methodName.contains("<init>"))
+                    methodName = Formatter.trimProperty(method.getClassName(false));
+
+
+                text.setText("<html><font color='gray'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + methodName + "</b> ( )</html>");
                 text.setIcon(IconUtils.getNodeIcon(method.getTypesList(false)));
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED) && !selected)
@@ -50,7 +60,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 else if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_DELETED) && !selected)
                     text.setForeground(new JBColor(new Color(178, 34, 34), new Color(178, 34, 34)));
 
-                text.setToolTipText(method.getMethodName(true));
+                text.setToolTipText(StringUtils.join(method.getTypesList(true), ", ")+": "+ method.getSignature(true));
 
             } else if (object instanceof Category) {
 
@@ -65,10 +75,19 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                     text.setToolTipText("<html>" + "<b>" + category.toString() + "</b> " + resourceBundle.getString(category.toString() + ".FullName") + "</html>");
                 } else
                     text.setText(category.toString());
-            } else {
+            } else if(object instanceof Pair){
+
+                Pair classPair = (Pair)object;
+                String classname = classPair.getKey().toString();
+
+                text.setToolTipText("Class Name: "+classname);
+                text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='gray'>(" + classPair.getValue() +")</font></html>");
+                text.setIcon(PluginIcons.CLASS);
+            }else {
 
                 text.setText(value.toString());
                 text.setIcon(null);
+                text.setToolTipText(null);
             }
         }
         return text;

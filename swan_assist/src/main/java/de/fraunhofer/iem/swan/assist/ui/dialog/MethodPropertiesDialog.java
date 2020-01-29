@@ -42,7 +42,7 @@ public class MethodPropertiesDialog extends DialogWrapper {
         //Table data
         Object[][] values = {{resourceBundle.getString("Properties.Return"), method.getReturnType(true)},
                 {resourceBundle.getString("Properties.Method"), method.getMethodName(true)},
-                {resourceBundle.getString("Properties.Parameters"), method.getParameter(true)},
+                {resourceBundle.getString("Properties.Parameters"), StringUtils.join(method.getParameters(true), ", ") },
                 {resourceBundle.getString("Properties.Security"), method.getMethod().getSecLevel()},
                 {resourceBundle.getString("Properties.Discovery"), method.getMethod().getDiscovery()},
                 {resourceBundle.getString("Properties.Framework"), method.getMethod().getFramework()},

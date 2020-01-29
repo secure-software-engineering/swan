@@ -25,7 +25,7 @@ import java.io.File;
 public class ImportAction extends AnAction {
 
     /**
-     * Allows user to select configuration file that is then loaded. 
+     * Allows user to select configuration file that is then loaded.
      * @param e source event
      */
     @Override

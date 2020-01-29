@@ -45,6 +45,10 @@ public class PluginSettingsDialog extends DialogWrapper {
     private JButton trainButton;
     private JPanel trainingPanel;
     private JCheckBox trainingPathCheckbox;
+    private JCheckBox configurationPathCheckbox;
+    private JTextField configFileTextbox;
+    private JButton configButton;
+    private JPanel configurationFilePanel;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
@@ -96,14 +100,26 @@ public class PluginSettingsDialog extends DialogWrapper {
             outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
 
         //Set value for using training path
-        trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH, false ));
+        trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH, false));
 
         for (Component component : trainingPanel.getComponents()) {
             component.setEnabled(trainingPathCheckbox.isSelected());
         }
 
-        if(PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)){
+        //Set value for using configuration file
+        configurationPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.PROJECT_CONFIGURATION_FILE, false));
+
+        for (Component component : configurationFilePanel.getComponents()) {
+            component.setEnabled(configurationPathCheckbox.isSelected());
+        }
+
+
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)) {
             trainingTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_DIRECTORY));
+        }
+
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)) {
+            configFileTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
         }
 
         init();
@@ -116,11 +132,22 @@ public class PluginSettingsDialog extends DialogWrapper {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println(trainingPathCheckbox.isSelected());
                 PropertiesComponent.getInstance(project).setValue(Constants.DEFAULT_TRAINING_PATH, trainingPathCheckbox.isSelected());
 
                 for (Component component : trainingPanel.getComponents()) {
                     component.setEnabled(trainingPathCheckbox.isSelected());
+                }
+            }
+        });
+
+        configurationPathCheckbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                PropertiesComponent.getInstance(project).setValue(Constants.PROJECT_CONFIGURATION_FILE, configurationPathCheckbox.isSelected());
+
+                for (Component component : configurationFilePanel.getComponents()) {
+                    component.setEnabled(configurationPathCheckbox.isSelected());
                 }
             }
         });
@@ -148,6 +175,14 @@ public class PluginSettingsDialog extends DialogWrapper {
                 trainingTextbox.setText(fileSelector(JFileChooser.DIRECTORIES_ONLY, trainingTextbox.getText()));
             }
         });
+
+        configButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                configFileTextbox.setText(fileSelector(JFileChooser.FILES_ONLY, configFileTextbox.getText()));
+            }
+        });
     }
 
     @Override
@@ -168,21 +203,29 @@ public class PluginSettingsDialog extends DialogWrapper {
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
-            } else if (trainingPathCheckbox.isSelected()) {
-
-                parameters.put(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
-                PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
-
-                setParameters();
             } else {
 
-                parameters.put(Constants.TRAIN_DIRECTORY, config.getProperty("swan_default_param_value"));
                 setParameters();
             }
         }
     }
 
     private void setParameters() {
+
+        //Check if option to use default training libs folder is selected
+        if (trainingPathCheckbox.isSelected()) {
+            parameters.put(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
+            PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_DIRECTORY, trainingTextbox.getText());
+        } else {
+            parameters.put(Constants.TRAIN_DIRECTORY, config.getProperty("swan_default_param_value"));
+        }
+
+        //Check if option to use default configuration file is selected
+        if (configurationPathCheckbox.isSelected()) {
+            parameters.put(Constants.CONFIGURATION_FILE, configFileTextbox.getText());
+        } else
+            parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
+
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));

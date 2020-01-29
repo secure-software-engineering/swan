@@ -149,6 +149,27 @@ public class JSONFileLoader {
         }
     }
 
+    public static HashMap<String, ArrayList<MethodWrapper>> getMethodsForTree(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
+
+        ArrayList<MethodWrapper> methods = getMethods(filters, currentFile, project);
+
+        HashMap<String, ArrayList<MethodWrapper>> methodMap = new HashMap();
+
+        for (MethodWrapper method : methods) {
+
+            if (methodMap.containsKey(method.getClassName(true))) {
+                methodMap.get(method.getClassName(true)).add(method);
+            } else {
+                ArrayList<MethodWrapper> list = new ArrayList<>();
+                list.add(method);
+                methodMap.put(method.getClassName(true), list);
+            }
+        }
+
+        return methodMap;
+    }
+
+
     /**
      * Filters method methods using the filters provided.
      *
@@ -193,8 +214,27 @@ public class JSONFileLoader {
         for (MethodWrapper method : methods.values()) {
 
             for (Category category : method.getCategories()) {
-                if (!categorySet.contains(category))
-                    categorySet.add(category);
+                categorySet.add(category);
+            }
+        }
+        return categorySet;
+    }
+
+    /**
+     * Returns list of possible categories.
+     *
+     * @return Set of all possible categories.
+     */
+    public static Set<Category> getAllCategories() {
+
+
+        Set<Category> categorySet = new HashSet<>();
+
+        for (Category category : Category.values()) {
+
+            if (!category.toString().equals(de.fraunhofer.iem.swan.data.Constants.NONE)
+                    && !category.equals(Category.CWETEST)) {
+                categorySet.add(category);
             }
         }
         return categorySet;

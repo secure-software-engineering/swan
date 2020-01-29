@@ -127,16 +127,16 @@ public class MethodWrapper {
      */
     public String getSignature(boolean isfullyQualifiedName) {
 
-        return getReturnType(isfullyQualifiedName) + " " + getMethodName(isfullyQualifiedName) + " (" + getParameter(isfullyQualifiedName) + ")";
+        return getReturnType(isfullyQualifiedName) + " " + getMethodName(isfullyQualifiedName) + " (" + StringUtils.join(getParameters(isfullyQualifiedName), ", ") + ")";
 
     }
 
     /**
-     * Returns the list of parameters as a comma separated String
+     * Returns the list of parameters
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
-     * @return List of parameters as comma separated spring
+     * @return List of parameters
      */
-    public String getParameter(boolean isFullyQualifiedName) {
+    public List<String> getParameters(boolean isFullyQualifiedName) {
 
         List<String> param = new ArrayList<>();
 
@@ -144,10 +144,10 @@ public class MethodWrapper {
             for (String parameter : method.getParameters()) {
                 param.add(trimProperty(parameter));
             }
-            return StringUtils.join(param, ", ");
+            return param;
         }
 
-        return StringUtils.join(method.getParameters(), ", ");
+        return method.getParameters();
     }
 
     /**
@@ -182,7 +182,7 @@ public class MethodWrapper {
 
     /**
      * Returns array list of types that are assigned to the method
-     * @param capitalize Condition to capitialize first character of types
+     * @param capitalize Condition to capitalize first character of types
      * @return Array list of types
      */
     public ArrayList<String> getTypesList(boolean capitalize) {
@@ -197,14 +197,6 @@ public class MethodWrapper {
         }
 
         return typesList;
-    }
-
-    /**
-     * Returns list of parameters
-     * @return List of method parameters
-     */
-    public List<String> getParameters() {
-        return parameters;
     }
 
     /**

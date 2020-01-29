@@ -13,6 +13,7 @@ import com.intellij.openapi.project.Project;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -38,19 +39,19 @@ public class UpdateMethodAction extends AnAction {
      * @param anActionEvent source event
      */
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 
         final Project project = anActionEvent.getProject();
 
         MethodDialog dialog = null;
 
-        if (method.getStatus()== MethodWrapper.MethodStatus.NEW){
+        if (method.getStatus() == MethodWrapper.MethodStatus.NEW) {
 
-            HashMap<String,MethodWrapper> methods = new HashMap<>();
-            methods.put(method.getSignature(true),method);
-            dialog = new MethodDialog(methods, method.getSignature(true), project, JSONFileLoader.getCategories());
+            HashMap<String, MethodWrapper> methods = new HashMap<>();
+            methods.put(method.getSignature(true), method);
+            dialog = new MethodDialog(methods, method.getSignature(true), project, JSONFileLoader.getAllCategories());
         } else
-            dialog = new MethodDialog(JSONFileLoader.getAllMethods(), method.getSignature(true), project, JSONFileLoader.getCategories());
+            dialog = new MethodDialog(JSONFileLoader.getAllMethods(), method.getSignature(true), project, JSONFileLoader.getAllCategories());
 
         dialog.show();
     }

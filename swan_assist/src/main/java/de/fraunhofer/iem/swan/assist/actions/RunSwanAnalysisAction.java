@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Action opens dialog for user to set parameters for running SWAN. After which thread is created to run SWAN.
  */
-public class LaunchSwanAction extends AnAction {
+public class RunSwanAnalysisAction extends AnAction {
 
     protected Set<Method> methods = new HashSet<Method>();
 
@@ -72,21 +72,22 @@ public class LaunchSwanAction extends AnAction {
 
             HashMap<String, String> swanParameters = dialog.getParameters();
 
-            String outputPath = swanParameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("input_json_suffix");
-            TrainingFileManager trainingFileManager = new TrainingFileManager(project);
+            if(!swanParameters.get(Constants.CONFIGURATION_FILE).contentEquals(config.getProperty("swan_default_param_value"))){
+                String outputPath = swanParameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("input_json_suffix");
+                TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
-            if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
-                swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
-            else
-                swanParameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
+                if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
+                    swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
+            }
 
-            SwanProcessBuilder processBuilder = new SwanProcessBuilder(project, dialog.getParameters());
-            processBuilder.start();
+            RunSwanAnalysisImpl processBuilder = new RunSwanAnalysisImpl(project, dialog.getParameters());
+            processBuilder.run();
 
             SwanNotifier publisher = messageBus.syncPublisher(SwanNotifier.START_SWAN_PROCESS_TOPIC);
             publisher.launchSwan(null);
         }
-    }
+
+        }
 
     /**
      * Controls whether the action is enabled or disabled

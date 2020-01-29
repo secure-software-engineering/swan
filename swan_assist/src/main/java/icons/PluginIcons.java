@@ -37,4 +37,6 @@ public interface PluginIcons {
     Icon DEFAULT = IconLoader.getIcon("/icons/default.png");
 
     Icon SELECTED = IconLoader.getIcon("/icons/selected.png");
+
+    Icon CLASS = IconLoader.getIcon("/icons/class.png");
 }
