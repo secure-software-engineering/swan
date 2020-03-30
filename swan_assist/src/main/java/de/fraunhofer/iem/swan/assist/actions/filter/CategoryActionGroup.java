@@ -11,9 +11,9 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
+import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.assist.util.Constants;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,15 +54,12 @@ public class CategoryActionGroup extends ActionGroup {
         ArrayList<FilterAction> cweFilter = new ArrayList<FilterAction>();
         ArrayList<FilterAction> typeFilter = new ArrayList<FilterAction>();
 
-        if (JSONFileLoader.isFileSelected()) {
+        for (Category category : JSONFileLoader.getCategories()) {
 
-            for (Category category : JSONFileLoader.getCategories()) {
-
-                if (category.isCwe())
-                    cweFilter.add(new FilterAction(new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString()))));
-                else
-                    typeFilter.add(new FilterAction(new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString()))));
-            }
+            if (category.isCwe())
+                cweFilter.add(new FilterAction(new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString()))));
+            else
+                typeFilter.add(new FilterAction(new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString()))));
         }
 
         if (this.toString().contains(Constants.FILTER_CWE))

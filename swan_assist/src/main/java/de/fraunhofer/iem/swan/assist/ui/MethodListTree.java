@@ -127,7 +127,36 @@ public class MethodListTree extends Tree {
                     if (node != null) {
                         Object object = node.getUserObject();
 
-                        if (object instanceof MethodWrapper) {
+                        if (object instanceof Pair) {
+
+                            Pair classPair = (Pair) object;
+                            String classname = classPair.getKey().toString();
+                            String simpleClassname = classname.substring(classname.lastIndexOf(".") + 1);
+
+                            PsiFile[] files = FilenameIndex.getFilesByName(project, simpleClassname + ".java", GlobalSearchScope.allScope(project));
+
+                            boolean methodFound = false;
+
+                            for (PsiFile file : files) {
+
+                                PsiJavaFile psiJavaFile = (PsiJavaFile) file;
+
+                                if ((psiJavaFile.getPackageName() + "." + simpleClassname).contentEquals(classname)) {
+
+                                    methodFound = true;
+
+                                    OpenFileDescriptor fileDescriptor = new OpenFileDescriptor(project, psiJavaFile.getVirtualFile());
+                                    fileDescriptor.navigateInEditor(project, true);
+                                }
+                            }
+
+                            if (!methodFound) {
+                                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.ClassNotFound"), MessageType.ERROR, null)
+                                        .createBalloon()
+                                        .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
+                            }
+
+                        } else if (object instanceof MethodWrapper) {
 
                             MethodWrapper method = (MethodWrapper) object;
 
@@ -504,7 +533,7 @@ public class MethodListTree extends Tree {
      */
     private void loadMethods() {
 
-        HashMap<String, ArrayList<MethodWrapper>> methods = JSONFileLoader.getMethodsForTree(TREE_FILTERS, currentFile, project);
+        TreeMap<String, ArrayList<MethodWrapper>> methods = JSONFileLoader.getMethodsForTree(TREE_FILTERS, currentFile, project);
 
         if (methods.size() > 0) {
 
@@ -517,7 +546,11 @@ public class MethodListTree extends Tree {
                 methodCount = methods.get(classname).size();
                 totalMethods += methodCount;
 
-                for (MethodWrapper method : methods.get(classname)) {
+                DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(new Pair<>(classname, methodCount));
+
+                ArrayList<MethodWrapper> sortedList =  methods.get(classname);
+                Collections.sort(sortedList);
+                for (MethodWrapper method : sortedList) {
 
                     classNode.add(addCategoriesToNode(method));
                     root.add(classNode);

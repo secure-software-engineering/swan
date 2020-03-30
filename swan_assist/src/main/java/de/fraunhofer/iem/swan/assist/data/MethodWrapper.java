@@ -18,7 +18,8 @@ import java.util.*;
 /**
  * Wrapper class to format data in method object to display in plugin.
  */
-public class MethodWrapper {
+public class MethodWrapper implements Comparable<MethodWrapper> {
+
 
     public enum MethodStatus {
         NONE,
@@ -68,6 +69,11 @@ public class MethodWrapper {
         this.method = new Method(methodName, parameters, returnType, className);
         status = MethodStatus.NONE;
 
+    }
+
+    @Override
+    public int compareTo(@NotNull MethodWrapper o) {
+        return this.getMethodName(false).compareTo(o.getMethodName(false));
     }
 
     /**
