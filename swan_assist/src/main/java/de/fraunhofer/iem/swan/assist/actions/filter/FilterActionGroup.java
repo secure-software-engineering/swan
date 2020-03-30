@@ -12,7 +12,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Separator;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
+import de.fraunhofer.iem.swan.assist.ui.MethodListTree;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import icons.PluginIcons;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -62,5 +64,10 @@ public class FilterActionGroup extends ActionGroup {
             event.getPresentation().setEnabled(true);
         else
             event.getPresentation().setEnabled(false);
+
+        if(!MethodListTree.TREE_FILTERS.isEmpty())
+            event.getPresentation().setIcon(PluginIcons.ACTIVE_FILTER_ACTION);
+        else
+            event.getPresentation().setIcon(PluginIcons.FILTER_ACTION);
     }
 }

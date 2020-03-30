@@ -39,7 +39,7 @@ public class MethodPropertiesAction extends AnAction {
      * @param method The properties of this method will be loaded.
      */
     public MethodPropertiesAction(MethodWrapper method) {
-        super("Properties");
+        super("Classification Properties");
         this.method = method;
     }
 

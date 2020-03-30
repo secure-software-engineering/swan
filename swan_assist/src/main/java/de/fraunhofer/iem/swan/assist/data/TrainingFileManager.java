@@ -76,9 +76,7 @@ public class TrainingFileManager {
 
     public boolean mergeExport(HashMap<String, MethodWrapper> methods, String configFileName) {
 
-        HashMap<String, MethodWrapper> trainingMethods = new HashMap<>();
-
-        trainingMethods = getTrainingMethods();
+        HashMap<String, MethodWrapper> trainingMethods =  getTrainingMethods();
         HashMap<String, MethodWrapper> mergedMethods = new HashMap<>(methods);
         mergedMethods.putAll(trainingMethods);
 

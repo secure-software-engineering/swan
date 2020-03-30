@@ -3,10 +3,18 @@
     {
       "name": "org.apache.xalan.xsltc.runtime.BasisLibrary.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String","java.lang.String[]"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1,2]
+        "parameters": [
+          0,
+          1,
+          2
+        ]
       },
       "dataOut": {
         "return": true,
@@ -16,17 +24,31 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://xml.apache.org/xalan-j/apidocs/org/apache/xalan/xsltc/runtime/BasisLibrary.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": "String replacement"
     },
     {
       "name": "org.springframework.security.crypto.password.StandardPasswordEncoder.encode",
       "return": "java.lang.String",
-      "parameters": ["java.lang.CharSequence","byte[]"],
+      "parameters": [
+        "java.lang.CharSequence",
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -36,14 +58,18 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/password/StandardPasswordEncoder.html",
-      "cwe": ["cwe829","cwe311","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.owasp.webgoat.session.RandomLessonTracker.hasCompleted",
       "return": "boolean",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -63,10 +89,14 @@
     {
       "name": "org.springframework.mock.web.portlet.MockPortletRequest.setParameters",
       "return": "void",
-      "parameters": ["java.util.Map"],
+      "parameters": [
+        "java.util.Map"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -76,17 +106,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/mock/web/portlet/MockPortletRequest.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.axis2.description.AxisService.printWSDLError",
       "return": "void",
-      "parameters": ["java.io.OutputStream"],
+      "parameters": [
+        "java.io.OutputStream"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -97,7 +135,9 @@
       "framework": "apache",
       "link": "http://people.apache.org/~ruwan/axis2/site/1.6.0/api/org/apache/axis2/description/AxisService.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
@@ -116,17 +156,28 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "",
-      "cwe": ["cwe306"],
-      "type": ["authentication","source"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "source"
+      ],
       "comment": ""
     },
     {
       "name": "org.jsoup.nodes.Entities.escape",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.nio.charset.CharsetEncoder","org.jsoup.nodes.Entities$EscapeMode"],
+      "parameters": [
+        "java.lang.String",
+        "java.nio.charset.CharsetEncoder",
+        "org.jsoup.nodes.Entities$EscapeMode"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -136,17 +187,27 @@
       "discovery": "manual",
       "framework": "jsoup",
       "link": "https://github.com/jhy/jsoup/blob/master/src/main/java/org/jsoup/nodes/Entities.java",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.mock.web.portlet.MockPortletRequest.setParameter",
       "return": "void",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -156,17 +217,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.security.config.authentication.CachingUserDetailsService.loadUserByUsername",
       "return": "org.springframework.security.core.userdetails.UserDetails",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -176,8 +245,12 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -203,10 +276,14 @@
     {
       "name": "org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper.loadUserDetails",
       "return": "org.springframework.security.core.userdetails.UserDetails",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -216,14 +293,21 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/3.2.6.RELEASE/apidocs/org/springframework/security/core/userdetails/UserDetailsByNameServiceWrapper.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.security.access.method.MapBasedMethodSecurityMetadataSource.isMatch",
       "return": "boolean",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -243,7 +327,9 @@
     {
       "name": "com.novell.ldap.LDAPConnection.disconnect",
       "return": "void",
-      "parameters": ["com.novell.ldap.LDAPConstraints"],
+      "parameters": [
+        "com.novell.ldap.LDAPConstraints"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -256,17 +342,26 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program in a unauthenticated state."
     },
     {
       "name": "org.apache.commons.lang3.text.StrSubstitutor.replace",
       "return": "java.lang.String",
-      "parameters": ["char[]"],
+      "parameters": [
+        "char[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -276,17 +371,31 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.http.impl.auth.DigestScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -296,17 +405,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/DigestScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Produces an authentication string for the given credentials."
     },
     {
       "name": "org.apache.http.impl.auth.NTLMScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -316,8 +436,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/NTLMScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Produces an authentication string for the given credentials."
     },
     {
@@ -337,16 +463,22 @@
       "framework": "generaljava",
       "link": "",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.commons.jxpath.ri.parser.XPathParser.unescape",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -356,17 +488,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "http://commons.apache.org/proper/commons-jxpath/apidocs/org/apache/commons/jxpath/ri/parser/XPathParser.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.jca.cci.connection.SingleConnectionFactory.closeConnection",
       "return": "void",
-      "parameters": ["javax.resource.cci.Connection"],
+      "parameters": [
+        "javax.resource.cci.Connection"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -375,15 +515,23 @@
       "securityLevel": "low",
       "discovery": "manual",
       "framework": "spring",
-      "cwe": ["cwe863","cwe862","cwe306"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jca/cci/connection/SingleConnectionFactory.html",
-      "type": ["authentication"],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the state of the program to unauthenticated."
     },
     {
       "name": "org.springframework.web.filter.DelegatingFilterProxy.class$",
       "return": "java.lang.Class",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -403,10 +551,15 @@
     {
       "name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.UsernamePasswordCredentials","java.lang.String"],
+      "parameters": [
+        "org.apache.commons.httpclient.UsernamePasswordCredentials",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -416,14 +569,23 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.springframework.web.portlet.ModelAndView.ModelAndView",
       "return": "void",
-      "parameters": ["java.lang.String","java.util.Map"],
+      "parameters": [
+        "java.lang.String",
+        "java.util.Map"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -456,17 +618,27 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://github.com/spring-projects/spring-security/blob/master/config/src/main/java/org/springframework/security/config/http/FormLoginBeanDefinitionParser.java",
-      "cwe": [],
-      "type": [],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for authentications and cwe306"
     },
     {
       "name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -476,17 +648,30 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.apache.xmlrpc.webserver.XmlRpcServletServer.setResponseHeader",
       "return": "void",
-      "parameters": ["org.apache.xmlrpc.common.ServerStreamConnection","java.lang.String","java.lang.String"],
+      "parameters": [
+        "org.apache.xmlrpc.common.ServerStreamConnection",
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1,2]
+        "parameters": [
+          1,
+          2
+        ]
       },
       "dataOut": {
         "return": false,
@@ -496,17 +681,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/XmlRpcServletServer.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (set)"
     },
     {
       "name": "net.sourceforge.pebble.domain.Comment.setAuthenticated",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -516,17 +709,29 @@
       "discovery": "manual",
       "framework": "pebble",
       "link": "http://help.collab.net/index.jsp?topic=/iaf-700/pebble-soap-javadocs/net/sourceforge/pebble/domain/Comment.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication","sink"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "sink"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.apache.commons.httpclient.auth.NTLMScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.NTCredentials","java.lang.String"],
+      "parameters": [
+        "org.apache.commons.httpclient.NTCredentials",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -536,14 +741,22 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/NTLMScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided. The authentication string is returned."
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletRequestImpl.getRealPath",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -556,17 +769,26 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletRequestImpl.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer."
     },
     {
       "name": "java.lang.String.replaceFirst",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -576,8 +798,16 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": "String manipulation"
     },
     {
@@ -597,16 +827,22 @@
       "framework": "oauth",
       "link": "http://google.github.io/google-auth-library-java/releases/0.6.0/apidocs/com/google/auth/oauth2/UserCredentials.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletResponseImpl.encodeUrl",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -616,14 +852,21 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletResponseImpl.html",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.xmlrpc.webserver.ServletWebServer.access$000",
       "return": "javax.servlet.http.HttpServlet",
-      "parameters": ["org.apache.xmlrpc.webserver.ServletWebServer"],
+      "parameters": [
+        "org.apache.xmlrpc.webserver.ServletWebServer"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -643,10 +886,17 @@
     {
       "name": "org.springframework.web.servlet.tags.UrlTag.createQueryString",
       "return": "java.lang.String",
-      "parameters": ["java.util.List","java.util.Set","boolean"],
+      "parameters": [
+        "java.util.List",
+        "java.util.Set",
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -657,16 +907,24 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/tags/UrlTag.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.web.socket.server.support.WebSocketHttpRequestHandler.handleRequest",
       "return": "void",
-      "parameters": ["javax.servlet.http.HttpServletRequest","javax.servlet.http.HttpServletResponse"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -676,8 +934,12 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/socket/server/support/WebSocketHttpRequestHandler.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
@@ -703,10 +965,14 @@
     {
       "name": "org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute",
       "return": "java.lang.Object",
-      "parameters": ["org.apache.xmlrpc.XmlRpcRequest"],
+      "parameters": [
+        "org.apache.xmlrpc.XmlRpcRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -716,17 +982,54 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/server/ReflectiveXmlRpcHandler.html",
-      "cwe": ["cwe078"],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078",
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
+      "comment": "Sink"
+    },
+    {
+      "name": "com.mysql.jdbc.Statement.executeQuery",
+      "return": "java.sql.ResultSet",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": [
+          0
+        ]
+      },
+      "dataOut": {
+        "return": false,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "java",
+      "link": "",
+      "cwe": [
+        "cwe089"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.UsernamePasswordCredentials"],
+      "parameters": [
+        "org.apache.commons.httpclient.UsernamePasswordCredentials"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -736,14 +1039,22 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.springframework.mock.web.MockJspWriter.print",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -763,10 +1074,14 @@
     {
       "name": "org.springframework.messaging.simp.stomp.StompDecoder.unescape",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -777,13 +1092,18 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/messaging/simp/stomp/StompDecoder.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer (unescape)"
     },
     {
       "name": "org.owasp.webgoat.controller.Logout.logout",
       "return": "org.springframework.web.servlet.ModelAndView",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -796,14 +1116,22 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/controller/Logout.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program in an un-authenticated state."
     },
     {
       "name": "net.sourceforge.pebble.event.AuditListener.blogEntryUnpublished",
       "return": "void",
-      "parameters": ["net.sourceforge.pebble.api.event.blogentry.BlogEntryEvent"],
+      "parameters": [
+        "net.sourceforge.pebble.api.event.blogentry.BlogEntryEvent"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -836,17 +1164,27 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/4.0.0.M1/apidocs/index.html?org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "the method returns a configurator for manipulation of users' details. The return object is authenticated and the owner may execute critical ops."
     },
     {
       "name": "org.springframework.test.context.transaction.TransactionalTestExecutionListener.runAfterTransactionMethods",
       "return": "void",
-      "parameters": ["org.springframework.test.context.TestContext"],
+      "parameters": [
+        "org.springframework.test.context.TestContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -856,8 +1194,12 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.0.0.M1_to_4.2.0.M2/Spring%20Framework%204.0.0.M1/org/springframework/test/context/transaction/TransactionalTestExecutionListener.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
@@ -876,8 +1218,14 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/servlet/tags/UrlTag.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source",
+        "sink"
+      ],
       "comment": "Source training set"
     },
     {
@@ -903,10 +1251,14 @@
     {
       "name": "org.springframework.web.context.request.RequestContextListener.requestInitialized",
       "return": "void",
-      "parameters": ["javax.servlet.ServletRequestEvent"],
+      "parameters": [
+        "javax.servlet.ServletRequestEvent"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -923,10 +1275,14 @@
     {
       "name": "org.springframework.security.authentication.UsernamePasswordAuthenticationToken.setAuthenticated",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -936,8 +1292,14 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/3.2.9.RELEASE/apidocs/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted. So the security level depentd on this fact."
     },
     {
@@ -956,17 +1318,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.1/apidocs/org/apache/shiro/subject/support/DelegatingSubject.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Logout"
     },
     {
       "name": "org.apache.xmlrpc.webserver.XmlRpcServlet.log",
       "return": "void",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -977,16 +1349,22 @@
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/XmlRpcServlet.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.stratos.cli.StratosApplication.run",
       "return": "int",
-      "parameters": ["java.lang.String[]"],
+      "parameters": [
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -996,17 +1374,26 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://github.com/apache/stratos/blob/master/components/org.apache.stratos.cli/src/main/java/org/apache/stratos/cli/StratosApplication.java",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "com.mitchellbosecke.pebble.utils.PathUtils.sanitize",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","char"],
+      "parameters": [
+        "java.lang.String",
+        "char"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1016,17 +1403,28 @@
       "discovery": "manual",
       "framework": "pebble",
       "link": "https://github.com/PebbleTemplates/pebble/blob/master/src/main/java/com/mitchellbosecke/pebble/utils/PathUtils.java",
-      "cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.owasp.webgoat.session.ParameterParser.update",
       "return": "void",
-      "parameters": ["javax.servlet.ServletRequest"],
+      "parameters": [
+        "javax.servlet.ServletRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1036,17 +1434,25 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/session/ParameterParser.java",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer.hasAnyRole",
       "return": "java.lang.String[]",
-      "parameters": ["java.lang.String[]"],
+      "parameters": [
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1063,7 +1469,9 @@
     {
       "name": "org.apache.commons.lang3.text.StrSubstitutor.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.CharSequence"],
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
       "dataIn": {
         "return": false,
         "parameters": [0]
@@ -1076,17 +1484,32 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.commons.httpclient.auth.HttpAuthenticator.authenticateProxyDefault",
       "return": "boolean",
-      "parameters": ["org.apache.commons.httpclient.HttpMethod","org.apache.commons.httpclient.HttpConnection","org.apache.commons.httpclient.HttpState"],
+      "parameters": [
+        "org.apache.commons.httpclient.HttpMethod",
+        "org.apache.commons.httpclient.HttpConnection",
+        "org.apache.commons.httpclient.HttpState"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [2,0]
+        "parameters": [
+          2,
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1096,17 +1519,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/HttpAuthenticator.html",
-      "cwe": ["cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided in the HttpState. The authentication is added to the header of the HttpMethod."
     },
     {
       "name": "org.apache.http.impl.auth.SPNegoScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest","org.apache.http.protocol.HttpContext"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest",
+        "org.apache.http.protocol.HttpContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1116,17 +1550,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/SPNegoScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication string is calculated from the credentials and returned as a header."
     },
     {
       "name": "org.springframework.mock.web.MockHttpServletRequest.authenticate",
       "return": "boolean",
-      "parameters": ["javax.servlet.http.HttpServletResponse"],
+      "parameters": [
+        "javax.servlet.http.HttpServletResponse"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,0]
+        "parameters": [
+          0,
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1136,8 +1581,14 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication is added to the response."
     },
     {
@@ -1156,8 +1607,12 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Returnes whether the program is connected."
     },
     {
@@ -1177,7 +1632,9 @@
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/java/io/File.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -1196,17 +1653,29 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/LoginContext.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Login"
     },
     {
       "name": "org.apache.xmlrpc.webserver.XmlRpcServletServer.execute",
       "return": "void",
-      "parameters": ["javax.servlet.http.HttpServletRequest","javax.servlet.http.HttpServletResponse"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1216,8 +1685,13 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/XmlRpcServletServer.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078",
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
@@ -1235,18 +1709,28 @@
       "securityLevel": "high",
       "discovery": "manual",
       "framework": "spring",
-      "cwe": ["cwe863","cwe862","cwe306"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/connection/UserCredentialsConnectionFactoryAdapter.html",
-      "type": ["authentication"],
+      "type": [
+        "authentication"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.security.authentication.rcp.RemoteAuthenticationProvider.authenticate",
       "return": "org.springframework.security.core.Authentication",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1256,17 +1740,29 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/3.1.8.CI-SNAPSHOT/apidocs/org/springframework/security/authentication/rcp/RemoteAuthenticationProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The input object is authenticated and returned."
     },
     {
       "name": "org.apache.xmlrpc.webserver.ServletOutputStreamImpl.write",
       "return": "void",
-      "parameters": ["byte[]","int","int"],
+      "parameters": [
+        "byte[]",
+        "int",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1276,17 +1772,26 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "http://grepcode.com/file/repo1.maven.org/maven2/org.apache.xmlrpc/xmlrpc-server/3.1/org/apache/xmlrpc/webserver/ServletOutputStreamImpl.java",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.commons.httpclient.auth.NTLMScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1296,17 +1801,29 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/NTLMScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided. The authentication string is returned."
     },
     {
       "name": "org.apache.xmlrpc.webserver.ConnectionServer.writeResponse",
       "return": "void",
-      "parameters": ["org.apache.xmlrpc.common.XmlRpcStreamRequestConfig","java.io.OutputStream","java.lang.Object"],
+      "parameters": [
+        "org.apache.xmlrpc.common.XmlRpcStreamRequestConfig",
+        "java.io.OutputStream",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1317,16 +1834,23 @@
       "framework": "apache",
       "link": "",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.xmlrpc.webserver.Connection.writeResponseHeader",
       "return": "void",
-      "parameters": ["org.apache.xmlrpc.webserver.RequestData","int"],
+      "parameters": [
+        "org.apache.xmlrpc.webserver.RequestData",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1336,17 +1860,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/Connection.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
-      "name": "org.apache.commons.jxpath.JXPathContext.getValue",
+      "name": "org.apache.commons.jxpath.ri.JXPathContextReferenceImpl.getValue",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1355,9 +1887,11 @@
       "securityLevel": "none",
       "discovery": "manual",
       "framework": "apache",
-      "link": "https://commons.apache.org/proper/commons-jxpath/apidocs/org/apache/commons/jxpath/JXPathContext.html",
+      "link": "https://commons.apache.org/proper/commons-jxpath/apidocs/org/apache/commons/jxpath/ri/JXPathContextReferenceImpl.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -1377,7 +1911,9 @@
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/RequestData.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer."
     },
     {
@@ -1423,10 +1959,15 @@
     {
       "name": "org.apache.bcel.util.JavaWrapper.runMain",
       "return": "void",
-      "parameters": ["java.lang.String","java.lang.String[]"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1436,37 +1977,26 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-bcel/apidocs/org/apache/bcel/util/JavaWrapper.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
-    },
-    {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","int","byte[]"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "generaljava",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
     },
     {
       "name": "org.springframework.format.datetime.joda.PeriodFormatter.parse",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String","java.util.Locale"],
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1477,16 +2007,22 @@
       "framework": "spring",
       "link": "https://github.com/cyejing/spring-framework-yj/blob/master/spring-context/src/main/java/org/springframework/format/datetime/joda/PeriodFormatter.java",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sources."
     },
     {
       "name": "com.google.auth.oauth2.DefaultCredentialsProvider.getDefaultCredentials",
       "return": "com.google.auth.oauth2.GoogleCredentials",
-      "parameters": ["com.google.api.client.http.HttpTransport"],
+      "parameters": [
+        "com.google.api.client.http.HttpTransport"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1496,8 +2032,12 @@
       "discovery": "manual",
       "framework": "oauth",
       "link": "https://github.com/google/google-auth-library-java/blob/master/oauth2_http/java/com/google/auth/oauth2/DefaultCredentialsProvider.java",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -1516,17 +2056,27 @@
       "discovery": "manual",
       "framework": "pebble",
       "link": "http://help.collab.net/topic/iaf-700/pebble-soap-javadocs/net/sourceforge/pebble/util/SecurityUtils.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the state of the program to unauthenticated."
     },
     {
       "name": "org.apache.commons.httpclient.HttpMethodDirector.authenticateProxy",
       "return": "void",
-      "parameters": ["org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1536,14 +2086,22 @@
       "discovery": "manual",
       "framework": "apachecommons",
       "link": "https://hc.apache.org/httpclient-3.x/xref/org/apache/commons/httpclient/HttpMethodDirector.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication string is added to the http method."
     },
     {
       "name": "org.springframework.web.filter.RequestContextFilter.setThreadContextInheritable",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -1583,10 +2141,15 @@
     {
       "name": "org.apache.xerces.impl.xs.models.XSDFACM.dumpTree",
       "return": "void",
-      "parameters": ["org.apache.xerces.impl.dtd.models.CMNode","int"],
+      "parameters": [
+        "org.apache.xerces.impl.dtd.models.CMNode",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1597,16 +2160,24 @@
       "framework": "apache",
       "link": "http://grepcode.com/file/repo1.maven.org/maven2/xerces/xerces/2.4.0/org/apache/xerces/impl/xs/models/XSDFACM.java?av=h",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.http.impl.auth.NegotiateScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest","org.apache.http.protocol.HttpContext"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest",
+        "org.apache.http.protocol.HttpContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1616,17 +2187,29 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/NegotiateScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Produces an authentication string for the given credentials."
     },
     {
       "name": "org.apache.http.impl.auth.KerberosScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest","org.apache.http.protocol.HttpContext"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest",
+        "org.apache.http.protocol.HttpContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1636,17 +2219,29 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/KerberosScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication string is calculated from the credentials and returned as a header."
     },
     {
       "name": "org.apache.shiro.mgt.DefaultSecurityManager.login",
       "return": "org.apache.shiro.subject.Subject",
-      "parameters": ["org.apache.shiro.subject.Subject","org.apache.shiro.authc.AuthenticationToken"],
+      "parameters": [
+        "org.apache.shiro.subject.Subject",
+        "org.apache.shiro.authc.AuthenticationToken"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1656,17 +2251,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.6/apidocs/org/apache/shiro/mgt/DefaultSecurityManager.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Login the specified subject with the tocken and return the subject."
     },
     {
       "name": "org.springframework.jdbc.core.JdbcTemplate.query",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String","org.springframework.jdbc.core.ResultSetExtractor"],
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.jdbc.core.ResultSetExtractor"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1676,17 +2282,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html",
-      "cwe": ["cwe089"],
-      "type": [],
+      "cwe": [
+        "cwe089"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "sql query"
     },
     {
       "name": "org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer.hasRole",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1703,10 +2317,15 @@
     {
       "name": "org.owasp.webgoat.session.DatabaseUtilities.getHsqldbConnection",
       "return": "java.sql.Connection",
-      "parameters": ["java.lang.String","org.owasp.webgoat.session.WebgoatContext"],
+      "parameters": [
+        "java.lang.String",
+        "org.owasp.webgoat.session.WebgoatContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1716,8 +2335,14 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/WebGoat/WebGoat-Legacy/blob/master/src/main/java/org/owasp/webgoat/session/DatabaseUtilities.java",
-      "cwe": ["cwe306","cwe089"],
-      "type": ["authentication","sink"],
+      "cwe": [
+        "cwe306",
+        "cwe089"
+      ],
+      "type": [
+        "authentication",
+        "sink"
+      ],
       "comment": "creates a database connection"
     },
     {
@@ -1743,10 +2368,14 @@
     {
       "name": "org.springframework.security.authentication.AnonymousAuthenticationProvider.authenticate",
       "return": "org.springframework.security.core.Authentication",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1756,8 +2385,14 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/3.1.8.CI-SNAPSHOT/apidocs/org/springframework/security/authentication/AnonymousAuthenticationProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The input object is authenticated and returned."
     },
     {
@@ -1776,29 +2411,15 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/authentication/jaas/SecurityContextLoginModule.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
-    },
-    {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","java.lang.String","java.util.Map","java.lang.Object","com.novell.ldap.LDAPConstraints"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "generaljava",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
     },
     {
       "name": "org.apache.xmlrpc.webserver.WebServer.newThreadPool",
@@ -1823,10 +2444,14 @@
     {
       "name": "org.springframework.jdbc.core.JdbcTemplate.execute",
       "return": "void",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1836,17 +2461,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html",
-      "cwe": ["cwe089"],
-      "type": ["sink"],
+      "cwe": [
+        "cwe089"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.jsoup.nodes.Entities.unescape",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1857,13 +2490,17 @@
       "framework": "jsoup",
       "link": "https://jsoup.org/apidocs/org/jsoup/nodes/Entities.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer (unescape)"
     },
     {
       "name": "org.apache.shiro.subject.support.DelegatingSubject.login",
       "return": "void",
-      "parameters": ["org.apache.shiro.authc.AuthenticationToken"],
+      "parameters": [
+        "org.apache.shiro.authc.AuthenticationToken"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -1876,17 +2513,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.1/apidocs/org/apache/shiro/subject/support/DelegatingSubject.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Login with the tocken."
     },
     {
       "name": "org.springframework.mock.web.MockBodyContent.println",
       "return": "void",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1897,16 +2544,23 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mock/web/MockBodyContent.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.owasp.webgoat.HammerHead.log",
       "return": "void",
-      "parameters": ["javax.servlet.http.HttpServletRequest","java.lang.String"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1916,17 +2570,25 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/HammerHead.java",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.xmlrpc.server.XmlRpcServerWorker.execute",
       "return": "java.lang.Object",
-      "parameters": ["org.apache.xmlrpc.XmlRpcRequest"],
+      "parameters": [
+        "org.apache.xmlrpc.XmlRpcRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -1936,17 +2598,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/server/XmlRpcServerWorker.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079",
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","java.lang.String","java.lang.String"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -1956,8 +2629,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
@@ -1976,8 +2655,14 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/session/WebSession.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
     },
     {
@@ -2016,17 +2701,25 @@
       "discovery": "manual",
       "framework": "pebble",
       "link": "http://help.collab.net/index.jsp?topic=/iaf-700/pebble-soap-javadocs/net/sourceforge/pebble/domain/Comment.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Returnes whether the program is authenticated."
     },
     {
       "name": "org.springframework.util.DefaultPropertiesPersister.unescape",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2037,16 +2730,22 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/util/DefaultPropertiesPersister.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer (unescape)"
     },
     {
       "name": "org.owasp.webgoat.plugins.Plugin.loadFiles",
       "return": "void",
-      "parameters": ["java.nio.file.Path"],
+      "parameters": [
+        "java.nio.file.Path"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2057,13 +2756,20 @@
       "framework": "webgoat",
       "link": "",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.web.socket.server.standard.GlassFishRequestUpgradeStrategy.handleSuccess",
       "return": "void",
-      "parameters": ["javax.servlet.http.HttpServletRequest","javax.servlet.http.HttpServletResponse","org.glassfish.tyrus.spi.WebSocketEngine$UpgradeInfo","org.glassfish.tyrus.core.TyrusUpgradeResponse"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse",
+        "org.glassfish.tyrus.spi.WebSocketEngine$UpgradeInfo",
+        "org.glassfish.tyrus.core.TyrusUpgradeResponse"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2083,10 +2789,15 @@
     {
       "name": "org.owasp.esapi.reference.DefaultEncoder.encodeForBase64",
       "return": "java.lang.String",
-      "parameters": ["byte[]","boolean"],
+      "parameters": [
+        "byte[]",
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2096,8 +2807,15 @@
       "discovery": "manual",
       "framework": "owaspesapi",
       "link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/Encoder.html",
-      "cwe": ["cwe078","cwe352","cwe311","cwe079","cwe798","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
@@ -2123,10 +2841,14 @@
     {
       "name": "org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry.hasAuthority",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2143,10 +2865,15 @@
     {
       "name": "org.owasp.esapi.reference.validation.HTMLValidationRule.sanitize",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2156,17 +2883,26 @@
       "discovery": "manual",
       "framework": "owaspesapi",
       "link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/CreditCardValidationRule.html",
-      "cwe": ["cwe352","cwe079","cwe798"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.owasp.webgoat.session.LessonSession.setAuthenticated",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2176,8 +2912,15 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/session/LessonSession.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication","sink"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "sink"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
@@ -2196,29 +2939,13 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/apidocs/org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Authentication to LDAP. The owner of the return object can manipulate users to a LDAP connection."
-    },
-    {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","int","byte[]","com.novell.ldap.LDAPResponseQueue","com.novell.ldap.LDAPConstraints"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "generaljava",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
     },
     {
       "name": "org.apache.shiro.subject.support.DelegatingSubject.isAuthenticated",
@@ -2236,17 +2963,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.1/apidocs/org/apache/shiro/subject/support/DelegatingSubject.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Check if the program is authenticated."
     },
     {
       "name": "org.apache.commons.httpclient.auth.DigestScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","java.lang.String","java.lang.String"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2256,14 +2993,22 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/DigestScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletResponseImpl.getHeader",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2276,37 +3021,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletResponseImpl.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer."
-    },
-    {
-      "name": "org.springframework.util.xml.XMLEventStreamReader.getEncoding",
-      "return": "void",
-      "parameters": ["java.lang.String"],
-      "dataIn": {
-        "return": false,
-        "parameters": []
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "none",
-      "discovery": "manual",
-      "framework": "spring",
-      "link": "https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/util/xml/XMLEventStreamReader.java",
-      "cwe": [],
-      "type": [],
-      "comment": "Counter example for sanitizer"
     },
     {
       "name": "com.google.auth.oauth2.UserAuthorizer.getCredentialsFromCode",
       "return": "com.google.auth.oauth2.UserCredentials",
-      "parameters": ["java.lang.String","java.net.URI"],
+      "parameters": [
+        "java.lang.String",
+        "java.net.URI"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2317,7 +3052,9 @@
       "framework": "oauth",
       "link": "http://google.github.io/google-auth-library-java/releases/0.7.1/apidocs/com/google/auth/oauth2/UserAuthorizer.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -2336,17 +3073,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/orm/hibernate3/support/ClobStringType.html",
-      "cwe": ["cwe089"],
-      "type": ["sink"],
+      "cwe": [
+        "cwe089"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "depricated method. "
     },
     {
       "name": "org.springframework.security.crypto.codec.Hex.encode",
       "return": "char[]",
-      "parameters": ["byte[]"],
+      "parameters": [
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2356,17 +3101,26 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/3.2.2.RELEASE/apidocs/org/springframework/security/crypto/codec/Hex.html",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.security.authentication.jaas.JaasAuthenticationProvider.authenticate",
       "return": "org.springframework.security.core.Authentication",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2376,17 +3130,29 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/3.1.8.CI-SNAPSHOT/apidocs/org/springframework/security/authentication/jaas/JaasAuthenticationProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The input object is authenticated and returned."
     },
     {
       "name": "org.apache.http.impl.auth.BasicScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","java.lang.String","boolean"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "java.lang.String",
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2396,8 +3162,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
@@ -2416,17 +3188,27 @@
       "discovery": "manual",
       "framework": "oauth",
       "link": "",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.http.impl.auth.BasicScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2436,14 +3218,22 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/BasicScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.springframework.test.context.MergedContextConfiguration.nullSafeToString",
       "return": "java.lang.String",
-      "parameters": ["org.springframework.test.context.ContextLoader"],
+      "parameters": [
+        "org.springframework.test.context.ContextLoader"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2463,7 +3253,9 @@
     {
       "name": "org.springframework.jdbc.object.RdbmsOperation.setQueryTimeout",
       "return": "void",
-      "parameters": ["int"],
+      "parameters": [
+        "int"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2480,16 +3272,17 @@
       "type": [],
       "comment": "Counter example for cwe089"
     },
-
-
-
     {
       "name": "org.owasp.webgoat.util.HtmlEncoder.decode",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2499,17 +3292,28 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/util/HtmlEncoder.java",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.owasp.webgoat.session.WebSession.update",
       "return": "void",
-      "parameters": ["javax.servlet.http.HttpServletRequest","javax.servlet.http.HttpServletResponse","java.lang.String"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2519,17 +3323,32 @@
       "discovery": "manual",
       "framework": "webgoat",
       "link": "",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.hibernate.validator.internal.util.ConcurrentReferenceHashMap.replace",
       "return": "boolean",
-      "parameters": ["java.lang.Object","java.lang.Object","java.lang.Object"],
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1,2,0,1,2]
+        "parameters": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2540,16 +3359,22 @@
       "framework": "hibernate",
       "link": "https://github.com/hibernate/hibernate-validator/blob/master/engine/src/main/java/org/hibernate/validator/internal/util/ConcurrentReferenceHashMap.java",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer"
     },
     {
       "name": "org.owasp.esapi.tags.ELEncodeFunctions.encodeForCSS",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2559,17 +3384,25 @@
       "discovery": "manual",
       "framework": "owaspesapi",
       "link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/Encoder.html",
-      "cwe": ["cwe352","cwe079","cwe798"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.xmlrpc.webserver.WebServer.setParanoid",
       "return": "void",
-      "parameters": ["boolean"],
+      "parameters": [
+        "boolean"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2580,7 +3413,9 @@
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/WebServer.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (set)"
     },
     {
@@ -2606,10 +3441,14 @@
     {
       "name": "javax.naming.ldap.Rdn.unescapeValue",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2620,16 +3459,24 @@
       "framework": "ldap",
       "link": "",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "com.novell.ldap.rfc2251.RfcFilter.addSubstring",
       "return": "void",
-      "parameters": ["int","byte[]"],
+      "parameters": [
+        "int",
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1,1]
+        "parameters": [
+          1,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2640,16 +3487,24 @@
       "framework": "ldap",
       "link": "",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (byte[] but nothing else)"
     },
     {
       "name": "org.springframework.web.socket.sockjs.transport.session.WebSocketServerSockJsSession.handleMessage",
       "return": "void",
-      "parameters": ["org.springframework.web.socket.TextMessage","org.springframework.web.socket.WebSocketSession"],
+      "parameters": [
+        "org.springframework.web.socket.TextMessage",
+        "org.springframework.web.socket.WebSocketSession"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2659,17 +3514,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/web/socket/sockjs/transport/session/WebSocketServerSockJsSession.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.security.access.intercept.RunAsImplAuthenticationProvider.authenticate",
       "return": "org.springframework.security.core.Authentication",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2679,17 +3542,27 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/access/intercept/RunAsImplAuthenticationProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The input object is authenticated and returned."
     },
     {
       "name": "javax.mail.internet.MimeMultipart.stripLinearWhiteSpace",
       "return": "byte[]",
-      "parameters": ["byte[]"],
+      "parameters": [
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2706,7 +3579,9 @@
     {
       "name": "org.apache.xmlrpc.webserver.WebServer.class$",
       "return": "java.lang.Class",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2739,14 +3614,22 @@
       "discovery": "manual",
       "framework": "ldap",
       "link": "https://github.com/aptivate/openldap-jldap/blob/master/com/novell/ldap/spml/SunIdm.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
     },
     {
       "name": "org.apache.xmlrpc.webserver.XmlRpcServletServer.getConfig",
       "return": "org.apache.xmlrpc.common.XmlRpcHttpRequestConfigImpl",
-      "parameters": ["javax.servlet.http.HttpServletRequest"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2760,7 +3643,9 @@
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/XmlRpcServletServer.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer."
     },
     {
@@ -2786,10 +3671,14 @@
     {
       "name": "org.xmldb.api.base.XMLDBException.printStackTrace",
       "return": "void",
-      "parameters": ["java.io.PrintWriter"],
+      "parameters": [
+        "java.io.PrintWriter"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2800,16 +3689,26 @@
       "framework": "generalJava",
       "link": "http://xmldb-org.sourceforge.net/xapi/api/org/xmldb/api/base/XMLDBException.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.commons.httpclient.auth.HttpAuthenticator.authenticateProxy",
       "return": "boolean",
-      "parameters": ["org.apache.commons.httpclient.auth.AuthScheme","org.apache.commons.httpclient.HttpMethod","org.apache.commons.httpclient.HttpConnection","org.apache.commons.httpclient.HttpState"],
+      "parameters": [
+        "org.apache.commons.httpclient.auth.AuthScheme",
+        "org.apache.commons.httpclient.HttpMethod",
+        "org.apache.commons.httpclient.HttpConnection",
+        "org.apache.commons.httpclient.HttpState"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [3,1]
+        "parameters": [
+          3,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2819,8 +3718,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/HttpAuthenticator.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided in the HttpState. The authentication is added to the header of the HttpMethod."
     },
     {
@@ -2846,10 +3751,14 @@
     {
       "name": "org.springframework.web.context.request.RequestContextListener.requestDestroyed",
       "return": "void",
-      "parameters": ["javax.servlet.ServletRequestEvent"],
+      "parameters": [
+        "javax.servlet.ServletRequestEvent"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2866,10 +3775,15 @@
     {
       "name": "org.owasp.esapi.reference.validation.CreditCardValidationRule.sanitize",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -2879,14 +3793,24 @@
       "discovery": "manual",
       "framework": "owaspesapi",
       "link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/CreditCardValidationRule.html",
-      "cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.web.client.AsyncRestTemplate.logResponseStatus",
       "return": "void",
-      "parameters": ["org.springframework.http.HttpMethod","java.net.URI","org.springframework.http.client.ClientHttpResponse"],
+      "parameters": [
+        "org.springframework.http.HttpMethod",
+        "java.net.URI",
+        "org.springframework.http.client.ClientHttpResponse"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -2926,10 +3850,14 @@
     {
       "name": "org.springframework.web.socket.adapter.standard.StandardWebSocketSession.sendTextMessage",
       "return": "void",
-      "parameters": ["org.springframework.web.socket.TextMessage"],
+      "parameters": [
+        "org.springframework.web.socket.TextMessage"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2940,16 +3868,25 @@
       "framework": "spring",
       "link": "https://github.com/spring-projects/spring-framework/blob/master/spring-websocket/src/main/java/org/springframework/web/socket/adapter/standard/StandardWebSocketSession.java",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletRequestImpl.parsePostData",
       "return": "void",
-      "parameters": ["java.util.Map","java.io.InputStream","java.lang.String"],
+      "parameters": [
+        "java.util.Map",
+        "java.io.InputStream",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1,0]
+        "parameters": [
+          1,
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2960,16 +3897,22 @@
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletRequestImpl.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.xerces.impl.xpath.regex.REUtil.dumpString",
       "return": "void",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -2980,7 +3923,9 @@
       "framework": "apache",
       "link": "http://grepcode.com/file/repo1.maven.org/maven2/xerces/xercesImpl/2.6.2/org/apache/xerces/impl/xpath/regex/REUtil.java",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
@@ -3020,16 +3965,23 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/concurrent/DelegatingSecurityContextExecutorService.html",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for authentication (none)"
     },
     {
       "name": "org.apache.http.impl.auth.NegotiateScheme.authenticate",
       "return": "org.apache.http.Header",
-      "parameters": ["org.apache.http.auth.Credentials","org.apache.http.HttpRequest"],
+      "parameters": [
+        "org.apache.http.auth.Credentials",
+        "org.apache.http.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3039,8 +3991,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/NegotiateScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Produces an authentication string for the given credentials."
     },
     {
@@ -3059,37 +4017,31 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/userdetails/User.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Returnes whether the program is authenticated."
-    },
-    {
-      "name": "org.apache.commons.lang3.time.FastDateParser.escapeRegex",
-      "return": "java.lang.String",
-      "parameters": ["java.lang.StringBuilder","java.lang.String","boolean"],
-      "dataIn": {
-        "return": false,
-        "parameters": [1]
-      },
-      "dataOut": {
-        "return": true,
-        "parameters": []
-      },
-      "securityLevel": "none",
-      "discovery": "manual",
-      "framework": "apache",
-      "link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.2/org/apache/commons/lang3/time/FastDateParser.html",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798"],
-      "type": ["sanitizer"],
-      "comment": ""
     },
     {
       "name": "org.apache.xalan.xsltc.compiler.util.Util.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String","java.lang.String[]"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1,2]
+        "parameters": [
+          0,
+          1,
+          2
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3099,8 +4051,17 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://xml.apache.org/xalan-j/apidocs/org/apache/xalan/xsltc/compiler/util/Util.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
@@ -3119,14 +4080,20 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/annotation/web/builders/HttpSecurity.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for authentication (none)"
     },
     {
       "name": "org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.access$200",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -3146,10 +4113,14 @@
     {
       "name": "org.xmldb.api.DatabaseManager.stripURIPrefix",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3159,14 +4130,22 @@
       "discovery": "manual",
       "framework": "xmldb",
       "link": "http://xmldb-org.sourceforge.net/xapi/api/org/xmldb/api/DatabaseManager.html",
-      "cwe": ["cwe311","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.owasp.webgoat.service.LessonInfoService.handleException",
       "return": "java.lang.String",
-      "parameters": ["java.lang.Exception"],
+      "parameters": [
+        "java.lang.Exception"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -3186,10 +4165,15 @@
     {
       "name": "org.apache.commons.httpclient.auth.DigestScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3199,17 +4183,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/auth/DigestScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "When the input is true, the tocken should be trusted."
     },
     {
       "name": "org.owasp.esapi.reference.validation.DateValidationRule.sanitize",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3219,8 +4214,14 @@
       "discovery": "manual",
       "framework": "owaspesapi",
       "link": "https://static.javadoc.io/org.owasp.esapi/esapi/2.0.1/org/owasp/esapi/reference/validation/",
-      "cwe": ["cwe078","cwe311","cwe079","cwe798","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe089"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
@@ -3239,8 +4240,12 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/apidocs/org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Authentication to JDBC. The owner of the return object can manipulate users to a JDBC connection."
     },
     {
@@ -3259,17 +4264,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.1/apidocs/org/apache/shiro/subject/support/DefaultSubjectContext.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Check if the program is authenticated."
     },
     {
       "name": "org.apache.http.impl.conn.DefaultClientConnection.sendRequestHeader",
       "return": "void",
-      "parameters": ["org.apache.http.HttpRequest"],
+      "parameters": [
+        "org.apache.http.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3279,14 +4292,20 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/conn/DefaultClientConnection.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletRequestImpl.access$000",
       "return": "int",
-      "parameters": ["org.apache.xmlrpc.webserver.HttpServletRequestImpl"],
+      "parameters": [
+        "org.apache.xmlrpc.webserver.HttpServletRequestImpl"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -3319,17 +4338,26 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/2.5.x/api/org/springframework/web/servlet/tags/EscapeBodyTag.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.web.util.UrlPathHelper.decodeRequestString",
       "return": "java.lang.String",
-      "parameters": ["javax.servlet.http.HttpServletRequest","java.lang.String"],
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3339,17 +4367,30 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/3.2.2.RELEASE_to_4.0.0.M1/Spring%20Framework%203.2.2.RELEASE/org/springframework/web/util/UrlPathHelper.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.commons.validator.util.ValidatorUtils.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1,2]
+        "parameters": [
+          0,
+          1,
+          2
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3359,17 +4400,31 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/util/ValidatorUtils.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder.requestAttr",
       "return": "org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder",
-      "parameters": ["java.lang.String","java.lang.Object"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3379,17 +4434,26 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/web/servlet/request/MockHttpServletRequestBuilder.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "com.google.auth.oauth2.UserAuthorizer.getCredentials",
       "return": "com.google.auth.oauth2.UserCredentials",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3399,17 +4463,25 @@
       "discovery": "manual",
       "framework": "oauth",
       "link": "https://github.com/google/google-auth-library-java/blob/master/oauth2_http/java/com/google/auth/oauth2/UserAuthorizer.java",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.springframework.web.socket.sockjs.transport.handler.JsonpReceivingTransportHandler.readMessages",
       "return": "java.lang.String[]",
-      "parameters": ["org.springframework.http.server.ServerHttpRequest"],
+      "parameters": [
+        "org.springframework.http.server.ServerHttpRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3419,17 +4491,25 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/socket/sockjs/transport/handler/JsonpReceivingTransportHandler.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "com.google.auth.oauth2.DefaultCredentialsProvider.getDefaultCredentialsUnsynchronized",
       "return": "com.google.auth.oauth2.GoogleCredentials",
-      "parameters": ["com.google.api.client.http.HttpTransport"],
+      "parameters": [
+        "com.google.api.client.http.HttpTransport"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3439,8 +4519,12 @@
       "discovery": "manual",
       "framework": "oauth",
       "link": "https://github.com/google/google-auth-library-java/blob/master/oauth2_http/java/com/google/auth/oauth2/DefaultCredentialsProvider.java",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
@@ -3459,8 +4543,14 @@
       "discovery": "manual",
       "framework": "ldap",
       "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program in a unauthenticated state."
     },
     {
@@ -3504,52 +4594,17 @@
       "comment": "Counter example for authentication (none)"
     },
     {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","java.lang.String","java.util.Map","java.lang.Object"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "ldap",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
-    },
-    {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","int","byte[]","com.novell.ldap.LDAPResponseQueue"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "ldap",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
-    },
-    {
       "name": "org.owasp.html.Encoding.stripBannedCodeunits",
       "return": "void",
-      "parameters": ["java.lang.StringBuilder"],
+      "parameters": [
+        "java.lang.StringBuilder"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,0]
+        "parameters": [
+          0,
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3559,8 +4614,16 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://github.com/OWASP/java-html-sanitizer/blob/master/src/main/java/org/owasp/html/Encoding.java",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
@@ -3579,17 +4642,32 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/http/FormLoginBeanDefinitionParser.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication","source"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306",
+        "cwe601"
+      ],
+      "type": [
+        "authentication",
+        "source"
+      ],
       "comment": ""
     },
     {
       "name": "com.google.json.JsonSanitizer.replace",
       "return": "void",
-      "parameters": ["int","int","java.lang.String"],
+      "parameters": [
+        "int",
+        "int",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,0]
+        "parameters": [
+          0,
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3599,17 +4677,26 @@
       "discovery": "manual",
       "framework": "json",
       "link": "https://github.com/OWASP/json-sanitizer/blob/master/src/main/java/com/google/json/JsonSanitizer.java",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletRequestImpl.readLine",
       "return": "java.lang.String",
-      "parameters": ["byte[]"],
+      "parameters": [
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3619,17 +4706,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/HttpServletRequestImpl.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe089",
+        "cwe078",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.owasp.esapi.reference.validation.StringValidationRule.addBlacklistPattern",
       "return": "void",
-      "parameters": ["java.util.regex.Pattern"],
+      "parameters": [
+        "java.util.regex.Pattern"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3640,13 +4737,17 @@
       "framework": "owaspesapi",
       "link": "",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (validation)"
     },
     {
       "name": "org.springframework.web.socket.BinaryMessage.BinaryMessage",
       "return": "void",
-      "parameters": ["byte[]"],
+      "parameters": [
+        "byte[]"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -3666,10 +4767,17 @@
     {
       "name": "org.apache.commons.lang3.text.StrSubstitutor.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.CharSequence","int","int"],
+      "parameters": [
+        "java.lang.CharSequence",
+        "int",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3679,17 +4787,32 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "java.lang.String.replace",
       "return": "java.lang.String",
-      "parameters": ["java.lang.CharSequence","java.lang.CharSequence"],
+      "parameters": [
+        "java.lang.CharSequence",
+        "java.lang.CharSequence"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3699,17 +4822,34 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.hibernate.validator.internal.util.ConcurrentReferenceHashMap.replace",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.Object","java.lang.Object"],
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1,0,1]
+        "parameters": [
+          0,
+          1,
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3720,16 +4860,24 @@
       "framework": "hibernate",
       "link": "",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer"
     },
     {
       "name": "org.apache.commons.httpclient.auth.NTLMScheme.authenticate",
       "return": "java.lang.String",
-      "parameters": ["org.apache.commons.httpclient.Credentials","java.lang.String","java.lang.String"],
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3739,8 +4887,14 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/NTLMScheme.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided. The authentication string is returned."
     },
     {
@@ -3759,17 +4913,27 @@
       "discovery": "manual",
       "framework": "ldap",
       "link": "https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/LoginContext.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
     },
     {
       "name": "org.apache.axis2.util.Utils.sanitizeWebOutput",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3779,17 +4943,29 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "http://grepcode.com/file/repo1.maven.org/maven2/org.apache.axis2/axis2-kernel/1.4/org/apache/axis2/util/Utils.java",
-      "cwe": ["cwe352","cwe079","cwe798"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.commons.httpclient.auth.HttpAuthenticator.authenticateDefault",
       "return": "boolean",
-      "parameters": ["org.apache.commons.httpclient.HttpMethod","org.apache.commons.httpclient.HttpConnection","org.apache.commons.httpclient.HttpState"],
+      "parameters": [
+        "org.apache.commons.httpclient.HttpMethod",
+        "org.apache.commons.httpclient.HttpConnection",
+        "org.apache.commons.httpclient.HttpState"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [2,0]
+        "parameters": [
+          2,
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3799,8 +4975,13 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/HttpAuthenticator.html",
-      "cwe": ["cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The credentials are provided in the HttpState. The authentication is added to the header of the HttpMethod."
     },
     {
@@ -3826,10 +5007,16 @@
     {
       "name": "org.springframework.security.util.FieldUtils.setProtectedFieldValue",
       "return": "void",
-      "parameters": ["java.lang.String","java.lang.Object","java.lang.Object"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3840,16 +5027,22 @@
       "framework": "apache",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/util/FieldUtils.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (set)"
     },
     {
       "name": "org.owasp.html.HtmlSanitizer.stripQuotes",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3859,17 +5052,26 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://github.com/OWASP/java-html-sanitizer/blob/master/src/main/java/org/owasp/html/HtmlSanitizer.java",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798","cwe306","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe306"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.apache.commons.httpclient.HttpMethodDirector.authenticateHost",
       "return": "void",
-      "parameters": ["org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3879,17 +5081,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/xref/org/apache/commons/httpclient/HttpMethodDirector.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication string is added to the http method."
     },
     {
       "name": "org.springframework.mock.web.MockBodyContent.println",
       "return": "void",
-      "parameters": ["char[]"],
+      "parameters": [
+        "char[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3899,14 +5111,20 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mock/web/MockBodyContent.html",
-      "cwe": [],
-      "type": ["sink"],
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.security.config.http.LogoutBeanDefinitionParser.getLogoutRequestMatcher",
       "return": "org.springframework.beans.factory.config.BeanDefinition",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -3919,17 +5137,29 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://github.com/spring-projects/spring-security/blob/master/config/src/main/java/org/springframework/security/config/http/LogoutBeanDefinitionParser.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication","source"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306",
+        "cwe601"
+      ],
+      "type": [
+        "authentication",
+        "source"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.security.crypto.codec.Utf8.encode",
       "return": "byte[]",
-      "parameters": ["java.lang.CharSequence"],
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -3939,17 +5169,27 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/crypto/codec/Utf8.html",
-      "cwe": ["cwe352","cwe311","cwe079","cwe798","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild",
       "return": "void",
-      "parameters": ["org.junit.runners.model.FrameworkMethod","org.junit.runner.notification.RunNotifier"],
+      "parameters": [
+        "org.junit.runners.model.FrameworkMethod",
+        "org.junit.runner.notification.RunNotifier"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3960,16 +5200,22 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/test/context/junit4/SpringJUnit4ClassRunner.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.owasp.esapi.reference.validation.CreditCardValidationRule.setMaxCardLength",
       "return": "void",
-      "parameters": ["int"],
+      "parameters": [
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -3986,10 +5232,14 @@
     {
       "name": "org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator.sendMessage",
       "return": "void",
-      "parameters": ["org.springframework.web.socket.WebSocketMessage"],
+      "parameters": [
+        "org.springframework.web.socket.WebSocketMessage"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4000,13 +5250,17 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/web/socket/handler/ConcurrentWebSocketSessionDecorator.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.web.socket.sockjs.transport.TransportHandlingSockJsService.access$200",
       "return": "org.apache.commons.logging.Log",
-      "parameters": ["org.springframework.web.socket.sockjs.transport.TransportHandlingSockJsService"],
+      "parameters": [
+        "org.springframework.web.socket.sockjs.transport.TransportHandlingSockJsService"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4026,10 +5280,14 @@
     {
       "name": "org.springframework.orm.hibernate3.TypeDefinitionBean.setParameters",
       "return": "void",
-      "parameters": ["java.util.Properties"],
+      "parameters": [
+        "java.util.Properties"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4040,33 +5298,19 @@
       "framework": "spring",
       "link": "",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
-    },
-    {
-      "name": "com.novell.ldap.LDAPConnection.bind",
-      "return": "void",
-      "parameters": ["java.lang.String","int","byte[]","com.novell.ldap.LDAPConstraints"],
-      "dataIn": {
-        "return": false,
-        "parameters": [2]
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "high",
-      "discovery": "manual",
-      "framework": "ldap",
-      "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication"],
-      "comment": "Bind to the host and port with the given password."
     },
     {
       "name": "org.springframework.web.socket.server.standard.WebLogicRequestUpgradeStrategy.access$800",
       "return": "java.lang.reflect.Method",
-      "parameters": ["java.lang.String","java.lang.String","java.lang.Class[]"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.Class[]"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4099,14 +5343,21 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/annotation/web/configurers/LogoutConfigurer.html",
-      "cwe": ["cwe306"],
-      "type": ["authentication","source"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "source"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.orm.hibernate3.LocalDataSourceConnectionProvider.closeConnection",
       "return": "void",
-      "parameters": ["java.sql.Connection"],
+      "parameters": [
+        "java.sql.Connection"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4119,8 +5370,15 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://static.javadoc.io/org.springframework/spring/2.0.4/org/springframework/orm/hibernate3/LocalDataSourceConnectionProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306","cwe089"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306",
+        "cwe089"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the state of the program to unauthenticated."
     },
     {
@@ -4139,17 +5397,32 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/mock/web/MockHttpServletRequest.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
     },
     {
       "name": "org.apache.http.impl.client.HttpAuthenticator.authenticate",
       "return": "boolean",
-      "parameters": ["org.apache.http.HttpHost","org.apache.http.HttpResponse","org.apache.http.client.AuthenticationStrategy","org.apache.http.auth.AuthState","org.apache.http.protocol.HttpContext"],
+      "parameters": [
+        "org.apache.http.HttpHost",
+        "org.apache.http.HttpResponse",
+        "org.apache.http.client.AuthenticationStrategy",
+        "org.apache.http.auth.AuthState",
+        "org.apache.http.protocol.HttpContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4159,17 +5432,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/impl/client/HttpAuthenticator.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Depricated method. The authentication string is added to the http response."
     },
     {
       "name": "org.springframework.web.util.OpaqueUriComponents.encode",
       "return": "org.springframework.web.util.UriComponents",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4179,8 +5462,13 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/3.2.8.RELEASE_to_3.2.9.RELEASE/Spring%20Framework%203.2.8.RELEASE/org/springframework/web/util/OpaqueUriComponents.html",
-      "cwe": ["cwe352","cwe601","cwe079","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
@@ -4206,7 +5494,9 @@
     {
       "name": "org.apache.xmlrpc.webserver.XmlRpcServlet.class$",
       "return": "java.lang.Class",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4224,32 +5514,17 @@
       "comment": "Counter example for sanitizer (String as param, but implicit method)"
     },
     {
-      "name": "org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl.isUsernameBasedPrimaryKey",
-      "return": "boolean",
-      "parameters": ["java.lang.String","java.lang.String"],
-      "dataIn": {
-        "return": false,
-        "parameters": []
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "none",
-      "discovery": "manual",
-      "framework": "spring",
-      "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/core/userdetails/jdbc/JdbcDaoImpl.html",
-      "cwe": [],
-      "type": [],
-      "comment": "Counter example for authentication (none)"
-    },
-    {
       "name": "org.springframework.format.datetime.joda.DateTimeParser.parse",
       "return": "org.joda.time.DateTime",
-      "parameters": ["java.lang.String","java.util.Locale"],
+      "parameters": [
+        "java.lang.String",
+        "java.util.Locale"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [1]
+        "parameters": [
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4260,7 +5535,9 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/format/datetime/joda/DateTimeParser.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sources."
     },
     {
@@ -4286,10 +5563,17 @@
     {
       "name": "org.springframework.security.crypto.codec.Base64.encodeBytesToBytes",
       "return": "byte[]",
-      "parameters": ["byte[]","int","int","int"],
+      "parameters": [
+        "byte[]",
+        "int",
+        "int",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4299,17 +5583,28 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/crypto/codec/Base64.html",
-      "cwe": ["cwe352","cwe311","cwe601","cwe079","cwe022","cwe798","cwe807"],
-      "type": ["sanitizer"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "java.lang.String.replaceAll",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String","java.lang.String"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4319,17 +5614,30 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/java/lang/String.html",
-      "cwe": ["cwe352","cwe078","cwe311","cwe079","cwe798","cwe306","cwe089","cwe807"],
-      "type": ["sink","sanitizer"],
+      "cwe": [
+        "cwe078",
+        "cwe079",
+        "cwe306",
+        "cwe089",
+        "cwe601"
+      ],
+      "type": [
+        "sink",
+        "sanitizer"
+      ],
       "comment": ""
     },
     {
       "name": "org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry.hasAnyAuthority",
       "return": "java.lang.String",
-      "parameters": ["java.lang.String[]"],
+      "parameters": [
+        "java.lang.String[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4342,26 +5650,6 @@
       "cwe": [],
       "type": [],
       "comment": "Counter example for sanitizer (has)"
-    },
-    {
-      "name": "org.springframework.oxm.xstream.XStreamMarshaller.getDefaultEncoding",
-      "return": "void",
-      "parameters": ["java.lang.String"],
-      "dataIn": {
-        "return": false,
-        "parameters": []
-      },
-      "dataOut": {
-        "return": false,
-        "parameters": []
-      },
-      "securityLevel": "none",
-      "discovery": "manual",
-      "framework": "spring",
-      "link": "https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/oxm/xstream/XStreamMarshaller.html",
-      "cwe": [],
-      "type": [],
-      "comment": "Counter example for sanitizer"
     },
     {
       "name": "org.apache.xmlrpc.webserver.RequestData.getHttpVersion",
@@ -4379,17 +5667,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/webserver/RequestData.html",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer."
     },
     {
       "name": "org.apache.commons.httpclient.HttpMethodDirector.authenticate",
       "return": "void",
-      "parameters": ["org.apache.commons.httpclient.HttpMethod"],
+      "parameters": [
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4399,14 +5695,22 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://hc.apache.org/httpclient-3.x/xref/org/apache/commons/httpclient/HttpMethodDirector.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The authentication string is added to the http method."
     },
     {
       "name": "org.dmfs.oauth2.client.BasicOAuth2ClientCredentials.authenticatedRequest",
       "return": "org.dmfs.httpclient.HttpRequest",
-      "parameters": ["org.dmfs.httpclient.HttpRequest"],
+      "parameters": [
+        "org.dmfs.httpclient.HttpRequest"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4419,8 +5723,14 @@
       "discovery": "manual",
       "framework": "oauth2essentials",
       "link": "https://github.com/dmfs/oauth2-essentials/blob/master/src/main/java/org/dmfs/oauth2/client/BasicOAuth2ClientCredentials.java",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Sends an authentication request."
     },
     {
@@ -4439,17 +5749,27 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/javax/security/auth/login/LoginContext.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Puts the program is an unauthenticated state."
     },
     {
       "name": "org.apache.shiro.mgt.DefaultSecurityManager.logout",
       "return": "void",
-      "parameters": ["org.apache.shiro.subject.Subject"],
+      "parameters": [
+        "org.apache.shiro.subject.Subject"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4459,17 +5779,27 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://shiro.apache.org/static/1.2.6/apidocs/org/apache/shiro/mgt/DefaultSecurityManager.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Logout the specified subject."
     },
     {
       "name": "com.novell.ldap.rfc2251.RfcFilter.unescapeString",
       "return": "byte[]",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4480,13 +5810,18 @@
       "framework": "ldap",
       "link": "",
       "cwe": [],
-      "type": ["source"],
+      "type": [
+        "source"
+      ],
       "comment": "Counter example for sanitizer (unescape)"
     },
     {
       "name": "org.apache.commons.lang3.ObjectUtils.identityToString",
       "return": "void",
-      "parameters": ["java.lang.StringBuilder","java.lang.Object"],
+      "parameters": [
+        "java.lang.StringBuilder",
+        "java.lang.Object"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4506,10 +5841,18 @@
     {
       "name": "org.apache.commons.io.HexDump.dump",
       "return": "void",
-      "parameters": ["byte[]","long","java.io.OutputStream","int"],
+      "parameters": [
+        "byte[]",
+        "long",
+        "java.io.OutputStream",
+        "int"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,2]
+        "parameters": [
+          0,
+          2
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4520,16 +5863,22 @@
       "framework": "apache",
       "link": "https://commons.apache.org/proper/commons-io/javadocs/api-2.5/org/apache/commons/io/HexDump.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "org.springframework.security.authentication.RememberMeAuthenticationProvider.authenticate",
       "return": "org.springframework.security.core.Authentication",
-      "parameters": ["org.springframework.security.core.Authentication"],
+      "parameters": [
+        "org.springframework.security.core.Authentication"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4539,17 +5888,27 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/3.1.8.CI-SNAPSHOT/apidocs/org/springframework/security/authentication/RememberMeAuthenticationProvider.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "The input object is authenticated and returned."
     },
     {
       "name": "org.springframework.mock.web.MockJspWriter.println",
       "return": "void",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4560,13 +5919,18 @@
       "framework": "spring",
       "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mock/web/MockJspWriter.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Sink"
     },
     {
       "name": "com.novell.ldap.LDAPConnection.connect",
       "return": "void",
-      "parameters": ["java.lang.String","int"],
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4579,14 +5943,23 @@
       "discovery": "manual",
       "framework": "ldap",
       "link": "https://www.novell.com/documentation/developer/jldap/jldapenu/api/com/novell/ldap/LDAPConnection.html",
-      "cwe": ["cwe863","cwe862","cwe306"],
-      "type": ["authentication"],
+      "cwe": [
+        "cwe863",
+        "cwe862",
+        "cwe306"
+      ],
+      "type": [
+        "authentication"
+      ],
       "comment": "Create a connection to the host and port. "
     },
     {
       "name": "org.apache.xalan.templates.ElemTemplateElement.replaceChild",
       "return": "org.w3c.dom.Node",
-      "parameters": ["org.w3c.dom.Node","org.w3c.dom.Node"],
+      "parameters": [
+        "org.w3c.dom.Node",
+        "org.w3c.dom.Node"
+      ],
       "dataIn": {
         "return": false,
         "parameters": []
@@ -4600,7 +5973,9 @@
       "framework": "apache",
       "link": "https://xalan.apache.org/xalan-j/apidocs/org/apache/xalan/templates/ElemTemplateElement.html",
       "cwe": [],
-      "type": ["sink"],
+      "type": [
+        "sink"
+      ],
       "comment": "Counter example for sanitizer (replace but for Nodes only)"
     },
     {
@@ -4626,10 +6001,15 @@
     {
       "name": "org.springframework.web.socket.config.HandlersBeanDefinitionParser.parse",
       "return": "org.springframework.beans.factory.config.BeanDefinition",
-      "parameters": ["org.w3c.dom.Element","org.springframework.beans.factory.xml.ParserContext"],
+      "parameters": [
+        "org.w3c.dom.Element",
+        "org.springframework.beans.factory.xml.ParserContext"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4639,17 +6019,26 @@
       "discovery": "manual",
       "framework": "spring",
       "link": "https://github.com/spring-projects/spring-framework/blob/master/spring-websocket/src/main/java/org/springframework/web/socket/config/HandlersBeanDefinitionParser.java",
-      "cwe": [],
-      "type": ["source","sink"],
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "source",
+        "sink"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "com.github.scribejava.core.oauth.OAuth20Service.sendAccessTokenRequestSync",
       "return": "com.github.scribejava.core.model.OAuth2AccessToken",
-      "parameters": ["com.github.scribejava.core.model.OAuthRequest"],
+      "parameters": [
+        "com.github.scribejava.core.model.OAuthRequest"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4659,8 +6048,13 @@
       "discovery": "manual",
       "framework": "scribejava",
       "link": "https://github.com/scribejava/scribejava/blob/master/scribejava-core/src/main/java/com/github/scribejava/core/oauth/OAuth20Service.java",
-      "cwe": ["cwe306"],
-      "type": ["authentication","sink"],
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "sink"
+      ],
       "comment": "Returns a tocken for the given request."
     },
     {
@@ -4669,7 +6063,9 @@
       "parameters": [],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4679,17 +6075,26 @@
       "discovery": "manual",
       "framework": "oauth",
       "link": "",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe862"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "com.github.scribejava.core.oauth.OAuth20Service.sendAccessTokenRequestAsync",
       "return": "java.util.concurrent.Future",
-      "parameters": ["com.github.scribejava.core.model.OAuthRequestAsync","com.github.scribejava.core.model.OAuthAsyncRequestCallback"],
+      "parameters": [
+        "com.github.scribejava.core.model.OAuthRequestAsync",
+        "com.github.scribejava.core.model.OAuthAsyncRequestCallback"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": true,
@@ -4699,9 +6104,14 @@
       "discovery": "manual",
       "framework": "scribejava",
       "link": "https://github.com/scribejava/scribejava/blob/master/scribejava-core/src/main/java/com/github/scribejava/core/oauth/OAuth20Service.java",
-      "cwe": ["cwe306"],
-      "type": ["authentication","sink"],
-      "comment": "Authenticateds the request"
+      "cwe": [
+        "cwe306"
+      ],
+      "type": [
+        "authentication",
+        "sink"
+      ],
+      "comment": "Authenticates the request"
     },
     {
       "name": "org.apache.xmlrpc.webserver.HttpServletRequestImpl.parseParameters",
@@ -4719,17 +6129,28 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "",
-      "cwe": [],
-      "type": ["source"],
+      "cwe": [
+        "cwe079",
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
       "comment": "Source training set"
     },
     {
       "name": "org.apache.xmlrpc.client.XmlRpcClient.execute",
       "return": "java.lang.Object",
-      "parameters": ["java.lang.String", "java.lang.Object[]"],
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0,1]
+        "parameters": [
+          0,
+          1
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4739,17 +6160,25 @@
       "discovery": "manual",
       "framework": "apache",
       "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/client/XmlRpcClient.html",
-      "cwe": ["cwe078"],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": "Performes a request for the method provided as the first argument."
     },
     {
       "name": "java.lang.Runtime.exec",
       "return": "java.lang.Process",
-      "parameters": ["java.lang.String"],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4759,17 +6188,25 @@
       "discovery": "manual",
       "framework": "generaljava",
       "link": "https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html#exec(java.lang.String)",
-      "cwe": ["cwe078"],
-      "type": ["sink"],
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": ""
     },
     {
-      "name": "javax.xml.xpath.XPath.compile",
+      "name": "org.apache.xpath.jaxp.XPathImpl.compile",
       "return": "javax.xml.xpath.XPathExpression",
-      "parameters": ["java.lang.String "],
+      "parameters": [
+        "java.lang.String"
+      ],
       "dataIn": {
         "return": false,
-        "parameters": [0]
+        "parameters": [
+          0
+        ]
       },
       "dataOut": {
         "return": false,
@@ -4777,19 +6214,158 @@
       },
       "securityLevel": "none",
       "discovery": "manual",
-      "framework": "generaljava",
-      "link": "https://docs.oracle.com/javase/7/docs/api/javax/xml/xpath/XPath.html#compile(java.lang.String)",
-      "cwe": ["cwe078"],
-      "type": ["sink"],
+      "framework": "apache",
+      "link": "https://xml.apache.org/xalan-j/apidocs/org/apache/xpath/jaxp/XPathImpl.html",
+      "cwe": [
+        "cwe078"
+      ],
+      "type": [
+        "sink"
+      ],
+      "comment": ""
+    },
+    {
+      "name": "org.jsoup.parser.Parser.parse",
+      "return": "org.jsoup.nodes.Document",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": [
+          0,
+          1
+        ]
+      },
+      "dataOut": {
+        "return": true,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "jsoup",
+      "link": "https://jsoup.org/apidocs/org/jsoup/parser/Parser.html#parseInput-java.lang.String-java.lang.String-",
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "source",
+        "sink"
+      ],
+      "comment": ""
+    },
+    {
+      "name": "org.jsoup.nodes.Node.before",
+      "return": "org.jsoup.nodes.Node",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": [
+          0
+        ]
+      },
+      "dataOut": {
+        "return": false,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "jsoup",
+      "link": "https://jsoup.org/apidocs/org/jsoup/nodes/Node.html#before-java.lang.String-",
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
+      "comment": ""
+    },
+    {
+      "name": "org.jsoup.nodes.Node.after",
+      "return": "org.jsoup.nodes.Node",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": [
+          0
+        ]
+      },
+      "dataOut": {
+        "return": false,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "jsoup",
+      "link": "https://jsoup.org/apidocs/org/jsoup/nodes/Node.html#before-java.lang.String-",
+      "cwe": [
+        "cwe079"
+      ],
+      "type": [
+        "sink"
+      ],
+      "comment": ""
+    },
+    {
+      "name": "javax.servlet.ServletRequestWrapper.getParameter",
+      "return": "java.lang.String",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": []
+      },
+      "dataOut": {
+        "return": true,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "javageneral",
+      "link": "https://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequestWrapper.html",
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "source"
+      ],
+      "comment": ""
+    },
+    {
+      "name": "javax.servlet.http.HttpServletResponseWrapper.sendRedirect",
+      "return": "void",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "dataIn": {
+        "return": false,
+        "parameters": [
+          0
+        ]
+      },
+      "dataOut": {
+        "return": false,
+        "parameters": []
+      },
+      "securityLevel": "none",
+      "discovery": "manual",
+      "framework": "javageneral",
+      "link": "https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponseWrapper.html",
+      "cwe": [
+        "cwe601"
+      ],
+      "type": [
+        "sink"
+      ],
       "comment": ""
     }
-
-
-
   ],
-
-
-
   "cwes": [
     {
       "id": "none",
@@ -4797,157 +6373,132 @@
       "short": "none",
       "link": ""
     },
-
     {
       "id": "cwe089",
       "name": "Improper Neutralization of Special Elements used in an SQL Command",
       "short": "SQL Injection",
       "link": "http://cwe.mitre.org/top25/#CWE-89"
     },
-
     {
       "id": "cwe078",
       "name": "Improper Neutralization of Special Elements used in an OS Command",
       "short": "OS Command Injection",
       "link": "http://cwe.mitre.org/top25/#CWE-78"
     },
-
     {
       "id": "cwe120",
       "name": "Buffer Copy without Checking Size of Input",
       "short": "Buffer Overflow",
       "link": "http://cwe.mitre.org/top25/#CWE-120"
     },
-
     {
       "id": "cwe079",
       "name": "Improper Neutralization of Input During Web Page Generation",
       "short": "Cross-site Scripting",
       "link": "http://cwe.mitre.org/top25/#CWE-79"
     },
-
     {
       "id": "cwe306",
       "name": "Missing Authentication for Critical Function",
       "link": "http://cwe.mitre.org/top25/#CWE-306"
     },
-
     {
       "id": "cwe862",
       "name": "Missing Authorization",
       "link": "http://cwe.mitre.org/top25/#CWE-862"
     },
-
     {
       "id": "cwe798",
       "name": "Use of Hard-coded Credentials",
       "link": "http://cwe.mitre.org/top25/#CWE-798"
     },
-
     {
       "id": "cwe311",
       "name": "Missing Encryption of Sensitive Data",
       "link": "http://cwe.mitre.org/top25/#CWE-311"
     },
-
     {
       "id": "cwe434",
       "name": "Unrestricted Upload of File with Dangerous Type",
       "link": "http://cwe.mitre.org/top25/#CWE-434"
     },
-
     {
       "id": "cwe807",
       "name": "Reliance on Untrusted Inputs in a Security Decision",
       "link": "http://cwe.mitre.org/top25/#CWE-807"
     },
-
     {
       "id": "cwe250",
       "name": "Execution with Unnecessary Privileges",
       "link": "http://cwe.mitre.org/top25/#CWE-250"
     },
-
     {
       "id": "cwe352",
       "name": "Cross-Site Request Forgery",
       "link": "http://cwe.mitre.org/top25/#CWE-352"
     },
-
     {
       "id": "cwe022",
       "name": "Improper Limitation of a Pathname to a Restricted Directory",
       "short": "Path Traversal",
       "link": "http://cwe.mitre.org/top25/#CWE-22"
     },
-
     {
       "id": "cwe494",
       "name": "Download of Code Without Integrity Check",
       "link": "http://cwe.mitre.org/top25/#CWE-494"
     },
-
     {
       "id": "cwe863",
       "name": "Incorrect Authorization",
       "link": "http://cwe.mitre.org/top25/#CWE-863"
     },
-
     {
       "id": "cwe829",
       "name": "Inclusion of Functionality from Untrusted Control Sphere",
       "link": "http://cwe.mitre.org/top25/#CWE-829"
     },
-
     {
       "id": "cwe732",
       "name": "Incorrect Permission Assignment for Critical Resource",
       "link": "http://cwe.mitre.org/top25/#CWE-732"
     },
-
     {
       "id": "cwe676",
       "name": "Use of Potentially Dangerous Function",
       "link": "http://cwe.mitre.org/top25/#CWE-676"
     },
-
     {
       "id": "cwe327",
       "name": "Use of a Broken or Risky Cryptographic Algorithm",
       "link": "http://cwe.mitre.org/top25/#CWE-327"
     },
-
     {
       "id": "cwe131",
       "name": "Incorrect Calculation of Buffer Size",
       "link": "http://cwe.mitre.org/top25/#CWE-131"
     },
-
     {
       "id": "cwe307",
       "name": "Improper Restriction of Excessive Authentication Attempts",
       "link": "http://cwe.mitre.org/top25/#CWE-307"
     },
-
     {
       "id": "cwe601",
       "name": "URL Redirection to Untrusted Site",
       "short": "Open Redirect",
       "link": "http://cwe.mitre.org/top25/#CWE-601"
     },
-
     {
       "id": "cwe134",
       "name": "Uncontrolled Format String",
       "link": "http://cwe.mitre.org/top25/#CWE-134"
     },
-
     {
       "id": "cwe190",
       "name": "Integer Overflow or Wraparound",
       "link": "http://cwe.mitre.org/top25/#CWE-190"
     },
-
     {
       "id": "cwe759",
       "name": "Use of a One-Way Hash without a Salt",

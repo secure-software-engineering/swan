@@ -7,13 +7,21 @@
 
 package de.fraunhofer.iem.swan.assist.actions;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.project.Project;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.JSONWriter;
+import de.fraunhofer.iem.swan.assist.util.Constants;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 
@@ -28,14 +36,23 @@ public class ExportAction extends AnAction {
      * @param anActionEvent source event
      */
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 
         final String FILE_EXTENSION = ".json";
         String filePath = "";
 
-        JFileChooser fileChooser = new JFileChooser();
+        final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
+
+        File projectPath;
+
+        if (project.getBasePath() == null)
+            projectPath = FileSystemView.getFileSystemView().getDefaultDirectory();
+        else
+            projectPath = new File(project.getBasePath());
+
+        JFileChooser fileChooser = new JFileChooser(projectPath);
         fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        fileChooser.setSelectedFile(new File("projectmethods.json"));
+        fileChooser.setSelectedFile(new File(project.getName() + "-methods.json"));
         fileChooser.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
 
         int returnValue = fileChooser.showSaveDialog(null);
@@ -53,6 +70,10 @@ public class ExportAction extends AnAction {
             //TODO deal with exception
             try {
                 exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
+
+                Notifications.Bus.notify(
+                        new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "", JSONFileLoader.getMethods().size()+ " methods exported to: "+filePath, NotificationType.INFORMATION));
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -64,7 +85,7 @@ public class ExportAction extends AnAction {
      * @param event source  event
      */
     @Override
-    public void update(AnActionEvent event) {
+    public void update(@NotNull AnActionEvent event) {
 
         //Disable/Enable action button
         if (JSONFileLoader.isFileSelected())

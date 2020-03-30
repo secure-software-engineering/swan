@@ -17,10 +17,7 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
-import com.intellij.openapi.fileEditor.FileEditorManagerListener;
+import com.intellij.openapi.fileEditor.*;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
@@ -43,7 +40,6 @@ import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
-import de.fraunhofer.iem.swan.assist.ui.dialog.SwanResultsDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
@@ -55,8 +51,13 @@ import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -71,6 +72,7 @@ public class MethodListTree extends Tree {
     public static Set<String> suggestedMethodsList;
     private Project project;
     private ResourceBundle resource;
+    public static boolean TREE_EXPANDED;
 
     /**
      * Initialises method list tree
@@ -94,8 +96,28 @@ public class MethodListTree extends Tree {
         TREE_FILTERS = new ArrayList<>();
         RESTORE_METHOD = false;
         currentFile = "";
+        TREE_EXPANDED = true;
 
         suggestedMethodsList = new HashSet<>();
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                System.out.println("enter selec");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -126,12 +148,46 @@ public class MethodListTree extends Tree {
                     if (node != null) {
                         Object object = node.getUserObject();
 
-                        if (object instanceof MethodWrapper) {
+                        if (object instanceof Pair) {
+
+                            Pair classPair = (Pair) object;
+                            String classname = classPair.getKey().toString();
+                            String simpleClassname = classname.substring(classname.lastIndexOf(".") + 1);
+
+                            PsiFile[] files = FilenameIndex.getFilesByName(project, simpleClassname + ".java", GlobalSearchScope.allScope(project));
+
+                            boolean methodFound = false;
+
+                            for (PsiFile file : files) {
+
+                                PsiJavaFile psiJavaFile = (PsiJavaFile) file;
+
+                                if ((psiJavaFile.getPackageName() + "." + simpleClassname).contentEquals(classname)) {
+
+                                    methodFound = true;
+
+                                    OpenFileDescriptor fileDescriptor = new OpenFileDescriptor(project, psiJavaFile.getVirtualFile());
+                                    fileDescriptor.navigateInEditor(project, true);
+                                }
+                            }
+
+                            if (!methodFound) {
+                                JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.ClassNotFound"), MessageType.ERROR, null)
+                                        .createBalloon()
+                                        .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) e.getComponent()), Balloon.Position.below);
+                            }
+
+                        } else if (object instanceof MethodWrapper) {
 
                             MethodWrapper method = (MethodWrapper) object;
 
                             //Get PSI element location
                             PsiFile[] files = FilenameIndex.getFilesByName(project, method.getFileName(), GlobalSearchScope.allScope(project));
+
+                            String methodSignature = method.getSignature(true);
+
+                            if (methodSignature.contains("<init>"))
+                                methodSignature = Formatter.trimProperty(method.getClassName(false));
 
                             boolean methodFound = false;
 
@@ -142,11 +198,11 @@ public class MethodListTree extends Tree {
                                 for (PsiClass psiClass : psiJavaFile.getClasses()) {
                                     for (PsiMethod psiMethod : psiClass.getMethods()) {
 
-                                        if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), method.getSignature(true))) {
-
+                                        if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), methodSignature)) {
                                             methodFound = true;
-                                            FileEditorManager.getInstance(project).openFile(psiJavaFile.getVirtualFile(), true, true);
-                                            FileEditorManager.getInstance(project).getSelectedTextEditor().getCaretModel().moveToOffset(psiMethod.getTextOffset());
+
+                                            OpenFileDescriptor fileDescriptor = new OpenFileDescriptor(project, psiJavaFile.getVirtualFile(), psiMethod.getTextOffset());
+                                            fileDescriptor.navigateInEditor(project, true);
                                         }
                                     }
                                 }
@@ -159,7 +215,6 @@ public class MethodListTree extends Tree {
                             }
                         }
                     }
-
                 }
             }
         });
@@ -179,15 +234,20 @@ public class MethodListTree extends Tree {
 
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
+
                                 JSONFileLoader.setConfigurationFile(fileName, project);
                                 JSONFileLoader.loadInitialFile();
-                                loadMethods();
                             }
                         });
                     }
-                });
 
-                DaemonCodeAnalyzer.getInstance(project).restart();
+                    @Override
+                    public void onFinished() {
+                        super.onFinished();
+                        loadMethods();
+                        DaemonCodeAnalyzer.getInstance(project).restart();
+                    }
+                });
             }
 
             @Override
@@ -200,13 +260,17 @@ public class MethodListTree extends Tree {
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
                                 JSONFileLoader.loadUpdatedFile(fileName, project);
-                                loadMethods();
                             }
                         });
                     }
-                });
 
-                DaemonCodeAnalyzer.getInstance(project).restart();
+                    @Override
+                    public void onFinished() {
+                        super.onFinished();
+                        loadMethods();
+                        DaemonCodeAnalyzer.getInstance(project).restart();
+                    }
+                });
             }
         });
 
@@ -254,9 +318,9 @@ public class MethodListTree extends Tree {
 
                 TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
-                if(trainingFileManager.exportNew(suggestedMethods, PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY))){
+                if (trainingFileManager.exportNew(suggestedMethods, PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY))) {
 
-                    PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_FILE_SUGGESTED,trainingFileManager.getTrainingFile());
+                    PropertiesComponent.getInstance(project).setValue(Constants.TRAIN_FILE_SUGGESTED, trainingFileManager.getTrainingFile());
 
                     NotificationType notificationType = NotificationType.INFORMATION;
                     Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.Suggest.NewTrainingFile"), PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_FILE_SUGGESTED), notificationType));
@@ -274,7 +338,21 @@ public class MethodListTree extends Tree {
                     node = searchNode((DefaultMutableTreeNode) treeModel.getRoot(), newMethod.getSignature(true));
                 }
 
-                treeModel.removeNodeFromParent(node);
+                DefaultMutableTreeNode root = (DefaultMutableTreeNode) node.getParent();
+
+                if (root != null) {
+                    Pair classPair = (Pair) root.getUserObject();
+
+                    int childCount = (int) classPair.getValue() - 1;
+
+                    if (childCount == 0) {
+                        treeModel.removeNodeFromParent(root);
+                    } else {
+                        root.setUserObject(new Pair<>(classPair.getKey(), childCount));
+                        treeModel.removeNodeFromParent(node);
+                    }
+                }
+
                 JSONFileLoader.removeMethod(newMethod);
                 DaemonCodeAnalyzer.getInstance(project).restart();
             }
@@ -291,7 +369,6 @@ public class MethodListTree extends Tree {
             public void launchSwan(HashMap<String, String> values) {
 
                 JSONFileLoader.setReloading(true);
-                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.RefreshStarted"), resource.getString("Messages.Notification.RefreshStarted"), NotificationType.INFORMATION));
             }
         });
 
@@ -304,31 +381,12 @@ public class MethodListTree extends Tree {
                 NotificationType notificationType = NotificationType.INFORMATION;
 
                 String message = "<html>"
-                        + resource.getString("Messages.Notification.Completed")
-                        + "<br><a href='logs'>View Logs</a> or <a href='load'>Load Changes</a></html>";
+                        + values.get(Constants.ANALYSIS_RESULT);
 
-                Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Notification.Title.Completed"), message, notificationType, new NotificationListener() {
-                    @Override
-                    public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent hyperlinkEvent) {
-
-                        if (hyperlinkEvent.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-
-                            if (hyperlinkEvent.getDescription().equals("logs")) {
-
-                                SwanResultsDialog resultsDialog = new SwanResultsDialog(project, values);
-                                resultsDialog.show();
-
-                            } else if (hyperlinkEvent.getDescription().equals("load")) {
-
-                                ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
-                                fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
-                            }
-                        }
-                    }
-                }));
+                ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
+                fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
             }
         });
-
 
         //Notify user that Suggest method process started or that the methods were generated
         bus.connect().subscribe(SuggestNotifier.SUGGEST_METHOD_TOPIC, new SuggestNotifier() {
@@ -337,7 +395,6 @@ public class MethodListTree extends Tree {
             public void startSuggestMethod() {
                 JSONFileLoader.setReloading(true);
                 Notifications.Bus.notify(new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, resource.getString("Messages.Title.SuggestStarted"), resource.getString("Messages.Notification.SuggestStarted"), NotificationType.INFORMATION));
-
             }
 
             @Override
@@ -364,7 +421,7 @@ public class MethodListTree extends Tree {
                                     suggestedMethods.put(method.getSignature(true), method);
                                 }
 
-                                MethodDialog dialog = new MethodDialog(suggestedMethods, (String) suggestedMethods.keySet().toArray()[0], project, JSONFileLoader.getCategories());
+                                MethodDialog dialog = new MethodDialog(suggestedMethods, (String) suggestedMethods.keySet().toArray()[0], project, JSONFileLoader.getAllCategories());
                                 dialog.show();
                             }
                         }
@@ -380,11 +437,11 @@ public class MethodListTree extends Tree {
 
                 if (value.equals(Constants.CLEAR_FILTER))
                     TREE_FILTERS.clear();
-                else if (TREE_FILTERS.contains(value))
+                else if (TREE_FILTERS.contains(value)) {
                     TREE_FILTERS.remove(value);
-                else
+                } else {
                     TREE_FILTERS.add(value);
-
+                }
                 if (TREE_FILTERS.contains(Constants.FILE_FILTER)) {
 
                     try {
@@ -416,16 +473,27 @@ public class MethodListTree extends Tree {
                 }
             }
         });
+
+
+        bus.connect().subscribe(ExpandNotifier.EXPAND_COLLAPSE_LIST, new ExpandNotifier() {
+            @Override
+            public void expandTree(boolean expand) {
+
+                TREE_EXPANDED = !TREE_EXPANDED;
+
+                expandErrors(TREE_EXPANDED);
+            }
+        });
     }
 
     /**
      * Searches if a method already exists in the Tree.
      *
-     * @param root   root object of tree
-     * @param method the method that is being searched for
+     * @param root  root object of tree
+     * @param query the method that is being searched for
      * @return returns the node if it's found
      */
-    private DefaultMutableTreeNode searchNode(DefaultMutableTreeNode root, String method) {
+    private DefaultMutableTreeNode searchNode(DefaultMutableTreeNode root, String query) {
 
         Enumeration e = root.breadthFirstEnumeration();
 
@@ -437,9 +505,16 @@ public class MethodListTree extends Tree {
 
                 MethodWrapper methodWrapper = (MethodWrapper) node.getUserObject();
 
-                if (method.equals(methodWrapper.getSignature(true))) {
+                if (query.equals(methodWrapper.getSignature(true))) {
                     return node;
                 }
+            } else if (node.getUserObject() instanceof Pair) {
+
+                Pair classPair = (Pair) node.getUserObject();
+                String classname = classPair.getKey().toString();
+
+                if (classname.equals(query))
+                    return node;
             }
         }
         return null;
@@ -451,10 +526,69 @@ public class MethodListTree extends Tree {
      * @param method New method to be added
      */
     private void addNode(MethodWrapper method) {
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
-        DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(method);
 
-        treeModel.insertNodeInto(addCategoriesToNode(newMethodNode, method), root, root.getChildCount());
+        DefaultMutableTreeNode root = searchNode((DefaultMutableTreeNode) getModel().getRoot(), method.getClassName(true));
+
+        if (root == null) {
+            root = (DefaultMutableTreeNode) getModel().getRoot();
+
+            DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(new Pair<>(method.getClassName(true), 1));
+            classNode.add(addCategoriesToNode(method));
+
+            treeModel.insertNodeInto(classNode, root, root.getChildCount());
+        } else {
+
+            if (root.getUserObject() instanceof Pair) {
+
+                Pair rootClass = (Pair) root.getUserObject();
+                root.setUserObject(new Pair<>(method.getClassName(true), (int) rootClass.getValue() + 1));
+            }
+
+            DefaultMutableTreeNode newMethodNode = new DefaultMutableTreeNode(method);
+            treeModel.insertNodeInto(addCategoriesToNode(newMethodNode, method), root, root.getChildCount());
+        }
+    }
+
+    /**
+     * Loads methods from file and uses them to create tree object.
+     */
+    private void loadMethods() {
+
+        TreeMap<String, ArrayList<MethodWrapper>> methods = JSONFileLoader.getMethodsForTree(TREE_FILTERS, currentFile, project);
+
+        if (methods.size() > 0) {
+
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>Classified Methods</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
+
+            int methodCount = 0;
+            int totalMethods = 0;
+            for (String classname : methods.keySet()) {
+
+                methodCount = methods.get(classname).size();
+                totalMethods += methodCount;
+
+                DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(new Pair<>(classname, methodCount));
+
+                ArrayList<MethodWrapper> sortedList =  methods.get(classname);
+                Collections.sort(sortedList);
+                for (MethodWrapper method : sortedList) {
+
+                    classNode.add(addCategoriesToNode(method));
+                    root.add(classNode);
+                }
+            }
+
+            String pattern = "###,###";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
+
+            root.setUserObject("<html><b>Classified Methods</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in "+ decimalFormat.format(methods.size())+" classes)</font></html>");
+
+            treeModel.setRoot(root);
+            TREE_EXPANDED = false;
+        } else {
+            treeModel.setRoot(null);
+            getEmptyText().setText(resource.getString("Messages.Notification.NoFilterResults"));
+        }
     }
 
     /**
@@ -485,23 +619,37 @@ public class MethodListTree extends Tree {
     }
 
     /**
-     * Loads methods from file and uses them to create tree object.
+     * @param expand flag for whether the tree should be expanded or not
      */
-    private void loadMethods() {
+    private void expandErrors(boolean expand) {
 
-        ArrayList<MethodWrapper> methods = JSONFileLoader.getMethods(TREE_FILTERS, currentFile, project);
+        TreeNode root = (TreeNode) this.getModel().getRoot();
+        expandAll(this, new TreePath(root), expand);
+    }
 
-        if (methods.size() > 0) {
+    /**
+     * @param tree   that should be expanded
+     * @param path   expansion path
+     * @param expand flag for whether the tree should be expanded or not
+     */
+    private void expandAll(Tree tree, TreePath path, boolean expand) {
+        TreeNode node = (TreeNode) path.getLastPathComponent();
 
-            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>Methods</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
+        if (node.getChildCount() >= 0) {
+            Enumeration enumeration = node.children();
 
-            for (MethodWrapper method : methods) {
-                root.add(addCategoriesToNode(method));
+            while (enumeration.hasMoreElements()) {
+                TreeNode treeNode = (TreeNode) enumeration.nextElement();
+                TreePath treePath = path.pathByAddingChild(treeNode);
+
+                expandAll(tree, treePath, expand);
             }
-            treeModel.setRoot(root);
+        }
+
+        if (expand) {
+            tree.expandPath(path);
         } else {
-            treeModel.setRoot(null);
-            getEmptyText().setText(resource.getString("Messages.Notification.NoFilterResults"));
+            tree.collapsePath(path);
         }
     }
 }

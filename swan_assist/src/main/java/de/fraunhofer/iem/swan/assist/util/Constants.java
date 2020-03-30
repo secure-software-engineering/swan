@@ -29,9 +29,11 @@ public class Constants {
     public final static String OUTPUT_DIRECTORY = PLUGIN_ID + "outputPath";
     public final static String OUTPUT_FILE = PLUGIN_ID + "outputFile";
     public final static String OUTPUT_LOG = PLUGIN_ID + "outputLogs";
+    public final static String ANALYSIS_RESULT = PLUGIN_ID + "analysisResult";
     public final static String TRAIN_FILE_SUGGESTED = PLUGIN_ID + "file_suggested_methods";
 
     public final static String DEFAULT_TRAINING_PATH = PLUGIN_ID + "defaultTrainingPath";
+    public final static String PROJECT_CONFIGURATION_FILE = PLUGIN_ID + "defaultConfigurationFile";
 
     public final static String FILTER_CWE = "CWE";
     public final static String FILTER_TYPE = "Type";
@@ -47,7 +49,7 @@ public class Constants {
     public final static String TRAINING_METHOD = "manual";
 
     //Notification titles/strings
-    public final static String PLUGIN_GROUP_DISPLAY_ID = "SWAN_Assist";
+    public final static String PLUGIN_GROUP_DISPLAY_ID = "Plugin-1";
 
 
 

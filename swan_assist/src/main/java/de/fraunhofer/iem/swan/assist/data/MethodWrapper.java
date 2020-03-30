@@ -11,12 +11,15 @@ import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import org.apache.commons.lang3.StringUtils;
 import de.fraunhofer.iem.swan.data.Method;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
  * Wrapper class to format data in method object to display in plugin.
  */
-public class MethodWrapper {
+public class MethodWrapper implements Comparable<MethodWrapper> {
+
 
     public enum MethodStatus {
         NONE,
@@ -66,6 +69,11 @@ public class MethodWrapper {
         this.method = new Method(methodName, parameters, returnType, className);
         status = MethodStatus.NONE;
 
+    }
+
+    @Override
+    public int compareTo(@NotNull MethodWrapper o) {
+        return this.getMethodName(false).compareTo(o.getMethodName(false));
     }
 
     /**
@@ -127,16 +135,16 @@ public class MethodWrapper {
      */
     public String getSignature(boolean isfullyQualifiedName) {
 
-        return getReturnType(isfullyQualifiedName) + " " + getMethodName(isfullyQualifiedName) + " (" + getParameter(isfullyQualifiedName) + ")";
+        return getReturnType(isfullyQualifiedName) + " " + getMethodName(isfullyQualifiedName) + " (" + StringUtils.join(getParameters(isfullyQualifiedName), ", ") + ")";
 
     }
 
     /**
-     * Returns the list of parameters as a comma separated String
+     * Returns the list of parameters
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
-     * @return List of parameters as comma separated spring
+     * @return List of parameters
      */
-    public String getParameter(boolean isFullyQualifiedName) {
+    public List<String> getParameters(boolean isFullyQualifiedName) {
 
         List<String> param = new ArrayList<>();
 
@@ -144,10 +152,10 @@ public class MethodWrapper {
             for (String parameter : method.getParameters()) {
                 param.add(trimProperty(parameter));
             }
-            return StringUtils.join(param, ", ");
+            return param;
         }
 
-        return StringUtils.join(method.getParameters(), ", ");
+        return method.getParameters();
     }
 
     /**
@@ -182,7 +190,7 @@ public class MethodWrapper {
 
     /**
      * Returns array list of types that are assigned to the method
-     * @param capitalize Condition to capitialize first character of types
+     * @param capitalize Condition to capitalize first character of types
      * @return Array list of types
      */
     public ArrayList<String> getTypesList(boolean capitalize) {
@@ -197,14 +205,6 @@ public class MethodWrapper {
         }
 
         return typesList;
-    }
-
-    /**
-     * Returns list of parameters
-     * @return List of method parameters
-     */
-    public List<String> getParameters() {
-        return parameters;
     }
 
     /**
@@ -263,7 +263,14 @@ public class MethodWrapper {
      * @return Message for editor marker
      */
     public String getMarkerMessage() {
-        return "This is a potential " + StringUtils.join(getTypesList(true), ", ") + " method of sensitive information relevant for " + StringUtils.join(getCWEList(), ", ");
+
+        String message = "<html><i>Potential</i> <b>" + StringUtils.join(getTypesList(true), ", ") + "</b> method";
+
+        if(getCWEList().size()>0)
+        message += " of sensitive information relevant for <b>" + StringUtils.join(getCWEList(), ", ")+"</b";
+
+        message+=".</html>";
+        return message;
     }
 
     /**

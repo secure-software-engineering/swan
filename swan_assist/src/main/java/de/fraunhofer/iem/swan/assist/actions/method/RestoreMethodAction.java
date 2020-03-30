@@ -17,6 +17,7 @@ import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.ui.MethodListTree;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.ResourceBundle;
@@ -33,6 +34,7 @@ public class RestoreMethodAction extends AnAction {
      * Initializes action
      */
     public RestoreMethodAction() {
+
     }
 
     /**
@@ -40,7 +42,8 @@ public class RestoreMethodAction extends AnAction {
      * @param method Method that will be restored.
      */
     public RestoreMethodAction(MethodWrapper method) {
-        super("Restore");
+
+        super("Restore Classification");
         this.method = method;
     }
 
@@ -49,7 +52,7 @@ public class RestoreMethodAction extends AnAction {
      * @param anActionEvent source event
      */
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 
         final Project project = anActionEvent.getRequiredData(CommonDataKeys.PROJECT);
         ResourceBundle resource = ResourceBundle.getBundle("dialog_messages");

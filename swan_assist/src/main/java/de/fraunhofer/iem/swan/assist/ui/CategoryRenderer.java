@@ -24,19 +24,23 @@ public class CategoryRenderer extends JLabel implements ListCellRenderer<Categor
     @Override
     public Component getListCellRendererComponent(JList<? extends Category> list, Category category, int index, boolean isSelected, boolean cellHasFocus) {
 
+        String HIGHLIGHT_COLOR = "gray";
+
         if (isSelected) {
             setBackground(new JBColor(new Color(9, 80, 208), new Color(9, 80, 208)));
             setForeground(JBColor.white);
+            HIGHLIGHT_COLOR = "white";
         } else {
             setBackground(JBColor.WHITE);
             setForeground(JBColor.BLACK);
         }
 
+
         if (category.isCwe()) {
 
             ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
 
-            setText("<html>" + Formatter.toTitleCase(category.toString()) + " <font color='gray'>" + resourceBundle.getString(category.toString() + ".Name") + "</font></html>");
+            setText("<html>" + Formatter.toTitleCase(category.toString()) + " <font color='" + HIGHLIGHT_COLOR + "'>" + resourceBundle.getString(category.toString() + ".Name") + "</font></html>");
             setToolTipText("<html>" + "<b>" + Formatter.toTitleCase(category.toString()) + "</b> " + resourceBundle.getString(category.toString() + ".FullName") + "</html>");
         } else {
             setText(Formatter.toTitleCase(category.toString()));

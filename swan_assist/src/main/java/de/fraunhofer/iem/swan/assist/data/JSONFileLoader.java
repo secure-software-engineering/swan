@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class JSONFileLoader {
 
-    static private HashMap<String, MethodWrapper> methods;
+    static private HashMap<String, MethodWrapper> methods= new HashMap<>();
     static private String congFile = "";
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
@@ -149,6 +149,32 @@ public class JSONFileLoader {
         }
     }
 
+    public static TreeMap<String, ArrayList<MethodWrapper>> getMethodsForTree(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
+
+        ArrayList<MethodWrapper> methods = getMethods(filters, currentFile, project);
+
+        TreeMap<String, ArrayList<MethodWrapper>> methodMap = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String class1, String class2) {
+                return Formatter.trimProperty(class1).toLowerCase().compareTo(Formatter.trimProperty(class2).toLowerCase());
+            }
+        });
+
+        for (MethodWrapper method : methods) {
+
+            if (methodMap.containsKey(method.getClassName(true))) {
+                methodMap.get(method.getClassName(true)).add(method);
+            } else {
+                ArrayList<MethodWrapper> list = new ArrayList<>();
+                list.add(method);
+                methodMap.put(method.getClassName(true), list);
+            }
+        }
+
+        return methodMap;
+    }
+
+
     /**
      * Filters method methods using the filters provided.
      *
@@ -193,8 +219,27 @@ public class JSONFileLoader {
         for (MethodWrapper method : methods.values()) {
 
             for (Category category : method.getCategories()) {
-                if (!categorySet.contains(category))
-                    categorySet.add(category);
+                categorySet.add(category);
+            }
+        }
+        return categorySet;
+    }
+
+    /**
+     * Returns list of possible categories.
+     *
+     * @return Set of all possible categories.
+     */
+    public static Set<Category> getAllCategories() {
+
+
+        Set<Category> categorySet = new HashSet<>();
+
+        for (Category category : Category.values()) {
+
+            if (!category.toString().equals(de.fraunhofer.iem.swan.data.Constants.NONE)
+                    && !category.equals(Category.CWETEST)) {
+                categorySet.add(category);
             }
         }
         return categorySet;

@@ -61,6 +61,8 @@ public class SummaryToolWindow implements ToolWindowFactory {
                 MessageBus messageBus = project.getMessageBus();
                 ConfigurationFileNotifier publisher = messageBus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
                 publisher.loadInitialFile(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
+
+                actionToolbar.updateActionsImmediately();
             }
         }
 

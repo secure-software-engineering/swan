@@ -36,7 +36,6 @@ public class DeleteMethodAction extends AnAction {
      * Initializes the action
      */
     public DeleteMethodAction() {
-        super("Delete");
         deleteMethod = null;
     }
 
@@ -45,7 +44,7 @@ public class DeleteMethodAction extends AnAction {
      * @param method that will be deleted
      */
     public DeleteMethodAction(MethodWrapper method) {
-        super("Delete");
+        super("Delete Classification");
         deleteMethod = method;
     }
 
