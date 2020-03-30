@@ -21,6 +21,7 @@ public interface PluginIcons {
     Icon REFRESH_SWAN = IconLoader.getIcon("/icons/refresh.png");
     Icon HELP_ACTION = IconLoader.getIcon("/icons/help.png");
     Icon FILTER_ACTION = IconLoader.getIcon("/icons/filter.png");
+    Icon ACTIVE_FILTER_ACTION = IconLoader.getIcon("/icons/activeFilter.png");
     Icon ADD_METHOD_ACTION = IconLoader.getIcon("/icons/add.png");
     Icon EXPORT_ACTION = IconLoader.getIcon("/icons/export.png");
     Icon SUGGEST_ACTION = IconLoader.getIcon("/icons/suggest.png");

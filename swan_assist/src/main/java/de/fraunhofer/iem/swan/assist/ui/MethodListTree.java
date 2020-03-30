@@ -53,6 +53,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -97,6 +99,25 @@ public class MethodListTree extends Tree {
         TREE_EXPANDED = true;
 
         suggestedMethodsList = new HashSet<>();
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                System.out.println("enter selec");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
