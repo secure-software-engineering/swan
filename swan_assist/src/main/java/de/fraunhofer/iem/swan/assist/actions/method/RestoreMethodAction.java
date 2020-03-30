@@ -34,6 +34,7 @@ public class RestoreMethodAction extends AnAction {
      * Initializes action
      */
     public RestoreMethodAction() {
+
     }
 
     /**
@@ -41,7 +42,8 @@ public class RestoreMethodAction extends AnAction {
      * @param method Method that will be restored.
      */
     public RestoreMethodAction(MethodWrapper method) {
-        super("Restore");
+
+        super("Restore Classification");
         this.method = method;
     }
 

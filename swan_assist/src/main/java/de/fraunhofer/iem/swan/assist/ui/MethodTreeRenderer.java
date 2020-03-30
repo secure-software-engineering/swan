@@ -34,9 +34,11 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 
-        if (selected)
+        String HIGHLIGHT_COLOR = "gray";
+        if (selected){
             text.setForeground(JBColor.WHITE);
-        else
+             HIGHLIGHT_COLOR = "white";
+        } else
             text.setForeground(JBColor.BLACK);
 
         if (value instanceof DefaultMutableTreeNode) {
@@ -51,8 +53,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 if(methodName.contains("<init>"))
                     methodName = Formatter.trimProperty(method.getClassName(false));
 
-
-                text.setText("<html><font color='gray'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + methodName + "</b> ( )</html>");
+                text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + methodName + "</b> ( )</html>");
                 text.setIcon(IconUtils.getNodeIcon(method.getTypesList(false)));
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED) && !selected)
@@ -60,7 +61,11 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 else if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_DELETED) && !selected)
                     text.setForeground(new JBColor(new Color(178, 34, 34), new Color(178, 34, 34)));
 
-                text.setToolTipText(StringUtils.join(method.getTypesList(true), ", ")+": "+ method.getSignature(true));
+                String cweList =": ";
+                if(method.getCWEList().size()>0)
+                    cweList = " relevant for <b>"+StringUtils.join(method.getCWEList(), ", ")+"</b>: ";
+
+                text.setToolTipText("<html><i>Potential</i> <b>"+StringUtils.join(method.getTypesList(true), ", ")+"</b>"+cweList+ method.getSignature(true)+"</html>");
 
             } else if (object instanceof Category) {
 
@@ -71,7 +76,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 if (category.isCwe()) {
 
                     ResourceBundle resourceBundle = ResourceBundle.getBundle("dialog_messages");
-                    text.setText("<html>" + category.toString() + " <font color='gray'>" + resourceBundle.getString(category.toString() + ".Name") + "</font></html>");
+                    text.setText("<html>" + category.toString() + " <font color='" + HIGHLIGHT_COLOR + "'>" + resourceBundle.getString(category.toString() + ".Name") + "</font></html>");
                     text.setToolTipText("<html>" + "<b>" + category.toString() + "</b> " + resourceBundle.getString(category.toString() + ".FullName") + "</html>");
                 } else
                     text.setText(category.toString());
@@ -80,12 +85,12 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 Pair classPair = (Pair)object;
                 String classname = classPair.getKey().toString();
 
-                text.setToolTipText("Class Name: "+classname);
-                text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='gray'>(" + classPair.getValue() +")</font></html>");
+                text.setToolTipText("<html>" +classPair.getValue()+ " methods in <b>"+classname+"</b></html>");
+                text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='" + HIGHLIGHT_COLOR + "'>(" + classPair.getValue() +")</font></html>");
                 text.setIcon(PluginIcons.CLASS);
             }else {
 
-                text.setText(value.toString());
+                text.setText(value.toString().replace("color='gray'","color='"+ HIGHLIGHT_COLOR +"'"));
                 text.setIcon(null);
                 text.setToolTipText(null);
             }

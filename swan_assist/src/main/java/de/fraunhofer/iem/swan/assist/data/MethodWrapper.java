@@ -11,6 +11,8 @@ import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import org.apache.commons.lang3.StringUtils;
 import de.fraunhofer.iem.swan.data.Method;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
@@ -255,7 +257,14 @@ public class MethodWrapper {
      * @return Message for editor marker
      */
     public String getMarkerMessage() {
-        return "This is a potential " + StringUtils.join(getTypesList(true), ", ") + " method of sensitive information relevant for " + StringUtils.join(getCWEList(), ", ");
+
+        String message = "<html><i>Potential</i> <b>" + StringUtils.join(getTypesList(true), ", ") + "</b> method";
+
+        if(getCWEList().size()>0)
+        message += " of sensitive information relevant for <b>" + StringUtils.join(getCWEList(), ", ")+"</b";
+
+        message+=".</html>";
+        return message;
     }
 
     /**

@@ -55,6 +55,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -138,7 +139,6 @@ public class MethodListTree extends Tree {
                             if (methodSignature.contains("<init>"))
                                 methodSignature = Formatter.trimProperty(method.getClassName(false));
 
-
                             boolean methodFound = false;
 
                             for (PsiFile file : files) {
@@ -184,9 +184,9 @@ public class MethodListTree extends Tree {
 
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
+
                                 JSONFileLoader.setConfigurationFile(fileName, project);
                                 JSONFileLoader.loadInitialFile();
-
                             }
                         });
                     }
@@ -210,7 +210,6 @@ public class MethodListTree extends Tree {
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
                                 JSONFileLoader.loadUpdatedFile(fileName, project);
-                                loadMethods();
                             }
                         });
                     }
@@ -509,11 +508,14 @@ public class MethodListTree extends Tree {
 
         if (methods.size() > 0) {
 
-            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>Methods</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>Classified Methods</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
 
+            int methodCount = 0;
+            int totalMethods = 0;
             for (String classname : methods.keySet()) {
 
-                DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(new Pair<>(classname, methods.get(classname).size()));
+                methodCount = methods.get(classname).size();
+                totalMethods += methodCount;
 
                 for (MethodWrapper method : methods.get(classname)) {
 
@@ -521,6 +523,11 @@ public class MethodListTree extends Tree {
                     root.add(classNode);
                 }
             }
+
+            String pattern = "###,###";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
+
+            root.setUserObject("<html><b>Classified Methods</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in "+ decimalFormat.format(methods.size())+" classes)</font></html>");
 
             treeModel.setRoot(root);
             TREE_EXPANDED = false;

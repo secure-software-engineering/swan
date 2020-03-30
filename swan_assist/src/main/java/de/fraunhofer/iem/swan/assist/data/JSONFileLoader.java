@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class JSONFileLoader {
 
-    static private HashMap<String, MethodWrapper> methods;
+    static private HashMap<String, MethodWrapper> methods= new HashMap<>();
     static private String congFile = "";
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
@@ -149,11 +149,16 @@ public class JSONFileLoader {
         }
     }
 
-    public static HashMap<String, ArrayList<MethodWrapper>> getMethodsForTree(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
+    public static TreeMap<String, ArrayList<MethodWrapper>> getMethodsForTree(ArrayList<Pair<String, String>> filters, String currentFile, Project project) {
 
         ArrayList<MethodWrapper> methods = getMethods(filters, currentFile, project);
 
-        HashMap<String, ArrayList<MethodWrapper>> methodMap = new HashMap();
+        TreeMap<String, ArrayList<MethodWrapper>> methodMap = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String class1, String class2) {
+                return Formatter.trimProperty(class1).toLowerCase().compareTo(Formatter.trimProperty(class2).toLowerCase());
+            }
+        });
 
         for (MethodWrapper method : methods) {
 

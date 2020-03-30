@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
  * Dialog to launch configuration window for SWAN before running the application.
  */
 
-public class PluginSettingsDialog extends DialogWrapper {
+public class RunAnalysisDialog extends DialogWrapper {
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -60,7 +60,7 @@ public class PluginSettingsDialog extends DialogWrapper {
      * @param project Active project in the editor
      * @param modal   Modal setting for dialog
      */
-    public PluginSettingsDialog(Project project, boolean modal) {
+    public RunAnalysisDialog(Project project, boolean modal) {
 
         super(project, modal);
         this.project = project;

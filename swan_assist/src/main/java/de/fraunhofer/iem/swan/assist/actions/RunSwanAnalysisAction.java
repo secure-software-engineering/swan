@@ -16,7 +16,7 @@ import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
-import de.fraunhofer.iem.swan.assist.ui.dialog.PluginSettingsDialog;
+import de.fraunhofer.iem.swan.assist.ui.dialog.RunAnalysisDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
@@ -65,7 +65,7 @@ public class RunSwanAnalysisAction extends AnAction {
         }
 
         //Launch Dialog
-        PluginSettingsDialog dialog = new PluginSettingsDialog(project, true);
+        RunAnalysisDialog dialog = new RunAnalysisDialog(project, true);
         dialog.show();
 
         if (dialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
