@@ -1474,10 +1474,7 @@
       ],
       "dataIn": {
         "return": false,
-        "parameters": [
-          0,
-          1
-        ]
+        "parameters": [0]
       },
       "dataOut": {
         "return": true,
