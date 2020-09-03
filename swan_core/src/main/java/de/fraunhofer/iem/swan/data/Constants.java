@@ -18,6 +18,10 @@ public final class Constants {
 	public final static String CWE = "cwe";
 	public final static String TYPE = "type";
 	public final static String COMMENT = "comment";
+	public final static String JAVADOC = "javadoc";
+	public final static String CLASS_DOC = "class";
+	public final static String METHOD_DOC = "method";
+	public final static String SOURCE_JAR = "jar";
 
 	//Method Categories
 	public final static String SOURCE = "source";
