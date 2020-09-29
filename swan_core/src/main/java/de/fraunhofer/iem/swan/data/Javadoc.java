@@ -37,4 +37,15 @@ public class Javadoc {
     public void setClassComment(String classComment) {
         this.classComment = classComment;
     }
+
+    public String getMergedComments() {
+        return methodComment + " " + classComment;
+    }
+    @Override
+    public String toString() {
+        return "Javadoc{" +
+                "methodComment='" + methodComment + '\'' +
+                ", classComment='" + classComment + '\'' +
+                '}';
+    }
 }
