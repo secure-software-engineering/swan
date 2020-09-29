@@ -4,13 +4,13 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if sink data flow prepositions are found in the doc comment.
  * <p>
  * The sink prepositions and nouns are based on the
- * {@link WordList#SINK_PREPOSITIONS} and {@link WordList#SINK_NOUNS} lists.
+ * {@link SecurityVocabulary#SINK_PREPOSITIONS} and {@link SecurityVocabulary#SINK_NOUNS} lists.
  *
  * @author Oshando Johnson on 01.09.20
  */

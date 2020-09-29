@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.doc.features.manual.unprocessed;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Token;
@@ -11,7 +11,7 @@ import edu.stanford.nlp.simple.Token;
 /**
  * Checks if words that indicate incomplete implementation are used in the doc comment.
  * <p>
- * List of words are found in {@link WordList#INCOMPLETE_CODE_KEYWORDS}
+ * List of words are found in {@link SecurityVocabulary#INCOMPLETE_CODE_KEYWORDS}
  *
  * @author Oshando Johnson on 02.09.20
  */
@@ -39,7 +39,7 @@ public class IncompleteCodeFeature implements IDocFeature {
         for (Sentence sentence : document.sentences()) {
 
             for (Token token : sentence.tokens()) {
-                if (WordList.INCOMPLETE_CODE_KEYWORDS.contains(token.lemma()))
+                if (SecurityVocabulary.INCOMPLETE_CODE_KEYWORDS.contains(token.lemma()))
                     counter++;
             }
         }

@@ -4,14 +4,14 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if SQL Injection words are found in the doc comment.
  * <p>
  * The number of SQL Injection verbs and nouns based on the
- * {@link WordList#CWE089_VERBS}
- * and {@link WordList#CWE089_NOUNS} lists.
+ * {@link SecurityVocabulary#CWE089_VERBS}
+ * and {@link SecurityVocabulary#CWE089_NOUNS} lists.
  *
  * @author Oshando Johnson on 07.08.20
  */

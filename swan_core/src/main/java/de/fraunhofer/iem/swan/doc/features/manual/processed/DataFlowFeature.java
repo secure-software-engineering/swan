@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.doc.features.manual.processed;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.nlp.NLPUtils;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.semgraph.SemanticGraph;
@@ -40,22 +40,22 @@ public abstract class DataFlowFeature {
 
         switch (category) {
             case SOURCE:
-                nounList = WordList.SOURCE_NOUNS;
-                prepositionList = WordList.SOURCE_PREPOSITIONS;
+                nounList = SecurityVocabulary.SOURCE_NOUNS;
+                prepositionList = SecurityVocabulary.SOURCE_PREPOSITIONS;
                 break;
             case SINK:
-                nounList = WordList.SINK_NOUNS;
-                prepositionList = WordList.SINK_PREPOSITIONS;
+                nounList = SecurityVocabulary.SINK_NOUNS;
+                prepositionList = SecurityVocabulary.SINK_PREPOSITIONS;
                 break;
             case SANITIZER:
-                nounList = WordList.SANITIZER_NOUNS;
-                prepositionList = WordList.SANITIZER_PREPOSITIONS;
+                nounList = SecurityVocabulary.SANITIZER_NOUNS;
+                prepositionList = SecurityVocabulary.SANITIZER_PREPOSITIONS;
                 break;
             case AUTHENTICATION_NEUTRAL:
             case AUTHENTICATION_TO_HIGH:
             case AUTHENTICATION_TO_LOW:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                prepositionList = WordList.AUTHENTICATION_PREPOSITIONS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                prepositionList = SecurityVocabulary.AUTHENTICATION_PREPOSITIONS;
                 break;
         }
 

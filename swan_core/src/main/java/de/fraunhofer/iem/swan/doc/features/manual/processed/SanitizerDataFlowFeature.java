@@ -4,13 +4,13 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if sanitizer data flow prepositions are found in the doc comment.
  * <p>
  * The sanitizer prepositions and nouns are based on the
- * {@link WordList#SANITIZER_PREPOSITIONS} and {@link WordList#SANITIZER_NOUNS} lists.
+ * {@link SecurityVocabulary#SANITIZER_PREPOSITIONS} and {@link SecurityVocabulary#SANITIZER_NOUNS} lists.
  *
  * @author Oshando Johnson on 01.09.20
  */

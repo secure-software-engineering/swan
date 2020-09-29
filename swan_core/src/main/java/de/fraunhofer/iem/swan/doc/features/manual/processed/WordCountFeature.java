@@ -2,7 +2,7 @@ package de.fraunhofer.iem.swan.doc.features.manual.processed;
 
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 import de.fraunhofer.iem.swan.doc.nlp.NLPUtils;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.IndexedWord;
@@ -36,32 +36,32 @@ public abstract class WordCountFeature {
 
         switch (category) {
             case SOURCE:
-                nounList = WordList.SOURCE_NOUNS;
-                verbList = WordList.SOURCE_VERBS;
+                nounList = SecurityVocabulary.SOURCE_NOUNS;
+                verbList = SecurityVocabulary.SOURCE_VERBS;
                 break;
             case SINK:
-                nounList = WordList.SINK_NOUNS;
-                verbList = WordList.SINK_VERBS;
+                nounList = SecurityVocabulary.SINK_NOUNS;
+                verbList = SecurityVocabulary.SINK_VERBS;
                 break;
             case SANITIZER:
-                nounList = WordList.SANITIZER_NOUNS;
-                verbList = WordList.SANITIZER_VERBS;
+                nounList = SecurityVocabulary.SANITIZER_NOUNS;
+                verbList = SecurityVocabulary.SANITIZER_VERBS;
                 break;
             case CWE089:
-                nounList = WordList.CWE089_NOUNS;
-                verbList = WordList.CWE089_VERBS;
+                nounList = SecurityVocabulary.CWE089_NOUNS;
+                verbList = SecurityVocabulary.CWE089_VERBS;
                 break;
             case AUTHENTICATION_NEUTRAL:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_NO_CHANGE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_NO_CHANGE_VERBS;
                 break;
             case AUTHENTICATION_TO_HIGH:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_SAFE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_SAFE_VERBS;
                 break;
             case AUTHENTICATION_TO_LOW:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_UNSAFE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_UNSAFE_VERBS;
                 break;
         }
 
@@ -121,32 +121,32 @@ public abstract class WordCountFeature {
 
         switch (category) {
             case SOURCE:
-                nounList = WordList.SOURCE_NOUNS;
-                verbList = WordList.SOURCE_VERBS;
+                nounList = SecurityVocabulary.SOURCE_NOUNS;
+                verbList = SecurityVocabulary.SOURCE_VERBS;
                 break;
             case SINK:
-                nounList = WordList.SINK_NOUNS;
-                verbList = WordList.SINK_VERBS;
+                nounList = SecurityVocabulary.SINK_NOUNS;
+                verbList = SecurityVocabulary.SINK_VERBS;
                 break;
             case SANITIZER:
-                nounList = WordList.SANITIZER_NOUNS;
-                verbList = WordList.SANITIZER_VERBS;
+                nounList = SecurityVocabulary.SANITIZER_NOUNS;
+                verbList = SecurityVocabulary.SANITIZER_VERBS;
                 break;
             case CWE089:
-                nounList = WordList.CWE089_NOUNS;
-                verbList = WordList.CWE089_VERBS;
+                nounList = SecurityVocabulary.CWE089_NOUNS;
+                verbList = SecurityVocabulary.CWE089_VERBS;
                 break;
             case AUTHENTICATION_NEUTRAL:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_NO_CHANGE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_NO_CHANGE_VERBS;
                 break;
             case AUTHENTICATION_TO_HIGH:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_SAFE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_SAFE_VERBS;
                 break;
             case AUTHENTICATION_TO_LOW:
-                nounList = WordList.AUTHENTICATION_NOUNS;
-                verbList = WordList.AUTH_UNSAFE_VERBS;
+                nounList = SecurityVocabulary.AUTHENTICATION_NOUNS;
+                verbList = SecurityVocabulary.AUTH_UNSAFE_VERBS;
                 break;
         }
 

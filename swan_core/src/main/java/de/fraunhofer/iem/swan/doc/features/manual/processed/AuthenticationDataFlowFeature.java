@@ -4,13 +4,13 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if authentication data flow prepositions are found in the doc comment.
  * <p>
  * The authentication prepositions and nouns are based on the
- * {@link WordList#AUTHENTICATION_PREPOSITIONS} and {@link WordList#AUTHENTICATION_NOUNS} lists.
+ * {@link SecurityVocabulary#AUTHENTICATION_PREPOSITIONS} and {@link SecurityVocabulary#AUTHENTICATION_NOUNS} lists.
  *
  * @author Oshando Johnson on 01.09.20
  */

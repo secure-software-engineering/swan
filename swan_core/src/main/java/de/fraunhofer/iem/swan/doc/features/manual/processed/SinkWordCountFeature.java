@@ -4,14 +4,14 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if sink words are found in the doc comment.
  * <p>
  * The number of sink verbs and nouns based on the
- * {@link WordList#SINK_VERBS}
- * and {@link WordList#SINK_NOUNS} lists.
+ * {@link SecurityVocabulary#SINK_VERBS}
+ * and {@link SecurityVocabulary#SINK_NOUNS} lists.
  *
  * @author Oshando Johnson on 20.07.20
  */

@@ -4,14 +4,14 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if auth-safe-state words are found in the doc comment.
  * <p>
  * The number of auth-safe-state verbs and nouns based on the
- * {@link WordList#AUTH_SAFE_VERBS}
- * and {@link WordList#AUTHENTICATION_NOUNS} lists.
+ * {@link SecurityVocabulary#AUTH_SAFE_VERBS}
+ * and {@link SecurityVocabulary#AUTHENTICATION_NOUNS} lists.
  *
  * @author Oshando Johnson on 07.08.20
  */

@@ -4,14 +4,14 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.doc.features.manual.FeatureResult;
 import de.fraunhofer.iem.swan.doc.features.manual.IDocFeature;
 import de.fraunhofer.iem.swan.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 
 /**
  * Evaluates if source words are found in the doc comment.
  * <p>
  * The number of source verbs and nouns based on the
- * {@link WordList#SOURCE_VERBS}
- * and {@link WordList#SOURCE_NOUNS} lists.
+ * {@link SecurityVocabulary#SOURCE_VERBS}
+ * and {@link SecurityVocabulary#SOURCE_NOUNS} lists.
  *
  * @author Oshando Johnson on 29.07.20
  */
