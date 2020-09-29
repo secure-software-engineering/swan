@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.doc.nlp;
 
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.doc.util.WordList;
+import de.fraunhofer.iem.swan.doc.util.SecurityVocabulary;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -35,11 +35,11 @@ public class CoreNLPExecutor {
 
     public static void mains(String[] args) {
         HashSet<String> general = new HashSet<>();
-        general.addAll(WordList.AUTHENTICATION_NOUNS);
-        general.addAll(WordList.SOURCE_NOUNS);
-        general.addAll(WordList.SINK_NOUNS);
-        general.addAll(WordList.SOURCE_NOUNS);
-        general.addAll(WordList.CWE089_NOUNS);
+        general.addAll(SecurityVocabulary.AUTHENTICATION_NOUNS);
+        general.addAll(SecurityVocabulary.SOURCE_NOUNS);
+        general.addAll(SecurityVocabulary.SINK_NOUNS);
+        general.addAll(SecurityVocabulary.SOURCE_NOUNS);
+        general.addAll(SecurityVocabulary.CWE089_NOUNS);
 
         List<String> list = new ArrayList<>(general);
 
