@@ -39,4 +39,6 @@ public final class Constants {
 	public final static String AUTH_NOCHANGE = "none";
 	public final static String AUTH_UNSAFE = "low";
 
+	//Relevant methods - super group for SRM
+	public final static String RELEVANT = "relevant";
 }
