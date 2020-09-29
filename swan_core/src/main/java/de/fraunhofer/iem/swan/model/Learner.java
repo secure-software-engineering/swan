@@ -78,18 +78,13 @@ public class Learner {
         MLPlanExecutor mlPlanExecutor = new MLPlanExecutor();
         LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
 
-        try {
-            HashMap<String, String>  f = mlPlanExecutor.run(instances);
-            fMeasure.put(mlPlanExecutor.getFilteredClassifier().getClass().getSimpleName(),f);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HashMap<String, String> f = mlPlanExecutor.run(instances);
+        fMeasure.put(mlPlanExecutor.getClassifier().getClass().getSimpleName(), f);
 
         return fMeasure;
     }
 
     /**
-     *
      * @param instances
      * @return
      */

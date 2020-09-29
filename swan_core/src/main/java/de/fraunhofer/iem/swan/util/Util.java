@@ -2,6 +2,7 @@ package de.fraunhofer.iem.swan.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.type.AbstractSootFeature;
 import soot.SootMethod;
+import weka.core.Instances;
 
 public class Util {
     private static final Logger logger = LoggerFactory.getLogger(Util.class);
@@ -225,5 +227,22 @@ public class Util {
             }
         }
         return files;
+    }
+
+    /**
+     * Loads the ARFF file to an instances object.
+     * @param filePath path to ARFF file
+     * @return data as Instances object
+     */
+    public static Instances loadArffFile(String filePath) {
+        Instances dataset = null;
+
+        try {
+            dataset = new Instances(new FileReader(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return dataset;
     }
 }
