@@ -1,7 +1,23 @@
 package de.fraunhofer.iem.swan;
 
 import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.doc.features.DocFeatureHandler;
+import de.fraunhofer.iem.swan.doc.features.automatic.AutomaticFeatureHandler;
+import de.fraunhofer.iem.swan.doc.features.automatic.DocCommentVector;
+import de.fraunhofer.iem.swan.doc.features.manual.ManualFeaturesHandler;
+import de.fraunhofer.iem.swan.doc.util.Utils;
+import de.fraunhofer.iem.swan.features.FeatureHandler;
+import de.fraunhofer.iem.swan.io.FileUtility;
+import de.fraunhofer.iem.swan.io.Loader;
+import de.fraunhofer.iem.swan.io.Parser;
+import de.fraunhofer.iem.swan.io.Writer;
+import de.fraunhofer.iem.swan.model.InstancesHandler;
+import de.fraunhofer.iem.swan.model.Learner;
 import de.fraunhofer.iem.swan.util.SwanConfig;
+import de.fraunhofer.iem.swan.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import weka.core.Instances;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +30,34 @@ import java.util.*;
  */
 
 public class Main {
+
+    private Learner learner;
+    private Loader loader;
+    private Parser parser;
+    private FeatureHandler featureHandler;
+    private String outputPath;
+    private Writer writer;
+
+    // Configuration tags for debugging
+    private static final boolean runSources = true;
+    private static final boolean runSinks = true;
+    private static final boolean runSanitizers = true;
+    private static final boolean runAuthentications = true;
+    private static final boolean runRelevant = true;
+    private static final boolean runCwes = true;
+
+    private static final boolean runOAT = false; // run one at a time analysis
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
+    private static final InstancesHandler.INSTANCE_SET INSTANCE_TYPE = InstancesHandler.INSTANCE_SET.SWAN_SWANDOC_MANUAL;
+    private static final Learner.LEARN_MODE LEARNING_MODE = Learner.LEARN_MODE.MANUAL;
+
+    public static String INPUT = "/Users/oshando/Projects/thesis/03-code/swandoc/src/main/resources/training-jars";
+    public static String JAVADOC_OUTPUT = "/Users/oshando/Projects/thesis/03-code/training-docs";
+    public static String TRAINING_SET = "/Users/oshando/Projects/thesis/03-code/swandoc/src/main/resources/training-set-javadoc.json";
+
+
+    DocFeatureHandler docFeatureHandler;
 
     public static void main(String[] args) {
 
@@ -44,29 +88,10 @@ public class Main {
 
             Main main = new Main();
             main.run(sourceDir, trainSourceCode, trainJson, outputDir);
-            // System.out.println("Done.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
-
-    private Learner learner;
-    private Loader loader;
-    private Parser parser;
-    private FeatureHandler featureHandler;
-    private String outputPath;
-    private Writer writer;
-
-    // Configuration tags for debugging
-    private static final boolean runSources = true;
-    private static final boolean runSinks = true;
-    private static final boolean runSanitizers = true;
-    private static final boolean runAuthentications = false;
-    private static final boolean runCwes = true;
-
-    private static final boolean runOAT = false; // run one at a time analysis
 
     /**
      * This method executes the analysis and can also be called from outside by
@@ -102,8 +127,7 @@ public class Main {
             throws IOException, InterruptedException {
 
         // This helper object keeps track of created temporary directories and files to
-        // to be deleted before exiting the
-        // application.
+        // to be deleted before exiting the application.
         FileUtility fileUtility = new FileUtility();
 
         if (trainJson == null) {
@@ -120,15 +144,15 @@ public class Main {
             internalRun(sourceDir, trainSourceCode, trainJson, outputDir);
 
         } finally {
-
             // Delete temporary files and folders that have been created.
             fileUtility.dispose();
         }
-
     }
 
     private void internalRun(String sourceDir, String trainSourceCode, String trainJson, String outputDir)
             throws IOException, InterruptedException {
+
+        long startAnalysisTime = System.currentTimeMillis();
 
         int iterations = 0;
         if (runOAT)
@@ -137,107 +161,154 @@ public class Main {
         // for OAT analysis. Each feature is disabled once.
         for (int i = 0; i <= iterations; i++) {
             if (i == 0)
-                System.out.println("***** Running with all features.");
+                logger.info("Running with all features.");
             else {
-                System.out.println("***** Running without " + i + "th feature");
+                logger.info("Running without " + i + "th feature");
             }
+
             // Cache the list of classes and the CP.
-            // System.out.println("***** Loading CP");
             Set<String> testClasses = Util.getAllClassesFromDirectory(sourceDir);
             String testCp = Util.buildCP(sourceDir);
+
+            logger.info("Loading train data from {}", trainSourceCode);
             String trainingCp = Util.buildCP(trainSourceCode);
             outputPath = outputDir;
-            // System.out.println("Training set cp: " + trainingCp + "\nTest set cp: " +
-            // testCp);
-
-            // Cache the features.
-            // System.out.println("***** Loading features");
-            featureHandler = new FeatureHandler(trainingCp + System.getProperty("path.separator") + testCp);
-            featureHandler.initializeFeatures(i); // use 0 for all feature instances
 
             // Cache the methods from the training set.
-            // System.out.println("***** Loading train data");
             parser = new Parser(trainingCp);
             parser.loadTrainingSet(Collections.singleton(trainJson));
+            logger.info("{} training methods, distribution={}",
+                    parser.methods().size(), Utils.countCategories(parser.methods(), false));
+
+            //Remove methods that do not have method doc comments
+            parser.removeUndocumentedMethods();
+            logger.info("Remove undocumented training methods. Remaining {}, distribution={}",
+                    parser.methods().size(), Utils.countCategories(parser.methods(), false));
 
             // Cache the methods from the testing set.
-            // System.out.println("***** Loading test data");
+            logger.info("Loading test data from {}", sourceDir);
             loader = new Loader(testCp);
             loader.loadTestSet(testClasses, parser.methods());
 
+            // Cache the features.
+            logger.info("Loading feature instances");
+            featureHandler = new FeatureHandler(trainingCp + System.getProperty("path.separator") + testCp);
+            featureHandler.initializeFeatures(i); // use 0 for all feature instances
+
+            //Populate SWAN feature attributes
+            docFeatureHandler = null;
+            switch (INSTANCE_TYPE) {
+                case SWANDOC_MANUAL:
+                case SWAN_SWANDOC_MANUAL:
+
+                    docFeatureHandler = new DocFeatureHandler(parser.getMethods());
+                    docFeatureHandler.initialiseManualFeatureSet();
+                    docFeatureHandler.evaluateManualFeatureData();
+                    break;
+                case SWANDOC_AUTOMATIC:
+                case SWAN_SWANDOC_AUTOMATIC:
+
+                    docFeatureHandler = new DocFeatureHandler(parser.getMethods());
+                    docFeatureHandler.initialiseAutomaticFeatureSet();
+                    docFeatureHandler.evaluateAutomaticFeatureData();
+                    break;
+            }
+
             // Prepare classifier.
-            // System.out.println("***** Preparing classifier");
+            logger.info("Preparing classifier");
             writer = new Writer(loader.methods());
             learner = new Learner(writer);
 
-            double averageF = 0;
-            int iter = 0;
-            // Classify.
-            if (runSources) {
-                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SOURCE, Category.NONE)), false);
-                iter++;
-            }
-            if (runSinks) {
-                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SINK, Category.NONE)), false);
-                iter++;
-            }
+            /*
+                FIRST PHASE - binary classification for each of the categories.
+                (1) Classify: source, sink, sanitizer,
+                auth-no-change, auth-unsafe-state, auth-safe-state
+                (2) Classify: relevant
+             */
+            runClassEvaluation(false);
 
-            if (runSanitizers) {
-                averageF += runClassifier(new HashSet<Category>(Arrays.asList(Category.SANITIZER, Category.NONE)),
-                        false);
-                iter++;
-            }
-
-            if (runAuthentications) {
-                averageF += runClassifier(
-                        new HashSet<Category>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,
-                                Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_NEUTRAL, Category.NONE)),
-                        false);
-                iter++;
-            }
             // Save data from last classification.
             loader.resetMethods();
 
             // Cache the methods from the second test set.
-            // System.out.println("***** Loading 2nd test set");
             loader.pruneNone();
 
-            if (runCwes) {
-                // Run classifications for all cwes in JSON file.
-                for (String cweId : parser.cwe()) {
-                    averageF += runClassifier(
-                            new HashSet<Category>(Arrays.asList(Category.getCategoryForCWE(cweId), Category.NONE)),
-                            true);
-                    iter++;
-                }
-            }
-            // System.out.println("***** F Measure is " + averageF/iter);
+            /*
+                SECOND PHASE - binary classification for each of the CWE categories.
+                (1) Classify: cwe78, cwe079, cwe089, cwe306, cwe601, cwe862, cwe863
+             */
+            runClassEvaluation(true);
 
             SwanConfig swanConfig = new SwanConfig();
             Properties config = swanConfig.getConfig();
             String fileName = config.getProperty("output_file_name");
 
-            // System.out.println("***** Writing final results");
-//			Set<String> tmpFiles = Util.getFiles(outputDir);
-            writer.printResultsTXT(loader.methods(),
-                    outputDir + File.separator + "txt" + File.separator + fileName + ".txt");
-            writer.writeResultsQWEL(loader.methods(),
-                    outputDir + File.separator + "qwel" + File.separator + fileName + ".qwel");
-            writer.writeResultsSoot(loader.methods(),
-                    outputDir + File.separator + "soot-qwel" + File.separator + fileName + ".sqwel");
-            writer.printResultsJSON(loader.methods(), outputDir + File.separator + fileName + ".json");
-            writer.writeResultsQwelXML(loader.methods(), outputDir + File.separator + fileName + ".xml");
+            String outputFile = outputDir + File.separator + fileName + ".json";
+            logger.info("Writing results to {}", outputFile);
+            writer.printResultsJSON(loader.methods(), outputFile);
+
+            long analysisTime = System.currentTimeMillis() - startAnalysisTime;
+            logger.info("Total runtime {} mins", analysisTime/60000);
         }
     }
 
-    private double runClassifier(HashSet<Category> categories, boolean cweMode)
-            throws IOException, InterruptedException {
-        parser.resetMethods();
-        loader.resetMethods();
-        // System.out.println("***** Starting classification for " +
-        // categories.toString());
-        return learner.classify(parser.methods(), loader.methods(), featureHandler.features(), categories,
-                outputPath + File.separator + "txt" + File.separator + "output.txt", cweMode);
+    public void runClassEvaluation(boolean forCwe) throws IOException, InterruptedException {
+
+        if (forCwe) {
+
+            // Run classifications for all CWEs in JSON file.
+            if (runCwes) {
+                for (String cweId : parser.cwe()) {
+                    // if (cweId.toLowerCase().contains("cwe306"))
+                    runClassifier(
+                            new HashSet<>(Arrays.asList(Category.getCategoryForCWE(cweId), Category.NONE)),
+                            Learner.EVAL_MODE.CLASS);
+                }
+            }
+        } else {
+
+            if (runSources) {
+                runClassifier(new HashSet<>(Arrays.asList(Category.SOURCE, Category.NONE)), Learner.EVAL_MODE.CLASS);
+            }
+
+            if (runSinks) {
+                runClassifier(new HashSet<>(Arrays.asList(Category.SINK, Category.NONE)), Learner.EVAL_MODE.CLASS);
+            }
+
+            if (runSanitizers) {
+                runClassifier(new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE)),
+                        Learner.EVAL_MODE.CLASS);
+            }
+
+            if (runAuthentications) {
+                runClassifier(
+                        new HashSet<>(Arrays.asList(Category.AUTHENTICATION_TO_HIGH,
+                                Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_NEUTRAL, Category.NONE)),
+                        Learner.EVAL_MODE.CLASS);
+            }
+
+            if (runRelevant) {
+                runClassifier(new HashSet<>(Arrays.asList(Category.RELEVANT, Category.NONE)), Learner.EVAL_MODE.RELEVANCE);
+            }
+        }
     }
 
+
+    private double runClassifier(HashSet<Category> categories, Learner.EVAL_MODE eval_mode) {
+        parser.resetMethods();
+        loader.resetMethods();
+
+        logger.info("Starting classification for {}", categories.toString());
+
+        InstancesHandler instancesHandler = new InstancesHandler();
+        Instances instances = instancesHandler.createInstances(parser.getMethods(), featureHandler.features(), docFeatureHandler, categories, INSTANCE_TYPE);
+        long startAnalysisTime = System.currentTimeMillis();
+
+        learner.trainModel(instances, LEARNING_MODE);
+
+        long analysisTime = System.currentTimeMillis() - startAnalysisTime;
+        logger.info("Total time for classification {}ms", analysisTime);
+
+        return 0.0;
+    }
 }
