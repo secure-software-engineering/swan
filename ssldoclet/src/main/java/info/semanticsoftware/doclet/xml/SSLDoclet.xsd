@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ssldoclet" type="ssldocletType"/>
+  <xs:complexType name="ClassType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="final"/>
+        <xs:attribute type="xs:string" name="line"/>
+        <xs:attribute type="xs:string" name="serializable"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="InterfaceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="final"/>
+        <xs:attribute type="xs:string" name="qualifiedType"/>
+        <xs:attribute type="xs:string" name="serializable"/>
+        <xs:attribute type="xs:string" name="type"/>
+        <xs:attribute type="xs:string" name="superclass"/>
+        <xs:attribute type="xs:string" name="superclassFullType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Interface_BlockType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Implements_Comment"/>
+      <xs:element type="InterfaceType" name="Interface"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendsType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="final"/>
+        <xs:attribute type="xs:string" name="qualifiedType"/>
+        <xs:attribute type="xs:string" name="serializable"/>
+        <xs:attribute type="xs:string" name="superclass"/>
+        <xs:attribute type="xs:string" name="superclassFullType"/>
+        <xs:attribute type="xs:string" name="type"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Extends_BlockType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Extends_Comment"/>
+      <xs:element type="ExtendsType" name="Extends"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Class_CommentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="line"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Class_Comment_BlockType">
+    <xs:sequence>
+      <xs:element type="Class_CommentType" name="Class_Comment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConstructorType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="final"/>
+        <xs:attribute type="xs:string" name="interface"/>
+        <xs:attribute type="xs:string" name="line"/>
+        <xs:attribute type="xs:string" name="modifier"/>
+        <xs:attribute type="xs:string" name="signature"/>
+        <xs:attribute type="xs:string" name="static"/>
+        <xs:attribute type="xs:string" name="synchronized"/>
+        <xs:attribute type="xs:string" name="synthetic"/>
+        <xs:attribute type="xs:string" name="visibility"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Constructor_CommentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="line"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Constructor_Comment_BlockType">
+    <xs:sequence>
+      <xs:element type="Constructor_CommentType" name="Constructor_Comment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Constructor_BlockType">
+    <xs:sequence>
+      <xs:element type="ConstructorType" name="Constructor"/>
+      <xs:element type="Constructor_Comment_BlockType" name="Constructor_Comment_Block"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConstructorsType">
+    <xs:sequence>
+      <xs:element type="Constructor_BlockType" name="Constructor_Block"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MethodType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="abstract" use="optional"/>
+        <xs:attribute type="xs:string" name="final" use="optional"/>
+        <xs:attribute type="xs:string" name="interface" use="optional"/>
+        <xs:attribute type="xs:string" name="line" use="optional"/>
+        <xs:attribute type="xs:string" name="modifier" use="optional"/>
+        <xs:attribute type="xs:string" name="signature" use="optional"/>
+        <xs:attribute type="xs:string" name="static" use="optional"/>
+        <xs:attribute type="xs:string" name="synchronized" use="optional"/>
+        <xs:attribute type="xs:string" name="synthetic" use="optional"/>
+        <xs:attribute type="xs:string" name="visibility" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Method_CommentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="line" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Method_Comment_BlockType">
+    <xs:sequence>
+      <xs:element type="Method_CommentType" name="Method_Comment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Return_BlockType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Return"/>
+      <xs:element type="xs:string" name="Return_Comment" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Method_BlockType">
+    <xs:sequence>
+      <xs:element type="MethodType" name="Method"/>
+      <xs:element type="Method_Comment_BlockType" name="Method_Comment_Block"/>
+      <xs:element type="Return_BlockType" name="Return_Block"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MethodsType">
+    <xs:sequence>
+      <xs:element type="Method_BlockType" name="Method_Block" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Class_BlockType">
+    <xs:sequence>
+      <xs:element type="ClassType" name="Class"/>
+      <xs:element type="Interface_BlockType" name="Interface_Block"/>
+      <xs:element type="Extends_BlockType" name="Extends_Block"/>
+      <xs:element type="Class_Comment_BlockType" name="Class_Comment_Block"/>
+      <xs:element type="ConstructorsType" name="Constructors"/>
+      <xs:element type="MethodsType" name="Methods"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Package_BlockType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Package"/>
+      <xs:element type="Class_BlockType" name="Class_Block"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ssldocletType">
+    <xs:sequence>
+      <xs:element type="Package_BlockType" name="Package_Block"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="creation"/>
+    <xs:attribute type="xs:string" name="source"/>
+    <xs:attribute type="xs:string" name="version"/>
+  </xs:complexType>
+</xs:schema>
