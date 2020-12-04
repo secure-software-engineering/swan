@@ -145,44 +145,6 @@ public class DocFeatureHandler {
 //        exclude.add("AuthNoChangeWordCountFeature");
 
 
-        /*
-
-        @attribute LinkTagCountFeature numeric
-@attribute SanitizerWordCountFeature numeric
-@attribute AverageTokenLengthFeature numeric
-@attribute AdverbCountFeature numeric
-@attribute SqlInjectionCountFeature numeric
-@attribute AuthUnsafeWordCountFeature numeric
-@attribute TokenCountFeature numeric
-@attribute AuthenticationDataFlowFeature numeric
-@attribute UppercaseWordsCountFeature numeric
-@attribute PrepositionCountFeature numeric
-@attribute PronounCountFeature numeric
-@attribute AverageSentenceLengthFeature numeric
-@attribute CodeTagCountFeature numeric
-@attribute IncompleteCodeFeature numeric
-@attribute LemmaCountFeature numeric
-@attribute AuthSafeWordCountFeature numeric
-@attribute AuthNoChangeWordCountFeature numeric
-@attribute SentenceCountFeature numeric
-@attribute VerbCountFeature numeric
-@attribute StopWordCountFeature numeric
-@attribute SanitizerDataFlowFeature numeric
-@attribute SeeTagCountFeature numeric
-@attribute SinkWordCountFeature numeric
-@attribute PunctuationCountFeature numeric
-@attribute SourceDataFlowFeature numeric
-@attribute DeprecatedTagCountFeature numeric
-@attribute CharacterCountFeature numeric
-@attribute NounCountFeature numeric
-@attribute NumberCountFeature numeric
-@attribute SinkDataFlowFeature numeric
-@attribute AdjectiveCountFeature numeric
-@attribute SourceWordCountFeature numeric
-@attribute ConjunctionCountFeature numeric
-         */
-
-
         Set<Class<? extends IDocFeature>> features = new HashSet<>(manualFeatureSet);
 
         for (Class<? extends IDocFeature> feature : features) {

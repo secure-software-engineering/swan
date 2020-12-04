@@ -43,7 +43,7 @@ public class DocCommentVector {
         //Export method and class doc comments
 
         Parser parser = new Parser();
-        parser.parse("/Users/oshando/Projects/thesis/03-code/swan/swan_core/src/main/resources/data-set-with-doc-comments.json");
+        parser.parse("/data-set-with-doc-comments.json");
 
 //        for(Method method: parser.getMethods()){
 //            if(method.getJavadoc().getMethodComment().length()>0)
@@ -86,7 +86,7 @@ public class DocCommentVector {
         List<String> stopWords = new ArrayList<>();
 
         try {
-            stopWords = FileUtils.readLines(new File("/Users/oshando/Projects/thesis/03-code/swan/swan_core/src/main/resources/stopwords-list.txt"), Charset.defaultCharset());
+            stopWords = FileUtils.readLines(new File("../resources/stopwords-list.txt"), Charset.defaultCharset());
         } catch (IOException e) {
             e.printStackTrace();
         }
