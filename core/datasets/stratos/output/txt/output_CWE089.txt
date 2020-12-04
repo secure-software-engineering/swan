@@ -1,0 +1,24 @@
+<org.apache.log4j.jdbc.JDBCAppender: java.sql.Connection getConnection()> 
+<org.apache.log4j.jdbc.JDBCAppender: void setDriver(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: void setBufferSize(int)> 
+<org.apache.log4j.jdbc.JDBCAppender: void setLocationInfo(boolean)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.Class loadClass(java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.String getName()> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.Object getObject(java.sql.ResultSet,java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty[] getDynaProperties()> 
+<org.apache.log4j.jdbc.JDBCAppender: void setPassword(java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty getDynaProperty(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: void closeConnection(java.sql.Connection)> 
+<org.apache.log4j.jdbc.JDBCAppender: void execute(java.lang.String)> 
+<org.apache.commons.beanutils.JDBCDynaClass: java.lang.String getColumnName(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: java.lang.String getSql()> 
+<org.apache.log4j.jdbc.JDBCAppender: java.lang.String getURL()> 
+<org.apache.log4j.jdbc.JDBCAppender: boolean getLocationInfo()> 
+<org.apache.log4j.jdbc.JDBCAppender: void setUser(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: java.lang.String getPassword()> 
+<org.apache.commons.beanutils.JDBCDynaClass: org.apache.commons.beanutils.DynaProperty createDynaProperty(java.sql.ResultSetMetaData,int)> 
+<org.apache.log4j.jdbc.JDBCAppender: void setSql(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: java.lang.String getUser()> 
+<org.apache.log4j.jdbc.JDBCAppender: void setURL(java.lang.String)> 
+<org.apache.log4j.jdbc.JDBCAppender: java.lang.String getLogStatement(org.apache.log4j.spi.LoggingEvent)> 
+<org.apache.log4j.jdbc.JDBCAppender: int getBufferSize()> ->_CWE089_

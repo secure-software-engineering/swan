@@ -1,0 +1,10 @@
+<org.apache.cordova.CordovaWebViewClient: void clearAuthenticationTokens()> 
+<org.apache.cordova.CordovaWebViewClient: org.apache.cordova.AuthenticationToken getAuthenticationToken(java.lang.String,java.lang.String)> 
+<org.apache.cordova.CordovaWebViewClient: void setAuthenticationToken(org.apache.cordova.AuthenticationToken,java.lang.String,java.lang.String)> 
+<org.apache.cordova.DroidGap: org.apache.cordova.AuthenticationToken removeAuthenticationToken(java.lang.String,java.lang.String)> 
+<org.apache.cordova.CordovaWebViewClient: org.apache.cordova.AuthenticationToken removeAuthenticationToken(java.lang.String,java.lang.String)> 
+<org.apache.cordova.DroidGap: void setAuthenticationToken(org.apache.cordova.AuthenticationToken,java.lang.String,java.lang.String)> 
+<org.apache.cordova.NetworkManager: java.lang.String getConnectionInfo(android.net.NetworkInfo)> 
+<org.apache.cordova.DroidGap: org.apache.cordova.AuthenticationToken getAuthenticationToken(java.lang.String,java.lang.String)> 
+<org.apache.cordova.DroidGap: void clearAuthenticationTokens()> 
+<org.apache.cordova.NetworkManager: void updateConnectionInfo(android.net.NetworkInfo)> 

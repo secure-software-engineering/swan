@@ -1,0 +1,3 @@
+<org.apache.cordova.NativeToJsMessageQueue: java.lang.String popAndEncodeAsJs()> 
+<org.apache.cordova.FileUtils: java.lang.String stripFileProtocol(java.lang.String)> 
+<org.apache.cordova.NativeToJsMessageQueue: java.lang.String popAndEncode()> 

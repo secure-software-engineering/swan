@@ -1,0 +1,6 @@
+<spark.Response: void redirect(java.lang.String,int)> 
+<spark.http.matching.ResponseWrapper: spark.Response getDelegate()> 
+<spark.Response: void redirect(java.lang.String)> 
+<spark.http.matching.ResponseWrapper: void setDelegate(spark.Response)> 
+<spark.RequestResponseFactory: spark.Request create(javax.servlet.http.HttpServletRequest)> 
+<spark.RequestResponseFactory: spark.Request create(spark.routematch.RouteMatch,javax.servlet.http.HttpServletRequest)> 

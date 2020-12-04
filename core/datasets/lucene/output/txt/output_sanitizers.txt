@@ -1,0 +1,5 @@
+<org.apache.lucene.queryParser.ParseException: java.lang.String add_escapes(java.lang.String)> 
+<org.apache.lucene.queryParser.QueryParser: java.lang.String discardEscapeChar(java.lang.String)> 
+<org.apache.lucene.queryParser.QueryParser: java.lang.String escape(java.lang.String)> 
+<org.apache.lucene.index.IndexFileNames: java.lang.String fileNameFromGeneration(java.lang.String,java.lang.String,long)> 
+<org.apache.lucene.queryParser.TokenMgrError: java.lang.String addEscapes(java.lang.String)> 

@@ -1,0 +1,4 @@
+<spark.embeddedserver.jetty.SocketConnectorFactory: void initializeConnector(org.eclipse.jetty.server.ServerConnector,java.lang.String,int)> 
+<spark.embeddedserver.jetty.SocketConnectorFactory: org.eclipse.jetty.server.ServerConnector createSocketConnector(org.eclipse.jetty.server.Server,java.lang.String,int)> 
+<spark.embeddedserver.jetty.SocketConnectorFactory: org.eclipse.jetty.server.HttpConnectionFactory createHttpConnectionFactory()> 
+<spark.embeddedserver.jetty.SocketConnectorFactory: org.eclipse.jetty.server.ServerConnector createSecureSocketConnector(org.eclipse.jetty.server.Server,java.lang.String,int,spark.ssl.SslStores)> 

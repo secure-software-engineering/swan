@@ -1,0 +1,5 @@
+<io.dropwizard.jetty.Jetty93InstrumentedConnectionFactory: org.eclipse.jetty.server.ConnectionFactory getConnectionFactory()> 
+<io.dropwizard.jetty.Jetty93InstrumentedConnectionFactory: org.eclipse.jetty.io.Connection newConnection(org.eclipse.jetty.server.Connector,org.eclipse.jetty.io.EndPoint)> 
+<io.dropwizard.jetty.HttpConnectorFactory: java.lang.String httpConnections()> 
+<io.dropwizard.jetty.HttpConnectorFactory: org.eclipse.jetty.server.ServerConnector buildConnector(org.eclipse.jetty.server.Server,org.eclipse.jetty.util.thread.Scheduler,org.eclipse.jetty.io.ByteBufferPool,java.lang.String,org.eclipse.jetty.util.thread.ThreadPool,org.eclipse.jetty.server.ConnectionFactory[])> 
+<io.dropwizard.jetty.HttpConnectorFactory: org.eclipse.jetty.server.HttpConnectionFactory buildHttpConnectionFactory(org.eclipse.jetty.server.HttpConfiguration)> 

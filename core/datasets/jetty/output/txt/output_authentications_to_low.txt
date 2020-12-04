@@ -1,0 +1,4 @@
+<org.eclipse.jetty.server.HttpConnection: org.eclipse.jetty.server.HttpConnection getCurrentConnection()> 
+<org.eclipse.jetty.server.bio.SocketConnector: void close()> 
+<org.eclipse.jetty.server.LocalConnector: void close()> 
+<org.eclipse.jetty.server.nio.BlockingChannelConnector: void close()> 

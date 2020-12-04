@@ -1,0 +1,10 @@
+<com.google.gwt.junit.JUnitMessageQueue: int getNumConnectedClients()> 
+<elemental.js.html.JsWindow: elemental.html.PeerConnection00 newPeerConnection00(java.lang.String,elemental.html.IceCallback)> 
+<com.google.gwt.thirdparty.guava.common.cache.LocalCache: void connectAccessOrder(com.google.gwt.thirdparty.guava.common.cache.LocalCache$ReferenceEntry,com.google.gwt.thirdparty.guava.common.cache.LocalCache$ReferenceEntry)> 
+<com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap: void connectExpirables(com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap$ReferenceEntry,com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap$ReferenceEntry)> 
+<com.google.web.bindery.requestfactory.vm.testing.UrlRequestTransport: void configureConnection(java.net.HttpURLConnection)> 
+<com.google.gwt.user.rebind.rpc.SerializableTypeOracleBuilder: void setLogOutputWriter(java.io.PrintWriter)> 
+<com.google.gwt.thirdparty.guava.common.cache.LocalCache: void connectWriteOrder(com.google.gwt.thirdparty.guava.common.cache.LocalCache$ReferenceEntry,com.google.gwt.thirdparty.guava.common.cache.LocalCache$ReferenceEntry)> 
+<com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap: void connectEvictables(com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap$ReferenceEntry,com.google.gwt.thirdparty.guava.common.collect.MapMakerInternalMap$ReferenceEntry)> 
+<com.google.gwt.thirdparty.guava.common.collect.Range: boolean isConnected(com.google.gwt.thirdparty.guava.common.collect.Range)> 
+<elemental.js.html.JsWindow: elemental.html.DeprecatedPeerConnection newDeprecatedPeerConnection(java.lang.String,elemental.html.SignalingCallback)> 
