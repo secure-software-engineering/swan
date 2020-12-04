@@ -2737,7 +2737,7 @@
         "CWE601"
       ],
       "javadoc": {
-        "method": "{@inheritDoc}",
+        "method": "The method is similar to ValidationRuile.getSafe except that it returns a harmless object that <b>may or may not have any similarity to the original input (in some cases you may not care)</b>. In most cases this should be the same as the getSafe method only instead of throwing an exception, return some default value.",
         "class": "A validator performs syntax and possibly semantic validation of a single piece of data from an untrusted source."
       },
       "framework": "owaspesapi",
@@ -11964,7 +11964,7 @@
         "CWE862"
       ],
       "javadoc": {
-        "method": "Establish <code>null<\/code> as the value returned when  <code>getUserPrincipal<\/code>, <code>getRemoteUser<\/code>,  and <code>getAuthType<\/code> is called on the request.",
+        "method": "Establish null as the value returned when  getUserPrincipal, getRemoteUser,  and getAuthType is called on the request.",
         "class": "Mock implementation of the {@link javax.servlet.http.HttpServletRequest} interface. The default, preferred {@link Locale} for the server mocked by this request is {@link Locale#ENGLISH}. This value can be changed via {@link #addPreferredLocale} or {@link #setPreferredLocales}. As of Spring Framework 4.0, this set of mocks is designed on a Servlet 3.0 baseline."
       },
       "framework": "spring",
