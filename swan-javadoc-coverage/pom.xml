@@ -206,7 +206,7 @@
                         <exclude>sample-project/**</exclude>
                         <exclude>target/**</exclude>
                         <exclude>src/test/**</exclude>
-                        <exclude>src/main/resources/**</exclude>
+                        <exclude>src/swanPipeline/resources/**</exclude>
                     </excludes>
                     <properties>
                         <startYear>${project.inceptionYear}</startYear>

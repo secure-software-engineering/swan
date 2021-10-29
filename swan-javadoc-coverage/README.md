@@ -144,7 +144,7 @@ dependencies {
 }
 // This generates the Javadoc coverage report into build/reports/javadoc/javadoc-coverage.html
 task javadocCoverageReport(type: Javadoc, dependsOn: javadoc) {
-    source = sourceSets.main.allJava
+    source = sourceSets.swanPipeline.allJava
     destinationDir = reporting.file("javadoc")
     options.docletpath = configurations.javadocCoverage.files.asType(List)
     options.doclet = "com.manoelcampos.javadoc.coverage.CoverageDoclet"
