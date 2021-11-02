@@ -1,3 +1,0 @@
-<spark.embeddedserver.jetty.SocketConnectorFactory: org.eclipse.jetty.server.HttpConnectionFactory createHttpConnectionFactory()> 
-<spark.resource.AbstractFileResolvingResource: void customizeConnection(java.net.HttpURLConnection)> 
-<spark.resource.AbstractFileResolvingResource: void customizeConnection(java.net.URLConnection)> 

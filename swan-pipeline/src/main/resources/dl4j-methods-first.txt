@@ -1,0 +1,324 @@
+Returns a Method object that reflects the specified declared method of the class or interface represented by this Class object. Instances of the class Class represent classes and interfaces in a running Java application.
+Persist the given transient instance, first assigning a generated identifier. Concrete implementation of a Session.
+Attempts to establish a connection to the given database URL. The basic service for managing a set of JDBC drivers.
+The default behavior of this method is to return getPathInfo() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return setAttribute(String name, Object o) on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to call setIntHeader(String name, int value) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Log a method entry. A Logger object is used to log messages for a specific system or application component.
+Create a new SingleConnectionFactory for bean-style usage. A CCI ConnectionFactory adapter that returns the same Connection on all getConnection calls, and ignores calls to Connection.close().
+Get the UserDetails object from the wrapped UserDetailsService implementation This implementation for AuthenticationUserDetailsService wraps a regular Spring Security UserDetailsService implementation, to retrieve a UserDetails object based on the user name contained in an Authentication object.
+Replaces all the occurrences of variables with their matching values from the resolver using the given source array as a template. Substitutes variables within a string by values.
+Produces a digest authorization string for the given set of Credentials, method name and URI. Digest authentication scheme as defined in RFC 2617.
+Produces an authorization string for the given set of Credentials. NTLM is a proprietary authentication scheme developed by Microsoft and optimized for Windows platforms.
+Gets the system property indicated by the specified key. The System class contains several useful class fields and methods.
+Produces basic authorization string for the given set of Credentials. Basic authentication scheme as defined in RFC 2617.
+Replace a certain character in a string with a new substring. Standard XSLT functions.
+This method encodes for JavaScript strings contained within HTML script blocks. Encode -- fluent interface for contextual encoding.
+Create a NTLM authorization string for the given challenge and NT credentials. An implementation of the Microsoft proprietary NTLM authentication scheme.
+The default behavior of this method is to return getParameterNames() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Gets the real path corresponding to the given virtual path. Stub implementation of a javax.servlet.http.HttpServletRequest with lots of unimplemented methods.
+Log an INFO message. A Logger object is used to log messages for a specific system or application component.
+Build the query string from available parameters that have not already been applied as template params. JSP tag for creating URLs.
+Return whether the set of method overrides is empty. Set of method overrides, determining which, if any, methods on a managed object the Spring IoC container will override at runtime.
+Produces basic authorization string for the given set of Credentials. Basic authentication scheme as defined in RFC 2617.
+See STOMP Spec 1.2: "Value Encoding". Decodes one or more STOMP frames contained in a ByteBuffer.
+Called when a blog entry has been unpublished.
+Return the persistent instance of the given entity class with the given identifier, assuming that the instance exists. Concrete implementation of a Session.
+Build the URL for the tag from the tag attributes and parameters. JSP tag for creating URLs.
+This method encodes for HTML text attributes. Encode -- fluent interface for contextual encoding.
+See .isAuthenticated() for a full description. An org.springframework.security.core.Authentication implementation that is designed for simple presentation of a username and password.
+Turn special characters into HTML character references. Utility class for HTML escaping.
+Logs out this Subject and invalidates and/or removes any associated entities, such as a Session Session and authorization data. Implementation of the Subject interface that delegates method calls to an underlying org.apache.shiro.mgt.SecurityManager SecurityManager instance for security checks.
+The default behavior of this method is to return getRemoteAddr() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Writes the specified message to a servlet log file, usually an event log. A default servlet implementation The typical use would be to derive a subclass, which is overwriting at least the method .newXmlRpcHandlerMapping().
+The default behavior of this method is to return getRequestedSessionId() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Produces SPNEGO authorization Header based on token created by processChallenge. SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism) authentication scheme.
+Use the container login mechanism configured for the ServletContext to authenticate the user making this request. Mock implementation of the javax.servlet.http.HttpServletRequest interface.
+Returns a String value for an unescaped CSV column. Escapes and unescapes Strings for Java, Java Script, HTML and XML.
+Produces NTLM authorization string for the given set of Credentials. An implementation of the Microsoft proprietary NTLM authentication scheme.
+Encoder for XML and XHTML text content. Encode -- fluent interface for contextual encoding.
+Encode data for use in an XML element. Reference implementation of the Encoder interface.
+Returns the request method. Web servers extension of org.apache.xmlrpc.common.XmlRpcHttpRequestConfig, which allows to store additional per request data.
+Turn special characters into HTML character references. Utility class for HTML escaping.
+The default behavior of this method is to call sendError(int sc) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Encode data for insertion inside a data value in a Visual Basic script. Reference implementation of the Encoder interface.
+Parse a text String to produce a T. Formatter implementation for a Joda-Time Period, following Joda-Time's parsing rules for a Period.
+Returns the name of the cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Find by primary key and lock. Concrete implementation of a Session.
+Returns the Application Default Credentials. Provides the Application Default Credential from the environment.
+Encodes for (X)HTML text content and text attributes. Encode -- fluent interface for contextual encoding.
+Log a FINER message. A Logger object is used to log messages for a specific system or application component.
+Dumps the tree of the current node to standard output. DFAContentModel is the implementation of XSCMValidator that does all of the non-trivial element content validation.
+Produces Negotiate authorization Header based on token created by processChallenge. SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism) authentication scheme.
+Performs percent-encoding for a component of a URI, such as a query parameter name or value, path or query-string. Encode -- fluent interface for contextual encoding.
+First authenticates the AuthenticationToken argument, and if successful, constructs a Subject instance representing the authenticated account's identity. The Shiro framework's default concrete implementation of the SecurityManager interface, based around a collection of org.apache.shiro.realm.Realms.
+Execute a query given static SQL, reading the ResultSet with a ResultSetExtractor. This is the central class in the JDBC core package.
+Creates a String for specifying a user requires a role. Adds URL based authorization using DefaultFilterInvocationSecurityMetadataSource.
+Performs authentication with the same contract as org.springframework.security.authentication.AuthenticationManager.authenticate(Authentication) . An AuthenticationProvider implementation that validates AnonymousAuthenticationTokens. To be successfully validated, the AnonymousAuthenticationToken.getKeyHash() must match this class' .getKey().
+Returns the selected text from the text that is presented by this text component. The TextComponent class is the superclass of any component that allows the editing of some text.
+Returns the comment describing the purpose of this cookie, or null if the cookie has no comment. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Prints an integer. Prints formatted representations of objects to a text-output stream.
+Construct an InternetAddress given the address and personal name. This class represents an Internet email address using the syntax of RFC822.
+The default behavior of this method is to return addHeader(String name, String value) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Un-escape an HTML escaped string. HTML entities, and escape routines.
+Print a String and then terminate the line. Mock implementation of the javax.servlet.jsp.tagext.BodyContent class.
+Performs a synchronous request. Server specific implementation of XmlRpcWorker.
+Produces basic authorization string for the given set of Credentials. Basic authentication scheme as defined in RFC 2617.
+Listens for client requests until stopped. The WebServer is a minimal HTTP server, that might be used as an embedded web server.
+Returns the text that is presented by this text component. The TextComponent class is the superclass of any component that allows the editing of some text.
+Returns a String containing the value of the named initialization parameter, or null if the parameter does not exist. Defines a generic, protocol-independent servlet.
+Encode for Base64. Reference implementation of the Encoder interface.
+The default behavior of this method is to return setHeader(String name, String value) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Delegates execution to the underlying Runnable. Simple Work adapter that delegates to a given Runnable.
+Encodes for CSS strings. Encode -- fluent interface for contextual encoding.
+Log a FINEST message. A Logger object is used to log messages for a specific system or application component.
+Returns a Field object that reflects the specified public member field of the class or interface represented by this Class object. Instances of the class Class represent classes and interfaces in a running Java application.
+The method is similar to ValidationRuile.getSafe except that it returns a harmless object that may or may not have any similarity to the original input (in some cases you may not care). A validator performs syntax and possibly semantic validation of a single piece of data from an untrusted source.
+Produces a digest authorization string for the given set of Credentials, method name and URI. Digest authentication scheme as defined in RFC 2617.
+Returns a UserCredentials instance by exchanging an OAuth2 authorization code for tokens. Handles an interactive 3-Legged-OAuth2 (3LO) user consent authorization.
+Returns the names of the servlet's initialization parameters as an Enumeration of String objects, or an empty Enumeration if the servlet has no initialization parameters. Defines a generic, protocol-independent servlet.
+Produces basic authorization header for the given set of Credentials. Basic authentication scheme as defined in RFC 2617.
+Given a string containing entity escapes, returns a string containing the actual Unicode characters corresponding to the escapes. This file is part of WebGoat, an Open Web Application Security Project utility.
+Generate a null-safe String representation of the supplied ContextLoader based solely on the fully qualified name of the loader or "null" if the supplied loaded is null. MergedContextConfiguration encapsulates the merged context configuration declared on a test class and all of its superclasses via ContextConfiguration @ContextConfiguration, ActiveProfiles @ActiveProfiles, and TestPropertySource @TestPropertySource.
+Replaces the entry for a key only if currently mapped to a given value. An advanced hash table supporting configurable garbage collection semantics of keys and values, optional referential-equality, full concurrency of retrievals, and adjustable expected concurrency for updates.
+Switch client filtering on/off. The WebServer is a minimal HTTP server, that might be used as an embedded web server.
+Given an attribute value string formated according to the rules specified in RFC 2253, returns the unformated value. This class represents a relative distinguished name, or RDN, which is a component of a distinguished name as specified by RFC 2253.
+Writes a double value to the client, with no carriage return-line feed (CRLF) at the end. Provides an output stream for sending binary data to the client.
+Return whether the connection is still open. A WebSocketSession for use with the Jetty 9.3/9.4 WebSocket API.
+Attempt to provide requisite proxy authentication credentials to the given method in the given context using the given authentication scheme. Utility methods for HTTP authorization and authentication.
+Encoder for XML and XHTML attribute content. Encode -- fluent interface for contextual encoding.
+The default behavior of this method is to call addIntHeader(String name, int value) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Performs the task. org.apache.xmlrpc.webserver.ServletWebServer ServletWebServer's org.apache.xmlrpc.util.ThreadPool.Task for handling a single servlet connection.
+Encodes data for an XML CDATA section. Encode -- fluent interface for contextual encoding.
+Gets the contents of this URL. Class URL represents a Uniform Resource Locator, a pointer to a "resource" on the World Wide Web.
+Indicates whether the user's credentials (password) has expired. Models core user information retrieved by a UserDetailsService.
+The default behavior of this method is to return getLocalName() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Replace a certain character in a string with a new substring.
+Log a FINE message. A Logger object is used to log messages for a specific system or application component.
+Performs a final update on the digest using the specified array of bytes, then completes the digest computation. This MessageDigest class provides applications the functionality of a message digest algorithm, such as SHA-1 or SHA-256.
+Finds a resource with a given name. Instances of the class Class represent classes and interfaces in a running Java application.
+Removes the URI_PREFIX from the front of the URI. DatabaseManager is the entry point for the API and enables you to get the initial Collection references necessary to do anything useful with the API.
+Returns a Method object that reflects the specified public member method of the class or interface represented by this Class object. Instances of the class Class represent classes and interfaces in a running Java application.
+Produces a digest authorization string for the given set of Credentials, method name and URI. Digest authentication scheme as defined in RFC 2617.
+Encodes for CSS URL contexts. Encode -- fluent interface for contextual encoding.
+Sends the request line and all headers over the connection. Default implementation of an operated client connection.
+Read the unescaped body content from the page. Custom JSP tag to escape its enclosed body content, applying HTML escaping and/or JavaScript escaping.
+Decode the given source string with a URLDecoder. Helper class for URL path matching.
+Replace part of a String with another value. Basic utility methods.
+Set a request attribute. Default builder for MockHttpServletRequest required as input to perform requests in MockMvc.
+Check whether a node can be compiled to bytecode. Expression language AST node that represents a long integer literal.
+Constructs a cookie with the specified name and value. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Leaves in the input buffer only code-units that comprise XML safe chars. Encoders and decoders for HTML.
+Prints a long integer. A PrintStream adds functionality to another output stream, namely the ability to print representations of various data values conveniently.
+Create a new binary WebSocket message with the given byte[] payload. A binary WebSocket message.
+Construct an XPath object. The XPath class wraps an expression object and provides general services for execution of that expression.
+Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence. The String class represents character strings.
+When using ProxyPass, requestCycle(). Default client info object for web applications.
+Loads the native library specified by the filename argument. The System class contains several useful class fields and methods.
+Produces NTLM authorization string for the given set of Credentials. An implementation of the Microsoft proprietary NTLM authentication scheme.
+Print an array of characters and then terminate the line. Mock implementation of the javax.servlet.jsp.tagext.BodyContent class.
+Performs percent-encoding of a URL according to RFC 3986. Encode -- fluent interface for contextual encoding.
+The default behavior of this method is to return getHeader(String name) on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getParameterValues(String name) on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Loads all of the properties represented by the XML document on the specified input stream into this properties table. The Properties class represents a persistent set of properties.
+The default behavior of this method is to return getCharacterEncoding() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Gets the LogoutHandler instances that will be used. Adds logout support.
+Encode all URI components using their specific encoding rules, and returns the result as a new UriComponents instance. Extension of UriComponents for opaque URIs.
+Helper method to write out the index to disk. Keeps an index of all blog entries from a specific author, allowing efficient access at runtime.
+Parse a text String to produce a T. Parses Joda DateTime instances using a DateTimeFormatter.
+Serializes a copy of the state of this class, filtering out non-serializable BeanPostProcessors. Adapter that implements the DisposableBean and Runnable interfaces performing various destruction steps on a given bean instance: DestructionAwareBeanPostProcessors; the bean implementing DisposableBean itself; a custom destroy method specified on the bean definition.
+Replaces each substring of this string that matches the given regular expression with the given replacement. The String class represents character strings.
+Log a CONFIG message. A Logger object is used to log messages for a specific system or application component.
+Returns the requests HTTP version. Web servers extension of org.apache.xmlrpc.common.XmlRpcHttpRequestConfig, which allows to store additional per request data.
+Logout the Subject. The LoginContext class describes the basic methods used to authenticate Subjects and provides a way to develop an application independent of the underlying authentication technology.
+Appends the toString that would be produced by Object if a class did not override toString itself. Operations on Object.
+Dump an array of bytes to an OutputStream. Dumps data in hexadecimal format.
+Writes a String to the client, followed by a carriage return-line feed (CRLF). Provides an output stream for sending binary data to the client.
+Connects to the specified host and port. The central class that encapsulates the connection to a directory server through the LDAP protocol.
+Creates a new FileReader, given the name of the file to read from. Convenience class for reading character files.
+Creates a new File instance by converting the given pathname string into an abstract pathname. An abstract representation of file and directory pathnames.
+Log a WARNING message. A Logger object is used to log messages for a specific system or application component.
+Returns a String value for a CSV column enclosed in double quotes, if required. Escapes and unescapes Strings for Java, Java Script, HTML and XML.
+Decodes a application/x-www-form-urlencoded string using a specific encoding scheme. Utility class for HTML form decoding.
+The default behavior of this method is to call addDateHeader(String name, long date) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Turn special characters into escaped characters conforming to JavaScript. Utility class for JavaScript escaping.
+Execute a SQL statement that retruns a single ResultSet A Statement object is used for executing a static SQL statement and obtaining the results produced by it.
+Unescapes any Java literals found in the String. Escapes and unescapes Strings for Java, Java Script, HTML and XML.
+Reads a line of text. Reads text from a character-input stream, buffering characters so as to provide for the efficient reading of characters, arrays, and lines.
+Encoder for XML and XHTML. Encode -- fluent interface for contextual encoding.
+Encode the raw password. A standard PasswordEncoder implementation that uses SHA-256 hashing with 1024 iterations and a random 8-byte random salt value.
+The default behavior of this method is to return getProtocol() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Translates a string into application/x-www-form-urlencoded format using a specific encoding scheme. Utility class for HTML form encoding.
+The default behavior of this method is to call setContentType(String type) on the wrapped response object. Provides a convenient implementation of the ServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Turn HTML character references into their plain text UNICODE equivalent. Utility class for HTML escaping.
+Prints generic WSDL error to the given output stream. Class AxisService
+Locates the user based on the username.
+The default behavior of this method is to return getServerName() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Returns the Class object associated with the class or interface with the given string name, using the given class loader. Instances of the class Class represent classes and interfaces in a running Java application.
+Returns an java.io.InputStream InputStream that can be used to retrieve the contents of the file. An adapter of Servlet 3.0 Part to Apache Commons FileUpload's FileItem
+Returns the contents of the file item as an array of bytes. An adapter of Servlet 3.0 Part to Apache Commons FileUpload's FileItem
+Return if the given method name matches the mapped name. Stores a list of ConfigAttributes for a method or class signature.
+Synchronously disconnects from the LDAP server. The central class that encapsulates the connection to a directory server through the LDAP protocol.
+Returns the absolute form of this abstract pathname. An abstract representation of file and directory pathnames.
+Close the given Connection. A CCI ConnectionFactory adapter that returns the same Connection on all getConnection calls, and ignores calls to Connection.close().
+Returns a basic Authorization header value for the given UsernamePasswordCredentials and charset. Basic authentication scheme as defined in RFC 2617.
+Create a new ModelAndView given a view name and a model. Holder for both Model and View in the web MVC framework.
+Decode from URL. Reference implementation of the Encoder interface.
+Encode data for insertion inside a data value or function argument in JavaScript. Reference implementation of the Encoder interface.
+Returns the path on the server to which the browser returns this cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Replaces the first substring of this string that matches the given regular expression with the given replacement. The String class represents character strings.
+Returns client secret of the credential from the console. OAuth2 Credentials representing a user's identity and consent.
+Encodes the specified URL by including the session ID in it, or, if encoding is not needed, returns the URL unchanged. Stub implementation of a javax.servlet.http.HttpServletResponse with lots of unimplemented methods.
+Returns the text contained in this TextComponent. JTextComponent is the base class for swing text components.
+Finds a resource with a given name. Instances of the class Class represent classes and interfaces in a running Java application.
+Process the given request, generating a response. A HttpRequestHandler for processing WebSocket handshake requests.
+Performs the request and returns the result object. Default implementation of XmlRpcHandler.
+Print a boolean value. Mock implementation of the javax.servlet.jsp.JspWriter class.
+Encode for an operating system command shell according to the selected codec (appropriate codecs include the WindowsCodec and UnixCodec). Reference implementation of the Encoder interface.
+Constructs a new Scanner that produces values scanned from the specified channel. A simple text scanner which can parse primitive types and strings using regular expressions.
+Run all AfterTransaction @AfterTransaction methods for the specified TestContext test context. TestExecutionListener that provides support for executing tests within test-managed transactions by honoring Spring's org.springframework.transaction.annotation.Transactional @Transactional annotation.
+Specifies a comment that describes a cookie's purpose. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Unescapes a string containing XML entity escapes to a string containing the actual Unicode characters corresponding to the escapes. Escapes and unescapes Strings for Java, Java Script, HTML and XML.
+Description of the Method ************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility.
+Creates a String for specifying that a user requires one of many roles. Adds URL based authorization using DefaultFilterInvocationSecurityMetadataSource.
+Replaces all the occurrences of variables with their matching values from the resolver using the given source as a template. Substitutes variables within a string by values.
+Attempt to provide default proxy authentication credentials to the given method in the given context using basic authentication scheme. Utility methods for HTTP authorization and authentication.
+Returns the canonical form of this abstract pathname. An abstract representation of file and directory pathnames.
+Removes the system property indicated by the specified key. The System class contains several useful class fields and methods.
+The default behavior of this method is to set the character encoding on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Perform the authentication. The LoginContext class describes the basic methods used to authenticate Subjects and provides a way to develop an application independent of the underlying authentication technology.
+Processes the servlet request. An extension of org.apache.xmlrpc.server.XmlRpcServer, which is suitable for processing servlet requests.
+Determine whether there are currently thread-bound credentials, using them if available, falling back to the statically specified username and password (i.e. values of the bean properties) else. An adapter for a target JMS javax.jms.ConnectionFactory, applying the given user credentials to every standard createConnection() call, that is, implicitly invoking createConnection(username, password) on the target.
+Returns the original filename in the client's filesystem, as provided by the browser (or other client software). An adapter of Servlet 3.0 Part to Apache Commons FileUpload's FileItem
+Performs authentication with the same contract as org.springframework.security.authentication.AuthenticationManager.authenticate(Authentication) . Client-side object which queries a RemoteAuthenticationManager to validate an authentication request.
+Specifies the attributes that will be returned as part of the search. This class encapsulates factors that determine scope of search and what gets returned as a result of the search.
+Decodes HTML entities. Reference implementation of the Encoder interface.
+Loads the native library specified by the libname argument. The System class contains several useful class fields and methods.
+Writes the response header to the output stream. Handler for a single clients connection.
+See the general contract of the readUTF method of DataInput. A data input stream lets an application read primitive Java data types from an underlying input stream in a machine-independent way.
+Helper method to write out the index to disk. Represents the tag index for a blog.
+This is a very important method. Class used internally by OMStAXWrapper.
+Runs the swanPipeline method of the given class with the arguments passed in argv Java interpreter replacement, i.e., wrapper that uses its own ClassLoader to modify/generate classes as they're requested.
+Constructs an initial DirContext using the supplied environment. This class is the starting context for performing directory operations.
+Searches for the property with the specified key in this property list. The Properties class represents a persistent set of properties.
+Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds plus the specified number of nanoseconds, subject to the precision and accuracy of system timers and schedulers. A thread is a thread of execution in a program.
+Returns a Field object that reflects the specified declared field of the class or interface represented by this Class object. Instances of the class Class represent classes and interfaces in a running Java application.
+Set whether to expose the LocaleContext and RequestAttributes as inheritable for child threads (using an java.lang.InheritableThreadLocal). Servlet 2.3 Filter that exposes the request to the current thread, through both org.springframework.context.i18n.LocaleContextHolder and RequestContextHolder.
+The default behavior of this method is to return getRemoteHost() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getLocalAddr() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Produces KERBEROS authorization Header based on token created by processChallenge. KERBEROS authentication scheme.
+Encoder for XML comments. Encode -- fluent interface for contextual encoding.
+This method encodes for HTML text content. Encode -- fluent interface for contextual encoding.
+Encode data for use in an XPath query. Reference implementation of the Encoder interface.
+The default behavior of this method is to return getContentType() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Log out the Subject. An implementation of LoginModule that uses a Spring Security org.springframework.security.core.context.SecurityContext SecurityContext to provide authentication.
+Assigns a new value to this Cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Update the persistent instance with the identifier of the given detached instance. Concrete implementation of a Session.
+Issue a single SQL execute, typically a DDL statement. This is the central class in the JDBC core package.
+Log a LogRecord. A Logger object is used to log messages for a specific system or application component.
+Performs a login attempt for this Subject/user. Implementation of the Subject interface that delegates method calls to an underlying org.apache.shiro.mgt.SecurityManager SecurityManager instance for security checks.
+Writes an array of characters. Prints formatted representations of objects to a text-output stream.
+Prints a character and then terminates the line. Prints formatted representations of objects to a text-output stream.
+The default behavior of this method is to return getReader() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Description of the Method ************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility.
+Executes the specified string command in a separate process. Every Java application has a single instance of class Runtime that allows the application to interface with the environment in which the application is running.
+The default behavior of this method is to return getParameter(String name) on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Gets the authenticated attribute of the WebSession object ************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility.
+Specifies a path for the cookie to which the client should return the cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+The default behavior of this method is to return getRemoteUser() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+See the general contract of the readLine method of DataInput. A data input stream lets an application read primitive Java data types from an underlying input stream in a machine-independent way.
+Encodes for unquoted HTML attribute values. Encode -- fluent interface for contextual encoding.
+Sets the system property indicated by the specified key. The System class contains several useful class fields and methods.
+Traverses the xpath and returns the resulting object. The reference implementation of JXPathContext.
+This method encodes for JavaScript strings contained within HTML script attributes (such as onclick). Encode -- fluent interface for contextual encoding.
+Encode data for use in Cascading Style Sheets (CSS) content. Reference implementation of the Encoder interface.
+Returns true if this Subject/user proved their identity during their current session by providing valid credentials matching those known to the system, false otherwise. Implementation of the Subject interface that delegates method calls to an underlying org.apache.shiro.mgt.SecurityManager SecurityManager instance for security checks.
+Writes the specified message to a servlet log file, prepended by the servlet's name. Defines a generic, protocol-independent servlet.
+Gets the value of the response header with the given name. Stub implementation of a javax.servlet.http.HttpServletResponse with lots of unimplemented methods.
+The default behavior of this method is to call setCharacterEncoding(String charset) on the wrapped response object. Provides a convenient implementation of the ServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Searches in the named context or object for entries that satisfy the given search filter. This class is the starting context for performing directory operations.
+Attempts to login the user given the Authentication objects principal and credential An AuthenticationProvider implementation that retrieves user details from a JAAS login configuration.
+Returns a basic Authorization header value for the given Credentials and charset. Basic authentication scheme as defined in RFC 2617.
+Prints a character and then terminate the line. A PrintStream adds functionality to another output stream, namely the ability to print representations of various data values conveniently.
+HTML escape an input string. HTML entities, and escape routines.
+Encode input for use in a SQL query, according to the selected codec (appropriate codecs include the MySQLCodec and OracleCodec). Reference implementation of the Encoder interface.
+Parse parameters from the given request, handle any servlet commands, and update this session based on the parameters. ************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility.
+Encode string for use in CSS. Static encoder methods for JSP EL expression functions.
+Terminate the current line by writing the line separator string. Mock implementation of the javax.servlet.jsp.tagext.BodyContent class.
+Adds a Substring component of initial, any or final substring matching. Represents an LDAP Filter.
+Performs authentication with the same contract as org.springframework.security.authentication.AuthenticationManager.authenticate(Authentication) . An AuthenticationProvider implementation that can authenticate a RunAsUserToken.
+returns the user agent string. Default client info object for web applications.
+Encode data for use in HTML attributes. Reference implementation of the Encoder interface.
+Escapes the characters in a String using Java String rules. Escapes and unescapes Strings for Java, Java Script, HTML and XML.
+The default behavior of this method is to return getAttributeNames() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getParameterMap() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The method is similar to ValidationRuile.getSafe except that it returns a harmless object that may or may not have any similarity to the original input (in some cases you may not care). A validator performs syntax and possibly semantic validation of Credit Card String from an untrusted source.
+Reads a property list (key and element pairs) from the input byte stream. The Properties class represents a persistent set of properties.
+The default behavior of this method is to return getAuthType() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Produces an authorization string for the given set of Credentials. SPNEGO (Simple and Protected GSSAPI Negotiation Mechanism) authentication scheme.
+Canonicalization is simply the operation of reducing a possibly encoded string down to its simplest form. Reference implementation of the Encoder interface.
+Returns an unmodifiable string map view of the current system environment. The System class contains several useful class fields and methods.
+Parse the given comma separated sequence of addresses into InternetAddress objects. This class represents an Internet email address using the syntax of RFC822.
+Turn special characters into HTML character references. Utility class for HTML escaping.
+Insert the specified HTML into the DOM after this node (i.e. as a following sibling). The base, abstract Node model.
+Gets the domain name of this Cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+Returns the selected text contained in this TextComponent. JTextComponent is the base class for swing text components.
+Encodes for a Java string. Encode -- fluent interface for contextual encoding.
+Writes a single character. Writes text to a character-output stream, buffering characters so as to provide for the efficient writing of single characters, arrays, and strings.
+Encode data for use in an LDAP distinguished name. Reference implementation of the Encoder interface.
+Encode for use in a URL. Reference implementation of the Encoder interface.
+Converts an array of bytes into an array of characters representing the hexadecimal values of each byte in order. Converts hexadecimal Strings.
+The method is similar to ValidationRuile.getSafe except that it returns a harmless object that may or may not have any similarity to the original input (in some cases you may not care). A validator performs syntax and possibly semantic validation of a single piece of data from an untrusted source.
+Returns true if the constructed Subject should be considered authenticated, false otherwise. Default implementation of the SubjectContext interface.
+The default behavior of this method is to return getContextPath() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Encode data for use in LDAP queries. Reference implementation of the Encoder interface.
+Encode data for use in HTML using HTML entity encoding Note that the following characters: 00-08, 0B-0C, 0E-1F, and 7F-9F cannot be used in HTML. Reference implementation of the Encoder interface.
+Attempts to retrieve credentials for the approved end user consent. Handles an interactive 3-Legged-OAuth2 (3LO) user consent authorization.
+Synchronously disconnects from the LDAP server. The central class that encapsulates the connection to a directory server through the LDAP protocol.
+Insert the specified HTML into the DOM before this node (i.e. as a preceding sibling). The base, abstract Node model.
+The default behavior of this method is to return getCookies() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getPathTranslated() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Parse HTML into a Document. Parses HTML into a org.jsoup.nodes.Document.
+Performs a request with the clients default configuration. The swanPipeline access point of an XML-RPC client.
+Encodes for a JavaScript string. Encode -- fluent interface for contextual encoding.
+The default behavior of this method is to return getHeaders(String name) on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getScheme() on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Replaces all the occurrences of variables with their matching values from the resolver using the given source as a template. Substitutes variables within a string by values.
+The default behavior of this method is to return getMethod() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Either .save(String, Object) or .update(String, Object) the given instance, depending upon resolution of the unsaved-value checks (see the manual for discussion of unsaved-value checking). Concrete implementation of a Session.
+Replaces the entry for a key only if currently mapped to some value. An advanced hash table supporting configurable garbage collection semantics of keys and values, optional referential-equality, full concurrency of retrievals, and adjustable expected concurrency for updates.
+Creates a random access file stream to read from, and optionally to write to, the file specified by the File argument. Instances of this class support both reading and writing to a random access file.
+The default behavior of this method is to return getRequestURL() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return getRequestURI() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Gets the current value of this Cookie. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+The default behavior of this method is to call setDateHeader(String name, long date) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Attempt to provide default authentication credentials to the given method in the given context using basic authentication scheme. Utility methods for HTTP authorization and authentication.
+The default behavior of this method is to call getAttribute(String name) on the wrapped request object. Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+The default behavior of this method is to return sendRedirect(String location) on the wrapped response object. Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet.
+Encode data for use in an XML attribute. Reference implementation of the Encoder interface.
+Get the bytes of the String in UTF-8 encoded form. UTF-8 Charset encoder/decoder.
+Perform the same logic as BlockJUnit4ClassRunner.runChild(FrameworkMethod, RunNotifier), except that tests are determined to be ignored by .isTestMethodIgnored(FrameworkMethod). SpringJUnit4ClassRunner is a custom extension of JUnit's BlockJUnit4ClassRunner which provides functionality of the Spring TestContext Framework to standard JUnit tests by means of the TestContextManager and associated support classes and annotations.
+Constructs a FileWriter object given a file name with a boolean indicating whether or not to append the data written. Convenience class for writing character files.
+Send a WebSocket message: either TextMessage or BinaryMessage. Wrap a org.springframework.web.socket.WebSocketSession WebSocketSession to guarantee only one thread can send messages at a time.
+Specify default parameters for the type. Bean that encapsulates a Hibernate type definition.
+The default behavior of this method is to return getServletPath() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+This implementation simply calls Connection.close. Hibernate connection provider for local DataSource instances in an application context.
+Establish null as the value returned when getUserPrincipal, getRemoteUser, and getAuthType is called on the request. Mock implementation of the javax.servlet.http.HttpServletRequest interface.
+Remove a persistent instance from the datastore. Concrete implementation of a Session.
+A convenience function that sanitizes a string of HTML. A factory that can be used to link a sanitizer to an output receiver and that provides a convenient PolicyFactory.sanitize sanitize method and a PolicyFactory.and and method to compose policies.
+Log a SEVERE message. A Logger object is used to log messages for a specific system or application component.
+Authenticates the given request using the Basic authentication scheme. Basic implementation of OAuth2ClientCredentials.
+Logs out the specified Subject from the system. The Shiro framework's default concrete implementation of the SecurityManager interface, based around a collection of org.apache.shiro.realm.Realms.
+Used during "compiling" a JPA criteria query. Concrete implementation of a Session.
+Replace escaped hex digits with the equivalent binary representation. Represents an LDAP Filter.
+Compile an XPath expression for later evaluation. The XPathImpl class provides implementation for the methods defined in javax.xml.xpath.XPath interface.
+Performs authentication with the same contract as org.springframework.security.authentication.AuthenticationManager.authenticate(Authentication) . An AuthenticationProvider implementation that validates RememberMeAuthenticationTokens. To be successfully validated, the RememberMeAuthenticationToken.getKeyHash() must match this class' .getKey().
+Print a String and then terminate the line. Mock implementation of the javax.servlet.jsp.JspWriter class.
+Returns the contents of the file item as a String, using the default character encoding. An adapter of Servlet 3.0 Part to Apache Commons FileUpload's FileItem
+The default behavior of this method is to return getQueryString() on the wrapped request object. Provides a convenient implementation of the HttpServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet.
+Replace the old child with a new child. An instance of this class represents an element inside an xsl:template class.
+Parse the specified org.w3c.dom.Element and register the resulting BeanDefinition BeanDefinition(s) with the org.springframework.beans.factory.xml.ParserContext.getRegistry() BeanDefinitionRegistry embedded in the supplied ParserContext. Parses the configuration for the websocket:handlers namespace element.
+Read a line of text. A buffered character-input stream that keeps track of line numbers.
+Specifies the domain within which this cookie should be presented. Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
+This method encodes for JavaScript strings contained within a JavaScript or JSON file. Encode -- fluent interface for contextual encoding.
+Escapes the characters in a String using XML entities. Escapes and unescapes Strings for Java, Java Script, HTML and XML.

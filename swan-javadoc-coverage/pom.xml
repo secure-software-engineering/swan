@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.manoelcampos</groupId>
+    <artifactId>javadoc-coverage</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.0</version>
+
+    <name>JavaDoc Coverage Doclet</name>
+    <description>Doclet to generate coverage reports of JavaDoc documentation.</description>
+    <url>http://manoelcampos.com</url>
+
+    <inceptionYear>2017</inceptionYear>
+
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+        <archetype.encoding>${encoding}</archetype.encoding>
+    </properties>
+
+    <organization>
+        <name>Manoel Campos da Silva Filho</name>
+        <url>http://manoelcampos.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GPLv3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Manoel Campos da Silva Filho</name>
+            <email>manoelcampos@gmail.com</email>
+            <organization>Instituto Federal de Educação Ciência e Tecnologia do Tocantins (IFTO)</organization>
+            <organizationUrl>http://www.ifto.edu.br</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/manoelcampos/javadoc-coverage</url>
+        <connection>scm:git@github.com:manoelcampos/javadoc-coverage.git</connection>
+        <developerConnection>scm:git@github.com:manoelcampos/javadoc-coverage.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <url>http://github.com/manoelcampos/javadoc-coverage/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <profiles>
+        <profile>
+            <id>default-profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <file>
+                    <exists>${java.home}/../lib/tools.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${java.home}/../lib/tools.jar</toolsjar>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-profile</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>${java.home}/../Classes/classes.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${java.home}/../Classes/classes.jar</toolsjar>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!--
+     URLs to deploy the project at the Maven Central (http://mvnrepository.com)
+     using a Sonatype account (http://central.sonatype.org)
+     See the "all" profile in this pom for deployment information.
+    -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <!--dependency>
+            <groupId>com.sun.tools</groupId>
+            <artifactId>tools</artifactId>
+            <version>${java.version}</version>
+            <scope>system</scope>
+            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+        </dependency-->
+        <dependency>
+            <groupId>jdk.tools</groupId>
+            <artifactId>jdk.tools</artifactId>
+            <scope>system</scope>
+            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <!-- Exports JavaDocs of the JavaDoc Coverage Plugin to regular HTML files -->
+                    <execution>
+                        <id>javadoc-html</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <configuration>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </execution>
+
+                    <!-- Generates the JavaDoc coverage report
+                     over the source files of the JavaDoc Coverage Plugin itself. -->
+                    <execution>
+                        <id>javadoc-coverage</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <configuration>
+                            <doclet>com.manoelcampos.javadoc.coverage.CoverageDoclet</doclet>
+                            <docletArtifact>
+                                <groupId>com.manoelcampos</groupId>
+                                <artifactId>javadoc-coverage</artifactId>
+                                <version>${project.version}</version>
+                            </docletArtifact>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <header>NOTICE</header>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/.*/**</exclude>
+                        <exclude>sample-project/**</exclude>
+                        <exclude>target/**</exclude>
+                        <exclude>src/test/**</exclude>
+                        <exclude>src/swanPipeline/resources/**</exclude>
+                    </excludes>
+                    <properties>
+                        <startYear>${project.inceptionYear}</startYear>
+                        <currentYear>${maven.build.timestamp}</currentYear>
+                        <name>Manoel Campos da Silva Filho</name>
+                    </properties>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <strictCheck>true</strictCheck>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.versioneye</groupId>
+                <artifactId>versioneye-maven-plugin</artifactId>
+                <version>3.11.4</version>
+                <configuration>
+                    <organisation>manoelcampos</organisation>
+                    <projectId>5968248d368b08001a803892</projectId>
+                </configuration>
+                <!--
+                The plugin is just being executed when the repository is pushed to travis-ci.org
+                in order to speed up local build.
+                See the .travis.yml file to check the command line being executed.
+                -->
+                <!--<executions><execution><goals><goal>update</goal></goals></execution></executions>-->
+            </plugin>
+        </plugins>
+    </build>
+</project>
