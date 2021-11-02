@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.io;
+package de.fraunhofer.iem.swan.cli;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,17 +28,17 @@ public class FileUtility {
 	 * List of temporary files that have been created and must be deleted before
 	 * exiting the application.
 	 */
-	private List<File> tempFiles = new ArrayList<File>();
+	private List<File> tempFiles = new ArrayList<>();
 
 	/**
 	 * List of temporary directories that have been created and must be deleted
 	 * before exiting the application.
 	 */
-	private List<File> tempDirs = new ArrayList<File>();
+	private List<File> tempDirs = new ArrayList<>();
 
 	/**
 	 * Finds and provides the bundled directory with the given resource location
-	 * inside this application's jar file. If it is not directly accessable from the
+	 * inside this application's jar file. If it is not directly accessible from the
 	 * filesystem, it is copied to a temporary location.
 	 * 
 	 * @param resourceLocation The location of the directory within the jar file.
@@ -93,7 +93,7 @@ public class FileUtility {
 
 	/**
 	 * Finds and provides the bundled file with the given resource location inside
-	 * this application's jar file. If it is not directly accessable from the
+	 * this application's jar file. If it is not directly accessible from the
 	 * filesystem, it is copied to a temporary location.
 	 * 
 	 * @param resourceLocation The location of the file within the jar file.
@@ -106,7 +106,7 @@ public class FileUtility {
 
 	/**
 	 * Finds and provides the bundled file with the given resource location inside
-	 * this application's jar file. If it is not directly accessable from the
+	 * this application's jar file. If it is not directly accessible from the
 	 * filesystem, it is copied to a temporary location.
 	 * 
 	 * @param resourceLocation The location of the file within the jar file.
@@ -118,6 +118,7 @@ public class FileUtility {
 	 */
 	public File getResourceFile(String resourceLocation, File destinationFile) throws IOException {
 		File localFile = getLocalResource(resourceLocation);
+
 		if (localFile != null) {
 			return localFile;
 		}
@@ -145,7 +146,7 @@ public class FileUtility {
 	 */
 	private File getLocalResource(String resourceLocation) {
 		URL url = FileUtility.class.getResource(resourceLocation);
-		if ("file".equals(url.getProtocol())) {
+		if ( "file".equals(url.getProtocol())) {
 			return new File(url.getFile());
 		}
 		return null;
