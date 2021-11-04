@@ -3,6 +3,7 @@ package de.fraunhofer.iem.swan;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.features.Features;
 import de.fraunhofer.iem.swan.features.InstancesHandler;
 import de.fraunhofer.iem.swan.features.code.FeatureHandler;
 import de.fraunhofer.iem.swan.features.code.soot.Loader;
@@ -27,18 +28,6 @@ import java.util.*;
  */
 
 public class SwanPipeline {
-
-    /**
-     * Instance set refers to the configuration that should be used when running SWAN.
-     * Available configurations are described in {@link InstancesHandler.INSTANCE_SET}
-     */
-    private static final InstancesHandler.INSTANCE_SET INSTANCE_TYPE = InstancesHandler.INSTANCE_SET.SWAN;
-
-    /**
-     * Sets the learning mode from {@link Learner.LEARN_MODE} that should be used when
-     * running SWAN.
-     */
-    private static final Learner.LEARN_MODE LEARNING_MODE = Learner.LEARN_MODE.MANUAL;
 
     private Learner learner;
     private Loader loader;
@@ -105,7 +94,10 @@ public class SwanPipeline {
 
         //Populate SWAN feature attributes
         docFeatureHandler = null;
-        switch (INSTANCE_TYPE) {
+        InstancesHandler.FeatureSet feature = InstancesHandler.FeatureSet.valueOf(options.getFeatureSet());
+
+        new Features();
+        switch (feature) {
             case SWANDOC_MANUAL:
             case SWAN_SWANDOC_MANUAL:
 
@@ -127,6 +119,8 @@ public class SwanPipeline {
         writer = new Writer(loader.methods());
         learner = new Learner(writer);
 
+        Learner.Mode learnerMode = Learner.Mode.valueOf(options.getLearningMode());
+
         /*
             FIRST PHASE - binary classification for each of the categories.
             (1) Classify: source, sink, sanitizer,
@@ -139,7 +133,7 @@ public class SwanPipeline {
         for (int x = 0; x < 10; x++)
             predictions.put(Integer.toString(x), new HashSet<>());
 
-        runClassEvaluation(options.getSrmClasses());
+        runClassEvaluation(options.getSrmClasses(), feature, learnerMode );
 
         // Save data from last classification.
         loader.resetMethods();
@@ -151,7 +145,7 @@ public class SwanPipeline {
             SECOND PHASE - binary classification for each of the CWE categories.
             (1) Classify: cwe78, cwe079, cwe089, cwe306, cwe601, cwe862, cwe863
          */
-        runClassEvaluation(options.getCweClasses());
+        runClassEvaluation(options.getCweClasses(), feature, learnerMode);
 
         SwanConfig swanConfig = new SwanConfig();
         Properties config = swanConfig.getConfig();
@@ -165,7 +159,7 @@ public class SwanPipeline {
         logger.info("Total runtime {} mins", analysisTime / 60000);
     }
 
-    public void runClassEvaluation(List<String> classes) {
+    public void runClassEvaluation(List<String> classes, InstancesHandler.FeatureSet featureSet, Learner.Mode learnerMode) {
 
         for (String cat : classes) {
 
@@ -177,12 +171,12 @@ public class SwanPipeline {
             else
                 categories = new HashSet<>(Arrays.asList(Category.fromText(cat), Category.NONE));
 
-            runClassifier(categories, Learner.EVAL_MODE.CLASS);
+            runClassifier(categories, Learner.EVAL_MODE.CLASS, featureSet, learnerMode);
         }
     }
 
 
-    private double runClassifier(HashSet<Category> categories, Learner.EVAL_MODE eval_mode) {
+    private double runClassifier(HashSet<Category> categories, Learner.EVAL_MODE eval_mode, InstancesHandler.FeatureSet featureSet, Learner.Mode learnerMode) {
         parser.resetMethods();
         loader.resetMethods();
 
@@ -205,22 +199,22 @@ public class SwanPipeline {
                 }
 
                 InstancesHandler instancesHandler = new InstancesHandler();
-                instancesHandler.createInstances(methods, featureHandler.features(), docFeatureHandler, categories, INSTANCE_TYPE);
+                instancesHandler.createInstances(methods, featureHandler.features(), docFeatureHandler, categories, featureSet);
 
                 instancesHandlers.add(instancesHandler);
             }
 
             startAnalysisTime = System.currentTimeMillis();
-            learner.trainModel(instancesHandlers, LEARNING_MODE);
+            learner.trainModel(instancesHandlers, learnerMode);
 
         } else {
             InstancesHandler instancesHandler = new InstancesHandler();
-            instancesHandler.createInstances(parser.getMethods(), featureHandler.features(), docFeatureHandler, categories, INSTANCE_TYPE);
+            instancesHandler.createInstances(parser.getMethods(), featureHandler.features(), docFeatureHandler, categories, featureSet);
             startAnalysisTime = System.currentTimeMillis();
 
             ArrayList<InstancesHandler> instancesHandlers = new ArrayList<>();
             instancesHandlers.add(instancesHandler);
-            learner.trainModel(instancesHandlers, LEARNING_MODE);
+            learner.trainModel(instancesHandlers, learnerMode);
         }
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;

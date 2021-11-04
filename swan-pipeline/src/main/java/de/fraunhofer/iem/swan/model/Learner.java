@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class Learner {
 
-    public enum LEARN_MODE {
+    public enum Mode {
         MANUAL,
         AUTOMATIC
     }
@@ -53,7 +53,7 @@ public class Learner {
      * @param instancesHandlers list of InstanceHandlers
      * @return Hashmap containing the name of the classifier and it's F-Measure
      */
-    public HashMap<String, HashMap<String, String>> trainModel(ArrayList<InstancesHandler> instancesHandlers, LEARN_MODE learnMode) {
+    public HashMap<String, HashMap<String, String>> trainModel(ArrayList<InstancesHandler> instancesHandlers, Mode learnMode) {
 
         switch (learnMode) {
 

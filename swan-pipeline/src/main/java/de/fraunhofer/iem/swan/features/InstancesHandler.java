@@ -25,12 +25,18 @@ public class InstancesHandler {
      * SWAN_SWANDOC_AUTOMATIC: source code and Javadoc automatic features
      * SWANDOC: only Javadoc features
      */
-    public enum INSTANCE_SET {
-        SWAN,
-        SWAN_SWANDOC_MANUAL,
-        SWAN_SWANDOC_WORD_EMBEDDING,
-        SWANDOC_MANUAL,
-        SWANDOC_WORD_EMBEDDING
+    public enum FeatureSet {
+        SWAN(0),
+        SWAN_SWANDOC_MANUAL(1),
+        SWAN_SWANDOC_WORD_EMBEDDING(2),
+        SWANDOC_MANUAL(3),
+        SWANDOC_WORD_EMBEDDING(4);
+
+        private int value;
+
+        FeatureSet(int value){
+            this.value = value;
+        }
     }
 
     private ArrayList<Attribute> attributes;
@@ -51,7 +57,7 @@ public class InstancesHandler {
      */
     public void createInstances(Set<Method> trainingSet,
                                      Map<Category, Set<IFeature>> features, DocFeatureHandler docFeatures, Set<Category> categories,
-                                     INSTANCE_SET instanceSet) {
+                                     FeatureSet instanceSet) {
 
         //Initialize instances
         initializeInstances(features, docFeatures, categories, trainingSet, null, instanceSet);
@@ -89,7 +95,7 @@ public class InstancesHandler {
      * @param instanceSet classification mode
      */
     public void initializeInstances(Map<Category, Set<IFeature>> features, DocFeatureHandler docFeatures, Set<Category> categories,
-                                    Set<Method> trainingSet, Set<Method> testSet, INSTANCE_SET instanceSet) {
+                                    Set<Method> trainingSet, Set<Method> testSet, FeatureSet instanceSet) {
 
         attributes = new ArrayList<>();
 
@@ -173,7 +179,7 @@ public class InstancesHandler {
      *
      * @param instanceSet classification mode
      */
-    public void initializeSwanDocFeatures(DocFeatureHandler features, INSTANCE_SET instanceSet) {
+    public void initializeSwanDocFeatures(DocFeatureHandler features, FeatureSet instanceSet) {
 
         switch (instanceSet) {
             case SWAN_SWANDOC_MANUAL:
@@ -267,7 +273,7 @@ public class InstancesHandler {
      * @param categories     set of categories
      * @return Instances containing data from SWAN-DOC
      */
-    public Instances addSwanDocInstances(Instances trainInstances, Set<Method> trainingSet, DocFeatureHandler docFeatures, Set<Category> categories, INSTANCE_SET instanceSet) {
+    public Instances addSwanDocInstances(Instances trainInstances, Set<Method> trainingSet, DocFeatureHandler docFeatures, Set<Category> categories, FeatureSet instanceSet) {
 
        // System.out.println("TOTAL DOCS...."+docFeatures.getMethodSet().size());
         for (Method method : trainingSet) {
