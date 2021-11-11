@@ -276,10 +276,6 @@ public class Util {
      */
     public static String exportInstancesToArff(Instances instances) {
         ArffSaver saver = new ArffSaver();
-
-        SwanConfig swanConfig = new SwanConfig();
-        Properties config = swanConfig.getConfig();
-
         String categoryName = getClassName(instances);
 
         if (Boolean.parseBoolean(config.getProperty("output_train_arff_data"))) {

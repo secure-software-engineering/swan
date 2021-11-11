@@ -147,11 +147,7 @@ public class SwanPipeline {
          */
         runClassEvaluation(options.getCweClasses(), feature, learnerMode);
 
-        SwanConfig swanConfig = new SwanConfig();
-        Properties config = swanConfig.getConfig();
-        String fileName = config.getProperty("output_file_name");
-
-        String outputFile = options.getOutputDir() + File.separator + fileName + ".json";
+        String outputFile = options.getOutputDir() + File.separator + "swan-srm-cwe-list.json";
         logger.info("Writing results to {}", outputFile);
         writer.printResultsJSON(loader.methods(), outputFile);
 
