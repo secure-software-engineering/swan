@@ -15,8 +15,10 @@ public class SwanOptions {
     private String learningMode;
     private List<String> srmClasses;
     private List<String> cweClasses;
+    private boolean exportArffData;
 
-    public SwanOptions(String testData, String trainData, String datasetJson, String outputDir, String featureSet, String learningMode, List<String> srmClasses, List<String> cweClasses) {
+    public SwanOptions(String testData, String trainData, String datasetJson, String outputDir, String featureSet,
+                       String learningMode, List<String> srmClasses, List<String> cweClasses, boolean exportArffData) {
         this.testData = testData;
         this.trainData = trainData;
         this.datasetJson = datasetJson;
@@ -25,6 +27,7 @@ public class SwanOptions {
         this.learningMode = learningMode;
         this.srmClasses = srmClasses;
         this.cweClasses = cweClasses;
+        this.exportArffData = exportArffData;
     }
 
     public String getTestData() {
@@ -91,17 +94,26 @@ public class SwanOptions {
         this.cweClasses = cweClasses;
     }
 
+    public boolean isExportArffData() {
+        return exportArffData;
+    }
+
+    public void setExportArffData(boolean exportArffData) {
+        this.exportArffData = exportArffData;
+    }
+
     @Override
     public String toString() {
-        return "SwanOptions={" +
+        return "SwanOptions{" +
                 "testData='" + testData + '\'' +
                 ", trainData='" + trainData + '\'' +
                 ", datasetJson='" + datasetJson + '\'' +
                 ", outputDir='" + outputDir + '\'' +
                 ", featureSet='" + featureSet + '\'' +
                 ", learningMode='" + learningMode + '\'' +
-                ", srmClasses='" + srmClasses + '\'' +
-                ", cweClasses='" + cweClasses + '\'' +
+                ", srmClasses=" + srmClasses +
+                ", cweClasses=" + cweClasses +
+                ", exportArffData=" + exportArffData +
                 '}';
     }
 }

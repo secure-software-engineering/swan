@@ -35,6 +35,10 @@ class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-c", "--cwe"}, description = {"CWE: all, cwe078, cwe079, cwe089, cwe306, cwe601, cwe862, cwe863"})
     private List<String> cweClasses = Arrays.asList("all");
 
+    @CommandLine.Option(names = {"-", "--arff-data"}, description = {"Export training ARFF files"})
+    private boolean exportArffData = true;
+
+
     @Override
     public Integer call() throws Exception {
 
@@ -45,7 +49,8 @@ class CliRunner implements Callable<Integer> {
                 featureSet,
                 learningMode,
                 srmClasses,
-                cweClasses);
+                cweClasses,
+                exportArffData);
 
         return new SwanCli().run(options);
     }

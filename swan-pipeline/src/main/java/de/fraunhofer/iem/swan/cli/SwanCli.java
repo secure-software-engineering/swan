@@ -41,8 +41,8 @@ public class SwanCli {
         logger.info("SWAN options: {}", options);
 
         try {
-            SwanPipeline swanPipeline = new SwanPipeline();
-            swanPipeline.run(options);
+            SwanPipeline swanPipeline = new SwanPipeline(options);
+            swanPipeline.run();
 
             return 0;
         } catch (CancellationException e) {

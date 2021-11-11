@@ -37,6 +37,15 @@ public class InstancesHandler {
         FeatureSet(int value){
             this.value = value;
         }
+
+        public static  FeatureSet getValue(int value) {
+            for(FeatureSet featureSet: FeatureSet.values()) {
+                if(featureSet.value == value) {
+                    return featureSet;
+                }
+            }
+            return null;// not found
+        }
     }
 
     private ArrayList<Attribute> attributes;

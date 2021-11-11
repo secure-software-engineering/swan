@@ -3,7 +3,6 @@ package de.fraunhofer.iem.swan;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.Features;
 import de.fraunhofer.iem.swan.features.InstancesHandler;
 import de.fraunhofer.iem.swan.features.code.FeatureHandler;
 import de.fraunhofer.iem.swan.features.code.soot.Loader;
@@ -11,7 +10,6 @@ import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
 import de.fraunhofer.iem.swan.io.dataset.Parser;
 import de.fraunhofer.iem.swan.io.dataset.Writer;
 import de.fraunhofer.iem.swan.model.Learner;
-import de.fraunhofer.iem.swan.util.SwanConfig;
 import de.fraunhofer.iem.swan.util.Util;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,14 +38,19 @@ public class SwanPipeline {
     private DocFeatureHandler docFeatureHandler;
     public static HashMap<String, HashSet<String>> predictions;
 
+    public static SwanOptions options;
+
+    public SwanPipeline(SwanOptions options) {
+        SwanPipeline.options = options;
+    }
+
     /**
      * Executes the analysis and can also be called from outside by lients.
      *
-     * @param options options to run the analysis
      * @throws IOException          In case an error occurs during the preparation
      *                              or execution of the analysis.
      */
-    public void run(SwanOptions options) throws IOException, InterruptedException {
+    public void run() throws IOException, InterruptedException {
 
         long startAnalysisTime = System.currentTimeMillis();
 
@@ -94,9 +97,8 @@ public class SwanPipeline {
 
         //Populate SWAN feature attributes
         docFeatureHandler = null;
-        InstancesHandler.FeatureSet feature = InstancesHandler.FeatureSet.valueOf(options.getFeatureSet());
+        InstancesHandler.FeatureSet feature = InstancesHandler.FeatureSet.getValue(Integer.parseInt(options.getFeatureSet()));
 
-        new Features();
         switch (feature) {
             case SWANDOC_MANUAL:
             case SWAN_SWANDOC_MANUAL:
@@ -119,7 +121,7 @@ public class SwanPipeline {
         writer = new Writer(loader.methods());
         learner = new Learner(writer);
 
-        Learner.Mode learnerMode = Learner.Mode.valueOf(options.getLearningMode());
+        Learner.Mode learnerMode = Learner.Mode.valueOf(options.getLearningMode().toUpperCase());
 
         /*
             FIRST PHASE - binary classification for each of the categories.

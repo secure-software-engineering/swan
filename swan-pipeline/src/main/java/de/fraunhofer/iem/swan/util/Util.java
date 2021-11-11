@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.api4.java.ai.ml.core.dataset.schema.attribute.IAttribute;
+import de.fraunhofer.iem.swan.SwanPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -278,13 +278,14 @@ public class Util {
         ArffSaver saver = new ArffSaver();
         String categoryName = getClassName(instances);
 
-        if (Boolean.parseBoolean(config.getProperty("output_train_arff_data"))) {
+        if (SwanPipeline.options.isExportArffData()) {
             // Save arff data.
 
             saver.setInstances(instances);
 
             try {
-                saver.setFile(new File("/swan-out/" + categoryName + "-methods-dataset.arff"));
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator+ categoryName + "-methods-dataset.arff";
+                saver.setFile(new File(arffFile ));
                 saver.writeBatch();
             } catch (IOException e) {
                 e.printStackTrace();
