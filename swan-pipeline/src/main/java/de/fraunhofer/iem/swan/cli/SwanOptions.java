@@ -16,6 +16,9 @@ public class SwanOptions {
     private List<String> srmClasses;
     private List<String> cweClasses;
     private boolean exportArffData;
+    private boolean isDocumented;
+    private int iterations;
+    private double trainTestSplit;
 
     public SwanOptions(String testData, String trainData, String datasetJson, String outputDir, String featureSet,
                        String learningMode, List<String> srmClasses, List<String> cweClasses, boolean exportArffData) {
@@ -28,6 +31,9 @@ public class SwanOptions {
         this.srmClasses = srmClasses;
         this.cweClasses = cweClasses;
         this.exportArffData = exportArffData;
+        this.isDocumented = isDocumented;
+        this.iterations = iterations;
+        this.trainTestSplit = trainTestSplit;
     }
 
     public String getTestData() {
@@ -102,6 +108,30 @@ public class SwanOptions {
         this.exportArffData = exportArffData;
     }
 
+    public boolean isDocumented() {
+        return isDocumented;
+    }
+
+    public void setDocumented(boolean documented) {
+        this.isDocumented = documented;
+    }
+
+    public int getIterations() {
+        return iterations;
+    }
+
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
+    }
+
+    public double getTrainTestSplit() {
+        return trainTestSplit;
+    }
+
+    public void setTrainTestSplit(double trainTestSplit) {
+        this.trainTestSplit = trainTestSplit;
+    }
+
     @Override
     public String toString() {
         return "SwanOptions{" +
@@ -114,6 +144,7 @@ public class SwanOptions {
                 ", srmClasses=" + srmClasses +
                 ", cweClasses=" + cweClasses +
                 ", exportArffData=" + exportArffData +
+                ", isDocumented=" + isDocumented +
                 '}';
     }
 }

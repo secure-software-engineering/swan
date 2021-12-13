@@ -38,6 +38,14 @@ class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-", "--arff-data"}, description = {"Export training ARFF files"})
     private boolean exportArffData = true;
 
+    @CommandLine.Option(names = {"-doc", "--documented"}, description = {"Use only methods with Javadoc"})
+    private boolean isDocumented = true;
+
+    @CommandLine.Option(names = {"-i", "--iterations"}, description = {"Number of iterations for training"})
+    private int iterations = 10;
+
+    @CommandLine.Option(names = {"-sp", "--training-split"}, description = {"Percentage for training"})
+    private double split = 0.7;
 
     @Override
     public Integer call() throws Exception {
@@ -50,7 +58,10 @@ class CliRunner implements Callable<Integer> {
                 learningMode,
                 srmClasses,
                 cweClasses,
-                exportArffData);
+                exportArffData,
+                isDocumented,
+                iterations,
+                split);
 
         return new SwanCli().run(options);
     }
