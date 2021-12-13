@@ -22,12 +22,12 @@ public class SwanCli {
             options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson()).getAbsolutePath());
         }
 
-        if (options.getTrainData().contentEquals("/input/train-data")) {
-            options.setTrainData(fileUtility.getResourceDirectory("/input/train-data").getAbsolutePath());
+        if (options.getTrainDataDir().contentEquals("/input/train-data")) {
+            options.setTrainDataDir(fileUtility.getResourceDirectory("/input/train-data").getAbsolutePath());
         }
 
-        if (options.getTestData().contentEquals("/input/test-data")) {
-            options.setTestData(fileUtility.getResourceDirectory("/input/test-data").getAbsolutePath());
+        if (options.getTestDataDir().contentEquals("/input/test-data")) {
+            options.setTestDataDir(fileUtility.getResourceDirectory("/input/test-data").getAbsolutePath());
         }
 
         if(options.getSrmClasses().contains("all")){
@@ -36,6 +36,10 @@ public class SwanCli {
 
         if(options.getCweClasses().contains("all")){
             options.setCweClasses(Arrays.asList("cwe078", "cwe079", "cwe089", "cwe306", "cwe601", "cwe862", "cwe863"));
+        }
+
+        if(options.getFeatureSet().contains("all")){
+            options.setFeatureSet(Arrays.asList("code", "doc-manual", "doc-auto"));
         }
 
         logger.info("SWAN options: {}", options);

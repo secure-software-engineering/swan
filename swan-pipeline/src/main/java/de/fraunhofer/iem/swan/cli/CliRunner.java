@@ -2,14 +2,13 @@ package de.fraunhofer.iem.swan.cli;
 
 import picocli.CommandLine;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "SWAN CLI", mixinStandardHelpOptions = true,
         version = "SWAN 3.0.1", description = "")
-public
-class CliRunner implements Callable<Integer> {
+public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})
     private String testDataDir = "/input/test-data";
@@ -23,19 +22,19 @@ class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
     private String outputDir = "/swan-output";
 
-    @CommandLine.Option(names = {"-f", "--feature"}, description = {"Feature set: 0 - SWAN; 1 - SWANDOC-AUTO; 2 - SWANDOC-MANUAL; 3 - SWAN-SWANDOC-MANUAL; 4 - SWAN-SWANDOC-AUTO"})
-    private String featureSet = "0";
+    @CommandLine.Option(names = {"-f", "--feature"}, description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
+    private List<String> featureSet =  Collections.singletonList("code");
 
     @CommandLine.Option(names = {"-l", "--learning"}, description = {"Learning modes: manual, auto"})
     private String learningMode = "manual";
 
-    @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication"})
-    private List<String> srmClasses = Arrays.asList("all");
+    @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
+    private List<String> srmClasses = Collections.singletonList("all");
 
     @CommandLine.Option(names = {"-c", "--cwe"}, description = {"CWE: all, cwe078, cwe079, cwe089, cwe306, cwe601, cwe862, cwe863"})
-    private List<String> cweClasses = Arrays.asList("all");
+    private List<String> cweClasses = Collections.singletonList("all");
 
-    @CommandLine.Option(names = {"-", "--arff-data"}, description = {"Export training ARFF files"})
+    @CommandLine.Option(names = {"-arff", "--arff-data"}, description = {"Export training ARFF files"})
     private boolean exportArffData = true;
 
     @CommandLine.Option(names = {"-doc", "--documented"}, description = {"Use only methods with Javadoc"})

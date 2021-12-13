@@ -7,11 +7,11 @@ import java.util.List;
  */
 public class SwanOptions {
 
-    private String testData;
-    private String trainData;
+    private String testDataDir;
+    private String trainDataDir;
     private String datasetJson;
     private String outputDir;
-    private String featureSet;
+    private List<String> featureSet;
     private String learningMode;
     private List<String> srmClasses;
     private List<String> cweClasses;
@@ -20,10 +20,11 @@ public class SwanOptions {
     private int iterations;
     private double trainTestSplit;
 
-    public SwanOptions(String testData, String trainData, String datasetJson, String outputDir, String featureSet,
-                       String learningMode, List<String> srmClasses, List<String> cweClasses, boolean exportArffData) {
-        this.testData = testData;
-        this.trainData = trainData;
+    public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
+                       List<String> featureSet, String learningMode, List<String> srmClasses, List<String> cweClasses,
+                       boolean exportArffData, boolean isDocumented, int iterations, double trainTestSplit) {
+        this.testDataDir = testDataDir;
+        this.trainDataDir = trainDataDir;
         this.datasetJson = datasetJson;
         this.outputDir = outputDir;
         this.featureSet = featureSet;
@@ -36,20 +37,20 @@ public class SwanOptions {
         this.trainTestSplit = trainTestSplit;
     }
 
-    public String getTestData() {
-        return testData;
+    public String getTestDataDir() {
+        return testDataDir;
     }
 
-    public void setTestData(String testData) {
-        this.testData = testData;
+    public void setTestDataDir(String testDataDir) {
+        this.testDataDir = testDataDir;
     }
 
-    public String getTrainData() {
-        return trainData;
+    public String getTrainDataDir() {
+        return trainDataDir;
     }
 
-    public void setTrainData(String trainData) {
-        this.trainData = trainData;
+    public void setTrainDataDir(String trainDataDir) {
+        this.trainDataDir = trainDataDir;
     }
 
     public String getDatasetJson() {
@@ -68,11 +69,11 @@ public class SwanOptions {
         this.outputDir = outputDir;
     }
 
-    public String getFeatureSet() {
+    public List<String> getFeatureSet() {
         return featureSet;
     }
 
-    public void setFeatureSet(String featureSet) {
+    public void setFeatureSet(List<String> featureSet) {
         this.featureSet = featureSet;
     }
 
@@ -135,8 +136,8 @@ public class SwanOptions {
     @Override
     public String toString() {
         return "SwanOptions{" +
-                "testData='" + testData + '\'' +
-                ", trainData='" + trainData + '\'' +
+                "testData='" + testDataDir + '\'' +
+                ", trainData='" + trainDataDir + '\'' +
                 ", datasetJson='" + datasetJson + '\'' +
                 ", outputDir='" + outputDir + '\'' +
                 ", featureSet='" + featureSet + '\'' +
