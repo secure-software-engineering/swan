@@ -378,7 +378,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/DigestScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -414,7 +414,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/NTLMScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -507,7 +507,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -613,7 +613,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/NTLMScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -795,7 +795,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1005,7 +1005,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/3.2.9.RELEASE\/apidocs\/org\/springframework\/security\/authentication\/UsernamePasswordAuthenticationToken.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1069,7 +1069,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.1\/apidocs\/org\/apache\/shiro\/subject\/support\/DelegatingSubject.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -1255,7 +1255,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/SPNegoScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1292,7 +1292,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/4.3.9.RELEASE\/javadoc-api\/org\/springframework\/mock\/web\/MockHttpServletRequest.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1357,7 +1357,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/NTLMScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1692,7 +1692,7 @@
       },
       "link": "http:\/\/help.collab.net\/topic\/iaf-700\/pebble-soap-javadocs\/net\/sourceforge\/pebble\/util\/SecurityUtils.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -1813,7 +1813,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/NegotiateScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1879,7 +1879,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.6\/apidocs\/org\/apache\/shiro\/mgt\/DefaultSecurityManager.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -1979,7 +1979,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/3.1.8.CI-SNAPSHOT\/apidocs\/org\/springframework\/security\/authentication\/AnonymousAuthenticationProvider.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -2309,7 +2309,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -2764,7 +2764,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/4.0.0.RELEASE\/apidocs\/org\/springframework\/security\/config\/annotation\/authentication\/builders\/AuthenticationManagerBuilder.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -2793,7 +2793,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/DigestScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -2945,7 +2945,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -3284,7 +3284,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/HttpAuthenticator.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -3602,7 +3602,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/core\/userdetails\/User.html",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -3911,7 +3911,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/DigestScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -3976,7 +3976,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/4.0.0.RELEASE\/apidocs\/org\/springframework\/security\/config\/annotation\/authentication\/builders\/AuthenticationManagerBuilder.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -4681,7 +4681,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/NTLMScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -4718,7 +4718,7 @@
       },
       "link": "https:\/\/docs.oracle.com\/javase\/7\/docs\/api\/javax\/security\/auth\/login\/LoginContext.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -4849,7 +4849,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/xref\/org\/apache\/commons\/httpclient\/HttpMethodDirector.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -4913,7 +4913,7 @@
       },
       "link": "https:\/\/github.com\/spring-projects\/spring-security\/blob\/master\/config\/src\/main\/java\/org\/springframework\/security\/config\/http\/LogoutBeanDefinitionParser.java",
       "type": [
-        "authentication",
+        "auth-no-change",
         "source"
       ],
       "securityLevel": "none",
@@ -5147,7 +5147,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/configurers\/LogoutConfigurer.html",
       "type": [
-        "authentication",
+        "auth-no-change",
         "source"
       ],
       "securityLevel": "none",
@@ -5177,7 +5177,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/client\/HttpAuthenticator.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -5458,7 +5458,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/xref\/org\/apache\/commons\/httpclient\/HttpMethodDirector.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -5493,7 +5493,7 @@
       },
       "link": "https:\/\/docs.oracle.com\/javase\/7\/docs\/api\/javax\/security\/auth\/login\/LoginContext.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -5618,7 +5618,7 @@
       },
       "link": "https:\/\/www.novell.com\/documentation\/developer\/jldap\/jldapenu\/api\/com\/novell\/ldap\/LDAPConnection.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -5973,7 +5973,7 @@
       },
       "link": "https:\/\/github.com\/scribejava\/scribejava\/blob\/master\/scribejava-core\/src\/main\/java\/com\/github\/scribejava\/core\/oauth\/OAuth20Service.java",
       "type": [
-        "authentication",
+        "auth-safe-state",
         "sink"
       ],
       "securityLevel": "high",
@@ -6305,7 +6305,7 @@
       },
       "link": "",
       "type": [
-        "authentication",
+        "auth-no-change",
         "source"
       ],
       "securityLevel": "none",
@@ -6508,7 +6508,7 @@
       },
       "link": "https:\/\/www.novell.com\/documentation\/developer\/jldap\/jldapenu\/api\/com\/novell\/ldap\/LDAPConnection.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -6600,7 +6600,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/jca\/cci\/connection\/SingleConnectionFactory.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -6635,7 +6635,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -6764,7 +6764,7 @@
       },
       "link": "http:\/\/help.collab.net\/index.jsp?topic=\/iaf-700\/pebble-soap-javadocs\/net\/sourceforge\/pebble\/domain\/Comment.html",
       "type": [
-        "authentication",
+        "auth-safe-state",
         "sink"
       ],
       "securityLevel": "high",
@@ -7135,7 +7135,7 @@
       },
       "link": "https:\/\/github.com\/sonatype\/WebGoat\/blob\/master\/src\/main\/java\/org\/owasp\/webgoat\/controller\/Logout.java",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -7199,7 +7199,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/4.0.0.M1\/apidocs\/index.html?org\/springframework\/security\/config\/annotation\/authentication\/builders\/AuthenticationManagerBuilder.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -7479,7 +7479,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/HttpAuthenticator.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -7516,7 +7516,7 @@
       },
       "link": "",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -7632,7 +7632,7 @@
       },
       "link": "https:\/\/docs.oracle.com\/javase\/7\/docs\/api\/javax\/security\/auth\/login\/LoginContext.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -7699,7 +7699,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/jms\/connection\/UserCredentialsConnectionFactoryAdapter.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -7757,7 +7757,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/3.1.8.CI-SNAPSHOT\/apidocs\/org\/springframework\/security\/authentication\/rcp\/RemoteAuthenticationProvider.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -8213,7 +8213,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/xref\/org\/apache\/commons\/httpclient\/HttpMethodDirector.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -8354,7 +8354,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/KerberosScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -8478,7 +8478,7 @@
       },
       "link": "https:\/\/github.com\/WebGoat\/WebGoat-Legacy\/blob\/master\/src\/main\/java\/org\/owasp\/webgoat\/session\/DatabaseUtilities.java",
       "type": [
-        "authentication",
+        "auth-no-change",
         "sink"
       ],
       "securityLevel": "none",
@@ -8566,7 +8566,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/authentication\/jaas\/SecurityContextLoginModule.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -8720,7 +8720,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.1\/apidocs\/org\/apache\/shiro\/subject\/support\/DelegatingSubject.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -8940,7 +8940,7 @@
       },
       "link": "https:\/\/github.com\/OWASP\/WebGoat\/blob\/master\/webgoat\/src\/main\/java\/org\/owasp\/webgoat\/session\/WebSession.java",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -8971,7 +8971,7 @@
       },
       "link": "http:\/\/help.collab.net\/index.jsp?topic=\/iaf-700\/pebble-soap-javadocs\/net\/sourceforge\/pebble\/domain\/Comment.html",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -9230,7 +9230,7 @@
       },
       "link": "https:\/\/github.com\/sonatype\/WebGoat\/blob\/master\/src\/main\/java\/org\/owasp\/webgoat\/session\/LessonSession.java",
       "type": [
-        "authentication",
+        "auth-safe-state",
         "sink"
       ],
       "securityLevel": "high",
@@ -9324,7 +9324,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.1\/apidocs\/org\/apache\/shiro\/subject\/support\/DelegatingSubject.html",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -9477,7 +9477,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/3.1.8.CI-SNAPSHOT\/apidocs\/org\/springframework\/security\/authentication\/jaas\/JaasAuthenticationProvider.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -9546,7 +9546,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/BasicScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -9868,7 +9868,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/access\/intercept\/RunAsImplAuthenticationProvider.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -9930,7 +9930,7 @@
       },
       "link": "https:\/\/github.com\/aptivate\/openldap-jldap\/blob\/master\/com\/novell\/ldap\/spml\/SunIdm.java",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -10342,7 +10342,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpcomponents-client-ga\/httpclient\/apidocs\/org\/apache\/http\/impl\/auth\/NegotiateScheme.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -10817,7 +10817,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.1\/apidocs\/org\/apache\/shiro\/subject\/support\/DefaultSubjectContext.html",
       "type": [
-        "authentication"
+        "auth-no-change"
       ],
       "securityLevel": "none",
       "cwe": [
@@ -10964,7 +10964,7 @@
       },
       "link": "https:\/\/www.novell.com\/documentation\/developer\/jldap\/jldapenu\/api\/com\/novell\/ldap\/LDAPConnection.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -11082,7 +11082,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/http\/FormLoginBeanDefinitionParser.html",
       "type": [
-        "authentication",
+        "auth-no-change",
         "source"
       ],
       "securityLevel": "none",
@@ -11549,7 +11549,7 @@
       },
       "link": "https:\/\/hc.apache.org\/httpclient-3.x\/apidocs\/org\/apache\/commons\/httpclient\/auth\/HttpAuthenticator.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -11921,7 +11921,7 @@
       },
       "link": "https:\/\/static.javadoc.io\/org.springframework\/spring\/2.0.4\/org\/springframework\/orm\/hibernate3\/LocalDataSourceConnectionProvider.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -11955,7 +11955,7 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/4.3.9.RELEASE\/javadoc-api\/org\/springframework\/mock\/web\/MockHttpServletRequest.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -12142,7 +12142,7 @@
       },
       "link": "https:\/\/github.com\/dmfs\/oauth2-essentials\/blob\/master\/src\/main\/java\/org\/dmfs\/oauth2\/client\/BasicOAuth2ClientCredentials.java",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -12175,7 +12175,7 @@
       },
       "link": "https:\/\/shiro.apache.org\/static\/1.2.6\/apidocs\/org\/apache\/shiro\/mgt\/DefaultSecurityManager.html",
       "type": [
-        "authentication"
+        "auth-unsafe-state"
       ],
       "securityLevel": "low",
       "cwe": [
@@ -12308,7 +12308,7 @@
       },
       "link": "http:\/\/docs.spring.io\/autorepo\/docs\/spring-security\/3.1.8.CI-SNAPSHOT\/apidocs\/org\/springframework\/security\/authentication\/RememberMeAuthenticationProvider.html",
       "type": [
-        "authentication"
+        "auth-safe-state"
       ],
       "securityLevel": "high",
       "cwe": [
@@ -12547,7 +12547,7 @@
       },
       "link": "https:\/\/github.com\/scribejava\/scribejava\/blob\/master\/scribejava-core\/src\/main\/java\/com\/github\/scribejava\/core\/oauth\/OAuth20Service.java",
       "type": [
-        "authentication",
+        "auth-safe-state",
         "sink"
       ],
       "securityLevel": "high",
