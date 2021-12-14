@@ -181,7 +181,7 @@ public class Util {
                             // If we only have annotations for the parent method, but not for
                             // the current one, we copy it down
                             if (parentMethodData.isAnnotated() && !method.isAnnotated()) {
-                                method.setCategoriesTrained(parentMethodData.getCategoriesTrained());
+                                method.setSrm(parentMethodData.getSrm());
                                 copied = true;
                             }
 
@@ -247,7 +247,7 @@ public class Util {
         return dataset;
     }
 
-    public static String getClassName(Instances instances){
+    public static String getClassName(Instances instances) {
 
         String categoryName = "";
 
@@ -284,8 +284,8 @@ public class Util {
             saver.setInstances(instances);
 
             try {
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator+ categoryName + "-methods-dataset.arff";
-                saver.setFile(new File(arffFile ));
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + categoryName + "-methods-dataset.arff";
+                saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {
                 e.printStackTrace();

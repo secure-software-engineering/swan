@@ -10,30 +10,33 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Category {
 
-    SOURCE(Constants.SOURCE, false),
-    SINK(Constants.SINK, false),
-    SANITIZER(Constants.SANITIZER, false),
-    AUTHENTICATION_TO_HIGH(Constants.AUTHENTICATION_SAFE, false),
-    AUTHENTICATION_TO_LOW(Constants.AUTHENTICATION_UNSAFE, false),
-    AUTHENTICATION_NEUTRAL(Constants.AUTHENTICATION_NOCHANGE, false),
-    RELEVANT(Constants.RELEVANT, false),
-    NONE(Constants.NONE, false),
-    CWE078("CWE078", true),
-    CWE079("CWE079", true),
-    CWE089("CWE089", true),
-    CWE306("CWE306", true),
-    CWE601("CWE601", true),
-    CWE862("CWE862", true),
-    CWE863("CWE863", true),
-    CWETEST("CWEtest", true),
-    CWE_NONE("none", true);
+    SOURCE(Constants.SOURCE, false, false),
+    SINK(Constants.SINK, false, false),
+    SANITIZER(Constants.SANITIZER, false, false),
+    AUTHENTICATION_TO_HIGH(Constants.AUTHENTICATION_SAFE, false, true),
+    AUTHENTICATION_TO_LOW(Constants.AUTHENTICATION_UNSAFE, false, true),
+    AUTHENTICATION_NEUTRAL(Constants.AUTHENTICATION_NOCHANGE, false, true),
+    AUTHENTICATION("authentication", false, true),
+    RELEVANT(Constants.RELEVANT, false, false),
+    NONE(Constants.NONE, false, false),
+    CWE078("CWE078", true, false),
+    CWE079("CWE079", true, false),
+    CWE089("CWE089", true, false),
+    CWE306("CWE306", true, false),
+    CWE601("CWE601", true, false),
+    CWE862("CWE862", true, false),
+    CWE863("CWE863", true, false),
+    CWETEST("CWEtest", true, false),
+    CWE_NONE("cwe-none", true, false);
 
     private final String id;
     private final boolean cwe;
+    private final boolean authentication;
 
-    private Category(String id, boolean cwe) {
+    private Category(String id, boolean cwe, boolean authentication) {
         this.id = id;
         this.cwe = cwe;
+        this.authentication = authentication;
     }
 
     public boolean isCwe() {
@@ -48,6 +51,14 @@ public enum Category {
     @Override
     public String toString() {
         return id;
+    }
+
+    public boolean isAuthentication() {
+        return authentication;
+    }
+
+    public boolean isNone() {
+        return id.contains("none");
     }
 
     public static Category getCategoryForCWE(String cweName) {
