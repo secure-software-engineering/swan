@@ -40,7 +40,7 @@ public class Util {
             if (m2 == null)
                 signatureToMethod.put(sig, m1);
             else if (!m1.equals(m2)) {
-                m2.addCategoriesTrained(m1.getCategoriesTrained());
+                //m2.addCategoriesTrained(m1.getSrm());
                 signatureToMethod.put(sig, m2);
             }
         }
@@ -59,7 +59,7 @@ public class Util {
     public static void printStatistics(String message, Set<Method> methods) {
         Map<Category, Integer> counters = new HashMap<Category, Integer>();
         for (Method am : methods) {
-            for (Category category : am.getCategoriesTrained()) {
+            for (Category category : am.getSrm()) {
                 if (counters.containsKey(category)) {
                     int counter = counters.get(category);
                     counters.put(category, ++counter);
@@ -124,12 +124,12 @@ public class Util {
         File[] listOfFiles = folder.listFiles();
         StringBuilder sb = new StringBuilder();
         if (listOfFiles != null) {
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].getName().endsWith(".jar") || listOfFiles[i].getName().endsWith(".apk")) {
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.getName().endsWith(".jar") || listOfFile.getName().endsWith(".apk")) {
                     if (sb.length() > 0) {
                         sb.append(System.getProperty("path.separator"));
                     }
-                    sb.append(listOfFiles[i].getAbsolutePath().toString());
+                    sb.append(listOfFile.getAbsolutePath());
                 }
             }
         }
@@ -174,7 +174,7 @@ public class Util {
 
                             // If we have annotations for both methods, they must match
                             if (parentMethodData.isAnnotated() && method.isAnnotated())
-                                if (!parentMethodData.getCategoriesTrained().equals(method.getCategoriesTrained()))
+                                if (!parentMethodData.getSrm().equals(method.getSrm()))
                                     throw new RuntimeException(
                                             "Categories mismatch for " + parentMethodData + " and " + method);
 
@@ -188,7 +188,7 @@ public class Util {
                             // If we only have annotations for the current method, but not for
                             // the parent one, we can copy it up
                             if (!parentMethodData.isAnnotated() && method.isAnnotated()) {
-                                parentMethodData.setCategoriesTrained(method.getCategoriesTrained());
+                                parentMethodData.setSrm(method.getSrm());
                                 copied = true;
                             }
                         }
@@ -301,7 +301,7 @@ public class Util {
      * @param methods set of methods
      * @return report showing distribution of categories
      */
-    public static String countCategories(Set<Method> methods, boolean hasJavadoc) {
+    public static String countCategories(Set<Method> methods) {
 
         HashMap<String, Integer> results = new HashMap<>();
 
@@ -315,20 +315,10 @@ public class Util {
 
         for (Method met : methods) {
 
-            if (!met.getJavadoc().getMethodComment().equals("") && hasJavadoc) {
-                results.put("all-methods", results.get("all-methods") + 1);
+            results.put("all-methods", results.get("all-methods") + 1);
 
-                if (!met.getJavadoc().getClassComment().equals(""))
-                    results.put("all-classes", results.get("all-classes") + 1);
-            } else if (!hasJavadoc) {
-                results.put("all-methods", results.get("all-methods") + 1);
-            }
-
-            for (Category cat : met.getCategoriesTrained()) {
-                if (!met.getJavadoc().getMethodComment().equals("") && hasJavadoc)
-                    results.put(cat.toString(), results.get(cat.toString()) + 1);
-                else if (!hasJavadoc)
-                    results.put(cat.toString(), results.get(cat.toString()) + 1);
+            for (Category cat : met.getSrm()) {
+                results.put(cat.toString(), results.get(cat.toString()) + 1);
             }
         }
         return results.toString();

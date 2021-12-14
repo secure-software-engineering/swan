@@ -1,5 +1,7 @@
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Type;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Class representing a single method
@@ -17,51 +20,65 @@ import java.util.Set;
 public class Method {
 
     // Inherited by SootMethodAndClass (from Soot Infoflow)
-    private final String methodName;
-    private final String className;
-    private final String returnType;
-    private final List<String> parameters;
-
-    private String subSignature = null;
-    private String signature = null;
+    private String name;
+    private String className;
+    @JsonProperty("return")
+    private String returnType;
+    private List<String> parameters;
+    private String subSignature;
+    private String signature;
     private int hashCode = 0;
 
-    public enum SecLevel {
-        HIGH, LOW, NEUTRAL;
+    public enum SecurityLevel {
+        HIGH("high"), LOW("low"), NEUTRAL("neutral"), NONE("none");
+
+        private final String level;
+
+        SecurityLevel(String level ) {
+            this.level = level;
+        }
+
+        @JsonValue
+        public String getLevel() {
+            return level;
+        }
     }
 
-    private String framework = "";
-    private String link = "";
-    private String comment = "";
-    private String discovery = "";
-    private SecLevel secLevel = SecLevel.NEUTRAL;
-    private RelevantPart dataIn = new RelevantPart();
-    private RelevantPart dataOut = new RelevantPart();
-    // private Set<CWE> cwes = new HashSet<CWE>();
-    private Set<Category> categoriesTrained = new HashSet<Category>();
-    private Set<Category> categoriesClassified = new HashSet<Category>();
-
-    private Category categoryClassified = null;
+    private String framework;
+    private String link;
+    private String comment;
+    private String discovery;
+    private SecurityLevel securityLevel;
+    private RelevantPart dataIn ;
+    private RelevantPart dataOut;
+    @JsonProperty("type")
+    private Set<Category> srm;
+    private Set<Category> cwe;
 
     private Javadoc javadoc = new Javadoc();
-    private String sourceJar = "";
+    @JsonProperty("jar")
+    private String sourceJar;
 
-    public Method(String methodName, String returnType, String className) {
-        this.methodName = methodName;
-        this.className = className;
-        this.returnType = returnType;
-        this.parameters = new ArrayList<String>();
+    public Method() {
+        cwe = new HashSet<>();
     }
 
-    public Method(String methodName, List<String> parameters, String returnType, String className) {
-        this.methodName = methodName;
+    public Method(String name, String returnType, String className) {
+        this.name = name;
+        this.className = className;
+        this.returnType = returnType;
+        this.parameters = new ArrayList<>();
+    }
+
+    public Method(String name, List<String> parameters, String returnType, String className) {
+        this.name = name;
         this.className = className;
         this.returnType = returnType;
         this.parameters = parameters;
     }
 
     public Method(SootMethod sm) {
-        this.methodName = sm.getName();
+        this.name = sm.getName();
         this.className = sm.getDeclaringClass().getName();
         this.returnType = sm.getReturnType().toString();
         this.parameters = new ArrayList<String>();
@@ -70,32 +87,24 @@ public class Method {
     }
 
     public Method(Method methodAndClass) {
-        this.methodName = methodAndClass.methodName;
+        this.name = methodAndClass.name;
         this.className = methodAndClass.className;
         this.returnType = methodAndClass.returnType;
         this.parameters = new ArrayList<String>(methodAndClass.parameters);
     }
 
     public Method deriveWithNewClass(String className) {
-        Method m = new Method(this.getMethodName(), this.getParameters(), this.getReturnType(), className);
+        Method m = new Method(this.getName(), this.getParameters(), this.getReturnType(), className);
         m.setFramework(this.framework);
         m.setLink(this.link);
         m.setComment(this.comment);
         m.setDiscovery(this.discovery);
-        m.setSecLevel(m.secLevel);
+        m.setSecurityLevel(m.securityLevel);
         m.setDataIn(this.dataIn);
         m.setDataOut(this.dataOut);
         // m.setCwes(this.cwes);
-        m.setCategoriesTrained(this.categoriesTrained);
-        m.setCategoryClassified(this.categoryClassified);
+        m.setSrm(this.srm);
         return m;
-    }
-
-    @Override
-    public String toString() {
-        if (this.categoryClassified == null)
-            return "";
-        return getSignature() + " ->_" + this.categoryClassified.toString().toUpperCase() + "_";
     }
 
     /**
@@ -105,7 +114,7 @@ public class Method {
      * @return True if there is an annotation for this method, otherwise false.
      */
     public boolean isAnnotated() {
-        return !this.categoriesTrained.isEmpty();
+        return !this.srm.isEmpty();
     }
 
     public String getFramework() {
@@ -140,12 +149,12 @@ public class Method {
         this.discovery = discovery;
     }
 
-    public SecLevel getSecLevel() {
-        return secLevel;
+    public SecurityLevel getSecurityLevel() {
+        return securityLevel;
     }
 
-    public void setSecLevel(SecLevel secLevel) {
-        this.secLevel = secLevel;
+    public void setSecurityLevel(SecurityLevel securityLevel) {
+        this.securityLevel = securityLevel;
     }
 
     public RelevantPart getDataIn() {
@@ -164,45 +173,42 @@ public class Method {
         this.dataOut = dataOut;
     }
 
-    public Category getCategoryClassified() {
-        return categoryClassified;
+    public Set<Category> getSrm() {
+        return srm;
     }
 
-    public void setCategoryClassified(Category category) {
-        this.categoryClassified = category;
+    public Set<Category> getAuthSrm() {
+
+        return srm.stream().filter(Category::isAuthentication).collect(Collectors.toSet());
     }
 
-    public Set<Category> getCategoriesTrained() {
-        return categoriesTrained;
+    public void setSrm(Set<Category> srm) {
+        this.srm = srm;
     }
 
-    public void setCategoriesTrained(Set<Category> categoriesTrained) {
-        this.categoriesTrained = categoriesTrained;
+    public void setCwe(Set<Category> categories) {
+        this.cwe = categories;
     }
 
-    public void addCategoriesTrained(Set<Category> categories) {
-        this.categoriesTrained.addAll(categories);
-    }
-
-    public void addCategoryTrained(Category category) {
-        this.categoriesTrained.add(category);
-    }
-
-    public Set<Category> getCategoriesClassified() {
-        return this.categoriesClassified;
+    public Set<Category> getCwe() {
+        return this.cwe;
     }
 
     public void addCategoryClassified(Category category) {
-        this.categoriesClassified.add(category);
+        this.cwe.add(category);
     }
 
     // Inherited from SootMethodAndClass (from Soot Infoflow)
-    public String getMethodName() {
-        return this.methodName;
+    public String getName() {
+        return this.name;
     }
 
     public String getClassName() {
-        return this.className;
+
+        if(name.contains("."))
+        return name.substring(0, name.lastIndexOf("."));
+        else
+            return name;
     }
 
     public String getReturnType() {
@@ -218,12 +224,12 @@ public class Method {
             return subSignature;
 
         StringBuilder sb = new StringBuilder(
-                10 + this.returnType.length() + this.methodName.length() + (this.parameters.size() * 30));
+                10 + this.returnType.length() + this.name.length() + (this.parameters.size() * 30));
         if (!this.returnType.isEmpty()) {
             sb.append(this.returnType);
             sb.append(" ");
         }
-        sb.append(this.methodName);
+        sb.append(trimProperty(this.name));
         sb.append("(");
 
         for (int i = 0; i < this.parameters.size(); i++) {
@@ -247,16 +253,16 @@ public class Method {
         if (signature != null)
             return signature;
 
-        StringBuilder sb = new StringBuilder(10 + this.className.length() + this.returnType.length()
-                + this.methodName.length() + (this.parameters.size() * 30));
+        StringBuilder sb = new StringBuilder(10 + getClassName().length() + this.returnType.length()
+                + this.name.length() + (this.parameters.size() * 30));
         sb.append("<");
-        sb.append(this.className);
+        sb.append(getClassName());
         sb.append(": ");
         if (!this.returnType.isEmpty()) {
             sb.append(this.returnType);
             sb.append(" ");
         }
-        sb.append(this.methodName);
+        sb.append(trimProperty(getName()));
         sb.append("(");
 
         for (int i = 0; i < this.parameters.size(); i++) {
@@ -276,8 +282,7 @@ public class Method {
      */
     public String getSimpleSignature() {
 
-        return trimProperty(getReturnType()) + " " + trimProperty(getMethodName()) + " (" + StringUtils.join(getParameters(true), ", ") + ")";
-
+        return trimProperty(getReturnType()) + " " + trimProperty(getName()) + " (" + StringUtils.join(getParameters(true), ", ") + ")";
     }
 
     /**
@@ -316,11 +321,9 @@ public class Method {
      */
     public String getJavaSignature() {
 
-
-        String methodName = getMethodName();
-        if (getMethodName().equals("<init>"))
+        String methodName = getName();
+        if (getName().equals("<init>"))
             methodName = getClassName().substring(getClassName().lastIndexOf(".") + 1);
-
 
         return this.returnType + " " + this.className + "." + methodName + "(" + StringUtils.join(this.parameters, ", ") + ")";
     }
@@ -354,7 +357,7 @@ public class Method {
             return false;
         Method otherMethod = (Method) another;
 
-        if (!this.methodName.equals(otherMethod.methodName))
+        if (!this.name.equals(otherMethod.name))
             return false;
         if (!this.parameters.equals(otherMethod.parameters))
             return false;
@@ -366,7 +369,7 @@ public class Method {
     @Override
     public int hashCode() {
         if (this.hashCode == 0)
-            this.hashCode = this.methodName.hashCode() + this.className.hashCode() * 5;
+            this.hashCode = this.name.hashCode()  * 5;
         // The parameter list is available from the outside, so we can't cache it
         return this.hashCode + this.parameters.hashCode() * 7;
     }

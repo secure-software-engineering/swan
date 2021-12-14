@@ -44,12 +44,12 @@ public class Training {
         Set<String> c2 = new HashSet<>();
 
         for (Method method : m2) {
-            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getMethodName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
+            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
             c2.add(sig);
         }
 
         for (Method method : methodSet) {
-            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getMethodName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
+            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
             //System.out.println(sig);
 
             uniqueClasses.add(sig);
@@ -84,7 +84,7 @@ public class Training {
 
         for (Method method : methodSet) {
 
-            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getMethodName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
+            String sig = method.getReturnType() + " " + method.getClassName() + "." + method.getName() + "(" + StringUtils.join(method.getParameters(), ", ") + ")";
             //System.out.println(sig);
             methodMap.put(sig, method);
             uniqueClasses.add(method.getClassName());

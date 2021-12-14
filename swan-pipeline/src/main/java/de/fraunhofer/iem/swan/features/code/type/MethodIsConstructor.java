@@ -12,8 +12,8 @@ public class MethodIsConstructor extends WeightedFeature implements IFeature {
 
   @Override
   public Type applies(Method method) {
-    if (method.getMethodName().equals("<init>")
-        || method.getMethodName().equals("<clinit>"))
+    if (method.getName().equals("<init>")
+        || method.getName().equals("<clinit>"))
       return Type.TRUE;
     return Type.FALSE;
   }

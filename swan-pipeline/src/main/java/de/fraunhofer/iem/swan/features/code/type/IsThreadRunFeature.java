@@ -17,7 +17,7 @@ public class IsThreadRunFeature extends AbstractSootFeature {
 
   @Override
   public Type appliesInternal(Method method) {
-    if (!method.getMethodName().equals("run"))
+    if (!method.getName().equals("run"))
       return Type.FALSE;
 
     SootMethod sm = getSootMethod(method);

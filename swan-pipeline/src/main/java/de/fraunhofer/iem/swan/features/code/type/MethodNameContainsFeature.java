@@ -9,33 +9,33 @@ import de.fraunhofer.iem.swan.data.Method;
  */
 public class MethodNameContainsFeature extends WeightedFeature implements IFeature {
 
-  private final String contains;
-  private final String doesNotContain;
+    private final String contains;
+    private final String doesNotContain;
 
-  public MethodNameContainsFeature(String contains) {
-    this.contains = contains.toLowerCase();
-    this.doesNotContain = null;
-  }
+    public MethodNameContainsFeature(String contains) {
+        this.contains = contains.toLowerCase();
+        this.doesNotContain = null;
+    }
 
-  public MethodNameContainsFeature(String contains, String doesNotContain) {
-    this.contains = contains.toLowerCase();
-    this.doesNotContain = doesNotContain.toLowerCase();
-  }
+    public MethodNameContainsFeature(String contains, String doesNotContain) {
+        this.contains = contains.toLowerCase();
+        this.doesNotContain = doesNotContain.toLowerCase();
+    }
 
-  @Override
-  public Type applies(Method method) {
-    if (doesNotContain != null
-        && method.getMethodName().toLowerCase().contains(doesNotContain))
-      return Type.FALSE;
-    return (method.getMethodName().toLowerCase().contains(contains) ? Type.TRUE
-        : Type.FALSE);
-  }
+    @Override
+    public Type applies(Method method) {
+        if (doesNotContain != null
+                && method.getName().toLowerCase().contains(doesNotContain))
+            return Type.FALSE;
+        return (method.getName().toLowerCase().contains(contains) ? Type.TRUE
+                : Type.FALSE);
+    }
 
-  @Override
-  public String toString() {
-    String s = "<Method name contains " + this.contains;
-    if (doesNotContain != null) s += " but not " + this.doesNotContain;
-    return s + ">";
-  }
+    @Override
+    public String toString() {
+        String s = "<Method name contains " + this.contains;
+        if (doesNotContain != null) s += " but not " + this.doesNotContain;
+        return s + ">";
+    }
 
 }

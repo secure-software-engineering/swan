@@ -47,7 +47,6 @@ public abstract class AbstractSootFeature extends WeightedFeature implements IFe
         Scene.v().forceResolve(method.getClassName(), SootClass.BODIES);
 
     if (c == null || c.isPhantom()) {
-      System.err.println("Class " + method.getClassName() + " not found");
       return null;
     }
 
@@ -57,9 +56,10 @@ public abstract class AbstractSootFeature extends WeightedFeature implements IFe
     while (c != null) {
       // Does the current class declare the method we are looking for?
       if (method.getReturnType().isEmpty()) {
-        if (c.declaresMethodByName(method.getMethodName()))
-          return c.getMethodByName(method.getMethodName());
+        if (c.declaresMethodByName(method.getName()))
+          return c.getMethodByName(method.getName());
       } else {
+        //System.out.println(method.getSubSignature());
         if (c.declaresMethod(method.getSubSignature()))
           return c.getMethod(method.getSubSignature());
       }

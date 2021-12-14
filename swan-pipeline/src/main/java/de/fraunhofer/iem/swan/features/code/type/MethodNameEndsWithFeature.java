@@ -18,7 +18,7 @@ public class MethodNameEndsWithFeature extends WeightedFeature implements IFeatu
 
   @Override
   public Type applies(Method method) {
-    String methodNameLowerCase = method.getMethodName().toLowerCase();
+    String methodNameLowerCase = method.getName().toLowerCase();
     String endsWithLowerCase = endsWith.toLowerCase();
     return (methodNameLowerCase.endsWith(endsWithLowerCase) ? Type.TRUE
         : Type.FALSE);

@@ -15,7 +15,7 @@ public class VoidOnMethodFeature extends WeightedFeature implements IFeature {
 
   @Override
   public Type applies(Method method) {
-    return (method.getMethodName().startsWith("on")
+    return (method.getName().startsWith("on")
         && (method.getReturnType().toString().equals("void")
             || method.getReturnType().toString().equals("boolean")) ? Type.TRUE
                 : Type.FALSE);

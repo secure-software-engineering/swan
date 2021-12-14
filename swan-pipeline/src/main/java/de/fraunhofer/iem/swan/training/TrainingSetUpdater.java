@@ -143,7 +143,7 @@ public class TrainingSetUpdater {
 
         for (Method m : sourceFileLoader.getMethods()) {
 
-            String sig = m.getClassName() + "." + m.getMethodName();
+            String sig = m.getClassName() + "." + m.getName();
 
             //Do not add these methods to the list because their doc comments aren't helpful
             //They contain a see comment
@@ -183,7 +183,7 @@ public class TrainingSetUpdater {
                             break;
                     }
                 }
-                m.setCategoriesTrained(categories);
+                m.setSrm(categories);
                 m.setSourceJar(classesJar.get(m.getClassName()));
                 m.setDiscovery(methodInfo[1]);
 

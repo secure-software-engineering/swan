@@ -17,7 +17,7 @@ public class MethodNameEqualsFeature extends WeightedFeature implements IFeature
 
   @Override
   public Type applies(Method method) {
-    return (method.getMethodName().toLowerCase().equals(contains) ? Type.TRUE
+    return (method.getName().toLowerCase().equals(contains) ? Type.TRUE
         : Type.FALSE);
   }
 

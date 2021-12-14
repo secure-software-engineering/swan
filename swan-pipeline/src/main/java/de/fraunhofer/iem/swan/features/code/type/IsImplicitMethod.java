@@ -12,7 +12,7 @@ public class IsImplicitMethod extends WeightedFeature implements IFeature {
 
   @Override
   public Type applies(Method method) {
-    return (method.getMethodName().contains("$") ? Type.TRUE : Type.FALSE);
+    return (method.getName().contains("$") ? Type.TRUE : Type.FALSE);
   }
 
   @Override

@@ -133,12 +133,12 @@ public class TrainingSetCreator {
             inst.setDataset(instances);
             inst.setValue(instances.attribute("id"), method.getMethod().getJavaSignature());
 
-            List<Category> list = new ArrayList<>(method.getMethod().getCategoriesTrained());
+            List<Category> list = new ArrayList<>(method.getMethod().getSrm());
             //System.out.println(method.getMethod().getJavaSignature() + "/" + list);
 
             Category categoryClassified = null;
 
-            for (Category category : method.getMethod().getCategoriesTrained()) {
+            for (Category category : method.getMethod().getSrm()) {
                 if (categorySet.contains(category)) {
                     categoryClassified = category;
                     break;

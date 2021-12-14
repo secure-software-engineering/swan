@@ -18,7 +18,7 @@ public class MethodNameStartsWithFeature extends WeightedFeature implements IFea
 
   @Override
   public Type applies(Method method) {
-    return (method.getMethodName().startsWith(this.startsWith) ? Type.TRUE
+    return (method.getName().startsWith(this.startsWith) ? Type.TRUE
         : Type.FALSE);
   }
 
