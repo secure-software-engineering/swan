@@ -1,219 +1,167 @@
 package de.fraunhofer.iem.swan.model;
 
-
-import de.fraunhofer.iem.swan.SwanPipeline;
-import de.fraunhofer.iem.swan.features.InstancesHandler;
-import de.fraunhofer.iem.swan.util.Util;
+import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.evaluation.output.prediction.AbstractOutput;
-import weka.classifiers.evaluation.output.prediction.CSV;
+import weka.classifiers.functions.Logistic;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.rules.JRip;
+import weka.classifiers.trees.DecisionStump;
+import weka.classifiers.trees.J48;
 import weka.core.Instances;
-import weka.core.Range;
+import weka.filters.Filter;
+import weka.filters.MultiFilter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
- * @author Oshando Johnson on 02.09.20
+ * Finds possible sources and sinks in a given set of system methods using a
+ * probabilistic algorithm trained on a previously annotated sample set.
+ *
+ * @author Steven Arzt, Lisa Nguyen Quang Do, Goran Piskachev
  */
 public class ModelEvaluator {
 
-    private ArrayList<AbstractOutput> predictions;
-    private HashMap<String, String> fMeasure;
-
-    public ModelEvaluator() {
-        predictions = new ArrayList<>();
+    public enum Mode {
+        MANUAL,
+        AUTOMATIC
     }
 
-    public ArrayList<AbstractOutput> getPredictions() {
-        return predictions;
+    private int iterations;
+    private double trainTestSplit;
+    private Mode evaluationMode;
+    private FeaturesHandler features;
+    private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
+
+    public ModelEvaluator(FeaturesHandler features, String evaluationMode, int iterations, double trainTestSplit) {
+        this.features = features;
+        this.evaluationMode = Mode.valueOf(evaluationMode.toUpperCase());
+        this.iterations = iterations;
+        this.trainTestSplit = trainTestSplit;
     }
 
-    public HashMap<String, String> getFMeasure() {
+    /**
+     * Trains and evaluates the model with the given training data and specified classification mode.
+     *
+     * @return Hashmap containing the name of the classifier and it's F-Measure
+     */
+    public HashMap<String, HashMap<String, String>> trainModel() {
+
+        for (Instances instances : features.getInstances()) {
+
+            switch (evaluationMode) {
+
+                case MANUAL:
+                    runManualEvaluation(instances);
+                case AUTOMATIC:
+                    //return runAutomaticEvaluation(instances);
+            }
+        }
+
+        //trainModels(options.getCweClasses());
+        return null;
+    }
+
+    /**
+     * Run AutoML training and evaluation on instances.
+     *
+     * @param instances list of instances
+     * @return
+     */
+    public HashMap<String, HashMap<String, String>> runAutomaticEvaluation(Instances instances) {
+
+        LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
+
+        MLPlanExecutor mlPlanExecutor = new MLPlanExecutor();
+        fMeasure.put("ML-Plan", mlPlanExecutor.evaluateDataset(instances));
+
+        outputFMeasure(fMeasure);
         return fMeasure;
     }
 
     /**
-     * Evaluates instances using Monte Carlo Cross Evaluation.
-     *
-     * @param instancesHandlers instance set
-     * @param classifier        classifier to model creation
-     * @param trainPercentage   percentage of instances for train set
-     * @param iterations        number of evaluation iterations
-     * @return average F-score for iterations
+     * @return
      */
-    public HashMap<String, String> monteCarloValidate(ArrayList<InstancesHandler> instancesHandlers, Classifier classifier, double trainPercentage, int iterations) {
+    public HashMap<String, HashMap<String, String>> runManualEvaluation(Instances instances) {
 
-        initializeResultSet(instancesHandlers.get(0).getInstances());
+        LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
 
-        if (instancesHandlers.size() == 1) {
-            for (int i = 0; i < iterations; i++) {
-                Util.exportInstancesToArff(instancesHandlers.get(0).getInstances());
-                evaluateIteration(instancesHandlers.get(0).getInstances(), classifier, trainPercentage, i);
-            }
+        List<Classifier> classifiers = new ArrayList<>();
+        classifiers.add(new BayesNet());
+        classifiers.add(new NaiveBayes());
+        classifiers.add(new J48());
+        classifiers.add(new SMO());
+        classifiers.add(new JRip());
+        classifiers.add(new DecisionStump());
+        classifiers.add(new Logistic());
 
-        } else {
+        //For each classifier, evaluate its performance on the instances
+        for (Classifier classifier : classifiers) {
 
-            for (InstancesHandler instancesHandler : instancesHandlers) {
-                Util.exportInstancesToArff(instancesHandlers.get(0).getInstances());
-                evaluateIteration(instancesHandler.getInstances(), classifier, trainPercentage, instancesHandlers.indexOf(instancesHandler));
-            }
+            MonteCarloValidator evaluator = new MonteCarloValidator();
+            evaluator.monteCarloValidate(instances, classifier, trainTestSplit, iterations);
+
+            exportPredictions(evaluator.getPredictions());
+
+            fMeasure.put(classifier.getClass().getSimpleName(), evaluator.getFMeasure());
         }
+
+        outputFMeasure(fMeasure);
+        Runtime.getRuntime().gc();
+
         return fMeasure;
     }
 
-    public void evaluateIteration(Instances instances, Classifier classifier, double trainPercentage, int iteration) {
+    public void outputFMeasure(LinkedHashMap<String, HashMap<String, String>> fMeasure) {
 
+        String value = fMeasure.keySet().toArray()[0].toString();
 
-        int trainSize = (int) Math.round(instances.numInstances() * trainPercentage);
-        int testSize = instances.numInstances() - trainSize;
+        for (Object srm : fMeasure.get(value).keySet()) {
+            logger.info("Classification complete for {}", srm.toString());
+            for (String c : fMeasure.keySet()) {
 
-        instances.randomize(new Random(1337 + iteration * 11));
-        instances.stratify(10);
-
-        Instances trainInstances = new Instances(instances, 0, trainSize);
-        Instances testInstances = new Instances(instances, trainSize, testSize);
-
-
-        /*try {
-            String arffFilePath = Util.exportInstancesToArff(instances);
-
-            //Initialize dataset using ARFF file path
-            ILabeledDataset<?> dataset = ArffDatasetAdapter.readDataset(new File(arffFilePath));
-            List<ILabeledDataset<?>> split = SplitterUtil.getLabelStratifiedTrainTestSplit(dataset, new Random(1337 + (iteration * 11)), 0.7);
-
-
-            String trainPath = "/Users/oshando/Projects/thesis/03-code/swan/swan_core/swan-out/mlplan/train-methods-dataset.arff";
-            ArffDatasetAdapter.serializeDataset(new File(trainPath), split.get(0));
-            ArffLoader trainLoader = new ArffLoader();
-            trainLoader.setFile(new File(trainPath));
-            Instances trainInstances = trainLoader.getDataSet();
-            trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
-
-
-            String testPath = "/Users/oshando/Projects/thesis/03-code/swan/swan_core/swan-out/mlplan/test-methods-dataset.arff";
-            ArffDatasetAdapter.serializeDataset(new File(testPath), split.get(1));
-            ArffLoader testLoader = new ArffLoader();
-            testLoader.setFile(new File(testPath));
-            Instances testInstances = testLoader.getDataSet();
-            testInstances.setClassIndex(testInstances.numAttributes() - 1);
-
-
-        } catch (Exception e) {
-
-        }*/
-        evaluate(classifier, trainInstances, testInstances, iteration);
+                String measures = fMeasure.get(c).get(srm.toString());
+                measures = measures.replace(".", ",").substring(0, measures.lastIndexOf(";"));
+                logger.info("{} classification results using {}: {}", srm, c, measures);
+            }
+        }
     }
 
-    public void evaluate(Classifier classifier, Instances trainInstances, Instances testInstances, int iteration) {
+    public void exportPredictions(ArrayList<AbstractOutput> predictions) {
 
-        Evaluation eval = null;
+        for (AbstractOutput prediction : predictions) {
+            //System.out.println("PRE: " + prediction.getBuffer());
+        }
+    }
+
+    /**
+     * Applies the Weka filters to the instances.
+     *
+     * @param instances instane set
+     * @param filters   array of filters
+     * @return instances with filter applied
+     */
+    public Instances applyFilter(Instances instances, MultiFilter filters) {
+
         try {
-
-            classifier.buildClassifier(trainInstances);
-
-            eval = new Evaluation(testInstances);
-
-            AbstractOutput abstractOutput = new CSV();
-            abstractOutput.setBuffer(new StringBuffer());
-            abstractOutput.setHeader(testInstances);
-            abstractOutput.setAttributes(Integer.toString(testInstances.numAttributes() - 1));
-
-            eval.evaluateModel(classifier, testInstances, abstractOutput);
-
-            //System.out.println(eval.toClassDetailsString());
-
-            String[] predictions = abstractOutput.getBuffer().toString().split("\n");
-
-            ArrayList<String> methods = new ArrayList<>();
-
-            for (String result : predictions) {
-                String[] entry = result.split(",");
-
-                if (entry[2].contains("source") || entry[2].contains("sink") || entry[2].contains("sanitizer")
-                        || entry[2].contains("auth")) {
-
-                    String method = entry[5].replace("'", "");
-                    SwanPipeline.predictions.get(Integer.toString(iteration)).add(method);
-                }
-            }
-
-            //get class name
-            String className = "";
-            for (int x = 0; x < testInstances.attribute("class").numValues(); x++) {
-
-                if (!testInstances.attribute("class").value(x).contains("none")) {
-                    className = testInstances.attribute("class").value(x);
-                    break;
-                }
-            }
-
-            String iter = classifier.getClass().getSimpleName() + ";" + className + ";" + iteration;
-
+            filters.setInputFormat(instances);
+            return Filter.useFilter(instances, filters);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        updateResultSet(testInstances, eval);
+        return null;
     }
 
-
-    /**
-     * Evaluates instances using Cross Evaluation.
-     *
-     * @param instances  instance set
-     * @param classifier classifier to model creation
-     * @param iterations number of evaluation iterations
-     * @return average F-score for iterations
-     */
-    public HashMap<String, String> crossValidate(Instances instances, Classifier classifier, int iterations, int folds) {
-
-        initializeResultSet(instances);
-
-        for (int i = 0; i < iterations; i++) {
-
-            Evaluation eval = null;
-            StringBuffer stringBuffer = new StringBuffer();
-
-            try {
-                eval = new Evaluation(instances);
-                eval.crossValidateModel(classifier, instances, folds
-                        , new Random(1337 + i * 11),
-                        stringBuffer, new Range(Integer.toString(instances.numAttributes() - 1)),
-                        true);
-                //System.out.println(stringBuffer.toString());
-                System.out.println(eval.toClassDetailsString());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            updateResultSet(instances, eval);
-        }
-        return fMeasure;
-    }
-
-    public void initializeResultSet(Instances instances) {
-        fMeasure = new HashMap<>();
-
-        for (int x = 0; x < instances.numClasses(); x++) {
-
-            if (!instances.classAttribute().value(x).contentEquals("none")) {
-                fMeasure.put(instances.classAttribute().value(x), "");
-            }
-        }
-    }
-
-    public void updateResultSet(Instances instances, Evaluation eval) {
-
-        for (int x = 0; x < instances.numClasses(); x++) {
-
-            if (!instances.classAttribute().value(x).contentEquals("none")) {
-
-                String current = fMeasure.get(instances.classAttribute().value(x));
-                current += eval.fMeasure(x) + ";";
-
-                fMeasure.replace(instances.classAttribute().value(x), current.replace("NaN", "0"));
-            }
-        }
+    public double round(double val, int decimals) {
+        val = val * (10 * decimals);
+        val = Math.round(val);
+        return val / (10 * decimals);
     }
 }
