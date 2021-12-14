@@ -1,39 +1,33 @@
 package de.fraunhofer.iem.swan.model;
 
 import ai.libs.jaicore.ml.classification.loss.dataset.EClassificationPerformanceMeasure;
-import ai.libs.jaicore.ml.classification.singlelabel.SingleLabelClassification;
 import ai.libs.jaicore.ml.core.dataset.schema.attribute.IntBasedCategoricalAttribute;
 import ai.libs.jaicore.ml.core.dataset.serialization.ArffDatasetAdapter;
-import ai.libs.jaicore.ml.core.evaluation.evaluator.SupervisedLearnerExecutor;
 import ai.libs.jaicore.ml.core.filter.SplitterUtil;
 import ai.libs.jaicore.ml.weka.classification.learner.IWekaClassifier;
 import ai.libs.mlplan.core.MLPlan;
 import ai.libs.mlplan.multiclass.wekamlplan.MLPlanWekaBuilder;
-import de.fraunhofer.iem.swan.features.InstancesHandler;
 import de.fraunhofer.iem.swan.util.Util;
-import org.api4.java.ai.ml.classification.singlelabel.evaluation.ISingleLabelClassification;
 import org.api4.java.ai.ml.core.dataset.schema.attribute.IAttribute;
 import org.api4.java.ai.ml.core.dataset.serialization.DatasetDeserializationFailedException;
 import org.api4.java.ai.ml.core.dataset.splitter.SplitFailedException;
 import org.api4.java.ai.ml.core.dataset.supervised.ILabeledDataset;
-import org.api4.java.ai.ml.core.evaluation.execution.ILearnerRunReport;
-import org.api4.java.ai.ml.core.evaluation.execution.LearnerExecutionFailedException;
-import org.api4.java.ai.ml.core.exception.TrainingException;
 import org.api4.java.algorithm.Timeout;
 import org.api4.java.algorithm.exceptions.AlgorithmException;
 import org.api4.java.algorithm.exceptions.AlgorithmExecutionCanceledException;
 import org.api4.java.algorithm.exceptions.AlgorithmTimeoutedException;
-import org.nd4j.common.io.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import weka.classifiers.Classifier;
-import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -51,13 +45,13 @@ public class MLPlanExecutor {
     /**
      * Run ML-Plan using the provided path to the ARFF file.
      *
-     * @param instancesHandler file path for ARFF file
+     * @param instances1 file path for ARFF file
      */
-    public HashMap<String, String> evaluateDataset(InstancesHandler instancesHandler) {
+    public HashMap<String, String> evaluateDataset(Instances instances1) {
 
-        String arffFilePath = Util.exportInstancesToArff(instancesHandler.getInstances());
+        String arffFilePath = Util.exportInstancesToArff(instances1);
 
-        String mClass = Util.getClassName(instancesHandler.getInstances());
+        String mClass = Util.getClassName(instances1);
 
         long start = System.currentTimeMillis();
 
@@ -74,14 +68,14 @@ public class MLPlanExecutor {
         ArrayList<Double> fScores = new ArrayList<>();
         ArrayList<String> algorithms = new ArrayList<>();
 
-        ModelEvaluator modelEvaluator = new ModelEvaluator();
+        MonteCarloValidator monteCarloValidator = new MonteCarloValidator();
 
         ArffLoader loader = new ArffLoader();
         try {
             loader.setFile(new File(arffFilePath));
             Instances instances = loader.getDataSet();
             instances.setClassIndex(instances.numAttributes() - 1);
-            modelEvaluator.initializeResultSet(instances);
+            monteCarloValidator.initializeResultSet(instances);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,7 +110,7 @@ public class MLPlanExecutor {
                 Instances testInstances = testLoader.getDataSet();
                 testInstances.setClassIndex(testInstances.numAttributes() - 1);
 
-                modelEvaluator.evaluate(optimizedClassifier, trainInstances, testInstances, iteration);
+                monteCarloValidator.evaluate(optimizedClassifier, trainInstances, testInstances, iteration);
 
 
                 /* evaluate solution produced by mlplan */
@@ -149,15 +143,15 @@ public class MLPlanExecutor {
                 e.printStackTrace();
             }
         }
-        return modelEvaluator.getFMeasure();
+        return monteCarloValidator.getFMeasure();
     }
 
-    public void evaluateDataset(InstancesHandler instancesHandler, int k) {
+    public void evaluateDataset(Instances instances, int k) {
 
         //arffFilePath = "swan/swan_core/src/main/resources/waveform.arff";
-        String arffFilePath = Util.exportInstancesToArff(instancesHandler.getInstances());
+        String arffFilePath = Util.exportInstancesToArff(instances);
 
-        String mClass = Util.getClassName(instancesHandler.getInstances());
+        String mClass = Util.getClassName(instances);
 
 
         long start = System.currentTimeMillis();
@@ -172,7 +166,7 @@ public class MLPlanExecutor {
 
         //dataset.removeColumn("id");
 
-        ModelEvaluator modelEvaluator = new ModelEvaluator();
+        MonteCarloValidator monteCarloValidator = new MonteCarloValidator();
 
         //For each iteration, create a new train-test-split and run ML-Plan
         for (int iteration = 0; iteration < ITERATIONS; iteration++) {
