@@ -1,11 +1,7 @@
 package de.fraunhofer.iem.swan.features.code;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
+import java.io.File;
+import java.util.*;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.features.code.type.*;
 import de.fraunhofer.iem.swan.features.code.type.MethodClassModifierFeature.ClassModifier;
@@ -19,23 +15,22 @@ import org.slf4j.LoggerFactory;
  * @author Lisa Nguyen Quang Do, Goran Piskachev
  */
 
-public class FeatureHandler {
+public class CodeFeatureHandler {
 
     private final String cp;
     private Map<Category, Set<IFeature>> featuresMap;
-    private static final Logger logger = LoggerFactory.getLogger(FeatureHandler.class);
-
-
-    public FeatureHandler(String cp) {
-        this.cp = cp;
-    }
-
+    private static final Logger logger = LoggerFactory.getLogger(CodeFeatureHandler.class);
     public Map<Category, Set<IFeature>> features() {
         return featuresMap;
     }
 
-    private void addFeature(IFeature feature,
-                            Set<Category> categoriesForFeature) {
+    public CodeFeatureHandler(String trainClasspath, String testClasspath) {
+        StringJoiner joiner = new StringJoiner(File.pathSeparator);
+        joiner.add(trainClasspath).add(testClasspath);
+        this.cp = joiner.toString();
+    }
+
+    private void addFeature(IFeature feature, Set<Category> categoriesForFeature) {
         for (Category category : categoriesForFeature) {
             Set<IFeature> typeFeatures = featuresMap.get(category);
             typeFeatures.add(feature);
@@ -48,9 +43,11 @@ public class FeatureHandler {
      *
      */
     public void initializeFeatures() {
-        featuresMap = new HashMap<Category, Set<IFeature>>();
+
+        featuresMap = new HashMap<>();
+
         for (Category category : Category.values())
-            featuresMap.put(category, new HashSet<IFeature>());
+            featuresMap.put(category, new HashSet<>());
 
             // Implicit method.
             IFeature isImplicitMethod = new IsImplicitMethod();
@@ -59,16 +56,17 @@ public class FeatureHandler {
                     new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
                             Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
                             Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-                            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE306, Category.CWE079, Category.CWE601,
-                            Category.NONE, Category.RELEVANT)));
+                            Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE306,
+                            Category.CWE079, Category.CWE601, Category.NONE, Category.RELEVANT)));
         
             // Method in anonymous class.
             IFeature anonymousClass = new MethodAnonymousClassFeature(true);
             ((WeightedFeature) anonymousClass).setWeight(8);
             addFeature(anonymousClass,
-                    new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862, Category.CWE863, Category.CWE601)));
+                    new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT,
+                            Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862,
+                            Category.CWE863, Category.CWE601)));
 
-        
             IFeature classNameContainsSaniti = new MethodClassContainsNameFeature(
                     "Saniti");
             ((WeightedFeature) classNameContainsSaniti).setWeight(2);
@@ -87,7 +85,6 @@ public class FeatureHandler {
             addFeature(classNameContainsEscape,
                     new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE, Category.RELEVANT)));
 
-        
             IFeature classNameContainsValid = new MethodClassContainsNameFeature(
                     "Valid");
             ((WeightedFeature) classNameContainsValid).setWeight(-13);
@@ -157,7 +154,8 @@ public class FeatureHandler {
             IFeature classNameContainsWeb = new MethodClassContainsNameFeature("web");
             ((WeightedFeature) classNameContainsWeb).setWeight(15);
             addFeature(classNameContainsWeb, new HashSet<>(
-                    Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE079, Category.CWE601)));
+                    Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE079,
+                            Category.CWE601)));
         
             IFeature classNameContainsNet = new MethodClassContainsNameFeature(".net.");
             ((WeightedFeature) classNameContainsNet).setWeight(9);
@@ -186,7 +184,8 @@ public class FeatureHandler {
                     "Input");
             ((WeightedFeature) classNameContainsInput).setWeight(5);
             addFeature(classNameContainsInput,
-                    new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.CWE078, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                    new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.CWE078, Category.CWE089,
+                            Category.NONE, Category.RELEVANT)));
         
             IFeature classNameContainsDatabase = new MethodClassContainsNameFeature(
                     "database");
@@ -217,7 +216,6 @@ public class FeatureHandler {
             ((WeightedFeature) classNameContainsProcess).setWeight(13);
             addFeature(classNameContainsProcess,
                     new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
-        
 
             IFeature classNameContainsRuntime = new MethodClassContainsNameFeature(
                     "runtime");
@@ -235,7 +233,6 @@ public class FeatureHandler {
             addFeature(classNameContainsJdbc,
                     new HashSet<>(Arrays.asList(Category.SINK,
                             Category.CWE089, Category.NONE, Category.RELEVANT)));
-        
 
             IFeature classNameContainsHtml = new MethodClassContainsNameFeature(
                     "Html");
@@ -258,7 +255,6 @@ public class FeatureHandler {
             ((WeightedFeature) classNameContainsHttp).setWeight(-8);
             addFeature(classNameContainsHttp, new HashSet<>(
                     Arrays.asList(Category.CWE601, Category.NONE, Category.RELEVANT)));
-        
 
             IFeature classNameContainsUrl = new MethodClassContainsNameFeature(
                     "url");
@@ -777,7 +773,6 @@ public class FeatureHandler {
             ((WeightedFeature) methodNameContainsSaniti).setWeight(-3);
             addFeature(methodNameContainsSaniti,
                     new HashSet<>(Arrays.asList(Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE089, Category.NONE, Category.RELEVANT)));
-
         
             IFeature methodNameContainsEscape = new MethodNameContainsFeature("escape",
                     "unescape");
@@ -909,7 +904,6 @@ public class FeatureHandler {
             addFeature(nameContainsRequest,
                     new HashSet<>(Arrays.asList(Category.SOURCE, Category.NONE, Category.RELEVANT)));
 
-        
             IFeature nameContainsCreate = new MethodNameContainsFeature("creat");
             ((WeightedFeature) nameContainsCreate).setWeight(6);
             addFeature(nameContainsCreate,
@@ -1118,7 +1112,6 @@ public class FeatureHandler {
                     new HashSet<>(Arrays.asList(Category.SANITIZER, Category.NONE, Category.RELEVANT)));
         
             // Parameter to sink.
-
             IFeature paramToSinkSetWrit = new ParameterToSinkFeature(cp, "writ");
             ((WeightedFeature) paramToSinkSetWrit).setWeight(-4);
             addFeature(paramToSinkSetWrit,
@@ -1149,7 +1142,6 @@ public class FeatureHandler {
             addFeature(paramToSinkSetPut,
                     new HashSet<>(Arrays.asList(Category.SINK, Category.NONE, Category.RELEVANT)));
 
-        
             IFeature paramToSinkSetAdd = new ParameterToSinkFeature(cp, "log");
             ((WeightedFeature) paramToSinkSetAdd).setWeight(-11);
             addFeature(paramToSinkSetAdd,
@@ -1204,7 +1196,6 @@ public class FeatureHandler {
             addFeature(returnContainsNode,
                     new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
 
-        
             IFeature returnContainsUser = new ReturnTypeContainsNameFeature(cp, "User");
             ((WeightedFeature) returnContainsUser).setWeight(-17);
             addFeature(returnContainsUser,
@@ -1298,7 +1289,7 @@ public class FeatureHandler {
         getFeaturesSize();
     }
 
-    private int getFeaturesSize() {
+    private void getFeaturesSize() {
         int count = 0;
 
         HashMap<String, Integer> featuresCount = new HashMap();
@@ -1308,7 +1299,6 @@ public class FeatureHandler {
             featuresCount.put(c.toString(), features);
             count += features;
         }
-        logger.info("{} Features, distribution={}", count, featuresCount);
-        return count;
+        logger.info("{} Features,  distribution={}", count, featuresCount);
     }
 }
