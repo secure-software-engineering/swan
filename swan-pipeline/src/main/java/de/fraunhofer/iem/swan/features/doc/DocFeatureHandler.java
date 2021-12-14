@@ -25,7 +25,6 @@ public class DocFeatureHandler {
     private HashMap<String, HashMap<String, Double>> automaticFeatureData;
     private Set<Method> methodSet;
 
-
     public DocFeatureHandler(Set<Method> trainingSet) {
         manualFeatureSet = new HashSet<>();
         manualFeatureData = new HashMap<>();
@@ -57,28 +56,21 @@ public class DocFeatureHandler {
 
         for (Method method : methodSet) {
 
-            //String docComment = NLPUtils.cleanText(method.getJavadoc().getMergedComments());
-
-
             String docComment = NLPUtils.cleanFirstSentence(method.getJavadoc().getMethodComment()) + " " +
                     NLPUtils.cleanFirstSentence(method.getJavadoc().getClassComment());
 
             NDArray array = (NDArray) docCommentVector.getParagraphVectors().inferVector(docComment);
-            // System.out.println("ARR: "+array.toString());
             HashMap<String, Double> vectorValues = new HashMap<>();
 
             for (int index = 0; index < array.columns(); index++) {
-                // System.out.println(array.getDouble(index));
                 vectorValues.put("dl4j-col-" + index, array.getDouble(index));
             }
 
             NDArray average = (NDArray) array.mean(1);
             vectorValues.put("dl4j-avg", average.getDouble(0));
-            //System.out.println(vectorValues);
             automaticFeatureData.put(method.getSignature(), vectorValues);
         }
     }
-
 
     public ArrayList<String> getAutomaticFeatureSet() {
 
@@ -99,9 +91,6 @@ public class DocFeatureHandler {
 
         Reflections features = new Reflections("de.fraunhofer.iem.swan.features.doc.manual");
         manualFeatureSet = features.getSubTypesOf(IDocFeature.class);
-
-        excludeFeatures();
-
     }
 
     public void initialiseAutomaticFeatureSet() {
@@ -115,35 +104,7 @@ public class DocFeatureHandler {
     /**
      *
      */
-    public void excludeFeatures() {
-        Set<String> exclude = new HashSet<>();
-
-        //Unprocessed features
-//        exclude.add("AverageTokenLengthFeature");
-//        exclude.add("AverageSentenceLengthFeature");
-//
-//        exclude.add("SentenceCountFeature");
-//        exclude.add("TokenCountFeature");
-//        exclude.add("UppercaseWordsCountFeature");
-//        exclude.add("NumberCountFeature");
-//        exclude.add("CharacterCountFeature");
-//
-//        exclude.add("DeprecatedTagCountFeature");
-//        exclude.add("CodeTagCountFeature");
-//        exclude.add("SeeTagCountFeature");
-//        exclude.add("LinkTagCountFeature");
-//        exclude.add("IncompleteCodeFeature");
-
-
-        //Processed features
-
-//        exclude.add("SanitizerWordCountFeature");
-//        exclude.add("SqlInjectionCountFeature");
-//        exclude.add("AuthUnsafeWordCountFeature");
-//        exclude.add("AuthSafeWordCountFeature");
-//        exclude.add("SourceWordCountFeature");
-//        exclude.add("AuthNoChangeWordCountFeature");
-
+    public void excludeFeatures(Set<String> exclude) {
 
         Set<Class<? extends IDocFeature>> features = new HashSet<>(manualFeatureSet);
 
