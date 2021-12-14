@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.swan;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
@@ -54,86 +55,9 @@ public class SwanPipeline {
 
         long startAnalysisTime = System.currentTimeMillis();
 
-        // Cache the list of classes and the CP.
-        Set<String> testClasses = Util.getAllClassesFromDirectory(options.getTestData());
-        String testCp = Util.buildCP(options.getTestData());
-
-        logger.info("Loading train data from {}", options.getTrainData());
-        String trainingCp = Util.buildCP(options.getTrainData());
-
-        // Cache the methods from the training set.
-        parser = new Parser(trainingCp);
-        parser.loadTrainingSet(Collections.singleton(options.getDatasetJson()));
-        logger.info("{} training methods, distribution={}",
-                parser.methods().size(), Util.countCategories(parser.methods(), false));
-
-        //Remove methods that do not have method doc comments
-        parser.removeUndocumentedMethods();
-        logger.info("Remove undocumented training methods. Remaining {}, distribution={}",
-                parser.methods().size(), Util.countCategories(parser.methods(), true));
-
-        // Cache the methods from the testing set.
-        logger.info("Loading test data from {}", options.getTestData());
-        loader = new Loader(testCp);
-        loader.loadTestSet(testClasses, parser.methods());
-
-        // Cache the features.
-        logger.info("Loading feature instances");
-        featureHandler = new FeatureHandler(trainingCp + System.getProperty("path.separator") + testCp);
-        featureHandler.initializeFeatures();
-
-        Set<Method> methods = new HashSet<>();
-
-        for (Method method : parser.methods()) {
-            List<String> words = Arrays.asList(StringUtils.split(method.getJavadoc().getMethodComment(), " "));
-            if (method.getJavadoc().getMethodComment().length() > 0 || words.size() > 1
-            ) {
-                //  if (method.getDiscovery().contentEquals("manual")) {
-                methods.add(method);
-                //if(method.getCategoriesTrained().contains(Category.AUTHENTICATION_NEUTRAL))
-                //   System.out.println(method.getJavaSignature());
-            }
-        }
-
-        //Populate SWAN feature attributes
-        docFeatureHandler = null;
-        InstancesHandler.FeatureSet feature = InstancesHandler.FeatureSet.getValue(Integer.parseInt(options.getFeatureSet()));
-
-        switch (feature) {
-            case SWANDOC_MANUAL:
-            case SWAN_SWANDOC_MANUAL:
-
-                docFeatureHandler = new DocFeatureHandler(methods);
-                docFeatureHandler.initialiseManualFeatureSet();
-                docFeatureHandler.evaluateManualFeatureData();
-                break;
-            case SWANDOC_WORD_EMBEDDING:
-            case SWAN_SWANDOC_WORD_EMBEDDING:
-
-                docFeatureHandler = new DocFeatureHandler(methods);
-                docFeatureHandler.initialiseAutomaticFeatureSet();
-                docFeatureHandler.evaluateAutomaticFeatureData();
-                break;
-        }
-
-        // Prepare classifier.
-        logger.info("Preparing classifier");
-        writer = new Writer(loader.methods());
-        learner = new Learner(writer);
-
-        Learner.Mode learnerMode = Learner.Mode.valueOf(options.getLearningMode().toUpperCase());
-
-        /*
-            FIRST PHASE - binary classification for each of the categories.
-            (1) Classify: source, sink, sanitizer,
-            auth-no-change, auth-unsafe-state, auth-safe-state
-            (2) Classify: relevant
-         */
-
-        //Store predictions for each classifier and iteration.
-        predictions = new HashMap<>();
-        for (int x = 0; x < 10; x++)
-            predictions.put(Integer.toString(x), new HashSet<>());
+        // Load methods in training dataset
+        SrmList dataset = SrmListUtils.importFile(options.getDatasetJson(), options.getTrainDataDir());
+        logger.info("Loaded {} training methods, distribution={}", dataset.getMethods().size(), Util.countCategories(dataset.getMethods()));
 
         //Load methods from the test set
         logger.info("Loading test JARs in {}", options.getTestDataDir());

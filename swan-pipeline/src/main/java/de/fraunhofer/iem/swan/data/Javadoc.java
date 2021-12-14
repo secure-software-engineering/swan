@@ -1,6 +1,8 @@
 
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Stores the Javadoc comment for a method and the class it belongs to.
  *
@@ -8,7 +10,9 @@ package de.fraunhofer.iem.swan.data;
  */
 public class Javadoc {
 
+    @JsonProperty("method")
     private String methodComment;
+    @JsonProperty("class")
     private String classComment;
 
     public Javadoc() {

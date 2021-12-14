@@ -1,8 +1,7 @@
 package de.fraunhofer.iem.swan.features.doc.nlp;
 
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.io.dataset.Parser;
-
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import edu.stanford.nlp.util.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
@@ -15,7 +14,6 @@ import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreproc
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.nd4j.common.io.ClassPathResource;
-import org.nd4j.linalg.cpu.nativecpu.NDArray;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,15 +40,15 @@ public class DocCommentVector {
 
         //Export method and class doc comments
 
-        Parser parser = new Parser();
-        parser.parse("/swan-dataset.json");
+        SrmList srmListUtils = new SrmList();
+        //parser.parse("/swan-dataset.json");
 
 //        for(Method method: parser.getMethods()){
 //            if(method.getJavadoc().getMethodComment().length()>0)
 //            System.out.println(NLPUtils.cleanText(method.getJavadoc().getMergedComments()));
 //        }
 
-        for(Method method: parser.getMethods()){
+        for(Method method: srmListUtils.getMethods()){
             List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
             if(method.getJavadoc().getMethodComment().length()>0 && words.size()>1)
                 System.out.println(NLPUtils.cleanFirstSentence(method.getJavadoc().getMethodComment())+" "+NLPUtils.cleanFirstSentence(method.getJavadoc().getClassComment()));

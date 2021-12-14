@@ -1,9 +1,8 @@
 package de.fraunhofer.iem.swan.training;
 
-import de.fraunhofer.iem.swan.features.code.soot.Loader;
-import de.fraunhofer.iem.swan.io.dataset.Parser;
+import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.util.Util;
-import de.fraunhofer.iem.swan.io.dataset.Writer;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import org.apache.commons.io.FileUtils;
@@ -44,23 +43,19 @@ public class TrainingSetUpdater {
         uniqueMethod = new HashSet<>();
 
         //Load original training file methods
-        Parser parser = new Parser();
-        parser.parse(ORIGINAL_TRAINING_FILE);
+        SrmList srmListUtils = new SrmList();
+        //parser.parse(ORIGINAL_TRAINING_FILE);
 
-        for (Method m : parser.methods())
-            uniqueMethod.add(m.getClassName() + "." + m.getMethodName());
+        for (Method m : srmListUtils.getMethods())
+            uniqueMethod.add(m.getClassName() + "." + m.getName());
 
         //Add training methods to master list
-        Set<Method> trainingMethods = new HashSet<>(parser.getMethods());
+        Set<Method> trainingMethods = new HashSet<>(srmListUtils.getMethods());
 
         //Load methods from text file: extracted from thecodemaster.com and find-sec-bugs plugin
         loadClassesAndMethods("/swan/swan_core/src/main/resources/swandoc-new-training-data.txt");
 
         trainingMethods.addAll(extractMethodData(classes, method));
-
-        //Export new training file
-        Writer writer = new Writer();
-        writer.outputJSONFile(trainingMethods, NEW_TRAINING_FILE);
     }
 
     public static void extractManualList() throws IOException {
@@ -73,20 +68,16 @@ public class TrainingSetUpdater {
         uniqueMethod = new HashSet<>();
 
         //Load original training file methods
-        Parser parser = new Parser();
-        parser.parse(NEW_TRAINING_FILE);
+        SrmList srmListUtils = new SrmList();
+        //parser.parse(NEW_TRAINING_FILE);
 
         Set<Method> trainingMethods = new HashSet<>();
 
-        for (Method m : parser.methods()){
+        for (Method m : srmListUtils.getMethods()){
             if(m.getJavaSignature().contains("org.owasp.esapi.reference.DefaultEncoder") &&
             m.getDiscovery().contentEquals("find-sec-bugs"))
                 trainingMethods.add(m);
         }
-
-        //Export new training file
-        Writer writer = new Writer();
-        writer.outputJSONFile(trainingMethods, MANUAL_TRAINING_FILE);
     }
 
     /**

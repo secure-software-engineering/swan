@@ -1,5 +1,7 @@
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Categories for the learner.
  *
@@ -38,6 +40,11 @@ public enum Category {
         return cwe;
     }
 
+    @JsonValue
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return id;
@@ -52,8 +59,8 @@ public enum Category {
 
     public static Category fromText(String text) {
 
-        for(Category cat: Category.values()){
-            if(cat.name().equalsIgnoreCase(text)){
+        for (Category cat : Category.values()) {
+            if (cat.name().equalsIgnoreCase(text)) {
                 return cat;
             }
         }

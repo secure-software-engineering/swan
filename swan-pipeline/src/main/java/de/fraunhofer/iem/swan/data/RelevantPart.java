@@ -4,38 +4,41 @@ package de.fraunhofer.iem.swan.data;
  * POJO for the Relevant parts of a method
  *
  * @author Goran Piskachev
- *
  */
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RelevantPart {
-  private boolean returnValue = false;
-  private List<Integer> parameterIndeces = new ArrayList<Integer>();
 
-  public RelevantPart(boolean rT, List<Integer> parInd) {
-    setReturnValue(rT);
-    setParameterIndeces(parInd);
-  }
+    @JsonProperty("return")
+    private boolean returnValue = false;
+    private List<Integer> parameters = new ArrayList<Integer>();
 
-  public RelevantPart() {
+    public RelevantPart(boolean rT, List<Integer> parInd) {
+        setReturnValue(rT);
+        setParameters(parInd);
+    }
 
-  }
+    public RelevantPart() {
 
-  public List<Integer> getParameterIndeces() {
-    return parameterIndeces;
-  }
+    }
 
-  public void setParameterIndeces(List<Integer> parameterIndeces) {
-    this.parameterIndeces = parameterIndeces;
-  }
+    public List<Integer> getParameters() {
+        return parameters;
+    }
 
-  public boolean getReturnValue() {
-    return returnValue;
-  }
+    public void setParameters(List<Integer> parameters) {
+        this.parameters = parameters;
+    }
 
-  public void setReturnValue(boolean returnValue) {
-    this.returnValue = returnValue;
-  }
+    public boolean getReturnValue() {
+        return returnValue;
+    }
+
+    public void setReturnValue(boolean returnValue) {
+        this.returnValue = returnValue;
+    }
 }
