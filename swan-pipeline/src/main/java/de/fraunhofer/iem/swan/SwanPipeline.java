@@ -135,7 +135,10 @@ public class SwanPipeline {
         for (int x = 0; x < 10; x++)
             predictions.put(Integer.toString(x), new HashSet<>());
 
-        runClassEvaluation(options.getSrmClasses(), feature, learnerMode );
+        //Load methods from the test set
+        logger.info("Loading test JARs in {}", options.getTestDataDir());
+        SourceFileLoader testDataset = new SourceFileLoader(options.getTestDataDir());
+        testDataset.load(dataset.getMethods());
 
         // Save data from last classification.
         loader.resetMethods();

@@ -133,15 +133,15 @@ public class TrainingSetUpdater {
             methodSet.put(t.substring(0, t.indexOf("|")), t.substring(t.indexOf("|") + 1));
         }
 
-        Loader loader = new Loader(classpath);
-        loader.loadMethodsFromTestLib(testClasses);
+        SourceFileLoader sourceFileLoader = new SourceFileLoader(classpath);
+        sourceFileLoader.loadMethodsFromTestLib();
 
-        Util.createSubclassAnnotations(loader.methods(), classpath);
+        Util.createSubclassAnnotations(sourceFileLoader.getMethods(), classpath);
 
         HashSet<Method> trainingMethods = new HashSet<>();
 
 
-        for (Method m : loader.methods()) {
+        for (Method m : sourceFileLoader.getMethods()) {
 
             String sig = m.getClassName() + "." + m.getMethodName();
 
