@@ -2,15 +2,11 @@ package de.fraunhofer.iem.swan;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.InstancesHandler;
-import de.fraunhofer.iem.swan.features.code.FeatureHandler;
-import de.fraunhofer.iem.swan.features.code.soot.Loader;
-import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
-import de.fraunhofer.iem.swan.io.dataset.Parser;
-import de.fraunhofer.iem.swan.io.dataset.Writer;
-import de.fraunhofer.iem.swan.model.Learner;
+import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
+import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -64,8 +60,9 @@ public class SwanPipeline {
         SourceFileLoader testDataset = new SourceFileLoader(options.getTestDataDir());
         testDataset.load(dataset.getMethods());
 
-        // Save data from last classification.
-        loader.resetMethods();
+        //Initialize and populate features
+        FeaturesHandler featuresHandler = new FeaturesHandler(dataset, testDataset, options);
+        featuresHandler.createFeatures();
 
         // Cache the methods from the second test set.
         loader.pruneNone();
