@@ -4,8 +4,8 @@ package de.fraunhofer.iem.swan.training;
  * @author Oshando Johnson on 23.06.20
  */
 
-import de.fraunhofer.iem.swan.io.dataset.Parser;
 import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.doc.DocletExecutor;
 import edu.stanford.nlp.util.StringUtils;
 import org.apache.commons.io.FileUtils;
@@ -30,15 +30,15 @@ public class Training {
 
     public static void main(String[] args) throws IOException {
         //Step 1: Export signatures for training
-        Parser parser = new Parser();
-        parser.parse("/swan/core/src/main/resources/input/Dataset/data-set.json");
-        Set<Method> methodSet = parser.methods();
+        SrmList srmListUtils = new SrmList();
+        //parser.parse("/swan/core/src/main/resources/input/Dataset/data-set.json");
+        Set<Method> methodSet = srmListUtils.getMethods();
 
         Set<String> uniqueClasses = new HashSet<>();
 
-        Parser p2 = new Parser();
-        p2.parse("/swan/core/src/main/resources/input/Dataset/swan-dataset.json");
-        Set<Method> m2 = p2.methods();
+        SrmList p2 = new SrmList();
+        //p2.parse("/swan/core/src/main/resources/input/Dataset/swan-dataset.json");
+        Set<Method> m2 = p2.getMethods();
         System.out.println(m2.size());
 
         Set<String> c2 = new HashSet<>();
@@ -74,9 +74,9 @@ public class Training {
 
 
         //Step 1: Export signatures for training
-        Parser parser = new Parser();
-        parser.parse("/swan/src/main/resources/training-set-original.json");
-        Set<Method> methodSet = parser.methods();
+        SrmList srmListUtils = new SrmList();
+        //parser.parse("/swan/src/main/resources/training-set-original.json");
+        Set<Method> methodSet = srmListUtils.getMethods();
 
         HashMap<String, Method> methodMap = new HashMap<String, Method>();
 

@@ -150,8 +150,9 @@ public class SwanPipeline {
         runClassEvaluation(options.getCweClasses(), feature, learnerMode);
 
         String outputFile = options.getOutputDir() + File.separator + "swan-srm-cwe-list.json";
-        logger.info("Writing results to {}", outputFile);
-        writer.printResultsJSON(loader.methods(), outputFile);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(new File(outputFile), dataset);
+        logger.info("SRM/CWE list exported to {}", outputFile);
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
         logger.info("Total runtime {} mins", analysisTime / 60000);

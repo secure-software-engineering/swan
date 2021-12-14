@@ -1,7 +1,6 @@
 package de.fraunhofer.iem.swan.training;
 
-import de.fraunhofer.iem.swan.io.dataset.Parser;
-import de.fraunhofer.iem.swan.io.dataset.Writer;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.io.doc.Javadoc;
 import de.fraunhofer.iem.swan.io.doc.JavadocToXmlConverter;
@@ -45,14 +44,14 @@ public class TrainingSetGenerator {
             PHASE 3: Use SWAN parser to load the original training file with methods
             that do not yet have class and method Javadoc comments.
          */
-        Parser parser = new Parser();
-        parser.parse(ORIGINAL_TRAINING_SET);
+        SrmList srmListUtils = new SrmList();
+        //parser.parse(ORIGINAL_TRAINING_SET);
 
-        Parser manualParser = new Parser();
-        manualParser.parse(ORIGINAL_MANUAL_TRAINING_SET);
+        SrmList manualSrmListUtils = new SrmList();
+        //manualParser.parse(ORIGINAL_MANUAL_TRAINING_SET);
 
-        Set<Method> methods = new HashSet<>(parser.methods());
-        methods.addAll(manualParser.getMethods());
+        Set<Method> methods = new HashSet<>(srmListUtils.getMethods());
+        methods.addAll(manualSrmListUtils.getMethods());
 
         HashMap<String, Method> trainingMethods = new HashMap<>();
 
@@ -90,7 +89,5 @@ public class TrainingSetGenerator {
         /*
             PHASE 4: Export updated training file that includes method and class comments
          */
-        Writer writer = new Writer();
-        writer.outputJSONFile(new HashSet<>(trainingMethods.values()), "Main.TRAINING_SET");
     }
 }
