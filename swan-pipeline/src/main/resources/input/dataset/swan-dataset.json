@@ -9,7 +9,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code Method} object that reflects the specified declared method of the class or interface represented by this {@code Class} object. The {@code name} parameter is a {@code String} that specifies the simple name of the desired method, and the {@code parameterTypes} parameter is an array of {@code Class} objects that identify the method's formal parameter types, in declared order. If more than one method with the same parameter types is declared in a class, and one of these methods has a return type that is more specific than any of the others, that method is returned; otherwise one of the methods is chosen arbitrarily. If the name is \"\"or \"\" a {@code NoSuchMethodException} is raised. If this {@code Class} object represents an array type, then this method does not find the {@code clone()} method.",
@@ -39,7 +38,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -70,7 +68,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Attempts to establish a connection to the given database URL. The DriverManager attempts to select an appropriate driver from the set of registered JDBC drivers. Note: If the {@code user} or {@code password} property are also specified as part of the {@code url}, it is implementation-defined as to which value will take precedence. For maximum portability, an application should only specify a property once.",
@@ -101,7 +98,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getPathInfo() on the wrapped request object.",
@@ -128,7 +124,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -163,7 +158,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -195,7 +189,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -222,7 +215,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -254,7 +246,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a method entry. This is a convenience method that can be used to log entry to a method. A LogRecord with message \"ENTRY\", log level FINER, and the given sourceMethod and sourceClass is logged.",
@@ -282,7 +273,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/jca\/cci\/connection\/SingleConnectionFactory.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Create a new SingleConnectionFactory for bean-style usage.",
@@ -309,7 +299,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -343,7 +332,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -380,7 +368,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -416,7 +403,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -450,7 +436,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -479,7 +464,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Gets the system property indicated by the specified key. First, if there is a security manager, its checkPropertyAccess method is called with the key as its argument. If there is no current set of system properties, a set of system properties is first created and initialized in the same manner as for the getProperties method.",
@@ -509,7 +493,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -546,7 +529,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -586,7 +568,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This method encodes for JavaScript strings contained within HTML script blocks. It is NOT safe for use in script attributes (such as onclick). The caller must provide the surrounding quotation characters. This method performs the same encode as {@link #forJavaScript(String)} with the exception that \" and ' are encoded as \\\" and \\' respectively. Unless you are interested in saving a few bytes of output or are writing a framework on top of this library, it is recommend that you use {@link #forJavaScript(String)} over this method. Example JSP Usage:     \n        var data = \"\";",
@@ -615,7 +596,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -651,7 +631,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getParameterNames() on the wrapped request object.",
@@ -678,7 +657,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -709,7 +687,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log an INFO message. If the logger is currently enabled for the INFO message level then the given message is forwarded to all the registered output Handler objects.",
@@ -738,7 +715,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Build the query string from available parameters that have not already been applied as template params. The names and values of parameters are URL encoded.",
@@ -770,7 +746,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/beans\/factory\/support\/MethodOverrides.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Return whether the set of method overrides is empty.",
@@ -797,7 +772,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -832,7 +806,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "See STOMP Spec 1.2: \"Value Encoding\".",
@@ -861,7 +834,6 @@
       },
       "link": "https:\/\/github.com\/balzaczyy\/pebble-clone\/blob\/master\/src\/main\/java\/net\/sourceforge\/pebble\/event\/AuditListener.java",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Called when a blog entry has been unpublished.",
@@ -890,7 +862,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -923,7 +894,6 @@
         "sink",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -953,7 +923,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This method encodes for HTML text attributes. Example JSP Usage      \n Encoding Table Input Result {@code &} {@code &} {@code }) is not required for attributes. Numeric encoding is used for double-quote character ({@code \"}) as it shorter than the also valid {@code \"}. Carriage return (U+0D), line-feed (U+0A), horizontal tab (U+09) and space (U+20) are valid in quoted attributes and in block in an unescaped form. Surrogate pairs are passed through only if valid. Characters that are not valid according to the XML specification are replaced by a space character as they could lead to parsing errors. In particular only {@code #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]} are considered valid.",
@@ -980,7 +949,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/4.3.9.RELEASE\/javadoc-api\/org\/springframework\/jca\/cci\/connection\/ConnectionFactoryUtils.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -1007,7 +975,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1042,7 +1009,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Turn special characters into HTML character references. Handles complete character set defined in HTML 4.01 recommendation. Escapes all special characters to their corresponding numeric reference in hex format (&#xHex;). Reference: http:\/\/www.w3.org\/TR\/html4\/sgml\/entities.html",
@@ -1071,7 +1037,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1102,7 +1067,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRemoteAddr() on the wrapped request object.",
@@ -1129,7 +1093,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Writes the specified message to a servlet log file, usually an event log. The name and type of the servlet log file is  specific to the servlet container.",
@@ -1160,7 +1123,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -1193,7 +1155,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -1230,7 +1191,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRequestedSessionId() on the wrapped request object.",
@@ -1257,7 +1217,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1294,7 +1253,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1330,7 +1288,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code String} value for an unescaped CSV column. If the value is enclosed in double quotes, and contains a comma, newline or double quote, then quotes are removed. Any double quote escaped characters (a pair of double quotes) are unescaped to just one double quote. If the value is not enclosed in double quotes, or is and does not contain a comma, newline or double quote, then the String value is returned unchanged. see Wikipedia and RFC 4180.",
@@ -1359,7 +1316,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1395,7 +1351,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encoder for XML and XHTML text content. See {@link #forHtmlContent(String)} for description of encoding and context.",
@@ -1424,7 +1379,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in an XML element. The implementation should follow the XML Encoding Standard from the W3C. The use of a real XML parser is strongly encouraged. However, in the hopefully rare case that you need to make sure that data is safe for inclusion in an XML document and cannot use a parse, this method provides a safe mechanism to do so.",
@@ -1453,7 +1407,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the request method.",
@@ -1480,7 +1433,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Turn special characters into HTML character references. Handles complete character set defined in HTML 4.01 recommendation. Escapes all special characters to their corresponding numeric reference in decimal format (&#Decimal;). Reference: http:\/\/www.w3.org\/TR\/html4\/sgml\/entities.html",
@@ -1509,7 +1461,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -1540,7 +1491,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for insertion inside a data value in a Visual Basic script. Putting user data directly inside a script is quite dangerous. Great care must be taken to prevent putting user data directly into script code itself, as no amount of encoding will prevent attacks there. This method is not recommended as VBScript is only supported by Internet Explorer",
@@ -1569,7 +1519,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Parse a text String to produce a T.",
@@ -1601,7 +1550,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the name of the cookie. The name cannot be changed after creation.",
@@ -1628,7 +1576,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -1661,7 +1608,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -1694,7 +1640,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1725,7 +1670,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for (X)HTML text content and text attributes. Since this method encodes for both contexts, it may be slightly less efficient to use this method over the methods targeted towards the specific contexts ({@link #forHtmlAttribute(String)} and {@link #forHtmlContent(String)}. In general this method should be preferred unless you are really concerned with saving a few bytes or are writing a framework that utilizes this package. Example JSP Usage      \n\n     \" \/>\n Encoding Table Input Result {@code &} {@code &} {@code } {@code >} {@code \"} {@code \"} {@code '} {@code '} Additional Notes The encoding of the greater-than sign ({@code >}) is not strictly required, but is included for maximum compatibility. Numeric encoding is used for double-quote character ({@code \"}) as it shorter than the also valid {@code \"}. Carriage return (U+0D), line-feed (U+0A), horizontal tab (U+09) and space (U+20) are valid in quoted attributes and in block in an unescaped form. Surrogate pairs are passed through only if valid. Characters that are not valid according to the XML specification are replaced by a space character as they could lead to parsing errors. In particular only {@code #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]} are considered valid.",
@@ -1754,7 +1698,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a FINER message. If the logger is currently enabled for the FINER message level then the given message is forwarded to all the registered output Handler objects.",
@@ -1783,7 +1726,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Dumps the tree of the current node to standard output.",
@@ -1815,7 +1757,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1852,7 +1793,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Performs percent-encoding for a component of a URI, such as a query parameter name or value, path or query-string. In particular this method insures that special characters in the component do not get interpreted as part of another component.      ?query#fragment\">\n\n     &order=1#top\">\n Encoding Table The following characters are not encoded:  U+20:                           - .   0 1 2 3 4 5 6 7 8 9\n U+40: @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z         _\n U+60:   a b c d e f g h i j k l m n o p q r s t u v w x y z       ~\n Encoding Notes Unlike {@link #forUri(String)} this method is safe to be used in most containing contexts, including: HTML\/XML, CSS, and JavaScript contexts. URL encoding is an encoding for bytes, not unicode. The input string is thus first encoded as a sequence of UTF-8 byte. The bytes are then encoded as {@code %xx} where {@code xx} is the two-digit hexidecimal representation of the byte. (The implementation does this as one step for performance.) Surrogate pairs are first decoded to a Unicode code point before encoding as UTF-8. Invalid characters (e.g. partial or invalid surrogate pairs), are replaced with a hyphen ({@code -}) character.",
@@ -1881,7 +1821,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -1918,7 +1857,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -1950,7 +1888,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/configurers\/UrlAuthorizationConfigurer.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Creates a String for specifying a user requires a role.",
@@ -1981,7 +1918,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -2016,7 +1952,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the selected text from the text that is presented by this text component.",
@@ -2043,7 +1978,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the comment describing the purpose of this cookie, or null if the cookie has no comment.",
@@ -2070,7 +2004,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -2101,7 +2034,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -2126,7 +2058,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -2153,7 +2084,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Construct an InternetAddress given the address and personal name. The address is assumed to be a syntactically valid RFC822 address.",
@@ -2183,7 +2113,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -2215,7 +2144,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Un-escape an HTML escaped string.",
@@ -2246,7 +2174,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Print a String and then terminate the line. This method behaves as though it invokes {@link #print(String)} and then {@link #println()}.",
@@ -2277,7 +2204,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078",
         "CWE079"
@@ -2311,7 +2237,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -2346,7 +2271,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/WebServer.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Listens for client requests until stopped. Call {@link #start()} to invoke this method, and {@link #shutdown()} to break out of it.",
@@ -2373,7 +2297,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -2403,7 +2326,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -2434,7 +2356,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "loadFiles.",
@@ -2465,7 +2386,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the text that is presented by this text component. By default, this is an empty string.",
@@ -2492,7 +2412,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a String containing the value of the named initialization parameter, or null if the parameter does not exist. See {@link ServletConfig#getInitParameter}. This method is supplied for convenience. It gets the value of the named parameter from the servlet's ServletConfig object.",
@@ -2521,7 +2440,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -2558,7 +2476,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -2588,7 +2505,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/jca\/work\/DelegatingWork.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Delegates execution to the underlying Runnable.",
@@ -2615,7 +2531,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for CSS strings. The context must be surrounded by quotation characters. It is safe for use in both style blocks and attributes in HTML. Example JSP Usage      ');\">\n\n     \n         background: url('');\n     \n Encoding Notes The following characters are encoded using hexidecimal encodings: {@code U+0000} - {@code U+001f}, {@code \"}, {@code '}, {@code \\}, {@code }, {@code U+007f}, line separator ({@code U+2028}), paragraph separator ({@code U+2029}). Any character requiring encoding is encoded as {@code \\xxx} where {@code xxx} is the shortest hexidecimal representation of its Unicode code point (after decoding surrogate pairs if necessary). This encoding is never zero padded. Thus, for example, the tab character is encoded as {@code \\9}, not {@code \\0009}. The encoder looks ahead 1 character in the input and appends a space to an encoding to avoid the next character becoming part of the hexidecimal encoded sequence. Thus \u201C{@code '1}\u201D is encoded as \u201C{@code \\27 1}\u201D, and not as \u201C{@code \\271}\u201D. If a space is not necessary, it is not included, thus \u201C{@code 'x}\u201D is encoded as \u201C{@code \\27x}\u201D, and not as \u201C{@code \\27 x}\u201D. Surrogate pairs are passed through only if valid. Invalid surrogate pairs are replaced by an underscore (_). Unicode \"non-characters\" are replaced by underscores (_).",
@@ -2642,7 +2557,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/messaging\/MessageSecurityMetadataSourceRegistry.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -2673,7 +2587,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a FINEST message. If the logger is currently enabled for the FINEST message level then the given message is forwarded to all the registered output Handler objects.",
@@ -2702,7 +2615,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code Field} object that reflects the specified public member field of the class or interface represented by this {@code Class} object. The {@code name} parameter is a {@code String} specifying the simple name of the desired field. The field to be reflected is determined by the algorithm that follows. Let C be the class or interface represented by this object: If C declares a public field with the name specified, that is the field to be reflected. If no field was found in step 1 above, this algorithm is applied recursively to each direct superinterface of C. The direct superinterfaces are searched in the order they were declared. If no field was found in steps 1 and 2 above, and C has a superclass S, then this algorithm is invoked recursively upon S. If C has no superclass, then a {@code NoSuchFieldException} is thrown. If this {@code Class} object represents an array type, then this method does not find the {@code length} field of the array type.",
@@ -2731,7 +2643,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -2766,7 +2677,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306"
       ],
@@ -2795,7 +2705,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -2832,7 +2741,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a UserCredentials instance by exchanging an OAuth2 authorization code for tokens.",
@@ -2864,7 +2772,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the names of the servlet's initialization parameters as an Enumeration of String objects, or an empty Enumeration if the servlet has no initialization parameters. See {@link ServletConfig#getInitParameterNames}. This method is supplied for convenience. It gets the parameter names from the servlet's ServletConfig object.",
@@ -2891,7 +2798,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -2920,7 +2826,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -2947,7 +2852,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -2983,7 +2887,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -3014,7 +2917,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/test\/context\/MergedContextConfiguration.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Generate a null-safe {@link String} representation of the supplied {@link ContextLoader} based solely on the fully qualified name of the loader or \"null\" if the supplied loaded is {@code null}.",
@@ -3043,7 +2945,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Replaces the entry for a key only if currently mapped to a given value. This is equivalent to  {@code\n if (map.containsKey(key) &amp;&amp; Objects.equals(map.get(key), oldValue)) {\n   map.put(key, newValue);\n   return true;\n } else\n   return false;\n } except that the action is performed atomically.",
@@ -3081,7 +2982,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Switch client filtering on\/off.",
@@ -3112,7 +3012,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Given an attribute value string formated according to the rules specified in RFC 2253, returns the unformated value. Escapes and quotes are stripped away, and hex-encoded UTF-8 is converted to equivalent UTF-16 characters. Returns a string value as a String, and a binary value as a byte array. Legal and illegal values are defined in RFC 2253. This method is generous in accepting the values and does not catch all illegal values. Therefore, passing in an illegal value might not necessarily trigger an IllegalArgumentException.",
@@ -3141,7 +3040,6 @@
       },
       "link": "http:\/\/docs.oracle.com\/javaee\/7\/api\/javax\/mail\/internet\/MimeMultipart.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3170,7 +3068,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/WebServer.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3199,7 +3096,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -3228,7 +3124,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/web\/socket\/adapter\/jetty\/JettyWebSocketSession.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Return whether the connection is still open.",
@@ -3255,7 +3150,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3286,7 +3180,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -3325,7 +3218,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encoder for XML and XHTML attribute content. See {@link #forHtmlAttribute(String)} for description of encoding and context.",
@@ -3352,7 +3244,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/SecurityConfigurerAdapter.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3377,7 +3268,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/web\/client\/AsyncRestTemplate.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3406,7 +3296,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/SecurityNamespaceHandler.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3433,7 +3322,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -3465,7 +3353,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3492,7 +3379,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3521,7 +3407,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/ServletConnection.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Performs the task.",
@@ -3548,7 +3433,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes data for an XML CDATA section. On the chance that the input contains a terminating {@code \"]]>\"}, it will be replaced by {@code \"]]>]]>\"}.\n As with all XML contexts, characters that are invalid according to the\n XML specification will be replaced by a space character.   Caller must\n provide the CDATA section boundaries.\n\n \n     &lt;xml-data&gt;&lt;![CDATA[&lt;%=Encode.forCDATA(...)%&gt;]]&gt;&lt;\/xml-data&gt;",
@@ -3577,7 +3461,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Gets the contents of this URL. This method is a shorthand for:      openConnection().getContent()",
@@ -3604,7 +3487,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -3635,7 +3517,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getLocalName() on the wrapped request object.",
@@ -3663,7 +3544,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -3704,7 +3584,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -3733,7 +3612,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a FINE message. If the logger is currently enabled for the FINE message level then the given message is forwarded to all the registered output Handler objects.",
@@ -3762,7 +3640,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Performs a final update on the digest using the specified array of bytes, then completes the digest computation. That is, this method first calls {@link #update(byte[]) update(input)}, passing the input array to the {@code update} method, then calls {@link #digest() digest()}.",
@@ -3789,7 +3666,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/configurers\/ExpressionUrlAuthorizationConfigurer.AuthorizedUrl.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -3819,7 +3695,6 @@
         "sink",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Finds a resource with a given name. The rules for searching resources associated with a given class are implemented by the defining {@linkplain ClassLoader class loader} of the class. This method delegates to this object's class loader. If this object was loaded by the bootstrap class loader, the method delegates to {@link ClassLoader#getSystemResourceAsStream}. Before delegation, an absolute resource name is constructed from the given resource name using this algorithm: If the {@code name} begins with a {@code '\/'} ('\\u002f'), then the absolute name of the resource is the portion of the {@code name} following the {@code '\/'}. Otherwise, the absolute name is of the following form: {@code modified_package_name\/name} Where the {@code modified_package_name} is the package name of this object with {@code '\/'} substituted for {@code '.'} ('\\u002e').",
@@ -3848,7 +3723,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE306",
@@ -3883,7 +3757,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code Method} object that reflects the specified public member method of the class or interface represented by this {@code Class} object. The {@code name} parameter is a {@code String} specifying the simple name of the desired method. The {@code parameterTypes} parameter is an array of {@code Class} objects that identify the method's formal parameter types, in declared order. If {@code parameterTypes} is {@code null}, it is treated as if it were an empty array. If the {@code name} is \"{@code }\" or \"{@code }\" a {@code NoSuchMethodException} is raised. Otherwise, the method to be reflected is determined by the algorithm that follows. Let C be the class or interface represented by this object: C is searched for a matching method, as defined below. If a matching method is found, it is reflected. If no matching method is found by step 1 then: If C is a class other than {@code Object}, then this algorithm is invoked recursively on the superclass of C. If C is the class {@code Object}, or if C is an interface, then the superinterfaces of C (if any) are searched for a matching method. If any such method is found, it is reflected. To find a matching method in a class or interface C: If C declares exactly one public method with the specified name and exactly the same formal parameter types, that is the method reflected. If more than one such method is found in C, and one of these methods has a return type that is more specific than any of the others, that method is reflected; otherwise one of the methods is chosen arbitrarily. Note that there may be more than one matching method in a class because while the Java language forbids a class to declare multiple methods with the same signature but different return types, the Java virtual machine does not. This increased flexibility in the virtual machine can be used to implement various language features. For example, covariant returns can be implemented with {@linkplain java.lang.reflect.Method#isBridge bridge methods}; the bridge method and the method being overridden would have the same signature but different return types. If this {@code Class} object represents an array type, then this method does not find the {@code clone()} method. Static methods declared in superinterfaces of the class or interface represented by this {@code Class} object are not considered members of the class or interface.",
@@ -3913,7 +3786,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -3949,7 +3821,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for CSS URL contexts. The context must be surrounded by {@code \"url(\"} and {@code \")\"}. It is safe for use in both style blocks and attributes in HTML. Note: this does not do any checking on the quality or safety of the URL itself. The caller should insure that the URL is safe for embedding (e.g. input validation) by other means. Example JSP Usage      );\">\n\n     \n         background: url();\n     \n Encoding Notes The following characters are encoded using hexidecimal encodings: {@code U+0000} - {@code U+001f}, {@code \"}, {@code '}, {@code \\}, {@code }, {@code U+007f}, line separator ({@code U+2028}), paragraph separator ({@code U+2029}). Any character requiring encoding is encoded as {@code \\xxx} where {@code xxx} is the shortest hexidecimal representation of its Unicode code point (after decoding surrogate pairs if necessary). This encoding is never zero padded. Thus, for example, the tab character is encoded as {@code \\9}, not {@code \\0009}. The encoder looks ahead 1 character in the input and appends a space to an encoding to avoid the next character becoming part of the hexidecimal encoded sequence. Thus \u201C{@code '1}\u201D is encoded as \u201C{@code \\27 1}\u201D, and not as \u201C{@code \\271}\u201D. If a space is not necessary, it is not included, thus \u201C{@code 'x}\u201D is encoded as \u201C{@code \\27x}\u201D, and not as \u201C{@code \\27 x}\u201D. Surrogate pairs are passed through only if valid. Invalid surrogate pairs are replaced by an underscore (_). Unicode \"non-characters\" are replaced by underscores (_).",
@@ -3978,7 +3849,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306"
       ],
@@ -4007,7 +3877,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -4038,7 +3907,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/HttpServletRequestImpl.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -4067,7 +3935,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -4096,7 +3963,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -4132,7 +3998,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -4173,7 +4038,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -4208,7 +4072,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -4241,7 +4104,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -4272,7 +4134,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/expression\/spel\/ast\/LongLiteral.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Check whether a node can be compiled to bytecode. The reasoning in each node may be different but will typically involve checking whether the exit type descriptor of the node is known and any relevant child nodes are compilable.",
@@ -4297,7 +4158,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/builders\/HttpSecurity.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -4324,7 +4184,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Constructs a cookie with the specified name and value. The name must conform to RFC 2109. However, vendors may provide a configuration option that allows cookie names conforming to the original Netscape Cookie Specification to be accepted. The name of a cookie cannot be changed once the cookie has been created. The value can be anything the server chooses to send. Its value is probably of interest only to the server. The cookie's value can be changed after creation with the setValue method. By default, cookies are created according to the Netscape cookie specification. The version can be changed with the setVersion method.",
@@ -4354,7 +4213,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -4393,7 +4251,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -4429,7 +4286,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -4464,7 +4320,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Prints a long integer. The string produced by {@link java.lang.String#valueOf(long)} is translated into bytes according to the platform's default character encoding, and these bytes are written in exactly the manner of the {@link #write(int)} method.",
@@ -4493,7 +4348,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -4522,7 +4376,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/web\/socket\/BinaryMessage.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Create a new binary WebSocket message with the given byte[] payload.",
@@ -4551,7 +4404,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Construct an XPath object. (Needs review -sc) This method initializes an XPathParser\/ Compiler and compiles the expression.",
@@ -4584,7 +4436,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -4623,7 +4474,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "When using ProxyPass, requestCycle().getHttpServletRequest(). getRemoteAddr() returns the IP of the machine forwarding the request. In order to maintain the clients ip address, the server places it in the X-Forwarded-For Header. Proxies may also mask the original client IP with tokens like \"hidden\" or \"unknown\". If so, the last proxy ip address is returned.",
@@ -4652,7 +4502,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -4683,7 +4532,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -4720,7 +4568,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -4751,7 +4598,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -4785,7 +4631,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -4818,7 +4663,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -4851,7 +4695,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -4886,7 +4729,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Performs percent-encoding of a URL according to RFC 3986. The provided URL is assumed to a valid URL. This method does not do any checking on the quality or safety of the URL itself. In many applications it may be better to use {@link java.net.URI} instead. Note: this is a particularly dangerous context to put untrusted content in, as for example a \"javascript:\" URL provided by a malicious user would be \"properly\" escaped, and still execute. Encoding Table The following characters are not encoded:  U+20:   !   # $   & ' ( ) * + , - . \/ 0 1 2 3 4 5 6 7 8 9 : ;   =   ?\n U+40: @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [   ]   _\n U+60:   a b c d e f g h i j k l m n o p q r s t u v w x y z       ~\n Encoding Notes The single-quote character({@code '}) is not encoded. This encoding is not intended to be used standalone. The output should be encoded to the target context. For example: {@code ...}. (Note, the single-quote character ({@code '}) is not encoded.) URL encoding is an encoding for bytes, not unicode. The input string is thus first encoded as a sequence of UTF-8 byte. The bytes are then encoded as {@code %xx} where {@code xx} is the two-digit hexidecimal representation of the byte. (The implementation does this as one step for performance.) Surrogate pairs are first decoded to a Unicode code point before encoding as UTF-8. Invalid characters (e.g. partial or invalid surrogate pairs), are replaced with a hyphen ({@code -}) character.",
@@ -4916,7 +4758,6 @@
         "auth-no-change",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -4950,7 +4791,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getHeader(String name) on the wrapped request object.",
@@ -4979,7 +4819,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getParameterValues(String name) on the wrapped request object.",
@@ -5006,7 +4845,6 @@
       },
       "link": "https:\/\/static.javadoc.io\/org.owasp.esapi\/esapi\/2.0.1\/org\/owasp\/esapi\/reference\/validation\/CreditCardValidationRule.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5035,7 +4873,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5064,7 +4901,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Loads all of the properties represented by the XML document on the specified input stream into this properties table. The XML document must have the following DOCTYPE declaration:  \n Furthermore, the document must satisfy the properties DTD described above. An implementation is required to read XML documents that use the \"{@code UTF-8}\" or \"{@code UTF-16}\" encoding. An implementation may support additional encodings. The specified stream is closed after this method returns.",
@@ -5093,7 +4929,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getCharacterEncoding() on the wrapped request object.",
@@ -5118,7 +4953,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5150,7 +4984,6 @@
         "auth-no-change",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -5179,7 +5012,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -5219,7 +5051,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -5251,7 +5082,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Helper method to write out the index to disk.",
@@ -5276,7 +5106,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/XmlRpcServlet.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5305,7 +5134,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Parse a text String to produce a T.",
@@ -5335,7 +5163,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/2.0.0\/api\/org\/springframework\/beans\/factory\/support\/DisposableBeanAdapter.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Serializes a copy of the state of this class, filtering out non-serializable BeanPostProcessors.",
@@ -5363,7 +5190,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -5402,7 +5228,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a CONFIG message. If the logger is currently enabled for the CONFIG message level then the given message is forwarded to all the registered output Handler objects.",
@@ -5431,7 +5256,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -5460,7 +5284,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -5495,7 +5318,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -5524,7 +5346,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Appends the toString that would be produced by {@code Object} if a class did not override toString itself. {@code null} will throw a NullPointerException for either of the two parameters.  ObjectUtils.identityToString(builder, \"\")            = builder.append(\"java.lang.String@1e23\"\n ObjectUtils.identityToString(builder, Boolean.TRUE)  = builder.append(\"java.lang.Boolean@7fa\"\n ObjectUtils.identityToString(builder, Boolean.TRUE)  = builder.append(\"java.lang.Boolean@7fa\")",
@@ -5554,7 +5375,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Dump an array of bytes to an OutputStream. The output is formatted for human inspection, with a hexadecimal offset followed by the hexadecimal values of the next 16 bytes of data and the printable ASCII characters (if any) that those bytes represent printed per each line of output. The offset argument specifies the start offset of the data array within a larger entity like a file or an incoming stream. For example, if the data array contains the third kibibyte of a file, then the offset argument should be set to 2048. The offset value printed at the beginning of each line indicates where in that larger entity the first byte on that line is located. All bytes between the given index (inclusive) and the end of the data array are dumped.",
@@ -5589,7 +5409,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -5620,7 +5439,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -5654,7 +5472,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Creates a new FileReader, given the name of the file to read from.",
@@ -5683,7 +5500,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Creates a new File instance by converting the given pathname string into an abstract pathname. If the given string is the empty string, then the result is the empty abstract pathname.",
@@ -5710,7 +5526,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/aop\/support\/StaticMethodMatcher.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5737,7 +5552,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a WARNING message. If the logger is currently enabled for the WARNING message level then the given message is forwarded to all the registered output Handler objects.",
@@ -5766,7 +5580,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code String} value for a CSV column enclosed in double quotes, if required. If the value contains a comma, newline or double quote, then the String value is returned enclosed in double quotes. Any double quote characters in the value are escaped with another double quote. If the value does not contain a comma, newline or double quote, then the String value is returned unchanged. see Wikipedia and RFC 4180.",
@@ -5795,7 +5608,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Decodes a {@code application\/x-www-form-urlencoded} string using a specific encoding scheme. The supplied encoding is used to determine what characters are represented by any consecutive sequences of the form \"{@code %xy}\". Note: The World Wide Web Consortium Recommendation states that UTF-8 should be used. Not doing so may introduce incompatibilities.",
@@ -5825,7 +5637,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -5857,7 +5668,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Turn special characters into escaped characters conforming to JavaScript. Handles complete character set defined in HTML 4.01 recommendation.",
@@ -5886,7 +5696,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -5913,7 +5722,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -5946,7 +5754,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Unescapes any Java literals found in the {@code String}. For example, it will turn a sequence of {@code '\\'} and {@code 'n'} into a newline character, unless the {@code '\\'} is preceded by another {@code '\\'}.",
@@ -5976,7 +5783,6 @@
         "auth-safe-state",
         "sink"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306"
       ],
@@ -6010,7 +5816,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Reads a line of text. A line is considered to be terminated by any one of a line feed ('\\n'), a carriage return ('\\r'), or a carriage return followed immediately by a linefeed.",
@@ -6037,7 +5842,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encoder for XML and XHTML. See {@link #forHtml(String)} for a description of the encoding and context.",
@@ -6066,7 +5870,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -6097,7 +5900,6 @@
       },
       "link": "https:\/\/github.com\/OWASP\/WebGoat\/blob\/master\/webgoat\/src\/main\/java\/org\/owasp\/webgoat\/session\/RandomLessonTracker.java",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "hasCompleted.",
@@ -6126,7 +5928,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode the raw password. Generally, a good encoding algorithm applies a SHA-1 or greater hash combined with an 8-byte or greater randomly generated salt.",
@@ -6159,7 +5960,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getProtocol() on the wrapped request object.",
@@ -6186,7 +5986,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Translates a string into {@code application\/x-www-form-urlencoded} format using a specific encoding scheme. This method uses the supplied encoding scheme to obtain the bytes for unsafe characters. Note: The World Wide Web Consortium Recommendation states that UTF-8 should be used. Not doing so may introduce incompatibilities.",
@@ -6216,7 +6015,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -6247,7 +6045,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Turn HTML character references into their plain text UNICODE equivalent. Handles complete character set defined in HTML 4.01 recommendation and all reference types (decimal, hex, and entity). Correctly converts the following formats: &#Entity; - (Example: &amp;) case sensitive &#Decimal; - (Example: &#68;) &#xHex; - (Example: &#xE5;) case insensitive Gracefully handles malformed character references by copying original characters as is when encountered. Reference: http:\/\/www.w3.org\/TR\/html4\/sgml\/entities.html",
@@ -6276,7 +6073,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Prints generic WSDL error to the given output stream.",
@@ -6308,7 +6104,6 @@
         "auth-no-change",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -6337,7 +6132,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -6370,7 +6164,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getServerName() on the wrapped request object.",
@@ -6397,7 +6190,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the {@code Class} object associated with the class or interface with the given string name, using the given class loader. Given the fully qualified name for a class or interface (in the same format returned by {@code getName}) this method attempts to locate, load, and link the class or interface. The specified class loader is used to load the class or interface. If the parameter {@code loader} is null, the class is loaded through the bootstrap class loader. The class is initialized only if the {@code initialize} parameter is {@code true} and if it has not been initialized earlier. If {@code name} denotes a primitive type or void, an attempt will be made to locate a user-defined class in the unnamed package whose name is {@code name}. Therefore, this method cannot be used to obtain any of the {@code Class} objects representing primitive types or void. If {@code name} denotes an array class, the component type of the array class is loaded but not initialized. For example, in an instance method the expression: {@code Class.forName(\"Foo\")} is equivalent to: {@code Class.forName(\"Foo\", true, this.getClass().getClassLoader())} Note that this method throws errors related to loading, linking or initializing as specified in Sections 12.2, 12.3 and 12.4 of The Java Language Specification. Note that this method does not check whether the requested class is accessible to its caller. If the {@code loader} is {@code null}, and a security manager is present, and the caller's class loader is not null, then this method calls the security manager's {@code checkPermission} method with a {@code RuntimePermission(\"getClassLoader\")} permission to ensure it's ok to access the bootstrap class loader.",
@@ -6428,7 +6220,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns an {@link java.io.InputStream InputStream} that can be used to retrieve the contents of the file.",
@@ -6455,7 +6246,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the contents of the file item as an array of bytes.",
@@ -6480,7 +6270,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/access\/method\/MapBasedMethodSecurityMetadataSource.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Return if the given method name matches the mapped name. The default implementation checks for \"xxx\" and \"xxx\" matches.",
@@ -6510,7 +6299,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306"
@@ -6542,7 +6330,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the absolute form of this abstract pathname. Equivalent to new File(this.{@link #getAbsolutePath}).",
@@ -6569,7 +6356,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -6602,7 +6388,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -6637,7 +6422,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -6671,7 +6455,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/web\/portlet\/ModelAndView.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Create a new ModelAndView given a view name and a model.",
@@ -6701,7 +6484,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Decode from URL. Implementations should first canonicalize and detect any double-encoding. If this check passes, then the data is decoded using URL decoding.",
@@ -6730,7 +6512,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -6767,7 +6548,6 @@
         "auth-safe-state",
         "sink"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -6802,7 +6582,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for insertion inside a data value or function argument in JavaScript. Including user data directly inside a script is quite dangerous. Great care must be taken to prevent including user data directly into script code itself, as no amount of encoding will prevent attacks there. Please note there are some JavaScript functions that can never safely receive untrusted data as input \u2013 even if the user input is encoded. For example:",
@@ -6831,7 +6610,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the path on the server to which the browser returns this cookie. The cookie is visible to all subpaths on the server.",
@@ -6859,7 +6637,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -6896,7 +6673,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns client secret of the credential from the console.",
@@ -6923,7 +6699,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -6957,7 +6732,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the text contained in this TextComponent. If the underlying document is null, will give a NullPointerException. Note that text is not a bound property, so no PropertyChangeEvent is fired when it changes. To listen for changes to the text, use DocumentListener.",
@@ -6982,7 +6756,6 @@
       },
       "link": "https:\/\/ws.apache.org\/xmlrpc\/apidocs\/org\/apache\/xmlrpc\/webserver\/ServletWebServer.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -7012,7 +6785,6 @@
         "sink",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Finds a resource with a given name. The rules for searching resources associated with a given class are implemented by the defining {@linkplain ClassLoader class loader} of the class. This method delegates to this object's class loader. If this object was loaded by the bootstrap class loader, the method delegates to {@link ClassLoader#getSystemResource}. Before delegation, an absolute resource name is constructed from the given resource name using this algorithm: If the {@code name} begins with a {@code '\/'} ('\\u002f'), then the absolute name of the resource is the portion of the {@code name} following the {@code '\/'}. Otherwise, the absolute name is of the following form: {@code modified_package_name\/name} Where the {@code modified_package_name} is the package name of this object with {@code '\/'} substituted for {@code '.'} ('\\u002e').",
@@ -7041,7 +6813,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -7076,7 +6847,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078",
         "CWE079"
@@ -7108,7 +6878,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/mock\/web\/MockJspWriter.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Print a boolean value. The string produced by {@link java.lang.String#valueOf(boolean)} is written to the JspWriter's buffer or, if no buffer is used, directly to the underlying writer.",
@@ -7137,7 +6906,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -7171,7 +6939,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode for an operating system command shell according to the selected codec (appropriate codecs include the WindowsCodec and UnixCodec). Please note the following recommendations before choosing to use this method: 1) It is strongly recommended that applications avoid making direct OS system calls if possible as such calls are not portable, and they are potentially unsafe. Please use language provided features if at all possible, rather than native OS calls to implement the desired feature. 2) If an OS call cannot be avoided, then it is recommended that the program to be invoked be invoked directly (e.g., System.exec(\"nameofcommand\" + \"parameterstocommand\");) as this avoids the use of the command shell. The \"parameterstocommand\" should of course be validated before passing them to the OS command. 3) If you must use this method, then we recommend validating all user supplied input passed to the command shell as well, in addition to using this method in order to make the command shell invocation safe. An example use of this method would be: System.exec(\"dir \" + ESAPI.encodeForOS(WindowsCodec, \"parameter(s)tocommandwithuserinput\");",
@@ -7201,7 +6968,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -7232,7 +6998,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Constructs a new Scanner that produces values scanned from the specified channel. Bytes from the source are converted into characters using the underlying platform's {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.",
@@ -7261,7 +7026,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -7294,7 +7058,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Specifies a comment that describes a cookie's purpose. The comment is useful if the browser presents the cookie to the user. Comments are not supported by Netscape Version 0 cookies.",
@@ -7321,7 +7084,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/web\/context\/request\/RequestContextListener.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -7352,7 +7114,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Unescapes a string containing XML entity escapes to a string containing the actual Unicode characters corresponding to the escapes. Supports only the five basic XML entities (gt, lt, quot, amp, apos). Does not support DTDs or external entities. Note that numerical \\\\u Unicode codes are unescaped to their respective Unicode characters. This may change in future releases.",
@@ -7381,7 +7142,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -7412,7 +7172,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/configurers\/UrlAuthorizationConfigurer.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Creates a String for specifying that a user requires one of many roles.",
@@ -7444,7 +7203,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -7481,7 +7239,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306",
         "CWE862"
@@ -7518,7 +7275,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -7547,7 +7303,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the canonical form of this abstract pathname. Equivalent to new File(this.{@link #getCanonicalPath}).",
@@ -7574,7 +7329,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Removes the system property indicated by the specified key. First, if a security manager exists, its SecurityManager.checkPermission method is called with a PropertyPermission(key, \"write\") permission. This may result in a SecurityException being thrown. If no exception is thrown, the specified property is removed.",
@@ -7603,7 +7357,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -7634,7 +7387,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -7665,7 +7417,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078",
         "CWE079"
@@ -7701,7 +7452,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -7732,7 +7482,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the original filename in the client's filesystem, as provided by the browser (or other client software). In most cases, this will be the base file name, without path information. However, some clients, such as the Opera browser, do include path information.",
@@ -7759,7 +7508,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -7794,7 +7542,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -7829,7 +7576,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -7862,7 +7608,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Specifies the attributes that will be returned as part of the search. null indicates that all attributes will be returned. An empty array indicates no attributes are returned.",
@@ -7891,7 +7636,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Decodes HTML entities.",
@@ -7920,7 +7664,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -7951,7 +7694,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -7985,7 +7727,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "See the general contract of the readUTF method of DataInput. Bytes for this operation are read from the contained input stream.",
@@ -8010,7 +7751,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Helper method to write out the index to disk.",
@@ -8035,7 +7775,6 @@
       },
       "link": "http:\/\/grepcode.com\/file\/repo1.maven.org\/maven2\/org.apache.ws.commons.axiom\/axiom-api\/1.2.12\/org\/apache\/axiom\/om\/impl\/SwitchingWrapper.java",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This is a very important method. It keeps the navigator one step ahead and pushes it one event ahead. If the nextNode is null then navigable is set to false. At the same time the parser and builder are set up for the upcoming event generation.",
@@ -8062,7 +7801,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -8096,7 +7834,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Constructs an initial DirContext using the supplied environment. Environment properties are discussed in the javax.naming.InitialContext class description. This constructor will not modify environment or save a reference to it, but may save a clone. Caller should not modify mutable keys and values in environment after it has been passed to the constructor.",
@@ -8125,7 +7862,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Searches for the property with the specified key in this property list. If the key is not found in this property list, the default property list, and its defaults, recursively, are then checked. The method returns {@code null} if the property is not found.",
@@ -8154,7 +7890,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -8186,7 +7921,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns a {@code Field} object that reflects the specified declared field of the class or interface represented by this {@code Class} object. The {@code name} parameter is a {@code String} that specifies the simple name of the desired field. If this {@code Class} object represents an array type, then this method does not find the {@code length} field of the array type.",
@@ -8215,7 +7949,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -8248,7 +7981,6 @@
       },
       "link": "https:\/\/static.javadoc.io\/org.springframework\/spring\/2.0.3\/org\/springframework\/web\/filter\/RequestContextFilter.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Set whether to expose the LocaleContext and RequestAttributes as inheritable for child threads (using an {@link java.lang.InheritableThreadLocal}). Default is \"false\", to avoid side effects on spawned background threads. Switch this to \"true\" to enable inheritance for custom child threads which are spawned during request processing and only used for this request (that is, ending after their initial task, without reuse of the thread). WARNING: Do not use inheritance for child threads if you are accessing a thread pool which is configured to potentially add new threads on demand (e.g. a JDK {@link java.util.concurrent.ThreadPoolExecutor}), since this will expose the inherited context to such a pooled thread.",
@@ -8277,7 +8009,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRemoteHost() on the wrapped request object.",
@@ -8302,7 +8033,6 @@
       },
       "link": "http:\/\/grepcode.com\/file\/repo1.maven.org\/maven2\/org.apache.ws.commons.axiom\/axiom-api\/1.2.12\/org\/apache\/axiom\/om\/impl\/SwitchingWrapper.java",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -8329,7 +8059,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getLocalAddr() on the wrapped request object.",
@@ -8356,7 +8085,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -8393,7 +8121,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encoder for XML comments. NOT FOR USE WITH (X)HTML CONTEXTS. (X)HTML comments may be interpreted by browsers as something other than a comment, typically in vendor specific extensions (e.g. {@code }). For (X)HTML it is recommend that unsafe content never be included in a comment. The caller must provide the comment start and end sequences. This method replaces all invalid XML characters with spaces, and replaces the \"--\" sequence (which is invalid in XML comments) with \"-~\" (hyphen-tilde). This encoding behavior may change in future releases. If the comments need to be decoded, the caller will need to come up with their own encode\/decode system.      out.println(\"\");\n     out.println(\"\");\n     out.println(\"\");\n     out.println(\"\");",
@@ -8422,7 +8149,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This method encodes for HTML text content. It does not escape quotation characters and is thus unsafe for use with HTML attributes. Use either forHtml or forHtmlAttribute for those methods. Example JSP Usage      \n Encoding Table Input Result {@code &} {@code &} {@code } {@code >} Additional Notes Single-quote character ({@code '}) and double-quote character ({@code \"}) do not require encoding in HTML blocks, unlike other HTML contexts. The encoding of the greater-than sign ({@code >}) is not strictly required, but is included for maximum compatibility. Carriage return (U+0D), line-feed (U+0A), horizontal tab (U+09) and space (U+20) are valid in quoted attributes and in block in an unescaped form. Surrogate pairs are passed through only if valid. Characters that are not valid according to the XML specification are replaced by a space character as they could lead to parsing errors. In particular only {@code #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]} are considered valid.",
@@ -8451,7 +8177,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in an XPath query. NB: The reference implementation encodes almost everything and may over-encode. The difficulty with XPath encoding is that XPath has no built in mechanism for escaping characters. It is possible to use XQuery in a parameterized way to prevent injection. For more information, refer to this article which specifies the following list of characters as the most dangerous: ^&\"*';<>(). This paper suggests disallowing ' and \" in queries.",
@@ -8481,7 +8206,6 @@
         "auth-no-change",
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE306"
@@ -8516,7 +8240,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getContentType() on the wrapped request object.",
@@ -8541,7 +8264,6 @@
       },
       "link": "",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -8568,7 +8290,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -8599,7 +8320,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Assigns a new value to this Cookie. If you use a binary value, you may want to use BASE64 encoding. With Version 0 cookies, values should not contain white space, brackets, parentheses, equals signs, commas, double quotes, slashes, question marks, at signs, colons, and semicolons. Empty values may not behave the same way on all browsers.",
@@ -8628,7 +8348,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -8660,7 +8379,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -8693,7 +8411,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a LogRecord. All the other logging methods in this class call through this method to actually perform any logging. Subclasses can override this single method to capture all log activity.",
@@ -8722,7 +8439,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -8755,7 +8471,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -8786,7 +8501,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -8817,7 +8531,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getReader() on the wrapped request object.",
@@ -8844,7 +8557,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -8878,7 +8590,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -8911,7 +8622,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -8942,7 +8652,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -8973,7 +8682,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -9002,7 +8710,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Specifies a path for the cookie to which the client should return the cookie. The cookie is visible to all the pages in the directory you specify, and all the pages in that directory's subdirectories. A cookie's path must include the servlet that set the cookie, for example, \/catalog, which makes the cookie visible to all directories on the server under \/catalog. Consult RFC 2109 (available on the Internet) for more information on setting path names for cookies.",
@@ -9031,7 +8738,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRemoteUser() on the wrapped request object.",
@@ -9058,7 +8764,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "See the general contract of the readLine method of DataInput. Bytes for this operation are read from the contained input stream.",
@@ -9083,7 +8788,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/web\/socket\/server\/standard\/GlassFishRequestUpgradeStrategy.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -9115,7 +8819,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for unquoted HTML attribute values. {@link #forHtml(String)} or {@link #forHtmlAttribute(String)} should usually be preferred over this method as quoted attributes are XHTML compliant. When using this method, the caller is not required to provide quotes around the attribute (since it is encoded for such context). The caller should make sure that the attribute value does not abut unsafe characters--and thus should usually err on the side of including a space character after the value. Use of this method is discouraged as quoted attributes are generally more compatible and safer. Also note, that no attempt has been made to optimize this encoding, though it is still probably faster than other encoding libraries. Example JSP Usage       >\n Encoding Table Input Result {@code U+0009} (horizontal tab) {@code } {@code U+000A} (line feed) {@code } {@code U+000C} (form feed) {@code } {@code U+000D} (carriage return) {@code } {@code U+0020} (space) {@code } {@code &} {@code &} {@code } {@code >} {@code \"} {@code \"} {@code '} {@code '} {@code \/} {@code \/} {@code =} {@code =} {@code `} {@code `} {@code U+0085} (next line) {@code \u2026} {@code U+2028} (line separator) {@code \u2028} {@code U+2029} (paragraph separator) {@code \u2029} Additional Notes The following characters are not encoded: {@code 0-9, a-z, A-Z}, {@code !}, {@code #}, {@code $}, {@code %}, {@code (}, {@code )}, {@code *}, {@code +}, {@code ,}, {@code -}, {@code .}, {@code [}, {@code \\}, {@code ]}, {@code ^}, {@code _}, {@code }}. Surrogate pairs are passed through only if valid. Invalid surrogate pairs are replaced by a hyphen (-). Characters in the C0 and C1 control blocks and not otherwise listed above are considered invalid and replaced by a hyphen (-) character. Unicode \"non-characters\" are replaced by hyphens (-).",
@@ -9144,7 +8847,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Sets the system property indicated by the specified key. First, if a security manager exists, its SecurityManager.checkPermission method is called with a PropertyPermission(key, \"write\") permission. This may result in a SecurityException being thrown. If no exception is thrown, the specified property is set to the given value.",
@@ -9174,7 +8876,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -9201,7 +8902,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Traverses the xpath and returns the resulting object. Primitive types are wrapped into objects.",
@@ -9233,7 +8933,6 @@
         "auth-safe-state",
         "sink"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -9268,7 +8967,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This method encodes for JavaScript strings contained within HTML script attributes (such as {@code onclick}). It is NOT safe for use in script blocks. The caller MUST provide the surrounding quotation characters. This method performs the same encode as {@link #forJavaScript(String)} with the exception that \/ is not escaped. Unless you are interested in saving a few bytes of output or are writing a framework on top of this library, it is recommend that you use {@link #forJavaScript(String)} over this method. Example JSP Usage:     ');\">",
@@ -9297,7 +8995,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in Cascading Style Sheets (CSS) content.",
@@ -9326,7 +9023,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -9355,7 +9051,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Writes the specified message to a servlet log file, prepended by the servlet's name. See {@link ServletContext#log(String)}.",
@@ -9384,7 +9079,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -9416,7 +9110,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -9447,7 +9140,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Searches in the named context or object for entries that satisfy the given search filter. Performs the search as specified by the search controls. The interpretation of filterExpr is based on RFC 2254. It may additionally contain variables of the form {i} -- where i is an integer -- that refer to objects in the filterArgs array. The interpretation of filterExpr is otherwise identical to that of the filter parameter of the method search(Name, String, SearchControls). When a variable {i} appears in a search filter, it indicates that the filter argument filterArgs[i] is to be used in that place. Such variables may be used wherever an attr, value, or matchingrule production appears in the filter grammar of RFC 2254, section 4. When a string-valued filter argument is substituted for a variable, the filter is interpreted as if the string were given in place of the variable, with any characters having special significance within filters (such as '*') having been escaped according to the rules of RFC 2254. For directories that do not use a string representation for some or all of their attributes, the filter argument corresponding to an attribute value may be of a type other than String. Directories that support unstructured binary-valued attributes, for example, should accept byte arrays as filter arguments. The interpretation (if any) of filter arguments of any other type is determined by the service provider for that directory, which maps the filter operations onto operations with corresponding semantics in the underlying directory. This method returns an enumeration of the results. Each element in the enumeration contains the name of the object and other information about the object (see SearchResult). The name is either relative to the target context of the search (which is named by the name parameter), or it is a URL string. If the target context is included in the enumeration (as is possible when cons specifies a search scope of SearchControls.OBJECT_SCOPE or SearchControls.SUBSTREE_SCOPE), its name is the empty string. The SearchResult may also contain attributes of the matching object if the cons argument specifies that attributes be returned. If the object does not have a requested attribute, that nonexistent attribute will be ignored. Those requested attributes that the object does have will be returned. A directory might return more attributes than were requested (see Attribute Type Names in the class description) but is not allowed to return arbitrary, unrelated attributes. If a search filter with invalid variable substitutions is provided to this method, the result is undefined. When changes are made to this DirContext, the effect on enumerations returned by prior calls to this method is undefined. See also Operational Attributes in the class description.",
@@ -9479,7 +9171,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -9514,7 +9205,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -9548,7 +9238,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -9585,7 +9274,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306",
         "CWE862"
@@ -9615,7 +9303,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Prints a character and then terminate the line. This method behaves as though it invokes {@link #print(char)} and then {@link #println()}.",
@@ -9644,7 +9331,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -9678,7 +9364,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode input for use in a SQL query, according to the selected codec (appropriate codecs include the MySQLCodec and OracleCodec). This method is not recommended. The use of the PreparedStatement interface is the preferred approach. However, if for some reason this is impossible, then this method is provided as a weaker alternative. The best approach is to make sure any single-quotes are double-quoted. Another possible approach is to use the {escape} syntax described in the JDBC specification in section 1.5.6. However, this syntax does not work with all drivers, and requires modification of all queries.",
@@ -9708,7 +9393,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -9744,7 +9428,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -9775,7 +9458,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/mock\/web\/MockBodyContent.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Terminate the current line by writing the line separator string. The line separator string is defined by the system property line.separator, and is not necessarily a single newline character ('\\n').",
@@ -9802,7 +9484,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Adds a Substring component of initial, any or final substring matching. This method can be invoked only if startSubString was the last filter- building method called. A substring is not required to have an 'INITIAL' substring. However, when a filter contains an 'INITIAL' substring only one can be added, and it must be the first substring added. Any number of 'ANY' substrings can be added. A substring is not required to have a 'FINAL' substrings either. However, when a filter does contain a 'FINAL' substring only one can be added, and it must be the last substring added.",
@@ -9835,7 +9516,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -9870,7 +9550,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -9905,7 +9584,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "returns the user agent string.",
@@ -9932,7 +9610,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -9963,7 +9640,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -9992,7 +9668,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in HTML attributes.",
@@ -10021,7 +9696,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Escapes the characters in a {@code String} using Java String rules. Deals correctly with quotes and control-chars (tab, backslash, cr, ff, etc.) So a tab becomes the characters {@code '\\\\'} and {@code 't'}. The only difference between Java strings and JavaScript strings is that in JavaScript, a single quote and forward-slash (\/) are escaped. Example:  input string: He didn't say, \"Stop!\"\n output string: He didn't say, \\\"Stop!\\\"",
@@ -10050,7 +9724,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getAttributeNames() on the wrapped request object.",
@@ -10077,7 +9750,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getParameterMap() on the wrapped request object.",
@@ -10102,7 +9774,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-framework\/docs\/current\/javadoc-api\/org\/springframework\/web\/context\/request\/RequestContextListener.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10133,7 +9804,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10160,7 +9830,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -10196,7 +9865,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Reads a property list (key and element pairs) from the input byte stream. The input stream is in a simple line-oriented format as specified in {@link #load(java.io.Reader) load(Reader)} and is assumed to use the ISO 8859-1 character encoding; that is each byte is one Latin1 character. Characters not in Latin1, and certain special characters, are represented in keys and elements using Unicode escapes as defined in section 3.3 of The Java™ Language Specification. The specified stream remains open after this method returns.",
@@ -10225,7 +9893,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10256,7 +9923,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10290,7 +9956,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10317,7 +9982,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getAuthType() on the wrapped request object.",
@@ -10344,7 +10008,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -10380,7 +10043,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Canonicalization is simply the operation of reducing a possibly encoded string down to its simplest form. This is important, because attackers frequently use encoding to change their input in a way that will bypass validation filters, but still be interpreted properly by the target of the attack. Note that data encoded more than once is not something that a normal user would generate and should be regarded as an attack. Everyone says you shouldn't do validation without canonicalizing the data first. This is easier said than done. The canonicalize method can be used to simplify just about any input down to its most basic form. Note that canonicalize doesn't handle Unicode issues, it focuses on higher level encoding and escaping schemes. In addition to simple decoding, canonicalize also handles: Perverse but legal variants of escaping schemes Multiple escaping (%2526 or &lt;) Mixed escaping (%26lt;) Nested escaping (%%316 or &%6ct;) All combinations of multiple, mixed, and nested encoding\/escaping (%253c or ┦gt;) Using canonicalize is simple. The default is just...\n                    String clean = ESAPI.encoder().canonicalize( request.getParameter(\"input\"));\n                    You need to decode untrusted data so that it's safe for ANY downstream interpreter or decoder. For example, if your data goes into a Windows command shell, then into a database, and then to a browser, you're going to need to decode for all of those systems. You can build a custom encoder to canonicalize for your application like this...\n                    ArrayList list = new ArrayList();\n                    list.add( new WindowsCodec() );\n                    list.add( new MySQLCodec() );\n                    list.add( new PercentCodec() );\n                    Encoder encoder = new DefaultEncoder( list );\n                    String clean = encoder.canonicalize( request.getParameter( \"input\" ));\n                    In ESAPI, the Validator uses the canonicalize method before it does validation. So all you need to do is to validate as normal and you'll be protected against a host of encoded attacks.      String input = request.getParameter( \"name\" );\n                    String name = ESAPI.validator().isValidInput( \"test\", input, \"FirstName\", 20, false);\n                    However, the default canonicalize() method only decodes HTMLEntity, percent (URL) encoding, and JavaScript encoding. If you'd like to use a custom canonicalizer with your validator, that's pretty easy too.\n                    ... setup custom encoder as above\n                    Validator validator = new DefaultValidator( encoder );\n                    String input = request.getParameter( \"name\" );\n                    String name = validator.isValidInput( \"test\", input, \"name\", 20, false);\n                    Although ESAPI is able to canonicalize multiple, mixed, or nested encoding, it's safer to not accept this stuff in the first place. In ESAPI, the default is \"strict\" mode that throws an IntrusionException if it receives anything not single-encoded with a single scheme. Currently this is not configurable in ESAPI.properties, but it probably should be. Even if you disable \"strict\" mode, you'll still get warning messages in the log about each multiple encoding and mixed encoding received.      \/\/ disabling strict mode to allow mixed encoding\n                    String url = ESAPI.encoder().canonicalize( request.getParameter(\"url\"), false);",
@@ -10410,7 +10072,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns an unmodifiable string map view of the current system environment. The environment is a system-dependent mapping from names to values which is passed from parent to child processes. If the system does not support environment variables, an empty map is returned. The returned map will never contain null keys or values. Attempting to query the presence of a null key or value will throw a {@link NullPointerException}. Attempting to query the presence of a key or value which is not of type {@link String} will throw a {@link ClassCastException}. The returned map and its collection views may not obey the general contract of the {@link Object#equals} and {@link Object#hashCode} methods. The returned map is typically case-sensitive on all platforms. If a security manager exists, its {@link SecurityManager#checkPermission checkPermission} method is called with a {@link RuntimePermission}(\"getenv.*\") permission. This may result in a {@link SecurityException} being thrown. When passing information to a Java subprocess, system properties are generally preferred over environment variables.",
@@ -10437,7 +10098,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Parse the given comma separated sequence of addresses into InternetAddress objects. Addresses must follow RFC822 syntax.",
@@ -10466,7 +10126,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Turn special characters into HTML character references. Handles complete character set defined in HTML 4.01 recommendation. Escapes all special characters to their corresponding entity reference (e.g. {@code <}). Reference: http:\/\/www.w3.org\/TR\/html4\/sgml\/entities.html",
@@ -10495,7 +10154,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -10528,7 +10186,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Gets the domain name of this Cookie. Domain names are formatted according to RFC 2109.",
@@ -10553,7 +10210,6 @@
       },
       "link": "https:\/\/github.com\/sanketsahoo25\/webgoat\/blob\/master\/webgoat-container\/src\/main\/java\/org\/owasp\/webgoat\/service\/LessonInfoService.java",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "handleException.",
@@ -10582,7 +10238,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the selected text contained in this TextComponent. If the selection is null or the document empty, returns null.",
@@ -10609,7 +10264,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for a Java string. This method will use \"\\b\", \"\\t\", \"\\r\", \"\\f\", \"\\n\", \"\\\"\", \"\\'\", \"\\\\\", octal and unicode escapes. Valid surrogate pairing is not checked. The caller must provide the enclosing quotation characters. This method is useful for when writing code generators and outputting debug messages.      out.println(\"public class Hello {\");\n     out.println(\"    public static void main(String[] args) {\");\n     out.println(\"        System.out.println(\\\"\" + Encode.forJava(message) + \"\\\");\");\n     out.println(\"    }\");\n     out.println(\"}\");",
@@ -10638,7 +10292,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Writes a single character.",
@@ -10667,7 +10320,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in an LDAP distinguished name.",
@@ -10696,7 +10348,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode for use in a URL. This method performs URL encoding on the entire string.",
@@ -10725,7 +10376,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Converts an array of bytes into an array of characters representing the hexadecimal values of each byte in order. The returned array will be double the length of the passed array, as it takes two characters to represent any given byte.",
@@ -10754,7 +10404,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -10783,7 +10432,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -10819,7 +10467,6 @@
       "type": [
         "auth-no-change"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306"
       ],
@@ -10848,7 +10495,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getContextPath() on the wrapped request object.",
@@ -10875,7 +10521,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in LDAP queries.",
@@ -10904,7 +10549,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in HTML using HTML entity encoding Note that the following characters: 00-08, 0B-0C, 0E-1F, and 7F-9F cannot be used in HTML.",
@@ -10933,7 +10577,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -10966,7 +10609,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -10997,7 +10639,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -11030,7 +10671,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getCookies() on the wrapped request object.",
@@ -11057,7 +10697,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getPathTranslated() on the wrapped request object.",
@@ -11085,7 +10724,6 @@
         "auth-no-change",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -11118,7 +10756,6 @@
         "sink",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -11153,7 +10790,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -11188,7 +10824,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encodes for a JavaScript string. It is safe for use in HTML script attributes (such as {@code onclick}), script blocks, JSON files, and JavaScript source. The caller MUST provide the surrounding quotation characters for the string. Since this performs additional encoding so it can work in all of the JavaScript contexts listed, it may be slightly less efficient than using one of the methods targetted to a specific JavaScript context ({@link #forJavaScriptAttribute(String)}, {@link #forJavaScriptBlock}, {@link #forJavaScriptSource}). Unless you are interested in saving a few bytes of output or are writing a framework on top of this library, it is recommend that you use this method over the others. Example JSP Usage:     ');\">\n    \n        var data = \"\";\n    \n Encoding Description Input Character Encoded Result Notes U+0008 BS \\b Backspace character U+0009 HT \\t Horizontal tab character U+000A LF \\n Line feed character U+000C FF \\f Form feed character U+000D CR \\r Carriage return character U+0022 \" \\x22 The encoding \\\" is not used here because it is not safe for use in HTML attributes. (In HTML attributes, it would also be correct to use \"\\&quot;\".) U+0026 & \\x26 Ampersand character U+0027 ' \\x27 The encoding \\' is not used here because it is not safe for use in HTML attributes. (In HTML attributes, it would also be correct to use \"\\&#39;\".) U+002F \/ \\\/ This encoding is used to avoid an input sequence \" block. U+005C \\ \\\\ U+0000 to U+001F \\x## Hexadecimal encoding is used for characters in this range that were not already mentioned in above.",
@@ -11217,7 +10852,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getHeaders(String name) on the wrapped request object.",
@@ -11246,7 +10880,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getScheme() on the wrapped request object.",
@@ -11274,7 +10907,6 @@
         "sink",
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089",
         "CWE078",
@@ -11314,7 +10946,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getMethod() on the wrapped request object.",
@@ -11341,7 +10972,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -11373,7 +11003,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Replaces the entry for a key only if currently mapped to some value. This is equivalent to  {@code\n if (map.containsKey(key)) {\n   return map.put(key, value);\n } else\n   return null;\n } except that the action is performed atomically.",
@@ -11408,7 +11037,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Creates a random access file stream to read from, and optionally to write to, the file specified by the {@link File} argument. A new {@link FileDescriptor} object is created to represent this file connection. The mode argument specifies the access mode in which the file is to be opened. The permitted values and their meanings are: Value Meaning \"r\" Open for reading only. Invoking any of the write methods of the resulting object will cause an {@link java.io.IOException} to be thrown. \"rw\" Open for reading and writing. If the file does not already exist then an attempt will be made to create it. \"rws\" Open for reading and writing, as with \"rw\", and also require that every update to the file's content or metadata be written synchronously to the underlying storage device. \"rwd\" Open for reading and writing, as with \"rw\", and also require that every update to the file's content be written synchronously to the underlying storage device. The \"rws\" and \"rwd\" modes work much like the {@link java.nio.channels.FileChannel#force(boolean) force(boolean)} method of the {@link java.nio.channels.FileChannel} class, passing arguments of true and false, respectively, except that they always apply to every I\/O operation and are therefore often more efficient. If the file resides on a local storage device then when an invocation of a method of this class returns it is guaranteed that all changes made to the file by that invocation will have been written to that device. This is useful for ensuring that critical information is not lost in the event of a system crash. If the file does not reside on a local device then no such guarantee is made. The \"rwd\" mode can be used to reduce the number of I\/O operations performed. Using \"rwd\" only requires updates to the file's content to be written to storage; using \"rws\" requires updates to both the file's content and its metadata to be written, which generally requires at least one more low-level I\/O operation. If there is a security manager, its {@code checkRead} method is called with the pathname of the {@code file} argument as its argument to see if read access to the file is allowed. If the mode allows writing, the security manager's {@code checkWrite} method is also called with the path argument to see if write access to the file is allowed.",
@@ -11438,7 +11066,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRequestURL() on the wrapped request object.",
@@ -11465,7 +11092,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getRequestURI() on the wrapped request object.",
@@ -11492,7 +11118,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Gets the current value of this Cookie.",
@@ -11519,7 +11144,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079"
       ],
@@ -11551,7 +11175,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306",
         "CWE862"
@@ -11588,7 +11211,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to call getAttribute(String name) on the wrapped request object.",
@@ -11617,7 +11239,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -11648,7 +11269,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/core\/authority\/mapping\/SimpleAttributes2GrantedAuthoritiesMapper.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -11675,7 +11295,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE306",
         "CWE079"
@@ -11709,7 +11328,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Encode data for use in an XML attribute. The implementation should follow the XML Encoding Standard from the W3C. The use of a real XML parser is highly encouraged. However, in the hopefully rare case that you need to make sure that data is safe for inclusion in an XML document and cannot use a parse, this method provides a safe mechanism to do so.",
@@ -11738,7 +11356,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -11772,7 +11389,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Perform the same logic as {@link BlockJUnit4ClassRunner#runChild(FrameworkMethod, RunNotifier)}, except that tests are determined to be ignored by {@link #isTestMethodIgnored(FrameworkMethod)}.",
@@ -11804,7 +11420,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Constructs a FileWriter object given a file name with a boolean indicating whether or not to append the data written.",
@@ -11834,7 +11449,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Send a WebSocket message: either {@link TextMessage} or {@link BinaryMessage}.",
@@ -11865,7 +11479,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Specify default parameters for the type. This only applies to parameterized types.",
@@ -11896,7 +11509,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getServletPath() on the wrapped request object.",
@@ -11923,7 +11535,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE089",
         "CWE863",
@@ -11957,7 +11568,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -11988,7 +11598,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -12020,7 +11629,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -12055,7 +11663,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring-security\/site\/docs\/current\/apidocs\/org\/springframework\/security\/config\/annotation\/web\/messaging\/MessageSecurityMetadataSourceRegistry.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -12086,7 +11693,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "A convenience function that sanitizes a string of HTML.",
@@ -12115,7 +11721,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Log a SEVERE message. If the logger is currently enabled for the SEVERE message level then the given message is forwarded to all the registered output Handler objects.",
@@ -12144,7 +11749,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -12177,7 +11781,6 @@
       "type": [
         "auth-unsafe-state"
       ],
-      "securityLevel": "low",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -12212,7 +11815,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE089"
       ],
@@ -12246,7 +11848,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Replace escaped hex digits with the equivalent binary representation. Assume either V2 or V3 escape mechanisms: V2: \\*, \\(, \\), \\\\. V3: \\2A, \\28, \\29, \\5C, \\00.",
@@ -12277,7 +11878,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE078"
       ],
@@ -12310,7 +11910,6 @@
       "type": [
         "auth-safe-state"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE863",
         "CWE306",
@@ -12345,7 +11944,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Print a String and then terminate the line. This method behaves as though it invokes {@link #print(String)} and then {@link #println()}.",
@@ -12376,7 +11974,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Returns the contents of the file item as a String, using the default character encoding. This method uses {@link #get()} to retrieve the contents of the item.",
@@ -12403,7 +12000,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "The default behavior of this method is to return getQueryString() on the wrapped request object.",
@@ -12430,7 +12026,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -12457,7 +12052,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Replace the old child with a new child.",
@@ -12488,7 +12082,6 @@
         "sink",
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE601"
       ],
@@ -12522,7 +12115,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Read a line of text. Whenever a line terminator is read the current line number is incremented.",
@@ -12550,7 +12142,6 @@
         "auth-safe-state",
         "sink"
       ],
-      "securityLevel": "high",
       "cwe": [
         "CWE306"
       ],
@@ -12583,7 +12174,6 @@
       "type": [
         "sink"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Specifies the domain within which this cookie should be presented. The form of the domain name is specified by RFC 2109. A domain name begins with a dot (.foo.com) and means that the cookie is visible to servers in a specified Domain Name System (DNS) zone (for example, www.foo.com, but not a.b.foo.com). By default, cookies are only returned to the server that sent them.",
@@ -12610,7 +12200,6 @@
       },
       "link": "https:\/\/docs.spring.io\/spring\/docs\/current\/javadoc-api\/org\/springframework\/jdbc\/object\/RdbmsOperation.html",
       "type": [],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "",
@@ -12639,7 +12228,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE862"
       ],
@@ -12670,7 +12258,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "This method encodes for JavaScript strings contained within a JavaScript or JSON file. This method is NOT safe for use in ANY context embedded in HTML. The caller must provide the surrounding quotation characters. This method performs the same encode as {@link #forJavaScript(String)} with the exception that \/ and & are not escaped and \" and ' are encoded as \\\" and \\' respectively. Unless you are interested in saving a few bytes of output or are writing a framework on top of this library, it is recommend that you use {@link #forJavaScript(String)} over this method. Example JSP Usage: This example is serving up JavaScript source directly:     \n    var data = \"\";\n This example is serving up JSON data (users of this use-case are encouraged to read up on \"JSON Hijacking\"):     \n    \n    {\"data\":\"\"}",
@@ -12699,7 +12286,6 @@
       "type": [
         "source"
       ],
-      "securityLevel": "none",
       "cwe": [
         "CWE079",
         "CWE601"
@@ -12729,7 +12315,6 @@
       "type": [
         "sanitizer"
       ],
-      "securityLevel": "none",
       "cwe": [],
       "javadoc": {
         "method": "Escapes the characters in a {@code String} using XML entities. For example: {@code \"bread\" & \"butter\"} => {@code \"bread\" & \"butter\"}. Supports only the five basic XML entities (gt, lt, quot, amp, apos). Does not support DTDs or external entities. Note that Unicode characters greater than 0x7f are as of 3.0, no longer escaped. If you still wish this functionality, you can achieve it via the following: {@code StringEscapeUtils.ESCAPE_XML.with( NumericEntityEscaper.between(0x7f, Integer.MAX_VALUE) );}",

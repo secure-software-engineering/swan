@@ -28,27 +28,10 @@ public class Method {
     private String subSignature;
     private String signature;
     private int hashCode = 0;
-
-    public enum SecurityLevel {
-        HIGH("high"), LOW("low"), NEUTRAL("neutral"), NONE("none");
-
-        private final String level;
-
-        SecurityLevel(String level ) {
-            this.level = level;
-        }
-
-        @JsonValue
-        public String getLevel() {
-            return level;
-        }
-    }
-
     private String framework;
     private String link;
     private String comment;
     private String discovery;
-    private SecurityLevel securityLevel;
     private RelevantPart dataIn ;
     private RelevantPart dataOut;
     @JsonProperty("type")
@@ -99,7 +82,6 @@ public class Method {
         m.setLink(this.link);
         m.setComment(this.comment);
         m.setDiscovery(this.discovery);
-        m.setSecurityLevel(m.securityLevel);
         m.setDataIn(this.dataIn);
         m.setDataOut(this.dataOut);
         // m.setCwes(this.cwes);
@@ -147,14 +129,6 @@ public class Method {
 
     public void setDiscovery(String discovery) {
         this.discovery = discovery;
-    }
-
-    public SecurityLevel getSecurityLevel() {
-        return securityLevel;
-    }
-
-    public void setSecurityLevel(SecurityLevel securityLevel) {
-        this.securityLevel = securityLevel;
     }
 
     public RelevantPart getDataIn() {
