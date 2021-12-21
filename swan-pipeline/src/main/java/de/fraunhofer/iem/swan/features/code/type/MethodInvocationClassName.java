@@ -26,7 +26,6 @@ public class MethodInvocationClassName extends AbstractSootFeature {
     SootMethod sm = getSootMethod(method);
 
     if (sm == null) {
-      System.err.println("Method not declared: " + method);
       return Type.NOT_SUPPORTED;
     }
 
