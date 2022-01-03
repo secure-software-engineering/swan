@@ -276,15 +276,15 @@ public class Util {
      */
     public static String exportInstancesToArff(Instances instances) {
         ArffSaver saver = new ArffSaver();
-        String categoryName = getClassName(instances);
 
         if (SwanPipeline.options.isExportArffData()) {
             // Save arff data.
 
             saver.setInstances(instances);
 
+
             try {
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + categoryName + "-methods-dataset.arff";
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + instances.relationName() + ".arff";
                 saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {
