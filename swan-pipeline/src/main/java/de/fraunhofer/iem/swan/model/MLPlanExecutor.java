@@ -47,7 +47,7 @@ public class MLPlanExecutor {
      *
      * @param instances1 file path for ARFF file
      */
-    public HashMap<String, String> evaluateDataset(Instances instances1) {
+    public HashMap<String, ArrayList<Double>> evaluateDataset(Instances instances1) {
 
         String arffFilePath = Util.exportInstancesToArff(instances1);
 
@@ -75,7 +75,7 @@ public class MLPlanExecutor {
             loader.setFile(new File(arffFilePath));
             Instances instances = loader.getDataSet();
             instances.setClassIndex(instances.numAttributes() - 1);
-            monteCarloValidator.initializeResultSet(instances);
+          //  monteCarloValidator.initializeResultSet(instances);
         } catch (IOException e) {
             e.printStackTrace();
         }

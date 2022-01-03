@@ -8,6 +8,7 @@ import weka.classifiers.evaluation.output.prediction.CSV;
 import weka.core.Instances;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -16,18 +17,19 @@ import java.util.Random;
  */
 public class MonteCarloValidator {
 
-    private ArrayList<AbstractOutput> predictions;
-    private HashMap<String, String> fMeasure;
+    private ArrayList<String> predictions;
+    private HashMap<String, ArrayList<Double>> fMeasure;
 
     public MonteCarloValidator() {
         predictions = new ArrayList<>();
+        fMeasure = new HashMap<>();
     }
 
-    public ArrayList<AbstractOutput> getPredictions() {
+    public ArrayList<String> getPredictions() {
         return predictions;
     }
 
-    public HashMap<String, String> getFMeasure() {
+    public HashMap<String, ArrayList<Double>> getFMeasure() {
         return fMeasure;
     }
 
@@ -40,32 +42,26 @@ public class MonteCarloValidator {
      * @param iterations      number of evaluation iterations
      * @return average F-score for iterations
      */
-    public HashMap<String, String> monteCarloValidate(Instances instances, Classifier classifier, double trainPercentage, int iterations) {
-
-        initializeResultSet(instances);
+    public HashMap<String, ArrayList<Double>> monteCarloValidate(Instances instances, Classifier classifier, double trainPercentage, int iterations) {
 
         for (int i = 0; i < iterations; i++) {
             Util.exportInstancesToArff(instances);
-            evaluateIteration(instances, classifier, trainPercentage, i);
+
+            int trainSize = (int) Math.round(instances.numInstances() * trainPercentage);
+            int testSize = instances.numInstances() - trainSize;
+
+            instances.randomize(new Random(1337 + i * 11));
+            instances.stratify(10);
+
+            Instances trainInstances = new Instances(instances, 0, trainSize);
+            Instances testInstances = new Instances(instances, trainSize, testSize);
+
+            evaluate(classifier, trainInstances, testInstances, i);
         }
         return fMeasure;
     }
 
-    public void evaluateIteration(Instances instances, Classifier classifier, double trainPercentage, int iteration) {
-
-        int trainSize = (int) Math.round(instances.numInstances() * trainPercentage);
-        int testSize = instances.numInstances() - trainSize;
-
-        instances.randomize(new Random(1337 + iteration * 11));
-        instances.stratify(10);
-
-        Instances trainInstances = new Instances(instances, 0, trainSize);
-        Instances testInstances = new Instances(instances, trainSize, testSize);
-
-        evaluate(classifier, trainInstances, testInstances, iteration);
-    }
-
-    public void evaluate(Classifier classifier, Instances trainInstances, Instances testInstances, int iteration) {
+    public ArrayList<String> evaluate(Classifier classifier, Instances trainInstances, Instances testInstances, int iteration) {
 
         Evaluation eval = null;
         try {
@@ -81,57 +77,35 @@ public class MonteCarloValidator {
 
             eval.evaluateModel(classifier, testInstances, abstractOutput);
 
-            String[] predictions = abstractOutput.getBuffer().toString().split("\n");
+            //Obtain all predictions and extract method signatures
+            String[] output = abstractOutput.getBuffer().toString().split("\n");
 
-            for (String result : predictions) {
+            for (String result : output) {
                 String[] entry = result.split(",");
 
-                if (entry[2].contains("source") || entry[2].contains("sink") || entry[2].contains("sanitizer")
-                        || entry[2].contains("auth")) {
-
-                    String method = entry[5].replace("'", "");
-
-                    // System.out.println(method);
-                    // SwanPipeline.predictions.get(Integer.toString(iteration)).add(method);
+                if (!entry[2].contains("none")) {
+                    predictions.add(entry[5].replace("'", ""));
                 }
             }
-
-            //get class name
-            String className = "";
-            for (int x = 0; x < testInstances.attribute("class").numValues(); x++) {
-
-                if (!testInstances.attribute("class").value(x).contains("none")) {
-                    className = testInstances.attribute("class").value(x);
-                    break;
-                }
-            }
+            updateResultSet(testInstances, eval);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        updateResultSet(testInstances, eval);
-    }
-
-    public void initializeResultSet(Instances instances) {
-        fMeasure = new HashMap<>();
-
-        for (int x = 0; x < instances.numClasses(); x++) {
-
-            if (!instances.classAttribute().value(x).contentEquals("none")) {
-                fMeasure.put(instances.classAttribute().value(x), "");
-            }
-        }
+        return predictions;
     }
 
     public void updateResultSet(Instances instances, Evaluation eval) {
 
-        for (int x = 0; x < instances.numClasses(); x++) {
+        for (int c = 0; c < instances.numClasses(); c++) {
 
-            if (!instances.classAttribute().value(x).contentEquals("none")) {
+            String currentClass = instances.classAttribute().value(c);
 
-                String current = fMeasure.get(instances.classAttribute().value(x));
-                current += eval.fMeasure(x) + ";";
-
-                fMeasure.replace(instances.classAttribute().value(x), current.replace("NaN", "0"));
+            if (!currentClass.contentEquals("none")) {
+                if (!fMeasure.containsKey(currentClass))
+                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(eval.fMeasure(c))));
+                else {
+                    fMeasure.get(currentClass).add(eval.fMeasure(c));
+                }
             }
         }
     }

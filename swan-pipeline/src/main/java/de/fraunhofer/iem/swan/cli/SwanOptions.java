@@ -1,6 +1,9 @@
 package de.fraunhofer.iem.swan.cli;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * POJO for SWAN command line options.
@@ -99,6 +102,10 @@ public class SwanOptions {
 
     public void setCweClasses(List<String> cweClasses) {
         this.cweClasses = cweClasses;
+    }
+
+    public List<String> getAllClasses(){
+        return Stream.of(srmClasses,cweClasses).flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     public boolean isExportArffData() {

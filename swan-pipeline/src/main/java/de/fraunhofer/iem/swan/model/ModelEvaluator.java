@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.swan.model;
 
+import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.features.FeaturesHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,17 +35,13 @@ public class ModelEvaluator {
         AUTOMATIC
     }
 
-    private int iterations;
-    private double trainTestSplit;
-    private Mode evaluationMode;
     private FeaturesHandler features;
+    private SwanOptions options;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public ModelEvaluator(FeaturesHandler features, String evaluationMode, int iterations, double trainTestSplit) {
+    public ModelEvaluator(FeaturesHandler features, SwanOptions options) {
         this.features = features;
-        this.evaluationMode = Mode.valueOf(evaluationMode.toUpperCase());
-        this.iterations = iterations;
-        this.trainTestSplit = trainTestSplit;
+        this.options = options;
     }
 
     /**
@@ -54,18 +51,26 @@ public class ModelEvaluator {
      */
     public HashMap<String, HashMap<String, String>> trainModel() {
 
-        for (Instances instances : features.getInstances()) {
 
-            switch (evaluationMode) {
+        switch (Mode.valueOf(options.getLearningMode().toUpperCase())) {
 
-                case MANUAL:
-                    runManualEvaluation(instances);
-                case AUTOMATIC:
-                    //return runAutomaticEvaluation(instances);
-            }
+            case MANUAL:
+
+                //Phase 1: classify SRM classes
+                for (String srm : options.getSrmClasses())
+                    runManualEvaluation(features.getInstances().get(srm));
+
+                //Filter methods from CWE instances that were not classified
+                //into one of the SRM classes
+
+
+                //Phase 2: classify CWE classes
+                for (String cwe : options.getCweClasses())
+                    runManualEvaluation(features.getInstances().get(cwe));
+
+            case AUTOMATIC:
+                //return runAutomaticEvaluation(instances);
         }
-
-        //trainModels(options.getCweClasses());
         return null;
     }
 
@@ -80,9 +85,9 @@ public class ModelEvaluator {
         LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
 
         MLPlanExecutor mlPlanExecutor = new MLPlanExecutor();
-        fMeasure.put("ML-Plan", mlPlanExecutor.evaluateDataset(instances));
+        // fMeasure.put("ML-Plan", mlPlanExecutor.evaluateDataset(instances));
 
-        outputFMeasure(fMeasure);
+        //outputFMeasure(fMeasure);
         return fMeasure;
     }
 
@@ -106,39 +111,12 @@ public class ModelEvaluator {
         for (Classifier classifier : classifiers) {
 
             MonteCarloValidator evaluator = new MonteCarloValidator();
-            evaluator.monteCarloValidate(instances, classifier, trainTestSplit, iterations);
+            evaluator.monteCarloValidate(instances, classifier, options.getTrainTestSplit(), options.getIterations());
 
-            exportPredictions(evaluator.getPredictions());
-
-            fMeasure.put(classifier.getClass().getSimpleName(), evaluator.getFMeasure());
+            for (String key : evaluator.getFMeasure().keySet())
+                logger.info("F-measure for {} using {}: {}", key, classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
         }
-
-        outputFMeasure(fMeasure);
-        Runtime.getRuntime().gc();
-
         return fMeasure;
-    }
-
-    public void outputFMeasure(LinkedHashMap<String, HashMap<String, String>> fMeasure) {
-
-        String value = fMeasure.keySet().toArray()[0].toString();
-
-        for (Object srm : fMeasure.get(value).keySet()) {
-            logger.info("Classification complete for {}", srm.toString());
-            for (String c : fMeasure.keySet()) {
-
-                String measures = fMeasure.get(c).get(srm.toString());
-                measures = measures.replace(".", ",").substring(0, measures.lastIndexOf(";"));
-                logger.info("{} classification results using {}: {}", srm, c, measures);
-            }
-        }
-    }
-
-    public void exportPredictions(ArrayList<AbstractOutput> predictions) {
-
-        for (AbstractOutput prediction : predictions) {
-            //System.out.println("PRE: " + prediction.getBuffer());
-        }
     }
 
     /**
@@ -157,11 +135,5 @@ public class ModelEvaluator {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public double round(double val, int decimals) {
-        val = val * (10 * decimals);
-        val = Math.round(val);
-        return val / (10 * decimals);
     }
 }

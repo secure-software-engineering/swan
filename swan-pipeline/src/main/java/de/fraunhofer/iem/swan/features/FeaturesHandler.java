@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @author Oshando Johnson on 27.09.20
  */
 public class FeaturesHandler {
-    private ArrayList<Attribute> attributes;
+
     private Map<IFeature, Attribute> codeAttributes;
     private final HashMap<String, Integer> instanceMap;
     private final SwanOptions options;
@@ -31,7 +31,7 @@ public class FeaturesHandler {
     private CodeFeatureHandler codeFeatureHandler;
     private SourceFileLoader testData;
     private DocFeatureHandler docFeatureHandler;
-    private ArrayList<Instances> instances;
+    private HashMap<String, Instances> instances;
 
     /**
      * Available feature sets:
@@ -65,7 +65,7 @@ public class FeaturesHandler {
         this.options = options;
         this.trainData = trainData;
         this.testData = testData;
-        instances = new ArrayList<>();
+        instances = new HashMap<>();
     }
 
     /**
@@ -98,19 +98,26 @@ public class FeaturesHandler {
                     break;
             }
 
-        for (String category : options.getSrmClasses()) {
+        for (String category : options.getAllClasses()) {
 
+            //TRAIN
             //Create attributes for feature set
-            attributes = new ArrayList<>();
-            createAttributes(getCategories(category), trainData.getMethods(), featureSets);
+            ArrayList<Attribute> trainAttributes = createAttributes(getCategories(category), trainData.getMethods(), featureSets);
 
-            // Set attributes to the train instances.
-            Instances trainingInstances = createInstances(featureSets, Category.fromText(category));
-            instances.add(trainingInstances);
-            Util.exportInstancesToArff(trainingInstances);
+            //Set attributes to the train instances.
+            Instances trainInstances = createInstances(featureSets, Category.fromText(category), trainAttributes, trainData.getMethods(), category + "-train-instances");
+            this.instances.put(category, trainInstances);
+            Util.exportInstancesToArff(trainInstances);
+
+            //TEST
+            ArrayList<Attribute> testAttributes = createAttributes(getCategories(category), testData.getMethods(), featureSets);
+
+            //Set attributes to the train instances.
+            Instances testInstances = createInstances(featureSets, Category.fromText(category), testAttributes, testData.getMethods(), category + "-test-instances");
+            //this.instances.put(category, trainInstances);
+            Util.exportInstancesToArff(testInstances);
         }
     }
-
 
     public HashSet<Category> getCategories(String cat) {
 
@@ -132,18 +139,19 @@ public class FeaturesHandler {
      * @param methods     list of training methods
      * @param featureSets classification mode
      */
-    public void createAttributes(Set<Category> categories, Set<Method> methods, List<FeaturesHandler.FeatureSet> featureSets) {
+    public ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods, List<FeaturesHandler.FeatureSet> featureSets) {
 
+        ArrayList<Attribute> attributes = new ArrayList<>();
         //Create feature set and add to attributes
         for (FeaturesHandler.FeatureSet featureSet : featureSets)
             switch (featureSet) {
 
                 case CODE:
-                    addCodeAttributes(categories);
+                    attributes.addAll(addCodeAttributes(categories));
                     break;
                 case DOC_MANUAL:
                 case DOC_AUTO:
-                    addDocAttributes(featureSet);
+                    attributes.addAll(addDocAttributes(featureSet));
                     break;
             }
 
@@ -154,6 +162,8 @@ public class FeaturesHandler {
         // Collect classes and add to attributes
         Attribute classAttr = new Attribute("class", categories.stream().map(Category::toString).collect(Collectors.toList()));
         attributes.add(classAttr);
+
+        return attributes;
     }
 
     /**
@@ -161,8 +171,9 @@ public class FeaturesHandler {
      *
      * @param categories list of categories
      */
-    public void addCodeAttributes(Set<Category> categories) {
+    public ArrayList<Attribute> addCodeAttributes(Set<Category> categories) {
 
+        ArrayList<Attribute> attributes = new ArrayList<>();
         // Collect the possible values
         ArrayList<String> ordinal = new ArrayList<>();
         ordinal.add("true");
@@ -185,6 +196,7 @@ public class FeaturesHandler {
                 }
             }
         }
+        return attributes;
     }
 
     /**
@@ -192,7 +204,9 @@ public class FeaturesHandler {
      *
      * @param instanceSet classification mode
      */
-    public void addDocAttributes(FeaturesHandler.FeatureSet instanceSet) {
+    public ArrayList<Attribute> addDocAttributes(FeaturesHandler.FeatureSet instanceSet) {
+
+        ArrayList<Attribute> attributes = new ArrayList<>();
 
         switch (instanceSet) {
             case DOC_MANUAL:
@@ -210,22 +224,22 @@ public class FeaturesHandler {
                 }
                 break;
         }
+        return attributes;
     }
 
+    public Instances createInstances(List<FeaturesHandler.FeatureSet> featureSets, Category category, ArrayList<Attribute> attributes, Set<Method> methods, String name) {
 
-    public Instances createInstances(List<FeaturesHandler.FeatureSet> featureSets, Category category) {
-
-        Instances instances = new Instances(category.toString() + "-methods-instances", attributes, 0);
+        Instances instances = new Instances(name, attributes, 0);
         instances.setClass(instances.attribute("class"));
 
         for (FeaturesHandler.FeatureSet featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                    instances.addAll(getCodeInstances(instances, trainData.getMethods(), category));
+                    instances.addAll(getCodeInstances(instances, methods, category, attributes));
                     break;
                 case DOC_MANUAL:
                 case DOC_AUTO:
-                    instances.addAll(getDocInstances(instances, trainData.getMethods(), category, featureSet));
+                    instances.addAll(getDocInstances(instances, methods, category, featureSet, attributes));
                     break;
             }
         return instances;
@@ -238,7 +252,7 @@ public class FeaturesHandler {
      * @param methods   training set
      * @return instance set containing data from SWAN
      */
-    public ArrayList<Instance> getCodeInstances(Instances instances, Set<Method> methods, Category category) {
+    public ArrayList<Instance> getCodeInstances(Instances instances, Set<Method> methods, Category category, ArrayList<Attribute> attributes) {
 
         ArrayList<Instance> instanceList = new ArrayList<>();
 
@@ -249,7 +263,9 @@ public class FeaturesHandler {
 
             Instance inst = new DenseInstance(attributes.size());
             inst.setDataset(instances);
-            inst.setClassValue(getCategory(method, category));
+
+            if (method.getSrm() != null || method.getCwe() != null)
+                inst.setClassValue(getCategory(method, category));
 
             for (Map.Entry<IFeature, Attribute> entry : codeAttributes.entrySet()) {
                 switch (entry.getKey().applies(method)) {
@@ -279,7 +295,7 @@ public class FeaturesHandler {
      * @param instances instance srt
      * @return Instances containing data from SWAN-DOC
      */
-    public ArrayList<Instance> getDocInstances(Instances instances, Set<Method> methods, Category category, FeaturesHandler.FeatureSet instanceSet) {
+    public ArrayList<Instance> getDocInstances(Instances instances, Set<Method> methods, Category category, FeaturesHandler.FeatureSet instanceSet, ArrayList<Attribute> attributes) {
 
         ArrayList<Instance> instanceList = new ArrayList<>();
 
@@ -295,7 +311,9 @@ public class FeaturesHandler {
                 inst = new DenseInstance(attributes.size());
                 inst.setDataset(instances);
                 isNewInstance = true;
-                inst.setClassValue(getCategory(method, category));
+
+                if (method.getSrm() != null || method.getCwe() != null)
+                    inst.setClassValue(getCategory(method, category));
                 inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
             }
 
@@ -307,6 +325,8 @@ public class FeaturesHandler {
                         try {
                             IDocFeature javadocFeature = feature.newInstance();
                             AnnotatedMethod annotatedMethod = docFeatureHandler.getManualFeatureData().get(method.getSignature());
+
+                            if(annotatedMethod!=null)
                             inst.setValue(instances.attribute(feature.getSimpleName()), javadocFeature.evaluate(annotatedMethod).getTotalValue());
                         } catch (InstantiationException | IllegalAccessException e) {
                             e.printStackTrace();
@@ -330,7 +350,7 @@ public class FeaturesHandler {
     /**
      * Checks if method belongs to the specified category.
      *
-     * @param method test or training method
+     * @param method   test or training method
      * @param category SRM or CWE class being evaluated
      * @return string representation of the method
      */
@@ -350,11 +370,11 @@ public class FeaturesHandler {
         return Category.NONE.toString();
     }
 
-    public ArrayList<Instances> getInstances() {
+    public HashMap<String, Instances> getInstances() {
         return instances;
     }
 
-    public void setInstances(ArrayList<Instances> instances) {
+    public void setInstances(HashMap<String, Instances> instances) {
         this.instances = instances;
     }
 

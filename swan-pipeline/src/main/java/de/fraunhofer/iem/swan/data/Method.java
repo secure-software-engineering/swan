@@ -6,11 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Type;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class representing a single method
@@ -166,6 +164,11 @@ public class Method {
 
     public Set<Category> getCwe() {
         return this.cwe;
+    }
+
+
+    public Set<Category> getAllCategories(){
+        return Stream.of(srm,cwe).flatMap(Collection::stream).collect(Collectors.toSet());
     }
 
     public void addCategoryClassified(Category category) {

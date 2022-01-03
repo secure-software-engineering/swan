@@ -52,7 +52,7 @@ public class SwanPipeline {
         featuresHandler.createFeatures();
 
         //Train and evaluate model for SRM and CWE categories
-        ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options.getLearningMode(), options.getIterations(), options.getTrainTestSplit());
+        ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options);
         modelEvaluator.trainModel();
 
         //TODO export final list to JSON file
