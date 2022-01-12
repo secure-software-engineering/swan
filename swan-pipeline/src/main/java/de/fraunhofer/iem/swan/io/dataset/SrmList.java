@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.swan.io.dataset;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.fraunhofer.iem.swan.data.Method;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 public class SrmList {
 
     private Set<Method> methods;
+    @JsonIgnore
     private String classpath;
 
     public SrmList() {

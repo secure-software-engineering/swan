@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Type;
@@ -30,7 +30,7 @@ public class Method {
     private String link;
     private String comment;
     private String discovery;
-    private RelevantPart dataIn ;
+    private RelevantPart dataIn;
     private RelevantPart dataOut;
     @JsonProperty("type")
     private Set<Category> srm;
@@ -93,6 +93,7 @@ public class Method {
      *
      * @return True if there is an annotation for this method, otherwise false.
      */
+    @JsonIgnore
     public boolean isAnnotated() {
         return !this.srm.isEmpty();
     }
@@ -149,9 +150,11 @@ public class Method {
         return srm;
     }
 
+    @JsonIgnore
     public Set<Category> getAuthSrm() {
-
-        return srm.stream().filter(Category::isAuthentication).collect(Collectors.toSet());
+        if (srm != null || cwe != null)
+            return srm.stream().filter(Category::isAuthentication).collect(Collectors.toSet());
+        else return new HashSet<>();
     }
 
     public void setSrm(Set<Category> srm) {
@@ -166,9 +169,12 @@ public class Method {
         return this.cwe;
     }
 
-
-    public Set<Category> getAllCategories(){
-        return Stream.of(srm,cwe).flatMap(Collection::stream).collect(Collectors.toSet());
+    @JsonIgnore
+    public Set<Category> getAllCategories() {
+        if (srm != null || cwe != null)
+            return Stream.of(srm, cwe).flatMap(Collection::stream).collect(Collectors.toSet());
+        else
+            return new HashSet<>();
     }
 
     public void addCategoryClassified(Category category) {
@@ -180,6 +186,7 @@ public class Method {
         return this.name;
     }
 
+    @JsonIgnore
     public String getClassName() {
 
         if(name.contains("."))
@@ -196,6 +203,7 @@ public class Method {
         return this.parameters;
     }
 
+    @JsonIgnore
     public String getSubSignature() {
         if (subSignature != null)
             return subSignature;
@@ -220,12 +228,14 @@ public class Method {
         return this.subSignature;
     }
 
+    @JsonIgnore
     public String getTrimmedSignature() {
 
         String signature = getSignature();
         return signature.substring(1, signature.length() - 1);
     }
 
+    @JsonIgnore
     public String getSignature() {
         if (signature != null)
             return signature;
@@ -255,8 +265,10 @@ public class Method {
 
     /**
      * Returns method's signature
+     *
      * @return Method's signature
      */
+    @JsonIgnore
     public String getSimpleSignature() {
 
         return trimProperty(getReturnType()) + " " + trimProperty(getName()) + " (" + StringUtils.join(getParameters(true), ", ") + ")";
@@ -264,9 +276,11 @@ public class Method {
 
     /**
      * Returns the list of parameters
+     *
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return List of parameters
      */
+    @JsonIgnore
     public List<String> getParameters(boolean isFullyQualifiedName) {
 
         List<String> param = new ArrayList<>();
@@ -283,6 +297,7 @@ public class Method {
 
     /**
      * Trim argument and returns last string
+     *
      * @param property Classname or data to be trimmed
      * @return Trimmed data
      */
@@ -296,6 +311,7 @@ public class Method {
      *
      * @return Java-style signature
      */
+    @JsonIgnore
     public String getJavaSignature() {
 
         String methodName = getName();
@@ -305,7 +321,8 @@ public class Method {
         return this.returnType + " " + this.className + "." + methodName + "(" + StringUtils.join(this.parameters, ", ") + ")";
     }
 
-    public String getArffSafeSignature(){
+    @JsonIgnore
+    public String getArffSafeSignature() {
 
         return getSignature().replace(",", "+");
     }
@@ -346,7 +363,7 @@ public class Method {
     @Override
     public int hashCode() {
         if (this.hashCode == 0)
-            this.hashCode = this.name.hashCode()  * 5;
+            this.hashCode = this.name.hashCode() * 5;
         // The parameter list is available from the outside, so we can't cache it
         return this.hashCode + this.parameters.hashCode() * 7;
     }
