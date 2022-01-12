@@ -75,7 +75,7 @@ public class Method {
     }
 
     public Method deriveWithNewClass(String className) {
-        Method m = new Method(this.getName(), this.getParameters(), this.getReturnType(), className);
+        Method m = new Method(className + "." + this.getName(), this.getParameters(), this.getReturnType());
         m.setFramework(this.framework);
         m.setLink(this.link);
         m.setComment(this.comment);
@@ -189,8 +189,8 @@ public class Method {
     @JsonIgnore
     public String getClassName() {
 
-        if(name.contains("."))
-        return name.substring(0, name.lastIndexOf("."));
+        if (name.contains("."))
+            return name.substring(0, name.lastIndexOf("."));
         else
             return name;
     }
@@ -208,8 +208,7 @@ public class Method {
         if (subSignature != null)
             return subSignature;
 
-        StringBuilder sb = new StringBuilder(
-                10 + this.returnType.length() + this.name.length() + (this.parameters.size() * 30));
+        StringBuilder sb = new StringBuilder();
         if (!this.returnType.isEmpty()) {
             sb.append(this.returnType);
             sb.append(" ");
@@ -240,8 +239,7 @@ public class Method {
         if (signature != null)
             return signature;
 
-        StringBuilder sb = new StringBuilder(10 + getClassName().length() + this.returnType.length()
-                + this.name.length() + (this.parameters.size() * 30));
+        StringBuilder sb = new StringBuilder();
         sb.append("<");
         sb.append(getClassName());
         sb.append(": ");

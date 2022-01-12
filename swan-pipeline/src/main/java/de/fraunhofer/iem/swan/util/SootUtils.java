@@ -5,10 +5,10 @@ import java.util.Arrays;
 
 public class SootUtils {
 
-    public static Method convertSootSignature(String sootSignature){
+    public static Method convertSootSignature(String sootSignature) {
 
         //Ignore < and > at the beginning and end of the signature
-        String[] parts = sootSignature.substring(1, sootSignature.length()-1).split(":");
+        String[] parts = sootSignature.substring(1, sootSignature.length() - 1).split(":");
 
         String className = parts[0];
         String[] method = parts[1].trim().split(" ");
@@ -20,7 +20,9 @@ public class SootUtils {
         if (methodName.contains("<init>"))
             methodName = getSimpleName(className);
 
-        return new Method(methodName, Arrays.asList(paramList), returnType, className);
+        methodName = className + "." + methodName;
+
+        return new Method(methodName, Arrays.asList(paramList), returnType);
     }
 
     /**
