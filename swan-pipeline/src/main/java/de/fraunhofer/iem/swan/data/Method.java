@@ -177,8 +177,10 @@ public class Method {
             return new HashSet<>();
     }
 
-    public void addCategoryClassified(Category category) {
-        this.cwe.add(category);
+    public void addCategory(Category category) {
+        if (category.isCwe())
+            cwe.add(category);
+        else srm.add(category);
     }
 
     // Inherited from SootMethodAndClass (from Soot Infoflow)

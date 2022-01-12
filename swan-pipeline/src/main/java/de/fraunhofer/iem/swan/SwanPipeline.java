@@ -7,6 +7,7 @@ import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
+import de.fraunhofer.iem.swan.model.engine.Meka;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,12 +55,6 @@ public class SwanPipeline {
         //Train and evaluate model for SRM and CWE categories
         ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options, testDataset.getMethods());
         modelEvaluator.trainModel();
-
-        //TODO export final list to JSON file
-        String outputFile = options.getOutputDir() + File.separator + "swan-srm-cwe-list.json";
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File(outputFile), dataset);
-        logger.info("SRM/CWE list exported to {}", outputFile);
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
         logger.info("Total runtime {} minutes", analysisTime / 60000);
