@@ -279,12 +279,13 @@ public class Util {
 
         if (SwanPipeline.options.isExportArffData()) {
             // Save arff data.
-
             saver.setInstances(instances);
 
-
             try {
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + instances.relationName() + ".arff";
+
+                String relationName = instances.relationName().substring(0, instances.relationName().indexOf(":"));
+
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + relationName + ".arff";
                 saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {
