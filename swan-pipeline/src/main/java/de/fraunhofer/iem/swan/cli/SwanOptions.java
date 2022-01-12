@@ -22,6 +22,27 @@ public class SwanOptions {
     private boolean isDocumented;
     private int iterations;
     private double trainTestSplit;
+    private String phase;
+    private double predictionThreshold;
+
+    public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
+                       List<String> featureSet, String learningMode, List<String> srmClasses,
+                       List<String> cweClasses, boolean exportArffData, boolean isDocumented,
+                       int iterations, double trainTestSplit, String phase) {
+        this.testDataDir = testDataDir;
+        this.trainDataDir = trainDataDir;
+        this.datasetJson = datasetJson;
+        this.outputDir = outputDir;
+        this.featureSet = featureSet;
+        this.learningMode = learningMode;
+        this.srmClasses = srmClasses;
+        this.cweClasses = cweClasses;
+        this.exportArffData = exportArffData;
+        this.isDocumented = isDocumented;
+        this.iterations = iterations;
+        this.trainTestSplit = trainTestSplit;
+        this.phase = phase;
+    }
 
     public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
                        List<String> featureSet, String learningMode, List<String> srmClasses, List<String> cweClasses,
@@ -138,6 +159,22 @@ public class SwanOptions {
 
     public void setTrainTestSplit(double trainTestSplit) {
         this.trainTestSplit = trainTestSplit;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public void setPhase(String phase) {
+        this.phase = phase;
+    }
+
+    public double getPredictionThreshold() {
+        return predictionThreshold;
+    }
+
+    public void setPredictionThreshold(double predictionThreshold) {
+        this.predictionThreshold = predictionThreshold;
     }
 
     @Override

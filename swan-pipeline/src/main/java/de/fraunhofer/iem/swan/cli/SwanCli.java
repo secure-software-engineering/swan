@@ -31,7 +31,7 @@ public class SwanCli {
         }
 
         if(options.getSrmClasses().contains("all")){
-            options.setSrmClasses(Arrays.asList("source", "sink", "sanitizer", "authentication", "relevant"));
+            options.setSrmClasses(Arrays.asList("source", "sink", "sanitizer", "authentication"));
         }
 
         if(options.getCweClasses().contains("all")){

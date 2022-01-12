@@ -25,8 +25,8 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-f", "--feature"}, description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
 
-    @CommandLine.Option(names = {"-l", "--learning"}, description = {"Learning modes: manual, auto"})
-    private String learningMode = "manual";
+    @CommandLine.Option(names = {"-l", "--learning"}, description = {"Learning modes: meka, weka, ml-plan"})
+    private String learningMode = "meka";
 
     @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
     private List<String> srmClasses = Collections.singletonList("all");
@@ -46,6 +46,13 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-sp", "--training-split"}, description = {"Percentage for training"})
     private double split = 0.7;
 
+    @CommandLine.Option(names = {"-p", "--phase"}, description = {"Phase: validate, predict"})
+    private String phase = "predict";
+
+    @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
+    private double predictionThreshold = 0.5;
+
+
     @Override
     public Integer call() throws Exception {
 
@@ -60,7 +67,9 @@ public class CliRunner implements Callable<Integer> {
                 exportArffData,
                 isDocumented,
                 iterations,
-                split);
+                split,
+                phase);
+        options.setPredictionThreshold(predictionThreshold);
 
         return new SwanCli().run(options);
     }

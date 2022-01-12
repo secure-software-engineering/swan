@@ -31,15 +31,21 @@ import java.util.List;
 public class ModelEvaluator {
 
     public enum Mode {
-        MANUAL,
-        AUTOMATIC
+        WEKA,
+        MEKA,
+        MLPLAN
+    }
+
+    public enum Phase {
+        VALIDATE,
+        PREDICT
     }
 
     private FeaturesHandler features;
     private SwanOptions options;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public ModelEvaluator(FeaturesHandler features, SwanOptions options) {
+    public ModelEvaluator(FeaturesHandler features, SwanOptions options, Set<Method> methods) {
         this.features = features;
         this.options = options;
     }
@@ -49,8 +55,7 @@ public class ModelEvaluator {
      *
      * @return Hashmap containing the name of the classifier and it's F-Measure
      */
-    public HashMap<String, HashMap<String, String>> trainModel() {
-
+    public void trainModel() {
 
         switch (Mode.valueOf(options.getLearningMode().toUpperCase())) {
 
