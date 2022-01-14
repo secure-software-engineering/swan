@@ -49,8 +49,8 @@ public class SwanPipeline {
         testDataset.load(dataset.getMethods());
 
         //Initialize and populate features
-        FeaturesHandler featuresHandler = new FeaturesHandler(dataset, testDataset, options);
-        featuresHandler.createFeatures();
+        FeatureSetSelector featureSetSelector = new FeatureSetSelector();
+        IFeatureSet featureSet = featureSetSelector.select(dataset, testDataset, options);
 
         //Train and evaluate model for SRM and CWE categories
         ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options, testDataset.getMethods());
