@@ -2,7 +2,9 @@ package de.fraunhofer.iem.swan.model;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.IFeatureSet;
+import de.fraunhofer.iem.swan.features.MekaFeatureSet;
+import de.fraunhofer.iem.swan.features.WekaFeatureSet;
 import de.fraunhofer.iem.swan.model.engine.MLPlan;
 import de.fraunhofer.iem.swan.model.engine.Meka;
 import de.fraunhofer.iem.swan.model.engine.Weka;
@@ -29,12 +31,12 @@ public class ModelEvaluator {
         PREDICT
     }
 
-    private FeaturesHandler features;
+    private IFeatureSet features;
     private SwanOptions options;
     private Set<Method> methods;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public ModelEvaluator(FeaturesHandler features, SwanOptions options, Set<Method> methods) {
+    public ModelEvaluator(IFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
         this.options = options;
         this.methods = methods;
@@ -51,18 +53,18 @@ public class ModelEvaluator {
 
             case MEKA:
                 logger.info("Evaluating model with MEKA");
-                Meka meka = new Meka(features, options, methods);
+                Meka meka = new Meka((MekaFeatureSet)features, options, methods);
                 meka.trainModel();
                 break;
             case WEKA:
                 logger.info("Evaluating model with WEKA");
-                Weka weka = new Weka(features, options);
+                Weka weka = new Weka((WekaFeatureSet) features, options);
                 weka.trainModel();
                 break;
             case MLPLAN:
                 logger.info("Evaluating model with ML-PLAN");
                 MLPlan mlPlan = new MLPlan();
-                mlPlan.evaluateDataset(features.getInstances().get("train"));
+                mlPlan.evaluateDataset(((WekaFeatureSet)features).getInstances().get("train"));
                 break;
         }
     }

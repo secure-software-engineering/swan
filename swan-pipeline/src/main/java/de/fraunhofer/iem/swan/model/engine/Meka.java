@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.model.engine;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
@@ -22,12 +22,12 @@ import java.util.Set;
 
 public class Meka {
 
-    private FeaturesHandler features;
+    private MekaFeatureSet features;
     private SwanOptions options;
     private Set<Method> methods;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public Meka(FeaturesHandler features, SwanOptions options, Set<Method> methods) {
+    public Meka(MekaFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
         this.options = options;
         this.methods = methods;

@@ -108,7 +108,7 @@ public class MLPlan {
                 Instances testInstances = testLoader.getDataSet();
                 testInstances.setClassIndex(testInstances.numAttributes() - 1);
 
-                monteCarloValidator.evaluate(optimizedClassifier, trainInstances, testInstances, iteration);
+                monteCarloValidator.evaluate(optimizedClassifier, trainInstances, testInstances);
 
 
                 /* evaluate solution produced by mlplan */

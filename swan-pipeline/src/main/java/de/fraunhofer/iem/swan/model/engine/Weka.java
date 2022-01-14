@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.model.engine;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.WekaFeatureSet;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.model.MonteCarloValidator;
 import org.slf4j.Logger;
@@ -31,11 +31,11 @@ import java.util.List;
  */
 public class Weka {
 
-    private FeaturesHandler features;
+    private WekaFeatureSet features;
     private SwanOptions options;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public Weka(FeaturesHandler features, SwanOptions options) {
+    public Weka(WekaFeatureSet features, SwanOptions options) {
         this.features = features;
         this.options = options;
     }
@@ -47,14 +47,11 @@ public class Weka {
      */
     public HashMap<String, HashMap<String, String>> trainModel() {
 
-
         //Phase 1: classify SRM classes
         for (String srm : options.getSrmClasses())
             runManualEvaluation(features.getInstances().get(srm));
 
-        //Filter methods from CWE instances that were not classified
-        //into one of the SRM classes
-
+        //Filter methods from CWE instances that were not classified into one of the SRM classes
         //Phase 2: classify CWE classes
         for (String cwe : options.getCweClasses())
             runManualEvaluation(features.getInstances().get(cwe));
@@ -66,6 +63,9 @@ public class Weka {
      * @return
      */
     public HashMap<String, HashMap<String, String>> runManualEvaluation(Instances instances) {
+
+        String category = instances.attribute(instances.numAttributes()-1).name();
+        instances.setClass(instances.attribute(instances.numAttributes()-1));
 
         LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
 
@@ -85,7 +85,7 @@ public class Weka {
             evaluator.monteCarloValidate(instances, classifier, options.getTrainTestSplit(), options.getIterations());
 
             for (String key : evaluator.getFMeasure().keySet())
-                logger.info("F-measure for {} using {}: {}", key, classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
+                logger.info("F-measure for {}({}) using {}: {}", category, key , classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
         }
         return fMeasure;
     }
