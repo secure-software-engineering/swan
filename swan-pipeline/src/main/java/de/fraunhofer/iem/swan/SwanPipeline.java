@@ -1,17 +1,16 @@
 package de.fraunhofer.iem.swan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.FeatureSetSelector;
+import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
-import de.fraunhofer.iem.swan.model.engine.Meka;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
+
 import java.io.IOException;
 
 /**
@@ -53,7 +52,7 @@ public class SwanPipeline {
         IFeatureSet featureSet = featureSetSelector.select(dataset, testDataset, options);
 
         //Train and evaluate model for SRM and CWE categories
-        ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options, testDataset.getMethods());
+        ModelEvaluator modelEvaluator = new ModelEvaluator(featureSet, options, testDataset.getMethods());
         modelEvaluator.trainModel();
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;

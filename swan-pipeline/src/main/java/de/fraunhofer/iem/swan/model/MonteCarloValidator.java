@@ -1,6 +1,5 @@
 package de.fraunhofer.iem.swan.model;
 
-import de.fraunhofer.iem.swan.util.Util;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.output.prediction.AbstractOutput;
@@ -40,12 +39,10 @@ public class MonteCarloValidator {
      * @param classifier      classifier to model creation
      * @param trainPercentage percentage of instances for train set
      * @param iterations      number of evaluation iterations
-     * @return average F-score for iterations
      */
-    public HashMap<String, ArrayList<Double>> monteCarloValidate(Instances instances, Classifier classifier, double trainPercentage, int iterations) {
+    public void monteCarloValidate(Instances instances, Classifier classifier, double trainPercentage, int iterations) {
 
         for (int i = 0; i < iterations; i++) {
-            Util.exportInstancesToArff(instances);
 
             int trainSize = (int) Math.round(instances.numInstances() * trainPercentage);
             int testSize = instances.numInstances() - trainSize;
@@ -56,12 +53,11 @@ public class MonteCarloValidator {
             Instances trainInstances = new Instances(instances, 0, trainSize);
             Instances testInstances = new Instances(instances, trainSize, testSize);
 
-            evaluate(classifier, trainInstances, testInstances, i);
+            evaluate(classifier, trainInstances, testInstances);
         }
-        return fMeasure;
     }
 
-    public ArrayList<String> evaluate(Classifier classifier, Instances trainInstances, Instances testInstances, int iteration) {
+    public ArrayList<String> evaluate(Classifier classifier, Instances trainInstances, Instances testInstances) {
 
         Evaluation eval = null;
         try {
@@ -83,7 +79,7 @@ public class MonteCarloValidator {
             for (String result : output) {
                 String[] entry = result.split(",");
 
-                if (!entry[2].contains("none")) {
+                if (!entry[2].contains("0")) {
                     predictions.add(entry[5].replace("'", ""));
                 }
             }
@@ -100,7 +96,7 @@ public class MonteCarloValidator {
 
             String currentClass = instances.classAttribute().value(c);
 
-            if (!currentClass.contentEquals("none")) {
+            if (!currentClass.contentEquals("0")) {
                 if (!fMeasure.containsKey(currentClass))
                     fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(eval.fMeasure(c))));
                 else {

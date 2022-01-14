@@ -42,6 +42,7 @@ public class Method {
 
     public Method() {
         cwe = new HashSet<>();
+        srm = new HashSet<>();
     }
 
     public Method(String name, String returnType, String className) {
@@ -49,20 +50,30 @@ public class Method {
         this.className = className;
         this.returnType = returnType;
         this.parameters = new ArrayList<>();
+        cwe = new HashSet<>();
+        srm = new HashSet<>();
     }
 
-    public Method(String name, List<String> parameters, String returnType, String className) {
+    public Method(String name, List<String> parameters, String returnType) {
         this.name = name;
-        this.className = className;
         this.returnType = returnType;
         this.parameters = parameters;
+        cwe = new HashSet<>();
+        srm = new HashSet<>();
+        framework = "";
+        link = "";
+        comment = "";
+        discovery = "";
+        dataIn = new RelevantPart();
+        dataOut = new RelevantPart();
+        sourceJar = "";
     }
 
     public Method(SootMethod sm) {
         this.name = sm.getName();
         this.className = sm.getDeclaringClass().getName();
         this.returnType = sm.getReturnType().toString();
-        this.parameters = new ArrayList<String>();
+        this.parameters = new ArrayList<>();
         for (Type p : sm.getParameterTypes())
             this.parameters.add(p.toString());
     }
@@ -71,7 +82,7 @@ public class Method {
         this.name = methodAndClass.name;
         this.className = methodAndClass.className;
         this.returnType = methodAndClass.returnType;
-        this.parameters = new ArrayList<String>(methodAndClass.parameters);
+        this.parameters = new ArrayList<>(methodAndClass.parameters);
     }
 
     public Method deriveWithNewClass(String className) {
@@ -355,9 +366,7 @@ public class Method {
             return false;
         if (!this.parameters.equals(otherMethod.parameters))
             return false;
-        if (!this.className.equals(otherMethod.className))
-            return false;
-        return true;
+        return this.className.equals(otherMethod.className);
     }
 
     @Override
