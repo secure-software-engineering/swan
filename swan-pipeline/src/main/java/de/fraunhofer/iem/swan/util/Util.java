@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
 import de.fraunhofer.iem.swan.SwanPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import de.fraunhofer.iem.swan.features.code.type.IFeature.Type;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
@@ -33,7 +31,7 @@ public class Util {
      * @return The purged set of methods without duplicates
      */
     public static Set<Method> sanityCheck(Set<Method> methods, Set<Method> init) {
-        Map<String, Method> signatureToMethod = new HashMap<String, Method>();
+        Map<String, Method> signatureToMethod = new HashMap<>();
         for (Method m1 : methods) {
             String sig = m1.getSignature();
             Method m2 = signatureToMethod.get(sig);
@@ -45,7 +43,7 @@ public class Util {
             }
         }
 
-        Set<Method> ret = new HashSet<Method>();
+        Set<Method> ret = new HashSet<>();
         for (Method m : signatureToMethod.values()) {
             if (!init.contains(m))
                 ret.add(m);
@@ -57,7 +55,7 @@ public class Util {
     }
 
     public static void printStatistics(String message, Set<Method> methods) {
-        Map<Category, Integer> counters = new HashMap<Category, Integer>();
+        Map<Category, Integer> counters = new HashMap<>();
         for (Method am : methods) {
             for (Category category : am.getSrm()) {
                 if (counters.containsKey(category)) {
@@ -68,17 +66,17 @@ public class Util {
             }
         }
 
-        logger.info(message + ": total methods={}, categories={}", methods.size(), counters.toString());
+        logger.info(message + ": total methods={}, categories={}", methods.size(), counters);
     }
 
     public static Set<String> getAllClassesFromDirectory(String dir) throws IOException {
-        Set<String> classes = new HashSet<String>();
+        Set<String> classes = new HashSet<>();
         File folder = new File(dir);
         File[] listOfFiles = folder.listFiles();
         if (listOfFiles != null) {
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].getName().endsWith(".jar"))
-                    classes.addAll(getAllClassesFromJar(listOfFiles[i].getAbsolutePath()));
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.getName().endsWith(".jar"))
+                    classes.addAll(getAllClassesFromJar(listOfFile.getAbsolutePath()));
             }
         }
         return classes;
@@ -89,12 +87,12 @@ public class Util {
         File folder = new File(dir);
         File[] listOfFiles = folder.listFiles();
         if (listOfFiles != null) {
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].getName().endsWith(".jar"))
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.getName().endsWith(".jar"))
 
 
-                    for (String str : getAllClassesFromJar(listOfFiles[i].getAbsolutePath())) {
-                        classes.put(str, listOfFiles[i].getName());
+                    for (String str : getAllClassesFromJar(listOfFile.getAbsolutePath())) {
+                        classes.put(str, listOfFile.getName());
                     }
 
                 //	classes.put(listOfFiles[i].getName() , getAllClassesFromJar(listOfFiles[i].getAbsolutePath()));
@@ -104,7 +102,7 @@ public class Util {
     }
 
     private static Set<String> getAllClassesFromJar(String jarFile) throws IOException {
-        Set<String> classes = new HashSet<String>();
+        Set<String> classes = new HashSet<>();
         ZipInputStream zip = new ZipInputStream(new FileInputStream(jarFile));
         for (ZipEntry entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
             if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
@@ -138,7 +136,7 @@ public class Util {
 
     /**
      * Creates artificial annotations for non-overridden methods in subclasses. If
-     * the class A implements some method foo() which is marked as e.g. a source and
+     *  class A implements some method foo() which is marked as e.g. a source and
      * class B extends A, but does not overwrite foo(), B.foo() must also be a
      * source.
      *
@@ -214,16 +212,16 @@ public class Util {
 
     public static Set<String> getFiles(String fileInDirectory) throws IOException {
         String directory = fileInDirectory.substring(0, fileInDirectory.lastIndexOf(File.separator));
-        String fileName = fileInDirectory.substring(fileInDirectory.lastIndexOf(File.separator) + 1,
-                fileInDirectory.length());
-        Set<String> files = new HashSet<String>();
+        String fileName = fileInDirectory.substring(fileInDirectory.lastIndexOf(File.separator) + 1
+        );
+        Set<String> files = new HashSet<>();
         File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile() && listOfFiles[i].getName().endsWith(".txt")
-                    && !listOfFiles[i].getName().endsWith("_" + Category.NONE + ".txt")
-                    && !listOfFiles[i].getName().equals(fileName)) {
-                files.add(listOfFiles[i].getCanonicalPath());
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile() && listOfFile.getName().endsWith(".txt")
+                    && !listOfFile.getName().endsWith("_" + Category.NONE + ".txt")
+                    && !listOfFile.getName().equals(fileName)) {
+                files.add(listOfFile.getCanonicalPath());
             }
         }
         return files;
@@ -272,19 +270,23 @@ public class Util {
     /**
      * Export the instances to an ARFF file.
      *
-     * @param instances
+     * @param instances WEKA instances to be exported
      */
     public static String exportInstancesToArff(Instances instances) {
         ArffSaver saver = new ArffSaver();
 
         if (SwanPipeline.options.isExportArffData()) {
             // Save arff data.
-
             saver.setInstances(instances);
 
-
             try {
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + instances.relationName() + ".arff";
+
+                String relationName = instances.relationName();
+
+                if (instances.relationName().contains(":"))
+                    relationName = relationName.substring(0, instances.relationName().indexOf(":"));
+
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + relationName + ".arff";
                 saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {

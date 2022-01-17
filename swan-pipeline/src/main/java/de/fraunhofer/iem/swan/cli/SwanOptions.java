@@ -15,23 +15,44 @@ public class SwanOptions {
     private String datasetJson;
     private String outputDir;
     private List<String> featureSet;
-    private String learningMode;
+    private String toolkit;
     private List<String> srmClasses;
     private List<String> cweClasses;
     private boolean exportArffData;
     private boolean isDocumented;
     private int iterations;
     private double trainTestSplit;
+    private String phase;
+    private double predictionThreshold;
 
     public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
-                       List<String> featureSet, String learningMode, List<String> srmClasses, List<String> cweClasses,
+                       List<String> featureSet, String toolkit, List<String> srmClasses,
+                       List<String> cweClasses, boolean exportArffData, boolean isDocumented,
+                       int iterations, double trainTestSplit, String phase) {
+        this.testDataDir = testDataDir;
+        this.trainDataDir = trainDataDir;
+        this.datasetJson = datasetJson;
+        this.outputDir = outputDir;
+        this.featureSet = featureSet;
+        this.toolkit = toolkit;
+        this.srmClasses = srmClasses;
+        this.cweClasses = cweClasses;
+        this.exportArffData = exportArffData;
+        this.isDocumented = isDocumented;
+        this.iterations = iterations;
+        this.trainTestSplit = trainTestSplit;
+        this.phase = phase;
+    }
+
+    public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
+                       List<String> featureSet, String toolkit, List<String> srmClasses, List<String> cweClasses,
                        boolean exportArffData, boolean isDocumented, int iterations, double trainTestSplit) {
         this.testDataDir = testDataDir;
         this.trainDataDir = trainDataDir;
         this.datasetJson = datasetJson;
         this.outputDir = outputDir;
         this.featureSet = featureSet;
-        this.learningMode = learningMode;
+        this.toolkit = toolkit;
         this.srmClasses = srmClasses;
         this.cweClasses = cweClasses;
         this.exportArffData = exportArffData;
@@ -80,12 +101,12 @@ public class SwanOptions {
         this.featureSet = featureSet;
     }
 
-    public String getLearningMode() {
-        return learningMode;
+    public String getToolkit() {
+        return toolkit;
     }
 
-    public void setLearningMode(String learningMode) {
-        this.learningMode = learningMode;
+    public void setToolkit(String toolkit) {
+        this.toolkit = toolkit;
     }
 
     public List<String> getSrmClasses() {
@@ -140,6 +161,22 @@ public class SwanOptions {
         this.trainTestSplit = trainTestSplit;
     }
 
+    public String getPhase() {
+        return phase;
+    }
+
+    public void setPhase(String phase) {
+        this.phase = phase;
+    }
+
+    public double getPredictionThreshold() {
+        return predictionThreshold;
+    }
+
+    public void setPredictionThreshold(double predictionThreshold) {
+        this.predictionThreshold = predictionThreshold;
+    }
+
     @Override
     public String toString() {
         return "SwanOptions{" +
@@ -148,7 +185,7 @@ public class SwanOptions {
                 ", datasetJson='" + datasetJson + '\'' +
                 ", outputDir='" + outputDir + '\'' +
                 ", featureSet='" + featureSet + '\'' +
-                ", learningMode='" + learningMode + '\'' +
+                ", learningMode='" + toolkit + '\'' +
                 ", srmClasses=" + srmClasses +
                 ", cweClasses=" + cweClasses +
                 ", exportArffData=" + exportArffData +

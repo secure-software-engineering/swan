@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.apache.commons.lang3.StringUtils;
 import soot.SootMethod;
 import soot.Type;
@@ -30,7 +30,7 @@ public class Method {
     private String link;
     private String comment;
     private String discovery;
-    private RelevantPart dataIn ;
+    private RelevantPart dataIn;
     private RelevantPart dataOut;
     @JsonProperty("type")
     private Set<Category> srm;
@@ -42,6 +42,7 @@ public class Method {
 
     public Method() {
         cwe = new HashSet<>();
+        srm = new HashSet<>();
     }
 
     public Method(String name, String returnType, String className) {
@@ -49,20 +50,30 @@ public class Method {
         this.className = className;
         this.returnType = returnType;
         this.parameters = new ArrayList<>();
+        cwe = new HashSet<>();
+        srm = new HashSet<>();
     }
 
-    public Method(String name, List<String> parameters, String returnType, String className) {
+    public Method(String name, List<String> parameters, String returnType) {
         this.name = name;
-        this.className = className;
         this.returnType = returnType;
         this.parameters = parameters;
+        cwe = new HashSet<>();
+        srm = new HashSet<>();
+        framework = "";
+        link = "";
+        comment = "";
+        discovery = "";
+        dataIn = new RelevantPart();
+        dataOut = new RelevantPart();
+        sourceJar = "";
     }
 
     public Method(SootMethod sm) {
         this.name = sm.getName();
         this.className = sm.getDeclaringClass().getName();
         this.returnType = sm.getReturnType().toString();
-        this.parameters = new ArrayList<String>();
+        this.parameters = new ArrayList<>();
         for (Type p : sm.getParameterTypes())
             this.parameters.add(p.toString());
     }
@@ -71,11 +82,11 @@ public class Method {
         this.name = methodAndClass.name;
         this.className = methodAndClass.className;
         this.returnType = methodAndClass.returnType;
-        this.parameters = new ArrayList<String>(methodAndClass.parameters);
+        this.parameters = new ArrayList<>(methodAndClass.parameters);
     }
 
     public Method deriveWithNewClass(String className) {
-        Method m = new Method(this.getName(), this.getParameters(), this.getReturnType(), className);
+        Method m = new Method(className + "." + this.getName(), this.getParameters(), this.getReturnType());
         m.setFramework(this.framework);
         m.setLink(this.link);
         m.setComment(this.comment);
@@ -93,6 +104,7 @@ public class Method {
      *
      * @return True if there is an annotation for this method, otherwise false.
      */
+    @JsonIgnore
     public boolean isAnnotated() {
         return !this.srm.isEmpty();
     }
@@ -149,9 +161,11 @@ public class Method {
         return srm;
     }
 
+    @JsonIgnore
     public Set<Category> getAuthSrm() {
-
-        return srm.stream().filter(Category::isAuthentication).collect(Collectors.toSet());
+        if (srm != null || cwe != null)
+            return srm.stream().filter(Category::isAuthentication).collect(Collectors.toSet());
+        else return new HashSet<>();
     }
 
     public void setSrm(Set<Category> srm) {
@@ -166,13 +180,18 @@ public class Method {
         return this.cwe;
     }
 
-
-    public Set<Category> getAllCategories(){
-        return Stream.of(srm,cwe).flatMap(Collection::stream).collect(Collectors.toSet());
+    @JsonIgnore
+    public Set<Category> getAllCategories() {
+        if (srm != null || cwe != null)
+            return Stream.of(srm, cwe).flatMap(Collection::stream).collect(Collectors.toSet());
+        else
+            return new HashSet<>();
     }
 
-    public void addCategoryClassified(Category category) {
-        this.cwe.add(category);
+    public void addCategory(Category category) {
+        if (category.isCwe())
+            cwe.add(category);
+        else srm.add(category);
     }
 
     // Inherited from SootMethodAndClass (from Soot Infoflow)
@@ -180,10 +199,11 @@ public class Method {
         return this.name;
     }
 
+    @JsonIgnore
     public String getClassName() {
 
-        if(name.contains("."))
-        return name.substring(0, name.lastIndexOf("."));
+        if (name.contains("."))
+            return name.substring(0, name.lastIndexOf("."));
         else
             return name;
     }
@@ -196,12 +216,12 @@ public class Method {
         return this.parameters;
     }
 
+    @JsonIgnore
     public String getSubSignature() {
         if (subSignature != null)
             return subSignature;
 
-        StringBuilder sb = new StringBuilder(
-                10 + this.returnType.length() + this.name.length() + (this.parameters.size() * 30));
+        StringBuilder sb = new StringBuilder();
         if (!this.returnType.isEmpty()) {
             sb.append(this.returnType);
             sb.append(" ");
@@ -220,18 +240,19 @@ public class Method {
         return this.subSignature;
     }
 
+    @JsonIgnore
     public String getTrimmedSignature() {
 
         String signature = getSignature();
         return signature.substring(1, signature.length() - 1);
     }
 
+    @JsonIgnore
     public String getSignature() {
         if (signature != null)
             return signature;
 
-        StringBuilder sb = new StringBuilder(10 + getClassName().length() + this.returnType.length()
-                + this.name.length() + (this.parameters.size() * 30));
+        StringBuilder sb = new StringBuilder();
         sb.append("<");
         sb.append(getClassName());
         sb.append(": ");
@@ -255,8 +276,10 @@ public class Method {
 
     /**
      * Returns method's signature
+     *
      * @return Method's signature
      */
+    @JsonIgnore
     public String getSimpleSignature() {
 
         return trimProperty(getReturnType()) + " " + trimProperty(getName()) + " (" + StringUtils.join(getParameters(true), ", ") + ")";
@@ -264,9 +287,11 @@ public class Method {
 
     /**
      * Returns the list of parameters
+     *
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return List of parameters
      */
+    @JsonIgnore
     public List<String> getParameters(boolean isFullyQualifiedName) {
 
         List<String> param = new ArrayList<>();
@@ -283,6 +308,7 @@ public class Method {
 
     /**
      * Trim argument and returns last string
+     *
      * @param property Classname or data to be trimmed
      * @return Trimmed data
      */
@@ -296,6 +322,7 @@ public class Method {
      *
      * @return Java-style signature
      */
+    @JsonIgnore
     public String getJavaSignature() {
 
         String methodName = getName();
@@ -305,7 +332,8 @@ public class Method {
         return this.returnType + " " + this.className + "." + methodName + "(" + StringUtils.join(this.parameters, ", ") + ")";
     }
 
-    public String getArffSafeSignature(){
+    @JsonIgnore
+    public String getArffSafeSignature() {
 
         return getSignature().replace(",", "+");
     }
@@ -338,15 +366,13 @@ public class Method {
             return false;
         if (!this.parameters.equals(otherMethod.parameters))
             return false;
-        if (!this.className.equals(otherMethod.className))
-            return false;
-        return true;
+        return this.className.equals(otherMethod.className);
     }
 
     @Override
     public int hashCode() {
         if (this.hashCode == 0)
-            this.hashCode = this.name.hashCode()  * 5;
+            this.hashCode = this.name.hashCode() * 5;
         // The parameter list is available from the outside, so we can't cache it
         return this.hashCode + this.parameters.hashCode() * 7;
     }

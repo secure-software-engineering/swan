@@ -1,7 +1,9 @@
 package de.fraunhofer.iem.swan.io.dataset;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.fraunhofer.iem.swan.data.Method;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents SRM JSON file.
@@ -9,6 +11,7 @@ import java.util.Set;
 public class SrmList {
 
     private Set<Method> methods;
+    @JsonIgnore
     private String classpath;
 
     public SrmList() {
@@ -32,5 +35,11 @@ public class SrmList {
 
     public void setMethods(Set<Method> methods) {
         this.methods = methods;
+    }
+
+    public void removeUnclassifiedMethods() {
+
+        methods = methods.stream().filter(m -> m.getAllCategories().size() > 0)
+                .collect(Collectors.toSet());
     }
 }

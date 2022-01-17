@@ -31,6 +31,7 @@ public class CodeFeatureHandler {
     }
 
     private void addFeature(IFeature feature, Set<Category> categoriesForFeature) {
+
         for (Category category : categoriesForFeature) {
             Set<IFeature> typeFeatures = featuresMap.get(category);
             typeFeatures.add(feature);

@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.features.FeaturesHandler;
+import de.fraunhofer.iem.swan.features.FeatureSetSelector;
+import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
@@ -10,7 +10,7 @@ import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
+
 import java.io.IOException;
 
 /**
@@ -48,18 +48,12 @@ public class SwanPipeline {
         testDataset.load(dataset.getMethods());
 
         //Initialize and populate features
-        FeaturesHandler featuresHandler = new FeaturesHandler(dataset, testDataset, options);
-        featuresHandler.createFeatures();
+        FeatureSetSelector featureSetSelector = new FeatureSetSelector();
+        IFeatureSet featureSet = featureSetSelector.select(dataset, testDataset, options);
 
         //Train and evaluate model for SRM and CWE categories
-        ModelEvaluator modelEvaluator = new ModelEvaluator(featuresHandler, options);
+        ModelEvaluator modelEvaluator = new ModelEvaluator(featureSet, options, testDataset.getMethods());
         modelEvaluator.trainModel();
-
-        //TODO export final list to JSON file
-        String outputFile = options.getOutputDir() + File.separator + "swan-srm-cwe-list.json";
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File(outputFile), dataset);
-        logger.info("SRM/CWE list exported to {}", outputFile);
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
         logger.info("Total runtime {} minutes", analysisTime / 60000);

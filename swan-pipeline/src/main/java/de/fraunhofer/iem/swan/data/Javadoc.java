@@ -1,6 +1,7 @@
 
 package de.fraunhofer.iem.swan.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -42,9 +43,11 @@ public class Javadoc {
         this.classComment = classComment;
     }
 
+    @JsonIgnore
     public String getMergedComments() {
         return methodComment + " " + classComment;
     }
+
     @Override
     public String toString() {
         return "Javadoc{" +
