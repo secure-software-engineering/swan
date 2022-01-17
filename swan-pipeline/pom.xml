@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.upb.cs.swt</groupId>
+    <groupId>de.fraunhofer.iem</groupId>
     <artifactId>swan</artifactId>
     <version>3.0.0</version>
     <packaging>jar</packaging>
@@ -39,7 +39,7 @@
         <developer>
             <id>johnson</id>
             <name>Oshando Johnson</name>
-            <email>oshando@iem.fraunhofer.de</email>
+            <email>oshando.johnson@iem.fraunhofer.de</email>
         </developer>
         <developer>
             <id>budde</id>
