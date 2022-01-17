@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
     public WekaFeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options) {
-        super(trainData, testData, options, ModelEvaluator.Mode.WEKA);
+        super(trainData, testData, options, ModelEvaluator.Toolkit.WEKA);
     }
 
     /**

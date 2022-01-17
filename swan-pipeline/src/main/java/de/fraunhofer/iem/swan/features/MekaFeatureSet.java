@@ -17,7 +17,7 @@ import java.util.*;
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
     public MekaFeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options) {
-        super(trainData, testData, options, ModelEvaluator.Mode.MEKA);
+        super(trainData, testData, options, ModelEvaluator.Toolkit.MEKA);
     }
 
     /**

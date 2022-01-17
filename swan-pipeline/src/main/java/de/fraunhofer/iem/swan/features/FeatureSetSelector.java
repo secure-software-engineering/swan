@@ -9,7 +9,7 @@ public class FeatureSetSelector {
 
     public IFeatureSet select(SrmList trainData, SourceFileLoader testData, SwanOptions options) {
 
-        switch (ModelEvaluator.Mode.valueOf(options.getLearningMode().toUpperCase())) {
+        switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
             case MEKA:
                 MekaFeatureSet mekaFeatureSet = new MekaFeatureSet(trainData, testData, options);

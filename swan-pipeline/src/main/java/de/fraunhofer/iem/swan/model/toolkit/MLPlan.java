@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.model.engine;
+package de.fraunhofer.iem.swan.model.toolkit;
 
 import ai.libs.jaicore.ml.classification.loss.dataset.EClassificationPerformanceMeasure;
 import ai.libs.jaicore.ml.core.dataset.schema.attribute.IntBasedCategoricalAttribute;

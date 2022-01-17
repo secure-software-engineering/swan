@@ -29,7 +29,7 @@ abstract class FeatureSet {
     protected SourceFileLoader testData;
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> instances;
-    protected ModelEvaluator.Mode mode;
+    protected ModelEvaluator.Toolkit toolkit;
 
     /**
      * Available feature sets:
@@ -58,12 +58,12 @@ abstract class FeatureSet {
         }
     }
 
-    public FeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options, ModelEvaluator.Mode mode) {
+    public FeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options, ModelEvaluator.Toolkit toolkit) {
         this.instanceMap = new HashMap<>();
         this.options = options;
         this.trainData = trainData;
         this.testData = testData;
-        this.mode = mode;
+        this.toolkit = toolkit;
         instances = new HashMap<>();
     }
 
@@ -232,7 +232,7 @@ abstract class FeatureSet {
             for (Category cat : categories) {
                 if (cat.isAuthentication() && !method.getAuthSrm().isEmpty()) {
 
-                    if (mode == ModelEvaluator.Mode.MEKA)
+                    if (toolkit == ModelEvaluator.Toolkit.MEKA)
                         inst.setValue(instances.attribute(cat.getId()), "1");
                     else {
                         for (Category auth : method.getAuthSrm()) {
@@ -302,7 +302,7 @@ abstract class FeatureSet {
                 inst.setDataset(instances);
                 isNewInstance = true;
 
-                switch (mode) {
+                switch (toolkit) {
                     case MEKA:
                         for (Category cat : categories) {
                             if (method.getAllCategories().contains(cat) || (cat.isAuthentication() && !method.getAuthSrm().isEmpty())) {

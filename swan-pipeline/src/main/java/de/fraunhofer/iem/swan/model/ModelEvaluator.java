@@ -5,9 +5,9 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
-import de.fraunhofer.iem.swan.model.engine.MLPlan;
-import de.fraunhofer.iem.swan.model.engine.Meka;
-import de.fraunhofer.iem.swan.model.engine.Weka;
+import de.fraunhofer.iem.swan.model.toolkit.MLPlan;
+import de.fraunhofer.iem.swan.model.toolkit.Meka;
+import de.fraunhofer.iem.swan.model.toolkit.Weka;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Set;
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class ModelEvaluator {
 
-    public enum Mode {
+    public enum Toolkit {
         WEKA,
         MEKA,
         MLPLAN
@@ -49,7 +49,7 @@ public class ModelEvaluator {
      */
     public void trainModel() {
 
-        switch (Mode.valueOf(options.getLearningMode().toUpperCase())) {
+        switch (Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
             case MEKA:
                 logger.info("Evaluating model with MEKA");

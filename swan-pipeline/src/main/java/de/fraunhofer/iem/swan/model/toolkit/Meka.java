@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.model.engine;
+package de.fraunhofer.iem.swan.model.toolkit;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
