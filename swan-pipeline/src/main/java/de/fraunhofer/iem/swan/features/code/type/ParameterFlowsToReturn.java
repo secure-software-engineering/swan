@@ -16,63 +16,58 @@ import soot.jimple.ReturnStmt;
  * Feature that checks whether a parameter flows to the sink.
  *
  * @author Steven Arzt, Siegfried Rasthofer
- *
  */
 public class ParameterFlowsToReturn extends AbstractSootFeature {
 
-  public ParameterFlowsToReturn(String cp) {
-    super(cp);
-  }
-
-  // TODO: Better analysis.
-  @Override
-  public Type appliesInternal(Method method) {
-    SootMethod sm = getSootMethod(method);
-
-    if (sm == null) {
-      return Type.NOT_SUPPORTED;
+    public ParameterFlowsToReturn() {
+        super();
     }
 
-    // We are only interested in setters
-    if (!sm.isConcrete()) return Type.NOT_SUPPORTED;
+    // TODO: Better analysis.
+    @Override
+    public Type appliesInternal(Method method) {
 
-    try {
-      Set<Value> paramVals = new HashSet<Value>();
-      for (Unit u : sm.retrieveActiveBody().getUnits()) {
-        // Collect the parameters
-        if (u instanceof IdentityStmt) {
-          IdentityStmt id = (IdentityStmt) u;
-          if (id.getRightOp() instanceof ParameterRef)
-            paramVals.add(id.getLeftOp());
+        if (method.getSootMethod() == null) {
+            return Type.NOT_SUPPORTED;
         }
 
-        if (u instanceof AssignStmt) {
-          Value leftOp = ((AssignStmt) u).getLeftOp();
-          Value rightOp = ((AssignStmt) u).getRightOp();
-          if (paramVals.contains(leftOp)) paramVals.remove(leftOp);
-          if (paramVals.contains(rightOp)) {
-            paramVals.add(leftOp);
-          }
-        }
+        // We are only interested in setters
+        if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
 
-        // Check for invocations
-        if (u instanceof ReturnStmt) {
-          ReturnStmt stmt = (ReturnStmt) u;
-          return paramVals.contains(stmt.getOp()) ? Type.TRUE : Type.FALSE;
+        try {
+            Set<Value> paramVals = new HashSet<>();
+            for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                // Collect the parameters
+                if (u instanceof IdentityStmt) {
+                    IdentityStmt id = (IdentityStmt) u;
+                    if (id.getRightOp() instanceof ParameterRef)
+                        paramVals.add(id.getLeftOp());
+                }
+
+                if (u instanceof AssignStmt) {
+                    Value leftOp = ((AssignStmt) u).getLeftOp();
+                    Value rightOp = ((AssignStmt) u).getRightOp();
+                    if (paramVals.contains(leftOp)) paramVals.remove(leftOp);
+                    if (paramVals.contains(rightOp)) {
+                        paramVals.add(leftOp);
+                    }
+                }
+
+                // Check for invocations
+                if (u instanceof ReturnStmt) {
+                    ReturnStmt stmt = (ReturnStmt) u;
+                    return paramVals.contains(stmt.getOp()) ? Type.TRUE : Type.FALSE;
+                }
+            }
+            throw new RuntimeException(
+                    "No return statement in method " + method.getSignature());
+        } catch (Exception ex) {
+            return Type.NOT_SUPPORTED;
         }
-      }
-      throw new RuntimeException(
-          "No return statement in method " + method.getSignature());
-    } catch (Exception ex) {
-      // System.err.println("Something went wrong:");
-      // ex.printStackTrace();
-      return Type.NOT_SUPPORTED;
     }
-  }
 
-  @Override
-  public String toString() {
-    return "<Parameter flows to return.>";
-  }
-
+    @Override
+    public String toString() {
+        return "<Parameter flows to return.>";
+    }
 }
