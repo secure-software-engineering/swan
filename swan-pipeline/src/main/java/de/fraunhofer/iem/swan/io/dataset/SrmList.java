@@ -11,22 +11,12 @@ import java.util.stream.Collectors;
 public class SrmList {
 
     private Set<Method> methods;
-    @JsonIgnore
-    private String classpath;
 
     public SrmList() {
     }
 
     public SrmList(Set<Method> methodList) {
         this.methods = methodList;
-    }
-
-    public String getClasspath() {
-        return classpath;
-    }
-
-    public void setClasspath(String classpath) {
-        this.classpath = classpath;
     }
 
     public Set<Method> getMethods() {

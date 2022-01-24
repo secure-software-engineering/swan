@@ -79,7 +79,7 @@ abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                    codeFeatureHandler = new CodeFeatureHandler(trainData.getClasspath(), testData.getClasspath());
+                    codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:

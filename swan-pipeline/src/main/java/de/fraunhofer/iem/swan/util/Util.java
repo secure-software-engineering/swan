@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
 import de.fraunhofer.iem.swan.SwanPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class Util {
      * @return The purged set of methods without duplicates
      */
     public static Set<Method> sanityCheck(Set<Method> methods, Set<Method> init) {
+
         Map<String, Method> signatureToMethod = new HashMap<>();
         for (Method m1 : methods) {
             String sig = m1.getSignature();
@@ -117,17 +119,21 @@ public class Util {
         return classes;
     }
 
-    public static String buildCP(String dir) {
-        File folder = new File(dir);
-        File[] listOfFiles = folder.listFiles();
+    public static String buildCP(String[] dirs) {
         StringBuilder sb = new StringBuilder();
-        if (listOfFiles != null) {
-            for (File listOfFile : listOfFiles) {
-                if (listOfFile.getName().endsWith(".jar") || listOfFile.getName().endsWith(".apk")) {
-                    if (sb.length() > 0) {
-                        sb.append(System.getProperty("path.separator"));
+
+        for (String dir : dirs) {
+            File folder = new File(dir);
+            File[] listOfFiles = folder.listFiles();
+
+            if (listOfFiles != null) {
+                for (File listOfFile : listOfFiles) {
+                    if (listOfFile.getName().endsWith(".jar") || listOfFile.getName().endsWith(".apk")) {
+                        if (sb.length() > 0) {
+                            sb.append(System.getProperty("path.separator"));
+                        }
+                        sb.append(listOfFile.getAbsolutePath());
                     }
-                    sb.append(listOfFile.getAbsolutePath());
                 }
             }
         }
@@ -136,7 +142,7 @@ public class Util {
 
     /**
      * Creates artificial annotations for non-overridden methods in subclasses. If
-     *  class A implements some method foo() which is marked as e.g. a source and
+     * class A implements some method foo() which is marked as e.g. a source and
      * class B extends A, but does not overwrite foo(), B.foo() must also be a
      * source.
      *
@@ -144,9 +150,10 @@ public class Util {
      * @param cp      The classpath to use.
      */
     public static void createSubclassAnnotations(final Set<Method> methods, final String cp) {
+
         int copyCount = -1;
         int totalCopyCount = 0;
-        while (copyCount != 0) {
+      /*  while (copyCount != 0) {
             copyCount = 0;
             for (Method am : methods) {
                 // Check whether one of the parent classes is already annotated
@@ -156,7 +163,7 @@ public class Util {
                     public Type appliesInternal(Method method) {
                         // This already searches up the class hierarchy until we
                         // find a match for the requested method.
-                        SootMethod parentMethod = getSootMethod(method);
+                        SootMethod parentMethod = method.getSootMethod();
                         if (parentMethod == null)
                             return Type.NOT_SUPPORTED;
 
@@ -206,7 +213,7 @@ public class Util {
                     totalCopyCount++;
                 }
             }
-        }
+        }*/
         logger.info("Created automatic annotations starting from " + totalCopyCount + " methods.");
     }
 

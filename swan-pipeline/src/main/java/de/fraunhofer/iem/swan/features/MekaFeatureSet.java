@@ -32,6 +32,8 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         Instances trainInstances = createInstances(featureSets, trainAttributes, trainData.getMethods(), getCategories(options.getAllClasses()), "train-instances");
         this.instances.put("train", convertToMekaInstances(trainInstances));
 
+
+        System.out.println(testData.getMethods().size());
         //Create and set attributes for the test instances.
         ArrayList<Attribute> testAttributes = createAttributes(getCategories(options.getAllClasses()), testData.getMethods(), featureSets);
         Instances testInstances = createInstances(featureSets, testAttributes, testData.getMethods(), getCategories(options.getAllClasses()), "test-instances");
