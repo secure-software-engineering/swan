@@ -1,12 +1,11 @@
-package de.fraunhofer.iem.swan.features.code.soot;
+package de.fraunhofer.iem.swan.soot;
 
 import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
-import de.fraunhofer.iem.swan.util.SootUtils;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import soot.G;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -16,88 +15,53 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InitializeSoot {
+public class Soot {
 
-    private static boolean SOOT_INITIALIZED = false;
     private static final Logger logger = LoggerFactory.getLogger(SrmListUtils.class);
     private String classpath;
 
-    public InitializeSoot(String... path) {
+    public Soot(String... path) {
 
         this.classpath = Util.buildCP(path);
-        initializeSoot(classpath);
+        configure(classpath);
     }
 
-    private String[] buildArgs(String path) {
-        String[] result = {
-                "-w",
-                "-no-bodies-for-excluded",
-                "-include-all",
-                "-p",
-                "cg.spark",
-                "on",
-                "-cp",
-                path,
-                "-p",
-                "jb",
-                "use-original-names:true",
-                "-f",
-                "n",
-                //do not merge variables (causes problems with PointsToSets)
-                "-p",
-                "jb.ulp",
-                "off"
-        };
-
-        return result;
-    }
-
-    public void initialize(String path) {
-        String[] args = buildArgs(path);
-
-        Options.v().set_allow_phantom_refs(true);
-        Options.v().set_prepend_classpath(true);
-        Options.v().set_output_format(Options.output_format_none);
-        Options.v().parse(args);
-
-        Options.v().set_whole_program(true);
-        Scene.v().addBasicClass(Object.class.getName());
-        Scene.v().loadNecessaryClasses();
-    }
-
-
-    public Set<Method> cleanupList(Set<Method> methods) throws IOException {
-
-        Set<Method> purgedMethods = prefilterInterfaces(methods);
-
-        Util.createSubclassAnnotations(purgedMethods, classpath);
-        Util.sanityCheck(purgedMethods, new HashSet<>());
-
-        return purgedMethods;
-    }
-
-    public void runSoot(String path) {
-
-    }
-
-
-    private void initializeSoot(String cp) {
-        if (SOOT_INITIALIZED)
-            return;
-
-        G.reset();
+    /**
+     * Configures Soot.
+     *
+     * @param classpath test and/or train source code classpath
+     */
+    private void configure(String classpath) {
 
         Options.v().set_allow_phantom_refs(true);
         Options.v().set_prepend_classpath(true);
         Options.v().set_whole_program(true);
         Options.v().set_include_all(true);
-        Options.v().set_soot_classpath(cp);
+        Options.v().set_soot_classpath(classpath);
 
         Scene.v().loadNecessaryClasses();
-        SOOT_INITIALIZED = true;
     }
 
-    protected SootClass getSootClass(Method method) {
+    /**
+     * Purges list of methods and performs sanity check.
+     *
+     * @param srmList SRM list to be cleaned.
+     */
+    public void cleanupList(SrmList srmList) throws IOException {
+
+        prefilterInterfaces(srmList.getMethods());
+
+        Util.createSubclassAnnotations(srmList.getMethods(), classpath);
+        Util.sanityCheck(srmList.getMethods(), new HashSet<>());
+    }
+
+    /**
+     * Returns SootClass for method.
+     *
+     * @param method Method from test or train set.
+     * @return Soot class
+     */
+    protected SootClass getClass(Method method) {
 
         SootClass c = Scene.v().forceResolve(method.getClassName(), SootClass.BODIES);
 
@@ -108,11 +72,24 @@ public class InitializeSoot {
         return c;
     }
 
-    protected SootMethod getSootMethod(Method method) {
-        return getSootMethod(method, true);
+    /**
+     * Returns SootMethod for provided method.
+     *
+     * @param method Method from test/train data set.
+     * @return Soot method
+     */
+    protected SootMethod getMethod(Method method) {
+        return getMethod(method, true);
     }
 
-    protected SootMethod getSootMethod(Method method, boolean lookInHierarchy) {
+    /**
+     * Returns SootMethod for provided method.
+     *
+     * @param method          Method from test or train data set.
+     * @param lookInHierarchy whether hierarchy should be searched
+     * @return Soot method
+     */
+    protected SootMethod getMethod(Method method, boolean lookInHierarchy) {
 
         SootClass c = Scene.v().forceResolve(method.getClassName(), SootClass.BODIES);
 
@@ -129,7 +106,6 @@ public class InitializeSoot {
                 if (c.declaresMethodByName(method.getName()))
                     return c.getMethodByName(method.getName());
             } else {
-                //System.out.println(method.getSubSignature());
                 if (c.declaresMethod(method.getSubSignature()))
                     return c.getMethod(method.getSubSignature());
             }
@@ -147,29 +123,26 @@ public class InitializeSoot {
      * Removes all interfaces from the given set of methods and returns the purged
      * set.
      */
-    private Set<Method> prefilterInterfaces(Set<Method> methods) {
-        Set<Method> purgedMethods = new HashSet<>();
+    private void prefilterInterfaces(Set<Method> methods) {
+        Set<Method> abstractMethods = new HashSet<>();
 
         for (Method method : methods) {
 
-            SootMethod sootMethod = getSootMethod(method);
-            method.setSootMethod(sootMethod);
-            method.setSootClass(getSootClass(method));
+            SootMethod sootMethod = getMethod(method);
 
-            if (sootMethod == null)
-                continue;
-
-            if (sootMethod.isAbstract())
+            if (sootMethod == null || sootMethod.isAbstract()) {
+                abstractMethods.add(method);
                 logger.info("Method purged from list {}", method.getSignature());
-            else
-                purgedMethods.add(method);
+            } else {
+                method.setSootMethod(sootMethod);
+                method.setSootClass(getClass(method));
+            }
         }
-
-        logger.info("{} methods purged down to {}", methods.size(), purgedMethods.size());
-        return purgedMethods;
+        methods.removeAll(abstractMethods);
+        logger.info("{} abstract methods removed, {} remaining methods", abstractMethods.size(), methods.size());
     }
 
-    public Set<Method> loadMethodsFromTestLib(Set<String> testClasses) {
+    public Set<Method> loadMethods(Set<String> testClasses) {
         Set<Method> methods = new HashSet<>();
 
         for (String className : testClasses) {

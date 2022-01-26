@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.util;
+package de.fraunhofer.iem.swan.soot;
 
 import de.fraunhofer.iem.swan.data.Method;
 import java.util.Arrays;
