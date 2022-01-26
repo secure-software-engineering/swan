@@ -1,17 +1,20 @@
 package de.fraunhofer.iem.swan;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
+import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.FeatureSetSelector;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
-import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
+import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
+import de.fraunhofer.iem.swan.soot.Soot;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Runner for SWAN
@@ -38,21 +41,27 @@ public class SwanPipeline {
 
         long startAnalysisTime = System.currentTimeMillis();
 
+        //Run Soot
+        Soot soot = new Soot(options.getTrainDataDir(), options.getTestDataDir());
+
         // Load methods in training dataset
-        SrmList dataset = SrmListUtils.importFile(options.getDatasetJson(), options.getTrainDataDir());
-        logger.info("Loaded {} training methods, distribution={}", dataset.getMethods().size(), Util.countCategories(dataset.getMethods()));
+        Dataset dataset = new Dataset();
+        dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
+        soot.cleanupList(dataset.getTrain());
+        logger.info("Loaded {} training methods, distribution={}", dataset.getTrainMethods().size(), Util.countCategories(dataset.getTrainMethods()));
 
         //Load methods from the test set
-        logger.info("Loading test JARs in {}", options.getTestDataDir());
-        SourceFileLoader testDataset = new SourceFileLoader(options.getTestDataDir());
-        testDataset.load(dataset.getMethods());
+        dataset.setTest(new SrmList(options.getTestDataDir()));
+        Set<Method> testMethods = soot.loadMethods(dataset.getTest().getTestClasses());
+        dataset.getTest().setMethods(testMethods);
+        logger.info("Loaded {} methods from {}", testMethods.size(), options.getTestDataDir());
 
         //Initialize and populate features
         FeatureSetSelector featureSetSelector = new FeatureSetSelector();
-        IFeatureSet featureSet = featureSetSelector.select(dataset, testDataset, options);
+        IFeatureSet featureSet = featureSetSelector.select(dataset, options);
 
         //Train and evaluate model for SRM and CWE categories
-        ModelEvaluator modelEvaluator = new ModelEvaluator(featureSet, options, testDataset.getMethods());
+        ModelEvaluator modelEvaluator = new ModelEvaluator(featureSet, options, dataset.getTestMethods());
         modelEvaluator.trainModel();
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
