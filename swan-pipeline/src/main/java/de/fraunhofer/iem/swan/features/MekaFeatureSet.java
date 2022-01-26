@@ -3,8 +3,7 @@ package de.fraunhofer.iem.swan.features;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
 import meka.filters.unsupervised.attribute.MekaClassAttributes;
@@ -16,8 +15,8 @@ import java.util.*;
 
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
-    public MekaFeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options) {
-        super(trainData, testData, options, ModelEvaluator.Toolkit.MEKA);
+    public MekaFeatureSet(Dataset dataset, SwanOptions options) {
+        super(dataset, options, ModelEvaluator.Toolkit.MEKA);
     }
 
     /**
@@ -28,15 +27,13 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         List<FeatureSet.Type> featureSets = initializeFeatures();
 
         //Create and set attributes for the train instances
-        ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), trainData.getMethods(), featureSets);
-        Instances trainInstances = createInstances(featureSets, trainAttributes, trainData.getMethods(), getCategories(options.getAllClasses()), "train-instances");
+        ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods(), featureSets);
+        Instances trainInstances = createInstances(featureSets, trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()), "train-instances");
         this.instances.put("train", convertToMekaInstances(trainInstances));
 
-
-        System.out.println(testData.getMethods().size());
         //Create and set attributes for the test instances.
-        ArrayList<Attribute> testAttributes = createAttributes(getCategories(options.getAllClasses()), testData.getMethods(), featureSets);
-        Instances testInstances = createInstances(featureSets, testAttributes, testData.getMethods(), getCategories(options.getAllClasses()), "test-instances");
+        ArrayList<Attribute> testAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods(), featureSets);
+        Instances testInstances = createInstances(featureSets, testAttributes, dataset.getTestMethods(), getCategories(options.getAllClasses()), "test-instances");
         this.instances.put("test", convertToMekaInstances(testInstances));
     }
 
