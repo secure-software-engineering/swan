@@ -1,22 +1,21 @@
 package de.fraunhofer.iem.swan.features;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 
 public class FeatureSetSelector {
 
-    public IFeatureSet select(SrmList trainData, SourceFileLoader testData, SwanOptions options) {
+    public IFeatureSet select(Dataset dataset, SwanOptions options) {
 
         switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
             case MEKA:
-                MekaFeatureSet mekaFeatureSet = new MekaFeatureSet(trainData, testData, options);
+                MekaFeatureSet mekaFeatureSet = new MekaFeatureSet(dataset, options);
                 mekaFeatureSet.createFeatures();
                 return mekaFeatureSet;
             case WEKA:
-                WekaFeatureSet wekaFeatureSet = new WekaFeatureSet(trainData, testData, options);
+                WekaFeatureSet wekaFeatureSet = new WekaFeatureSet(dataset, options);
                 wekaFeatureSet.createFeatures();
                 return wekaFeatureSet;
         }
