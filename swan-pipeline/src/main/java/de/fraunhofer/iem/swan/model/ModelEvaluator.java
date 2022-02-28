@@ -5,11 +5,16 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.toolkit.MLPlan;
 import de.fraunhofer.iem.swan.model.toolkit.Meka;
 import de.fraunhofer.iem.swan.model.toolkit.Weka;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -34,12 +39,14 @@ public class ModelEvaluator {
     private IFeatureSet features;
     private SwanOptions options;
     private Set<Method> methods;
+    private SrmList predictedSrmList;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
     public ModelEvaluator(IFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
         this.options = options;
         this.methods = methods;
+        predictedSrmList = new SrmList();
     }
 
     /**
@@ -53,8 +60,8 @@ public class ModelEvaluator {
 
             case MEKA:
                 logger.info("Evaluating model with MEKA");
-                Meka meka = new Meka((MekaFeatureSet)features, options, methods);
-                meka.trainModel();
+                Meka meka = new Meka((MekaFeatureSet) features, options, methods);
+                processResults(meka.trainModel());
                 break;
             case WEKA:
                 logger.info("Evaluating model with WEKA");
@@ -64,8 +71,28 @@ public class ModelEvaluator {
             case MLPLAN:
                 logger.info("Evaluating model with ML-PLAN");
                 MLPlan mlPlan = new MLPlan();
-                mlPlan.evaluateDataset(((WekaFeatureSet)features).getInstances().get("train"));
+                mlPlan.evaluateDataset(((WekaFeatureSet) features).getInstances().get("train"));
                 break;
         }
+    }
+
+    public void processResults(SrmList srmList) {
+
+        if (srmList != null)
+            predictedSrmList = srmList;
+
+        predictedSrmList.removeUnclassifiedMethods();
+        logger.info("{} SRMs detected", predictedSrmList.getMethods().size());
+
+        try {
+            if (!options.getOutputDir().isEmpty())
+                SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public SrmList getPredictedSrmList() {
+        return predictedSrmList;
     }
 }
