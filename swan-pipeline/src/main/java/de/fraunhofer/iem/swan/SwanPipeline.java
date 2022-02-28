@@ -26,6 +26,7 @@ public class SwanPipeline {
 
     private static final Logger logger = LoggerFactory.getLogger(SwanPipeline.class);
     public static SwanOptions options;
+    private ModelEvaluator modelEvaluator;
 
     public SwanPipeline(SwanOptions options) {
         SwanPipeline.options = options;
@@ -47,7 +48,10 @@ public class SwanPipeline {
         // Load methods in training dataset
         Dataset dataset = new Dataset();
         dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
-        soot.cleanupList(dataset.getTrain());
+
+        if (!options.getTrainDataDir().isEmpty())
+            soot.cleanupList(dataset.getTrain());
+
         logger.info("Loaded {} training methods, distribution={}", dataset.getTrainMethods().size(), Util.countCategories(dataset.getTrainMethods()));
 
         //Load methods from the test set
@@ -61,10 +65,14 @@ public class SwanPipeline {
         IFeatureSet featureSet = featureSetSelector.select(dataset, options);
 
         //Train and evaluate model for SRM and CWE categories
-        ModelEvaluator modelEvaluator = new ModelEvaluator(featureSet, options, dataset.getTestMethods());
+        modelEvaluator = new ModelEvaluator(featureSet, options, dataset.getTestMethods());
         modelEvaluator.trainModel();
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
         logger.info("Total runtime {} minutes", analysisTime / 60000);
+    }
+
+    public ModelEvaluator getModelEvaluator() {
+        return modelEvaluator;
     }
 }

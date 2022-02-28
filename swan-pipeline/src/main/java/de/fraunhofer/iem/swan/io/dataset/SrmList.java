@@ -31,7 +31,6 @@ public class SrmList {
         methods = new HashSet<>();
     }
 
-
     public void load(final Set<Method> trainingSet) {
 
         Util.createSubclassAnnotations(methods, "classpath");

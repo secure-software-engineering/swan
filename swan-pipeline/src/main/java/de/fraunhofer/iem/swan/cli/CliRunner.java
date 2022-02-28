@@ -2,6 +2,7 @@ package de.fraunhofer.iem.swan.cli;
 
 import picocli.CommandLine;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -11,16 +12,19 @@ import java.util.concurrent.Callable;
 public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})
-    private String testDataDir = "/input/test-data";
+    private String testDataDir = "";
 
     @CommandLine.Option(names = {"-train", "--train-data"}, description = {"Path of training JARs or class files"})
-    private String trainDataDir = "/input/train-data";
+    private String trainDataDir = "";
 
     @CommandLine.Option(names = {"-d", "--dataset"}, description = {"Path to JSON dataset file"})
-    private String datasetJson = "/input/dataset/swan-dataset.json";
+    private String datasetJson = "/dataset/swan-dataset.json";
+
+    @CommandLine.Option(names = {"-in", "--train-instances"}, description = {"Path to ARFF files that contain training instances"})
+    private List<String> instancesArff = new ArrayList<>();
 
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
-    private String outputDir = "/swan-output";
+    private String outputDir = "";
 
     @CommandLine.Option(names = {"-f", "--feature"}, description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
@@ -52,9 +56,7 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;
 
-
-    @Override
-    public Integer call() throws Exception {
+    public SwanOptions initializeOptions(){
 
         SwanOptions options = new SwanOptions(testDataDir,
                 trainDataDir,
@@ -70,7 +72,14 @@ public class CliRunner implements Callable<Integer> {
                 split,
                 phase);
         options.setPredictionThreshold(predictionThreshold);
+        options.setInstances(instancesArff);
 
-        return new SwanCli().run(options);
+        return options;
+    }
+
+    @Override
+    public Integer call() throws Exception {
+
+        return new SwanCli().run(initializeOptions());
     }
 }

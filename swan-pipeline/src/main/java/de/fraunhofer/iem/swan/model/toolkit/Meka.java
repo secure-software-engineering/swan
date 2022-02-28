@@ -37,12 +37,12 @@ public class Meka {
      * Trains and evaluates the model with the given training data and specified classification mode.
      *
      */
-    public void trainModel() {
+    public SrmList trainModel() {
 
         switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
             case VALIDATE:
                 crossValidateModel(features.getTrainInstances());
-                break;
+                return null;
             case PREDICT:
                 HashMap<String, ArrayList<Category>> predictions = predictModel(features.getTrainInstances(), features.getTestInstances(), options.getPredictionThreshold());
 
@@ -51,14 +51,9 @@ public class Meka {
                         method.addCategory(category);
                     }
                 }
-
-                try {
-                    SrmListUtils.exportFile(new SrmList(methods), options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+                return new SrmList(methods);
         }
+        return null;
     }
 
     /**

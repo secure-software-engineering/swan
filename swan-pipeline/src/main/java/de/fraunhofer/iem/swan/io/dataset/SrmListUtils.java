@@ -43,10 +43,9 @@ public class SrmListUtils {
      */
     public static void exportFile(SrmList srmList, String file) throws IOException {
 
-        srmList.removeUnclassifiedMethods();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File(file), srmList);
-        logger.info("{} methods exported to {}", srmList.getMethods().size(), file);
+        logger.info("{} SRMs exported to {}", srmList.getMethods().size(), file);
     }
 
     public static void removeUndocumentedMethods(SrmList list) {

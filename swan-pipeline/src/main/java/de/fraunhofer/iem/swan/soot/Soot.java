@@ -23,6 +23,7 @@ public class Soot {
     public Soot(String... path) {
 
         this.classpath = Util.buildCP(path);
+        logger.info("Soot Classpath {}", classpath);
         configure(classpath);
     }
 

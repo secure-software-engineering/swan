@@ -1,5 +1,16 @@
 package de.fraunhofer.iem.swan.util;
 
+import de.fraunhofer.iem.swan.SwanPipeline;
+import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.data.Method;
+import org.apache.commons.io.FileUtils;
+import org.nd4j.common.io.ClassUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import weka.core.Attribute;
+import weka.core.Instances;
+import weka.core.converters.ArffSaver;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -8,17 +19,6 @@ import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import de.fraunhofer.iem.swan.SwanPipeline;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import de.fraunhofer.iem.swan.features.code.type.IFeature.Type;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.AbstractSootFeature;
-import soot.SootMethod;
-import weka.core.Attribute;
-import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 public class Util {
     private static final Logger logger = LoggerFactory.getLogger(Util.class);
@@ -72,19 +72,27 @@ public class Util {
     }
 
     public static Set<String> getAllClassesFromDirectory(String dir) throws IOException {
+
         Set<String> classes = new HashSet<>();
-        File folder = new File(dir);
-        File[] listOfFiles = folder.listFiles();
-        if (listOfFiles != null) {
-            for (File listOfFile : listOfFiles) {
-                if (listOfFile.getName().endsWith(".jar"))
-                    classes.addAll(getAllClassesFromJar(listOfFile.getAbsolutePath()));
+
+        for (File file : FileUtils.listFiles(new File(dir), new String[]{"class", "jar"}, true)) {
+            if (file.getName().endsWith(".jar"))
+                classes.addAll(getAllClassesFromJar(file.getAbsolutePath()));
+            else if (file.getName().endsWith(".class")) {
+
+                String packageName = file.getCanonicalPath().replace(dir, "").replace(".class", "");
+
+                if (packageName.startsWith(File.separator))
+                    packageName = packageName.replaceFirst(File.separator, "");
+
+                classes.add(ClassUtils.convertResourcePathToClassName(packageName));
             }
         }
         return classes;
     }
 
     public static Map<String, String> getAllClassesFromDir(String dir) throws IOException {
+
         Map<String, String> classes = new HashMap<>();
         File folder = new File(dir);
         File[] listOfFiles = folder.listFiles();
@@ -107,37 +115,44 @@ public class Util {
         Set<String> classes = new HashSet<>();
         ZipInputStream zip = new ZipInputStream(new FileInputStream(jarFile));
         for (ZipEntry entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
+
             if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
-                String className = entry.getName().replace('/', '.');
-                className = className.substring(0, className.length() - ".class".length());
-                if (className.contains("$"))
-                    className = className.substring(0, className.indexOf("$") - 1);
-                classes.add(className);
+                classes.add(getClassname(entry.getName()));
             }
         }
         zip.close();
         return classes;
     }
 
+    public static String getClassname(String path) {
+
+        String className = path.replace('/', '.');
+        className = className.substring(0, className.length() - ".class".length());
+        if (className.contains("$"))
+            className = className.substring(0, className.indexOf("$") - 1);
+        System.out.println(className);
+        return className;
+    }
+
+
     public static String buildCP(String[] dirs) {
-        StringBuilder sb = new StringBuilder();
+
+        ArrayList<String> paths = new ArrayList<>();
 
         for (String dir : dirs) {
-            File folder = new File(dir);
-            File[] listOfFiles = folder.listFiles();
 
-            if (listOfFiles != null) {
-                for (File listOfFile : listOfFiles) {
-                    if (listOfFile.getName().endsWith(".jar") || listOfFile.getName().endsWith(".apk")) {
-                        if (sb.length() > 0) {
-                            sb.append(System.getProperty("path.separator"));
-                        }
-                        sb.append(listOfFile.getAbsolutePath());
-                    }
+            File folder = new File(dir);
+
+            //If folder contains .class files, add path to classpath
+            if (FileUtils.listFiles(folder, new String[]{"class"}, true).size() > 0)
+                paths.add(dir);
+            else {
+                for (File file : FileUtils.listFiles(folder, new String[]{"jar", "apk"}, true)) {
+                    paths.add(file.getAbsolutePath());
                 }
             }
         }
-        return sb.toString();
+        return String.join(File.pathSeparator, paths);
     }
 
     /**
@@ -282,7 +297,7 @@ public class Util {
     public static String exportInstancesToArff(Instances instances) {
         ArffSaver saver = new ArffSaver();
 
-        if (SwanPipeline.options.isExportArffData()) {
+        if (SwanPipeline.options.isExportArffData() && !SwanPipeline.options.getOutputDir().isEmpty() ) {
             // Save arff data.
             saver.setInstances(instances);
 
@@ -299,9 +314,10 @@ public class Util {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return saver.retrieveFile().getAbsolutePath();
         }
 
-        return saver.retrieveFile().getAbsolutePath();
+     return null;
     }
 
     /**

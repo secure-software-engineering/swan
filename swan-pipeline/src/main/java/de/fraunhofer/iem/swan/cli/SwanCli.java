@@ -4,7 +4,9 @@ import de.fraunhofer.iem.swan.SwanPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 
 /**
@@ -13,39 +15,44 @@ import java.util.concurrent.CancellationException;
 public class SwanCli {
 
     private static final Logger logger = LoggerFactory.getLogger(SwanCli.class);
+    private SwanPipeline swanPipeline;
 
     public Integer run(SwanOptions options) throws Exception {
 
         FileUtility fileUtility = new FileUtility();
 
-        if (options.getDatasetJson().contentEquals("/input/dataset/swan-dataset.json")) {
+        if (options.getDatasetJson().contentEquals("/dataset/swan-dataset.json")) {
             options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson()).getAbsolutePath());
         }
 
-        if (options.getTrainDataDir().contentEquals("/input/train-data")) {
-            options.setTrainDataDir(fileUtility.getResourceDirectory("/input/train-data").getAbsolutePath());
-        }
-
-        if (options.getTestDataDir().contentEquals("/input/test-data")) {
-            options.setTestDataDir(fileUtility.getResourceDirectory("/input/test-data").getAbsolutePath());
-        }
-
-        if(options.getSrmClasses().contains("all")){
+        if (options.getSrmClasses().contains("all")) {
             options.setSrmClasses(Arrays.asList("source", "sink", "sanitizer", "authentication"));
         }
 
-        if(options.getCweClasses().contains("all")){
+        if (options.getCweClasses().contains("all")) {
             options.setCweClasses(Arrays.asList("cwe078", "cwe079", "cwe089", "cwe306", "cwe601", "cwe862", "cwe863"));
         }
 
-        if(options.getFeatureSet().contains("all")){
+        if (options.getFeatureSet().contains("all")) {
             options.setFeatureSet(Arrays.asList("code", "doc-manual", "doc-auto"));
+        }
+
+        if (options.getInstances().isEmpty()) {
+
+            List<String> instances = new ArrayList<>();
+
+            for (String feature : options.getFeatureSet()){
+                String filepath = "/dataset/" + options.getToolkit() + "-" + feature + "-instances.arff";
+                instances.add(fileUtility.getResourceFile(filepath).getAbsolutePath());
+            }
+
+            options.setInstances(instances);
         }
 
         logger.info("SWAN options: {}", options);
 
         try {
-            SwanPipeline swanPipeline = new SwanPipeline(options);
+            swanPipeline = new SwanPipeline(options);
             swanPipeline.run();
 
             return 0;
@@ -59,5 +66,9 @@ public class SwanCli {
             // Delete temporary files and folders that have been created.
             fileUtility.dispose();
         }
+    }
+
+    public SwanPipeline getSwanPipeline() {
+        return swanPipeline;
     }
 }
