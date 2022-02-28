@@ -188,10 +188,9 @@ abstract class FeatureSet {
         return attributes;
     }
 
-    public Instances createInstances(List<Type> featureSets, ArrayList<Attribute> attributes,
-                                     Set<Method> methods, Set<Category> categories, String name) {
 
-        Instances instances = new Instances(name, attributes, 0);
+    public Instances createInstances(Instances instances, List<Type> featureSets, ArrayList<Attribute> attributes,
+                                     Set<Method> methods, Set<Category> categories) {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
@@ -204,6 +203,15 @@ abstract class FeatureSet {
                     break;
             }
         return instances;
+    }
+
+
+    public Instances createInstances(List<Type> featureSets, ArrayList<Attribute> attributes,
+                                     Set<Method> methods, Set<Category> categories) {
+
+        Instances instances = new Instances("swan-srm", attributes, 0);
+
+        return createInstances(instances, featureSets, attributes, methods, categories);
     }
 
 
@@ -256,13 +264,13 @@ abstract class FeatureSet {
 
                 switch (entry.getKey().applies(method)) {
                     case TRUE:
-                        inst.setValue(entry.getValue(), "true");
+                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "true");
                         break;
                     case FALSE:
-                        inst.setValue(entry.getValue(), "false");
+                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "false");
                         break;
                     default:
-                        inst.setMissing(entry.getValue());
+                        inst.setMissing(instances.attribute(String.valueOf(entry.getKey())));
                 }
             }
 

@@ -106,7 +106,7 @@
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
             <version>4.3.0</version>
-            <classifier>models</classifier>
+            <classifier>models-english</classifier>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>

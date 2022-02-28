@@ -47,7 +47,10 @@ public class SwanPipeline {
         // Load methods in training dataset
         Dataset dataset = new Dataset();
         dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
-        soot.cleanupList(dataset.getTrain());
+
+        if (!options.getTrainDataDir().isEmpty())
+            soot.cleanupList(dataset.getTrain());
+
         logger.info("Loaded {} training methods, distribution={}", dataset.getTrainMethods().size(), Util.countCategories(dataset.getTrainMethods()));
 
         //Load methods from the test set
