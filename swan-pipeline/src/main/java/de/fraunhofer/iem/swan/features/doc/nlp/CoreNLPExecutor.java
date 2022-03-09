@@ -28,7 +28,7 @@ public class CoreNLPExecutor {
     public CoreNLPExecutor() {
         logger.info("Initializing CoreNLP pipeline");
         properties = new Properties();
-        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
+        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
         pipeline = new StanfordCoreNLP(properties);
     }
 

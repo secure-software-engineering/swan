@@ -1,6 +1,8 @@
 package de.fraunhofer.iem.swan.io;
 
 import dev.jeka.core.api.depmanagement.*;
+import dev.jeka.core.api.depmanagement.resolution.JkDependencyResolver;
+import dev.jeka.core.api.depmanagement.resolution.JkResolvedDependencyNode;
 import edu.stanford.nlp.util.StringUtils;
 
 import java.nio.file.Path;
@@ -29,25 +31,23 @@ public class DependencyManager {
     public List<Path> getSourceJar(String module) {
 
         JkDependencySet sources = JkDependencySet.of()
-                .and(module)
-                .withDefaultScopes(JkScope.SOURCES);
+                .and(module);
 
-        return resolver.resolve(sources, JkScope.SOURCES).getFiles().getEntries();
+        return resolver.resolve(sources).getFiles().getEntries();
     }
 
     public String getDependencies(String moduleDescription) {
         JkDependencySet deps = JkDependencySet.of()
-                .and(moduleDescription)
-                .withDefaultScopes(JkScope.COMPILE);
+                .and(moduleDescription);
 
          resolver = JkDependencyResolver.of().addRepos(JkRepo.ofMavenCentral());
 
         //Get list of dependencies for module
-        List<JkDependencyNode> nodes = resolver.resolve(deps, JkScope.COMPILE).getDependencyTree().toFlattenList();
+        List<JkResolvedDependencyNode> nodes = resolver.resolve(deps).getDependencyTree().toFlattenList();
 
         Set<String> dependencies = new HashSet<>();
 
-        for (JkDependencyNode node : nodes)
+        for (JkResolvedDependencyNode node : nodes)
             dependencies.add(node.getModuleInfo().getModuleId().toString()
                     + ":" + node.getModuleInfo().getResolvedVersion().toString());
 

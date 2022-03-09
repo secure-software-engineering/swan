@@ -130,7 +130,7 @@ public class Util {
         className = className.substring(0, className.length() - ".class".length());
         if (className.contains("$"))
             className = className.substring(0, className.indexOf("$") - 1);
-        System.out.println(className);
+
         return className;
     }
 
