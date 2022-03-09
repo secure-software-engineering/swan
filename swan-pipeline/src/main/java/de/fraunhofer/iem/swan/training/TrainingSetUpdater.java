@@ -1,10 +1,9 @@
 package de.fraunhofer.iem.swan.training;
 
-import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.util.Util;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.util.Util;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -115,7 +114,7 @@ public class TrainingSetUpdater {
 
         System.out.println("Classes: Total/" + classes.size());
 
-        String classpath = Util.buildCP(TRAINING_JARS);
+        String classpath = "Util.buildCP(TRAINING_JARS)";
 
         HashMap<String, String> methodSet = new HashMap<>();
 
@@ -124,15 +123,15 @@ public class TrainingSetUpdater {
             methodSet.put(t.substring(0, t.indexOf("|")), t.substring(t.indexOf("|") + 1));
         }
 
-        SourceFileLoader sourceFileLoader = new SourceFileLoader(classpath);
-        sourceFileLoader.loadMethodsFromTestLib();
+      //  SourceFileLoader sourceFileLoader = new SourceFileLoader(classpath);
+        //sourceFileLoader.loadMethodsFromTestLib();
 
-        Util.createSubclassAnnotations(sourceFileLoader.getMethods(), classpath);
+       // Util.createSubclassAnnotations(sourceFileLoader.getMethods(), classpath);
 
         HashSet<Method> trainingMethods = new HashSet<>();
 
 
-        for (Method m : sourceFileLoader.getMethods()) {
+        for (Method m :trainingMethods) {
 
             String sig = m.getClassName() + "." + m.getName();
 

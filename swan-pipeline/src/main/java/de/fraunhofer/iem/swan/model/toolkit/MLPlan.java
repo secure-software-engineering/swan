@@ -5,7 +5,7 @@ import ai.libs.jaicore.ml.core.dataset.schema.attribute.IntBasedCategoricalAttri
 import ai.libs.jaicore.ml.core.dataset.serialization.ArffDatasetAdapter;
 import ai.libs.jaicore.ml.core.filter.SplitterUtil;
 import ai.libs.jaicore.ml.weka.classification.learner.IWekaClassifier;
-import ai.libs.mlplan.multiclass.wekamlplan.MLPlanWekaBuilder;
+import ai.libs.mlplan.weka.MLPlanWekaBuilder;
 import de.fraunhofer.iem.swan.model.MonteCarloValidator;
 import de.fraunhofer.iem.swan.util.Util;
 import org.api4.java.ai.ml.core.dataset.schema.attribute.IAttribute;
@@ -50,6 +50,7 @@ public class MLPlan {
     public HashMap<String, ArrayList<Double>> evaluateDataset(Instances instances1) {
 
         String arffFilePath = Util.exportInstancesToArff(instances1);
+        ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
 
         String mClass = Util.getClassName(instances1);
 
@@ -58,7 +59,7 @@ public class MLPlan {
         //Initialize dataset using ARFF file path
         ILabeledDataset<?> dataset = null;
         try {
-            dataset = ArffDatasetAdapter.readDataset(new File(arffFilePath));
+            dataset = arffDatasetAdapter.readDataset(new File(arffFilePath));
         } catch (DatasetDeserializationFailedException e) {
             e.printStackTrace();
         }
@@ -95,14 +96,14 @@ public class MLPlan {
                 //optimizedClassifier.fit(split.get(0));
 
                 String trainPath = "swan/swan_core/swan-out/mlplan/train-methods-dataset.arff";
-                ArffDatasetAdapter.serializeDataset(new File(trainPath), split.get(0));
+                arffDatasetAdapter.serializeDataset(new File(trainPath), split.get(0));
                 ArffLoader trainLoader = new ArffLoader();
                 trainLoader.setFile(new File(trainPath));
                 Instances trainInstances = trainLoader.getDataSet();
                 trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
 
                 String testPath = "swan/swan_core/swan-out/mlplan/test-methods-dataset.arff";
-                ArffDatasetAdapter.serializeDataset(new File(testPath), split.get(1));
+                arffDatasetAdapter.serializeDataset(new File(testPath), split.get(1));
                 ArffLoader testLoader = new ArffLoader();
                 testLoader.setFile(new File(testPath));
                 Instances testInstances = testLoader.getDataSet();
@@ -148,6 +149,7 @@ public class MLPlan {
 
         //arffFilePath = "swan/swan_core/src/main/resources/waveform.arff";
         String arffFilePath = Util.exportInstancesToArff(instances);
+        ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
 
         String mClass = Util.getClassName(instances);
 
@@ -156,7 +158,7 @@ public class MLPlan {
         //Initialize dataset using ARFF file path
         ILabeledDataset<?> dataset = null;
         try {
-            dataset = ArffDatasetAdapter.readDataset(new File(arffFilePath));
+            dataset = arffDatasetAdapter.readDataset(new File(arffFilePath));
         } catch (DatasetDeserializationFailedException e) {
             e.printStackTrace();
         }
@@ -177,7 +179,7 @@ public class MLPlan {
 
                     //   System.out.println(attribute.getName());
                 }
-                ArffDatasetAdapter.serializeDataset(new File("swan/swan_core/swan-out/mlplan/methods-dataset.arff"), split.get(1));
+                arffDatasetAdapter.serializeDataset(new File("swan/swan_core/swan-out/mlplan/methods-dataset.arff"), split.get(1));
 
 
                 for (int x = 0; x < split.get(1).size(); x++) {
