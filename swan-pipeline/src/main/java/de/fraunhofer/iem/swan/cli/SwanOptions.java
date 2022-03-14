@@ -24,6 +24,7 @@ public class SwanOptions {
     private double trainTestSplit;
     private String phase;
     private double predictionThreshold;
+    private List<String> instancesArff;
 
     public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
                        List<String> featureSet, String toolkit, List<String> srmClasses,
@@ -177,12 +178,21 @@ public class SwanOptions {
         this.predictionThreshold = predictionThreshold;
     }
 
+    public List<String> getInstances() {
+        return instancesArff;
+    }
+
+    public void setInstances(List<String> instancesArff) {
+        this.instancesArff = instancesArff;
+    }
+
     @Override
     public String toString() {
         return "SwanOptions{" +
                 "testData='" + testDataDir + '\'' +
                 ", trainData='" + trainDataDir + '\'' +
                 ", datasetJson='" + datasetJson + '\'' +
+                ", instances='" + instancesArff + '\'' +
                 ", outputDir='" + outputDir + '\'' +
                 ", featureSet='" + featureSet + '\'' +
                 ", learningMode='" + toolkit + '\'' +

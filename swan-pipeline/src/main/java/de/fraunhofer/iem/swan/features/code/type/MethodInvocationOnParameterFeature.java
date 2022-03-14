@@ -17,59 +17,55 @@ import soot.jimple.Stmt;
  * invoked on one of the parameters
  *
  * @author Steven Arzt, Siegfried Rasthofer
- *
  */
 public class MethodInvocationOnParameterFeature extends AbstractSootFeature {
 
-  private final String methodName;
+    private final String methodName;
 
-  public MethodInvocationOnParameterFeature(String cp, String methodName) {
-    super(cp);
-    this.methodName = methodName;
-  }
-
-  @Override
-  public Type appliesInternal(Method method) {
-    SootMethod sm = getSootMethod(method);
-
-    if (sm == null) {
-      return Type.NOT_SUPPORTED;
+    public MethodInvocationOnParameterFeature(String methodName) {
+        super();
+        this.methodName = methodName;
     }
 
-    // We are only interested in setters
-    if (!sm.isConcrete()) return Type.NOT_SUPPORTED;
+    @Override
+    public Type appliesInternal(Method method) {
 
-    try {
-      Set<Value> paramVals = new HashSet<Value>();
-      for (Unit u : sm.retrieveActiveBody().getUnits()) {
-        // Collect the parameters
-        if (u instanceof IdentityStmt) {
-          IdentityStmt id = (IdentityStmt) u;
-          if (id.getRightOp() instanceof ParameterRef)
-            paramVals.add(id.getLeftOp());
+        if (method.getSootMethod() == null) {
+            return Type.NOT_SUPPORTED;
         }
 
-        // Check for invocations
-        if (u instanceof Stmt) {
-          Stmt stmt = (Stmt) u;
-          if (stmt.containsInvokeExpr())
-            if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
-            InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
-            if (paramVals.contains(iinv.getBase())) if (iinv.getMethod().getName().startsWith(methodName)) return Type.TRUE;
+        // We are only interested in setters
+        if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
+
+        try {
+            Set<Value> paramVals = new HashSet<>();
+            for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                // Collect the parameters
+                if (u instanceof IdentityStmt) {
+                    IdentityStmt id = (IdentityStmt) u;
+                    if (id.getRightOp() instanceof ParameterRef)
+                        paramVals.add(id.getLeftOp());
+                }
+
+                // Check for invocations
+                if (u instanceof Stmt) {
+                    Stmt stmt = (Stmt) u;
+                    if (stmt.containsInvokeExpr())
+                        if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                            InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                            if (paramVals.contains(iinv.getBase()))
+                                if (iinv.getMethod().getName().startsWith(methodName)) return Type.TRUE;
+                        }
+                }
             }
+            return Type.FALSE;
+        } catch (Exception ex) {
+            return Type.NOT_SUPPORTED;
         }
-      }
-      return Type.FALSE;
-    } catch (Exception ex) {
-      // System.err.println("Something went wrong:");
-      // ex.printStackTrace();
-      return Type.NOT_SUPPORTED;
     }
-  }
 
-  @Override
-  public String toString() {
-    return "<Method " + methodName + "invoked on parameter object>";
-  }
-
+    @Override
+    public String toString() {
+        return "<Method " + methodName + "invoked on parameter object>";
+    }
 }

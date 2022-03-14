@@ -3,6 +3,7 @@ package de.fraunhofer.iem.swan.data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
+import soot.SootClass;
 import soot.SootMethod;
 import soot.Type;
 
@@ -39,6 +40,10 @@ public class Method {
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
     private String sourceJar;
+    @JsonIgnore
+    private SootMethod sootMethod;
+    @JsonIgnore
+    private SootClass sootClass;
 
     public Method() {
         cwe = new HashSet<>();
@@ -329,7 +334,7 @@ public class Method {
         if (getName().equals("<init>"))
             methodName = getClassName().substring(getClassName().lastIndexOf(".") + 1);
 
-        return this.returnType + " " + this.className + "." + methodName + "(" + StringUtils.join(this.parameters, ", ") + ")";
+        return this.returnType + " " + methodName + "(" + StringUtils.join(this.parameters, ", ") + ")";
     }
 
     @JsonIgnore
@@ -354,6 +359,22 @@ public class Method {
         this.sourceJar = source;
     }
 
+    public SootMethod getSootMethod() {
+        return sootMethod;
+    }
+
+    public void setSootMethod(SootMethod sootMethod) {
+        this.sootMethod = sootMethod;
+    }
+
+    public SootClass getSootClass() {
+        return sootClass;
+    }
+
+    public void setSootClass(SootClass sootClass) {
+        this.sootClass = sootClass;
+    }
+
     @Override
     public boolean equals(Object another) {
         if (super.equals(another))
@@ -366,7 +387,7 @@ public class Method {
             return false;
         if (!this.parameters.equals(otherMethod.parameters))
             return false;
-        return this.className.equals(otherMethod.className);
+        return this.getClassName().equals(otherMethod.getClassName());
     }
 
     @Override

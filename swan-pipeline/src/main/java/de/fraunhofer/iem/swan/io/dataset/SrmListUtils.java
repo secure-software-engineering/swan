@@ -2,13 +2,9 @@ package de.fraunhofer.iem.swan.io.dataset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.AbstractSootFeature;
-import de.fraunhofer.iem.swan.features.code.type.IFeature.Type;
-import de.fraunhofer.iem.swan.util.Util;
 import edu.stanford.nlp.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import soot.SootMethod;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,58 +27,12 @@ public class SrmListUtils {
      * @param file JSON File that stores security-relevant methods
      * @return object containing all security-relevant methods
      */
-    public static SrmList importFile(String file, String sourceFiles) throws IOException {
+    public static SrmList importFile(String file) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         SrmList srmList = objectMapper.readValue(new File(file), SrmList.class);
         logger.info("Collected {} methods from the training set.", srmList.getMethods().size());
 
-        return cleanupList(srmList, sourceFiles);
-    }
-
-    public static SrmList cleanupList(SrmList srmList, String sourceFiles) throws IOException {
-
-        srmList.setClasspath(Util.buildCP(sourceFiles));
-
-        SrmList list = prefilterInterfaces(srmList, srmList.getClasspath());
-        Util.createSubclassAnnotations(srmList.getMethods(), srmList.getClasspath());
-        Util.sanityCheck(srmList.getMethods(), new HashSet<>());
-        //TODO When should this filter be applied?
-        removeUndocumentedMethods(list);
-
-        return list;
-    }
-
-    /**
-     * Removes all interfaces from the given set of methods and returns the purged
-     * set.
-     */
-    private static SrmList prefilterInterfaces(SrmList srmList, String classpath) {
-        Set<Method> purgedMethods = new HashSet<Method>(srmList.getMethods().size());
-        for (Method am : srmList.getMethods()) {
-            AbstractSootFeature asf = new AbstractSootFeature(classpath) {
-                @Override
-                public Type appliesInternal(Method method) {
-
-                    SootMethod sm = getSootMethod(method);
-                    if (sm == null)
-                        return Type.NOT_SUPPORTED;
-
-                    if (sm.isAbstract())
-                        return Type.FALSE;
-                    else
-                        return Type.TRUE;
-                }
-            };
-
-            Type t = asf.applies(am);
-            if (t == Type.TRUE) {
-                purgedMethods.add(am);
-            } else
-                logger.info("Method purged from list {}", am.getSignature());
-        }
-        logger.info("{} methods purged down to {}", srmList.getMethods().size(), purgedMethods.size());
-        srmList.setMethods(purgedMethods);
         return srmList;
     }
 
@@ -93,10 +43,9 @@ public class SrmListUtils {
      */
     public static void exportFile(SrmList srmList, String file) throws IOException {
 
-        srmList.removeUnclassifiedMethods();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File(file), srmList);
-        logger.info("{} methods exported to {}", srmList.getMethods().size(), file);
+        logger.info("{} SRMs exported to {}", srmList.getMethods().size(), file);
     }
 
     public static void removeUndocumentedMethods(SrmList list) {

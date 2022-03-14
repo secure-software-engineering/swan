@@ -4,12 +4,11 @@ import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
-import de.fraunhofer.iem.swan.features.code.soot.SourceFileLoader;
 import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -24,9 +23,8 @@ abstract class FeatureSet {
     protected Map<IFeature, Attribute> codeAttributes;
     protected final HashMap<String, Integer> instanceMap;
     protected final SwanOptions options;
-    protected SrmList trainData;
+    protected Dataset dataset;
     protected CodeFeatureHandler codeFeatureHandler;
-    protected SourceFileLoader testData;
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> instances;
     protected ModelEvaluator.Toolkit toolkit;
@@ -58,11 +56,10 @@ abstract class FeatureSet {
         }
     }
 
-    public FeatureSet(SrmList trainData, SourceFileLoader testData, SwanOptions options, ModelEvaluator.Toolkit toolkit) {
+    public FeatureSet(Dataset dataset, SwanOptions options, ModelEvaluator.Toolkit toolkit) {
         this.instanceMap = new HashMap<>();
         this.options = options;
-        this.trainData = trainData;
-        this.testData = testData;
+        this.dataset = dataset;
         this.toolkit = toolkit;
         instances = new HashMap<>();
     }
@@ -79,18 +76,18 @@ abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                    codeFeatureHandler = new CodeFeatureHandler(trainData.getClasspath(), testData.getClasspath());
+                    codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:
 
-                    docFeatureHandler = new DocFeatureHandler(trainData.getMethods());
+                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
                     docFeatureHandler.initialiseManualFeatureSet();
                     docFeatureHandler.evaluateManualFeatureData();
                     break;
                 case DOC_AUTO:
 
-                    docFeatureHandler = new DocFeatureHandler(trainData.getMethods());
+                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
                     docFeatureHandler.initialiseAutomaticFeatureSet();
                     docFeatureHandler.evaluateAutomaticFeatureData();
                     break;
@@ -191,10 +188,9 @@ abstract class FeatureSet {
         return attributes;
     }
 
-    public Instances createInstances(List<Type> featureSets, ArrayList<Attribute> attributes,
-                                     Set<Method> methods, Set<Category> categories, String name) {
 
-        Instances instances = new Instances(name, attributes, 0);
+    public Instances createInstances(Instances instances, List<Type> featureSets, ArrayList<Attribute> attributes,
+                                     Set<Method> methods, Set<Category> categories) {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
@@ -207,6 +203,15 @@ abstract class FeatureSet {
                     break;
             }
         return instances;
+    }
+
+
+    public Instances createInstances(List<Type> featureSets, ArrayList<Attribute> attributes,
+                                     Set<Method> methods, Set<Category> categories) {
+
+        Instances instances = new Instances("swan-srm", attributes, 0);
+
+        return createInstances(instances, featureSets, attributes, methods, categories);
     }
 
 
@@ -259,13 +264,13 @@ abstract class FeatureSet {
 
                 switch (entry.getKey().applies(method)) {
                     case TRUE:
-                        inst.setValue(entry.getValue(), "true");
+                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "true");
                         break;
                     case FALSE:
-                        inst.setValue(entry.getValue(), "false");
+                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "false");
                         break;
                     default:
-                        inst.setMissing(entry.getValue());
+                        inst.setMissing(instances.attribute(String.valueOf(entry.getKey())));
                 }
             }
 

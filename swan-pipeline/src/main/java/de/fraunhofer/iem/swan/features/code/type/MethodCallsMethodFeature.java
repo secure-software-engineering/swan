@@ -15,88 +15,84 @@ import soot.jimple.Stmt;
  * one
  *
  * @author Steven Arzt, Siegfried Rasthofer
- *
  */
 public class MethodCallsMethodFeature extends AbstractSootFeature {
 
-  private final String className;
-  private final String methodName;
-  private final boolean substringMatch;
+    private final String className;
+    private final String methodName;
+    private final boolean substringMatch;
 
-  public MethodCallsMethodFeature(String cp, String methodName) {
-    this(cp, "", methodName);
-  }
-
-  public MethodCallsMethodFeature(String cp, String className,
-      String methodName) {
-    this(cp, className, methodName, false);
-  }
-
-  public MethodCallsMethodFeature(String cp, String className,
-      String methodName, boolean substringMatch) {
-    super(cp);
-    this.className = className;
-    this.methodName = methodName;
-    this.substringMatch = substringMatch;
-  }
-
-  @Override
-  public Type appliesInternal(Method method) {
-    try {
-      SootMethod sm = getSootMethod(method);
-      if (sm == null) {
-        return Type.NOT_SUPPORTED;
-      }
-      return checkMethod(sm, new ArrayList<SootMethod>());
-    } catch (Exception ex) {
-      System.err.println("Something went wrong:");
-      ex.printStackTrace();
-      return Type.NOT_SUPPORTED;
+    public MethodCallsMethodFeature(String methodName) {
+        this("", methodName);
     }
-  }
 
-  public Type checkMethod(SootMethod method, List<SootMethod> doneList) {
-    if (doneList.contains(method))
-      return Type.NOT_SUPPORTED;
-    if (!method.isConcrete())
-      return Type.NOT_SUPPORTED;
-    doneList.add(method);
-
-    try {
-      Body body = null;
-      try {
-        body = method.retrieveActiveBody();
-      } catch (Exception ex) {
-        return Type.NOT_SUPPORTED;
-      }
-
-      for (Unit u : body.getUnits()) {
-        if (!(u instanceof Stmt))
-          continue;
-        Stmt stmt = (Stmt) u;
-        if (!stmt.containsInvokeExpr())
-          continue;
-
-        InvokeExpr inv = stmt.getInvokeExpr();
-        if ((substringMatch
-            && inv.getMethod().getName().contains(this.methodName))
-            || inv.getMethod().getName().startsWith(this.methodName)) {
-          if (this.className.isEmpty() || this.className
-              .equals(inv.getMethod().getDeclaringClass().getName()))
-            return Type.TRUE;
-        } else if (checkMethod(inv.getMethod(), doneList) == Type.TRUE)
-          return Type.TRUE;
-      }
-      return Type.FALSE;
-    } catch (Exception ex) {
-      System.err.println("Oops: " + ex);
-      return Type.NOT_SUPPORTED;
+    public MethodCallsMethodFeature(String className, String methodName) {
+        this(className, methodName, false);
     }
-  }
 
-  @Override
-  public String toString() {
-    return "Method starting with '" + this.methodName + "' invoked";
-  }
+    public MethodCallsMethodFeature(String className, String methodName, boolean substringMatch) {
+        super();
+        this.className = className;
+        this.methodName = methodName;
+        this.substringMatch = substringMatch;
+    }
 
+    @Override
+    public Type appliesInternal(Method method) {
+        try {
+
+            if (method.getSootMethod() == null) {
+                return Type.NOT_SUPPORTED;
+            }
+            return checkMethod(method.getSootMethod(), new ArrayList<>());
+        } catch (Exception ex) {
+            System.err.println("Something went wrong:");
+            ex.printStackTrace();
+            return Type.NOT_SUPPORTED;
+        }
+    }
+
+    public Type checkMethod(SootMethod method, List<SootMethod> doneList) {
+        if (doneList.contains(method))
+            return Type.NOT_SUPPORTED;
+        if (!method.isConcrete())
+            return Type.NOT_SUPPORTED;
+        doneList.add(method);
+
+        try {
+            Body body;
+            try {
+                body = method.retrieveActiveBody();
+            } catch (Exception ex) {
+                return Type.NOT_SUPPORTED;
+            }
+
+            for (Unit u : body.getUnits()) {
+                if (!(u instanceof Stmt))
+                    continue;
+                Stmt stmt = (Stmt) u;
+                if (!stmt.containsInvokeExpr())
+                    continue;
+
+                InvokeExpr inv = stmt.getInvokeExpr();
+                if ((substringMatch
+                        && inv.getMethod().getName().contains(this.methodName))
+                        || inv.getMethod().getName().startsWith(this.methodName)) {
+                    if (this.className.isEmpty() || this.className
+                            .equals(inv.getMethod().getDeclaringClass().getName()))
+                        return Type.TRUE;
+                } else if (checkMethod(inv.getMethod(), doneList) == Type.TRUE)
+                    return Type.TRUE;
+            }
+            return Type.FALSE;
+        } catch (Exception ex) {
+            System.err.println("Oops: " + ex);
+            return Type.NOT_SUPPORTED;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Method starting with '" + this.methodName + "' invoked";
+    }
 }
