@@ -10,7 +10,7 @@ public class Main {
         String[] docletArgs = new String[]{
                 "-doclet", CoverageDoclet.class.getName(),
                 "-docletpath", "target/classes/",
-                "-sourcepath", "/home/oshando/IdeaProjects/swan/swan-pipeline/test-doc/encoder-1.2.3-sources.jar",
+                "-sourcepath", "source-jars/",
                 "-subpackages", "org.owasp.encoder",
         };
 
