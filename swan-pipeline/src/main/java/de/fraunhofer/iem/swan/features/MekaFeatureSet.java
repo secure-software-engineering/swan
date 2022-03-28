@@ -54,11 +54,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         structure.replaceAttributeAt(idAttr, structure.attribute("id").index());
         ArrayList<Attribute> aList = Collections.list(structure.enumerateAttributes());
 
-        ArrayList<Attribute> testAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods(), featureSets);
-        Instances testInstances = (createInstances(structure, featureSets, aList, dataset.getTestMethods(), getCategories(options.getAllClasses())));
-
-        this.instances.put("train", convertToMekaInstances(trainInstances));
-        this.instances.put("test", convertToMekaInstances(testInstances));
+        return createInstances(structure, aList, dataset.getTestMethods(), getCategories(options.getAllClasses()));
     }
 
     /**
@@ -78,7 +74,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             attributes.add(catAttribute);
         }
 
-        attributes.addAll(super.createAttributes(categories, methods, featureSets));
+        attributes.addAll(super.createAttributes(categories, methods));
 
         return attributes;
     }

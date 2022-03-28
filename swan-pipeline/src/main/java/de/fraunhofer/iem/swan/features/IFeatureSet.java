@@ -12,5 +12,5 @@ public interface IFeatureSet {
 
      void createFeatures();
 
-     ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods, List<FeatureSet.Type> featureSets);
+     ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods);
     }
