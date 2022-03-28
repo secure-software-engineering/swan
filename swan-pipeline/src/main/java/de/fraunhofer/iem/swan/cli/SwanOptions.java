@@ -12,6 +12,8 @@ public class SwanOptions {
 
     private String testDataDir;
     private String trainDataDir;
+    private String testDataSourceDir;
+    private String trainDataSourceDir;
     private String datasetJson;
     private String outputDir;
     private List<String> featureSet;
@@ -126,8 +128,8 @@ public class SwanOptions {
         this.cweClasses = cweClasses;
     }
 
-    public List<String> getAllClasses(){
-        return Stream.of(srmClasses,cweClasses).flatMap(Collection::stream).collect(Collectors.toList());
+    public List<String> getAllClasses() {
+        return Stream.of(srmClasses, cweClasses).flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     public boolean isExportArffData() {
@@ -184,6 +186,22 @@ public class SwanOptions {
 
     public void setInstances(List<String> instancesArff) {
         this.arffInstancesFiles = instancesArff;
+    }
+
+    public String getTestDataSourceDir() {
+        return testDataSourceDir;
+    }
+
+    public void setTestDataSourceDir(String testDataSourceDir) {
+        this.testDataSourceDir = testDataSourceDir;
+    }
+
+    public String getTrainDataSourceDir() {
+        return trainDataSourceDir;
+    }
+
+    public void setTrainDataSourceDir(String trainDataSourceDir) {
+        this.trainDataSourceDir = trainDataSourceDir;
     }
 
     @Override
