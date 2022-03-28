@@ -34,16 +34,16 @@ public class LemmaCountFeature implements IDocFeature {
         return featureResult;
     }
 
-    public int countLemmas(List<CoreMap> sentences){
+    public int countLemmas(List<CoreMap> sentences) {
 
         Set<String> lemmas = new HashSet<>();
 
-        if(sentences!=null)
-        for (CoreLabel token : sentences.get(0).get(CoreAnnotations.TokensAnnotation.class)) {
+        if (sentences != null && sentences.size() > 0)
+            for (CoreLabel token : sentences.get(0).get(CoreAnnotations.TokensAnnotation.class)) {
 
-            String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
-            lemmas.add(lemma);
-        }
+                String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
+                lemmas.add(lemma);
+            }
 
         return lemmas.size();
     }
