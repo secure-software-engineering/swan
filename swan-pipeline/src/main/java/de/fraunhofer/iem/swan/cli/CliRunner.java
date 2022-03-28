@@ -21,7 +21,7 @@ public class CliRunner implements Callable<Integer> {
     private String datasetJson = "/dataset/swan-dataset.json";
 
     @CommandLine.Option(names = {"-in", "--train-instances"}, description = {"Path to ARFF files that contain training instances"})
-    private List<String> instancesArff = new ArrayList<>();
+    private List<String> arffInstancesFiles = new ArrayList<>();
 
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
     private String outputDir = "";
@@ -72,7 +72,7 @@ public class CliRunner implements Callable<Integer> {
                 split,
                 phase);
         options.setPredictionThreshold(predictionThreshold);
-        options.setInstances(instancesArff);
+        options.setInstances(arffInstancesFiles);
 
         return options;
     }

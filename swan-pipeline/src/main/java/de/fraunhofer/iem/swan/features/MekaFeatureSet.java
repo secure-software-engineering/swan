@@ -35,7 +35,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         initializeFeatures();
 
         //Create and set attributes for the train instances
-        if (options.getInstances().isEmpty()) {
+        if (options.getArffInstancesFiles().isEmpty()) {
             ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods(), featureSets);
             structure = new Instances("swan-srm", trainAttributes, 0);
             convertToMekaInstances(structure);
@@ -49,7 +49,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             ArffLoader loader = new ArffLoader();
 
             try {
-                loader.setSource(new File(options.getInstances().get(0)));
+                loader.setSource(new File(options.getArffInstancesFiles().get(0)));
                 trainInstances = loader.getDataSet();
                 structure = loader.getStructure();
             } catch (IOException e) {
