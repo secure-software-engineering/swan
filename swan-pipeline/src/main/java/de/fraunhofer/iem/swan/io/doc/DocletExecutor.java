@@ -1,7 +1,9 @@
 package de.fraunhofer.iem.swan.io.doc;
 
-//import com.sun.tools.javadoc.Main;
-//import jdk.javadoc.doclet.StandardDoclet;
+import javax.tools.DocumentationTool;
+import javax.tools.ToolProvider;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Oshando Johnson on 03.06.20
@@ -9,7 +11,7 @@ package de.fraunhofer.iem.swan.io.doc;
 public class DocletExecutor {
 
     public static final String SSL_DOCLET = "info.semanticsoftware.doclet.SSLDoclet";
-    public static final String COVERAGE_DOCLET = "com.manoelcampos.javadoc.coverage.CoverageDoclet";
+    public static final String COVERAGE_DOCLET = "de.fraunhofer.iem.coveragedoclet.CoverageDoclet";
     public static final String STANDARD_DOCLET = "com.sun.tools.doclets.standard.Standard";
 
     private String outputDir;
@@ -33,20 +35,20 @@ public class DocletExecutor {
 
     public void runDoclet(String sourcePath, String packages, String outputPath) {
 
-        System.out.println("runnin:"+ sourcePath+ " "+ packages);
-        String[] docletParams = new String[]{
-              //  "Xdoclint:none",
-                "-private",
-                "-doclet", getDoclet(),
+        ArrayList<String> docletArgs = new ArrayList<>(List.of(
+                "-doclet", doclet,
                 "-docletpath", getDocletPath(doclet),
-                "-d", outputPath,
-               // "-source", "8",
-                // "-o", "coverage-report.html",
                 "-sourcepath", sourcePath,
                 "-subpackages", packages
-        };
-        System.out.println();
-       //Main.execute(docletParams);
+        ));
+
+        if (doclet.equals(SSL_DOCLET)) {
+            docletArgs.add("--destdir");
+            docletArgs.add(outputPath);
+        }
+
+        DocumentationTool docTool = ToolProvider.getSystemDocumentationTool();
+        docTool.run(System.in, System.out, System.err, docletArgs.toArray(new String[0]));
     }
 
     public void runDoclet(String sourcePath, String packages) {
@@ -62,9 +64,9 @@ public class DocletExecutor {
     private String getDocletPath(String doclet) {
         switch (doclet) {
             case SSL_DOCLET:
-                return "../ssldoclet/target/ssldoclet-1.2.jar";
+                return "swan-javadoc-exporter/target/classes";
             case COVERAGE_DOCLET:
-                return "../javadoc-coverage/target/javadoc-coverage-1.2.0.jar";
+                return "../doc-coverage-doclet/target/classes/";
             case STANDARD_DOCLET:
                 return "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/lib/tools.jar";
         }

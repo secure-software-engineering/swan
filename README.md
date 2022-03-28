@@ -12,7 +12,7 @@ The project contains the following modules:
 * **swan-pipeline**: core machine learning implementation for SWAN with components for data collection and preparation, feature engineering and model selection phases
 * **swan-assist**: IntelliJ plugin provides GUI support for SWAN and enables active machine learning.
 * **swan-javadoc-exporter**: Doclet exports doc comments to XML files so that they can be analyzed by the Natural Language Processing (NLP) module
-* **swan-javadoc-coverage**: Doclet calculates the software documentation coverage of Java programs based on the presence of doc comments for classes, methods, and other objects.
+* **doc-coverage-doclet**: Doclet calculates the software documentation coverage of Java programs based on the presence of doc comments for classes, methods, and other objects.
 
 How do I get started with SWAN?
 -------------
