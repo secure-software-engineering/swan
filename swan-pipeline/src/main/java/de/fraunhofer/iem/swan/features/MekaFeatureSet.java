@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
+    Instances trainInstances = null;
+    Instances testInstances = null;
+    Instances structure = null;
+
     public MekaFeatureSet(Dataset dataset, SwanOptions options) {
         super(dataset, options, ModelEvaluator.Toolkit.MEKA);
     }
@@ -28,15 +32,19 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
      */
     public void createFeatures() {
 
-        List<FeatureSet.Type> featureSets = initializeFeatures();
-
-        Instances trainInstances = null;
-        Instances structure = null;
+        initializeFeatures();
 
         //Create and set attributes for the train instances
         if (options.getInstances().isEmpty()) {
             ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods(), featureSets);
-            trainInstances = createInstances(featureSets, trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
+            structure = new Instances("swan-srm", trainAttributes, 0);
+            convertToMekaInstances(structure);
+
+            Set<Method> methods = new HashSet<>(dataset.getTrainMethods());
+            methods.addAll(dataset.getTestMethods());
+
+            evaluateFeatureData(methods);
+            trainInstances = createInstances(structure, trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
         } else {
             ArffLoader loader = new ArffLoader();
 
@@ -47,7 +55,17 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods(), featureSets);
+            evaluateFeatureData(dataset.getTestMethods());
         }
+        testInstances = createTestSet();
+
+        this.instances.put("train", convertToMekaInstances(trainInstances));
+        this.instances.put("test", convertToMekaInstances(testInstances));
+    }
+
+    public Instances createTestSet() {
 
         //Create and set attributes for the test instances.
         Attribute idAttr = new Attribute("id", dataset.getTestMethods().stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));

@@ -87,12 +87,10 @@ public abstract class FeatureSet {
                 case DOC_MANUAL:
                     docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseManualFeatureSet();
-                    docFeatureHandler.evaluateManualFeatureData();
                     break;
                 case DOC_AUTO:
                     docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseAutomaticFeatureSet();
-                    docFeatureHandler.evaluateAutomaticFeatureData();
                     break;
             }
     }
