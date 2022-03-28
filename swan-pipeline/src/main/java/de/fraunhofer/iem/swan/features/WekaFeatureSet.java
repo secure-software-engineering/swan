@@ -26,15 +26,15 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
      */
     public void createFeatures() {
 
-        List<FeatureSet.Type> featureSets = initializeFeatures();
+        initializeFeatures();
 
         for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
 
             //Create and set attributes for the train instances
-            ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods(), featureSets);
+            ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods());
 
             String instanceName = category.getId().toLowerCase() + "-train-instances";
-            Instances trainInstances = createInstances(featureSets, trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
+            Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
             this.instances.put(category.getId().toLowerCase(), trainInstances);
             Util.exportInstancesToArff(trainInstances);
 
@@ -48,13 +48,12 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
     /**
      * Creates instances and adds attributes for the features, classes, and method signatures.
      *
-     * @param category    list of categories
-     * @param methods     list of training methods
-     * @param featureSets classification mode
+     * @param category list of categories
+     * @param methods  list of training methods
      */
-    public ArrayList<Attribute> createAttributes(Category category, Set<Method> methods, List<FeatureSet.Type> featureSets) {
+    public ArrayList<Attribute> createAttributes(Category category, Set<Method> methods) {
 
-        ArrayList<Attribute> attributes = new ArrayList<>(super.createAttributes(getCategories(category), methods, featureSets));
+        ArrayList<Attribute> attributes = new ArrayList<>(super.createAttributes(getCategories(category), methods));
         ArrayList<String> attributeValues = new ArrayList<>(Arrays.asList("0", "1"));
 
         // Collect classes and add to attributes

@@ -18,7 +18,7 @@ import weka.core.Instances;
 import java.util.*;
 import java.util.stream.Collectors;
 
-abstract class FeatureSet {
+public abstract class FeatureSet {
 
     protected Map<IFeature, Attribute> codeAttributes;
     protected final HashMap<String, Integer> instanceMap;
@@ -28,6 +28,7 @@ abstract class FeatureSet {
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> instances;
     protected ModelEvaluator.Toolkit toolkit;
+    protected List<FeatureSet.Type> featureSets;
 
     /**
      * Available feature sets:
@@ -46,6 +47,10 @@ abstract class FeatureSet {
             this.value = value;
         }
 
+        public String getValue(){
+            return value.toLowerCase();
+        }
+
         public static FeatureSet.Type getValue(String value) {
             for (FeatureSet.Type featureSet : FeatureSet.Type.values()) {
                 if (featureSet.value.contains(value)) {
@@ -62,16 +67,16 @@ abstract class FeatureSet {
         this.dataset = dataset;
         this.toolkit = toolkit;
         instances = new HashMap<>();
+
+        featureSets = options.getFeatureSet().stream()
+                .map(f -> FeatureSet.Type.getValue(f.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
     /**
-     *
+     * Initialize feature handlers.
      */
-    public List<FeatureSet.Type> initializeFeatures() {
-
-        List<FeatureSet.Type> featureSets = options.getFeatureSet().stream()
-                .map(f -> FeatureSet.Type.getValue(f.toUpperCase()))
-                .collect(Collectors.toList());
+    public void initializeFeatures() {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
@@ -80,30 +85,23 @@ abstract class FeatureSet {
                     codeFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:
-
-                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
+                    docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseManualFeatureSet();
-                    docFeatureHandler.evaluateManualFeatureData();
                     break;
                 case DOC_AUTO:
-
-                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
+                    docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseAutomaticFeatureSet();
-                    docFeatureHandler.evaluateAutomaticFeatureData();
                     break;
             }
-
-        return featureSets;
     }
 
     /**
      * Creates instances and adds attributes for the features, classes, and method signatures.
      *
-     * @param categories  list of categories
-     * @param methods     list of training methods
-     * @param featureSets classification mode
+     * @param categories list of categories
+     * @param methods    list of training methods
      */
-    public ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods, List<FeatureSet.Type> featureSets) {
+    public ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods) {
 
         ArrayList<Attribute> attributes = new ArrayList<>();
 
@@ -188,8 +186,22 @@ abstract class FeatureSet {
         return attributes;
     }
 
+    public void evaluateFeatureData(Set<Method> methods) {
 
-    public Instances createInstances(Instances instances, List<Type> featureSets, ArrayList<Attribute> attributes,
+        for (FeatureSet.Type featureSet : featureSets)
+            switch (featureSet) {
+                case CODE:
+                    break;
+                case DOC_MANUAL:
+                    docFeatureHandler.evaluateManualFeatureData(methods);
+                    break;
+                case DOC_AUTO:
+                    docFeatureHandler.evaluateAutomaticFeatureData(methods);
+                    break;
+            }
+    }
+
+    public Instances createInstances(Instances instances, ArrayList<Attribute> attributes,
                                      Set<Method> methods, Set<Category> categories) {
 
         for (FeatureSet.Type featureSet : featureSets)
@@ -206,12 +218,12 @@ abstract class FeatureSet {
     }
 
 
-    public Instances createInstances(List<Type> featureSets, ArrayList<Attribute> attributes,
+    public Instances createInstances(ArrayList<Attribute> attributes,
                                      Set<Method> methods, Set<Category> categories) {
 
         Instances instances = new Instances("swan-srm", attributes, 0);
 
-        return createInstances(instances, featureSets, attributes, methods, categories);
+        return createInstances(instances, attributes, methods, categories);
     }
 
 

@@ -50,13 +50,13 @@ public class StopWordCountFeature implements IDocFeature {
 
         ArrayList<String> lemmas = new ArrayList<>();
 
-        if(sentences!=null)
-        for (CoreLabel token : sentences.get(0).get(CoreAnnotations.TokensAnnotation.class)) {
+        if (sentences != null && sentences.size() > 0)
+            for (CoreLabel token : sentences.get(0).get(CoreAnnotations.TokensAnnotation.class)) {
 
-            String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
-            if (stopWordSet.contains(lemma))
-                lemmas.add(lemma);
-        }
+                String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
+                if (stopWordSet.contains(lemma))
+                    lemmas.add(lemma);
+            }
 
         return lemmas.size();
     }

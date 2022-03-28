@@ -37,7 +37,7 @@ public class SwanCli {
             options.setFeatureSet(Arrays.asList("code", "doc-manual", "doc-auto"));
         }
 
-        if (options.getInstances().isEmpty()) {
+        if (options.getArffInstancesFiles().isEmpty() && options.getTrainDataDir().isEmpty()) {
 
             List<String> instances = new ArrayList<>();
 
