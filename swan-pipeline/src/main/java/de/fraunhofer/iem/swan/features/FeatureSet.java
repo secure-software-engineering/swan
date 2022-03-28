@@ -85,14 +85,12 @@ public abstract class FeatureSet {
                     codeFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:
-
-                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
+                    docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseManualFeatureSet();
                     docFeatureHandler.evaluateManualFeatureData();
                     break;
                 case DOC_AUTO:
-
-                    docFeatureHandler = new DocFeatureHandler(dataset.getTrainMethods());
+                    docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseAutomaticFeatureSet();
                     docFeatureHandler.evaluateAutomaticFeatureData();
                     break;

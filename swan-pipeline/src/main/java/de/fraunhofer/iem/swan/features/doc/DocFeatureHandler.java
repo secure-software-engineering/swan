@@ -23,18 +23,12 @@ public class DocFeatureHandler {
     private ArrayList<String> automaticFeatureSet;
     private HashMap<String, AnnotatedMethod> manualFeatureData;
     private HashMap<String, HashMap<String, Double>> automaticFeatureData;
-    private Set<Method> methodSet;
 
-    public DocFeatureHandler(Set<Method> trainingSet) {
+    public DocFeatureHandler() {
         manualFeatureSet = new HashSet<>();
         manualFeatureData = new HashMap<>();
         automaticFeatureSet = new ArrayList<>();
         automaticFeatureData = new HashMap<>();
-        methodSet = new HashSet<>(trainingSet);
-    }
-
-    public Set<Method> getMethodSet() {
-        return methodSet;
     }
 
     public HashMap<String, AnnotatedMethod> getManualFeatureData() {
@@ -45,12 +39,12 @@ public class DocFeatureHandler {
         return automaticFeatureData;
     }
 
-    public void evaluateManualFeatureData() {
+    public void evaluateManualFeatureData(Set<Method> methodSet) {
         CoreNLPExecutor nlpExecutor = new CoreNLPExecutor();
         manualFeatureData = nlpExecutor.run(new ArrayList<>(methodSet));
     }
 
-    public void evaluateAutomaticFeatureData() {
+    public void evaluateAutomaticFeatureData(Set<Method> methodSet) {
         DocCommentVector docCommentVector = new DocCommentVector();
         docCommentVector.fitVectors();
 
