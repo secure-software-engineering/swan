@@ -53,7 +53,6 @@ public class XmlDocletParser {
 
             for (File file : FileUtils.listFiles(filePath, new String[]{"xml"}, true))
                 parseFile(file.getAbsolutePath());
-
         } else {
             parseFile(filePath.getAbsolutePath());
         }
@@ -71,15 +70,14 @@ public class XmlDocletParser {
 
                 HashMap<String, MethodBlockType> methods = new HashMap<>();
 
+                for (MethodBlockType methodBlock : xmlDoc.getPackageBlock().getClassBlock().getMethods().getMethodBlock()) {
 
-                    for (MethodBlockType methodBlock : xmlDoc.getPackageBlock().getClassBlock().getMethods().getMethodBlock()) {
+                    String methodSignature = getSignature(xmlDoc.getPackageBlock().getQualifiedName(), methodBlock);
 
-                        String methodSignature = getSignature(xmlDoc.getPackageBlock().getQualifiedName(), methodBlock);
-
-                        methodBlock.setSignature(methodSignature);
-                        methods.put(methodSignature, methodBlock);
-                    }
-                    javadocs.add(new Javadoc(xmlDoc.getPackageBlock(), methods, xmlFile));
+                    methodBlock.setSignature(methodSignature);
+                    methods.put(methodSignature, methodBlock);
+                }
+                javadocs.add(new Javadoc(xmlDoc.getPackageBlock(), methods, xmlFile));
             }
 
         } catch (FileNotFoundException | JAXBException e) {

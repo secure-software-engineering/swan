@@ -17,6 +17,12 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-train", "--train-data"}, description = {"Path of training JARs or class files"})
     private String trainDataDir = "";
 
+    @CommandLine.Option(names = {"-test-source", "--test-data-source"}, description = {"Path of test source files"})
+    private String testDataSourceDir = "";
+
+    @CommandLine.Option(names = {"-train-source", "--train-data-source"}, description = {"Path of training source files"})
+    private String trainDataDirSource = "";
+
     @CommandLine.Option(names = {"-d", "--dataset"}, description = {"Path to JSON dataset file"})
     private String datasetJson = "/dataset/swan-dataset.json";
 
@@ -73,6 +79,8 @@ public class CliRunner implements Callable<Integer> {
                 phase);
         options.setPredictionThreshold(predictionThreshold);
         options.setInstances(arffInstancesFiles);
+        options.setTrainDataSourceDir(trainDataDirSource);
+        options.setTestDataSourceDir(testDataSourceDir);
 
         return options;
     }

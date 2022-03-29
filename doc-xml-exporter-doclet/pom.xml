@@ -4,33 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>info.semanticsoftware</groupId>
-    <artifactId>ssldoclet</artifactId>
-    <version>1.2</version>
-
     <name>SSLDoclet</name>
     <description>Javadoc NLP Corpus Generation Doclet</description>
     <url>https://www.semanticsoftware.info/javadoclet</url>
 
+    <groupId>info.semanticsoftware</groupId>
+    <artifactId>ssldoclet</artifactId>
+    <version>1.2</version>
+
     <properties>
-        <project.java.version>1.8</project.java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <profiles>
-        <profile>
-            <id>default-profile</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <file>
-                    <exists>/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/lib/tools.jar</exists>
-                </file>
-            </activation>
-            <properties>
-                <toolsjar>${java.home}/../lib/tools.jar</toolsjar>
-            </properties>
-        </profile>
         <profile>
             <id>mac-profile</id>
             <activation>
@@ -62,7 +49,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

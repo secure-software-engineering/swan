@@ -1,12 +1,12 @@
 package de.fraunhofer.iem.swan;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.FeatureSetSelector;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
+import de.fraunhofer.iem.swan.io.doc.JavadocProcessor;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.soot.Soot;
 import de.fraunhofer.iem.swan.util.Util;
@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * Runner for SWAN
@@ -56,9 +55,12 @@ public class SwanPipeline {
 
         //Load methods from the test set
         dataset.setTest(new SrmList(options.getTestDataDir()));
-        Set<Method> testMethods = soot.loadMethods(dataset.getTest().getTestClasses());
-        dataset.getTest().setMethods(testMethods);
-        logger.info("Loaded {} methods from {}", testMethods.size(), options.getTestDataDir());
+        dataset.getTest().setMethods(soot.loadMethods(dataset.getTest().getTestClasses()));
+
+        //Extract doc comments and add to test set, if option is selected
+        JavadocProcessor javadocProcessor = new JavadocProcessor(options.getTestDataSourceDir(), options.getOutputDir());
+        javadocProcessor.run(dataset.getTestMethods(), options.getFeatureSet());
+        logger.info("Loaded {} methods from {}", dataset.getTestMethods().size(), options.getTestDataDir());
 
         //Initialize and populate features
         FeatureSetSelector featureSetSelector = new FeatureSetSelector();
