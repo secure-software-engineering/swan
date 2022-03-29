@@ -130,7 +130,7 @@ public class XMLSerializer {
     /**
      * The method that saves the XML files
      */
-    public void save(String dir, String fileName, String packageName) {
+    public void save(String dir, String fileName) {
         try {
             StringWriter sw = new StringWriter();
             StreamResult result = new StreamResult(sw);
@@ -138,7 +138,7 @@ public class XMLSerializer {
             trans.transform(source, result);
 
             try {
-                FileWriter out = new FileWriter(dir + "/" + fileName + " - " + packageName + ".xml");
+                FileWriter out = new FileWriter(dir + "/" + fileName  + ".xml");
                 out.write(sw.toString());
                 out.close();
             } catch (IOException ioEx) {

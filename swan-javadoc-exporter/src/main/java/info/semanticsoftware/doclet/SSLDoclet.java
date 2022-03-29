@@ -22,11 +22,24 @@
 */
 package info.semanticsoftware.doclet;
 
-import com.sun.javadoc.*;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.util.DocTrees;
+import com.sun.source.util.TreePath;
 import info.semanticsoftware.doclet.xml.XMLSerializer;
+import jdk.javadoc.doclet.Doclet;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Reporter;
 import org.w3c.dom.Element;
 
-import java.util.Date;
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.*;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.ElementFilter;
+import javax.lang.model.util.ElementScanner9;
+import javax.tools.JavaFileObject;
+import java.util.*;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * This class is in charge of iterating through all of the Javadoc objects and
@@ -35,86 +48,166 @@ import java.util.Date;
  * @author Ninus
  * @version 1.2
  */
-public class SSLDoclet extends Doclet {
-    private static String programversion = "2.0";
-    private static String destdir = "./";
-    private static String sourcePath;
+public class SSLDoclet implements Doclet {
+
+    private static final boolean OK = true;
+    private String sourcePath;
+    private String outputDir;
+    private static final String programversion = "2.0";
     private static XMLSerializer xmlSerializer;
+    static DocTrees docTrees;
+    static DocletEnvironment environment;
 
+    final private Logger log = Logger.getLogger(SSLDoclet.class.getName());
 
-    /**
-     * Needed by the Javadoc API
-     */
-    public static boolean start(RootDoc doc) {
-        getParameters(doc);
-        iterateClasses(doc);
-        return true;
-    }
+    abstract class Option implements Doclet.Option {
+        private final String name;
+        private final boolean hasArg;
+        private final String description;
+        private final String parameters;
 
-    /**
-     * Needed by the Javadoc to validate the options
-     */
-    public static int optionLength(String option) {
-        if (option.compareToIgnoreCase("-d") == 0)
-            return 2;
-        return 0;
-    }
-
-    /**
-     * Needed by the Javadoc for valid options
-     */
-    public static boolean validOptions(String options[][], DocErrorReporter reporter) {
-        return true;
-    }
-
-    /**
-     * Needed by the Javadoc to iterate through valid options
-     */
-    private static void getParameters(RootDoc doc) {
-        String[][] options = doc.options();
-        for (String[] option : options) {
-            if (option[0].compareToIgnoreCase("-d") == 0) {
-                destdir = option[1];
-                String fs = System.getProperty("file.separator");
-
-                if (!destdir.endsWith(fs)) {
-                    destdir += fs;
-                    continue;
-                }
-            } else if (option[0].equals("-sourcepath")) {
-
-                if (option[1].contains(":"))
-                    sourcePath = option[1].substring(0, option[1].indexOf(":"));
-                else
-                    sourcePath = option[1];
-            }
+        Option(String name, boolean hasArg,
+               String description, String parameters) {
+            this.name = name;
+            this.hasArg = hasArg;
+            this.description = description;
+            this.parameters = parameters;
         }
 
-        System.out.println("XML Generator Version: " + programversion);
-        System.out.println("Using output directory '" + destdir);
+        @Override
+        public int getArgumentCount() {
+            return hasArg ? 1 : 0;
+        }
+
+        @Override
+        public String getDescription() {
+            return description;
+        }
+
+        @Override
+        public Kind getKind() {
+            return Kind.STANDARD;
+        }
+
+        @Override
+        public List<String> getNames() {
+            return List.of(name);
+        }
+
+        @Override
+        public String getParameters() {
+            return hasArg ? parameters : "";
+        }
+    }
+
+    private final Set<Option> options = Set.of(
+
+            // An option that takes a single string-valued argument.
+            new Option("--sourcepath", true, "The directory containing the source code that needs to be processed", "<string>") {
+                @Override
+                public boolean process(String option,
+                                       List<String> arguments) {
+                    sourcePath = arguments.get(0);
+                    return OK;
+                }
+            },
+
+            // An option that takes a single integer-valued argument.
+            new Option("--destdir", true, "The directory where the doclet will place the generated XML documents.", "<int>") {
+                @Override
+                public boolean process(String option,
+                                       List<String> arguments) {
+                    outputDir = arguments.get(0);
+                    return OK;
+                }
+            }
+    );
+
+    @Override
+    public void init(Locale locale, Reporter reporter) {
+
+    }
+
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    public Set<? extends Option> getSupportedOptions() {
+
+        return options;
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return null;
+    }
+
+    @Override
+    public boolean run(DocletEnvironment environment) {
+
+        docTrees = environment.getDocTrees();
+        iterateClasses(environment);
+
+        return OK;
     }
 
     /**
      * Needed by the Javadoc to iterate through the classes
      */
-    private static void iterateClasses(RootDoc doc) {
-        ClassDoc[] classes = doc.classes();
+    private void iterateClasses(DocletEnvironment environment) {
 
         xmlSerializer = new XMLSerializer();
+        this.environment = environment;
 
-        for (ClassDoc c : classes) {
-            generateRoot();
-            Element p = generatePackage(c.containingPackage());
-            generateClass(c, p);
+        Set<TypeElement> elements = ElementFilter.typesIn(environment.getIncludedElements());
+        log.info("Exporting doc comments from " + elements.size() + " classes to: " + outputDir);
+
+        for (TypeElement typeElement : elements) {
+            generateRoot(new ShowFileObjects().getFilePath(typeElement));
+
+            Element p = generatePackage((PackageElement) typeElement.getEnclosingElement());
+            generateClass(typeElement, p);
+
             xmlSerializer.formatDocument();
-            xmlSerializer.save(destdir, c.name(), c.containingPackage().name());
+            xmlSerializer.save(outputDir, typeElement.getQualifiedName().toString());
+        }
+    }
+
+    /**
+     * A scanner that displays the name of the source file
+     * (if available) for any types that it encounters.
+     */
+    class ShowFileObjects extends ElementScanner9<Void, Void> {
+
+        String filePath;
+
+        ShowFileObjects() {
+            filePath = "";
+        }
+
+        String getFilePath(TypeElement typeElement) {
+            visitType(typeElement, null);
+            return filePath;
+        }
+
+        @Override
+        public Void visitType(TypeElement te, Void p) {
+            TreePath dct = docTrees.getPath(te);
+            if (dct != null) {
+                JavaFileObject fo =
+                        dct.getCompilationUnit().getSourceFile();
+                filePath = fo.getName();
+            }
+            return super.visitType(te, p);
         }
     }
 
     /**
      * Generates the root element
      */
-    private static void generateRoot() {
+    private static void generateRoot(String sourcePath) {
         xmlSerializer.createDocument();
         Element root = xmlSerializer.createRoot("ssldoclet");
         xmlSerializer.createAttribute(root, "version", programversion);
@@ -122,24 +215,31 @@ public class SSLDoclet extends Doclet {
         xmlSerializer.createAttribute(root, "source", sourcePath);
     }
 
+    public static boolean isDocumented(DocCommentTree docCommentTree) {
+
+        return docCommentTree != null && !docCommentTree.getFullBody().isEmpty();
+    }
+
     /**
      * Generates the Package node
      */
-    private static Element generatePackage(PackageDoc p) {
+    private static Element generatePackage(PackageElement p) {
         Element packageBlockNode = xmlSerializer.createElement("Package_Block");
         Element packageNode = xmlSerializer.createElement("Package");
-        Element commentBlockNode = null;
-        Element commentNode = null;
+        Element commentBlockNode;
+        Element commentNode;
 
-        xmlSerializer.createText(packageNode, p.name());
-        if (p.commentText() != null && p.commentText().length() > 0) {
+        xmlSerializer.createText(packageNode, p.getQualifiedName().toString());
+
+        DocCommentTree docCommentTree = docTrees.getDocCommentTree(p);
+
+        if (isDocumented(docCommentTree)) {
             commentBlockNode = xmlSerializer.createElement("Package_Comment_Block");
             commentNode = xmlSerializer.createElement("Package_Comment");
 
-            xmlSerializer.createText(commentNode, p.commentText());
+            xmlSerializer.createText(commentNode, docCommentTree.getFullBody().toString());
             commentBlockNode.appendChild(commentNode);
         }
-        //x.createAttribute(commentNode, "line", String.valueOf(p.position().line()));
         packageBlockNode.appendChild(packageNode);
 
         return packageBlockNode;
@@ -148,14 +248,16 @@ public class SSLDoclet extends Doclet {
     /**
      * Generates the Class node
      */
-    private static Element generateClass(ClassDoc classDoc, Element p) {
+    private static Element generateClass(TypeElement classDoc, Element p) {
+
         Element classBlockNode;
         Element classNode;
 
-        if (classDoc.isInterface()) {
+        if (classDoc.getKind().isInterface()) {
             classBlockNode = xmlSerializer.createElement("Interface_Block");
             classNode = xmlSerializer.createElement("Interface");
-        } else if (classDoc.isAbstract() && !classDoc.isInterface()) {
+        } else if (classDoc.getKind().isClass() && classDoc.getModifiers().contains(Modifier.ABSTRACT) &&
+                !classDoc.getKind().isInterface()) {
             classBlockNode = xmlSerializer.createElement("Abstract_Class_Block");
             classNode = xmlSerializer.createElement("Abstract_Class");
         } else {
@@ -165,35 +267,21 @@ public class SSLDoclet extends Doclet {
 
         classBlockNode.appendChild(classNode);
         p.appendChild(classBlockNode);
+        xmlSerializer.createText(classNode, classDoc.getSimpleName().toString());
 
-        xmlSerializer.createText(classNode, classDoc.name());
-
-
-        ClassDoc[] extendClasses = classDoc.interfaces();
-        if (extendClasses.length > 0) {
-            for (ClassDoc extendClass : extendClasses) {
-                generateImplementClass(extendClass, classBlockNode);
-            }
+        for (TypeMirror extendClass : classDoc.getInterfaces()) {
+            generateImplementClass(extendClass, classBlockNode);
         }
 
-        if (classDoc.superclass() != null) {
-
-            generateExtendClass(classDoc.superclass(), classBlockNode);
+        if (!(classDoc.getSuperclass().toString().equals("java.lang.Object"))) {
+            generateExtendClass(classDoc.getSuperclass(), classBlockNode);
         }
 
-        xmlSerializer.createAttribute(classNode, "line", String.valueOf(classDoc.position().line()));
-        xmlSerializer.createAttribute(classNode, "final", String.valueOf(classDoc.isFinal()));
-        xmlSerializer.createAttribute(classNode, "serializable", String.valueOf(classDoc.isSerializable()));
+        xmlSerializer.createAttribute(classNode, "final", String.valueOf(classDoc.getModifiers().contains(Modifier.FINAL)));
 
-        generateComments(classDoc, classBlockNode);
-
-        generateFields(classDoc.fields(), classBlockNode);
-        // generateConstructors(classDoc.constructors(), classBlockNode);
-        generateMethods(classDoc.methods(), classDoc.constructors(), classBlockNode);
-
-        ClassDoc[] innerClasses = classDoc.innerClasses();
-        for (int classIndex = 0; classIndex < innerClasses.length; classIndex++)
-            classBlockNode.appendChild(generateClass(innerClasses[classIndex], classBlockNode));
+        generateComments(classDoc, classBlockNode, false);
+        generateFields(ElementFilter.fieldsIn(classDoc.getEnclosedElements()), classBlockNode);
+        generateMethods(ElementFilter.methodsIn(classDoc.getEnclosedElements()), ElementFilter.constructorsIn(classDoc.getEnclosedElements()), classBlockNode);
 
         return classBlockNode;
     }
@@ -201,72 +289,56 @@ public class SSLDoclet extends Doclet {
     /**
      * Generates the Class implemented by the processed class
      */
-    private static void generateImplementClass(ClassDoc implementDoc, Element classBlockNode) {
-        Element implementBlockNode;
-        Element implementNode;
-        Element implementCommentNode;
+    private static void generateImplementClass(TypeMirror implementDoc, Element classBlockNode) {
 
-        implementBlockNode = xmlSerializer.createElement("Interface_Block");
-        implementNode = xmlSerializer.createElement("Interface");
+        Element implementBlockNode = xmlSerializer.createElement("Interface_Block");
+        Element implementNode = xmlSerializer.createElement("Interface");
 
-        xmlSerializer.createAttribute(implementNode, "type", "Interface");
-        xmlSerializer.createAttribute(implementNode, "qualifiedType", implementDoc.qualifiedTypeName());
+        TypeElement element = (TypeElement) environment.getTypeUtils().asElement(implementDoc);
 
-        if (implementDoc.superclass() != null) {
-            xmlSerializer.createAttribute(implementNode, "superclass", implementDoc.superclass().name());
-            xmlSerializer.createAttribute(implementNode, "superclassFullType", implementDoc.superclass().qualifiedName());
-        }
-
-        xmlSerializer.createAttribute(implementNode, "final", String.valueOf(implementDoc.isFinal()));
-        xmlSerializer.createAttribute(implementNode, "serializable", String.valueOf(implementDoc.isSerializable()));
-
-        xmlSerializer.createText(implementNode, implementDoc.name());
-
-        if (implementDoc.commentText() != null && implementDoc.commentText().length() > 0) {
-            implementCommentNode = xmlSerializer.createElement("Implements_Comment");
-            xmlSerializer.createText(implementCommentNode, implementDoc.commentText());
-            implementBlockNode.appendChild(implementCommentNode);
-        }
-
-        implementBlockNode.appendChild(implementNode);
-        classBlockNode.appendChild(implementBlockNode);
+        generateExtendImplement(classBlockNode, implementBlockNode, implementNode, element);
     }
 
     /**
      * Generates the Class extended by the processed class
      */
-    private static void generateExtendClass(ClassDoc extendDoc, Element classBlockNode) {
-        Element extendBlockNode;
-        Element extendNode;
-        Element extendCommentNode;
+    private static void generateExtendClass(TypeMirror extendDoc, Element classBlockNode) {
 
-        extendBlockNode = xmlSerializer.createElement("Extends_Block");
-        extendNode = xmlSerializer.createElement("Extends");
+        Element extendBlockNode = xmlSerializer.createElement("Extends_Block");
+        Element extendNode = xmlSerializer.createElement("Extends");
 
-        if (extendDoc.isAbstract()) {
-            xmlSerializer.createAttribute(extendNode, "type", "Abstract_Class");
-        } else {
-            xmlSerializer.createAttribute(extendNode, "type", "Class");
+        TypeElement element = (TypeElement) environment.getTypeUtils().asElement(extendDoc);
+
+        generateExtendImplement(classBlockNode, extendBlockNode, extendNode, element);
+    }
+
+    private static void generateExtendImplement(Element classBlockNode, Element extendBlockNode, Element extendNode, TypeElement element) {
+
+        switch (element.getKind()) {
+            case CLASS:
+                if (element.getModifiers().contains(Modifier.ABSTRACT)) {
+                    xmlSerializer.createAttribute(extendNode, "type", "Abstract_Class");
+                } else {
+                    xmlSerializer.createAttribute(extendNode, "type", "Class");
+                }
+                break;
+            case INTERFACE:
+                xmlSerializer.createAttribute(extendNode, "type", "Interface");
+                break;
         }
 
-        xmlSerializer.createAttribute(extendNode, "qualifiedType", extendDoc.qualifiedTypeName());
+        xmlSerializer.createAttribute(extendNode, "qualifiedType", element.getQualifiedName().toString());
 
-        if (extendDoc.superclass() != null) {
-            xmlSerializer.createAttribute(extendNode, "superclass", extendDoc.superclass().name());
-            xmlSerializer.createAttribute(extendNode, "superclassFullType", extendDoc.superclass().qualifiedName());
+        if (!(element.getSuperclass().toString().equals("java.lang.Object"))) {
+            xmlSerializer.createAttribute(extendNode, "superclass", element.getSuperclass().toString());
+            xmlSerializer.createAttribute(extendNode, "superclassFullType", element.getSuperclass().toString());
         }
 
+        xmlSerializer.createAttribute(extendNode, "final", String.valueOf(element.getModifiers().contains(Modifier.FINAL)));
 
-        xmlSerializer.createAttribute(extendNode, "final", String.valueOf(extendDoc.isFinal()));
-        xmlSerializer.createAttribute(extendNode, "serializable", String.valueOf(extendDoc.isSerializable()));
+        xmlSerializer.createText(extendNode, String.valueOf(element.getSimpleName()));
 
-        xmlSerializer.createText(extendNode, extendDoc.name());
-
-        if (extendDoc.commentText() != null && extendDoc.commentText().length() > 0) {
-            extendCommentNode = xmlSerializer.createElement("Extends_Comment");
-            xmlSerializer.createText(extendCommentNode, extendDoc.commentText());
-            extendBlockNode.appendChild(extendCommentNode);
-        }
+        generateComments(element, extendBlockNode, true);
 
         extendBlockNode.appendChild(extendNode);
         classBlockNode.appendChild(extendBlockNode);
@@ -275,35 +347,33 @@ public class SSLDoclet extends Doclet {
     /**
      * Generates the Field node
      */
-    private static void generateFields(FieldDoc[] fields, Element node) {
-        if (fields.length < 1) return;
+    private static void generateFields(List<VariableElement> fields, Element node) {
 
         Element fieldsNode = xmlSerializer.createElement("Fields");
 
-        for (int index = 0; index < fields.length; index++) {
+        for (VariableElement field : fields) {
+
             Element fieldBlockNode = xmlSerializer.createElement("Field_Block");
             Element fieldNode = xmlSerializer.createElement("Field");
 
-            xmlSerializer.createText(fieldNode, fields[index].name());
+            xmlSerializer.createText(fieldNode, field.getSimpleName().toString());
             fieldBlockNode.appendChild(fieldNode);
-            xmlSerializer.createAttribute(fieldNode, "line", String.valueOf(fields[index].position().line()));
-            xmlSerializer.createAttribute(fieldNode, "type", fields[index].type().typeName());
-            xmlSerializer.createAttribute(fieldNode, "fullType", fields[index].type().toString());
 
-            if (fields[index].constantValue() != null && fields[index].constantValue().toString().length() > 0)
+            xmlSerializer.createAttribute(fieldNode, "type", field.asType().toString());
+            xmlSerializer.createAttribute(fieldNode, "fullType", field.asType().toString());
+
+            if (field.getConstantValue() != null && field.getConstantValue().toString().length() > 0) {
                 xmlSerializer.createAttribute(fieldNode, "const", "true");
-            if (fields[index].constantValueExpression() != null && fields[index].constantValueExpression().length() > 0)
-                xmlSerializer.createAttribute(fieldNode, "constantValueExpression", fields[index].constantValueExpression());
+                xmlSerializer.createAttribute(fieldNode, "constantValueExpression", field.getConstantValue().toString());
+            }
 
-            setVisibility(fields[index], fieldNode);
+            setVisibility(field, fieldNode);
 
-
-            xmlSerializer.createAttribute(fieldNode, "static", String.valueOf(fields[index].isStatic()));
-            xmlSerializer.createAttribute(fieldNode, "final", String.valueOf(fields[index].isFinal()));
-            xmlSerializer.createAttribute(fieldNode, "transient", String.valueOf(fields[index].isTransient()));
-            xmlSerializer.createAttribute(fieldNode, "volatile", String.valueOf(fields[index].isVolatile()));
-
-            generateComments(fields[index], fieldBlockNode);
+            xmlSerializer.createAttribute(fieldNode, "static", String.valueOf(field.getKind() == ElementKind.STATIC_INIT));
+            xmlSerializer.createAttribute(fieldNode, "final", String.valueOf(field.getModifiers().contains(Modifier.FINAL)));
+            xmlSerializer.createAttribute(fieldNode, "transient", String.valueOf(field.getModifiers().contains(Modifier.TRANSIENT)));
+            xmlSerializer.createAttribute(fieldNode, "volatile", String.valueOf(field.getModifiers().contains(Modifier.VOLATILE)));
+            generateComments(field, fieldBlockNode, false);
 
             fieldsNode.appendChild(fieldBlockNode);
         }
@@ -311,289 +381,131 @@ public class SSLDoclet extends Doclet {
     }
 
     /**
-     * Generates the Constructor node
-     */
-    private static void generateConstructors(ConstructorDoc[] constructors, Element node) {
-        if (constructors.length < 1) return;
-
-        Element constructorsNode = xmlSerializer.createElement("Constructors");
-
-        for (int index = 0; index < constructors.length; index++) {
-            Element constBlockNode = xmlSerializer.createElement("Constructor_Block");
-            Element constNode = xmlSerializer.createElement("Constructor");
-
-            xmlSerializer.createText(constNode, constructors[index].name());
-            constBlockNode.appendChild(constNode);
-
-            populateMethodNode(constructors[index], constBlockNode, constNode);
-
-            constructorsNode.appendChild(constBlockNode);
-        }
-
-        node.appendChild(constructorsNode);
-    }
-
-    /**
      * Generates the Method node
      */
-    private static void generateMethods(MethodDoc[] methods, ConstructorDoc[] constructors, Element node) {
-        if ((methods.length + constructors.length) < 1) return;
+    private static void generateMethods(List<ExecutableElement> methods, List<ExecutableElement> constructors, Element node) {
 
+        methods.addAll(constructors);
         Element methodsNode = xmlSerializer.createElement("Methods");
 
-        for (int index = 0; index < methods.length; index++) {
+        for (ExecutableElement method : methods) {
             Element methodBlockNode = xmlSerializer.createElement("Method_Block");
             Element methodNode = xmlSerializer.createElement("Method");
 
-            xmlSerializer.createText(methodNode, methods[index].name());
+            xmlSerializer.createText(methodNode, method.getSimpleName().toString());
             methodBlockNode.appendChild(methodNode);
 
-            populateMethodNode(methods[index], methodBlockNode, methodNode);
-
+            populateMethodNode(method, methodBlockNode, methodNode);
 
             methodsNode.appendChild(methodBlockNode);
         }
-
-        for (int index = 0; index < constructors.length; index++) {
-            Element methodBlockNode = xmlSerializer.createElement("Method_Block");
-            Element methodNode = xmlSerializer.createElement("Method");
-
-            xmlSerializer.createText(methodNode, constructors[index].name());
-            methodBlockNode.appendChild(methodNode);
-
-            populateMethodNode(constructors[index], methodBlockNode, methodNode);
-
-
-            methodsNode.appendChild(methodBlockNode);
-        }
-
         node.appendChild(methodsNode);
     }
-
 
     /**
      * Generates additional information for Methods and Constructors node
      */
-    private static void populateMethodNode(ExecutableMemberDoc method, Element blockNode, Element node) {
+    private static void populateMethodNode(ExecutableElement method, Element blockNode, Element node) {
+
         setVisibility(method, node);
 
-        xmlSerializer.createAttribute(node, "line", String.valueOf(method.position().line()));
-        xmlSerializer.createAttribute(node, "modifier", method.modifiers());
-        xmlSerializer.createAttribute(node, "signature", method.signature());
-        xmlSerializer.createAttribute(node, "static", String.valueOf(method.isStatic()));
-        xmlSerializer.createAttribute(node, "interface", String.valueOf(method.isInterface()));
-        xmlSerializer.createAttribute(node, "final", String.valueOf(method.isFinal()));
-        if (method instanceof MethodDoc)
-            xmlSerializer.createAttribute(node, "abstract", String.valueOf(((MethodDoc) method).isAbstract()));
-        xmlSerializer.createAttribute(node, "synchronized", String.valueOf(method.isSynchronized()));
-        xmlSerializer.createAttribute(node, "synthetic", String.valueOf(method.isSynthetic()));
-        xmlSerializer.createAttribute(node, "constructor", String.valueOf(method.isConstructor()));
+        xmlSerializer.createAttribute(node, "modifier", method.getModifiers().stream().map(Modifier::toString).collect(Collectors.joining(",")));
 
-        generateComments(method, blockNode);
+        String parameters = method.getParameters().stream().map(javax.lang.model.element.Element::asType).
+                map(Objects::toString).collect(Collectors.joining(", "));
 
-        if (method instanceof MethodDoc) { //&&
-            //((MethodDoc) method).returnType().simpleTypeName().compareToIgnoreCase("void") != 0
+        xmlSerializer.createAttribute(node, "signature", "(" + parameters + ")");
+        xmlSerializer.createAttribute(node, "static", String.valueOf(method.getKind() == ElementKind.STATIC_INIT));
+        xmlSerializer.createAttribute(node, "interface", String.valueOf(method.getKind() == ElementKind.INTERFACE));
 
-            Element returnBlockNode = xmlSerializer.createElement("Return_Block");
-            Element returnNode = xmlSerializer.createElement("Return");
-            Element returnCommentNode = null;
+        xmlSerializer.createAttribute(node, "final", String.valueOf(method.getModifiers().contains(Modifier.FINAL)));
+        xmlSerializer.createAttribute(node, "abstract", String.valueOf(method.getModifiers().contains(Modifier.ABSTRACT)));
+        xmlSerializer.createAttribute(node, "synchronized", String.valueOf(method.getModifiers().contains(Modifier.SYNCHRONIZED)));
+        //xmlSerializer.createAttribute(node, "synthetic", String.valueOf(method.getModifiers().contains(Modifier.));
+        xmlSerializer.createAttribute(node, "constructor", String.valueOf(method.getKind() == ElementKind.CONSTRUCTOR));
 
-            xmlSerializer.createText(returnNode, ((MethodDoc) method).returnType().toString());
+        generateComments(method, blockNode, false);
 
-            returnBlockNode.appendChild(returnNode);
+        Element returnBlockNode = xmlSerializer.createElement("Return_Block");
+        Element returnNode = xmlSerializer.createElement("Return");
+        Element returnCommentNode = null;
 
-            Tag[] ts = method.tags();
-            for (Tag t : ts) {
-                if (t.name().compareToIgnoreCase("@return") == 0) {
-                    if (t.text() != null && t.text().length() > 0) {
-                        returnCommentNode = xmlSerializer.createElement("Return_Comment");
-                        xmlSerializer.createText(returnCommentNode, t.text());
-                        returnBlockNode.appendChild(returnCommentNode);
-                    }
-                }
-            }
-            blockNode.appendChild(returnBlockNode);
-        }
-
-        Parameter[] parameters = method.parameters();
-        if (parameters.length > 0) {
-            ParamTag[] paramTags = method.paramTags();
-
-            for (int param = 0; param < parameters.length; param++) {
-                Element paramBlockNode = xmlSerializer.createElement("Parameter_Block");
-                Element paramNode = xmlSerializer.createElement("Parameter");
-                Element paramCommentNode = null;
-
-                xmlSerializer.createText(paramNode, parameters[param].name());
-                paramBlockNode.appendChild(paramNode);
-
-                for (int paramTag = 0; paramTag < paramTags.length; paramTag++) {
-                    if (paramTags[paramTag].parameterName().compareToIgnoreCase(parameters[param].name()) == 0) {
-                        if (paramTags[paramTag].parameterComment() != null && paramTags[paramTag].parameterComment().length() > 0) {
-                            paramCommentNode = xmlSerializer.createElement("Parameter_Comment");
-                            xmlSerializer.createText(paramCommentNode, paramTags[paramTag].parameterComment());
-                            paramBlockNode.appendChild(paramCommentNode);
-                        }
-                    }
-                }
-
-                xmlSerializer.createAttribute(paramNode, "type", parameters[param].type().typeName());
-                xmlSerializer.createAttribute(paramNode, "fulltype", parameters[param].type().toString());
-
-                blockNode.appendChild(paramBlockNode);
-            }
-        }
-
-        ClassDoc[] exceptions = method.thrownExceptions();
-        if (exceptions.length > 0) {
-            ThrowsTag[] throwsTags = method.throwsTags();
-
-            for (int except = 0; except < exceptions.length; except++) {
-                Element exceptBlockNode = xmlSerializer.createElement("Exception_Block");
-                Element exceptNode = xmlSerializer.createElement("Exception");
-                Element exceptCommentNode = null;
-
-                xmlSerializer.createText(exceptNode, exceptions[except].name());
-                exceptBlockNode.appendChild(exceptNode);
-
-                for (int throwTag = 0; throwTag < throwsTags.length; throwTag++) {
-                    if (throwsTags[throwTag].exceptionName().compareToIgnoreCase(exceptions[except].name()) == 0) {
-                        if (throwsTags[throwTag].exceptionComment() != null && throwsTags[throwTag].exceptionComment().length() > 0) {
-                            exceptCommentNode = xmlSerializer.createElement("Exception_Comment");
-                            xmlSerializer.createText(exceptCommentNode, throwsTags[throwTag].exceptionComment());
-                            exceptBlockNode.appendChild(exceptCommentNode);
-                        }
-                    }
-                }
-
-                xmlSerializer.createAttribute(exceptNode, "type", exceptions[except].typeName());
-                xmlSerializer.createAttribute(exceptNode, "fulltype", exceptions[except].qualifiedTypeName());
-
-                blockNode.appendChild(exceptBlockNode);
-            }
-        }
+        xmlSerializer.createText(returnNode, method.getReturnType().toString());
+        returnBlockNode.appendChild(returnNode);
+        blockNode.appendChild(returnBlockNode);
     }
 
     /**
      * Sets the visbility attribute for methods and fields
      */
-    private static void setVisibility(ProgramElementDoc member, Element node) {
-        if (member.isPrivate()) xmlSerializer.createAttribute(node, "visibility", "private");
-        else if (member.isProtected()) xmlSerializer.createAttribute(node, "visibility", "protected");
-        else if (member.isPublic()) xmlSerializer.createAttribute(node, "visibility", "public");
-        else if (member.isPackagePrivate()) xmlSerializer.createAttribute(node, "visibility", "package-private");
+    private static void setVisibility(javax.lang.model.element.Element member, Element node) {
+
+        Set<Modifier> modifiers = member.getModifiers();
+
+        if (modifiers.contains(Modifier.PRIVATE)) xmlSerializer.createAttribute(node, "visibility", "private");
+        else if (modifiers.contains(Modifier.PROTECTED)) xmlSerializer.createAttribute(node, "visibility", "protected");
+        else if (modifiers.contains(Modifier.PUBLIC)) xmlSerializer.createAttribute(node, "visibility", "public");
     }
 
     /**
      * Generates the comments for all elements
      */
-    private static void generateComments(Doc doc, Element node) {
+    private static void generateComments(javax.lang.model.element.Element doc, Element node, boolean superClass) {
 
         Element commentBlockNode = null;
         Element commentNode = null;
 
         String overrideCommentText = "";
 
-        if (doc.commentText() == null || doc.commentText().length() <= 0)
+        DocCommentTree docCommentTree = docTrees.getDocCommentTree(doc);
+        if (!isDocumented(docCommentTree))
             return;
 
+        //TODO Process {@inheritDoc}
 
-        //if (doc.name().contentEquals("encodeForXML"))
-            // System.out.println(((MethodDoc) doc).qualifiedName()+"****"+doc.commentText()+"****"+doc.getClass().getSimpleName());
+        switch (doc.getKind()) {
+            case CLASS:
+                if (superClass) {
+                    commentNode = xmlSerializer.createElement("Extends_Comment");
+                } else {
+                    commentBlockNode = xmlSerializer.createElement("Class_Comment_Block");
+                    commentNode = xmlSerializer.createElement("Class_Comment");
+                }
 
-
-           /* if (doc.commentText() == null || doc.commentText().length() <= 0 || doc.commentText().contains("{@inheritDoc}")) {
-
-
-                if (doc instanceof MethodDoc) {
-
-
-                    MethodDoc methodDoc = (MethodDoc) doc;
-                    if (doc.name().contentEquals("encodeForXML"))
-                        //   System.out.println("222222"+((MethodDoc) doc).qualifiedName()+"****"+doc.commentText()+"****"+methodDoc.overriddenMethod().name());
-
-                        if (methodDoc.overriddenMethod() != null) {
-                            if (doc.commentText().contains("{@inheritDoc}")) {
-
-                                if (doc.name().contentEquals("encodeForXML"))
-                                    //  System.out.println("****"+((MethodDoc) doc).qualifiedName()+"****"+methodDoc.overriddenMethod().qualifiedName());
-                                    overrideCommentText = doc.commentText().replace("{@inheritDoc}", methodDoc.overriddenMethod().commentText());
-                            } else
-                                overrideCommentText = methodDoc.overriddenMethod().commentText();
-                        } else
-                            return;
-                } else
-                    return;
-            }*/
-
-
-            if (doc.isClass()) {
-                commentBlockNode = xmlSerializer.createElement("Class_Comment_Block");
-                commentNode = xmlSerializer.createElement("Class_Comment");
-            } else if (doc.isInterface()) {
-                commentBlockNode = xmlSerializer.createElement("Interface_Comment_Block");
-                commentNode = xmlSerializer.createElement("Interface_Comment");
-            } else if (doc.isEnum()) {
-                commentBlockNode = xmlSerializer.createElement("Enum_Comment_Block");
-                commentNode = xmlSerializer.createElement("Enum_Comment");
-            } else if (doc.isMethod() ) {
-
-                //   if()
-                //  System.out.println("NAME: "+doc.name());
-                commentBlockNode = xmlSerializer.createElement("Method_Comment_Block");
-                commentNode = xmlSerializer.createElement("Method_Comment");
-            } else if (doc.isConstructor()) {
-            commentBlockNode = xmlSerializer.createElement("Constructor_Comment_Block");
-            commentNode = xmlSerializer.createElement("Constructor_Comment");
-        } else if (doc.isField()) {
+                break;
+            case FIELD:
                 commentBlockNode = xmlSerializer.createElement("Field_Comment_Block");
                 commentNode = xmlSerializer.createElement("Field_Comment");
-            } else if (doc.isException()) {
+                break;
+            case EXCEPTION_PARAMETER:
                 commentBlockNode = xmlSerializer.createElement("Exception_Comment_Block");
                 commentNode = xmlSerializer.createElement("Exception_Comment");
-            } else if (doc.isClass()) {
-                commentBlockNode = xmlSerializer.createElement("Class_Comment_Block");
-                commentNode = xmlSerializer.createElement("Class_Comment");
-            } else
+                break;
+            case CONSTRUCTOR:
+            case METHOD:
+                commentBlockNode = xmlSerializer.createElement("Method_Comment_Block");
+                commentNode = xmlSerializer.createElement("Method_Comment");
+                break;
+            case ENUM:
+                commentBlockNode = xmlSerializer.createElement("Enum_Comment_Block");
+                commentNode = xmlSerializer.createElement("Enum_Comment");
+                break;
+            case INTERFACE:
+                commentBlockNode = xmlSerializer.createElement("Interface_Comment_Block");
+                commentNode = xmlSerializer.createElement("Interface_Comment");
+                break;
+            case TYPE_PARAMETER:
+            default:
                 return;
+        }
 
-        boolean addNode = false;
+        xmlSerializer.createText(commentNode, docCommentTree.getFullBody().toString());
 
-       /* assert commentNode != null;
-
-
-        if (overrideCommentText.length() > 0) {
-
-            xmlSerializer.createText(commentNode, overrideCommentText);
-        } else*/
-
-            xmlSerializer.createText(commentNode, doc.commentText());
-        xmlSerializer.createAttribute(commentNode, "line", String.valueOf(doc.position().line()));
-        commentBlockNode.appendChild(commentNode);
-        addNode = true;
-
-
-        /*Tag[] tags = doc.tags();
-        for (Tag value : tags) {
-            Element paramNode;
-
-            if (excludedTag(value.name())) continue;
-
-            System.out.println("XML Element: "+value.name().substring(1).substring(0, 1).toUpperCase() + value.name().substring(2).toLowerCase());
-
-            if (!excludedFromComment(value.name()) )
-                paramNode = xmlSerializer.createElement(value.name().substring(1).substring(0, 1).toUpperCase() + value.name().substring(2).toLowerCase() + "_Comment");
-
-            else
-                paramNode = xmlSerializer.createElement(value.name().substring(1).substring(0, 1).toUpperCase() + value.name().substring(2).toLowerCase());
-
-            xmlSerializer.createText(paramNode, value.text());
-            commentBlockNode.appendChild(paramNode);
-            addNode = true;
-        }*/
-
-        if (addNode) {
+        if (commentBlockNode != null) {
+            commentBlockNode.appendChild(commentNode);
             node.appendChild(commentBlockNode);
+        } else {
+            node.appendChild(commentNode);
         }
     }
 
