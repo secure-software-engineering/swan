@@ -36,7 +36,7 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
             String instanceName = category.getId().toLowerCase() + "-train-instances";
             Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
             this.instances.put(category.getId().toLowerCase(), trainInstances);
-            Util.exportInstancesToArff(trainInstances);
+            Util.exportInstancesToArff(trainInstances, "weka");
 
             //Create and set attributes for the test instances.
             /*ArrayList<Attribute> testAttributes = createAttributes(getCategories(category), testData.getMethods(), featureSets);

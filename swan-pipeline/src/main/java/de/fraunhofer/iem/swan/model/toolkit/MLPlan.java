@@ -49,7 +49,7 @@ public class MLPlan {
      */
     public HashMap<String, ArrayList<Double>> evaluateDataset(Instances instances1) {
 
-        String arffFilePath = Util.exportInstancesToArff(instances1);
+        String arffFilePath = Util.exportInstancesToArff(instances1, "mlplan");
         ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
 
         String mClass = Util.getClassName(instances1);
@@ -148,7 +148,7 @@ public class MLPlan {
     public void evaluateDataset(Instances instances, int k) {
 
         //arffFilePath = "swan/swan_core/src/main/resources/waveform.arff";
-        String arffFilePath = Util.exportInstancesToArff(instances);
+        String arffFilePath = Util.exportInstancesToArff(instances, "mlplan");
         ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
 
         String mClass = Util.getClassName(instances);
