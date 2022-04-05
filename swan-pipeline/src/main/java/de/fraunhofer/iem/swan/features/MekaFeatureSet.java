@@ -65,6 +65,43 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         this.instances.put("test", convertToMekaInstances(testInstances));
     }
 
+    /**
+     * Merge two instances into one instances object.
+     * @param first instances
+     * @param second instances
+     * @return merged instances
+     */
+    public Instances mergeInstances(Instances first, Instances second) {
+
+        for (int c = 0; c < 12; c++) {
+            second.renameAttribute(second.attribute(c), "b_" + second.attribute(c).name());
+        }
+
+        Instances instances = Instances.mergeInstances(first, second);
+
+        ArrayList<Integer> indices = new ArrayList<>();
+
+        for (int att = 0; att < instances.numAttributes(); att++) {
+            if (instances.attribute(att).name().startsWith("b_")) {
+                indices.add(att);
+            }
+        }
+
+        Remove removeFilter = new Remove();
+        removeFilter.setAttributeIndicesArray(indices.stream().mapToInt(i -> i).toArray());
+        removeFilter.setInvertSelection(false);
+
+        try {
+            removeFilter.setInputFormat(instances);
+            instances = Filter.useFilter(instances, removeFilter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return instances;
+    }
+
     public Instances createTestSet() {
 
         //Create and set attributes for the test instances.
