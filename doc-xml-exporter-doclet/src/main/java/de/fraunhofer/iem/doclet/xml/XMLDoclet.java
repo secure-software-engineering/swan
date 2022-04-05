@@ -20,12 +20,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package info.semanticsoftware.doclet;
+package de.fraunhofer.iem.doclet.xml;
 
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.util.DocTrees;
 import com.sun.source.util.TreePath;
-import info.semanticsoftware.doclet.xml.XMLSerializer;
+import de.fraunhofer.iem.doclet.xml.serializer.XMLSerializer;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
  * @author Ninus
  * @version 1.2
  */
-public class SSLDoclet implements Doclet {
+public class XMLDoclet implements Doclet {
 
     private static final boolean OK = true;
     private String sourcePath;
@@ -58,7 +58,7 @@ public class SSLDoclet implements Doclet {
     static DocTrees docTrees;
     static DocletEnvironment environment;
 
-    final private Logger log = Logger.getLogger(SSLDoclet.class.getName());
+    final private Logger log = Logger.getLogger(XMLDoclet.class.getName());
 
     abstract class Option implements Doclet.Option {
         private final String name;

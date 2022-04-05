@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DocletExecutor {
 
-    public static final String SSL_DOCLET = "info.semanticsoftware.doclet.SSLDoclet";
+    public static final String SSL_DOCLET = "de.fraunhofer.iem.doclet.xml.XMLDoclet";
     public static final String COVERAGE_DOCLET = "de.fraunhofer.iem.coveragedoclet.CoverageDoclet";
     public static final String STANDARD_DOCLET = "com.sun.tools.doclets.standard.Standard";
 
@@ -64,7 +64,7 @@ public class DocletExecutor {
     private String getDocletPath(String doclet) {
         switch (doclet) {
             case SSL_DOCLET:
-                return "swan-javadoc-exporter/target/classes";
+                return "../doc-xml-exporter-doclet/target/classes";
             case COVERAGE_DOCLET:
                 return "../doc-coverage-doclet/target/classes/";
             case STANDARD_DOCLET:

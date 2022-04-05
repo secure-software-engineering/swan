@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package info.semanticsoftware.doclet.xml;
+package de.fraunhofer.iem.doclet.xml.serializer;
 
 import org.jsoup.Jsoup;
 import org.w3c.dom.DOMException;
