@@ -107,7 +107,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             output = Filter.useFilter(instances, filter);
             output.setRelationName("swan-srm:" + output.relationName());
 
-            Util.exportInstancesToArff(output);
+            Util.exportInstancesToArff(output, "meka");
         } catch (Exception e) {
             e.printStackTrace();
         }

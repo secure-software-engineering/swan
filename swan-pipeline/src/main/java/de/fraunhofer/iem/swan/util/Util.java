@@ -294,10 +294,10 @@ public class Util {
      *
      * @param instances WEKA instances to be exported
      */
-    public static String exportInstancesToArff(Instances instances) {
+    public static String exportInstancesToArff(Instances instances, String source) {
         ArffSaver saver = new ArffSaver();
 
-        if (SwanPipeline.options.isExportArffData() && !SwanPipeline.options.getOutputDir().isEmpty() ) {
+        if (SwanPipeline.options.isExportArffData() && !SwanPipeline.options.getOutputDir().isEmpty()) {
             // Save arff data.
             saver.setInstances(instances);
 
@@ -308,7 +308,7 @@ public class Util {
                 if (instances.relationName().contains(":"))
                     relationName = relationName.substring(0, instances.relationName().indexOf(":"));
 
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + relationName + ".arff";
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + relationName + "-" + source + ".arff";
                 saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {
@@ -316,8 +316,7 @@ public class Util {
             }
             return saver.retrieveFile().getAbsolutePath();
         }
-
-     return null;
+        return null;
     }
 
     /**
