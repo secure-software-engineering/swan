@@ -11,6 +11,7 @@ import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,27 +37,39 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
         //Create and set attributes for the train instances
         if (options.getArffInstancesFiles().isEmpty()) {
-            ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods(), featureSets);
+            ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods());
             structure = new Instances("swan-srm", trainAttributes, 0);
-            convertToMekaInstances(structure);
 
             Set<Method> methods = new HashSet<>(dataset.getTrainMethods());
             methods.addAll(dataset.getTestMethods());
 
             evaluateFeatureData(methods);
-            trainInstances = createInstances(structure, trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
+            trainInstances = createInstances(new Instances(structure), trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
         } else {
             ArffLoader loader = new ArffLoader();
 
             try {
                 loader.setSource(new File(options.getArffInstancesFiles().get(0)));
+
                 trainInstances = loader.getDataSet();
                 structure = loader.getStructure();
+
+                //append remaining instances
+                if (options.getArffInstancesFiles().size() > 1) {
+                    for (int x = 1; x < options.getArffInstancesFiles().size(); x++) {
+
+                        ArffLoader arffLoader = new ArffLoader();
+                        arffLoader.setSource(new File(options.getArffInstancesFiles().get(x)));
+
+                        trainInstances = mergeInstances(trainInstances, arffLoader.getDataSet());
+                        structure = mergeInstances(structure, arffLoader.getStructure());
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods(), featureSets);
+            createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods());
             evaluateFeatureData(dataset.getTestMethods());
         }
         testInstances = createTestSet();
@@ -104,22 +117,22 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
     public Instances createTestSet() {
 
+        Instances testInstances = new Instances(structure);
         //Create and set attributes for the test instances.
         Attribute idAttr = new Attribute("id", dataset.getTestMethods().stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));
-        structure.replaceAttributeAt(idAttr, structure.attribute("id").index());
-        ArrayList<Attribute> aList = Collections.list(structure.enumerateAttributes());
+        testInstances.replaceAttributeAt(idAttr, testInstances.attribute("id").index());
+        ArrayList<Attribute> aList = Collections.list(testInstances.enumerateAttributes());
 
-        return createInstances(structure, aList, dataset.getTestMethods(), getCategories(options.getAllClasses()));
+        return createInstances(testInstances, aList, dataset.getTestMethods(), getCategories(options.getAllClasses()));
     }
 
     /**
      * Creates instances and adds attributes for the features, classes, and method signatures.
      *
-     * @param categories  list of categories
-     * @param methods     list of training methods
-     * @param featureSets classification mode
+     * @param categories list of categories
+     * @param methods    list of training methods
      */
-    public ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods, List<FeatureSet.Type> featureSets) {
+    public ArrayList<Attribute> createAttributes(Set<Category> categories, Set<Method> methods) {
 
         ArrayList<Attribute> attributes = new ArrayList<>();
 
