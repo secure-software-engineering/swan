@@ -78,17 +78,22 @@ public class ModelEvaluator {
 
     public void processResults(SrmList srmList) {
 
-        if (srmList != null)
-            predictedSrmList = srmList;
+        switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
+            case PREDICT:
 
-        predictedSrmList.removeUnclassifiedMethods();
-        logger.info("{} SRMs detected", predictedSrmList.getMethods().size());
+                if (srmList != null)
+                    predictedSrmList = srmList;
 
-        try {
-            if (!options.getOutputDir().isEmpty())
-                SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");
-        } catch (IOException e) {
-            e.printStackTrace();
+                predictedSrmList.removeUnclassifiedMethods();
+                logger.info("{} SRMs detected", predictedSrmList.getMethods().size());
+
+                try {
+                    if (!options.getOutputDir().isEmpty())
+                        SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 
