@@ -98,9 +98,9 @@ public class MonteCarloValidator {
 
             if (!currentClass.contentEquals("0")) {
                 if (!fMeasure.containsKey(currentClass))
-                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(eval.fMeasure(c))));
+                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.fMeasure(c)) ? 0 : eval.fMeasure(c))));
                 else {
-                    fMeasure.get(currentClass).add(eval.fMeasure(c));
+                    fMeasure.get(currentClass).add(Double.isNaN(eval.fMeasure(c)) ? 0 : eval.fMeasure(c));
                 }
             }
         }
