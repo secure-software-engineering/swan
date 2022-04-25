@@ -8,7 +8,9 @@ import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
 import weka.core.Attribute;
 import weka.core.Instances;
-
+import weka.core.converters.ArffLoader;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,8 +19,11 @@ import java.util.stream.Collectors;
  */
 public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
+    HashMap<String, Instances> structures;
+
     public WekaFeatureSet(Dataset dataset, SwanOptions options) {
         super(dataset, options, ModelEvaluator.Toolkit.WEKA);
+        structures = new HashMap<>();
     }
 
     /**
@@ -28,21 +33,98 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
         initializeFeatures();
 
-        for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
+        if (options.getArffInstancesFiles().isEmpty()) {
+
+            Set<Method> methods = new HashSet<>(dataset.getTrainMethods());
+
+            if (options.isPredictPhase())
+                methods.addAll(dataset.getTestMethods());
+
+            evaluateFeatureData(methods);
+
+            for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
+
+                //Create and set attributes for the train instances
+                ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods());
+                structures.put(category.getId().toLowerCase(), new Instances("weka-", trainAttributes, 0));
+
+                Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
+                trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
+                this.trainInstances.put(category.getId().toLowerCase(), trainInstances);
+                Util.exportInstancesToArff(trainInstances, category.getId());
+            }
+        } else {
+
+            ArffLoader loader = new ArffLoader();
+
+            for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
+
+                List<String> instancesFile = options.getArffInstancesFiles().stream().filter(c -> c.contains(category.getId().toLowerCase())).collect(Collectors.toList());
+
+                try {
+                    loader.setSource(new File(instancesFile.get(0)));
+                    Instances trainInstances = loader.getDataSet();
+                    Instances structure = loader.getStructure();
+                    trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
+
+                    //append remaining instances
+                    if (instancesFile.size() > 1) {
+                        for (int x = 1; x < instancesFile.size(); x++) {
+
+                            ArffLoader arffLoader = new ArffLoader();
+                            arffLoader.setSource(new File(instancesFile.get(x)));
+
+                            trainInstances = mergeInstances(trainInstances, arffLoader.getDataSet());
+                            structure = mergeInstances(structure, arffLoader.getStructure());
+                        }
+                    }
+
+                    this.trainInstances.put(category.getId().toLowerCase(), trainInstances);
+                    structures.put(category.getId().toLowerCase(), structure);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //Set attributes for the test instances
+        if (options.isPredictPhase()) {
+            //TODO implement predict phase for WEKA
+        }
+
+
+        /*  for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
 
             //Create and set attributes for the train instances
             ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods());
 
-            String instanceName = category.getId().toLowerCase() + "-train-instances";
             Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
             this.instances.put(category.getId().toLowerCase(), trainInstances);
-            Util.exportInstancesToArff(trainInstances, "weka");
+            Util.exportInstancesToArff(trainInstances, "weka-"+category.getId());
 
             //Create and set attributes for the test instances.
             /*ArrayList<Attribute> testAttributes = createAttributes(getCategories(category), testData.getMethods(), featureSets);
             Instances testInstances = createInstances(featureSets, testAttributes, testData.getMethods(), getCategories(category), category + "-test-instances");
-             */
-        }
+
+        }*/
+    }
+
+
+    /**
+     * Merge two instances into one instances object.
+     *
+     * @param first  instances
+     * @param second instances
+     * @return merged instances
+     */
+    public Instances mergeInstances(Instances first, Instances second) {
+
+        //rename ID and class attributes
+        first.renameAttribute(first.attribute(first.numAttributes() - 1), "b_" + first.attribute(first.numAttributes() - 1).name());
+        second.renameAttribute(second.attribute(0), "b_" + second.attribute(0).name());
+
+        return this.mergeInstances(first, second);
     }
 
     /**

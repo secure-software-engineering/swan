@@ -11,8 +11,6 @@ import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -20,8 +18,6 @@ import java.util.stream.Collectors;
 
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
-    Instances trainInstances = null;
-    Instances testInstances = null;
     Instances structure = null;
 
     public MekaFeatureSet(Dataset dataset, SwanOptions options) {
@@ -35,23 +31,31 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
         initializeFeatures();
 
+        Instances trainingInstances = null;
+
         //Create and set attributes for the train instances
         if (options.getArffInstancesFiles().isEmpty()) {
+
             ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods());
-            structure = new Instances("swan-srm", trainAttributes, 0);
+            structure = new Instances("meka", trainAttributes, 0);
 
             Set<Method> methods = new HashSet<>(dataset.getTrainMethods());
-            methods.addAll(dataset.getTestMethods());
+
+            if (options.isPredictPhase())
+                methods.addAll(dataset.getTestMethods());
 
             evaluateFeatureData(methods);
-            trainInstances = createInstances(new Instances(structure), trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
+
+            trainingInstances = createInstances(new Instances(structure), trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
+            Util.exportInstancesToArff(trainingInstances, options.getFeatureSet().get(0));
         } else {
+
             ArffLoader loader = new ArffLoader();
 
             try {
                 loader.setSource(new File(options.getArffInstancesFiles().get(0)));
 
-                trainInstances = loader.getDataSet();
+                trainingInstances = loader.getDataSet();
                 structure = loader.getStructure();
 
                 //append remaining instances
@@ -61,26 +65,31 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
                         ArffLoader arffLoader = new ArffLoader();
                         arffLoader.setSource(new File(options.getArffInstancesFiles().get(x)));
 
-                        trainInstances = mergeInstances(trainInstances, arffLoader.getDataSet());
+                        trainingInstances = mergeInstances(trainingInstances, arffLoader.getDataSet());
                         structure = mergeInstances(structure, arffLoader.getStructure());
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        this.trainInstances.put("meka", convertToMekaInstances(trainingInstances));
+
+        //Set attributed for the test instances
+        if (options.getPhase().toUpperCase().contentEquals(ModelEvaluator.Phase.PREDICT.name())) {
 
             createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods());
             evaluateFeatureData(dataset.getTestMethods());
-        }
-        testInstances = createTestSet();
 
-        this.instances.put("train", convertToMekaInstances(trainInstances));
-        this.instances.put("test", convertToMekaInstances(testInstances));
+            this.testInstances.put("meka", convertToMekaInstances(createTestSet()));
+        }
     }
 
     /**
      * Merge two instances into one instances object.
-     * @param first instances
+     *
+     * @param first  instances
      * @param second instances
      * @return merged instances
      */
@@ -90,35 +99,13 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             second.renameAttribute(second.attribute(c), "b_" + second.attribute(c).name());
         }
 
-        Instances instances = Instances.mergeInstances(first, second);
-
-        ArrayList<Integer> indices = new ArrayList<>();
-
-        for (int att = 0; att < instances.numAttributes(); att++) {
-            if (instances.attribute(att).name().startsWith("b_")) {
-                indices.add(att);
-            }
-        }
-
-        Remove removeFilter = new Remove();
-        removeFilter.setAttributeIndicesArray(indices.stream().mapToInt(i -> i).toArray());
-        removeFilter.setInvertSelection(false);
-
-        try {
-            removeFilter.setInputFormat(instances);
-            instances = Filter.useFilter(instances, removeFilter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return instances;
+        return this.mergeInstances(first, second);
     }
+
 
     public Instances createTestSet() {
 
         Instances testInstances = new Instances(structure);
-        //Create and set attributes for the test instances.
         Attribute idAttr = new Attribute("id", dataset.getTestMethods().stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));
         testInstances.replaceAttributeAt(idAttr, testInstances.attribute("id").index());
         ArrayList<Attribute> aList = Collections.list(testInstances.enumerateAttributes());

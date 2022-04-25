@@ -14,7 +14,10 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,7 +29,8 @@ public abstract class FeatureSet {
     protected Dataset dataset;
     protected CodeFeatureHandler codeFeatureHandler;
     protected DocFeatureHandler docFeatureHandler;
-    protected HashMap<String, Instances> instances;
+    protected HashMap<String, Instances> trainInstances;
+    protected HashMap<String, Instances> testInstances;
     protected ModelEvaluator.Toolkit toolkit;
     protected List<FeatureSet.Type> featureSets;
 
@@ -47,7 +51,7 @@ public abstract class FeatureSet {
             this.value = value;
         }
 
-        public String getValue(){
+        public String getValue() {
             return value.toLowerCase();
         }
 
@@ -66,7 +70,8 @@ public abstract class FeatureSet {
         this.options = options;
         this.dataset = dataset;
         this.toolkit = toolkit;
-        instances = new HashMap<>();
+        trainInstances = new HashMap<>();
+        testInstances = new HashMap<>();
 
         featureSets = options.getFeatureSet().stream()
                 .map(f -> FeatureSet.Type.getValue(f.toUpperCase()))
@@ -226,6 +231,31 @@ public abstract class FeatureSet {
         return createInstances(instances, attributes, methods, categories);
     }
 
+    public Instances mergeInstances(Instances first, Instances second) {
+        Instances instances = Instances.mergeInstances(first, second);
+
+        ArrayList<Integer> indices = new ArrayList<>();
+
+        for (int att = 0; att < instances.numAttributes(); att++) {
+            if (instances.attribute(att).name().startsWith("b_")) {
+                indices.add(att);
+            }
+        }
+
+        Remove removeFilter = new Remove();
+        removeFilter.setAttributeIndicesArray(indices.stream().mapToInt(i -> i).toArray());
+        removeFilter.setInvertSelection(false);
+
+        try {
+            removeFilter.setInputFormat(instances);
+            instances = Filter.useFilter(instances, removeFilter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return instances;
+    }
 
     /**
      * Adds data for SWAN features to instance set.
@@ -243,7 +273,7 @@ public abstract class FeatureSet {
         // Evaluate all methods against the features.
         for (Method method : methods) {
 
-            Instance inst = new DenseInstance(attributes.size());
+            Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
             inst.setDataset(instances);
 
             for (Category cat : categories) {
@@ -253,17 +283,7 @@ public abstract class FeatureSet {
                         inst.setValue(instances.attribute(cat.getId()), "1");
                     else {
                         for (Category auth : method.getAuthSrm()) {
-                            switch (auth) {
-                                case AUTHENTICATION_TO_LOW:
-                                    inst.setValue(instances.attribute(cat.getId()), "1");
-                                    break;
-                                case AUTHENTICATION_NEUTRAL:
-                                    inst.setValue(instances.attribute(cat.getId()), "2");
-                                    break;
-                                case AUTHENTICATION_TO_HIGH:
-                                    inst.setValue(instances.attribute(cat.getId()), "3");
-                                    break;
-                            }
+                            inst.setValue(instances.attribute(cat.getId()), getAuthClass(auth));
                         }
                     }
                 } else if (method.getAllCategories().contains(cat)) {
@@ -315,25 +335,9 @@ public abstract class FeatureSet {
             if (instanceMap.containsKey(method.getArffSafeSignature())) {
                 inst = instances.instance(instanceMap.get(method.getArffSafeSignature()));
             } else {
-                inst = new DenseInstance(attributes.size());
+                inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
                 inst.setDataset(instances);
                 isNewInstance = true;
-
-                switch (toolkit) {
-                    case MEKA:
-                        for (Category cat : categories) {
-                            if (method.getAllCategories().contains(cat) || (cat.isAuthentication() && !method.getAuthSrm().isEmpty())) {
-                                inst.setValue(instances.attribute(cat.getId()), "1");
-                            } else
-                                inst.setValue(instances.attribute(cat.getId()), "0");
-                        }
-                        break;
-
-                    case WEKA:
-                        if (method.getSrm() != null || method.getCwe() != null)
-                            // inst.setClassValue(getCategory(method, categories));
-                            break;
-                }
 
                 inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
             }
@@ -343,28 +347,64 @@ public abstract class FeatureSet {
                     for (Class<? extends IDocFeature> feature : docFeatureHandler.getManualFeatureSet()) {
 
                         try {
-                            IDocFeature javadocFeature = feature.newInstance();
+                            IDocFeature javadocFeature = feature.getDeclaredConstructor().newInstance();
                             AnnotatedMethod annotatedMethod = docFeatureHandler.getManualFeatureData().get(method.getSignature());
 
                             if (annotatedMethod != null)
                                 inst.setValue(instances.attribute(feature.getSimpleName()), javadocFeature.evaluate(annotatedMethod).getTotalValue());
                         } catch (InstantiationException | IllegalAccessException e) {
                             e.printStackTrace();
+                        } catch (InvocationTargetException | NoSuchMethodException e) {
+                            throw new RuntimeException(e);
                         }
                     }
                     break;
                 case DOC_AUTO:
                     HashMap<String, Double> vectorValues = docFeatureHandler.getAutomaticFeatureData().get(method.getSignature());
 
-                    for (String key : vectorValues.keySet()) {
-                        inst.setValue(instances.attribute(key), vectorValues.get(key));
+                    if (vectorValues != null) {
+                        for (String key : vectorValues.keySet()) {
+                            inst.setValue(instances.attribute(key), vectorValues.get(key));
+                        }
                     }
+
                     break;
             }
             if (isNewInstance)
                 instanceList.add(inst);
         }
         return instanceList;
+    }
+
+
+    String getAuthClass(Category category){
+
+        switch (category) {
+            case AUTHENTICATION_TO_LOW:
+                return "1";
+            case AUTHENTICATION_NEUTRAL:
+                return "2";
+            case AUTHENTICATION_TO_HIGH:
+            default:
+             return "3";
+        }
+    }
+
+    Instance setClassValues(Set<Category> categories, Method method, Instances instances, Instance inst) {
+
+        for (Category cat : categories) {
+
+            if (cat.isAuthentication() && !method.getAuthSrm().isEmpty() && toolkit == ModelEvaluator.Toolkit.WEKA) {
+
+                for (Category auth : method.getAuthSrm()) {
+                    inst.setValue(instances.attribute(cat.getId()), getAuthClass(auth));
+                }
+            } else if (method.getAllCategories().contains(cat)) {
+                inst.setValue(instances.attribute(cat.getId()), "1");
+            } else
+                inst.setValue(instances.attribute(cat.getId()), "0");
+        }
+        return inst;
     }
 
     /**
@@ -374,37 +414,30 @@ public abstract class FeatureSet {
      * @param category SRM or CWE class being evaluated
      * @return string representation of the method
      */
-    public String getCategory(Method method, Category category) {
+    public boolean getCategory(Method method, Category category) {
 
         if (method.getSrm().contains(category) || (method.getCwe().contains(category))
                 || category.toString().contains("relevant") && !method.getSrm().isEmpty())
-            return category.toString();
+            return true;
         else if (category.toString().contains("authentication")) {
 
             Set<Category> auth = method.getAuthSrm();
 
-            if (!auth.isEmpty()) {
-                return auth.stream().findFirst().get().toString();
-            }
+            return !auth.isEmpty();
         }
-        return Category.NONE.toString();
+        return false;
     }
 
-    public HashMap<String, Instances> getInstances() {
-        return instances;
+    public HashMap<String, Instances> getTestInstances() {
+        return testInstances;
     }
 
-    public Instances getTrainInstances() {
-        return instances.get("train");
+    public HashMap<String, Instances> getTrainInstances() {
+        return trainInstances;
     }
 
-    public Instances getTestInstances() {
-        return instances.get("test");
-    }
-
-
-    public void setInstances(HashMap<String, Instances> instances) {
-        this.instances = instances;
+    public void setTrainInstances(HashMap<String, Instances> trainInstances) {
+        this.trainInstances = trainInstances;
     }
 
     public CodeFeatureHandler getCodeFeatureHandler() {

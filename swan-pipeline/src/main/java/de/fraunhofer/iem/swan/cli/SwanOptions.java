@@ -168,6 +168,11 @@ public class SwanOptions {
         return phase;
     }
 
+    public boolean isPredictPhase(){
+
+        return getPhase().contentEquals("predict");
+    }
+
     public void setPhase(String phase) {
         this.phase = phase;
     }

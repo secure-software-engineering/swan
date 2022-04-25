@@ -41,10 +41,10 @@ public class Meka {
 
         switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
             case VALIDATE:
-                crossValidateModel(features.getTrainInstances());
+                crossValidateModel(features.getTrainInstances().get("meka"));
                 return null;
             case PREDICT:
-                HashMap<String, ArrayList<Category>> predictions = predictModel(features.getTrainInstances(), features.getTestInstances(), options.getPredictionThreshold());
+                HashMap<String, ArrayList<Category>> predictions = predictModel(features.getTrainInstances().get("meka"), features.getTestInstances().get("meka"), options.getPredictionThreshold());
 
                 for (Method method : methods) {
                     for (Category category : predictions.get(method.getArffSafeSignature())) {

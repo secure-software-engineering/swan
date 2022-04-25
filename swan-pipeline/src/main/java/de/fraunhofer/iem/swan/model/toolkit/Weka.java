@@ -47,15 +47,22 @@ public class Weka {
      */
     public HashMap<String, HashMap<String, String>> trainModel() {
 
-        //Phase 1: classify SRM classes
-        for (String srm : options.getSrmClasses())
-            runManualEvaluation(features.getInstances().get(srm));
+        switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
+            case VALIDATE:
 
-        //Filter methods from CWE instances that were not classified into one of the SRM classes
-        //Phase 2: classify CWE classes
-        for (String cwe : options.getCweClasses())
-            runManualEvaluation(features.getInstances().get(cwe));
+                //Phase 1: classify SRM classes
+                for (String srm : options.getSrmClasses())
+                    runManualEvaluation(features.getTrainInstances().get(srm));
 
+                //Filter methods from CWE instances that were not classified into one of the SRM classes
+                //Phase 2: classify CWE classes
+                for (String cwe : options.getCweClasses())
+                    runManualEvaluation(features.getTrainInstances().get(cwe));
+
+                return null;
+            case PREDICT:
+
+        }
         return null;
     }
 
@@ -64,8 +71,8 @@ public class Weka {
      */
     public HashMap<String, HashMap<String, String>> runManualEvaluation(Instances instances) {
 
-        String category = instances.attribute(instances.numAttributes()-1).name();
-        instances.setClass(instances.attribute(instances.numAttributes()-1));
+        String category = instances.attribute(instances.numAttributes() - 1).name();
+        instances.setClass(instances.attribute(instances.numAttributes() - 1));
 
         LinkedHashMap<String, HashMap<String, String>> fMeasure = new LinkedHashMap<>();
 
@@ -84,8 +91,11 @@ public class Weka {
             MonteCarloValidator evaluator = new MonteCarloValidator();
             evaluator.monteCarloValidate(instances, classifier, options.getTrainTestSplit(), options.getIterations());
 
-            for (String key : evaluator.getFMeasure().keySet())
-                logger.info("F-measure for {}({}) using {}: {}", category, key , classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
+            for (String key : evaluator.getFMeasure().keySet()) {
+
+                logger.info("Average F-measure for {}({}) using {}: {}, {}", category, key, classifier.getClass().getSimpleName(),
+                        evaluator.getFMeasure().get(key).stream().mapToDouble(a -> a).average().getAsDouble(), evaluator.getFMeasure().get(key));
+            }
         }
         return fMeasure;
     }
