@@ -9,6 +9,11 @@ public class Dataset {
     private SrmList train;
     private SrmList test;
 
+    public Dataset() {
+        train = new SrmList();
+        test = new SrmList();
+    }
+
     public SrmList getTrain() {
         return train;
     }

@@ -37,6 +37,7 @@ public class SrmListUtils {
         SrmList srmList = objectMapper.readValue(new File(file), SrmList.class);
         logger.info("Collected {} methods from the training set.", srmList.getMethods().size());
 
+      //  removeManualMethods(srmList);
         return srmList;
     }
 
@@ -60,6 +61,16 @@ public class SrmListUtils {
             List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
 
             if (method.getJavadoc().getMethodComment().length() == 0 || words.size() <= 1)
+                list.getMethods().remove(method);
+        }
+    }
+
+    public static void removeManualMethods(SrmList list) {
+        Set<Method> temp = new HashSet<>(list.getMethods());
+
+        for (Method method : temp) {
+
+            if(!method.getDiscovery().contains("manual"))
                 list.getMethods().remove(method);
         }
     }
