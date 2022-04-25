@@ -4,9 +4,11 @@ import de.fraunhofer.iem.swan.SwanPipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CancellationException;
 
 /**
@@ -22,7 +24,7 @@ public class SwanCli {
         FileUtility fileUtility = new FileUtility();
 
         if (options.getDatasetJson().contentEquals("/dataset/swan-dataset.json")) {
-            options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson()).getAbsolutePath());
+            options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson(), null).getAbsolutePath());
         }
 
         if (options.getSrmClasses().contains("all")) {
@@ -41,11 +43,16 @@ public class SwanCli {
 
             List<String> instances = new ArrayList<>();
 
-            for (String feature : options.getFeatureSet()){
-                String filepath = "/dataset/" + options.getToolkit() + "-" + feature + "-instances.arff";
-                instances.add(fileUtility.getResourceFile(filepath).getAbsolutePath());
-            }
+            for (String feature : options.getFeatureSet()) {
+                String filepath = File.separator + "dataset" + File.separator + options.getToolkit() + File.separator + feature;
 
+                ArrayList<String> files = new ArrayList<>();
+
+                for (File f : Objects.requireNonNull(fileUtility.getResourceDirectory(filepath).listFiles())) {
+                    files.add(f.getAbsolutePath());
+                }
+                instances.addAll(files);
+            }
             options.setInstances(instances);
         }
 
