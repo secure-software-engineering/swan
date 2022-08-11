@@ -4,15 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.io.doc.Javadoc;
 import de.fraunhofer.iem.swan.io.doc.ssldoclet.MethodBlockType;
-import edu.stanford.nlp.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,11 +31,8 @@ public class SrmListUtils {
     public static SrmList importFile(String file) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        SrmList srmList = objectMapper.readValue(new File(file), SrmList.class);
-        logger.info("Collected {} methods from the training set.", srmList.getMethods().size());
 
-      //  removeManualMethods(srmList);
-        return srmList;
+        return objectMapper.readValue(new File(file), SrmList.class);
     }
 
     /**
@@ -51,38 +45,18 @@ public class SrmListUtils {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File(file), srmList);
-        logger.info("{} SRMs exported to {}", srmList.getMethods().size(), file);
-    }
-
-    public static void removeUndocumentedMethods(SrmList list) {
-        Set<Method> temp = new HashSet<>(list.getMethods());
-
-        for (Method method : temp) {
-            List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
-
-            if (method.getJavadoc().getMethodComment().length() == 0 || words.size() <= 1)
-                list.getMethods().remove(method);
-        }
-    }
-
-    public static void removeManualMethods(SrmList list) {
-        Set<Method> temp = new HashSet<>(list.getMethods());
-
-        for (Method method : temp) {
-
-            if(!method.getDiscovery().contains("manual"))
-                list.getMethods().remove(method);
-        }
+        logger.info("Exporting {} SRMs to {}", srmList.getMethods().size(), file);
     }
 
     /**
      * Adds doc comments to method set.
-     * @param methods methods to be updated
+     *
+     * @param methods  methods to be updated
      * @param javadocs list of Javadoc objects
      * @return updated method set
      */
     public static Set<Method> addDocComments(Set<Method> methods, ArrayList<Javadoc> javadocs) {
-
+        //TODO Check if returned set is used
         for (Javadoc doc : javadocs) {
 
             for (MethodBlockType methodBlock : doc.getMethodBlocks().values()) {
