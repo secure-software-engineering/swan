@@ -32,10 +32,10 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
     private String outputDir = "";
 
-    @CommandLine.Option(names = {"-f", "--feature"}, description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
+    @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
 
-    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, ml-plan"})
+    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, autoweka, mlplan"})
     private String toolkit = "meka";
 
     @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
