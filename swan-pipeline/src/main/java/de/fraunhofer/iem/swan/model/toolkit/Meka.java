@@ -35,7 +35,6 @@ public class Meka {
 
     /**
      * Trains and evaluates the model with the given training data and specified classification mode.
-     *
      */
     public SrmList trainModel() {
 
