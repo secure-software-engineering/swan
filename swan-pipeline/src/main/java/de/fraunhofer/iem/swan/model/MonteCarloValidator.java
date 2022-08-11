@@ -6,6 +6,7 @@ import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.classifiers.evaluation.output.prediction.CSV;
 import weka.core.Instances;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class MonteCarloValidator {
 
     private ArrayList<String> predictions;
     private HashMap<String, ArrayList<Double>> fMeasure;
+    private DecimalFormat df = new DecimalFormat("####0.00");
 
     public MonteCarloValidator() {
         predictions = new ArrayList<>();
@@ -98,9 +100,9 @@ public class MonteCarloValidator {
 
             if (!currentClass.contentEquals("0")) {
                 if (!fMeasure.containsKey(currentClass))
-                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.fMeasure(c)) ? 0 : eval.fMeasure(c))));
+                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.fMeasure(c)) ? 0 : Double.parseDouble(df.format(eval.fMeasure(c))))));
                 else {
-                    fMeasure.get(currentClass).add(Double.isNaN(eval.fMeasure(c)) ? 0 : eval.fMeasure(c));
+                    fMeasure.get(currentClass).add(Double.isNaN(eval.fMeasure(c)) ? 0 : Double.parseDouble(df.format(eval.fMeasure(c))));
                 }
             }
         }

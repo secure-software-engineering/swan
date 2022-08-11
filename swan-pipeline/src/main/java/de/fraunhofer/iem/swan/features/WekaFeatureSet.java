@@ -6,6 +6,11 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import weka.attributeSelection.AttributeSelection;
+import weka.attributeSelection.InfoGainAttributeEval;
+import weka.attributeSelection.Ranker;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
@@ -20,6 +25,7 @@ import java.util.stream.Collectors;
 public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
     HashMap<String, Instances> structures;
+    private static final Logger logger = LoggerFactory.getLogger(WekaFeatureSet.class);
 
     public WekaFeatureSet(Dataset dataset, SwanOptions options) {
         super(dataset, options, ModelEvaluator.Toolkit.WEKA);
@@ -57,6 +63,9 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
             ArffLoader loader = new ArffLoader();
 
+            logger.info("Using default {} TRAIN dataset(s) file(s) in {}",
+                    options.getAllClasses(), options.getArffInstancesFiles());
+
             for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
 
                 List<String> instancesFile = options.getArffInstancesFiles().stream().filter(c -> c.contains(category.getId().toLowerCase())).collect(Collectors.toList());
@@ -74,8 +83,8 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
                             ArffLoader arffLoader = new ArffLoader();
                             arffLoader.setSource(new File(instancesFile.get(x)));
 
-                            trainInstances = mergeInstances(trainInstances, arffLoader.getDataSet());
-                            structure = mergeInstances(structure, arffLoader.getStructure());
+                            trainInstances = joinInstances(trainInstances, arffLoader.getDataSet());
+                            structure = joinInstances(structure, arffLoader.getStructure());
                         }
                     }
 

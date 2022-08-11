@@ -51,11 +51,13 @@ public class Weka {
             case VALIDATE:
 
                 //Phase 1: classify SRM classes
+                logger.info("Performing {}-fold cross-validation for {} using WEKA", options.getIterations(), options.getSrmClasses());
                 for (String srm : options.getSrmClasses())
                     runManualEvaluation(features.getTrainInstances().get(srm));
 
                 //Filter methods from CWE instances that were not classified into one of the SRM classes
                 //Phase 2: classify CWE classes
+                logger.info("Performing {}-fold cross-validation for {} using WEKA", options.getIterations(), options.getCweClasses());
                 for (String cwe : options.getCweClasses())
                     runManualEvaluation(features.getTrainInstances().get(cwe));
 
