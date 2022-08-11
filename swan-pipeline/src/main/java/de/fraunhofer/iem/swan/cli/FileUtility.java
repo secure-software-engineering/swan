@@ -58,33 +58,34 @@ public class FileUtility {
 
         // Find JAR Entries
         URL url = FileUtility.class.getResource(resourceLocation);
-        if (resourceLocation.startsWith(File.pathSeparator)) {
+        if (resourceLocation.startsWith(File.separator)) {
             resourceLocation = resourceLocation.substring(1);
         }
 
+        assert url != null;
         if (url.getProtocol().equals("jar")) {
-            String[] splitted = url.getPath().split("\\!");
-            splitted = splitted[0].split("file:/");
-            String jarPath = splitted[splitted.length - 1];
-            File jarFile = new File(jarPath);
+
+            String[] jarFilePath = url.getPath().split("!")[0].split("file:");
+
+            File jarFile = new File(jarFilePath[jarFilePath.length - 1]);
 
             if (jarFile.exists()) {
-                JarFile jar = null;
-                try {
-                    jar = new JarFile(jarFile.getAbsolutePath());
+
+                try (JarFile jar = new JarFile(jarFile)) {
+
                     Enumeration<JarEntry> entries = jar.entries(); // gives ALL entries in jar
+
                     while (entries.hasMoreElements()) {
-                        String name = entries.nextElement().getName();
-                        if (name.startsWith(resourceLocation) && !name.endsWith("/")) {
-                            String destinationName = name.substring(resourceLocation.length());
+
+                        JarEntry entry = entries.nextElement();
+
+                        if (entry.getName().contains(resourceLocation) && !entry.getName().endsWith(File.separator)) {
+
+                            String destinationName = entry.getName().substring(resourceLocation.length());
                             File destination = new File(tempDir, destinationName);
-                            InputStream stream = FileUtility.class.getResourceAsStream("/" + name);
+                            InputStream stream = FileUtility.class.getResourceAsStream(File.separator + entry.getName());
                             FileUtils.copyInputStreamToFile(stream, destination);
                         }
-                    }
-                } finally {
-                    if (jar != null) {
-                        jar.close();
                     }
                 }
             }
