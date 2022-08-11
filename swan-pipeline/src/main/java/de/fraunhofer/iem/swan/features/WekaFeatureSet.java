@@ -55,6 +55,10 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
                 structures.put(category.getId().toLowerCase(), new Instances("weka-", trainAttributes, 0));
 
                 Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
+
+                if (options.isReduceAttributes())
+                    trainInstances = performAttributeSelection(trainInstances);
+
                 trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
                 this.trainInstances.put(category.getId().toLowerCase(), trainInstances);
                 Util.exportInstancesToArff(trainInstances, category.getId());
@@ -88,9 +92,20 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
                         }
                     }
 
-                    this.trainInstances.put(category.getId().toLowerCase(), trainInstances);
-                    structures.put(category.getId().toLowerCase(), structure);
+                    logger.info("Using default {} TRAIN dataset(s) file(s) in {} with {} features and {} instances",
+                            category.getId(), instancesFile, trainInstances.numAttributes(), trainInstances.numInstances());
 
+                    if (options.isReduceAttributes()) {
+
+                        Instances originalInstances = trainInstances;
+                        trainInstances = performAttributeSelection(trainInstances);
+
+                        logger.debug("Performing feature selection on {} TRAIN dataset(s), {} reduced to {} features ",
+                                category.getId(), originalInstances.numAttributes(), trainInstances.numAttributes());
+                    }
+
+                    this.trainInstances.put(category.getId().toLowerCase(), filterInstances(trainInstances, dataset.getTrainMethods()));
+                    structures.put(category.getId().toLowerCase(), structure);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -102,21 +117,44 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
             //TODO implement predict phase for WEKA
         }
 
+    public Instances performAttributeSelection(Instances instances) {
 
-        /*  for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
+        //CfsSubsetEval eval = new CfsSubsetEval();
+        //CorrelationAttributeEval eval = new CorrelationAttributeEval();
+        InfoGainAttributeEval eval = new InfoGainAttributeEval();
+        //ReliefFAttributeEval eval = new ReliefFAttributeEval();
 
-            //Create and set attributes for the train instances
-            ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods());
+        //Set search method
+        //GreedyStepwise search = new GreedyStepwise();
+        //search.setNumToSelect(980);
+        //search.setSearchBackwards(true);
 
-            Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
-            this.instances.put(category.getId().toLowerCase(), trainInstances);
-            Util.exportInstancesToArff(trainInstances, "weka-"+category.getId());
+        Ranker search = new Ranker();
+        try {
+            search.setOptions(new String[]{"-T", "0.0343"});
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            //Create and set attributes for the test instances.
-            /*ArrayList<Attribute> testAttributes = createAttributes(getCategories(category), testData.getMethods(), featureSets);
-            Instances testInstances = createInstances(featureSets, testAttributes, testData.getMethods(), getCategories(category), category + "-test-instances");
+        //search.setNumToSelect(10);
+        //Perform attribute selection
+        AttributeSelection attributeSelection = new AttributeSelection();
+        attributeSelection.setEvaluator(eval);
+        attributeSelection.setSearch(search);
+        attributeSelection.setRanking(true);
 
-        }*/
+        Instances filteredInstances;
+
+        try {
+            attributeSelection.SelectAttributes(instances);
+            filteredInstances = attributeSelection.reduceDimensionality(instances);
+
+            System.out.println(attributeSelection.toResultsString());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return filteredInstances;
     }
 
 
