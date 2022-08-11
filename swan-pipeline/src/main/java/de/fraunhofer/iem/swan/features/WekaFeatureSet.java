@@ -113,9 +113,46 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
         }
 
         //Set attributes for the test instances
-        if (options.isPredictPhase()) {
-            //TODO implement predict phase for WEKA
+        if (options.getPhase().toUpperCase().contentEquals(ModelEvaluator.Phase.PREDICT.name())) {
+
+            for (Category category : options.getAllClasses().stream().map(Category::fromText).collect(Collectors.toList())) {
+
+                createAttributes(category, dataset.getTestMethods());
+                evaluateFeatureData(dataset.getTestMethods());
+
+                Instances testInstances = new Instances(structures.get(category.getId().toLowerCase()));
+                testInstances.setRelationName(testInstances.relationName() + "-test");
+
+                //Replace existing method IDs with test set IDs
+                Attribute idAttr = new Attribute("id", dataset.getTestMethods().stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));
+                testInstances.replaceAttributeAt(idAttr, testInstances.attribute("id").index());
+
+                ArrayList<Attribute> aList = Collections.list(testInstances.enumerateAttributes());
+
+                Instances tInstances = createInstances(testInstances, aList, dataset.getTestMethods(), Collections.singleton(category));
+                tInstances.setClassIndex(tInstances.numAttributes() - 1);
+
+                logger.info("Creating {} TEST dataset with {} features",
+                        category.getId(), tInstances.numAttributes());
+
+                this.testInstances.put(category.getId().toLowerCase(), tInstances);
+            }
         }
+    }
+
+    public Instances filterInstances(Instances instances, Set<Method> methods) {
+
+        Set<String> train = methods.stream().map(Method::getArffSafeSignature).collect(Collectors.toSet());
+
+        for (int i = instances.numInstances() - 1; i >= 0; i--) {
+            String instanceId = instances.get(i).stringValue(instances.attribute("id").index());
+
+            if (!train.contains(instanceId)) {
+                instances.remove(i);
+            }
+        }
+        return instances;
+    }
 
     public Instances performAttributeSelection(Instances instances) {
 
