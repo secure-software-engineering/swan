@@ -118,13 +118,13 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
      * @param second instances
      * @return merged instances
      */
-    public Instances mergeInstances(Instances first, Instances second) {
+    public Instances joinInstances(Instances first, Instances second) {
 
         //rename ID and class attributes
         first.renameAttribute(first.attribute(first.numAttributes() - 1), "b_" + first.attribute(first.numAttributes() - 1).name());
         second.renameAttribute(second.attribute(0), "b_" + second.attribute(0).name());
 
-        return this.mergeInstances(first, second);
+        return mergeInstances(first, second);
     }
 
     /**

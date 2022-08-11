@@ -65,8 +65,8 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
                         ArffLoader arffLoader = new ArffLoader();
                         arffLoader.setSource(new File(options.getArffInstancesFiles().get(x)));
 
-                        trainingInstances = mergeInstances(trainingInstances, arffLoader.getDataSet());
-                        structure = mergeInstances(structure, arffLoader.getStructure());
+                        trainingInstances = joinInstances(trainingInstances, arffLoader.getDataSet());
+                        structure = joinInstances(structure, arffLoader.getStructure());
                     }
                 }
             } catch (IOException e) {
@@ -93,13 +93,13 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
      * @param second instances
      * @return merged instances
      */
-    public Instances mergeInstances(Instances first, Instances second) {
+    public Instances joinInstances(Instances first, Instances second) {
 
         for (int c = 0; c < 12; c++) {
             second.renameAttribute(second.attribute(c), "b_" + second.attribute(c).name());
         }
 
-        return this.mergeInstances(first, second);
+        return mergeInstances(first, second);
     }
 
 
