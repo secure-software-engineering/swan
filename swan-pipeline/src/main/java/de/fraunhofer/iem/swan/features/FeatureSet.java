@@ -196,6 +196,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
+                    codeFeatureHandler.evaluateCodeFeatureData(methods);
                     break;
                 case DOC_MANUAL:
                     docFeatureHandler.evaluateManualFeatureData(methods);
@@ -276,38 +277,26 @@ public abstract class FeatureSet {
             Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
             inst.setDataset(instances);
 
-            for (Category cat : categories) {
-                if (cat.isAuthentication() && !method.getAuthSrm().isEmpty()) {
+            //Set id attribute
+            inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
 
-                    if (toolkit == ModelEvaluator.Toolkit.MEKA)
-                        inst.setValue(instances.attribute(cat.getId()), "1");
-                    else {
-                        for (Category auth : method.getAuthSrm()) {
-                            inst.setValue(instances.attribute(cat.getId()), getAuthClass(auth));
-                        }
-                    }
-                } else if (method.getAllCategories().contains(cat)) {
-                    inst.setValue(instances.attribute(cat.getId()), "1");
-                } else
-                    inst.setValue(instances.attribute(cat.getId()), "0");
-            }
+            //TODO Add feature values
+            //for (Class<? extends IDocFeature> feature : codeFeatureHandler.getClass()) {
 
+           // }
             for (Map.Entry<IFeature, Attribute> entry : codeAttributes.entrySet()) {
 
                 switch (entry.getKey().applies(method)) {
                     case TRUE:
-                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "true");
+                        inst.setValue(instances.attribute(entry.getKey().toString()), "true");
                         break;
                     case FALSE:
-                        inst.setValue(instances.attribute(String.valueOf(entry.getKey())), "false");
+                        inst.setValue(instances.attribute(entry.getKey().toString()), "false");
                         break;
                     default:
-                        inst.setMissing(instances.attribute(String.valueOf(entry.getKey())));
+                        inst.setMissing(instances.attribute(entry.getKey().toString()));
                 }
             }
-
-            //Set id attribute
-            inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
 
             instanceList.add(inst);
             instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
@@ -376,8 +365,12 @@ public abstract class FeatureSet {
         return instanceList;
     }
 
-
-    String getAuthClass(Category category){
+    /**
+     * Returns authentication class ID for a authentication category.
+     * @param category
+     * @return Class ID
+     */
+    String getAuthClass(Category category) {
 
         switch (category) {
             case AUTHENTICATION_TO_LOW:
@@ -386,7 +379,7 @@ public abstract class FeatureSet {
                 return "2";
             case AUTHENTICATION_TO_HIGH:
             default:
-             return "3";
+                return "3";
         }
     }
 
@@ -394,7 +387,9 @@ public abstract class FeatureSet {
 
         for (Category cat : categories) {
 
-            if (cat.isAuthentication() && !method.getAuthSrm().isEmpty() && toolkit == ModelEvaluator.Toolkit.WEKA) {
+            if (instances.relationName().endsWith("test")) {
+                inst.setMissing(instances.attribute(cat.getId()));
+            } else if (cat.isAuthentication() && !method.getAuthSrm().isEmpty() && toolkit == ModelEvaluator.Toolkit.WEKA) {
 
                 for (Category auth : method.getAuthSrm()) {
                     inst.setValue(instances.attribute(cat.getId()), getAuthClass(auth));
@@ -454,5 +449,9 @@ public abstract class FeatureSet {
 
     public void setDocFeatureHandler(DocFeatureHandler docFeatureHandler) {
         this.docFeatureHandler = docFeatureHandler;
+    }
+
+    public Dataset getDataset() {
+        return dataset;
     }
 }

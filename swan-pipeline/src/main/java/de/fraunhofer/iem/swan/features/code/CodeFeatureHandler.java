@@ -1,6 +1,7 @@
 package de.fraunhofer.iem.swan.features.code;
 
 import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.*;
 import de.fraunhofer.iem.swan.features.code.type.MethodClassModifierFeature.ClassModifier;
 import de.fraunhofer.iem.swan.features.code.type.MethodModifierFeature.Modifier;
@@ -25,6 +26,10 @@ public class CodeFeatureHandler {
 
     public CodeFeatureHandler() {
 
+    }
+
+    public void evaluateCodeFeatureData(Set<Method> methodSet) {
+        //TODO refactor code features implementation to be similar to the doc features
     }
 
     private void addFeature(IFeature feature, Set<Category> categoriesForFeature) {
@@ -1225,6 +1230,6 @@ public class CodeFeatureHandler {
             featuresCount.put(c.toString(), features);
             count += features;
         }
-        logger.info("{} Features,  distribution={}", count, featuresCount);
+        logger.info("Created {} code features,  distribution of methods={}", count, featuresCount);
     }
 }
