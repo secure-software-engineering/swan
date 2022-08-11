@@ -1,6 +1,7 @@
 package de.fraunhofer.iem.swan.cli;
 
 import de.fraunhofer.iem.swan.SwanPipeline;
+import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,11 +44,25 @@ public class SwanCli {
 
             List<String> instances = new ArrayList<>();
 
+            String dataset = "";
+
+            switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
+
+                case MEKA:
+                    dataset = options.getToolkit();
+                    break;
+                case WEKA:
+                case MLPLAN:
+                case AUTOWEKA:
+                    dataset = "weka";
+                    break;
+            }
+
             for (String feature : options.getFeatureSet()) {
-                String filepath = File.separator + "dataset" + File.separator + options.getToolkit() + File.separator + feature;
+                String filepath = File.separator + "dataset" + File.separator + dataset
+                        + File.separator + feature;
 
                 ArrayList<String> files = new ArrayList<>();
-
                 for (File f : Objects.requireNonNull(fileUtility.getResourceDirectory(filepath).listFiles())) {
                     files.add(f.getAbsolutePath());
                 }
@@ -56,7 +71,7 @@ public class SwanCli {
             options.setInstances(instances);
         }
 
-        logger.info("SWAN options: {}", options);
+        logger.info("Configuring SWAN with {}", options);
 
         try {
             swanPipeline = new SwanPipeline(options);
