@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -113,7 +113,7 @@ public class Util {
 
     private static Set<String> getAllClassesFromJar(String jarFile) throws IOException {
         Set<String> classes = new HashSet<>();
-        ZipInputStream zip = new ZipInputStream(new FileInputStream(jarFile));
+        ZipInputStream zip = new ZipInputStream(Files.newInputStream(Paths.get(jarFile)));
         for (ZipEntry entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
 
             if (!entry.isDirectory() && entry.getName().endsWith(".class")) {
@@ -239,6 +239,7 @@ public class Util {
         Set<String> files = new HashSet<>();
         File folder = new File(directory);
         File[] listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
         for (File listOfFile : listOfFiles) {
             if (listOfFile.isFile() && listOfFile.getName().endsWith(".txt")
                     && !listOfFile.getName().endsWith("_" + Category.NONE + ".txt")
@@ -294,7 +295,7 @@ public class Util {
      *
      * @param instances WEKA instances to be exported
      */
-    public static String exportInstancesToArff(Instances instances, String source) {
+    public static String exportInstancesToArff(Instances instances, String fileName) {
         ArffSaver saver = new ArffSaver();
 
         if (SwanPipeline.options.isExportArffData() && !SwanPipeline.options.getOutputDir().isEmpty()) {
@@ -308,7 +309,7 @@ public class Util {
                 if (instances.relationName().contains(":"))
                     relationName = relationName.substring(0, instances.relationName().indexOf(":"));
 
-                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + relationName + "-" + source + ".arff";
+                String arffFile = SwanPipeline.options.getOutputDir() + File.separator + "arff-data" + File.separator + fileName + ".arff";
                 saver.setFile(new File(arffFile));
                 saver.writeBatch();
             } catch (IOException e) {
