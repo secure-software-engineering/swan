@@ -50,6 +50,9 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-doc", "--documented"}, description = {"Use only methods with Javadoc"})
     private boolean isDocumented = true;
 
+    @CommandLine.Option(names = {"-att", "--attribute-selection"}, description = {"Use attribute selection"})
+    private boolean reduceAttributes = false;
+
     @CommandLine.Option(names = {"-i", "--iterations"}, description = {"Number of iterations for training"})
     private int iterations = 10;
 
@@ -61,6 +64,12 @@ public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;
+
+    @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
+    private List<String> discovery =  Collections.singletonList("manual");
+
+    @CommandLine.Option(names = {"-tl", "--timelimit"}, description = {"Time (minutes) to execute operation "})
+    private int timeLimit = 1;
 
     public SwanOptions initializeOptions(){
 
@@ -81,6 +90,9 @@ public class CliRunner implements Callable<Integer> {
         options.setInstances(arffInstancesFiles);
         options.setTrainDataSourceDir(trainDataDirSource);
         options.setTestDataSourceDir(testDataSourceDir);
+        options.setReduceAttributes(false);
+        options.setDiscovery(discovery);
+        options.setTimeLimit(timeLimit);
 
         return options;
     }
