@@ -42,7 +42,7 @@ public class Weka {
     private static final Logger logger = LoggerFactory.getLogger(Weka.class);
     private HashMap<String, ArrayList<Category>> predictions;
     private HashMap<String, HashMap<String, ArrayList<Double>>> results;
-    private DecimalFormat df = new DecimalFormat("####0.00");
+    private DecimalFormat df = new DecimalFormat("####0.000");
 
     public Weka(WekaFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
@@ -164,6 +164,9 @@ public class Weka {
             for (String key : evaluator.getFMeasure().keySet()) {
 
                 double averageFMeasure = evaluator.getFMeasure().get(key).stream().mapToDouble(a -> a).average().getAsDouble();
+                double averagePrecision = evaluator.getPrecision().get(key).stream().mapToDouble(a -> a).average().getAsDouble();
+                double averageRecall = evaluator.getRecall().get(key).stream().mapToDouble(a -> a).average().getAsDouble();
+
                 Pair summary = new Pair<>(classifier.getClass().getSimpleName(), Double.parseDouble(df.format(averageFMeasure)));
                 classifierSummary.add(summary);
 
@@ -183,8 +186,7 @@ public class Weka {
                 } else
                     measure.put(classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
 
-                logger.debug("Average F-measure for {}({}) using {}: {}, {}", category, key, classifier.getClass().getSimpleName(),
-                        averageFMeasure, evaluator.getFMeasure().get(key));
+                logger.debug("{} Average F-measure ({}), Precision ({}) and Recall ({}) for {}({}) ", classifier.getClass().getSimpleName(), averageFMeasure,averagePrecision, averageRecall, category, key);
             }
             if (!category.contains("authentication"))
                 results.put(category, measure);
