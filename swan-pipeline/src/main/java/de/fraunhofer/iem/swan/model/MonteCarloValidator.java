@@ -6,6 +6,7 @@ import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.classifiers.evaluation.output.prediction.CSV;
 import weka.core.Instances;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,10 +19,15 @@ public class MonteCarloValidator {
 
     private ArrayList<String> predictions;
     private HashMap<String, ArrayList<Double>> fMeasure;
+    private HashMap<String, ArrayList<Double>> precision;
+    private HashMap<String, ArrayList<Double>> recall;
+    private DecimalFormat df = new DecimalFormat("####0.00");
 
     public MonteCarloValidator() {
         predictions = new ArrayList<>();
         fMeasure = new HashMap<>();
+        precision = new HashMap<>();
+        recall = new HashMap<>();
     }
 
     public ArrayList<String> getPredictions() {
@@ -30,6 +36,14 @@ public class MonteCarloValidator {
 
     public HashMap<String, ArrayList<Double>> getFMeasure() {
         return fMeasure;
+    }
+
+    public HashMap<String, ArrayList<Double>> getRecall() {
+        return recall;
+    }
+
+    public HashMap<String, ArrayList<Double>> getPrecision() {
+        return precision;
     }
 
     /**
@@ -53,11 +67,11 @@ public class MonteCarloValidator {
             Instances trainInstances = new Instances(instances, 0, trainSize);
             Instances testInstances = new Instances(instances, trainSize, testSize);
 
-            evaluate(classifier, trainInstances, testInstances);
+            evaluate(classifier, trainInstances, testInstances, i);
         }
     }
 
-    public ArrayList<String> evaluate(Classifier classifier, Instances trainInstances, Instances testInstances) {
+    public ArrayList<String> evaluate(Classifier classifier, Instances trainInstances, Instances testInstances, int iteration) {
 
         Evaluation eval = null;
         try {
@@ -72,6 +86,9 @@ public class MonteCarloValidator {
             abstractOutput.setAttributes(Integer.toString(testInstances.numAttributes() - 1));
 
             eval.evaluateModel(classifier, testInstances, abstractOutput);
+
+            String header = "=== " + classifier.getClass().getSimpleName() + " Iteration #" + iteration + ": " + trainInstances.attribute(trainInstances.numAttributes() - 1).name() + " ===";
+            System.out.println(eval.toClassDetailsString(header));
 
             //Obtain all predictions and extract method signatures
             String[] output = abstractOutput.getBuffer().toString().split("\n");
@@ -97,10 +114,14 @@ public class MonteCarloValidator {
             String currentClass = instances.classAttribute().value(c);
 
             if (!currentClass.contentEquals("0")) {
-                if (!fMeasure.containsKey(currentClass))
-                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(eval.fMeasure(c))));
-                else {
-                    fMeasure.get(currentClass).add(eval.fMeasure(c));
+                if (!fMeasure.containsKey(currentClass)) {
+                    fMeasure.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.fMeasure(c)) ? 0 : Double.parseDouble(df.format(eval.fMeasure(c))))));
+                    recall.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.recall(c)) ? 0 : Double.parseDouble(df.format(eval.recall(c))))));
+                    precision.put(currentClass, new ArrayList<>(Collections.singletonList(Double.isNaN(eval.precision(c)) ? 0 : Double.parseDouble(df.format(eval.precision(c))))));
+                } else {
+                    fMeasure.get(currentClass).add(Double.isNaN(eval.fMeasure(c)) ? 0 : Double.parseDouble(df.format(eval.fMeasure(c))));
+                    recall.get(currentClass).add(Double.isNaN(eval.recall(c)) ? 0 : Double.parseDouble(df.format(eval.recall(c))));
+                    precision.get(currentClass).add(Double.isNaN(eval.precision(c)) ? 0 : Double.parseDouble(df.format(eval.precision(c))));
                 }
             }
         }

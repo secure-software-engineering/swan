@@ -1,17 +1,22 @@
 package de.fraunhofer.iem.swan.model.toolkit;
 
 import ai.libs.jaicore.ml.classification.loss.dataset.EClassificationPerformanceMeasure;
-import ai.libs.jaicore.ml.core.dataset.schema.attribute.IntBasedCategoricalAttribute;
 import ai.libs.jaicore.ml.core.dataset.serialization.ArffDatasetAdapter;
+import ai.libs.jaicore.ml.core.evaluation.evaluator.SupervisedLearnerExecutor;
 import ai.libs.jaicore.ml.core.filter.SplitterUtil;
 import ai.libs.jaicore.ml.weka.classification.learner.IWekaClassifier;
 import ai.libs.mlplan.weka.MLPlanWekaBuilder;
-import de.fraunhofer.iem.swan.model.MonteCarloValidator;
+import de.fraunhofer.iem.swan.cli.SwanOptions;
+import de.fraunhofer.iem.swan.features.WekaFeatureSet;
+import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
-import org.api4.java.ai.ml.core.dataset.schema.attribute.IAttribute;
+import org.api4.java.ai.ml.classification.singlelabel.evaluation.ISingleLabelClassification;
 import org.api4.java.ai.ml.core.dataset.serialization.DatasetDeserializationFailedException;
 import org.api4.java.ai.ml.core.dataset.splitter.SplitFailedException;
 import org.api4.java.ai.ml.core.dataset.supervised.ILabeledDataset;
+import org.api4.java.ai.ml.core.dataset.supervised.ILabeledInstance;
+import org.api4.java.ai.ml.core.evaluation.execution.ILearnerRunReport;
+import org.api4.java.ai.ml.core.evaluation.execution.LearnerExecutionFailedException;
 import org.api4.java.algorithm.Timeout;
 import org.api4.java.algorithm.exceptions.AlgorithmException;
 import org.api4.java.algorithm.exceptions.AlgorithmExecutionCanceledException;
@@ -19,8 +24,6 @@ import org.api4.java.algorithm.exceptions.AlgorithmTimeoutedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import weka.classifiers.Classifier;
-import weka.core.Instances;
-import weka.core.converters.ArffLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,215 +40,95 @@ public class MLPlan {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MLPlan.class);
     private final int ITERATIONS = 1;
+    private WekaFeatureSet featureSet;
+    private SwanOptions swanOptions;
+    long start;
 
-    public MLPlan() {
-
+    public MLPlan(WekaFeatureSet features, SwanOptions options) {
+        this.featureSet = features;
+        swanOptions = options;
     }
 
     /**
-     * Run ML-Plan using the provided path to the ARFF file.
+     * Trains and evaluates the model with the given training data and specified classification mode.
      *
-     * @param instances1 file path for ARFF file
+     * @return Hashmap containing the name of the classifier and it's F-Measure
      */
-    public HashMap<String, ArrayList<Double>> evaluateDataset(Instances instances1) {
+    public HashMap<String, HashMap<String, String>> trainModel() {
 
-        String arffFilePath = Util.exportInstancesToArff(instances1, "mlplan");
-        ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
+        switch (ModelEvaluator.Phase.valueOf(swanOptions.getPhase().toUpperCase())) {
+            case VALIDATE:
 
-        String mClass = Util.getClassName(instances1);
-
-        long start = System.currentTimeMillis();
-
-        //Initialize dataset using ARFF file path
-        ILabeledDataset<?> dataset = null;
-        try {
-            dataset = arffDatasetAdapter.readDataset(new File(arffFilePath));
-        } catch (DatasetDeserializationFailedException e) {
-            e.printStackTrace();
+                evaluateData(Util.exportInstancesToArff(featureSet.getTrainInstances().get("sanitizer"), "mlplan"));
+                return null;
+            case PREDICT:
         }
-
-        //dataset.removeColumn("id");
-
-        ArrayList<Double> fScores = new ArrayList<>();
-        ArrayList<String> algorithms = new ArrayList<>();
-
-        MonteCarloValidator monteCarloValidator = new MonteCarloValidator();
-
-        ArffLoader loader = new ArffLoader();
-        try {
-            loader.setFile(new File(arffFilePath));
-            Instances instances = loader.getDataSet();
-            instances.setClassIndex(instances.numAttributes() - 1);
-          //  monteCarloValidator.initializeResultSet(instances);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        //For each iteration, create a new train-test-split and run ML-Plan
-        for (int iteration = 0; iteration < ITERATIONS; iteration++) {
-
-            System.out.println("Iteration #"+iteration);
-            try {
-                List<ILabeledDataset<?>> split = SplitterUtil.getLabelStratifiedTrainTestSplit(dataset, new Random(1337 + (iteration * 11)), 0.7);
-                LOGGER.info("Data read. Time to create dataset object was {}ms", System.currentTimeMillis() - start);
-
-                Classifier optimizedClassifier = getClassifier(split.get(0));
-                //System.out.println("Classify: " + optimizedClassifier.getClassifier().getClass().getSimpleName());
-
-                //optimizedClassifier.fit(split.get(0));
-
-                String trainPath = "swan/swan_core/swan-out/mlplan/train-methods-dataset.arff";
-                arffDatasetAdapter.serializeDataset(new File(trainPath), split.get(0));
-                ArffLoader trainLoader = new ArffLoader();
-                trainLoader.setFile(new File(trainPath));
-                Instances trainInstances = trainLoader.getDataSet();
-                trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
-
-                String testPath = "swan/swan_core/swan-out/mlplan/test-methods-dataset.arff";
-                arffDatasetAdapter.serializeDataset(new File(testPath), split.get(1));
-                ArffLoader testLoader = new ArffLoader();
-                testLoader.setFile(new File(testPath));
-                Instances testInstances = testLoader.getDataSet();
-                testInstances.setClassIndex(testInstances.numAttributes() - 1);
-
-                monteCarloValidator.evaluate(optimizedClassifier, trainInstances, testInstances);
-
-
-                /* evaluate solution produced by mlplan */
-        /*       SupervisedLearnerExecutor executor = new SupervisedLearnerExecutor();
-               ILearnerRunReport report = executor.execute(optimizedClassifier, split.get(0), split.get(1));
-
-                for (Object pred : report.getPredictionDiffList().getPredictionsAsList()) {
-
-                    SingleLabelClassification cl = (SingleLabelClassification) pred;
-
-                }
-
-                for (Object prediction : report.getPredictionDiffList().getPredictionsAsList()) {
-
-                    SingleLabelClassification label = (SingleLabelClassification) prediction;
-                }
-
-
-
-
-                LOGGER.info("Model selected: {},{},{},{}", mClass, iteration,
-                        optimizedClassifier.getClassifier().getClass().getSimpleName(),
-                        EClassificationPerformanceMeasure.F1_WITH_1_POSITIVE.F1_WITH_1_POSITIVE.loss(report.getPredictionDiffList().getCastedView(Integer.class, ISingleLabelClassification.class)));
-*/
-                //fScores.add(EClassificationPerformanceMeasure.F1_WITH_1_POSITIVE.loss(report.getPredictionDiffList().getCastedView(Integer.class, ISingleLabelClassification.class)));
-                //algorithms.add(optimizedClassifier.getClassifier().getClass().getSimpleName());
-                //LOGGER.info("Error Rate of the solution produced by ML-Plan: {}. ",  );
-
-            } catch (SplitFailedException | InterruptedException | IOException  e) {
-                e.printStackTrace();
-            }
-        }
-        return monteCarloValidator.getFMeasure();
+        return null;
     }
 
-    public void evaluateDataset(Instances instances, int k) {
+    public HashMap<String, ArrayList<Double>> evaluateData(String arffFilePath) {
 
-        //arffFilePath = "swan/swan_core/src/main/resources/waveform.arff";
-        String arffFilePath = Util.exportInstancesToArff(instances, "mlplan");
-        ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
+        start = System.currentTimeMillis();
 
-        String mClass = Util.getClassName(instances);
-
-        long start = System.currentTimeMillis();
-
-        //Initialize dataset using ARFF file path
-        ILabeledDataset<?> dataset = null;
         try {
-            dataset = arffDatasetAdapter.readDataset(new File(arffFilePath));
-        } catch (DatasetDeserializationFailedException e) {
-            e.printStackTrace();
+
+            ArffDatasetAdapter arffDatasetAdapter = new ArffDatasetAdapter();
+            ILabeledDataset<ILabeledInstance> dataset = arffDatasetAdapter.readDataset(new File(arffFilePath));
+
+            List<ILabeledDataset<?>> split = SplitterUtil.getLabelStratifiedTrainTestSplit(dataset, new Random(42), .7);
+            LOGGER.info("Data read. Time to create dataset object was {}ms", System.currentTimeMillis() - start);
+
+            getClassifier(split);
+
+        } catch (InterruptedException | DatasetDeserializationFailedException | SplitFailedException e) {
+            throw new RuntimeException(e);
         }
-
-        //dataset.removeColumn("id");
-
-        MonteCarloValidator monteCarloValidator = new MonteCarloValidator();
-
-        //For each iteration, create a new train-test-split and run ML-Plan
-        for (int iteration = 0; iteration < ITERATIONS; iteration++) {
-
-            try {
-                List<ILabeledDataset<?>> split = SplitterUtil.getLabelStratifiedTrainTestSplit(dataset, new Random(1337 + (iteration * 11)), 0.7);
-                LOGGER.info("Data read. Time to create dataset object was {}ms", System.currentTimeMillis() - start);
-
-                System.out.println(split.get(1).getLabelAttribute().getName());
-                for (IAttribute attribute : split.get(1).getListOfAttributes()) {
-
-                    //   System.out.println(attribute.getName());
-                }
-                arffDatasetAdapter.serializeDataset(new File("swan/swan_core/swan-out/mlplan/methods-dataset.arff"), split.get(1));
-
-
-                for (int x = 0; x < split.get(1).size(); x++) {
-
-                    int attributeIndex = split.get(1).getNumAttributes() - 1;
-                    //System.out.println(Arrays.toString(split.get(1).get(x).getAttributes()));
-
-                    IAttribute attribute = split.get(1).getAttribute(attributeIndex);
-
-                    //System.out.println(dataset.getLabelVector().);
-                    System.out.println(((IntBasedCategoricalAttribute) split.get(1).getAttribute(attributeIndex)).getLabelOfCategory((int) split.get(1).get(x).getAttributeValue(attributeIndex)));
-                    System.out.println(((IntBasedCategoricalAttribute) split.get(1).getLabelAttribute()).getLabelOfCategory((int) split.get(1).get(x).getLabel()));
-                    // System.out.println(split.get(1).getAttribute());
-                    System.out.println(split.get(1).get(x).getAttributeValue(split.get(1).getNumAttributes() - 2) + "   " + split.get(1).get(x).getAttributeValue(split.get(1).getNumAttributes() - 1));
-                }
-            } catch (SplitFailedException | InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
-        }
+        return null;
     }
 
     /**
-     * SReturns trained clssifier
+     * Returns trained clssifier
      *
      * @param trainingSet training set
      * @return trained classifier
      */
-    public Classifier getClassifier(ILabeledDataset<?> trainingSet) {
+    public Classifier getClassifier(List<ILabeledDataset<?>> trainingSet) {
 
-        Classifier optimizedClassifier = null;
-        /* initialize mlplan with a tiny search space, and let it run for 30 seconds */
+        IWekaClassifier optimizedClassifier = null;
 
         try {
+            /* initialize mlplan with a tiny search space, and let it run for 30 seconds */
             ai.libs.mlplan.core.MLPlan<IWekaClassifier> mlPlan = new MLPlanWekaBuilder()
-                    .withNumCpus(12)//Set to about 12 on the server
+                    .withNumCpus(4)//Set to about 12 on the server
                     .withSeed(35467463)
                     //set default timeout
-                    .withTimeOut(new Timeout(30, TimeUnit.SECONDS))
-                    .withDataset(trainingSet)
-                    .withCandidateEvaluationTimeOut(new Timeout(30, TimeUnit.SECONDS))
+                    .withTimeOut(new Timeout(60, TimeUnit.SECONDS))
+                    .withDataset(trainingSet.get(0))
+                    /*.withCandidateEvaluationTimeOut(new Timeout(5, TimeUnit.SECONDS))
                     .withPortionOfDataReservedForSelection(0.0)//ignore selection phase
                     .withPerformanceMeasureForSearchPhase(EClassificationPerformanceMeasure.F1_WITH_1_POSITIVE)//use F1
-                    .withMCCVBasedCandidateEvaluationInSearchPhase(5, .7)
+                    .withMCCVBasedCandidateEvaluationInSearchPhase(1, .7)*/
                     .build();
+            mlPlan.setLoggerName("mlplan-swan");
 
-            mlPlan.setLoggerName("testedalgorithm");
-
-            long start = System.currentTimeMillis();
-
-            optimizedClassifier = mlPlan.call().getClassifier();
+            optimizedClassifier = mlPlan.call();
 
             long trainTime = (int) (System.currentTimeMillis() - start) / 1000;
             LOGGER.info("Finished build of the classifier. Training time was {}s.", trainTime);
-            LOGGER.info("Internally believed error was {}", mlPlan.getInternalValidationErrorOfSelectedClassifier());
+            LOGGER.info("Chosen model is: {}", mlPlan.getSelectedClassifier());
 
-        } catch (IOException | AlgorithmTimeoutedException | InterruptedException | AlgorithmException | AlgorithmExecutionCanceledException e) {
+            /* evaluate solution produced by mlplan */
+            SupervisedLearnerExecutor executor = new SupervisedLearnerExecutor();
+            ILearnerRunReport report = executor.execute(optimizedClassifier, trainingSet.get(1));
+            LOGGER.info("F-measure for ML-Plan Solution: {}",
+                    EClassificationPerformanceMeasure.F1_WITH_1_POSITIVE.loss(report.getPredictionDiffList().getCastedView(Integer.class, ISingleLabelClassification.class)));
+
+        } catch (IOException | AlgorithmTimeoutedException | InterruptedException | AlgorithmException |
+                 AlgorithmExecutionCanceledException e) {
             e.printStackTrace();
+        } catch (LearnerExecutionFailedException e) {
+            throw new RuntimeException(e);
         }
-        return optimizedClassifier;
-    }
-
-    public static void maihn(String[] args) {
-
-        String file = "swan/swan_core/src/main/resources/waveform.arff";
-
-        MLPlan mlPlan = new MLPlan();
-        //  mlPlan.evaluateDataset(file, "sdfs");
+        return optimizedClassifier.getClassifier();
     }
 }

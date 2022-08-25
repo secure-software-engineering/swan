@@ -15,6 +15,8 @@ public class FeatureSetSelector {
                 mekaFeatureSet.createFeatures();
                 return mekaFeatureSet;
             case WEKA:
+            case MLPLAN:
+            case AUTOWEKA:
                 WekaFeatureSet wekaFeatureSet = new WekaFeatureSet(dataset, options);
                 wekaFeatureSet.createFeatures();
                 return wekaFeatureSet;

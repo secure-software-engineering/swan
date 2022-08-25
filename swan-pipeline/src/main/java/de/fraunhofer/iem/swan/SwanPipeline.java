@@ -4,12 +4,8 @@ import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.features.FeatureSetSelector;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
-import de.fraunhofer.iem.swan.io.doc.JavadocProcessor;
+import de.fraunhofer.iem.swan.io.dataset.DatasetProcessor;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
-import de.fraunhofer.iem.swan.soot.Soot;
-import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,26 +37,9 @@ public class SwanPipeline {
 
         long startAnalysisTime = System.currentTimeMillis();
 
-        //Run Soot
-        Soot soot = new Soot(options.getTrainDataDir(), options.getTestDataDir());
-
-        // Load methods in training dataset
-        Dataset dataset = new Dataset();
-        dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
-
-        if (!options.getTrainDataDir().isEmpty())
-            soot.cleanupList(dataset.getTrain());
-
-        logger.info("Loaded {} training methods, distribution={}", dataset.getTrainMethods().size(), Util.countCategories(dataset.getTrainMethods()));
-
-        //Load methods from the test set
-        dataset.setTest(new SrmList(options.getTestDataDir()));
-        dataset.getTest().setMethods(soot.loadMethods(dataset.getTest().getTestClasses()));
-
-        //Extract doc comments and add to test set, if option is selected
-        JavadocProcessor javadocProcessor = new JavadocProcessor(options.getTestDataSourceDir(), options.getOutputDir());
-        javadocProcessor.run(dataset.getTestMethods(), options.getFeatureSet());
-        logger.info("Loaded {} methods from {}", dataset.getTestMethods().size(), options.getTestDataDir());
+        //Create train and test datasets
+        DatasetProcessor datasetProcessor = new DatasetProcessor(options);
+        Dataset dataset = datasetProcessor.run();
 
         //Initialize and populate features
         FeatureSetSelector featureSetSelector = new FeatureSetSelector();

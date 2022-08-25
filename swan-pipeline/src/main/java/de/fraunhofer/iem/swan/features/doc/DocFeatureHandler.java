@@ -1,18 +1,16 @@
 package de.fraunhofer.iem.swan.features.doc;
 
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.doc.nlp.DocCommentVector;
+import de.fraunhofer.iem.swan.features.doc.embedding.DocCommentVector;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
 import de.fraunhofer.iem.swan.features.doc.nlp.CoreNLPExecutor;
 import de.fraunhofer.iem.swan.features.doc.nlp.NLPUtils;
+import edu.stanford.nlp.util.StringUtils;
 import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.reflections.Reflections;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Oshando Johnson on 06.09.20
@@ -53,16 +51,20 @@ public class DocFeatureHandler {
             String docComment = NLPUtils.cleanFirstSentence(method.getJavadoc().getMethodComment()) + " " +
                     NLPUtils.cleanFirstSentence(method.getJavadoc().getClassComment());
 
-            NDArray array = (NDArray) docCommentVector.getParagraphVectors().inferVector(docComment);
-            HashMap<String, Double> vectorValues = new HashMap<>();
+            List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
 
-            for (int index = 0; index < array.columns(); index++) {
-                vectorValues.put("dl4j-col-" + index, array.getDouble(index));
+            if (method.getJavadoc().getMethodComment().length() > 0 && words.size() > 1) {
+                NDArray array = (NDArray) docCommentVector.getParagraphVectors().inferVector(docComment);
+                HashMap<String, Double> vectorValues = new HashMap<>();
+
+                for (int index = 0; index < array.columns(); index++) {
+                    vectorValues.put("dl4j-col-" + index, array.getDouble(index));
+                }
+
+                NDArray average = (NDArray) array.mean(1);
+                vectorValues.put("dl4j-avg", average.getDouble(0));
+                automaticFeatureData.put(method.getSignature(), vectorValues);
             }
-
-            NDArray average = (NDArray) array.mean(1);
-            vectorValues.put("dl4j-avg", average.getDouble(0));
-            automaticFeatureData.put(method.getSignature(), vectorValues);
         }
     }
 

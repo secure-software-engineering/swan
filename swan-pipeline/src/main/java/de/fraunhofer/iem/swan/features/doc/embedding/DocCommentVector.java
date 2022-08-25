@@ -1,8 +1,6 @@
-package de.fraunhofer.iem.swan.features.doc.nlp;
+package de.fraunhofer.iem.swan.features.doc.embedding;
 
-import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import edu.stanford.nlp.util.StringUtils;
+import de.fraunhofer.iem.swan.cli.FileUtility;
 import org.apache.commons.io.FileUtils;
 import org.deeplearning4j.models.paragraphvectors.ParagraphVectors;
 import org.deeplearning4j.models.word2vec.VocabWord;
@@ -36,26 +34,6 @@ public class DocCommentVector {
         return paragraphVectors;
     }
 
-    public static void main(String[] args) {
-
-        //Export method and class doc comments
-
-        SrmList srmListUtils = new SrmList();
-        //parser.parse("/swan-dataset.json");
-
-//        for(Method method: parser.getMethods()){
-//            if(method.getJavadoc().getMethodComment().length()>0)
-//            System.out.println(NLPUtils.cleanText(method.getJavadoc().getMergedComments()));
-//        }
-
-        for(Method method: srmListUtils.getMethods()){
-            List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
-            if(method.getJavadoc().getMethodComment().length()>0 && words.size()>1)
-                System.out.println(NLPUtils.cleanFirstSentence(method.getJavadoc().getMethodComment())+" "+NLPUtils.cleanFirstSentence(method.getJavadoc().getClassComment()));
-        }
-    }
-
-
     public void fitVectors() {
 
         ClassPathResource resource = new ClassPathResource("/dl4j-methods-first.txt");
@@ -67,7 +45,6 @@ public class DocCommentVector {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         AbstractCache<VocabWord> cache = new AbstractCache<>();
 
@@ -84,13 +61,16 @@ public class DocCommentVector {
         List<String> stopWords = new ArrayList<>();
 
         try {
-            stopWords = FileUtils.readLines(new File("../resources/stopwords-list.txt"), Charset.defaultCharset());
+
+            FileUtility fileUtility = new FileUtility();
+
+            stopWords = FileUtils.readLines(fileUtility.getResourceFile("/stopwords-list.txt", null), Charset.defaultCharset());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         paragraphVectors = new ParagraphVectors.Builder()
-               // .minWordFrequency(1)
+                // .minWordFrequency(1)
                 .iterations(10) //set to 10 for final run
                 .seed(0)
                 .allowParallelTokenization(false)

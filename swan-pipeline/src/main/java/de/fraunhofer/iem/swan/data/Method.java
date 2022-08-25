@@ -383,17 +383,13 @@ public class Method {
             return false;
         Method otherMethod = (Method) another;
 
-        if (!this.name.equals(otherMethod.name))
-            return false;
-        if (!this.parameters.equals(otherMethod.parameters))
-            return false;
-        return this.getClassName().equals(otherMethod.getClassName());
+        return this.getSignature().equals(otherMethod.getSignature());
     }
 
     @Override
     public int hashCode() {
         if (this.hashCode == 0)
-            this.hashCode = this.name.hashCode() * 5;
+            this.hashCode = this.getSignature().hashCode() * 5;
         // The parameter list is available from the outside, so we can't cache it
         return this.hashCode + this.parameters.hashCode() * 7;
     }

@@ -22,11 +22,14 @@ public class SwanOptions {
     private List<String> cweClasses;
     private boolean exportArffData;
     private boolean isDocumented;
+    private boolean reduceAttributes;
     private int iterations;
     private double trainTestSplit;
     private String phase;
     private double predictionThreshold;
     private List<String> arffInstancesFiles;
+    private List<String> discovery;
+    private int timeLimit;
 
     public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
                        List<String> featureSet, String toolkit, List<String> srmClasses,
@@ -136,6 +139,14 @@ public class SwanOptions {
         return exportArffData;
     }
 
+    public boolean isReduceAttributes() {
+        return reduceAttributes;
+    }
+
+    public void setReduceAttributes(boolean reduceAttributes) {
+        this.reduceAttributes = reduceAttributes;
+    }
+
     public void setExportArffData(boolean exportArffData) {
         this.exportArffData = exportArffData;
     }
@@ -166,6 +177,11 @@ public class SwanOptions {
 
     public String getPhase() {
         return phase;
+    }
+
+    public boolean isPredictPhase(){
+
+        return getPhase().contentEquals("predict");
     }
 
     public void setPhase(String phase) {
@@ -202,6 +218,22 @@ public class SwanOptions {
 
     public void setTrainDataSourceDir(String trainDataSourceDir) {
         this.trainDataSourceDir = trainDataSourceDir;
+    }
+
+    public List<String> getDiscovery() {
+        return discovery;
+    }
+
+    public void setDiscovery(List<String> discovery) {
+        this.discovery = discovery;
+    }
+
+    public int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(int timeLimit) {
+        this.timeLimit = timeLimit;
     }
 
     @Override
