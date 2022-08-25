@@ -43,7 +43,7 @@ public class DatasetProcessor {
 
                 for (Method method : new HashSet<>(dataset.getTrainMethods())) {
 
-                    if (!options.getDiscovery().contains(method.getDiscovery()) ||
+                    if ((!options.getDiscovery().contains(method.getDiscovery()) && options.getDiscovery().size() > 0) ||
                             ((method.getJavadoc().getMethodComment().length() == 0
                                     || StringUtils.split(method.getJavadoc().getMethodComment(), " ").size() <= 1) && options.isDocumented())) {
                         dataset.getTrainMethods().remove(method);
