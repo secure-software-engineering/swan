@@ -15,7 +15,7 @@ import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.ui.MethodListTree;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import icons.PluginIcons;
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

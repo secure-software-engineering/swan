@@ -16,8 +16,7 @@ import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.assist.comm.FilterNotifier;
 import de.fraunhofer.iem.swan.assist.ui.MethodListTree;
 import icons.PluginIcons;
-import javafx.util.Pair;
-
+import de.fraunhofer.iem.swan.assist.util.Pair;
 /**
  * Plugin action to filter method list.
  */
