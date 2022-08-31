@@ -7,7 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.util;
 
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 
 import java.util.ResourceBundle;
 

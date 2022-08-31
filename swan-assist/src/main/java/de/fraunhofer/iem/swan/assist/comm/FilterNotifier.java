@@ -8,7 +8,7 @@
 package de.fraunhofer.iem.swan.assist.comm;
 
 import com.intellij.util.messages.Topic;
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 
 /**
  * Notification events for filters.
