@@ -23,7 +23,10 @@ dependencies {
 }
 
 intellij {
-    version = '2018.3.6'
+    version = "2022.1"
+    type = "IC"
+    plugins = ["com.intellij.java"]
+
 }
 
 patchPluginXml {
