@@ -15,7 +15,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 
 import java.util.*;
 
