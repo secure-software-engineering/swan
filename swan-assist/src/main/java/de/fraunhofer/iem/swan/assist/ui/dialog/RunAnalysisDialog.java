@@ -45,10 +45,6 @@ public class RunAnalysisDialog extends DialogWrapper {
     private JButton trainButton;
     private JPanel trainingPanel;
     private JCheckBox trainingPathCheckbox;
-    private JCheckBox configurationPathCheckbox;
-    private JTextField configFileTextbox;
-    private JButton configButton;
-    private JPanel configurationFilePanel;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
@@ -107,20 +103,20 @@ public class RunAnalysisDialog extends DialogWrapper {
         }
 
         //Set value for using configuration file
-        configurationPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.PROJECT_CONFIGURATION_FILE, false));
-
-        for (Component component : configurationFilePanel.getComponents()) {
-            component.setEnabled(configurationPathCheckbox.isSelected());
-        }
+//        configurationPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.PROJECT_CONFIGURATION_FILE, false));
+//
+//        for (Component component : configurationFilePanel.getComponents()) {
+//            component.setEnabled(configurationPathCheckbox.isSelected());
+//        }
 
 
         if (PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)) {
             trainingTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_DIRECTORY));
         }
 
-        if (PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)) {
-            configFileTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
-        }
+//        if (PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)) {
+//            configFileTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
+//        }
 
         init();
         /*
@@ -140,7 +136,7 @@ public class RunAnalysisDialog extends DialogWrapper {
             }
         });
 
-        configurationPathCheckbox.addActionListener(new ActionListener() {
+        /*configurationPathCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -150,7 +146,7 @@ public class RunAnalysisDialog extends DialogWrapper {
                     component.setEnabled(configurationPathCheckbox.isSelected());
                 }
             }
-        });
+        }); */
 
         sourceBtn.addActionListener(new ActionListener() {
             @Override
@@ -176,13 +172,13 @@ public class RunAnalysisDialog extends DialogWrapper {
             }
         });
 
-        configButton.addActionListener(new ActionListener() {
+        /*configButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 configFileTextbox.setText(fileSelector(JFileChooser.FILES_ONLY, configFileTextbox.getText()));
             }
-        });
+        });*/
     }
 
     @Override
@@ -221,10 +217,11 @@ public class RunAnalysisDialog extends DialogWrapper {
         }
 
         //Check if option to use default configuration file is selected
-        if (configurationPathCheckbox.isSelected()) {
+        /* if (configurationPathCheckbox.isSelected()) {
             parameters.put(Constants.CONFIGURATION_FILE, configFileTextbox.getText());
-        } else
-            parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
+        } else */
+        //set the configuration file to default
+        parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
