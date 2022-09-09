@@ -12,24 +12,21 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.Main;
-import de.fraunhofer.iem.swan.SwanPipeline;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
-import de.fraunhofer.iem.swan.assist.data.JSONFileParser;
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import de.fraunhofer.iem.swan.cli.CliRunner;
+import de.fraunhofer.iem.swan.cli.SwanCli;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import org.apache.commons.io.FileUtils;
-import org.jaxen.util.SingletonList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -40,11 +37,13 @@ public class RunSwanAnalysisImpl {
     private static HashMap<String, String> parameters;
     private Project project;
     private long duration;
+    private SwanCli swan;
 
     /**
      * Initializes builder.
+     *
      * @param project Project on which the plugin is being used with
-     * @param param Parameters that will be used as program arguments
+     * @param param   Parameters that will be used as program arguments
      */
     RunSwanAnalysisImpl(Project project, HashMap<String, String> param) {
 
@@ -61,7 +60,7 @@ public class RunSwanAnalysisImpl {
 
         File outputFolder = new File(parameters.get(Constants.OUTPUT_DIRECTORY));
 
-        if(!outputFolder.exists())
+        if (!outputFolder.exists())
             outputFolder.mkdir();
 
         /*File logFile = new File(outputFolder, currentTimestamp + parameters.get(Constants.OUTPUT_LOG));
@@ -83,27 +82,23 @@ public class RunSwanAnalysisImpl {
 
                 long start = System.currentTimeMillis();
 
-                SwanOptions options = new SwanOptions("", "", "",
-                        "/Users/rohith/Desktop/Work",
-                        new SingletonList("code"), "meka", new SingletonList("all"), new SingletonList("all"), false
-                        , true, 10, 0.7, "validate");
+                SwanOptions options = new CliRunner().initializeOptions();
+                options.setTestDataDir(parameters.get(Constants.SOURCE_DIRECTORY));
+                options.setOutputDir( parameters.get(Constants.OUTPUT_DIRECTORY));
+                options.setToolkit("meka");
+                options.setPhase("predict");
+                options.setTrainDataDir("");
 
-                SwanPipeline swan = new SwanPipeline(options);
+
+                swan = new SwanCli();
                 try {
-                    swan.run();
-                } catch (IOException e) {
+                    swan.run(options);
+                } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-
-
-//                Main.main(new String[]{parameters.get(Constants.SOURCE_DIRECTORY),
-//                        parameters.get(Constants.TRAIN_DIRECTORY),
-//                        parameters.get(Constants.CONFIGURATION_FILE),
-//                        });
-
-                 duration = System.currentTimeMillis() - start;
+                duration = System.currentTimeMillis() - start;
             }
 
             @Override
@@ -115,21 +110,32 @@ public class RunSwanAnalysisImpl {
             public void onSuccess() {
                 super.onSuccess();
 
-                System.out.println("FILE: "+parameters.get(Constants.OUTPUT_FILE));
+
+                SrmList srmList = swan.getSwanPipeline().getModelEvaluator().getPredictedSrmList();
+
+                String filename = parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + "srm-" + getCurrentTimestamp() + ".json";
+
+                try {
+                    SrmListUtils.exportFile(srmList, filename);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
                 //Create copy of file
-                copyFile(new File(parameters.get(Constants.OUTPUT_FILE)));
+                /*copyFile(new File(parameters.get(Constants.OUTPUT_FILE)));
 
                 JSONFileParser parser = new JSONFileParser(parameters.get(Constants.OUTPUT_FILE));
-                HashMap<String, MethodWrapper> exportedMethods = parser.parseJSONFileMap();
+                HashMap<String, MethodWrapper> exportedMethods = parser.parseJSONFileMap();*/
 
                 HashMap<String, String> results = new HashMap<String, String>();
-                results.put(Constants.OUTPUT_FILE, parameters.get(Constants.OUTPUT_FILE));
-                results.put(Constants.OUTPUT_LOG, parameters.get(Constants.OUTPUT_LOG));
+                results.put(Constants.OUTPUT_FILE, filename);
+                results.put(Constants.OUTPUT_LOG, "");
 
                 int m = (int) (((duration / 1000) / 60) % 60);
                 int s = (int) ((duration / 1000) % 60);
 
-                results.put(Constants.ANALYSIS_RESULT, exportedMethods.size() + " methods found in "+m+" mins "+s+ " secs");
+                results.put(Constants.ANALYSIS_RESULT, srmList.getMethods().size() + " methods found in " + m + " mins " + s + " secs");
 
                 MessageBus messageBus = project.getMessageBus();
                 SwanNotifier publisher = messageBus.syncPublisher(SwanNotifier.END_SWAN_PROCESS_TOPIC);
@@ -138,10 +144,10 @@ public class RunSwanAnalysisImpl {
         });
     }
 
-    private void copyFile(File original ){
+    private void copyFile(File original) {
 
         File copied = new File(
-                parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator +getCurrentTimestamp()+ "-config.json");
+                parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + getCurrentTimestamp() + "-config.json");
         try {
             FileUtils.copyFile(original, copied);
         } catch (IOException e) {
@@ -151,6 +157,7 @@ public class RunSwanAnalysisImpl {
 
     /**
      * Get the timestamp in a specified format.
+     *
      * @return Formatted date
      */
     private String getCurrentTimestamp() {

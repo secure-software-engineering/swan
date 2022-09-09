@@ -558,7 +558,7 @@ public class MethodListTree extends Tree {
 
         if (methods.size() > 0) {
 
-            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>Classified Methods</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>SRMs</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
 
             int methodCount = 0;
             int totalMethods = 0;
@@ -581,7 +581,7 @@ public class MethodListTree extends Tree {
             String pattern = "###,###";
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
-            root.setUserObject("<html><b>Classified Methods</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in "+ decimalFormat.format(methods.size())+" classes)</font></html>");
+            root.setUserObject("<html><b>SRMs</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in "+ decimalFormat.format(methods.size())+" classes)</font></html>");
 
             treeModel.setRoot(root);
             TREE_EXPANDED = false;
