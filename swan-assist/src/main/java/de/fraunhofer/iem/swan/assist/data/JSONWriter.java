@@ -7,7 +7,8 @@
 
 package de.fraunhofer.iem.swan.assist.data;
 
-import de.fraunhofer.iem.swan.Writer;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.data.Method;
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ public class JSONWriter {
             methodSet.add(method.getMethod());
         }
 
-        Writer writer = new Writer();
-        writer.outputJSONFile(methodSet, outputPath);
+        SrmListUtils.exportFile(new SrmList(methodSet), outputPath);
+//        Writer writer = new Writer();
+//        writer.outputJSONFile(methodSet, outputPath);
     }
 }
