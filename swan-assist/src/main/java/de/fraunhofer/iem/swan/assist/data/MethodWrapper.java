@@ -66,7 +66,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
     public MethodWrapper(String methodName, List<String> parameters, String returnType,
                          String className) {
 
-        this.method = new Method(methodName, parameters, returnType, className);
+        this.method = new Method(methodName, parameters, returnType);
         status = MethodStatus.NONE;
 
     }
@@ -101,9 +101,9 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
     public String getMethodName(boolean fullyQualifiedName) {
 
         if (!fullyQualifiedName)
-            return trimProperty(method.getClassName() + "." + method.getMethodName());
+            return trimProperty(method.getClassName() + "." + method.getName());
         else
-            return method.getClassName() + "." + method.getMethodName();
+            return method.getClassName() + "." + method.getName();
     }
 
     /**
@@ -179,7 +179,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
         ArrayList<String> cweList = new ArrayList<String>();
 
-        for (Category category : method.getCategoriesTrained()) {
+        for (Category category : method.getAllCategories()) {
             if (category.isCwe()) {
                 cweList.add(category.toString());
             }
@@ -197,7 +197,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
         ArrayList<String> typesList = new ArrayList<String>();
 
-        for (Category category : method.getCategoriesTrained()) {
+        for (Category category : method.getAllCategories()) {
             if (!category.isCwe() && !capitalize) {
                 typesList.add(category.toString());
             } else if (!category.isCwe())
@@ -212,7 +212,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
      * @return Set of Method categories
      */
     public Set<Category> getCategories() {
-        return method.getCategoriesTrained();
+        return method.getAllCategories();
     }
 
     /**
@@ -221,7 +221,18 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
      */
     public void setCategories(Set<Category> categories) {
 
-       method.setCategoriesTrained(categories);
+        Set<Category> cweCategories = null;
+        Set<Category> srmCategories = null;
+        for(Category category: categories) {
+            if (category.isCwe()) {
+                cweCategories.add(category);
+            } else if (category.isNone()) {
+            } else {
+                srmCategories.add(category);
+            }
+        }
+        method.setSrm(srmCategories);
+        method.setCwe(cweCategories);
     }
 
     /**
