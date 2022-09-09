@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "SWAN CLI", mixinStandardHelpOptions = true,
-        version = "SWAN 3.0.1", description = "")
+        version = "SWAN 3.2.0", description = "")
 public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})
@@ -73,23 +73,28 @@ public class CliRunner implements Callable<Integer> {
 
     public SwanOptions initializeOptions(){
 
-        SwanOptions options = new SwanOptions(testDataDir,
-                trainDataDir,
-                datasetJson,
-                outputDir,
-                featureSet,
-                toolkit,
-                srmClasses,
-                cweClasses,
-                exportArffData,
-                isDocumented,
-                iterations,
-                split,
-                phase);
-        options.setPredictionThreshold(predictionThreshold);
-        options.setInstances(arffInstancesFiles);
-        options.setTrainDataSourceDir(trainDataDirSource);
+        SwanOptions options = new SwanOptions();
+        options.setToolkit(toolkit);
+        options.setPhase(phase);
+
+        options.setDatasetJson(datasetJson);
+        options.setTrainDataDir(trainDataDir);
+        options.setTrainDataSourceDir(trainDataSourceDir);
+        options.setTestDataDir(testDataDir);
         options.setTestDataSourceDir(testDataSourceDir);
+
+        options.setFeatureSet(featureSet);
+        options.setSrmClasses(srmClasses);
+        options.setCweClasses(cweClasses);
+        options.setInstances(arffInstancesFiles);
+
+        options.setOutputDir(outputDir);
+
+        options.setExportArffData(exportArffData);
+        options.setDocumented(isDocumented);
+        options.setIterations(iterations);
+        options.setTrainTestSplit(split);
+        options.setPredictionThreshold(predictionThreshold);
         options.setReduceAttributes(false);
         options.setDiscovery(discovery);
         options.setTimeLimit(timeLimit);

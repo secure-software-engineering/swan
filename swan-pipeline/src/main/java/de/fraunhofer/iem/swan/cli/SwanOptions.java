@@ -31,6 +31,9 @@ public class SwanOptions {
     private List<String> discovery;
     private int timeLimit;
 
+    public SwanOptions(){
+
+    }
     public SwanOptions(String testDataDir, String trainDataDir, String datasetJson, String outputDir,
                        List<String> featureSet, String toolkit, List<String> srmClasses,
                        List<String> cweClasses, boolean exportArffData, boolean isDocumented,

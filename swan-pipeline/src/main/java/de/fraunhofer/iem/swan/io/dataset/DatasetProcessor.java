@@ -34,7 +34,7 @@ public class DatasetProcessor {
             if (!options.getTrainDataDir().isEmpty())
                 soot.cleanupList(dataset.getTrain());
 
-            logger.info("Importing {} SRMs from TRAIN dataset in {}, distribution={}",
+            logger.info("Importing {} SRMs from dataset {}, distribution={}",
                     dataset.getTrainMethods().size(), options.getDatasetJson(),
                     Util.countCategories(dataset.getTrainMethods()));
 
@@ -50,7 +50,6 @@ public class DatasetProcessor {
                     }
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -60,9 +59,8 @@ public class DatasetProcessor {
             dataset.setTest(new SrmList(options.getTestDataDir()));
             dataset.getTest().setMethods(soot.loadMethods(dataset.getTest().getTestClasses()));
 
-            logger.info("Importing {} SRMs from TEST dataset in {}, distribution={}",
-                    dataset.getTestMethods().size(), options.getTestDataDir(),
-                    Util.countCategories(dataset.getTestMethods()));
+            logger.info("Importing {} TEST methods from {}",
+                    dataset.getTestMethods().size(), options.getTestDataDir());
 
             if (options.getFeatureSet().contains("doc-")) {
 
