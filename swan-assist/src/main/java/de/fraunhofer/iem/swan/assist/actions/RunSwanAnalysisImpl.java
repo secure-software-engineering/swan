@@ -13,18 +13,23 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.Main;
+import de.fraunhofer.iem.swan.SwanPipeline;
 import de.fraunhofer.iem.swan.assist.comm.SwanNotifier;
 import de.fraunhofer.iem.swan.assist.data.JSONFileParser;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import de.fraunhofer.iem.swan.cli.SwanOptions;
 import org.apache.commons.io.FileUtils;
+import org.jaxen.util.SingletonList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -78,10 +83,25 @@ public class RunSwanAnalysisImpl {
 
                 long start = System.currentTimeMillis();
 
-                Main.main(new String[]{parameters.get(Constants.SOURCE_DIRECTORY),
-                        parameters.get(Constants.TRAIN_DIRECTORY),
-                        parameters.get(Constants.CONFIGURATION_FILE),
-                        parameters.get(Constants.OUTPUT_DIRECTORY)});
+                SwanOptions options = new SwanOptions("", "", "",
+                        "/Users/rohith/Desktop/Work",
+                        new SingletonList("code"), "meka", new SingletonList("all"), new SingletonList("all"), false
+                        , true, 10, 0.7, "validate");
+
+                SwanPipeline swan = new SwanPipeline(options);
+                try {
+                    swan.run();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+//                Main.main(new String[]{parameters.get(Constants.SOURCE_DIRECTORY),
+//                        parameters.get(Constants.TRAIN_DIRECTORY),
+//                        parameters.get(Constants.CONFIGURATION_FILE),
+//                        });
 
                  duration = System.currentTimeMillis() - start;
             }
