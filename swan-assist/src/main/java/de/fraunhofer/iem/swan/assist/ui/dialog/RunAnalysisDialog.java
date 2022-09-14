@@ -87,13 +87,13 @@ public class RunAnalysisDialog extends DialogWrapper {
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
         //Use value for source path, if available. Otherwise set the default path
-        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
-            sourceDirTextbox.setText(project.getBasePath());
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
+            sourceDirTextbox.setText(project.getBasePath()+"/target");
         else
             sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
         //Use value for the output path, if available. Otherwise set the default path
-        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
             outputDir.setText(project.getBasePath() + File.separator + config.getProperty("output_dir_name"));
         else
             outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
