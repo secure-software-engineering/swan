@@ -85,7 +85,7 @@ public class RunSwanAnalysisImpl {
                 SwanOptions options = new CliRunner().initializeOptions();
                 options.setTestDataDir(parameters.get(Constants.SOURCE_DIRECTORY));
                 options.setOutputDir( parameters.get(Constants.OUTPUT_DIRECTORY));
-                options.setToolkit("meka");
+                options.setToolkit(parameters.get(Constants.TOOLKIT).toLowerCase());
                 options.setPhase("predict");
                 options.setTrainDataDir("");
 

@@ -45,6 +45,9 @@ public class RunAnalysisDialog extends DialogWrapper {
     private JButton trainButton;
     private JPanel trainingPanel;
     private JCheckBox trainingPathCheckbox;
+    private JRadioButton WEKARadioButton;
+    private JRadioButton MEKARadioButton;
+    private JPanel toolkitPanel;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
@@ -223,6 +226,11 @@ public class RunAnalysisDialog extends DialogWrapper {
         //set the configuration file to default
         parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
+        if(!MEKARadioButton.isSelected()){
+            parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
+        }else{
+            parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
+        }
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));

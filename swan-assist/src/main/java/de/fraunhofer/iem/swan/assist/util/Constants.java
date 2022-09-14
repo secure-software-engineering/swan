@@ -32,6 +32,7 @@ public class Constants {
     public final static String ANALYSIS_RESULT = PLUGIN_ID + "analysisResult";
     public final static String TRAIN_FILE_SUGGESTED = PLUGIN_ID + "file_suggested_methods";
 
+    public final static String TOOLKIT = "toolkit";
     public final static String DEFAULT_TRAINING_PATH = PLUGIN_ID + "defaultTrainingPath";
     public final static String PROJECT_CONFIGURATION_FILE = PLUGIN_ID + "defaultConfigurationFile";
 
