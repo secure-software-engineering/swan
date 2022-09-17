@@ -20,7 +20,6 @@ import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Methods to find PSI methods using the PSI object or event.
@@ -29,6 +28,7 @@ public class PsiTraversal {
 
     /**
      * Returns list of parameters for the PSI method
+     *
      * @param psiMethod PSI method
      * @return List of parameters
      */
@@ -55,8 +55,9 @@ public class PsiTraversal {
 
     /**
      * Determines if action originated from the editor
+     *
      * @param anActionEvent Source event
-     * @return Returns whether or not action originated in the editor
+     * @return Returns whether action originated in the editor
      */
     public static boolean isFromEditor(AnActionEvent anActionEvent) {
 
@@ -71,7 +72,8 @@ public class PsiTraversal {
 
     /**
      * Returns the method at a particular offset in the editor
-     * @param anActionEvent Source event
+     *
+     * @param anActionEvent    Source event
      * @param createIfNotFound Option to create the method if it wasn't found
      * @return Returns MethodWrapper object for method
      */
@@ -101,7 +103,7 @@ public class PsiTraversal {
                         //Get class
                         PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);
 
-                        MethodWrapper method = new MethodWrapper(psiMethod.getName(), PsiTraversal.getParameters(psiMethod), returnType, psiClass.getQualifiedName());
+                        MethodWrapper method = new MethodWrapper(psiClass.getQualifiedName() + "." + psiMethod.getName(), PsiTraversal.getParameters(psiMethod), returnType);
 
                         return method;
                     } else {
@@ -116,6 +118,7 @@ public class PsiTraversal {
 
     /**
      * Returns method signature for a PSI method
+     *
      * @param psiMethod PSI Method
      * @return Method signature
      */
@@ -123,15 +126,15 @@ public class PsiTraversal {
 
         PsiClass psiClass = PsiTreeUtil.getParentOfType(psiMethod, PsiClass.class);
 
-        String returnType ="";
-        if(psiMethod.getReturnType()!=null){
-            if(psiMethod.getReturnType() instanceof PsiPrimitiveType)
+        String returnType = "";
+        if (psiMethod.getReturnType() != null) {
+            if (psiMethod.getReturnType() instanceof PsiPrimitiveType)
                 returnType = ((PsiPrimitiveType) psiMethod.getReturnType()).getName();
             else
                 returnType = psiMethod.getReturnType().getCanonicalText();
         }
 
-        return  returnType+ " " +
+        return returnType + " " +
                 psiClass.getQualifiedName() + "." + psiMethod.getName() + " (" +
                 StringUtils.join(getParameters(psiMethod), ", ") + ")";
     }
