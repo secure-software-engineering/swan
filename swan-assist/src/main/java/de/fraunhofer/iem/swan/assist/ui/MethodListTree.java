@@ -9,10 +9,7 @@ package de.fraunhofer.iem.swan.assist.ui;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.ide.util.PropertiesComponent;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationListener;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
+import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.application.ApplicationManager;
@@ -73,6 +70,9 @@ public class MethodListTree extends Tree {
     private Project project;
     private ResourceBundle resource;
     public static boolean TREE_EXPANDED;
+
+    private static final NotificationGroup TOOL_GROUP= new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
+            NotificationDisplayType.TOOL_WINDOW, true);;
 
     /**
      * Initialises method list tree
@@ -297,7 +297,6 @@ public class MethodListTree extends Tree {
 
                         break;
                     case JSONFileLoader.NEW_METHOD:
-
                         addNode(newMethod);
                         break;
                 }
@@ -378,10 +377,9 @@ public class MethodListTree extends Tree {
             public void launchSwan(HashMap<String, String> values) {
 
                 JSONFileLoader.setReloading(false);
-                NotificationType notificationType = NotificationType.INFORMATION;
 
-                String message = "<html>"
-                        + values.get(Constants.ANALYSIS_RESULT);
+                Notification analysisCompleted = TOOL_GROUP.createNotification("", "SRM List updated", NotificationType.INFORMATION);
+                Notifications.Bus.notify(analysisCompleted, project);
 
                 ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
                 fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
@@ -569,7 +567,7 @@ public class MethodListTree extends Tree {
 
                 DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(new Pair<>(classname, methodCount));
 
-                ArrayList<MethodWrapper> sortedList =  methods.get(classname);
+                ArrayList<MethodWrapper> sortedList = methods.get(classname);
                 Collections.sort(sortedList);
                 for (MethodWrapper method : sortedList) {
 
@@ -581,7 +579,7 @@ public class MethodListTree extends Tree {
             String pattern = "###,###";
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
-            root.setUserObject("<html><b>SRMs</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in "+ decimalFormat.format(methods.size())+" classes)</font></html>");
+            root.setUserObject("<html><b>SRMs</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in " + decimalFormat.format(methods.size()) + " classes)</font></html>");
 
             treeModel.setRoot(root);
             TREE_EXPANDED = false;
