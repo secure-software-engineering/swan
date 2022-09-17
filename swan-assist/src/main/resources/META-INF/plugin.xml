@@ -17,7 +17,7 @@
     <depends>com.intellij.modules.java</depends>
 
 
-    <idea-version since-build="181"/>
+    <idea-version since-build="213" until-build="222.*"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
