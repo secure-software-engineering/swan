@@ -24,8 +24,8 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -39,9 +39,9 @@ import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.assist.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -109,8 +109,8 @@ public class MethodListTree extends Tree {
             @Override
             public void keyPressed(KeyEvent e) {
 
-                if(e.getKeyCode() == KeyEvent.VK_ENTER)
-                System.out.println("enter selec");
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                }
             }
 
             @Override
@@ -153,14 +153,13 @@ public class MethodListTree extends Tree {
                             Pair classPair = (Pair) object;
                             String classname = classPair.getKey().toString();
                             String simpleClassname = classname.substring(classname.lastIndexOf(".") + 1);
-
-                            PsiFile[] files = FilenameIndex.getFilesByName(project, simpleClassname + ".java", GlobalSearchScope.allScope(project));
+                            Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(simpleClassname + ".java", GlobalSearchScope.allScope(project));
 
                             boolean methodFound = false;
 
-                            for (PsiFile file : files) {
+                            for (VirtualFile file : files) {
 
-                                PsiJavaFile psiJavaFile = (PsiJavaFile) file;
+                                PsiJavaFile psiJavaFile = (PsiJavaFile) PsiManager.getInstance(project).findFile(file);
 
                                 if ((psiJavaFile.getPackageName() + "." + simpleClassname).contentEquals(classname)) {
 
@@ -182,8 +181,7 @@ public class MethodListTree extends Tree {
                             MethodWrapper method = (MethodWrapper) object;
 
                             //Get PSI element location
-                            PsiFile[] files = FilenameIndex.getFilesByName(project, method.getFileName(), GlobalSearchScope.allScope(project));
-
+                            Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(method.getFileName(), GlobalSearchScope.allScope(project));
                             String methodSignature = method.getSignature(true);
 
                             if (methodSignature.contains("<init>"))
@@ -191,9 +189,9 @@ public class MethodListTree extends Tree {
 
                             boolean methodFound = false;
 
-                            for (PsiFile file : files) {
+                            for (VirtualFile file : files) {
 
-                                PsiJavaFile psiJavaFile = (PsiJavaFile) file;
+                                PsiJavaFile psiJavaFile = (PsiJavaFile) PsiManager.getInstance(project).findFile(file);
 
                                 for (PsiClass psiClass : psiJavaFile.getClasses()) {
                                     for (PsiMethod psiMethod : psiClass.getMethods()) {
@@ -201,7 +199,7 @@ public class MethodListTree extends Tree {
                                         if (Objects.equals(PsiTraversal.getMethodSignature(psiMethod), methodSignature)) {
                                             methodFound = true;
 
-                                            OpenFileDescriptor fileDescriptor = new OpenFileDescriptor(project, psiJavaFile.getVirtualFile(), psiMethod.getTextOffset());
+                                            OpenFileDescriptor fileDescriptor = new OpenFileDescriptor(project, file, psiMethod.getTextOffset());
                                             fileDescriptor.navigateInEditor(project, true);
                                         }
                                     }
