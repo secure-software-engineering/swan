@@ -199,6 +199,12 @@ public class Method {
         else srm.add(category);
     }
 
+    public void removeCategory(Category category) {
+        if (category.isCwe())
+            cwe.remove(category);
+        else srm.remove(category);
+    }
+
     // Inherited from SootMethodAndClass (from Soot Infoflow)
     public String getName() {
         return this.name;
