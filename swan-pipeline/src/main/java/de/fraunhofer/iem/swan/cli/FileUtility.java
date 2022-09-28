@@ -15,7 +15,7 @@ import java.util.jar.JarFile;
 
 /**
  * This class can extract resource entries from the JAR file that this
- * application is located in. Also it keeps track of extracted files to delete
+ * application is located in. Also, it keeps track of extracted files to delete
  * them when the application is exiting.
  *
  * @author Ingo Budde (Fraunhofer IEM)
@@ -62,8 +62,7 @@ public class FileUtility {
             resourceLocation = resourceLocation.substring(1);
         }
 
-        assert url != null;
-        if (url.getProtocol().equals("jar")) {
+        if (url != null && url.getProtocol().equals("jar")) {
 
             String[] jarFilePath = url.getPath().split("!")[0].split("file:");
 
@@ -136,16 +135,15 @@ public class FileUtility {
     private File getLocalResource(String resourceLocation) {
 
         URL url = FileUtility.class.getResource(resourceLocation);
-        assert url != null;
 
-        if (url.getProtocol().equals("file")) {
+        if (url != null && url.getProtocol().equals("file")) {
             return new File(url.getFile());
         } else
             return null;
     }
 
     /**
-     * Cleans up this object and deletes all temporary files and directies. This
+     * Cleans up this object and deletes all temporary files and directories. This
      * should be called before the application exists, or after an analysis is done.
      */
     public void dispose() {
