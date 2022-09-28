@@ -61,10 +61,8 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
      * @param methodName Name of method
      * @param parameters List of method's parameters
      * @param returnType Method's return type
-     * @param className Method's fully qualified class name
      */
-    public MethodWrapper(String methodName, List<String> parameters, String returnType,
-                         String className) {
+    public MethodWrapper(String methodName, List<String> parameters, String returnType) {
 
         this.method = new Method(methodName, parameters, returnType);
         status = MethodStatus.NONE;
@@ -103,7 +101,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
         if (!fullyQualifiedName)
             return trimProperty(method.getClassName() + "." + method.getName());
         else
-            return method.getClassName() + "." + method.getName();
+            return method.getName();
     }
 
     /**
@@ -179,10 +177,8 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
         ArrayList<String> cweList = new ArrayList<String>();
 
-        for (Category category : method.getAllCategories()) {
-            if (category.isCwe()) {
+        for (Category category : method.getCwe()) {
                 cweList.add(category.toString());
-            }
         }
 
         return cweList;
@@ -195,12 +191,12 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
      */
     public ArrayList<String> getTypesList(boolean capitalize) {
 
-        ArrayList<String> typesList = new ArrayList<String>();
+        ArrayList<String> typesList = new ArrayList<>();
 
-        for (Category category : method.getAllCategories()) {
-            if (!category.isCwe() && !capitalize) {
+        for (Category category : method.getSrm()) {
+            if (!capitalize) {
                 typesList.add(category.toString());
-            } else if (!category.isCwe())
+            } else
                 typesList.add(Formatter.toTitleCase(category.toString()));
         }
 
@@ -221,12 +217,12 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
      */
     public void setCategories(Set<Category> categories) {
 
-        Set<Category> cweCategories = null;
-        Set<Category> srmCategories = null;
+        Set<Category> cweCategories = new HashSet<>();
+        Set<Category> srmCategories = new HashSet<>();
+
         for(Category category: categories) {
             if (category.isCwe()) {
                 cweCategories.add(category);
-            } else if (category.isNone()) {
             } else {
                 srmCategories.add(category);
             }
@@ -244,16 +240,16 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
     }
 
     /**
-     * Returns whether or not the method is a training method
-     * @return Whether or not the method is a training method
+     * Returns whether the method is a training method
+     * @return Whether the method is a training method
      */
     public boolean isTrainingMethod() {
         return isTrainingMethod;
     }
 
     /**
-     * Set whether or not the method is a training method
-     * @param trainingMethod Whether or not the method is a training method
+     * Set whether the method is a training method
+     * @param trainingMethod Whether the method is a training method
      */
     public void setTrainingMethod(boolean trainingMethod) {
         isTrainingMethod = trainingMethod;
