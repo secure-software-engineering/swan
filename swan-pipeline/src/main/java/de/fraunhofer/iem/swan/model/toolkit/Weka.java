@@ -43,12 +43,14 @@ public class Weka {
     private HashMap<String, ArrayList<Category>> predictions;
     private HashMap<String, HashMap<String, ArrayList<Double>>> results;
     private DecimalFormat df = new DecimalFormat("####0.000");
+    private Classifier bestClass;
 
     public Weka(WekaFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
         this.options = options;
         this.methods = methods;
         predictions = new HashMap<>();
+
 
         results = new HashMap<>();
 
@@ -109,11 +111,8 @@ public class Weka {
 
         try {
 
-            Classifier classifier = AbstractClassifier.forName(bestClassifier.getKey(), null);
+            Classifier classifier = bestClass;
             classifier.buildClassifier(features.getTrainInstances().get(srm));
-
-            //NaiveBayes classifier = new NaiveBayes();
-            //classifier.buildClassifier(features.getTrainInstances().get(srm));
 
             Evaluation eval = new Evaluation(features.getTestInstances().get(srm));
             eval.evaluateModel(classifier, features.getTestInstances().get(srm));
@@ -167,11 +166,12 @@ public class Weka {
                 double averagePrecision = evaluator.getPrecision().get(key).stream().mapToDouble(a -> a).average().getAsDouble();
                 double averageRecall = evaluator.getRecall().get(key).stream().mapToDouble(a -> a).average().getAsDouble();
 
-                Pair summary = new Pair<>(classifier.getClass().getSimpleName(), Double.parseDouble(df.format(averageFMeasure)));
+                Pair summary = new Pair<>(classifier.getClass().getName(), Double.parseDouble(df.format(averageFMeasure)));
                 classifierSummary.add(summary);
 
                 if (averageFMeasure > bestClassifier.getValue()) {
                     bestClassifier = summary;
+                    bestClass = classifier;
                 }
 
                 if (category.contains("authentication")) {
