@@ -234,9 +234,9 @@ public class RunAnalysisDialog extends DialogWrapper {
 
         if (MEKARadioButton.isSelected()) {
             parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
-        } else {
-            parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
+        } else {  parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
         }
+        
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));
