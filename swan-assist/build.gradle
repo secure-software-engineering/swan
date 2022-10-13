@@ -35,6 +35,8 @@ patchPluginXml {
             "<br>- suggest methods" +
             "<br>- filter list" +
             "<br>- import and export configuration file"
+    sinceBuild = "221.*"
+    untilBuild = "222.*"
 }
 
 runIde {
