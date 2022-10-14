@@ -15,7 +15,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class JSONFileLoader {
 
-    static private HashMap<String, MethodWrapper> methods= new HashMap<>();
+    static private HashMap<String, MethodWrapper> methods = new HashMap<>();
     static private String congFile = "";
     static public final int NEW_METHOD = 0;
     static public final int EXISTING_METHOD = 1;
@@ -232,13 +232,18 @@ public class JSONFileLoader {
      */
     public static Set<Category> getAllCategories() {
 
-
         Set<Category> categorySet = new HashSet<>();
+
+        Set<Category> exclude = new HashSet<>();
+        exclude.add(Category.CWETEST);
+        exclude.add(Category.NONE);
+        exclude.add(Category.RELEVANT);
+        exclude.add(Category.AUTHENTICATION);
+        exclude.add(Category.CWE_NONE);
 
         for (Category category : Category.values()) {
 
-            if (!category.toString().equals(de.fraunhofer.iem.swan.data.Constants.NONE)
-                    && !category.equals(Category.CWETEST)) {
+            if (!exclude.contains(category)) {
                 categorySet.add(category);
             }
         }

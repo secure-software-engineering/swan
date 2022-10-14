@@ -7,7 +7,6 @@
 
 package de.fraunhofer.iem.swan.assist.ui.markers;
 
-import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeInsight.daemon.GutterIconNavigationHandler;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.LineMarkerProvider;
@@ -21,6 +20,7 @@ import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 import icons.IconUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,10 +58,11 @@ public class ErrorLineMarker implements LineMarkerProvider {
                 return new LineMarkerInfo<>(psiElement,
                         psiElement.getTextRange(),
                         IconUtils.getNodeIcon(method.getTypesList(false)),
-                        Pass.UPDATE_ALL,
                         new TooltipProvider(method.getMarkerMessage()),
                         navigationHandler,
-                        GutterIconRenderer.Alignment.LEFT);
+                        GutterIconRenderer.Alignment.LEFT,
+                        () -> StringUtils.join(method.getTypesList(true), ", ")
+                );
 
             } else
                 return null;
@@ -70,7 +71,7 @@ public class ErrorLineMarker implements LineMarkerProvider {
     }
 
     @Override
-    public void collectSlowLineMarkers(@NotNull List<PsiElement> list, @NotNull Collection<LineMarkerInfo> collection) {
+    public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> list, @NotNull Collection<? super LineMarkerInfo<?>> collection) {
 
     }
 }

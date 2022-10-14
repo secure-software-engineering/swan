@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import de.fraunhofer.iem.swan.IFeature;
+import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 
 
 public class Suggester {

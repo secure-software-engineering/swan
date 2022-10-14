@@ -15,12 +15,14 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,10 +47,9 @@ public class RunAnalysisDialog extends DialogWrapper {
     private JButton trainButton;
     private JPanel trainingPanel;
     private JCheckBox trainingPathCheckbox;
-    private JCheckBox configurationPathCheckbox;
-    private JTextField configFileTextbox;
-    private JButton configButton;
-    private JPanel configurationFilePanel;
+    private JRadioButton WEKARadioButton;
+    private JRadioButton MEKARadioButton;
+    private JPanel toolkitPanel;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
     private Properties config;
@@ -89,7 +90,7 @@ public class RunAnalysisDialog extends DialogWrapper {
 
         //Use value for source path, if available. Otherwise set the default path
         if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
-            sourceDirTextbox.setText(project.getBasePath());
+            sourceDirTextbox.setText(project.getBasePath() + "/target/classes");
         else
             sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
@@ -107,20 +108,20 @@ public class RunAnalysisDialog extends DialogWrapper {
         }
 
         //Set value for using configuration file
-        configurationPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.PROJECT_CONFIGURATION_FILE, false));
-
-        for (Component component : configurationFilePanel.getComponents()) {
-            component.setEnabled(configurationPathCheckbox.isSelected());
-        }
+//        configurationPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.PROJECT_CONFIGURATION_FILE, false));
+//
+//        for (Component component : configurationFilePanel.getComponents()) {
+//            component.setEnabled(configurationPathCheckbox.isSelected());
+//        }
 
 
         if (PropertiesComponent.getInstance(project).isValueSet(Constants.TRAIN_DIRECTORY)) {
             trainingTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.TRAIN_DIRECTORY));
         }
 
-        if (PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)) {
-            configFileTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
-        }
+//        if (PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)) {
+//            configFileTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
+//        }
 
         init();
         /*
@@ -140,7 +141,7 @@ public class RunAnalysisDialog extends DialogWrapper {
             }
         });
 
-        configurationPathCheckbox.addActionListener(new ActionListener() {
+        /*configurationPathCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -150,7 +151,7 @@ public class RunAnalysisDialog extends DialogWrapper {
                     component.setEnabled(configurationPathCheckbox.isSelected());
                 }
             }
-        });
+        }); */
 
         sourceBtn.addActionListener(new ActionListener() {
             @Override
@@ -176,13 +177,13 @@ public class RunAnalysisDialog extends DialogWrapper {
             }
         });
 
-        configButton.addActionListener(new ActionListener() {
+        /*configButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 configFileTextbox.setText(fileSelector(JFileChooser.FILES_ONLY, configFileTextbox.getText()));
             }
-        });
+        });*/
     }
 
     @Override
@@ -191,7 +192,9 @@ public class RunAnalysisDialog extends DialogWrapper {
         if (isOKActionEnabled()) {
 
             //ensure that required fields are populated
-            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()) {
+            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()
+                    || !(new File(sourceDirTextbox.getText().trim()).exists())
+                    || (FileUtils.listFiles(new File(sourceDirTextbox.getText()), new String[]{"class", "jar"}, true)).size() == 0) {
 
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
@@ -206,6 +209,8 @@ public class RunAnalysisDialog extends DialogWrapper {
             } else {
 
                 setParameters();
+                //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
+                //analysisCompleted.notify();
             }
         }
     }
@@ -221,11 +226,17 @@ public class RunAnalysisDialog extends DialogWrapper {
         }
 
         //Check if option to use default configuration file is selected
-        if (configurationPathCheckbox.isSelected()) {
+        /* if (configurationPathCheckbox.isSelected()) {
             parameters.put(Constants.CONFIGURATION_FILE, configFileTextbox.getText());
-        } else
-            parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
+        } else */
+        //set the configuration file to default
+        parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
+        if (MEKARadioButton.isSelected()) {
+            parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
+        } else {  parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
+        }
+        
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));

@@ -11,6 +11,7 @@ import com.intellij.openapi.util.IconLoader;
 import de.fraunhofer.iem.swan.data.Constants;
 import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 

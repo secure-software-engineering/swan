@@ -74,10 +74,10 @@ public class RunSwanAnalysisAction extends AnAction {
 
             if(!swanParameters.get(Constants.CONFIGURATION_FILE).contentEquals(config.getProperty("swan_default_param_value"))){
                 String outputPath = swanParameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("input_json_suffix");
-                TrainingFileManager trainingFileManager = new TrainingFileManager(project);
+                //TrainingFileManager trainingFileManager = new TrainingFileManager(project);
 
-                if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
-                    swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
+                //if (trainingFileManager.mergeExport(JSONFileLoader.getAllMethods(), outputPath))
+                  //  swanParameters.put(Constants.CONFIGURATION_FILE, outputPath);
             }
 
             RunSwanAnalysisImpl processBuilder = new RunSwanAnalysisImpl(project, dialog.getParameters());
