@@ -20,8 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class RunSwanTask extends Task.Backgroundable {
 
@@ -45,7 +45,7 @@ public class RunSwanTask extends Task.Backgroundable {
         options.setTestDataDir(parameters.get(Constants.SOURCE_DIRECTORY));
         options.setOutputDir(parameters.get(Constants.OUTPUT_DIRECTORY));
         options.setToolkit(parameters.get(Constants.TOOLKIT).toLowerCase());
-        options.setSrmClasses(Arrays.asList("source", "sink"));
+        options.setSrmClasses(List.of("all"));
         options.setPhase("predict");
         options.setTrainDataDir("");
 
