@@ -52,9 +52,8 @@ public class RunSwanTask extends Task.Backgroundable {
 
         indicator.setText("Running SWAN");
         SwanCli swan = new SwanCli();
-        System.out.println("--1--");
+
         try {
-            System.out.println("--2--");
             swan.run(options);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -63,13 +62,13 @@ public class RunSwanTask extends Task.Backgroundable {
         duration = System.currentTimeMillis() - start;
         int m = (int) (((duration / 1000) / 60) % 60);
         int s = (int) ((duration / 1000) % 60);
-        System.out.println("--3--");
+
         indicator.setText("Exporting SRMs");
-        System.out.println("--4--");
         String filename = parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + "srm-" + getCurrentTimestamp() + ".json";
         SrmList srmList = swan.getSwanPipeline().getModelEvaluator().getPredictedSrmList();
+
         try {
-            System.out.println("--5--");
+
             SrmListUtils.exportFile(srmList, filename);
         } catch (IOException e) {
             throw new RuntimeException(e);
