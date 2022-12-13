@@ -7,7 +7,7 @@ import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import weka.classifiers.Evaluation;
-import weka.classifiers.meta.AutoWEKAClassifier;
+//import weka.classifiers.meta.AutoWEKAClassifier;
 import weka.core.Instances;
 
 import java.util.HashMap;
@@ -71,8 +71,8 @@ public class AutoWeka {
                     "-no-cv",
                     "-timeLimit", Integer.toString(options.getTimeLimit())};
 
-            String out = Evaluation.evaluateModel(new AutoWEKAClassifier(), args);
-            logger.info("Auto-Weka Results: {]}",out);
+//            String out = Evaluation.evaluateModel(new AutoWEKAClassifier(), args);
+//            logger.info("Auto-Weka Results: {]}",out);
 
             //autoWekaClassifier.buildClassifier(instances);
         } catch (Exception e) {
