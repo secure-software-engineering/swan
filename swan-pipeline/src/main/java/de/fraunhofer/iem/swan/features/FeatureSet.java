@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.features;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler2;
+import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
 import de.fraunhofer.iem.swan.features.code.IFeatureNew;
 import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
@@ -27,7 +27,7 @@ public abstract class FeatureSet {
     protected final HashMap<String, Integer> instanceMap;
     protected final SwanOptions options;
     protected Dataset dataset;
-    protected CodeFeatureHandler2 codeFeatureHandler;
+    protected CodeFeatureHandler codeFeatureHandler;
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> trainInstances;
     protected HashMap<String, Instances> testInstances;
@@ -86,7 +86,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                    codeFeatureHandler = new CodeFeatureHandler2();
+                    codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:
@@ -140,13 +140,14 @@ public abstract class FeatureSet {
         ArrayList<Attribute> attributes = new ArrayList<>();
 
         // Collect all attributes for the categories we classify into, and create the instance set.
+
         codeAttributes = new HashMap<>();
         for (Category type : codeFeatureHandler.features().keySet()) {
             if (type == Category.NONE) continue;
             if (categories.contains(type)) {
                 for (IFeatureNew f : codeFeatureHandler.features().get(type)) {
                     Attribute attr = null;
-                    switch (f.getFeatureType()){
+                    switch (f.getFeatureType()){ //Initializing instance values for each feature type.
                         case NUMERICAL:
                             attr = new Attribute(f.toString());
                             break;
@@ -471,11 +472,11 @@ public abstract class FeatureSet {
         this.trainInstances = trainInstances;
     }
 
-    public CodeFeatureHandler2 getCodeFeatureHandler() {
+    public CodeFeatureHandler getCodeFeatureHandler() {
         return codeFeatureHandler;
     }
 
-    public void setCodeFeatureHandler(CodeFeatureHandler2 codeFeatureHandler) {
+    public void setCodeFeatureHandler(CodeFeatureHandler codeFeatureHandler) {
         this.codeFeatureHandler = codeFeatureHandler;
     }
 

@@ -57,7 +57,7 @@ public class MethodNameStartsWithKeywordFeature extends WeightedFeature implemen
 
     @Override
     public String toString() {
-        return "<Method name starts with a keyword from the list>";
+        return "MethodNameStartsWithKeyword";
     }
 
     @Override

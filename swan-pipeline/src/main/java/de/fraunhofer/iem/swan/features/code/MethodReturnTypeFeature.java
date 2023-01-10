@@ -5,8 +5,11 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class ReturnTypeOfMethodFeature extends WeightedFeature implements IFeatureNew {
+public class MethodReturnTypeFeature extends WeightedFeature implements IFeatureNew {
 
     private Values category;
 
@@ -60,17 +63,13 @@ public class ReturnTypeOfMethodFeature extends WeightedFeature implements IFeatu
 
     @Override
     public String toString(){
-        return "<Type of the return type>";
+        return "MethodReturnType";
     }
 
     @Override
     public ArrayList<String> getFeatureValues(){
-        this.featureValues = new ArrayList<>();
-        this.featureValues.add(String.valueOf(Values.Native));
-        this.featureValues.add(String.valueOf(Values.Custom));
-        this.featureValues.add(String.valueOf(Values.String));
-        this.featureValues.add(String.valueOf(Values.Others));
-
+        //Converting Enum Values to ArrayList
+        this.featureValues = new ArrayList<>(Stream.of(Values.values()).map(Values::name).collect(Collectors.toList()));
         return this.featureValues;
     }
 
