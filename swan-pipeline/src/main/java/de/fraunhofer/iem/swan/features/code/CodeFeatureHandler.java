@@ -3,9 +3,13 @@ package de.fraunhofer.iem.swan.features.code;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.*;
+import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
+import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class CodeFeatureHandler {
@@ -46,52 +50,66 @@ public class CodeFeatureHandler {
         for (Category category : Category.values())
             featuresMap.put(category, new HashSet<>());
 
-        IFeatureNew MethodAccessModifier = new MethodAccessModifierFeature();
-        ((WeightedFeature) MethodAccessModifier).setWeight(5);
-        addFeature(MethodAccessModifier,allCategories);
+//        IFeatureNew MethodAccessModifier = new MethodAccessModifierFeature();
+//        ((WeightedFeature) MethodAccessModifier).setWeight(5);
+//        addFeature(MethodAccessModifier,allCategories);
+//
+//        IFeatureNew ClassAccessModifier = new ClassAccessModifierFeature();
+//        ((WeightedFeature) ClassAccessModifier).setWeight(5);
+//        addFeature(ClassAccessModifier,allCategories);
+//
+//        IFeatureNew ClassModifier = new ClassModifierFeature();
+//        ((WeightedFeature) ClassModifier).setWeight(5);
+//        addFeature(ClassModifier,allCategories);
+//
+//        IFeatureNew MethodModifier = new MethodModifierFeature();
+//        ((WeightedFeature) MethodModifier).setWeight(5);
+//        addFeature(MethodModifier,allCategories);
+//
+//        IFeatureNew MethodReturnType = new MethodReturnTypeFeature();
+//        ((WeightedFeature) MethodReturnType).setWeight(5);
+//        addFeature(MethodReturnType,allCategories);
+//
+//        IFeatureNew MethodNameStartWithKeyword = new MethodStartsWithStringFeature();
+//        ((WeightedFeature) MethodNameStartWithKeyword).setWeight(5);
+//        addFeature(MethodNameStartWithKeyword, allCategories);
+//
+//        IFeatureNew MethodNameKeywordsCount = new MethodNameContainsStringFeature();
+//        ((WeightedFeature) MethodNameKeywordsCount).setWeight(5);
+//        addFeature(MethodNameKeywordsCount,allCategories);
+//
+//        IFeatureNew ClassNameKeywordsCount = new ClassNameKeywordsCountFeature();
+//        ((WeightedFeature) ClassNameKeywordsCount).setWeight(5);
+//        addFeature(ClassNameKeywordsCount,allCategories);
+//
+//        IFeatureNew MethodsInvokedCount = new MethodsInvokedCountFeature();
+//        ((WeightedFeature) MethodsInvokedCount).setWeight(5);
+//        addFeature(MethodsInvokedCount,allCategories);
+//
+//        IFeatureNew ParametersCount = new ParametersCountFeature();
+//        ((WeightedFeature) ParametersCount).setWeight(5);
+//        addFeature(ParametersCount,allCategories);
 
-        IFeatureNew ClassAccessModifier = new ClassAccessModifierFeature();
-        ((WeightedFeature) ClassAccessModifier).setWeight(5);
-        addFeature(ClassAccessModifier,allCategories);
+        Set<Class<? extends IFeatureNew>> manualFeatureSet;
+        Reflections features = new Reflections("de.fraunhofer.iem.swan.features.code");
+        manualFeatureSet = features.getSubTypesOf(IFeatureNew.class);
+        for(Class<? extends IFeatureNew> featureClass: manualFeatureSet){
 
-        IFeatureNew ClassModifier = new ClassModifierFeature();
-        ((WeightedFeature) ClassModifier).setWeight(5);
-        addFeature(ClassModifier,allCategories);
-
-        IFeatureNew MethodModifier = new MethodModifierFeature();
-        ((WeightedFeature) MethodModifier).setWeight(5);
-        addFeature(MethodModifier,allCategories);
-
-        IFeatureNew MethodReturnType = new MethodReturnTypeFeature();
-        ((WeightedFeature) MethodReturnType).setWeight(5);
-        addFeature(MethodReturnType,allCategories);
-
-        IFeatureNew MethodNameStartWithKeyword = new MethodNameStartsWithKeywordFeature();
-        ((WeightedFeature) MethodNameStartWithKeyword).setWeight(5);
-        addFeature(MethodNameStartWithKeyword, allCategories);
-
-        IFeatureNew MethodNameKeywordsCount = new MethodNameKeywordsCountFeature();
-        ((WeightedFeature) MethodNameKeywordsCount).setWeight(5);
-        addFeature(MethodNameKeywordsCount,allCategories);
-
-        IFeatureNew ClassNameKeywordsCount = new ClassNameKeywordsCountFeature();
-        ((WeightedFeature) ClassNameKeywordsCount).setWeight(5);
-        addFeature(ClassNameKeywordsCount,allCategories);
-
-        IFeatureNew MethodsInvokedCount = new MethodsInvokedCountFeature();
-        ((WeightedFeature) MethodsInvokedCount).setWeight(5);
-        addFeature(MethodsInvokedCount,allCategories);
-
-        IFeatureNew ParametersCount = new ParametersCountFeature();
-        ((WeightedFeature) ParametersCount).setWeight(5);
-        addFeature(ParametersCount,allCategories);
-
+            try {
+                IFeatureNew NewFeature = featureClass.getDeclaredConstructor().newInstance();
+                ((WeightedFeature) NewFeature).setWeight(5);
+                addFeature(NewFeature,allCategories);
+            } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
+                     InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private void getFeaturesSize() {
         int count = 0;
 
-        HashMap<String, Integer> featuresCount = new HashMap();
+        HashMap<String, Integer> featuresCount = new HashMap<>();
 
         for (Category c : featuresMap.keySet()) {
             int features = featuresMap.get(c).size();
