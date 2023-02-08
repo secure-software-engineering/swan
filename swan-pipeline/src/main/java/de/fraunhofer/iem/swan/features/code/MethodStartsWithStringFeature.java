@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
 
-public class MethodNameStartsWithKeywordFeature extends WeightedFeature implements IFeatureNew {
+public class MethodStartsWithStringFeature extends WeightedFeature implements IFeatureNew {
 
     private Set<String> Keywords;
 
@@ -19,10 +19,12 @@ public class MethodNameStartsWithKeywordFeature extends WeightedFeature implemen
 
     private FeatureResult featureResult;
 
+    public MethodStartsWithStringFeature() {
+        this.featureResult = new FeatureResult();
+    }
 
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         switch (category) {
             case SOURCE:
                 this.Keywords = SOURCE_METHOD_START;
@@ -45,7 +47,7 @@ public class MethodNameStartsWithKeywordFeature extends WeightedFeature implemen
         }
         for(String keyword : this.Keywords) {
             IFeature checkForKeyword = new MethodNameStartsWithFeature(keyword);
-            if(checkForKeyword.applies(method) == de.fraunhofer.iem.swan.features.code.type.IFeature.Type.TRUE){
+            if(method.getName().startsWith(keyword)){
                 this.featureResult.setBooleanValue(Boolean.TRUE);
                 return this.featureResult;
             }
@@ -57,7 +59,7 @@ public class MethodNameStartsWithKeywordFeature extends WeightedFeature implemen
 
     @Override
     public String toString() {
-        return "MethodNameStartsWithKeyword";
+        return "MethodStartsWithString";
     }
 
     @Override

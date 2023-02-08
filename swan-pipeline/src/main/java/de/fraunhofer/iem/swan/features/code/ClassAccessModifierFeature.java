@@ -14,13 +14,16 @@ public class ClassAccessModifierFeature extends WeightedFeature implements IFeat
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
+    public ClassAccessModifierFeature() {
+        this.featureResult = new FeatureResult();
+    }
+
     public enum Modifier{
         PRIVATE, PUBLIC, PROTECTED, DEFAULT,
     }
 
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         if(method.getSootMethod().getDeclaringClass().isPublic()){
             this.modifier = Modifier.PUBLIC;
         } else if (method.getSootMethod().getDeclaringClass().isPrivate()) {

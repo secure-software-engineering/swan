@@ -11,16 +11,19 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
 
-public class MethodNameKeywordsCountFeature extends WeightedFeature implements IFeatureNew {
+public class MethodNameStringsCountFeature extends WeightedFeature implements IFeatureNew {
 
     private Set<String> Keywords;
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
     private int NumberOfMatches;
 
-    public FeatureResult applies(Method method, Category category){
+    public MethodNameStringsCountFeature() {
         this.NumberOfMatches = 0;
         this.featureResult = new FeatureResult();
+    }
+
+    public FeatureResult applies(Method method, Category category){
         switch (category) {
             case SOURCE:
                 this.Keywords = SOURCE_METHOD_CONTAINS;
@@ -39,8 +42,7 @@ public class MethodNameKeywordsCountFeature extends WeightedFeature implements I
                 break;
         }
         for(String keyword : this.Keywords) {
-            IFeature checkForKeyword = new MethodNameContainsFeature(keyword);
-            if(checkForKeyword.applies(method) == IFeature.Type.TRUE){
+            if(method.getName().toLowerCase().contains(keyword)){
                 this.NumberOfMatches += 1;
             }
         }
@@ -51,7 +53,7 @@ public class MethodNameKeywordsCountFeature extends WeightedFeature implements I
 
     @Override
     public String toString() {
-        return "MethodNameKeywordsCount";
+        return "MethodNameStringsCount";
     }
 
     @Override

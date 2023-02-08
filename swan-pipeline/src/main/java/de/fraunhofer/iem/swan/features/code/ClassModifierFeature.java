@@ -18,9 +18,12 @@ public class ClassModifierFeature extends WeightedFeature implements IFeatureNew
         STATIC, ABSTRACT, FINAL, DEFAULT
     }
 
+    public ClassModifierFeature() {
+        this.featureResult = new FeatureResult();
+    }
+
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         if(method.getSootMethod().getDeclaringClass().isFinal()){
             this.modifier = Modifier.FINAL;
         } else if (method.getSootMethod().getDeclaringClass().isStatic()) {
@@ -33,11 +36,12 @@ public class ClassModifierFeature extends WeightedFeature implements IFeatureNew
         this.featureResult.setStringValue(String.valueOf(this.modifier));
         return this.featureResult;
     }
-
     @Override
     public FeatureType getFeatureType() {
         return FeatureType.CATEGORICAL;
     }
+
+
 
     @Override
     public String toString(){

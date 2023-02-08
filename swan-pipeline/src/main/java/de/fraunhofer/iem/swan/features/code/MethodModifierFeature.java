@@ -18,9 +18,12 @@ public class MethodModifierFeature extends WeightedFeature implements IFeatureNe
         FINAL, STATIC, ABSTRACT, SYNCHRONIZED, DEFAULT
     }
 
+    public MethodModifierFeature() {
+        this.featureResult = new FeatureResult();
+    }
+
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         if(method.getSootMethod().isFinal()){
             this.modifier = Modifier.FINAL;
         } else if (method.getSootMethod().isStatic()) {
@@ -43,7 +46,7 @@ public class MethodModifierFeature extends WeightedFeature implements IFeatureNe
 
     @Override
     public String toString(){
-        return "<Method Modifier>";
+        return "MethodModifier";
     }
 
     @Override

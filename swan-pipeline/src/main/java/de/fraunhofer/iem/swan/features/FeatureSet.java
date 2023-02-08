@@ -314,6 +314,7 @@ public abstract class FeatureSet {
                             inst.setValue(instances.attribute(entry.getKey().toString()), String.valueOf(booleanData));
                             break;
                         case CATEGORICAL:
+
                             String stringData = (String) entry.getKey().applies(method, cat).getStringValue();
                             inst.setValue(instances.attribute(entry.getKey().toString()), stringData);
                             break;

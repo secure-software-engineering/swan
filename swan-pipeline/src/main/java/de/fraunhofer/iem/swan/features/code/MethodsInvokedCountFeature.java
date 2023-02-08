@@ -5,6 +5,9 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.features.code.type.MethodInvocationName;
 import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import soot.Unit;
+import soot.jimple.InstanceInvokeExpr;
+import soot.jimple.Stmt;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -19,10 +22,13 @@ public class MethodsInvokedCountFeature extends WeightedFeature implements IFeat
 
     private ArrayList<String> featureValues;
 
-    @Override
-    public FeatureResult applies(Method method, Category category){
+    public MethodsInvokedCountFeature() {
         this.featureResult = new FeatureResult();
         this.NumberOfMatches = 0;
+    }
+
+    @Override
+    public FeatureResult applies(Method method, Category category){
         switch (category) {
             case SOURCE:
                 this.MethodsList = SOURCE_METHOD_INVOKED;
@@ -40,11 +46,30 @@ public class MethodsInvokedCountFeature extends WeightedFeature implements IFeat
                 this.MethodsList = SANITIZER_METHOD_INVOKED;
                 break;
         }
-        for(String methodName : this.MethodsList) {
-            IFeature checkForKeyword = new MethodInvocationName(methodName);
-            if(checkForKeyword.applies(method) == de.fraunhofer.iem.swan.features.code.type.IFeature.Type.TRUE){
-                this.NumberOfMatches += 1;
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
+            this.featureResult.setIntegerValue(this.NumberOfMatches);
+            return this.featureResult;
+        }
+        try {
+            for(String methodName : this.MethodsList) {
+                for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                    // Check for invocations
+                    if (u instanceof Stmt) {
+                        Stmt stmt = (Stmt) u;
+                        if (stmt.containsInvokeExpr()) {
+                            if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                                InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                                if (iinv.getMethod().getName().contains(methodName)) {
+                                    this.NumberOfMatches += 1;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+        } catch (Exception ex) {
+            this.featureResult.setIntegerValue(this.NumberOfMatches);
+            return this.featureResult;
         }
         this.featureResult.setIntegerValue(this.NumberOfMatches);
         return this.featureResult;

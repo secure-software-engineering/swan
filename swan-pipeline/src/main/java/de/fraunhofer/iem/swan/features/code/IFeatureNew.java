@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public interface IFeatureNew {
 
     enum FeatureType{
-        NUMERICAL, CATEGORICAL, BOOLEAN
+        NUMERICAL,
+        CATEGORICAL,
+        BOOLEAN
     }
     FeatureResult applies(Method method, Category category);
 

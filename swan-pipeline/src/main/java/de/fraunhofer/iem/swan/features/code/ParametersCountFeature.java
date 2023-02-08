@@ -14,11 +14,13 @@ public class ParametersCountFeature extends WeightedFeature implements IFeatureN
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
-
+    public ParametersCountFeature() {
+        this.featureResult = new FeatureResult();
+        this.NumberOfParametersFeature = 0;
+    }
 
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         this.NumberOfParametersFeature = method.getParameters().size();
         this.featureResult.setIntegerValue(this.NumberOfParametersFeature);
         return this.featureResult;
@@ -35,8 +37,5 @@ public class ParametersCountFeature extends WeightedFeature implements IFeatureN
     }
 
     @Override
-    public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
-        return this.featureValues;
-    }
+    public ArrayList<String> getFeatureValues() {return null;}
 }

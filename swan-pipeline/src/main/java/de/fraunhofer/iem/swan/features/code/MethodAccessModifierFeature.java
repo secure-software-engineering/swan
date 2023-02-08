@@ -18,9 +18,12 @@ public class MethodAccessModifierFeature extends WeightedFeature implements IFea
         PRIVATE, PUBLIC, PROTECTED, DEFAULT
     }
 
+    public MethodAccessModifierFeature() {
+        this.featureResult = new FeatureResult();
+    }
+
     @Override
     public FeatureResult applies(Method method, Category category) {
-        this.featureResult = new FeatureResult();
         if(method.getSootMethod().isPublic()){
             this.modifier = Modifier.PUBLIC;
         } else if (method.getSootMethod().isPrivate()) {

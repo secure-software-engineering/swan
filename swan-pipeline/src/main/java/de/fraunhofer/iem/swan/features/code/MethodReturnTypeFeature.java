@@ -20,9 +20,12 @@ public class MethodReturnTypeFeature extends WeightedFeature implements IFeature
         String, Native, Custom, Others
     }
 
+    public MethodReturnTypeFeature() {
+        this.featureResult = new FeatureResult();
+    }
+
     @Override
     public FeatureResult applies(Method method, Category category){
-        this.featureResult = new FeatureResult();
         switch (method.getReturnType()){
             case "java.lang.CharSequence":
             case "java.lang.String":
@@ -50,7 +53,6 @@ public class MethodReturnTypeFeature extends WeightedFeature implements IFeature
         }
 
         this.featureResult.setStringValue(String.valueOf(this.category));
-
         return this.featureResult;
 
     }

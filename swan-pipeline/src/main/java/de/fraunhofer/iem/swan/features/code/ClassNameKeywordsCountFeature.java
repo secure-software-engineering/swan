@@ -18,10 +18,13 @@ public class ClassNameKeywordsCountFeature extends WeightedFeature implements IF
     private int NumberOfMatches;
     private ArrayList<String> featureValues;
 
-    @Override
-    public FeatureResult applies(Method method, Category category){
+    public ClassNameKeywordsCountFeature() {
         this.NumberOfMatches = 0;
         this.featureResult = new FeatureResult();
+    }
+
+    @Override
+    public FeatureResult applies(Method method, Category category){
         switch (category) {
             case SOURCE:
                 this.Keywords = SOURCE_CLASS_CONTAINS;
@@ -40,8 +43,7 @@ public class ClassNameKeywordsCountFeature extends WeightedFeature implements IF
                 break;
         }
         for(String keyword : this.Keywords) {
-            IFeature checkForKeyword = new MethodClassContainsNameFeature(keyword);
-            if(checkForKeyword.applies(method) == de.fraunhofer.iem.swan.features.code.type.IFeature.Type.TRUE){
+            if(method.getClassName().toLowerCase().contains(keyword)){
                 this.NumberOfMatches += 1;
             }
         }
@@ -63,10 +65,6 @@ public class ClassNameKeywordsCountFeature extends WeightedFeature implements IF
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
-        for(int i=0;i<100;i++){
-            this.featureValues.add(String.valueOf(i));
-        }
-        return this.featureValues;
+        return null;
     }
 }

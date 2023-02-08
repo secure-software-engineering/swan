@@ -8,14 +8,6 @@ public class FeatureResult {
 
     private Boolean booleanValue;
 
-    private ReturnTypeOfMethodFeature.Values enumValue;
-
-
-
-    public void set(ReturnTypeOfMethodFeature.Values value){
-
-    }
-
     public void setIntegerValue(int value){
         this.integerValue = value;
     }
