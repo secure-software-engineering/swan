@@ -15,7 +15,7 @@ public class CliRunner implements Callable<Integer> {
     private String testDataDir = "";
 
     @CommandLine.Option(names = {"-train", "--train-data"}, description = {"Path of training JARs or class files"})
-    private String trainDataDir = "/Users/rohith/Desktop/IEM/Datasets-New/Jar";
+    private String trainDataDir = "";
 
     @CommandLine.Option(names = {"-test-source", "--test-data-source"}, description = {"Path of test source files"})
     private String testDataSourceDir = "";
@@ -30,7 +30,7 @@ public class CliRunner implements Callable<Integer> {
     private List<String> arffInstancesFiles = new ArrayList<>();
 
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
-    private String outputDir = "/Users/rohith/Desktop";
+    private String outputDir = "";
 
     @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
