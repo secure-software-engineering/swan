@@ -275,39 +275,14 @@ public abstract class FeatureSet {
 
         int instanceIndex = 0;
 
-        // Evaluate all methods against the features.
         for (Method method : methods) {
-
-            //loop over categories and perform setClassValues here
-//            Instance inst = null;
-
             Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
 
             inst.setDataset(instances);
 
             for (Category cat : categories) {
-
-//                if (instances.relationName().endsWith("test")) {
-//                    inst.setMissing(instances.attribute(cat.getId()));
-//                } else if (cat.isAuthentication() && !method.getAuthSrm().isEmpty() && toolkit == ModelEvaluator.Toolkit.WEKA) {
-//
-//                    for (Category auth : method.getAuthSrm()) {
-//                        inst.setValue(instances.attribute(cat.getId()), getAuthClass(auth));
-//                    }
-//                } else if (method.getAllCategories().contains(cat)) {
-//                    inst.setValue(instances.attribute(cat.getId()), "1");
-//                } else
-//                    inst.setValue(instances.attribute(cat.getId()), "0");
-
-                //Initialize the dataset
-                //Set id attribute
                 inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
-
-                //TODO Add feature values
-                //for (Class<? extends IDocFeature> feature : codeFeatureHandler.getClass()) {}
-
                 for (Map.Entry<IFeatureNew, Attribute> entry : codeAttributes.entrySet()) {
-
                     switch (entry.getKey().getFeatureType()){
                         case BOOLEAN:
                             boolean booleanData = (boolean) entry.getKey().applies(method, cat).getBooleanValue();
@@ -323,17 +298,6 @@ public abstract class FeatureSet {
                             inst.setValue(instances.attribute(entry.getKey().toString()), integerData);
                             break;
                     }
-//                    inst.setValue(instances.attribute(entry.getKey().toString()), entry.getKey().applies(method, cat).toString());
-//                    switch (entry.getKey().applies(method)) {
-//                        case TRUE:
-//                            inst.setValue(instances.attribute(entry.getKey().toString()), "true");
-//                            break;
-//                        case FALSE:
-//                            inst.setValue(instances.attribute(entry.getKey().toString()), "false");
-//                            break;
-//                        default:
-//                            inst.setMissing(instances.attribute(entry.getKey().toString()));
-//                    }
                 }
                 instanceList.add(inst);
                 instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
