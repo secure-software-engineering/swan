@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MethodReturnTypeFeature extends WeightedFeature implements IFeatureNew {
+public class ReturnTypeFeature extends WeightedFeature implements IFeatureNew {
 
     private Values category;
 
@@ -20,7 +20,7 @@ public class MethodReturnTypeFeature extends WeightedFeature implements IFeature
         String, Native, Custom, Others
     }
 
-    public MethodReturnTypeFeature() {
+    public ReturnTypeFeature() {
         this.featureResult = new FeatureResult();
     }
 
