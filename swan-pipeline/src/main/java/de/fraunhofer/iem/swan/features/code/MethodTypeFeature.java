@@ -3,7 +3,6 @@ package de.fraunhofer.iem.swan.features.code;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
-import fj.test.Bool;
 import soot.*;
 import soot.jimple.*;
 
@@ -40,15 +39,13 @@ public class MethodTypeFeature extends WeightedFeature implements IFeatureNew {
             this.category = Values.None;
 
         this.featureResult.setStringValue(this.category.toString());
-
         return this.featureResult;
     }
 
     private Boolean isGetter(Method method){
         //Check if method is Getter
-        Values category = null;
         if (!method.getSootMethod().getName().startsWith("get") && !method.getSootMethod().getName().startsWith("set"))
-            return false;
+            category = Values.None;
         String baseName = method.getSootMethod().getName().substring(3);
         String getterName = "get" + baseName;
         String setterName = "set" + baseName;
@@ -97,11 +94,12 @@ public class MethodTypeFeature extends WeightedFeature implements IFeatureNew {
                     }
                 }
             if (accessPath.isEmpty())
-                return false;
+                category = Values.None;
             return true;
         } catch (Exception ex) {
-            return false;
+            category = Values.None;
         }
+        return false;
     }
 
     private Boolean isSetter(Method method){

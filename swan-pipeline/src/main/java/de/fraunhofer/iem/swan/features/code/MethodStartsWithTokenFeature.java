@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
 
-public class MethodStartsWithStringFeature extends WeightedFeature implements IFeatureNew {
+public class MethodStartsWithTokenFeature extends WeightedFeature implements IFeatureNew {
 
     private Set<String> Keywords;
 
@@ -19,7 +19,7 @@ public class MethodStartsWithStringFeature extends WeightedFeature implements IF
 
     private FeatureResult featureResult;
 
-    public MethodStartsWithStringFeature() {
+    public MethodStartsWithTokenFeature() {
         this.featureResult = new FeatureResult();
     }
 
