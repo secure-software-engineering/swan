@@ -19,37 +19,18 @@ public class ClassNameTokenCountFeature extends WeightedFeature implements IFeat
     private ArrayList<String> featureValues;
 
     public ClassNameTokenCountFeature() {
-        this.NumberOfMatches = 0;
         this.featureResult = new FeatureResult();
     }
 
     @Override
     public FeatureResult applies(Method method, Category category){
-        switch (category) {
-            case SOURCE:
-                this.Keywords = SOURCE_CLASS_CONTAINS;
-                break;
-            case AUTHENTICATION_NEUTRAL:
-            case AUTHENTICATION_TO_HIGH:
-            case AUTHENTICATION_TO_LOW:
-            case AUTHENTICATION:
-                this.Keywords = AUTHENTICATION_CLASS_CONTAINS;
-                break;
-            case SINK:
-                this.Keywords = SINK_CLASS_CONTAINS;
-                break;
-            case SANITIZER:
-                this.Keywords = SANITIZER_CLASS_CONTAINS;
-                break;
-        }
-        for(String keyword : this.Keywords) {
-            if(method.getClassName().toLowerCase().contains(keyword)){
-                this.NumberOfMatches += 1;
+        this.NumberOfMatches = 0;
+        for(Pair<String, Integer> item: METHOD_CONTAINS){
+            if(method.getName().toLowerCase().contains(item.getLeft())){
+                this.NumberOfMatches += item.getRight();
             }
         }
-
         this.featureResult.setIntegerValue(this.NumberOfMatches);
-
         return this.featureResult;
     }
 

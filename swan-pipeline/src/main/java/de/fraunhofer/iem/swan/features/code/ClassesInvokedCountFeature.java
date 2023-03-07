@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
-import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.SANITIZER_CLASS_CONTAINS;
 
 public class ClassesInvokedCountFeature extends WeightedFeature implements IFeatureNew{
     private FeatureResult featureResult;
@@ -20,12 +19,12 @@ public class ClassesInvokedCountFeature extends WeightedFeature implements IFeat
     private Set<String> ClassesSet;
 
     public ClassesInvokedCountFeature() {
-        this.NumberOfMatches = 0;
         this.featureResult = new FeatureResult();
     }
 
     @Override
     public FeatureResult applies(Method method, Category category) {
+        this.NumberOfMatches = 0;
         switch (category) {
             case SOURCE:
                 this.ClassesSet = SOURCE_CLASSES_INVOKED;
