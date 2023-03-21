@@ -14,7 +14,7 @@ import de.fraunhofer.iem.swan.assist.util.Formatter;
 import de.fraunhofer.iem.swan.data.Category;
 import icons.IconUtils;
 import icons.PluginIcons;
-import javafx.util.Pair;
+import de.fraunhofer.iem.swan.assist.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;

@@ -10,7 +10,8 @@ package de.fraunhofer.iem.swan.assist.data;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import de.fraunhofer.iem.swan.Parser;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import de.fraunhofer.iem.swan.data.Method;
 
@@ -62,11 +63,16 @@ public class JSONFileParser {
      * @return HashMap of methods
      */
     public HashMap<String, MethodWrapper> parseJSONFileMap() {
-
-        Parser parser = new Parser(congFilePath);
+        try {
+            SrmList srmList = SrmListUtils.importFile(congFilePath);
+            return parseMethods(srmList.getMethods());
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        /*Parser parser = new Parser(congFilePath);
         parser.parse(congFilePath);
-
-       return parseMethods(parser.methods());
+        return parseMethods(parser.methods());*/
     }
 
     /**
@@ -75,9 +81,7 @@ public class JSONFileParser {
      */
     public HashMap<String, MethodWrapper> parseJSONFileStream(InputStreamReader streamReader) {
 
-        Parser parser = new Parser();
-        parser.parseStream(streamReader);
-        return parseMethods(parser.methods());
+        return null;
     }
 
     private HashMap<String, MethodWrapper> parseMethods(Set<Method> methodsSet){

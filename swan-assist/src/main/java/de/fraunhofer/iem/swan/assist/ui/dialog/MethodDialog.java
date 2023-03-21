@@ -53,9 +53,10 @@ public class MethodDialog extends DialogWrapper {
 
     /**
      * Initializes dialog to show method properties
-     * @param methods Method data that will be shown in dialog
-     * @param signature Method Signature
-     * @param project Active project
+     *
+     * @param methods    Method data that will be shown in dialog
+     * @param signature  Method Signature
+     * @param project    Active project
      * @param categories List of all possible method categories
      */
     public MethodDialog(HashMap<String, MethodWrapper> methods, String signature, Project project, Set<Category> categories) {
@@ -149,7 +150,7 @@ public class MethodDialog extends DialogWrapper {
                     availableCategories.remove(selectedCategory);
 
                     selectedModel.addElement(selectedCategory);
-                    method.getCategories().add(selectedCategory);
+                    method.getMethod().addCategory(selectedCategory);
                     methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
                     methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
                 }
@@ -167,21 +168,21 @@ public class MethodDialog extends DialogWrapper {
                     JList value = (JList) e.getSource();
                     selectedCategory = (Category) value.getSelectedValue();
 
-                    if (method.getTypesList(false).size() == 1 && !selectedCategory.isCwe()) {
+                    /*if (method.getTypesList(false).size() == 1 && !selectedCategory.isCwe()) {
                         JBPopupFactory.getInstance()
                                 .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.CategoryNotSelected"), MessageType.ERROR, null)
                                 .createBalloon()
                                 .show(JBPopupFactory.getInstance().guessBestPopupLocation((JComponent) selectedList), Balloon.Position.below);
-                    } else {
+                    } else {*/
 
-                        selectedModel.removeElement(selectedCategory);
-                        method.getCategories().remove(selectedCategory);
-                        methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
-                        methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
+                    selectedModel.removeElement(selectedCategory);
+                    method.getMethod().removeCategory(selectedCategory);
+                    methodTypes.setText(StringUtils.join(method.getTypesList(true), ", "));
+                    methodCwes.setText(StringUtils.join(method.getCWEList(), ", "));
 
-                        availableModel.addElement(selectedCategory);
-                        availableCategories.add(selectedCategory);
-                    }
+                    availableModel.addElement(selectedCategory);
+                    availableCategories.add(selectedCategory);
+                    //   }
                 }
             }
         });
@@ -202,7 +203,8 @@ public class MethodDialog extends DialogWrapper {
 
     /**
      * Loads method details in the dialog
-     * @param signature Method signature
+     *
+     * @param signature  Method signature
      * @param categories List of all possible method categories
      */
     private void updateFields(String signature, Set<Category> categories) {
@@ -224,9 +226,7 @@ public class MethodDialog extends DialogWrapper {
 
         for (Category category : selectedCategories) {
 
-            if (availableCategories.contains(category)) {
-                availableCategories.remove(category);
-            }
+            availableCategories.remove(category);
         }
 
         selectedModel = addCategoriesToModel(selectedCategories, false);
@@ -234,7 +234,6 @@ public class MethodDialog extends DialogWrapper {
 
         availableModel = addCategoriesToModel(availableCategories, false);
         availableList.setModel(availableModel);
-
     }
 
     @Override
@@ -250,6 +249,7 @@ public class MethodDialog extends DialogWrapper {
 
     /**
      * Deep copy of method categories
+     *
      * @param categories Method categories
      * @return New Set of method categories
      */
@@ -303,7 +303,8 @@ public class MethodDialog extends DialogWrapper {
 
     /**
      * Shows error message
-     * @param message Message
+     *
+     * @param message  Message
      * @param location Where on screen the message should be shown
      */
     private void showErrorMessage(String message, JComponent location) {
@@ -321,8 +322,9 @@ public class MethodDialog extends DialogWrapper {
 
     /**
      * Add categories to the List model
+     *
      * @param categories Method categories
-     * @param showCwe Condition to show CWEs or not
+     * @param showCwe    Condition to show CWEs or not
      * @return return List Model for List
      */
     private DefaultListModel<Category> addCategoriesToModel(Set<Category> categories, boolean showCwe) {

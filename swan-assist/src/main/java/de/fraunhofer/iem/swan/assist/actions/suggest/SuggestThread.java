@@ -10,9 +10,11 @@ package de.fraunhofer.iem.swan.assist.actions.suggest;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.FeatureHandler;
-import de.fraunhofer.iem.swan.IFeature;
-import de.fraunhofer.iem.swan.Parser;
+import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
+import de.fraunhofer.iem.swan.features.FeatureSet;
+import de.fraunhofer.iem.swan.features.code.type.IFeature;
+import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.assist.comm.SuggestNotifier;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
@@ -45,13 +47,17 @@ public class SuggestThread extends Thread {
 
         Map<Method, Set<IFeature>> matrix = new HashMap<Method, Set<IFeature>>();
         Set<Method> methods = new HashSet<Method>();
+        try {
+            SrmList srmList = SrmListUtils.importFile(configFilePath);
+            methods = srmList.getMethods();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
-        Parser parser = new Parser(configFilePath);
-        parser.parse(configFilePath);
-        methods = parser.methods();
-
-        FeatureHandler featureHandler = new FeatureHandler(projectPath);
-        featureHandler.initializeFeatures(0);
+        CodeFeatureHandler featureHandler = new CodeFeatureHandler();
+        featureHandler.initializeFeatures();
+        /*FeatureHandler featureHandler = new FeatureHandler(projectPath);
+        featureHandler.initializeFeatures(0);*/
 
         Set<IFeature> features = featureHandler.features().get(Category.NONE);
 

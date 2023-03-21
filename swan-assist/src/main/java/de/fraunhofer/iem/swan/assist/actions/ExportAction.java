@@ -7,9 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.actions;
 
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
+import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -31,8 +29,11 @@ import java.io.IOException;
 
 public class ExportAction extends AnAction {
 
+    private static final NotificationGroup TOOL_GROUP = new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
+            NotificationDisplayType.TOOL_WINDOW, true);
     /**
      * Obtains list of methods and creates new JSON file in the location specified by the user.
+     *
      * @param anActionEvent source event
      */
     @Override
@@ -71,8 +72,8 @@ public class ExportAction extends AnAction {
             try {
                 exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
 
-                Notifications.Bus.notify(
-                        new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "", JSONFileLoader.getMethods().size()+ " methods exported to: "+filePath, NotificationType.INFORMATION));
+                Notification analysisCompleted = TOOL_GROUP.createNotification("", JSONFileLoader.getMethods().size() + " methods exported to: " + filePath, NotificationType.INFORMATION);
+                Notifications.Bus.notify(analysisCompleted, project);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,6 +83,7 @@ public class ExportAction extends AnAction {
 
     /**
      * Controls whether the action is enabled or disabled
+     *
      * @param event source  event
      */
     @Override
