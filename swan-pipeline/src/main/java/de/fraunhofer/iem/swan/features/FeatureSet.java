@@ -4,7 +4,7 @@ import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
+import de.fraunhofer.iem.swan.features.code.IFeatureNew;
 import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public abstract class FeatureSet {
 
-    protected Map<IFeature, Attribute> codeAttributes;
+    protected Map<IFeatureNew, Attribute> codeAttributes;
     protected final HashMap<String, Integer> instanceMap;
     protected final SwanOptions options;
     protected Dataset dataset;
@@ -138,21 +138,25 @@ public abstract class FeatureSet {
     public ArrayList<Attribute> addCodeAttributes(Set<Category> categories) {
 
         ArrayList<Attribute> attributes = new ArrayList<>();
-        // Collect the possible values
-        ArrayList<String> ordinal = new ArrayList<>();
-        ordinal.add("true");
-        ordinal.add("false");
 
         // Collect all attributes for the categories we classify into, and create the instance set.
+
         codeAttributes = new HashMap<>();
-
         for (Category type : codeFeatureHandler.features().keySet()) {
-
             if (type == Category.NONE) continue;
-
             if (categories.contains(type)) {
-                for (IFeature f : codeFeatureHandler.features().get(type)) {
-                    Attribute attr = new Attribute(f.toString(), ordinal);
+                for (IFeatureNew f : codeFeatureHandler.features().get(type)) {
+                    Attribute attr = null;
+                    switch (f.getFeatureType()){ //Initializing instance values for each feature type.
+                        case NUMERICAL:
+                            attr = new Attribute(f.toString());
+                            break;
+                        case BOOLEAN:
+                        case CATEGORICAL:
+                            ArrayList<String> featureValues = f.getFeatureValues();
+                             attr = new Attribute(f.toString(), featureValues);
+                    }
+                    //Set all the possible values for a given feature
                     if (!codeAttributes.containsKey(f) && !attributes.contains(attr)) {
                         codeAttributes.put(f, attr);
                         attributes.add(attr);
@@ -271,35 +275,33 @@ public abstract class FeatureSet {
 
         int instanceIndex = 0;
 
-        // Evaluate all methods against the features.
         for (Method method : methods) {
-
             Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
+
             inst.setDataset(instances);
 
-            //Set id attribute
-            inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
+            for (Category cat : categories) {
+                inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
+                for (Map.Entry<IFeatureNew, Attribute> entry : codeAttributes.entrySet()) {
+                    switch (entry.getKey().getFeatureType()){
+                        case BOOLEAN:
+                            boolean booleanData = (boolean) entry.getKey().applies(method, cat).getBooleanValue();
+                            inst.setValue(instances.attribute(entry.getKey().toString()), String.valueOf(booleanData));
+                            break;
+                        case CATEGORICAL:
 
-            //TODO Add feature values
-            //for (Class<? extends IDocFeature> feature : codeFeatureHandler.getClass()) {
-
-           // }
-            for (Map.Entry<IFeature, Attribute> entry : codeAttributes.entrySet()) {
-
-                switch (entry.getKey().applies(method)) {
-                    case TRUE:
-                        inst.setValue(instances.attribute(entry.getKey().toString()), "true");
-                        break;
-                    case FALSE:
-                        inst.setValue(instances.attribute(entry.getKey().toString()), "false");
-                        break;
-                    default:
-                        inst.setMissing(instances.attribute(entry.getKey().toString()));
+                            String stringData = (String) entry.getKey().applies(method, cat).getStringValue();
+                            inst.setValue(instances.attribute(entry.getKey().toString()), stringData);
+                            break;
+                        case NUMERICAL:
+                            int integerData = (int) entry.getKey().applies(method, cat).getIntegerValue();
+                            inst.setValue(instances.attribute(entry.getKey().toString()), integerData);
+                            break;
+                    }
                 }
+                instanceList.add(inst);
+                instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
             }
-
-            instanceList.add(inst);
-            instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
         }
         return instanceList;
     }

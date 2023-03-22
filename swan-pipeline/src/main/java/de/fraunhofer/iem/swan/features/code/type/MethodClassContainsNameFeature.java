@@ -10,6 +10,7 @@ public class MethodClassContainsNameFeature extends WeightedFeature implements I
     this.partOfName = partOfName.toLowerCase();
   }
 
+
   @Override
   public Type applies(Method method) {
     return (method.getClassName().toLowerCase().contains(partOfName) ? Type.TRUE
