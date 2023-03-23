@@ -1,20 +1,19 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.stats;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.features.code.type.MethodInvocationName;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.Unit;
 import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
-import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
+import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
-public class MethodsInvokedCountFeature extends WeightedFeature implements IFeatureNew {
+public class MethodsInvokedCountFeature implements ICodeFeature {
 
     private Set<String> MethodsList;
     private int NumberOfMatches;
@@ -25,27 +24,18 @@ public class MethodsInvokedCountFeature extends WeightedFeature implements IFeat
     public MethodsInvokedCountFeature() {
         this.featureResult = new FeatureResult();
         this.NumberOfMatches = 0;
+        MethodsList = new HashSet<>();
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category){
-        switch (category) {
-            case SOURCE:
-                this.MethodsList = SOURCE_METHOD_INVOKED;
-                break;
-            case AUTHENTICATION_NEUTRAL:
-            case AUTHENTICATION_TO_HIGH:
-            case AUTHENTICATION_TO_LOW:
-            case AUTHENTICATION:
-                this.MethodsList = AUTHENTICATION_METHOD_INVOKED;
-                break;
-            case SINK:
-                this.MethodsList = SINK_METHOD_INVOKED;
-                break;
-            case SANITIZER:
-                this.MethodsList = SANITIZER_METHOD_INVOKED;
-                break;
-        }
+    public FeatureResult applies(Method method){
+
+        MethodsList.addAll(SOURCE_METHOD_INVOKED);
+        MethodsList.addAll(AUTHENTICATION_METHOD_INVOKED);
+        MethodsList.addAll(SINK_METHOD_INVOKED);
+        MethodsList.addAll(SANITIZER_METHOD_INVOKED);
+
+
         if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
             this.featureResult.setIntegerValue(this.NumberOfMatches);
             return this.featureResult;

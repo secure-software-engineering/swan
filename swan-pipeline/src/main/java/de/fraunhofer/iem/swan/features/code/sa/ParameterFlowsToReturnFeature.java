@@ -1,9 +1,8 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.sa;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.AssignStmt;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ParameterFlowsToReturnFeature extends WeightedFeature implements IFeatureNew{
+public class ParameterFlowsToReturnFeature implements ICodeFeature {
     private ArrayList<String> featureValues;
     private FeatureResult featureResult;
 
@@ -24,7 +23,7 @@ public class ParameterFlowsToReturnFeature extends WeightedFeature implements IF
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         if (method.getSootMethod() == null) {
             this.featureResult.setBooleanValue(Boolean.FALSE);
             return this.featureResult;

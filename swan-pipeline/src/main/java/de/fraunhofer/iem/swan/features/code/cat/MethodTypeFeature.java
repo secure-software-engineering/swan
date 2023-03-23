@@ -1,8 +1,8 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.cat;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.*;
 import soot.jimple.*;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MethodTypeFeature extends WeightedFeature implements IFeatureNew {
+public class MethodTypeFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
@@ -28,7 +28,7 @@ public class MethodTypeFeature extends WeightedFeature implements IFeatureNew {
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         if(method.getName().equals("<init>") || method.getName().equals("<clinit>"))
             this.category = Values.Constructor;
         else if (isGetter(method))

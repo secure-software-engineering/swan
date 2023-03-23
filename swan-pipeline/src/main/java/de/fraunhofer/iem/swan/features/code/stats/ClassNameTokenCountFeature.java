@@ -1,17 +1,15 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.stats;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.features.code.type.MethodClassContainsNameFeature;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 import java.util.Set;
 
-import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
+import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
-public class ClassNameTokenCountFeature extends WeightedFeature implements IFeatureNew {
+public class ClassNameTokenCountFeature implements ICodeFeature {
 
     private Set<String> Keywords;
     private FeatureResult featureResult;
@@ -23,11 +21,11 @@ public class ClassNameTokenCountFeature extends WeightedFeature implements IFeat
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category){
+    public FeatureResult applies(Method method){
         this.NumberOfMatches = 0;
-        for(Pair<String, Integer> item: CLASS_CONTAINS){
-            if(method.getName().toLowerCase().contains(item.getLeft())){
-                this.NumberOfMatches += item.getRight();
+        for(String item: METHOD_NAME_TOKENS){
+            if(method.getName().toLowerCase().contains(item)){
+                this.NumberOfMatches ++;
             }
         }
         this.featureResult.setIntegerValue(this.NumberOfMatches);

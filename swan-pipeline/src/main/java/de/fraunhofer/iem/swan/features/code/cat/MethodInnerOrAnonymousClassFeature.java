@@ -1,23 +1,22 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.cat;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MethodInnerOrAnonymousClassFeature extends WeightedFeature implements IFeatureNew{
+public class MethodInnerOrAnonymousClassFeature implements ICodeFeature {
     private ArrayList<String> featureValues;
     private FeatureResult featureResult;
 
     private Values category;
 
     private enum Values{
-        InnerClass, AnonymousClass, None
+        INNER_CLASS, ANONYMOUS_CLASS, None
     }
 
     public MethodInnerOrAnonymousClassFeature() {
@@ -25,23 +24,23 @@ public class MethodInnerOrAnonymousClassFeature extends WeightedFeature implemen
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         int index = method.getClassName().lastIndexOf("$");
         if (index != -1) {
             String subclassName = method.getClassName().substring(index + 1);
-            this.category =  Pattern.matches("^\\d+$", subclassName) ? Values.AnonymousClass : Values.None;
+            this.category =  Pattern.matches("^\\d+$", subclassName) ? Values.ANONYMOUS_CLASS : Values.None;
         }
         if(this.category == Values.None){
             if (method.getSootMethod() == null)
                 this.category = Values.None;
             try {
                 if (method.getSootMethod().getDeclaringClass().hasOuterClass())
-                    this.category = Values.InnerClass;
+                    this.category = Values.INNER_CLASS;
                 else if (!method.getSootMethod().getDeclaringClass().hasOuterClass())
                     this.category = Values.None;
                 else if (method.getSootMethod().getDeclaringClass().hasOuterClass())
                     this.category = Values.None;
-                else this.category = Values.InnerClass;
+                else this.category = Values.INNER_CLASS;
             } catch (Exception ex) {
                 System.err.println("Something went wrong: " + ex.getMessage());
                 this.category = Values.None;

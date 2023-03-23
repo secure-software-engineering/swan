@@ -1,12 +1,13 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.cat;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
-public class IsMethodImplicitFeature extends WeightedFeature implements IFeatureNew {
+public class IsMethodImplicitFeature implements ICodeFeature {
+
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
@@ -15,7 +16,7 @@ public class IsMethodImplicitFeature extends WeightedFeature implements IFeature
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         if(method.getName().contains("$"))
             this.featureResult.setBooleanValue(Boolean.TRUE);
         else
