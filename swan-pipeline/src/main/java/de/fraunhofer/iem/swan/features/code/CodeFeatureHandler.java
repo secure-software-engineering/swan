@@ -2,22 +2,22 @@ package de.fraunhofer.iem.swan.features.code;
 
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.*;
-import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
-import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
+import de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class CodeFeatureHandler {
-    private Map<Category, Set<IFeatureNew>> featuresMap;
+    private Map<Category, Set<ICodeFeature>> featuresMap;
 
     private HashSet<Category> allCategories;
     private static final Logger logger = LoggerFactory.getLogger(CodeFeatureHandler.class);
-    public Map<Category, Set<IFeatureNew>> features() {
+
+    public Map<Category, Set<ICodeFeature>> features() {
         return featuresMap;
     }
 
@@ -29,78 +29,56 @@ public class CodeFeatureHandler {
         //TODO refactor code features implementation to be similar to the doc features
     }
 
-    private void addFeature(IFeatureNew feature, Set<Category> categoriesForFeature) {
+    private void addFeature(ICodeFeature feature, Set<Category> categoriesForFeature) {
 
         for (Category category : categoriesForFeature) {
-            Set<IFeatureNew> typeFeatures = featuresMap.get(category);
+            Set<ICodeFeature> typeFeatures = featuresMap.get(category);
             typeFeatures.add(feature);
             featuresMap.put(category, typeFeatures);
         }
     }
+
     public void initializeFeatures() {
 
         //change - loop over all classes that use the IfeatureNew Interface, create class object and
         // use addFeature method, remove feature weights completely
         featuresMap = new HashMap<>();
-        allCategories = new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
-                Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
-                Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-                Category.AUTHENTICATION));
+        allCategories = new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK, Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION));
 
         for (Category category : Category.values())
             featuresMap.put(category, new HashSet<>());
 
-//        IFeatureNew MethodAccessModifier = new MethodAccessModifierFeature();
-//        ((WeightedFeature) MethodAccessModifier).setWeight(5);
-//        addFeature(MethodAccessModifier,allCategories);
-//
-//        IFeatureNew ClassAccessModifier = new ClassAccessModifierFeature();
-//        ((WeightedFeature) ClassAccessModifier).setWeight(5);
-//        addFeature(ClassAccessModifier,allCategories);
-//
-//        IFeatureNew ClassModifier = new ClassModifierFeature();
-//        ((WeightedFeature) ClassModifier).setWeight(5);
-//        addFeature(ClassModifier,allCategories);
-//
-//        IFeatureNew MethodModifier = new MethodModifierFeature();
-//        ((WeightedFeature) MethodModifier).setWeight(5);
-//        addFeature(MethodModifier,allCategories);
-//
-//        IFeatureNew MethodReturnType = new MethodReturnTypeFeature();
-//        ((WeightedFeature) MethodReturnType).setWeight(5);
-//        addFeature(MethodReturnType,allCategories);
-//
-//        IFeatureNew MethodNameStartWithKeyword = new MethodStartsWithStringFeature();
-//        ((WeightedFeature) MethodNameStartWithKeyword).setWeight(5);
-//        addFeature(MethodNameStartWithKeyword, allCategories);
-//
-//        IFeatureNew MethodNameKeywordsCount = new MethodNameContainsStringFeature();
-//        ((WeightedFeature) MethodNameKeywordsCount).setWeight(5);
-//        addFeature(MethodNameKeywordsCount,allCategories);
-//
-//        IFeatureNew ClassNameKeywordsCount = new ClassNameKeywordsCountFeature();
-//        ((WeightedFeature) ClassNameKeywordsCount).setWeight(5);
-//        addFeature(ClassNameKeywordsCount,allCategories);
-//
-//        IFeatureNew MethodsInvokedCount = new MethodsInvokedCountFeature();
-//        ((WeightedFeature) MethodsInvokedCount).setWeight(5);
-//        addFeature(MethodsInvokedCount,allCategories);
-//
-//        IFeatureNew ParametersCount = new ParametersCountFeature();
-//        ((WeightedFeature) ParametersCount).setWeight(5);
-//        addFeature(ParametersCount,allCategories);
-
-        Set<Class<? extends IFeatureNew>> manualFeatureSet;
+        Set<Class<? extends ICodeFeature>> featureSet;
         Reflections features = new Reflections("de.fraunhofer.iem.swan.features.code");
-        manualFeatureSet = features.getSubTypesOf(IFeatureNew.class);
-        for(Class<? extends IFeatureNew> featureClass: manualFeatureSet){
+        featureSet = features.getSubTypesOf(ICodeFeature.class);
+
+        for (Class<? extends ICodeFeature> featureClass : featureSet) {
 
             try {
-                IFeatureNew NewFeature = featureClass.getDeclaredConstructor().newInstance();
-                ((WeightedFeature) NewFeature).setWeight(5);
-                addFeature(NewFeature,allCategories);
-            } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
-                     InvocationTargetException e) {
+
+                switch (featureClass.getName()) {
+                    case "de.fraunhofer.iem.swan.features.code.bow.MethodNameContainsToken":
+                        Constructor<? extends ICodeFeature> constructor = featureClass.getDeclaredConstructor(String.class);
+
+                        for (String token : SecurityVocabulary.METHOD_NAME_TOKENS)
+                            addFeature(constructor.newInstance(token), allCategories);// featureClass.getDeclaredConstructor().newInstance("tesst");
+
+                        break;
+                    //TODO Implement features for ClassNameContainsTokens similar to MethodNameContainsToken
+                    case "de.fraunhofer.iem.swan.features.code.bow.ClassNameContainsToken":
+                        //TODO Implement features for InvokedMethodNameContainsToken
+                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedMethodNameContainsToken":
+                        //TODO Implement features for InvokedClassNameContainsToken
+                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedClassNameContainsToken":
+                        //TODO Implement features for ParameterFlowsInvokedMethodFeature
+                    case "de.fraunhofer.iem.swan.features.code.bow.ParameterFlowsInvokedMethodFeature":
+                    default:
+
+                        ICodeFeature codeFeature = featureClass.getDeclaredConstructor().newInstance();
+                        addFeature(codeFeature, allCategories);
+                }
+            } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
+                     IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -16,15 +16,15 @@ import java.util.*;
  * @author Lisa Nguyen Quang Do, Goran Piskachev
  */
 
-public class CodeFeatureHandler3 {
+public class CodeFeatureHandlerOld {
 
     private Map<Category, Set<IFeature>> featuresMap;
-    private static final Logger logger = LoggerFactory.getLogger(CodeFeatureHandler3.class);
+    private static final Logger logger = LoggerFactory.getLogger(CodeFeatureHandlerOld.class);
     public Map<Category, Set<IFeature>> features() {
         return featuresMap;
     }
 
-    public CodeFeatureHandler3() {
+    public CodeFeatureHandlerOld() {
 
     }
 
@@ -1149,29 +1149,29 @@ public class CodeFeatureHandler3 {
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
 
         // Return types (ReturnTypeFeature).
-        IFeature byteArrayReturnType = new ReturnTypeFeature("byte[]");
+        IFeature byteArrayReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("byte[]");
         ((WeightedFeature) byteArrayReturnType).setWeight(-4);
         addFeature(byteArrayReturnType,
                 new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.NONE, Category.RELEVANT)));
 
-        IFeature stringReturnType = new ReturnTypeFeature("java.lang.String");
+        IFeature stringReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.lang.String");
         ((WeightedFeature) stringReturnType).setWeight(27);
         addFeature(stringReturnType,
                 new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.CWE079, Category.CWE078, Category.CWE089, Category.NONE, Category.RELEVANT)));
 
-        IFeature charSequenceReturnType = new ReturnTypeFeature("java.lang.CharSequence");
+        IFeature charSequenceReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.lang.CharSequence");
         ((WeightedFeature) charSequenceReturnType).setWeight(-8);
         addFeature(charSequenceReturnType,
                 new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.NONE, Category.RELEVANT)));
 
-        IFeature booleanReturnType = new ReturnTypeFeature("boolean");
+        IFeature booleanReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("boolean");
         ((WeightedFeature) booleanReturnType).setWeight(-8);
         addFeature(booleanReturnType,
                 new HashSet<>(Arrays.asList(Category.AUTHENTICATION_NEUTRAL,
                         Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
                         Category.NONE, Category.RELEVANT)));
 
-        IFeature resultsetReturnType = new ReturnTypeFeature("java.sql.ResultSet");
+        IFeature resultsetReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.sql.ResultSet");
         ((WeightedFeature) resultsetReturnType).setWeight(21);
         addFeature(resultsetReturnType,
                 new HashSet<>(Arrays.asList(Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE089)));
