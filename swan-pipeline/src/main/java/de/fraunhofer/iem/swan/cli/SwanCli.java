@@ -53,7 +53,6 @@ public class SwanCli {
                     break;
                 case WEKA:
                 case MLPLAN:
-                case AUTOWEKA:
                     dataset = "weka";
                     break;
             }
