@@ -11,14 +11,14 @@ import java.util.ArrayList;
  * @author Steven Arzt
  *
  */
-public interface IFeatureNew {
+public interface ICodeFeature {
 
     enum FeatureType{
         NUMERICAL,
         CATEGORICAL,
         BOOLEAN
     }
-    FeatureResult applies(Method method, Category category);
+    FeatureResult applies(Method method);
 
     String toString();
 

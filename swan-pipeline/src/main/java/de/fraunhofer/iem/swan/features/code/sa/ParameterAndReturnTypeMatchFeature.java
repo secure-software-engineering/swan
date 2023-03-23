@@ -1,14 +1,14 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.sa;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implements IFeatureNew{
+public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implements ICodeFeature {
     private ArrayList<String> featureValues;
     private FeatureResult featureResult;
 
@@ -17,7 +17,7 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         List<String> paramList = method.getParameters();
         for (String param : paramList) {
             if (param.toLowerCase().contains(method.getReturnType().toLowerCase())){

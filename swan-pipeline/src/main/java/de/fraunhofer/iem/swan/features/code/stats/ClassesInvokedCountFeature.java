@@ -1,48 +1,40 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.stats;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.Unit;
 import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
-import static de.fraunhofer.iem.swan.features.code.SecurityVocabulary.*;
+import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
-public class ClassesInvokedCountFeature extends WeightedFeature implements IFeatureNew{
+public class ClassesInvokedCountFeature implements ICodeFeature {
+
     private FeatureResult featureResult;
     private int NumberOfMatches;
     private Set<String> ClassesSet;
 
     public ClassesInvokedCountFeature() {
         this.featureResult = new FeatureResult();
+        ClassesSet = new HashSet<>();
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
+
         this.NumberOfMatches = 0;
-        switch (category) {
-            case SOURCE:
-                this.ClassesSet = SOURCE_CLASSES_INVOKED;
-                break;
-            case AUTHENTICATION_NEUTRAL:
-            case AUTHENTICATION_TO_HIGH:
-            case AUTHENTICATION_TO_LOW:
-            case AUTHENTICATION:
-                this.ClassesSet = AUTHENTICATION_CLASSES_INVOKED;
-                break;
-            case SINK:
-                this.ClassesSet = SINK_CLASSES_INVOKED;
-                break;
-            case SANITIZER:
-                this.ClassesSet = SANITIZER_CLASSES_INVOKED;
-                break;
-        }
-        for(String className: ClassesSet){
+
+        ClassesSet.addAll(SOURCE_CLASSES_INVOKED);
+        ClassesSet.addAll(AUTHENTICATION_CLASSES_INVOKED);
+        ClassesSet.addAll(SINK_CLASSES_INVOKED);
+        ClassesSet.addAll(SANITIZER_CLASSES_INVOKED);
+
+        for (String className : ClassesSet) {
             try {
                 for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
                     // Check for invocations
@@ -52,12 +44,12 @@ public class ClassesInvokedCountFeature extends WeightedFeature implements IFeat
                             if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
                                 InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
                                 if (iinv.getMethod().getDeclaringClass().getName().contains(className))
-                                    this.NumberOfMatches+=1;
+                                    this.NumberOfMatches += 1;
                             }
                     }
                 }
             } catch (Exception ex) {
-                throw(ex);
+                throw (ex);
             }
         }
         this.featureResult.setIntegerValue(this.NumberOfMatches);

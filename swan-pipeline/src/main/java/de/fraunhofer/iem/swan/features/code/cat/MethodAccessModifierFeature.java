@@ -1,37 +1,35 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.cat;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MethodModifierFeature extends WeightedFeature implements IFeatureNew{
+public class MethodAccessModifierFeature implements ICodeFeature {
 
     private Modifier modifier;
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
     public enum Modifier{
-        FINAL, STATIC, ABSTRACT, SYNCHRONIZED, DEFAULT
+        PRIVATE, PUBLIC, PROTECTED, DEFAULT
     }
 
-    public MethodModifierFeature() {
+    public MethodAccessModifierFeature() {
         this.featureResult = new FeatureResult();
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
-        if(method.getSootMethod().isFinal()){
-            this.modifier = Modifier.FINAL;
-        } else if (method.getSootMethod().isStatic()) {
-            this.modifier = Modifier.STATIC;
-        } else if (method.getSootMethod().isAbstract()) {
-            this.modifier = Modifier.ABSTRACT;
-        } else if(method.getSootMethod().isSynchronized()){
-            this.modifier = Modifier.SYNCHRONIZED;
+    public FeatureResult applies(Method method) {
+        if(method.getSootMethod().isPublic()){
+            this.modifier = Modifier.PUBLIC;
+        } else if (method.getSootMethod().isPrivate()) {
+            this.modifier = Modifier.PRIVATE;
+        } else if (method.getSootMethod().isProtected()) {
+            this.modifier = Modifier.PROTECTED;
         } else {
             this.modifier = Modifier.DEFAULT;
         }
@@ -46,7 +44,7 @@ public class MethodModifierFeature extends WeightedFeature implements IFeatureNe
 
     @Override
     public String toString(){
-        return "MethodModifier";
+        return "MethodAccessModifier";
     }
 
     @Override

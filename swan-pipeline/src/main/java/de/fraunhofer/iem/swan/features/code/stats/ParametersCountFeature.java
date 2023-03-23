@@ -1,14 +1,12 @@
-package de.fraunhofer.iem.swan.features.code;
+package de.fraunhofer.iem.swan.features.code.stats;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
+import de.fraunhofer.iem.swan.features.code.FeatureResult;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class ParametersCountFeature extends WeightedFeature implements IFeatureNew{
+public class ParametersCountFeature implements ICodeFeature {
 
     private int NumberOfParametersFeature;
     private FeatureResult featureResult;
@@ -20,7 +18,7 @@ public class ParametersCountFeature extends WeightedFeature implements IFeatureN
     }
 
     @Override
-    public FeatureResult applies(Method method, Category category) {
+    public FeatureResult applies(Method method) {
         this.NumberOfParametersFeature = method.getParameters().size();
         this.featureResult.setIntegerValue(this.NumberOfParametersFeature);
         return this.featureResult;
