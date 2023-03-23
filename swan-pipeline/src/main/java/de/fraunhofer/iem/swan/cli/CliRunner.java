@@ -21,7 +21,7 @@ public class CliRunner implements Callable<Integer> {
     private String testDataSourceDir = "";
 
     @CommandLine.Option(names = {"-train-source", "--train-data-source"}, description = {"Path of training source files"})
-    private String trainDataDirSource = "";
+    private String trainDataSourceDir = "";
 
     @CommandLine.Option(names = {"-d", "--dataset"}, description = {"Path to JSON dataset file"})
     private String datasetJson = "/dataset/swan-dataset.json";
@@ -79,7 +79,7 @@ public class CliRunner implements Callable<Integer> {
 
         options.setDatasetJson(datasetJson);
         options.setTrainDataDir(trainDataDir);
-        options.setTrainDataSourceDir(trainDataDirSource);
+        options.setTrainDataSourceDir(trainDataSourceDir);
         options.setTestDataDir(testDataDir);
         options.setTestDataSourceDir(testDataSourceDir);
 
