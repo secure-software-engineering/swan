@@ -4,7 +4,9 @@ import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
-import de.fraunhofer.iem.swan.features.code.IFeatureNew;
+import de.fraunhofer.iem.swan.features.code.CodeFeatureHandlerOld;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
+import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
@@ -23,11 +25,13 @@ import java.util.stream.Collectors;
 
 public abstract class FeatureSet {
 
-    protected Map<IFeatureNew, Attribute> codeAttributes;
+    protected Map<ICodeFeature, Attribute> codeAttributes;
+    protected Map<IFeature, Attribute> codeAttributesOld;
     protected final HashMap<String, Integer> instanceMap;
     protected final SwanOptions options;
     protected Dataset dataset;
     protected CodeFeatureHandler codeFeatureHandler;
+    protected CodeFeatureHandlerOld codeFeatureHandlerOld;
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> trainInstances;
     protected HashMap<String, Instances> testInstances;
@@ -42,6 +46,7 @@ public abstract class FeatureSet {
      */
     public enum Type {
         CODE("CODE"),
+        CODES("CODES"),
         DOC_AUTO("DOC-AUTO"),
         DOC_MANUAL("DOC-MANUAL");
 
@@ -89,6 +94,10 @@ public abstract class FeatureSet {
                     codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
+                case CODES:
+                    codeFeatureHandlerOld = new CodeFeatureHandlerOld();
+                    codeFeatureHandlerOld.initializeFeatures();
+                    break;
                 case DOC_MANUAL:
                     docFeatureHandler = new DocFeatureHandler();
                     docFeatureHandler.initialiseManualFeatureSet();
@@ -110,15 +119,12 @@ public abstract class FeatureSet {
 
         ArrayList<Attribute> attributes = new ArrayList<>();
 
-        // Add method signatures as id attribute
-        Attribute idAttr = new Attribute("id", methods.stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));
-        attributes.add(idAttr);
-
         //Create feature set and add to attributes
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
 
                 case CODE:
+                case CODES:
                     attributes.addAll(addCodeAttributes(categories));
                     break;
                 case DOC_MANUAL:
@@ -141,29 +147,59 @@ public abstract class FeatureSet {
 
         // Collect all attributes for the categories we classify into, and create the instance set.
 
-        codeAttributes = new HashMap<>();
-        for (Category type : codeFeatureHandler.features().keySet()) {
-            if (type == Category.NONE) continue;
-            if (categories.contains(type)) {
-                for (IFeatureNew f : codeFeatureHandler.features().get(type)) {
-                    Attribute attr = null;
-                    switch (f.getFeatureType()){ //Initializing instance values for each feature type.
-                        case NUMERICAL:
-                            attr = new Attribute(f.toString());
-                            break;
-                        case BOOLEAN:
-                        case CATEGORICAL:
-                            ArrayList<String> featureValues = f.getFeatureValues();
-                             attr = new Attribute(f.toString(), featureValues);
+        for (FeatureSet.Type featureSet : featureSets)
+            switch (featureSet) {
+
+                case CODE:
+                    codeAttributes = new HashMap<>();
+                    for (Category type : codeFeatureHandler.features().keySet()) {
+                        if (type == Category.NONE) continue;
+                        if (categories.contains(type)) {
+                            for (ICodeFeature f : codeFeatureHandler.features().get(type)) {
+                                Attribute attr = null;
+                                switch (f.getFeatureType()) { //Initializing instance values for each feature type.
+                                    case NUMERICAL:
+                                        attr = new Attribute(f.toString());
+                                        break;
+                                    case BOOLEAN:
+                                    case CATEGORICAL:
+                                        ArrayList<String> featureValues = f.getFeatureValues();
+                                        attr = new Attribute(f.toString(), featureValues);
+                                }
+                                //Set all the possible values for a given feature
+                                if (!codeAttributes.containsKey(f) && !attributes.contains(attr)) {
+                                    codeAttributes.put(f, attr);
+                                    attributes.add(attr);
+                                }
+                            }
+                        }
                     }
-                    //Set all the possible values for a given feature
-                    if (!codeAttributes.containsKey(f) && !attributes.contains(attr)) {
-                        codeAttributes.put(f, attr);
-                        attributes.add(attr);
+                    break;
+                case CODES:
+                    codeAttributesOld = new HashMap<>();
+                    ArrayList<String> ordinal = new ArrayList<>();
+                    ordinal.add("true");
+                    ordinal.add("false");
+
+                    // Collect all attributes for the categories we classify into, and create the instance set.
+
+                    for (Category type : codeFeatureHandlerOld.features().keySet()) {
+
+                        if (type == Category.NONE) continue;
+
+                        if (categories.contains(type)) {
+                            for (IFeature f : codeFeatureHandlerOld.features().get(type)) {
+                                Attribute attr = new Attribute(f.toString(), ordinal);
+                                if (!codeAttributesOld.containsKey(f) && !attributes.contains(attr)) {
+                                    codeAttributesOld.put(f, attr);
+                                    attributes.add(attr);
+                                }
+                            }
+                        }
                     }
-                }
+
+                    break;
             }
-        }
         return attributes;
     }
 
@@ -202,6 +238,9 @@ public abstract class FeatureSet {
                 case CODE:
                     codeFeatureHandler.evaluateCodeFeatureData(methods);
                     break;
+                case CODES:
+                    codeFeatureHandlerOld.evaluateCodeFeatureData(methods);
+                    break;
                 case DOC_MANUAL:
                     docFeatureHandler.evaluateManualFeatureData(methods);
                     break;
@@ -217,6 +256,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
+                case CODES:
                     instances.addAll(getCodeInstances(instances, methods, categories, attributes));
                     break;
                 case DOC_MANUAL:
@@ -275,34 +315,65 @@ public abstract class FeatureSet {
 
         int instanceIndex = 0;
 
-        for (Method method : methods) {
-            Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
+        for (FeatureSet.Type featureSet : featureSets)
 
-            inst.setDataset(instances);
+            switch (featureSet) {
 
-            for (Category cat : categories) {
-                inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
-                for (Map.Entry<IFeatureNew, Attribute> entry : codeAttributes.entrySet()) {
-                    switch (entry.getKey().getFeatureType()){
-                        case BOOLEAN:
-                            boolean booleanData = (boolean) entry.getKey().applies(method, cat).getBooleanValue();
-                            inst.setValue(instances.attribute(entry.getKey().toString()), String.valueOf(booleanData));
-                            break;
-                        case CATEGORICAL:
+                case CODE:
 
-                            String stringData = (String) entry.getKey().applies(method, cat).getStringValue();
-                            inst.setValue(instances.attribute(entry.getKey().toString()), stringData);
-                            break;
-                        case NUMERICAL:
-                            int integerData = (int) entry.getKey().applies(method, cat).getIntegerValue();
-                            inst.setValue(instances.attribute(entry.getKey().toString()), integerData);
-                            break;
+                    for (Method method : methods) {
+
+                        Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
+                        inst.setDataset(instances);
+
+                        for (Map.Entry<ICodeFeature, Attribute> entry : codeAttributes.entrySet()) {
+
+                            switch (entry.getKey().getFeatureType()) {
+                                case BOOLEAN:
+                                    boolean booleanData = entry.getKey().applies(method).getBooleanValue();
+                                    inst.setValue(instances.attribute(entry.getKey().toString()), String.valueOf(booleanData));
+                                    break;
+                                case CATEGORICAL:
+
+                                    String stringData = entry.getKey().applies(method).getStringValue();
+                                    inst.setValue(instances.attribute(entry.getKey().toString()), stringData);
+                                    break;
+                                case NUMERICAL:
+                                    int integerData = entry.getKey().applies(method).getIntegerValue();
+                                    inst.setValue(instances.attribute(entry.getKey().toString()), integerData);
+                                    break;
+                            }
+                        }
+                        instanceList.add(inst);
+                        instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
                     }
-                }
-                instanceList.add(inst);
-                instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
+                    break;
+                case CODES:
+                    // Evaluate all methods against the features.
+                    for (Method method : methods) {
+
+                        Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
+                        inst.setDataset(instances);
+
+                        for (Map.Entry<IFeature, Attribute> entry : codeAttributesOld.entrySet()) {
+
+                            switch (entry.getKey().applies(method)) {
+                                case TRUE:
+                                    inst.setValue(instances.attribute(entry.getKey().toString()), "true");
+                                    break;
+                                case FALSE:
+                                    inst.setValue(instances.attribute(entry.getKey().toString()), "false");
+                                    break;
+                                default:
+                                    inst.setMissing(instances.attribute(entry.getKey().toString()));
+                            }
+                        }
+
+                        instanceList.add(inst);
+                        instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
+                    }
+                    break;
             }
-        }
         return instanceList;
     }
 
@@ -368,7 +439,8 @@ public abstract class FeatureSet {
     }
 
     /**
-     * Returns authentication class ID for a authentication category.
+     * Returns authentication class ID for an authentication category.
+     *
      * @param category
      * @return Class ID
      */
