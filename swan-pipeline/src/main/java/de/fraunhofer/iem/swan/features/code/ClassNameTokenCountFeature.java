@@ -25,7 +25,7 @@ public class ClassNameTokenCountFeature extends WeightedFeature implements IFeat
     @Override
     public FeatureResult applies(Method method, Category category){
         this.NumberOfMatches = 0;
-        for(Pair<String, Integer> item: METHOD_CONTAINS){
+        for(Pair<String, Integer> item: CLASS_CONTAINS){
             if(method.getName().toLowerCase().contains(item.getLeft())){
                 this.NumberOfMatches += item.getRight();
             }
