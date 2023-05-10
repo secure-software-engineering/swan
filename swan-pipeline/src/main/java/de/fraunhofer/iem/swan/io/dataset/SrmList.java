@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class SrmList {
 
     private Set<Method> methods;
+    private String version;
     @JsonIgnore
     private Set<String> testClasses;
 
@@ -55,6 +56,14 @@ public class SrmList {
 
     public void setTestClasses(Set<String> testClasses) {
         this.testClasses = testClasses;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public void removeUnclassifiedMethods() {
