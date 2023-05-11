@@ -186,7 +186,7 @@ public class Weka {
                 } else
                     measure.put(classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
 
-                logger.debug("{} Average F-measure ({}), Precision ({}) and Recall ({}) for {}({}) ", classifier.getClass().getSimpleName(), averageFMeasure,averagePrecision, averageRecall, category, key);
+                logger.info("{} Average F-measure ({}), Precision ({}) and Recall ({}) for {}({}) ", classifier.getClass().getSimpleName(), averageFMeasure,averagePrecision, averageRecall, category, key);
             }
             if (!category.contains("authentication"))
                 results.put(category, measure);
