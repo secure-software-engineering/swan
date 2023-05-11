@@ -20,16 +20,13 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
 
     public ParameterFlowsToReturnFeature() {
         this.featureResult = new FeatureResult();
+        this.featureResult.setBooleanValue(Boolean.FALSE);
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        if (method.getSootMethod() == null) {
-            this.featureResult.setBooleanValue(Boolean.FALSE);
-            return this.featureResult;
-        }
-        if (!method.getSootMethod().isConcrete()){
-            this.featureResult.setBooleanValue(Boolean.FALSE);
+
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()){
             return this.featureResult;
         }
 
@@ -55,8 +52,6 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
                     ReturnStmt stmt = (ReturnStmt) u;
                     if(paramVals.contains(stmt.getOp()))
                         this.featureResult.setBooleanValue(Boolean.TRUE);
-                    else
-                        this.featureResult.setBooleanValue(Boolean.FALSE);
                 }
             }
         } catch (Exception ex) {

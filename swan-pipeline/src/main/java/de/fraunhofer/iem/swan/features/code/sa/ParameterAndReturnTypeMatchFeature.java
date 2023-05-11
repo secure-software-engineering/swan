@@ -14,17 +14,16 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
 
     public ParameterAndReturnTypeMatchFeature() {
         this.featureResult = new FeatureResult();
+        this.featureResult.setBooleanValue(Boolean.FALSE);
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        List<String> paramList = method.getParameters();
-        for (String param : paramList) {
-            if (param.toLowerCase().contains(method.getReturnType().toLowerCase())){
+
+        for (String param : method.getParameters()) {
+            if (param.toLowerCase().contains(method.getReturnType().toLowerCase())) {
                 this.featureResult.setBooleanValue(Boolean.TRUE);
-                break;
-            }else{
-                this.featureResult.setBooleanValue(Boolean.FALSE);
+                return this.featureResult;
             }
         }
         return this.featureResult;
@@ -36,7 +35,9 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
     }
 
     @Override
-    public String toString(){ return "ParameterAndReturnTypeMatchFeature"; }
+    public String toString() {
+        return "ParameterAndReturnTypeMatchFeature";
+    }
 
     @Override
     public ArrayList<String> getFeatureValues() {
