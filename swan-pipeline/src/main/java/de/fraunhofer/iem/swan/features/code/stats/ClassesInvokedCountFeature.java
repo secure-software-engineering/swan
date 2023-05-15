@@ -29,10 +29,7 @@ public class ClassesInvokedCountFeature implements ICodeFeature {
 
         this.NumberOfMatches = 0;
 
-        ClassesSet.addAll(SOURCE_CLASSES_INVOKED);
-        ClassesSet.addAll(AUTHENTICATION_CLASSES_INVOKED);
-        ClassesSet.addAll(SINK_CLASSES_INVOKED);
-        ClassesSet.addAll(SANITIZER_CLASSES_INVOKED);
+        ClassesSet.addAll(INNVOKED_CLASS_NAME_TOKENS);
 
         for (String className : ClassesSet) {
             try {

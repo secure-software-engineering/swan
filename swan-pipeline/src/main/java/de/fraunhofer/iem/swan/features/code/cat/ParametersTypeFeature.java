@@ -29,10 +29,7 @@ public class ParametersTypeFeature extends WeightedFeature implements ICodeFeatu
     public FeatureResult applies(Method method) {
 
         //TODO Convert to categorical feature
-        ParametersList.addAll(SOURCE_PARAMETER_TYPES);
-        ParametersList.addAll(AUTHENTICATION_PARAMETER_TYPES);
-        ParametersList.addAll(SINK_PARAMETER_TYPES);
-        ParametersList.addAll(SANITIZER_PARAMETER_TYPES);
+        ParametersList.addAll(PARAMETER_TYPES_TOKENS);
 
         for (String methodParameter: method.getParameters()){
             for(String parameter: this.ParametersList){

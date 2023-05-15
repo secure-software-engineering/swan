@@ -23,7 +23,7 @@ public class ClassNameTokenCountFeature implements ICodeFeature {
     @Override
     public FeatureResult applies(Method method){
         this.NumberOfMatches = 0;
-        for(String item: METHOD_NAME_TOKENS){
+        for(String item: CLASS_CONTAINS_TOKENS){
             if(method.getName().toLowerCase().contains(item)){
                 this.NumberOfMatches ++;
             }

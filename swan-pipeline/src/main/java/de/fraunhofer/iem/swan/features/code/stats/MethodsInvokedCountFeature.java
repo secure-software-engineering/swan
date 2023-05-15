@@ -30,10 +30,7 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
     @Override
     public FeatureResult applies(Method method){
 
-        MethodsList.addAll(SOURCE_METHOD_INVOKED);
-        MethodsList.addAll(AUTHENTICATION_METHOD_INVOKED);
-        MethodsList.addAll(SINK_METHOD_INVOKED);
-        MethodsList.addAll(SANITIZER_METHOD_INVOKED);
+        MethodsList.addAll(INNVOKED_METHOD_NAME_TOKENS);
 
 
         if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
