@@ -32,7 +32,6 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
 
         MethodsList.addAll(INNVOKED_METHOD_NAME_TOKENS);
 
-
         if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
             this.featureResult.setIntegerValue(this.NumberOfMatches);
             return this.featureResult;

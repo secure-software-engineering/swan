@@ -10,12 +10,12 @@ public class FeatureSetSelector {
 
         switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
+            case MLPLAN:
             case MEKA:
                 MekaFeatureSet mekaFeatureSet = new MekaFeatureSet(dataset, options);
                 mekaFeatureSet.createFeatures();
                 return mekaFeatureSet;
             case WEKA:
-            case MLPLAN:
             case AUTOWEKA:
                 WekaFeatureSet wekaFeatureSet = new WekaFeatureSet(dataset, options);
                 wekaFeatureSet.createFeatures();

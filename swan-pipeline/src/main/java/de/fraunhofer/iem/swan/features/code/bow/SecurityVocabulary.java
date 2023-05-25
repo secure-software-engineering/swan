@@ -49,7 +49,6 @@ public class SecurityVocabulary {
             "creat",
             "name").collect(Collectors.toSet());
 
-
     public static final Set<String> CLASS_CONTAINS_TOKENS = Stream.of(
 
             //For Authentication
@@ -182,5 +181,5 @@ public class SecurityVocabulary {
 //    public static final Set<String> SOURCE_METHOD_START = Stream.of("get").collect(Collectors.toSet());
 //    public static final Set<String> SOURCE_METHOD_INVOKED = Stream.of("read", "load", "decod", "get", "output", "creat", "unescap", "request").collect(Collectors.toSet());
 //    public static final Set<String> SOURCE_CLASSES_INVOKED = Stream.of(".io.", "sql", "db", "web", ".net.").collect(Collectors.toSet());
-//    public static final Set<String> SOURCE_PARAMETER_TYPES = Stream.of("java.lang.string", "char[]", "java.lang.charsequence", "byte[]").collect(Collectors.toSet());
+//    public static final Set<String> SOURCE_PARAMETER_TYPES = Stream.of("java.lang.string", "char[]", "java.lang.charsequence", "byte[]").collect(Collectors.toSet());  
 }

@@ -41,6 +41,9 @@ public class DatasetProcessor {
             //Apply filters to dataset
             if (options.getDiscovery().size() > 0 || options.isDocumented()) {
 
+                logger.info("Filters applied to dataset: discovery={}, documented={}",
+                        options.getDiscovery(), options.isDocumented());
+
                 for (Method method : new HashSet<>(dataset.getTrainMethods())) {
 
                     if ((!options.getDiscovery().contains(method.getDiscovery()) && options.getDiscovery().size() > 0) ||

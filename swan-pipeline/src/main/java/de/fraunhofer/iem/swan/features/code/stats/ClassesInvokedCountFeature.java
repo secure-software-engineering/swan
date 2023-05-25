@@ -30,7 +30,6 @@ public class ClassesInvokedCountFeature implements ICodeFeature {
         this.NumberOfMatches = 0;
 
         ClassesSet.addAll(INNVOKED_CLASS_NAME_TOKENS);
-
         for (String className : ClassesSet) {
             try {
                 for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {

@@ -155,7 +155,7 @@
         </dependency>
         <dependency>
             <groupId>ai.libs</groupId>
-            <artifactId>mlplan-weka</artifactId>
+            <artifactId>mlplan-meka</artifactId>
             <version>0.2.7</version>
         </dependency>
         <dependency>

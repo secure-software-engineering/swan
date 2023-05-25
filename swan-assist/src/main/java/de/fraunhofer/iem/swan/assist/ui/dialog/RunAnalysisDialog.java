@@ -15,12 +15,14 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.util.Constants;
+import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,8 +89,9 @@ public class RunAnalysisDialog extends DialogWrapper {
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
         //Use value for source path, if available. Otherwise set the default path
-        if (PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
-            sourceDirTextbox.setText(project.getBasePath()+"/target");
+
+        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
+            sourceDirTextbox.setText(project.getBasePath() + "/target/classes");
         else
             sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
@@ -190,7 +193,9 @@ public class RunAnalysisDialog extends DialogWrapper {
         if (isOKActionEnabled()) {
 
             //ensure that required fields are populated
-            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()) {
+            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()
+                    || !(new File(sourceDirTextbox.getText().trim()).exists())
+                    || (FileUtils.listFiles(new File(sourceDirTextbox.getText()), new String[]{"class", "jar"}, true)).size() == 0) {
 
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
@@ -205,6 +210,8 @@ public class RunAnalysisDialog extends DialogWrapper {
             } else {
 
                 setParameters();
+                //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
+                //analysisCompleted.notify();
             }
         }
     }
@@ -226,10 +233,9 @@ public class RunAnalysisDialog extends DialogWrapper {
         //set the configuration file to default
         parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
 
-        if(!MEKARadioButton.isSelected()){
-            parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
-        }else{
+        if (MEKARadioButton.isSelected()) {
             parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
+        } else {  parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
         }
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());

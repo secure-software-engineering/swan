@@ -29,11 +29,12 @@ public class Method {
     private int hashCode = 0;
     private String framework;
     private String link;
+    @JsonProperty("interface")
+    private String isInterface;
     private String comment;
     private String discovery;
     private RelevantPart dataIn;
     private RelevantPart dataOut;
-    @JsonProperty("type")
     private Set<Category> srm;
     private Set<Category> cwe;
     @JsonProperty("isInterface")
@@ -185,6 +186,14 @@ public class Method {
 
     public Set<Category> getCwe() {
         return this.cwe;
+    }
+
+    public String getIsInterface() {
+        return isInterface;
+    }
+
+    public void setIsInterface(String isInterface) {
+        this.isInterface = isInterface;
     }
 
     @JsonIgnore
