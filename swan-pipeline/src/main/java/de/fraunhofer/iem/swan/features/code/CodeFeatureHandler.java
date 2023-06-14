@@ -58,28 +58,28 @@ public class CodeFeatureHandler {
 
                 switch (featureClass.getName()) {
                     case "de.fraunhofer.iem.swan.features.code.bow.MethodNameContainsToken":
-                        Constructor<? extends ICodeFeature> MethodNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        Constructor<? extends ICodeFeature> methodNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.METHOD_NAME_TOKENS)
-                            addFeature(MethodNameConstructor.newInstance(token), allCategories);// featureClass.getDeclaredConstructor().newInstance("tesst");
+                            addFeature(methodNameConstructor.newInstance(token), allCategories);// featureClass.getDeclaredConstructor().newInstance("tesst");
                         break;
 
                     case "de.fraunhofer.iem.swan.features.code.bow.ClassNameContainsToken":
-                        Constructor<? extends ICodeFeature> ClassNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        Constructor<? extends ICodeFeature> classNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.CLASS_CONTAINS_TOKENS)
-                            addFeature(ClassNameConstructor.newInstance(token), allCategories);
+                            addFeature(classNameConstructor.newInstance(token), allCategories);
                         break;
 
                     case "de.fraunhofer.iem.swan.features.code.bow.InvokedMethodNameContainsToken":
-                        Constructor<? extends ICodeFeature> InvokedMethodNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        Constructor<? extends ICodeFeature> invokedMethodNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.INNVOKED_METHOD_NAME_TOKENS)
-                            addFeature(InvokedMethodNameConstructor.newInstance(token), allCategories);
+                            addFeature(invokedMethodNameConstructor.newInstance(token), allCategories);
                         break;
 
 
                     case "de.fraunhofer.iem.swan.features.code.bow.InvokedClassNameContainsToken":
-                        Constructor<? extends ICodeFeature> InvokedClassNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        Constructor<? extends ICodeFeature> invokedClassNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.INNVOKED_CLASS_NAME_TOKENS)
-                            addFeature(InvokedClassNameConstructor.newInstance(token), allCategories);
+                            addFeature(invokedClassNameConstructor.newInstance(token), allCategories);
                         break;
 
                         //TODO Implement features for ParameterFlowsInvokedMethodFeature
