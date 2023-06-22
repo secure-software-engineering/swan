@@ -82,11 +82,16 @@ public class CodeFeatureHandler {
                             addFeature(InvokedClassNameConstructor.newInstance(token), allCategories);
                         break;
 
-                        //TODO Implement features for ParameterFlowsInvokedMethodFeature
-                    case "de.fraunhofer.iem.swan.features.code.bow.ParameterFlowsInvokedMethodFeature":
-//                        Constructor<? extends ICodeFeature> ParameterFlowsInvokedConstructor = featureClass.getDeclaredConstructor(String.class);
-//                        for (String token : SecurityVocabulary.PARAMETER_TYPES_TOKENS)
-//                            addFeature(ParameterFlowsInvokedConstructor.newInstance(token), allCategories);
+                    case "de.fraunhofer.iem.swan.features.code.bow.SourceToReturnFeature":
+                        Constructor<? extends ICodeFeature> SourceToReturnConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.SOURCE_TO_RETURN)
+                            addFeature(SourceToReturnConstructor.newInstance(token), allCategories);
+                        break;
+
+                    case "de.fraunhofer.iem.swan.features.code.bow.ParameterToInvokedSinkFeature":
+                        Constructor<? extends ICodeFeature> ParameterToInvokedSinkConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.PARAMETER_TO_SINK)
+                            addFeature(ParameterToInvokedSinkConstructor.newInstance(token), allCategories);
                         break;
                     default:
                         ICodeFeature codeFeature = featureClass.getDeclaredConstructor().newInstance();

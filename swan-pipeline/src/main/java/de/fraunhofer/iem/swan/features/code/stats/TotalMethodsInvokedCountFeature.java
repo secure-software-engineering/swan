@@ -15,7 +15,6 @@ import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
 public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
-    private Set<String> methodsList;
     private int numberOfFunctions;
     private FeatureResult featureResult;
 
@@ -24,7 +23,6 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
     public TotalMethodsInvokedCountFeature() {
         this.featureResult = new FeatureResult();
         this.numberOfFunctions = 0;
-        methodsList = new HashSet<>();
     }
 
     @Override
@@ -66,10 +64,6 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
-        for(int i=0;i<100;i++){
-            this.featureValues.add(String.valueOf(i));
-        }
-        return this.featureValues;
+        return null;
     }
 }

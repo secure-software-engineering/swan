@@ -37,8 +37,6 @@ public class Method {
     private RelevantPart dataOut;
     private Set<Category> srm;
     private Set<Category> cwe;
-    @JsonProperty("isInterface")
-    private boolean isInterface;
 
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
@@ -390,14 +388,6 @@ public class Method {
 
     public void setSootClass(SootClass sootClass) {
         this.sootClass = sootClass;
-    }
-    public void setInterface(boolean isInterface){
-        this.isInterface = isInterface;
-    }
-
-
-    public boolean isInterface(){
-        return this.isInterface;
     }
 
     @Override

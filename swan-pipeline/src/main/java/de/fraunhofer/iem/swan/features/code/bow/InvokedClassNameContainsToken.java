@@ -11,6 +11,12 @@ import soot.jimple.Stmt;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Evaluates whether method's class name contains tokens in the security vocabulary.
+ *
+ * @author Rohith Kumar
+ */
+
 public class InvokedClassNameContainsToken extends WeightedFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private String token;

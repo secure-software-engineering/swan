@@ -8,19 +8,18 @@ import java.util.ArrayList;
 
 public class ParametersCountFeature implements ICodeFeature {
 
-    private int NumberOfParametersFeature;
+    private int numberOfParameters;
     private FeatureResult featureResult;
-    private ArrayList<String> featureValues;
 
     public ParametersCountFeature() {
         this.featureResult = new FeatureResult();
-        this.NumberOfParametersFeature = 0;
+        this.numberOfParameters = 0;
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        this.NumberOfParametersFeature = method.getParameters().size();
-        this.featureResult.setIntegerValue(this.NumberOfParametersFeature);
+        this.numberOfParameters = method.getParameters().size();
+        this.featureResult.setIntegerValue(this.numberOfParameters);
         return this.featureResult;
     }
 

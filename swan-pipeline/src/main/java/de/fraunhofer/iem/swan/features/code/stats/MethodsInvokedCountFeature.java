@@ -15,29 +15,32 @@ import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
 public class MethodsInvokedCountFeature implements ICodeFeature {
 
-    private Set<String> MethodsList;
-    private int NumberOfMatches;
+    private Set<String> methodsList;
+    private int numberOfMatches;
     private FeatureResult featureResult;
 
     private ArrayList<String> featureValues;
 
     public MethodsInvokedCountFeature() {
         this.featureResult = new FeatureResult();
-        this.NumberOfMatches = 0;
-        MethodsList = new HashSet<>();
+        this.numberOfMatches = 0;
+        this.methodsList = new HashSet<>();
     }
 
     @Override
     public FeatureResult applies(Method method){
 
-        MethodsList.addAll(INNVOKED_METHOD_NAME_TOKENS);
+        methodsList.addAll(SANITIZER_METHOD_INVOKED);
+        methodsList.addAll(AUTHENTICATION_METHOD_INVOKED);
+        methodsList.addAll(SINK_METHOD_INVOKED);
+        methodsList.addAll(SOURCE_METHOD_INVOKED);
 
         if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
-            this.featureResult.setIntegerValue(this.NumberOfMatches);
+            this.featureResult.setIntegerValue(this.numberOfMatches);
             return this.featureResult;
         }
         try {
-            for(String methodName : this.MethodsList) {
+            for(String methodName : this.methodsList) {
                 for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
                     // Check for invocations
                     if (u instanceof Stmt) {
@@ -46,7 +49,7 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
                             if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
                                 InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
                                 if (iinv.getMethod().getName().contains(methodName)) {
-                                    this.NumberOfMatches += 1;
+                                    this.numberOfMatches += 1;
                                 }
                             }
                         }
@@ -54,10 +57,10 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
                 }
             }
         } catch (Exception ex) {
-            this.featureResult.setIntegerValue(this.NumberOfMatches);
+            this.featureResult.setIntegerValue(this.numberOfMatches);
             return this.featureResult;
         }
-        this.featureResult.setIntegerValue(this.NumberOfMatches);
+        this.featureResult.setIntegerValue(this.numberOfMatches);
         return this.featureResult;
     }
 
@@ -74,10 +77,6 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
-        for(int i=0;i<100;i++){
-            this.featureValues.add(String.valueOf(i));
-        }
-        return this.featureValues;
+        return null;
     }
 }
