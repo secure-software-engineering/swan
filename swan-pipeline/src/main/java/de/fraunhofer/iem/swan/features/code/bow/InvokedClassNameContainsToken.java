@@ -31,21 +31,23 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
     public FeatureResult applies(Method method) {
         this.featureResult.setBooleanValue(Boolean.FALSE);
         try {
-            for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
-                // Check for invocations
-                if (u instanceof Stmt) {
-                    Stmt stmt = (Stmt) u;
-                    if (stmt.containsInvokeExpr())
-                        if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
-                            InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
-                            if (iinv.getMethod().getDeclaringClass().getName().contains(this
-                                    .token))
-                                this.featureResult.setBooleanValue(Boolean.FALSE);
-                        }
+            if(method.getSootMethod().hasActiveBody()){
+                for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                    // Check for invocations
+                    if (u instanceof Stmt) {
+                        Stmt stmt = (Stmt) u;
+                        if (stmt.containsInvokeExpr())
+                            if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                                InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                                if (iinv.getMethod().getDeclaringClass().getName().contains(this
+                                        .token))
+                                    this.featureResult.setBooleanValue(Boolean.TRUE);
+                            }
+                    }
                 }
             }
         } catch (Exception ex) {
-            throw(ex);
+            this.featureResult.setBooleanValue(Boolean.FALSE);
         }
         return this.featureResult;
     }

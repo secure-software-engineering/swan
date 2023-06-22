@@ -15,7 +15,7 @@ public class CliRunner implements Callable<Integer> {
     private String testDataDir = "";
 
     @CommandLine.Option(names = {"-train", "--train-data"}, description = {"Path of training JARs or class files"})
-    private String trainDataDir = "";
+    private String trainDataDir = "/Users/rohith/Desktop/IEM/Datasets-New/Jar";
 
     @CommandLine.Option(names = {"-test-source", "--test-data-source"}, description = {"Path of test source files"})
     private String testDataSourceDir = "";
@@ -30,13 +30,13 @@ public class CliRunner implements Callable<Integer> {
     private List<String> arffInstancesFiles = new ArrayList<>();
 
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
-    private String outputDir = "";
+    private String outputDir = "/Users/rohith/Desktop/IEM/Swan - GF/swan/swan-pipeline/out";
 
     @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
 
     @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, autoweka, mlplan"})
-    private String toolkit = "weka";
+    private String toolkit = "meka";
 
     @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
     private List<String> srmClasses = Collections.singletonList("all");
@@ -66,7 +66,7 @@ public class CliRunner implements Callable<Integer> {
     private double predictionThreshold = 0.5;
 
     @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
-    private List<String> discovery =  Collections.singletonList("manual");
+    private List<String> discovery =  new ArrayList<>();//  Collections.singletonList("manual");
 
     @CommandLine.Option(names = {"-tl", "--timelimit"}, description = {"Time (minutes) to execute operation "})
     private int timeLimit = 1;

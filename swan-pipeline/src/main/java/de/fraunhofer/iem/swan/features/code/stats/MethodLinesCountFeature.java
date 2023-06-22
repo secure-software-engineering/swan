@@ -17,8 +17,10 @@ public class MethodLinesCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfLines = method.getSootMethod().retrieveActiveBody().getUnits().size();
-        this.featureResult.setIntegerValue(this.numberOfLines);
+        if(method.getSootMethod().hasActiveBody()){
+            this.numberOfLines = method.getSootMethod().retrieveActiveBody().getUnits().size();
+            this.featureResult.setIntegerValue(this.numberOfLines);
+        }
         return this.featureResult;
     }
 

@@ -26,9 +26,11 @@ public class VariablesUsageCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method){
-        for (Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
-            System.out.println(u.getUseAndDefBoxes());
-            this.variablesUsageCount += u.getUseAndDefBoxes().size();
+        if(method.getSootMethod().hasActiveBody()){
+            for (Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
+//                System.out.println(u.getUseAndDefBoxes());
+                this.variablesUsageCount += u.getUseAndDefBoxes().size();
+            }
         }
         this.featureResult.setIntegerValue(this.variablesUsageCount);
         return this.featureResult;

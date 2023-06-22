@@ -17,9 +17,11 @@ public class BranchingStatementCountFeature implements ICodeFeature {
     }
     @Override
     public FeatureResult applies(Method method) {
-        for (Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
-            if(u.branches()){
-                this.numberOfBranchingStatements += 1;
+        if(method.getSootMethod().hasActiveBody()){
+            for (Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
+                if(u.branches()){
+                    this.numberOfBranchingStatements += 1;
+                }
             }
         }
         this.featureResult.setIntegerValue(this.numberOfBranchingStatements);

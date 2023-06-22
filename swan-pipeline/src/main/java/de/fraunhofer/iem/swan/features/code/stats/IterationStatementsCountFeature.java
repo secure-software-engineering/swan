@@ -19,9 +19,11 @@ public class IterationStatementsCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method) {
-        for(Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
-            if(u instanceof LookupSwitchStmt){
-                this.numberOfIterationStatements += 1;
+        if(method.getSootMethod().hasActiveBody()){
+            for(Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
+                if(u instanceof LookupSwitchStmt){
+                    this.numberOfIterationStatements += 1;
+                }
             }
         }
         this.featureResult.setIntegerValue(this.numberOfIterationStatements);

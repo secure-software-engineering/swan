@@ -21,7 +21,12 @@ public class ClassLineCountFeature implements ICodeFeature{
     @Override
     public FeatureResult applies(Method method) {
         for(SootMethod sm : method.getSootClass().getMethods()){
-            this.numberOfLines += sm.getActiveBody().getUnits().size();
+            if(sm.hasActiveBody()){
+                this.numberOfLines += sm.getActiveBody().getUnits().size();
+            }else{
+                this.numberOfLines += 0;
+            }
+
         }
         this.featureResult.setIntegerValue(this.numberOfLines);
         return this.featureResult;

@@ -32,15 +32,17 @@ public class InvokedMethodNameContainsToken extends WeightedFeature implements I
     @Override
     public FeatureResult applies(Method method) {
         this.featureResult.setBooleanValue(Boolean.FALSE);
-        for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
-            // Check for invocations
-            if (u instanceof Stmt) {
-                Stmt stmt = (Stmt) u;
-                if (stmt.containsInvokeExpr()) {
-                    if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
-                        InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
-                        if (iinv.getMethod().getName().contains(this.token)) {
-                            this.featureResult.setBooleanValue(Boolean.TRUE);
+        if(method.getSootMethod().hasActiveBody()) {
+            for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                // Check for invocations
+                if (u instanceof Stmt) {
+                    Stmt stmt = (Stmt) u;
+                    if (stmt.containsInvokeExpr()) {
+                        if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                            InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                            if (iinv.getMethod().getName().contains(this.token)) {
+                                this.featureResult.setBooleanValue(Boolean.TRUE);
+                            }
                         }
                     }
                 }

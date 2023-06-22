@@ -34,16 +34,18 @@ public class ClassesInvokedCountFeature implements ICodeFeature {
 
         for (String className : this.classesSet) {
             try {
-                for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
-                    // Check for invocations
-                    if (u instanceof Stmt) {
-                        Stmt stmt = (Stmt) u;
-                        if (stmt.containsInvokeExpr())
-                            if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
-                                InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
-                                if (iinv.getMethod().getDeclaringClass().getName().contains(className))
-                                    this.numberOfMatches += 1;
-                            }
+                if(method.getSootMethod().hasActiveBody()){
+                    for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                        // Check for invocations
+                        if (u instanceof Stmt) {
+                            Stmt stmt = (Stmt) u;
+                            if (stmt.containsInvokeExpr())
+                                if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                                    InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                                    if (iinv.getMethod().getDeclaringClass().getName().contains(className))
+                                        this.numberOfMatches += 1;
+                                }
+                        }
                     }
                 }
             } catch (Exception ex) {
