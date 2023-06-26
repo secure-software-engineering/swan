@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Evaluates whether the parameter in a Source flows to the return statement of the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class SourceToReturnFeature extends WeightedFeature implements ICodeFeature {
     private String token;
     private FeatureResult featureResult;

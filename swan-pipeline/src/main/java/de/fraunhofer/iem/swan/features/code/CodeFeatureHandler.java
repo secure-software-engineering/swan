@@ -60,7 +60,7 @@ public class CodeFeatureHandler {
                     case "de.fraunhofer.iem.swan.features.code.bow.MethodNameContainsToken":
                         Constructor<? extends ICodeFeature> methodNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.METHOD_NAME_TOKENS)
-                            addFeature(methodNameConstructor.newInstance(token), allCategories);// featureClass.getDeclaredConstructor().newInstance("tesst");
+                            addFeature(methodNameConstructor.newInstance(token), allCategories);
                         break;
 
                     case "de.fraunhofer.iem.swan.features.code.bow.ClassNameContainsToken":

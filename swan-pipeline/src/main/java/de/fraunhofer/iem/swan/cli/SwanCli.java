@@ -60,7 +60,6 @@ public class SwanCli {
             for (String feature : options.getFeatureSet()) {
                 String filepath = File.separator + "dataset" + File.separator + dataset
                         + File.separator + feature;
-                System.out.println(filepath);
 
                 ArrayList<String> files = new ArrayList<>();
                 for (File f : Objects.requireNonNull(fileUtility.getResourceDirectory(filepath).listFiles())) {

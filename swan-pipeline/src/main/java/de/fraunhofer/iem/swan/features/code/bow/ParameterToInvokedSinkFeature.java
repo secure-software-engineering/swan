@@ -12,7 +12,11 @@ import soot.jimple.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * Checks if there is parameter flow from a method to the invoked Sink
+ *
+ * @author Rohith Kumar
+ */
 public class ParameterToInvokedSinkFeature extends WeightedFeature implements ICodeFeature {
 
     private String token;
