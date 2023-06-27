@@ -15,27 +15,26 @@ public class ParametersTypeFeature extends WeightedFeature implements ICodeFeatu
 
     //TODO make sure that use use camel case for all variable names
     private int NumberOfParameters;
-    private Set<String> ParametersList;
+    private Set<String> parametersList;
     private FeatureResult featureResult;
-    private ArrayList<String> featureValues;
 
     public ParametersTypeFeature() {
         this.NumberOfParameters = 0;
         this.featureResult = new FeatureResult();
-        ParametersList = new HashSet<>();
+        this.parametersList = new HashSet<>();
     }
 
     @Override
     public FeatureResult applies(Method method) {
 
         //TODO Convert to categorical feature
-        ParametersList.addAll(SOURCE_PARAMETER_TYPES);
-        ParametersList.addAll(AUTHENTICATION_PARAMETER_TYPES);
-        ParametersList.addAll(SINK_PARAMETER_TYPES);
-        ParametersList.addAll(SANITIZER_PARAMETER_TYPES);
+        this.parametersList.addAll(AUTHENTICATION_PARAMETER_TYPES);
+        this.parametersList.addAll(SOURCE_PARAMETER_TYPES);
+        this.parametersList.addAll(SINK_PARAMETER_TYPES);
+        this.parametersList.addAll(SANITIZER_PARAMETER_TYPES);
 
         for (String methodParameter: method.getParameters()){
-            for(String parameter: this.ParametersList){
+            for(String parameter: this.parametersList){
                 if(methodParameter.contains(parameter)){
                     this.NumberOfParameters +=1;
                 }

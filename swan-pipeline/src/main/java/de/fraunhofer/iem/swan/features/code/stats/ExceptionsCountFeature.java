@@ -6,33 +6,34 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
-public class ParametersCountFeature implements ICodeFeature {
-
-    private int numberOfParameters;
+public class ExceptionsCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
+    private int numberOfExceptions;
 
-    public ParametersCountFeature() {
+    public ExceptionsCountFeature() {
         this.featureResult = new FeatureResult();
-        this.numberOfParameters = 0;
+        this.numberOfExceptions = 0;
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfParameters = method.getParameters().size();
-        this.featureResult.setIntegerValue(this.numberOfParameters);
+        this.numberOfExceptions = method.getSootMethod().getExceptions().size();
+        featureResult.setIntegerValue(this.numberOfExceptions);
         return this.featureResult;
     }
 
     @Override
     public FeatureType getFeatureType() {
-        return FeatureType.NUMERICAL;
+       return FeatureType.NUMERICAL;
     }
 
     @Override
-    public String toString(){
-        return "ParametersCount";
+    public String toString() {
+        return "ExceptionsCount";
     }
 
     @Override
-    public ArrayList<String> getFeatureValues() {return null;}
+    public ArrayList<String> getFeatureValues() {
+        return null;
+    }
 }

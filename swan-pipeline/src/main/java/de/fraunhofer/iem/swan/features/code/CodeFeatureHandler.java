@@ -58,22 +58,42 @@ public class CodeFeatureHandler {
 
                 switch (featureClass.getName()) {
                     case "de.fraunhofer.iem.swan.features.code.bow.MethodNameContainsToken":
-                        Constructor<? extends ICodeFeature> constructor = featureClass.getDeclaredConstructor(String.class);
-
+                        Constructor<? extends ICodeFeature> methodNameConstructor = featureClass.getDeclaredConstructor(String.class);
                         for (String token : SecurityVocabulary.METHOD_NAME_TOKENS)
-                            addFeature(constructor.newInstance(token), allCategories);// featureClass.getDeclaredConstructor().newInstance("tesst");
-
+                            addFeature(methodNameConstructor.newInstance(token), allCategories);
                         break;
-                    //TODO Implement features for ClassNameContainsTokens similar to MethodNameContainsToken
-                    case "de.fraunhofer.iem.swan.features.code.bow.ClassNameContainsToken":
-                        //TODO Implement features for InvokedMethodNameContainsToken
-                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedMethodNameContainsToken":
-                        //TODO Implement features for InvokedClassNameContainsToken
-                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedClassNameContainsToken":
-                        //TODO Implement features for ParameterFlowsInvokedMethodFeature
-                    case "de.fraunhofer.iem.swan.features.code.bow.ParameterFlowsInvokedMethodFeature":
-                    default:
 
+                    case "de.fraunhofer.iem.swan.features.code.bow.ClassNameContainsToken":
+                        Constructor<? extends ICodeFeature> classNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.CLASS_CONTAINS_TOKENS)
+                            addFeature(classNameConstructor.newInstance(token), allCategories);
+                        break;
+
+                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedMethodNameContainsToken":
+                        Constructor<? extends ICodeFeature> invokedMethodNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.INNVOKED_METHOD_NAME_TOKENS)
+                            addFeature(invokedMethodNameConstructor.newInstance(token), allCategories);
+                        break;
+
+
+                    case "de.fraunhofer.iem.swan.features.code.bow.InvokedClassNameContainsToken":
+                        Constructor<? extends ICodeFeature> invokedClassNameConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.INNVOKED_CLASS_NAME_TOKENS)
+                            addFeature(invokedClassNameConstructor.newInstance(token), allCategories);
+                        break;
+
+                    case "de.fraunhofer.iem.swan.features.code.bow.SourceToReturnFeature":
+                        Constructor<? extends ICodeFeature> SourceToReturnConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.SOURCE_TO_RETURN)
+                            addFeature(SourceToReturnConstructor.newInstance(token), allCategories);
+                        break;
+
+                    case "de.fraunhofer.iem.swan.features.code.bow.ParameterToInvokedSinkFeature":
+                        Constructor<? extends ICodeFeature> ParameterToInvokedSinkConstructor = featureClass.getDeclaredConstructor(String.class);
+                        for (String token : SecurityVocabulary.PARAMETER_TO_SINK)
+                            addFeature(ParameterToInvokedSinkConstructor.newInstance(token), allCategories);
+                        break;
+                    default:
                         ICodeFeature codeFeature = featureClass.getDeclaredConstructor().newInstance();
                         addFeature(codeFeature, allCategories);
                 }

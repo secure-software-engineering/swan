@@ -31,6 +31,7 @@ public class DatasetProcessor {
         try {
             dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
 
+            System.out.println();
             if (!options.getTrainDataDir().isEmpty())
                 soot.cleanupList(dataset.getTrain());
 

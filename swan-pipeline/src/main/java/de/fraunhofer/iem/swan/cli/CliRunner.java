@@ -36,7 +36,7 @@ public class CliRunner implements Callable<Integer> {
     private List<String> featureSet =  Collections.singletonList("code");
 
     @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, autoweka, mlplan"})
-    private String toolkit = "weka";
+    private String toolkit = "meka";
 
     @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
     private List<String> srmClasses = Collections.singletonList("all");
@@ -66,7 +66,7 @@ public class CliRunner implements Callable<Integer> {
     private double predictionThreshold = 0.5;
 
     @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
-    private List<String> discovery =  Collections.singletonList("manual");
+    private List<String> discovery =  new ArrayList<>();//  Collections.singletonList("manual");
 
     @CommandLine.Option(names = {"-tl", "--timelimit"}, description = {"Time (minutes) to execute operation "})
     private int timeLimit = 1;

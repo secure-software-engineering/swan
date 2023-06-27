@@ -16,43 +16,43 @@ import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 public class ClassesInvokedCountFeature implements ICodeFeature {
 
     private FeatureResult featureResult;
-    private int NumberOfMatches;
-    private Set<String> ClassesSet;
+    private int numberOfMatches;
+    private Set<String> classesSet;
 
     public ClassesInvokedCountFeature() {
         this.featureResult = new FeatureResult();
-        ClassesSet = new HashSet<>();
+        this.classesSet = new HashSet<>();
     }
 
     @Override
     public FeatureResult applies(Method method) {
+        this.numberOfMatches = 0;
+        this.classesSet.addAll(AUTHENTICATION_CLASSES_INVOKED);
+        this.classesSet.addAll(SANITIZER_CLASSES_INVOKED);
+        this.classesSet.addAll(SINK_CLASSES_INVOKED);
+        this.classesSet.addAll(SOURCE_CLASSES_INVOKED);
 
-        this.NumberOfMatches = 0;
-
-        ClassesSet.addAll(SOURCE_CLASSES_INVOKED);
-        ClassesSet.addAll(AUTHENTICATION_CLASSES_INVOKED);
-        ClassesSet.addAll(SINK_CLASSES_INVOKED);
-        ClassesSet.addAll(SANITIZER_CLASSES_INVOKED);
-
-        for (String className : ClassesSet) {
+        for (String className : this.classesSet) {
             try {
-                for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
-                    // Check for invocations
-                    if (u instanceof Stmt) {
-                        Stmt stmt = (Stmt) u;
-                        if (stmt.containsInvokeExpr())
-                            if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
-                                InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
-                                if (iinv.getMethod().getDeclaringClass().getName().contains(className))
-                                    this.NumberOfMatches += 1;
-                            }
+                if(method.getSootMethod().hasActiveBody()){
+                    for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
+                        // Check for invocations
+                        if (u instanceof Stmt) {
+                            Stmt stmt = (Stmt) u;
+                            if (stmt.containsInvokeExpr())
+                                if (stmt.getInvokeExpr() instanceof InstanceInvokeExpr) {
+                                    InstanceInvokeExpr iinv = (InstanceInvokeExpr) stmt.getInvokeExpr();
+                                    if (iinv.getMethod().getDeclaringClass().getName().contains(className))
+                                        this.numberOfMatches += 1;
+                                }
+                        }
                     }
                 }
             } catch (Exception ex) {
                 throw (ex);
             }
         }
-        this.featureResult.setIntegerValue(this.NumberOfMatches);
+        this.featureResult.setIntegerValue(this.numberOfMatches);
         return this.featureResult;
     }
 

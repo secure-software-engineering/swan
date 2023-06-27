@@ -89,13 +89,14 @@ public class RunAnalysisDialog extends DialogWrapper {
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
         //Use value for source path, if available. Otherwise set the default path
+
         if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
             sourceDirTextbox.setText(project.getBasePath() + "/target/classes");
         else
             sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
         //Use value for the output path, if available. Otherwise set the default path
-        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
             outputDir.setText(project.getBasePath() + File.separator + config.getProperty("output_dir_name"));
         else
             outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
@@ -236,7 +237,6 @@ public class RunAnalysisDialog extends DialogWrapper {
             parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
         } else {  parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
         }
-        
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));

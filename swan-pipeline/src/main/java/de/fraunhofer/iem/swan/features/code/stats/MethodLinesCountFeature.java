@@ -6,20 +6,21 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
-public class ParametersCountFeature implements ICodeFeature {
-
-    private int numberOfParameters;
+public class MethodLinesCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
+    private int numberOfLines;
 
-    public ParametersCountFeature() {
+    public MethodLinesCountFeature(){
         this.featureResult = new FeatureResult();
-        this.numberOfParameters = 0;
+        this.numberOfLines = 0;
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfParameters = method.getParameters().size();
-        this.featureResult.setIntegerValue(this.numberOfParameters);
+        if(method.getSootMethod().hasActiveBody()){
+            this.numberOfLines = method.getSootMethod().retrieveActiveBody().getUnits().size();
+            this.featureResult.setIntegerValue(this.numberOfLines);
+        }
         return this.featureResult;
     }
 
@@ -29,10 +30,12 @@ public class ParametersCountFeature implements ICodeFeature {
     }
 
     @Override
-    public String toString(){
-        return "ParametersCount";
+    public String toString() {
+        return "MethodLinesCount";
     }
 
     @Override
-    public ArrayList<String> getFeatureValues() {return null;}
+    public ArrayList<String> getFeatureValues() {
+        return null;
+    }
 }
