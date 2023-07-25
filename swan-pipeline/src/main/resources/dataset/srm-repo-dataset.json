@@ -1415,7 +1415,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -4494,7 +4494,7 @@
         "int",
         "int",
         "boolean",
-        "org.apache.turbine.util.db.pool.DBConnection"
+        "java.sql.Connection"
       ],
       "framework": "",
       "link": "",
@@ -4516,7 +4516,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -11434,7 +11434,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "org.apache.struts2.util.Object",
+      "return": "java.lang.Object",
       "srm": [
         "sink"
       ],
@@ -12715,7 +12715,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -14062,7 +14062,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "org.apache.struts2.util.List",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -15709,7 +15709,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "org.apache.struts2.util.Object",
+      "return": "java.lang.Object",
       "srm": [
         "sink"
       ],
@@ -22604,7 +22604,7 @@
       "parameters": [
         "java.lang.String",
         "boolean",
-        "org.apache.turbine.util.db.pool.DBConnection"
+        "java.sql.Connection"
       ],
       "framework": "",
       "link": "",
@@ -22626,7 +22626,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -24837,7 +24837,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -27607,7 +27607,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "java.util.Vector",
+      "return": "java.util.List",
       "srm": [
         "sink"
       ],
@@ -28093,7 +28093,7 @@
       "name": "org.apache.struts2.views.jsp.ui.OgnlTool.findValue",
       "parameters": [
         "java.lang.String",
-        "org.apache.struts2.views.jsp.ui.Object"
+        "java.lang.Object"
       ],
       "framework": "",
       "link": "",
@@ -28115,7 +28115,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "org.apache.struts2.views.jsp.ui.Object",
+      "return": "java.lang.Object",
       "srm": [
         "sink"
       ],
