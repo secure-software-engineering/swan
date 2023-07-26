@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implements ICodeFeature {
+
     private ArrayList<String> featureValues;
     private FeatureResult featureResult;
 
@@ -18,13 +19,15 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
 
     @Override
     public FeatureResult applies(Method method) {
+
         List<String> paramList = method.getParameters();
+
+        this.featureResult.setBooleanValue(Boolean.FALSE);
+
         for (String param : paramList) {
             if (param.toLowerCase().contains(method.getReturnType().toLowerCase())){
                 this.featureResult.setBooleanValue(Boolean.TRUE);
                 break;
-            }else{
-                this.featureResult.setBooleanValue(Boolean.FALSE);
             }
         }
         return this.featureResult;
@@ -36,12 +39,12 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
     }
 
     @Override
-    public String toString(){ return "ParameterAndReturnTypeMatchFeature"; }
+    public String toString(){ return "ParameterAndReturnTypeMatch"; }
 
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
+        featureValues = new ArrayList<>();
         this.featureValues.add("true");
         this.featureValues.add("false");
         return this.featureValues;
