@@ -69,7 +69,7 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
 
     @Override
     public String toString(){
-        return "ParameterFlowsToReturnFeature";
+        return "ParameterFlowsToReturn";
     }
 
     @Override
