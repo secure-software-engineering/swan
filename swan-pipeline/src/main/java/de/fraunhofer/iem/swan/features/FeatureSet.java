@@ -345,7 +345,7 @@ public abstract class FeatureSet {
                             }
                         }
                         instanceList.add(inst);
-                        instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
+                        instanceMap.put(method.getSignature(), instanceIndex++);
                     }
                     break;
                 case CODES:
@@ -370,7 +370,7 @@ public abstract class FeatureSet {
                         }
 
                         instanceList.add(inst);
-                        instanceMap.put(method.getArffSafeSignature(), instanceIndex++);
+                        instanceMap.put(method.getSignature(), instanceIndex++);
                     }
                     break;
             }
@@ -394,14 +394,14 @@ public abstract class FeatureSet {
             boolean isNewInstance = false;
 
             //If instance exists already, update it. Otherwise, create a new instance
-            if (instanceMap.containsKey(method.getArffSafeSignature())) {
-                inst = instances.instance(instanceMap.get(method.getArffSafeSignature()));
+            if (instanceMap.containsKey(method.getSignature())) {
+                inst = instances.instance(instanceMap.get(method.getSignature()));
             } else {
                 inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
                 inst.setDataset(instances);
                 isNewInstance = true;
 
-                inst.setValue(instances.attribute("id"), method.getArffSafeSignature());
+                inst.setValue(instances.attribute("id"), method.getSignature());
             }
 
             switch (instanceSet) {
@@ -474,6 +474,15 @@ public abstract class FeatureSet {
                 inst.setValue(instances.attribute(cat.getId()), "0");
         }
         return inst;
+    }
+
+    public int getInstanceIndex(String methodSignature) {
+
+        return instanceMap.get(methodSignature);
+    }
+
+    public HashMap<String, Integer> getInstanceMap() {
+        return instanceMap;
     }
 
     /**

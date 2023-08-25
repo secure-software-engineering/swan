@@ -14,7 +14,6 @@ import weka.filters.Filter;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
@@ -77,6 +76,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         this.trainInstances.put("meka", convertToMekaInstances(trainingInstances));
 
         //Set attributed for the test instances
+        //Set attributes for the test instances
         if (options.getPhase().toUpperCase().contentEquals(ModelEvaluator.Phase.PREDICT.name())) {
 
             createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods());
@@ -106,8 +106,6 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
     public Instances createTestSet() {
 
         Instances testInstances = new Instances(structure);
-        Attribute idAttr = new Attribute("id", dataset.getTestMethods().stream().map(Method::getArffSafeSignature).collect(Collectors.toList()));
-        testInstances.replaceAttributeAt(idAttr, testInstances.attribute("id").index());
         ArrayList<Attribute> aList = Collections.list(testInstances.enumerateAttributes());
 
         return createInstances(testInstances, aList, dataset.getTestMethods(), getCategories(options.getAllClasses()));
