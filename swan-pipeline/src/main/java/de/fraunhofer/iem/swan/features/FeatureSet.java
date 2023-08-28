@@ -46,7 +46,7 @@ public abstract class FeatureSet {
      */
     public enum Type {
         CODE("CODE"),
-        CODES("CODES"),
+        CODX("CODX"),
         DOC_AUTO("DOC-AUTO"),
         DOC_MANUAL("DOC-MANUAL");
 
@@ -90,11 +90,11 @@ public abstract class FeatureSet {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
-                case CODE:
+                case CODX:
                     codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
-                case CODES:
+                case CODE:
                     codeFeatureHandlerOld = new CodeFeatureHandlerOld();
                     codeFeatureHandlerOld.initializeFeatures();
                     break;
@@ -124,7 +124,7 @@ public abstract class FeatureSet {
             switch (featureSet) {
 
                 case CODE:
-                case CODES:
+                case CODX:
                     attributes.addAll(addCodeAttributes(categories));
                     break;
                 case DOC_MANUAL:
@@ -150,7 +150,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
 
-                case CODE:
+                case CODX:
                     codeAttributes = new HashMap<>();
                     for (Category type : codeFeatureHandler.features().keySet()) {
                         if (type == Category.NONE) continue;
@@ -175,7 +175,7 @@ public abstract class FeatureSet {
                         }
                     }
                     break;
-                case CODES:
+                case CODE:
                     codeAttributesOld = new HashMap<>();
                     ArrayList<String> ordinal = new ArrayList<>();
                     ordinal.add("true");
@@ -235,10 +235,10 @@ public abstract class FeatureSet {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
-                case CODE:
+                case CODX:
                     codeFeatureHandler.evaluateCodeFeatureData(methods);
                     break;
-                case CODES:
+                case CODE:
                     codeFeatureHandlerOld.evaluateCodeFeatureData(methods);
                     break;
                 case DOC_MANUAL:
@@ -256,7 +256,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                case CODES:
+                case CODX:
                     instances.addAll(getCodeInstances(instances, methods, categories, attributes));
                     break;
                 case DOC_MANUAL:
@@ -319,7 +319,7 @@ public abstract class FeatureSet {
 
             switch (featureSet) {
 
-                case CODE:
+                case CODX:
 
                     for (Method method : methods) {
 
@@ -348,7 +348,7 @@ public abstract class FeatureSet {
                         instanceMap.put(method.getSignature(), instanceIndex++);
                     }
                     break;
-                case CODES:
+                case CODE:
                     // Evaluate all methods against the features.
                     for (Method method : methods) {
 
