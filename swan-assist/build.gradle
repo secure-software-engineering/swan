@@ -15,12 +15,11 @@ repositories {
 
 dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1'
-    implementation 'de.fraunhofer.iem:swan:3.2.0'
+    implementation 'de.fraunhofer.iem:swan:3.2.1'
     implementation 'ca.mcgill.sable:soot:3.3.0'
     implementation 'org.slf4j:slf4j-api:1.7.29'
     implementation 'org.slf4j:slf4j-simple:1.7.29'
     implementation 'org.apache.commons:commons-lang3:3.0'
-    //implementation files('src/main/resources/Jar/swan.jar')
 }
 
 intellij {
