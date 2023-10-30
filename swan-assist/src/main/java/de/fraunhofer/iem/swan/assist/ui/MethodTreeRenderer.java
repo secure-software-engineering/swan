@@ -35,9 +35,9 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 
         String HIGHLIGHT_COLOR = "gray";
-        if (selected){
+        if (selected) {
             text.setForeground(JBColor.WHITE);
-             HIGHLIGHT_COLOR = "white";
+            HIGHLIGHT_COLOR = "white";
         } else
             text.setForeground(JBColor.BLACK);
 
@@ -50,7 +50,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
 
                 String methodName = Formatter.trimProperty(method.getMethodName(false));
 
-                if(methodName.contains("<init>"))
+                if (methodName.contains("<init>"))
                     methodName = Formatter.trimProperty(method.getClassName(false));
 
                 text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + methodName + "</b> ( )</html>");
@@ -61,11 +61,11 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 else if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_DELETED) && !selected)
                     text.setForeground(new JBColor(new Color(178, 34, 34), new Color(178, 34, 34)));
 
-                String cweList =": ";
-                if(method.getCWEList().size()>0)
-                    cweList = " relevant for <b>"+StringUtils.join(method.getCWEList(), ", ")+"</b>: ";
+                String cweList = ": ";
+                if (method.getCWEList().size() > 0)
+                    cweList = " relevant for <b>" + StringUtils.join(method.getCWEList(), ", ") + "</b>: ";
 
-                text.setToolTipText("<html><i>Potential</i> <b>"+StringUtils.join(method.getTypesList(true), ", ")+"</b>"+cweList+ method.getSignature(true)+"</html>");
+                text.setToolTipText("<html><i>Potential</i> <b>" + StringUtils.join(method.getTypesList(true), ", ") + "</b>" + cweList + method.getSignature(true) + "</html>");
 
             } else if (object instanceof Category) {
 
@@ -80,21 +80,25 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                     text.setToolTipText("<html>" + "<b>" + category.toString() + "</b> " + resourceBundle.getString(category.toString() + ".FullName") + "</html>");
                 } else
                     text.setText(category.toString());
-            } else if(object instanceof Pair){
+            } else if (object instanceof Pair) {
 
-                Pair classPair = (Pair)object;
+                Pair classPair = (Pair) object;
                 String classname = classPair.getKey().toString();
 
-                text.setToolTipText("<html>" +classPair.getValue()+ " methods in <b>"+classname+"</b></html>");
-                text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='" + HIGHLIGHT_COLOR + "'>(" + classPair.getValue() +")</font></html>");
+                text.setToolTipText("<html>" + classPair.getValue() + " methods in <b>" + classname + "</b></html>");
+                text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='" + HIGHLIGHT_COLOR + "'>" + classPair.getValue() + " " + getPlural(Integer.parseInt(classPair.getValue().toString()), "method", "methods") + "</font></html>");
                 text.setIcon(PluginIcons.CLASS);
-            }else {
+            } else {
 
-                text.setText(value.toString().replace("color='gray'","color='"+ HIGHLIGHT_COLOR +"'"));
+                text.setText(value.toString().replace("color='gray'", "color='" + HIGHLIGHT_COLOR + "'"));
                 text.setIcon(null);
                 text.setToolTipText(null);
             }
         }
         return text;
+    }
+
+    public String getPlural(int count, String singular, String plural) {
+        return count == 1 ? singular : plural;
     }
 }
