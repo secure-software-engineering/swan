@@ -12,6 +12,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
 import de.fraunhofer.iem.swan.features.FeatureSet;
+import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
@@ -45,7 +46,8 @@ public class SuggestThread extends Thread {
      */
     public void run() {
 
-        Map<Method, Set<IFeature>> matrix = new HashMap<Method, Set<IFeature>>();
+        //FIXME Reimplement and evaluate SuggestSWAN
+       /* Map<Method, Set<IFeature>> matrix = new HashMap<Method, Set<IFeature>>();
         Set<Method> methods = new HashSet<Method>();
         try {
             SrmList srmList = SrmListUtils.importFile(configFilePath);
@@ -59,48 +61,48 @@ public class SuggestThread extends Thread {
         /*FeatureHandler featureHandler = new FeatureHandler(projectPath);
         featureHandler.initializeFeatures(0);*/
 
-        Set<IFeature> features = featureHandler.features().get(Category.NONE);
+        /**Set<ICodeFeature> features = featureHandler.features().get(Category.NONE);
 
-        for (Method m : methods) {
-            Set<IFeature> mFeatures = new HashSet<IFeature>();
-            for (IFeature f : features) {
-                //If method conforms to the feature, add it to the matrix.
-                if (f.applies(m).equals(IFeature.Type.TRUE))
-                    mFeatures.add(f);
-            }
-            matrix.put(m, mFeatures);
-        }
+         for (Method m : methods) {
+         Set<IFeature> mFeatures = new HashSet<IFeature>();
+         for (ICodeFeature f : features) {
+         //If method conforms to the feature, add it to the matrix.
+         if (f.applies(m).equals(ICodeFeature.FeatureType.BOOLEAN))
+         mFeatures.add(f);
+         }
+         matrix.put(m, mFeatures);
+         }
 
-        Suggester suggester = new Suggester();
-        Set<MethodWrapper> suggestedMethods = new HashSet<>();
-        boolean methodPairFound = false;
+         Suggester suggester = new Suggester();
+         Set<MethodWrapper> suggestedMethods = new HashSet<>();
+         boolean methodPairFound = false;
 
-        //Get training methods
-        TrainingFileManager trainingFileManager = new TrainingFileManager(project);
-        Set<String> trainingMethods = new HashSet<>(trainingFileManager.getTrainingMethods().keySet());
-        trainingMethods.addAll(MethodListTree.suggestedMethodsList);
+         //Get training methods
+         TrainingFileManager trainingFileManager = new TrainingFileManager(project);
+         Set<String> trainingMethods = new HashSet<>(trainingFileManager.getTrainingMethods().keySet());
+         trainingMethods.addAll(MethodListTree.suggestedMethodsList);
 
-        while (!methodPairFound) {
+         while (!methodPairFound) {
 
-            MethodPair methodPair = suggester.suggestMethod(matrix, features);
+         MethodPair methodPair = suggester.suggestMethod(matrix, features);
 
-            if (methodPair != null) {
+         if (methodPair != null) {
 
-                if (trainingMethods.contains(methodPair.getMethod1().getSignature(true)) ||
-                        trainingMethods.contains(methodPair.getMethod2().getSignature(true))) {
-                    continue;
-                }
+         if (trainingMethods.contains(methodPair.getMethod1().getSignature(true)) ||
+         trainingMethods.contains(methodPair.getMethod2().getSignature(true))) {
+         continue;
+         }
 
-                methodPair.getMethod1().setStatus(MethodWrapper.MethodStatus.SUGGESTED);
-                suggestedMethods.add(methodPair.getMethod1());
-                methodPair.getMethod2().setStatus(MethodWrapper.MethodStatus.SUGGESTED);
-                suggestedMethods.add(methodPair.getMethod2());
-                methodPairFound = true;
-            }
-        }
+         methodPair.getMethod1().setStatus(MethodWrapper.MethodStatus.SUGGESTED);
+         suggestedMethods.add(methodPair.getMethod1());
+         methodPair.getMethod2().setStatus(MethodWrapper.MethodStatus.SUGGESTED);
+         suggestedMethods.add(methodPair.getMethod2());
+         methodPairFound = true;
+         }
+         }
 
-        MessageBus messageBus = project.getMessageBus();
-        SuggestNotifier suggestNotifier = messageBus.syncPublisher(SuggestNotifier.SUGGEST_METHOD_TOPIC);
-        suggestNotifier.endSuggestMethod(suggestedMethods);
+         MessageBus messageBus = project.getMessageBus();
+         SuggestNotifier suggestNotifier = messageBus.syncPublisher(SuggestNotifier.SUGGEST_METHOD_TOPIC);
+         suggestNotifier.endSuggestMethod(suggestedMethods);**/
     }
 }
