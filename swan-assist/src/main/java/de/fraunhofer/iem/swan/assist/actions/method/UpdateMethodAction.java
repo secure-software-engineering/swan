@@ -30,7 +30,7 @@ public class UpdateMethodAction extends AnAction {
      * @param method Method that should be updated or added.
      */
     public UpdateMethodAction(MethodWrapper method) {
-        super("Re-Classify Method");
+        super("Edit");
         this.method = method;
     }
 

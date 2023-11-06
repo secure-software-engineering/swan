@@ -43,7 +43,7 @@ public class RestoreMethodAction extends AnAction {
      */
     public RestoreMethodAction(MethodWrapper method) {
 
-        super("Restore Classification");
+        super("Restore");
         this.method = method;
     }
 
