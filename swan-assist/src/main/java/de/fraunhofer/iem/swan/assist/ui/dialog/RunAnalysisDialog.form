@@ -166,19 +166,12 @@
           </component>
           <component id="d7cdd" class="javax.swing.JRadioButton" binding="WEKARadioButton" default-binding="true">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <selected value="true"/>
-              <text resource-bundle="dialog_messages" key="Launcher.wekaRadioButton"/>
-            </properties>
-          </component>
-          <component id="7d7a5" class="javax.swing.JRadioButton" binding="MEKARadioButton" default-binding="true">
-            <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text resource-bundle="dialog_messages" key="Launcher.mekaRadioButton"/>
+              <enabled value="true"/>
+              <selected value="false"/>
+              <text resource-bundle="dialog_messages" key="Launcher.wekaRadioButton"/>
             </properties>
           </component>
           <hspacer id="5d45f">
@@ -186,6 +179,15 @@
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="7d7a5" class="javax.swing.JRadioButton" binding="MEKARadioButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text resource-bundle="dialog_messages" key="Launcher.mekaRadioButton"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
