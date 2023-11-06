@@ -1,13 +1,11 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.8.1'
+    id 'org.jetbrains.intellij' version '1.16.0'
 }
 
 group 'de.fraunhofer'
 version '1.5'
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 repositories {
     mavenCentral()
     mavenLocal()
@@ -23,7 +21,7 @@ dependencies {
 }
 
 intellij {
-    version = "2022.1"
+    version = "2022.2"
     type = "IC"
     plugins = ["com.intellij.java"]
 
