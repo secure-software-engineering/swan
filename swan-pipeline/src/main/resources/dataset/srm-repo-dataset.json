@@ -6330,7 +6330,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -8163,7 +8164,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089"
       ],
       "javadoc": {
         "method": "",
@@ -8194,7 +8195,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089"
       ],
       "javadoc": {
         "method": "",
@@ -9722,7 +9723,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -9917,7 +9919,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": [],
+      "cwe": [
+        "CWE089"
+      ],
       "javadoc": {
         "method": "Encode data for use in HTML attributes.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -10199,7 +10203,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -12867,7 +12872,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -12927,7 +12933,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089"
       ],
       "javadoc": {
         "method": "",
@@ -13428,7 +13434,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -16715,7 +16722,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -17917,7 +17925,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089"
       ],
       "javadoc": {
         "method": "",
@@ -20740,7 +20748,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": [],
+      "cwe": [
+        "CWE089"
+      ],
       "javadoc": {
         "method": "Decodes a {@code application/x-www-form-urlencoded} string using a specific encoding scheme. The supplied encoding is used to determine what characters are represented by any consecutive sequences of the form \"{@code %xy}\". Note: The World Wide Web Consortium Recommendation states that UTF-8 should be used. Not doing so may introduce incompatibilities.",
         "class": "Utility class for HTML form decoding. This class contains static methods for decoding a String from the application/x-www-form-urlencoded MIME format. The conversion process is the reverse of that used by the URLEncoder class. It is assumed that all characters in the encoded string are one of the following: \"{@code a}\" through \"{@code z}\", \"{@code A}\" through \"{@code Z}\", \"{@code 0}\" through \"{@code 9}\", and \"{@code -}\", \"{@code _}\", \"{@code .}\", and \"{@code *}\". The character \"{@code %}\" is allowed but is interpreted as the start of a special escaped sequence. The following rules are applied in the conversion: The alphanumeric characters \"{@code a}\" through \"{@code z}\", \"{@code A}\" through \"{@code Z}\" and \"{@code 0}\" through \"{@code 9}\" remain the same. The special characters \"{@code .}\", \"{@code -}\", \"{@code *}\", and \"{@code _}\" remain the same. The plus sign \"{@code +}\" is converted into a space character \" \" . A sequence of the form \"{@code %xy}\" will be treated as representing a byte where xy is the two-digit hexadecimal representation of the 8 bits. Then, all substrings that contain one or more of these byte sequences consecutively will be replaced by the character(s) whose encoding would result in those consecutive bytes. The encoding scheme used to decode these characters may be specified, or if unspecified, the default encoding of the platform will be used. There are two possible ways in which this decoder could deal with illegal strings. It could either leave illegal characters alone or it could throw an {@link java.lang.IllegalArgumentException}. Which approach the decoder takes is left to the implementation."
@@ -22494,7 +22504,8 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089",
+        "CWE079"
       ],
       "javadoc": {
         "method": "",
@@ -22713,7 +22724,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": [],
+      "cwe": [
+        "CWE089"
+      ],
       "javadoc": {
         "method": "Constructs a cookie with the specified name and value. The name must conform to RFC 2109. However, vendors may provide a configuration option that allows cookie names conforming to the original Netscape Cookie Specification to be accepted. The name of a cookie cannot be changed once the cookie has been created. The value can be anything the server chooses to send. Its value is probably of interest only to the server. The cookie's value can be changed after creation with the setValue method. By default, cookies are created according to the Netscape cookie specification. The version can be changed with the setVersion method.",
         "class": "Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server. A cookie's value can uniquely identify a client, so cookies are commonly used for session management. A cookie has a name, a single value, and optional attributes such as a comment, path and domain qualifiers, a maximum age, and a version number. Some Web browsers have bugs in how they handle the optional attributes, so use them sparingly to improve the interoperability of your servlets. The servlet sends cookies to the browser by using the {@link HttpServletResponse#addCookie} method, which adds fields to HTTP response headers to send cookies to the browser, one at a time. The browser is expected to support 20 cookies for each Web server, 300 cookies total, and may limit cookie size to 4 KB each. The browser returns cookies to the servlet by adding fields to HTTP request headers. Cookies can be retrieved from a request by using the {@link HttpServletRequest#getCookies} method. Several cookies might have the same name but different path attributes. Cookies affect the caching of the Web pages that use them. HTTP 1.0 does not cache pages that use cookies created with this class. This class does not support the cache control defined with HTTP 1.1. This class supports both the Version 0 (by Netscape) and Version 1 (by RFC 2109) cookie specifications. By default, cookies are created using Version 0 to ensure the best interoperability."
@@ -24645,7 +24658,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE089"
       ],
       "javadoc": {
         "method": "",
@@ -26255,7 +26268,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE079"],
+      "cwe": [
+        "CWE079"
+      ],
       "javadoc": {
         "method": "Decodes HTML entities.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -26730,7 +26745,10 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE079"],
+      "cwe": [
+        "CWE079",
+        "CWE089"
+      ],
       "javadoc": {
         "method": "Encode data for use in HTML using HTML entity encoding Note that the following characters: 00-08, 0B-0C, 0E-1F, and 7F-9F cannot be used in HTML.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -26956,7 +26974,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE089"],
+      "cwe": [
+        "CWE089"
+      ],
       "javadoc": {
         "method": "Encode input for use in a SQL query, according to the selected codec (appropriate codecs include the MySQLCodec and OracleCodec). This method is not recommended. The use of the PreparedStatement interface is the preferred approach. However, if for some reason this is impossible, then this method is provided as a weaker alternative. The best approach is to make sure any single-quotes are double-quoted. Another possible approach is to use the {escape} syntax described in the JDBC specification in section 1.5.6. However, this syntax does not work with all drivers, and requires modification of all queries.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -29717,7 +29737,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE089"],
+      "cwe": [
+        "CWE089"
+      ],
       "javadoc": {
         "method": "A convenience function that sanitizes a string of HTML.",
         "class": "A factory that can be used to link a sanitizer to an output receiver and that provides a convenient {@link PolicyFactory#sanitize sanitize} method and a {@link PolicyFactory#and and} method to compose policies."
