@@ -6315,7 +6315,7 @@
     {
       "name": "javax.servlet.http.HttpServletRequest.getHeaders",
       "parameters": [
-        "java.lang.Strin"
+        "java.lang.String"
       ],
       "framework": "",
       "link": "",
@@ -26092,7 +26092,7 @@
     {
       "name": "javax.servlet.http.HttpServletRequestWrapper.getHeaders",
       "parameters": [
-        "java.lang.Strin"
+        "java.lang.String"
       ],
       "framework": "",
       "link": "",
@@ -31583,12 +31583,12 @@
       "jar": "tomcat-5.5-servlet-api.jar"
     },
     {
-      "name": "com.opensymphony.xwork2.util.TextParseUtil.translateVariablesCollection",
+      "name": "com.opensymphony.xwork2.util.TextParseUtil.translateVariables",
       "parameters": [
         "java.lang.String",
         "com.opensymphony.xwork2.util.ValueStack",
-        "boolean",
-        "com.opensymphony.xwork2.util.TextParseUtil$ParsedValueEvaluator"
+        "java.lang.Class",
+        "com.opensymphony.xwork2.util.TextParseUtil.ParsedValueEvaluator"
       ],
       "framework": "",
       "link": "",
@@ -31610,7 +31610,7 @@
         "class": ""
       },
       "interface": false,
-      "return": "com.opensymphony.xwork2.util.Collection",
+      "return": "java.lang.String",
       "srm": [
         "sink"
       ],
@@ -38773,7 +38773,7 @@
         "java.util.Calendar",
         "java.util.TimeZone",
         "boolean",
-        "com.mysql.jdbc.MySQLConnection",
+        "com.mysql.jdbc.ConnectionImpl",
         "com.mysql.jdbc.ResultSetImpl"
       ],
       "framework": "",
@@ -44371,7 +44371,7 @@
         "java.util.Calendar",
         "java.util.TimeZone",
         "boolean",
-        "com.mysql.jdbc.MySQLConnection",
+        "com.mysql.jdbc.ConnectionImpl",
         "com.mysql.jdbc.ResultSetImpl"
       ],
       "framework": "",
