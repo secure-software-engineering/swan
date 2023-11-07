@@ -971,7 +971,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE117"],
+      "cwe": [
+        "CWE117"
+      ],
       "javadoc": {
         "method": "Decode from URL. Implementations should first canonicalize and detect any double-encoding. If this check passes, then the data is decoded using URL decoding.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -4795,7 +4797,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE117"],
+      "cwe": [
+        "CWE117"
+      ],
       "javadoc": {
         "method": "Encode for use in a URL. This method performs URL encoding on the entire string.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -9021,7 +9025,7 @@
         "return": false
       },
       "cwe": [
-        "none"
+        "CWE078"
       ],
       "javadoc": {
         "method": "",
@@ -11268,7 +11272,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE091"],
+      "cwe": [
+        "CWE091"
+      ],
       "javadoc": {
         "method": "Encode data for use in an XML element. The implementation should follow the XML Encoding Standard from the W3C. The use of a real XML parser is strongly encouraged. However, in the hopefully rare case that you need to make sure that data is safe for inclusion in an XML document and cannot use a parse, this method provides a safe mechanism to do so.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -13683,7 +13689,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE077"],
+      "cwe": [
+        "CWE077"
+      ],
       "javadoc": {
         "method": "Encode for an operating system command shell according to the selected codec (appropriate codecs include the WindowsCodec and UnixCodec). Please note the following recommendations before choosing to use this method: 1) It is strongly recommended that applications avoid making direct OS system calls if possible as such calls are not portable, and they are potentially unsafe. Please use language provided features if at all possible, rather than native OS calls to implement the desired feature. 2) If an OS call cannot be avoided, then it is recommended that the program to be invoked be invoked directly (e.g., System.exec(\"nameofcommand\" + \"parameterstocommand\");) as this avoids the use of the command shell. The \"parameterstocommand\" should of course be validated before passing them to the OS command. 3) If you must use this method, then we recommend validating all user supplied input passed to the command shell as well, in addition to using this method in order to make the command shell invocation safe. An example use of this method would be: System.exec(\"dir \" + ESAPI.encodeForOS(WindowsCodec, \"parameter(s)tocommandwithuserinput\");",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -17247,7 +17255,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE643"],
+      "cwe": [
+        "CWE643"
+      ],
       "javadoc": {
         "method": "Encode data for use in an XPath query. NB: The reference implementation encodes almost everything and may over-encode. The difficulty with XPath encoding is that XPath has no built in mechanism for escaping characters. It is possible to use XQuery in a parameterized way to prevent injection. For more information, refer to this article which specifies the following list of characters as the most dangerous: ^&\"*';<>(). This paper suggests disallowing ' and \" in queries.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
@@ -18281,7 +18291,9 @@
         "parameters": [],
         "return": false
       },
-      "cwe": ["CWE090"],
+      "cwe": [
+        "CWE090"
+      ],
       "javadoc": {
         "method": "Encode data for use in LDAP queries.",
         "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
