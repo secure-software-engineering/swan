@@ -50,9 +50,7 @@ public class MethodActionGroup extends ActionGroup {
         return new AnAction[]{
                 new UpdateMethodAction(methodWrapper),
                 new RestoreMethodAction(methodWrapper),
-                new DeleteMethodAction(methodWrapper),
-                new Separator(),
-                new MethodPropertiesAction(methodWrapper)};
+                new DeleteMethodAction(methodWrapper)};
     }
 
     @Override
