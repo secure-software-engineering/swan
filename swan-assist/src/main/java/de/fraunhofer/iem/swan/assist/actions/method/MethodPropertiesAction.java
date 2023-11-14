@@ -17,9 +17,11 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
+import de.fraunhofer.iem.swan.assist.ui.dialog.MethodDialog;
 import de.fraunhofer.iem.swan.assist.ui.dialog.MethodPropertiesDialog;
 import de.fraunhofer.iem.swan.assist.util.PsiTraversal;
 
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -39,7 +41,7 @@ public class MethodPropertiesAction extends AnAction {
      * @param method The properties of this method will be loaded.
      */
     public MethodPropertiesAction(MethodWrapper method) {
-        super("Classification Properties");
+        super("Method Properties");
         this.method = method;
     }
 
@@ -58,8 +60,17 @@ public class MethodPropertiesAction extends AnAction {
             method = PsiTraversal.getMethodAtOffset(anActionEvent, false);
 
         if (method != null) {
-            MethodPropertiesDialog detailsDialog = new MethodPropertiesDialog(project, method);
-            detailsDialog.show();
+            MethodPropertiesDialog dialog = null;
+
+            if (method.getStatus() == MethodWrapper.MethodStatus.NEW) {
+
+                HashMap<String, MethodWrapper> methods = new HashMap<>();
+                methods.put(method.getSignature(true), method);
+                dialog = new MethodPropertiesDialog(methods, method.getSignature(true), project, JSONFileLoader.getAllCategories());
+            } else
+                dialog = new MethodPropertiesDialog(JSONFileLoader.getAllMethods(), method.getSignature(true), project, JSONFileLoader.getAllCategories());
+
+            dialog.show();
         } else {
             final Editor editor = anActionEvent.getRequiredData(CommonDataKeys.EDITOR);
             JBPopupFactory.getInstance().createHtmlTextBalloonBuilder(resource.getString("Messages.Error.MethodNotFound"), MessageType.INFO, null)
