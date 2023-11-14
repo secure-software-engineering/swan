@@ -13,7 +13,6 @@ import com.intellij.ui.table.JBTable;
 import com.intellij.uiDesigner.core.GridConstraints;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.data.Category;
-import jnr.ffi.annotations.In;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +41,6 @@ public class MethodPropertiesDialog extends DialogWrapper {
     private JPanel parametersPanel;
     private JPanel dataOutPanel;
     private JPanel dataInPanel;
-    private JButton updateButton;
     private List<JCheckBox> dataCheckBoxes;
     private ResourceBundle resourceBundle;
 
