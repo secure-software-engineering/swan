@@ -35,6 +35,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 
         String HIGHLIGHT_COLOR = "gray";
+        String CWE_COLOR = "e67e21";
         if (selected) {
             text.setForeground(JBColor.WHITE);
             HIGHLIGHT_COLOR = "white";
@@ -48,12 +49,14 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
 
                 MethodWrapper method = (MethodWrapper) object;
 
+
+
                 String methodName = Formatter.trimProperty(method.getMethodName(false));
 
                 if (methodName.contains("<init>"))
                     methodName = Formatter.trimProperty(method.getClassName(false));
 
-                text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>" + methodName + "</b> ( )</html>");
+                text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>"+ methodName + "</b>( ) <font color='" +CWE_COLOR + "'>"+StringUtils.join(method.getCWEList(),", ").replaceAll("CWE","")+"</font></html>");
                 text.setIcon(IconUtils.getNodeIcon(method.getTypesList(false)));
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED) && !selected)
