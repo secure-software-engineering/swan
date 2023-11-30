@@ -58,15 +58,15 @@ public class CodeFeatureHandlerOld {
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
                         Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
                         Category.AUTHENTICATION_TO_HIGH, Category.AUTHENTICATION_TO_LOW,
-                        Category.CWE089, Category.CWE862, Category.CWE863, Category.CWE078, Category.CWE306,
-                        Category.CWE079, Category.CWE601, Category.NONE, Category.RELEVANT)));
+                        Category.CWE89, Category.CWE862, Category.CWE863, Category.CWE78, Category.CWE306,
+                        Category.CWE79, Category.CWE601, Category.NONE, Category.RELEVANT)));
 
         // Method in anonymous class.
         IFeature anonymousClass = new MethodAnonymousClassFeature(true);
         ((WeightedFeature) anonymousClass).setWeight(8);
         addFeature(anonymousClass,
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT,
-                        Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862,
+                        Category.CWE78, Category.CWE79, Category.CWE89, Category.CWE306, Category.CWE862,
                         Category.CWE863, Category.CWE601)));
 
         IFeature classNameContainsSaniti = new MethodClassContainsNameFeature("Saniti");
@@ -146,7 +146,7 @@ public class CodeFeatureHandlerOld {
         IFeature classNameContainsWeb = new MethodClassContainsNameFeature("web");
         ((WeightedFeature) classNameContainsWeb).setWeight(15);
         addFeature(classNameContainsWeb, new HashSet<>(
-                Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE079,
+                Arrays.asList(Category.SOURCE, Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE79,
                         Category.CWE601)));
 
         IFeature classNameContainsNet = new MethodClassContainsNameFeature(".net.");
@@ -158,7 +158,7 @@ public class CodeFeatureHandlerOld {
         ((WeightedFeature) classNameContainsSql).setWeight(17);
         addFeature(classNameContainsSql,
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
-                        Category.CWE089, Category.NONE, Category.RELEVANT)));
+                        Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsManager = new MethodClassContainsNameFeature("Manager");
         ((WeightedFeature) classNameContainsManager).setWeight(-5);
@@ -173,39 +173,39 @@ public class CodeFeatureHandlerOld {
         IFeature classNameContainsInput = new MethodClassContainsNameFeature("Input");
         ((WeightedFeature) classNameContainsInput).setWeight(5);
         addFeature(classNameContainsInput,
-                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.CWE078, Category.CWE089,
+                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE79, Category.CWE78, Category.CWE89,
                         Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsDatabase = new MethodClassContainsNameFeature("database");
         ((WeightedFeature) classNameContainsDatabase).setWeight(10);
         addFeature(classNameContainsDatabase,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsDb = new MethodClassContainsNameFeature("db");
         ((WeightedFeature) classNameContainsDb).setWeight(5);
         addFeature(classNameContainsDb,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsHibernate = new MethodClassContainsNameFeature("hibernate");
         ((WeightedFeature) classNameContainsHibernate).setWeight(-8);
         addFeature(classNameContainsHibernate,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsCredential = new MethodClassContainsNameFeature("credential");
         ((WeightedFeature) classNameContainsCredential).setWeight(19);
         addFeature(classNameContainsCredential,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.CWE862,
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.CWE862,
                         Category.CWE863, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsProcess = new MethodClassContainsNameFeature("process");
         ((WeightedFeature) classNameContainsProcess).setWeight(13);
         addFeature(classNameContainsProcess,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsRuntime = new MethodClassContainsNameFeature("runtime");
         ((WeightedFeature) classNameContainsRuntime).setWeight(17);
         addFeature(classNameContainsRuntime,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsUser = new MethodClassContainsNameFeature("user");
         ((WeightedFeature) classNameContainsUser).setWeight(2);
@@ -216,17 +216,17 @@ public class CodeFeatureHandlerOld {
         ((WeightedFeature) classNameContainsJdbc).setWeight(2);
         addFeature(classNameContainsJdbc,
                 new HashSet<>(Arrays.asList(Category.SINK,
-                        Category.CWE089, Category.NONE, Category.RELEVANT)));
+                        Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsHtml = new MethodClassContainsNameFeature("Html");
         ((WeightedFeature) classNameContainsHtml).setWeight(1);
         addFeature(classNameContainsHtml,
-                new HashSet<>(Arrays.asList(Category.SINK, Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SINK, Category.SOURCE, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsPage = new MethodClassContainsNameFeature("Page");
         ((WeightedFeature) classNameContainsPage).setWeight(5);
         addFeature(classNameContainsPage,
-                new HashSet<>(Arrays.asList(Category.CWE079, Category.SANITIZER, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE79, Category.SANITIZER, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsRequest = new MethodClassContainsNameFeature("Request");
         ((WeightedFeature) classNameContainsRequest).setWeight(13);
@@ -261,29 +261,29 @@ public class CodeFeatureHandlerOld {
         IFeature classNameContainsCss = new MethodClassContainsNameFeature("Css");
         ((WeightedFeature) classNameContainsCss).setWeight(5);
         addFeature(classNameContainsCss,
-                new HashSet<>(Arrays.asList(Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature classNameContainsDom = new MethodClassContainsNameFeature("Dom");
         ((WeightedFeature) classNameContainsDom).setWeight(-1);
         addFeature(classNameContainsDom,
-                new HashSet<>(Arrays.asList(Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         // Method class ends
         IFeature classEndsWithEncoder = new MethodClassEndsWithNameFeature("Encoder");
         ((WeightedFeature) classEndsWithEncoder).setWeight(18);
         addFeature(classEndsWithEncoder, new HashSet<>(Arrays.asList(
-                Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE862,
-                Category.CWE863, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                Category.SANITIZER, Category.CWE78, Category.CWE79, Category.CWE862,
+                Category.CWE863, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classEndsWithRequest = new MethodClassEndsWithNameFeature("Request");
         ((WeightedFeature) classEndsWithRequest).setWeight(13);
         addFeature(classEndsWithRequest, new HashSet<>(Arrays.asList(
-                Category.SINK, Category.CWE079, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                Category.SINK, Category.CWE79, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature classEndsWithRender = new MethodClassEndsWithNameFeature("Render");
         ((WeightedFeature) classEndsWithRender).setWeight(-8);
         addFeature(classEndsWithRender, new HashSet<>(Arrays.asList(
-                Category.SINK, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                Category.SINK, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         // Class modifier.
         IFeature isStaticClass = new MethodClassModifierFeature(ClassModifier.STATIC);
@@ -305,9 +305,9 @@ public class CodeFeatureHandlerOld {
         IFeature hasParamsPerm = new MethodHasParametersFeature();
         ((WeightedFeature) hasParamsPerm).setWeight(2);
         addFeature(hasParamsPerm,
-                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SINK, Category.CWE079,
+                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SINK, Category.CWE79,
                         Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
-                        Category.AUTHENTICATION_TO_LOW, Category.CWE601, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                        Category.AUTHENTICATION_TO_LOW, Category.CWE601, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         // Has a return type.
         IFeature hasReturnType = new MethodHasReturnTypeFeature();
@@ -321,7 +321,7 @@ public class CodeFeatureHandlerOld {
         ((WeightedFeature) innerClassMethod).setWeight(0);
         addFeature(innerClassMethod,
                 new HashSet<>(Arrays.asList(
-                        Category.SINK, Category.SOURCE, Category.NONE, Category.RELEVANT, Category.CWE078, Category.CWE079, Category.CWE089, Category.CWE306, Category.CWE862, Category.CWE863, Category.CWE601)));
+                        Category.SINK, Category.SOURCE, Category.NONE, Category.RELEVANT, Category.CWE78, Category.CWE79, Category.CWE89, Category.CWE306, Category.CWE862, Category.CWE863, Category.CWE601)));
 
         // Call to a method of class.
         IFeature methodInvocationClassNameSaniti = new MethodInvocationClassName("Saniti");
@@ -368,7 +368,7 @@ public class CodeFeatureHandlerOld {
         IFeature methodInvocationClassNameWeb = new MethodInvocationClassName("web");
         ((WeightedFeature) methodInvocationClassNameWeb).setWeight(29);
         addFeature(methodInvocationClassNameWeb, new HashSet<>(
-                Arrays.asList(Category.SOURCE, Category.SINK, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                Arrays.asList(Category.SOURCE, Category.SINK, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature methodInvocationClassNameNet = new MethodInvocationClassName(".net.");
         ((WeightedFeature) methodInvocationClassNameNet).setWeight(19);
@@ -583,12 +583,12 @@ public class CodeFeatureHandlerOld {
         IFeature methodInvocationNameMakedb = new MethodInvocationName("makedb");
         ((WeightedFeature) methodInvocationNameMakedb).setWeight(-8);
         addFeature(methodInvocationNameMakedb,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature methodInvocationNameExecute = new MethodInvocationName("execute");
         ((WeightedFeature) methodInvocationNameExecute).setWeight(12);
         addFeature(methodInvocationNameExecute,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature methodInvocationNameSaniti = new MethodInvocationName("saniti");
         ((WeightedFeature) methodInvocationNameSaniti).setWeight(-10);
@@ -601,8 +601,8 @@ public class CodeFeatureHandlerOld {
         addFeature(methodIsConstructor,
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
                         Category.SANITIZER, Category.AUTHENTICATION_TO_LOW, Category.AUTHENTICATION_TO_HIGH,
-                        Category.AUTHENTICATION_NEUTRAL, Category.CWE078, Category.CWE862,
-                        Category.CWE863, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                        Category.AUTHENTICATION_NEUTRAL, Category.CWE78, Category.CWE862,
+                        Category.CWE863, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature realSetter = new MethodIsRealSetterFeature();
         ((WeightedFeature) realSetter).setWeight(0);
@@ -649,7 +649,7 @@ public class CodeFeatureHandlerOld {
         addFeature(methodNameStartsWithSet,
                 new HashSet<>(Arrays.asList(Category.SINK, Category.SANITIZER,
                         Category.AUTHENTICATION_NEUTRAL, Category.AUTHENTICATION_TO_HIGH,
-                        Category.AUTHENTICATION_TO_LOW, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                        Category.AUTHENTICATION_TO_LOW, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature methodNameStartsWithPut = new MethodNameStartsWithFeature("put");
         ((WeightedFeature) methodNameStartsWithPut).setWeight(12);
@@ -708,7 +708,7 @@ public class CodeFeatureHandlerOld {
         IFeature nameEqualsSetHeader = new MethodNameEqualsFeature("setHeader");
         ((WeightedFeature) nameEqualsSetHeader).setWeight(9);
         addFeature(nameEqualsSetHeader,
-                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature nameEqualsSendRedirect = new MethodNameEqualsFeature("sendRedirect");
         ((WeightedFeature) nameEqualsSendRedirect).setWeight(-8);
@@ -719,7 +719,7 @@ public class CodeFeatureHandlerOld {
         IFeature methodNameContainsSaniti = new MethodNameContainsFeature("saniti");
         ((WeightedFeature) methodNameContainsSaniti).setWeight(-3);
         addFeature(methodNameContainsSaniti,
-                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.CWE78, Category.CWE79, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature methodNameContainsEscape = new MethodNameContainsFeature("escape", "unescape");
         ((WeightedFeature) methodNameContainsEscape).setWeight(51);
@@ -910,7 +910,7 @@ public class CodeFeatureHandlerOld {
         IFeature nameContainsRun = new MethodNameContainsFeature("run");
         ((WeightedFeature) nameContainsRun).setWeight(0);
         addFeature(nameContainsRun, new HashSet<>(
-                Arrays.asList(Category.SINK, Category.CWE078, Category.NONE, Category.RELEVANT)));
+                Arrays.asList(Category.SINK, Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature nameContainsExecut = new MethodNameContainsFeature("execut");
         ((WeightedFeature) nameContainsExecut).setWeight(-8);
@@ -920,12 +920,12 @@ public class CodeFeatureHandlerOld {
         IFeature nameContainsExec = new MethodNameContainsFeature("exec");
         ((WeightedFeature) nameContainsExec).setWeight(34);
         addFeature(nameContainsExec,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature nameContainsCompile = new MethodNameContainsFeature("compile");
         ((WeightedFeature) nameContainsCompile).setWeight(17);
         addFeature(nameContainsCompile,
-                new HashSet<>(Arrays.asList(Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature nameContainsDump = new MethodNameContainsFeature("dump");
         ((WeightedFeature) nameContainsDump).setWeight(9);
@@ -940,12 +940,12 @@ public class CodeFeatureHandlerOld {
         IFeature nameContainsExecute = new MethodNameContainsFeature("execute");
         ((WeightedFeature) nameContainsExecute).setWeight(8);
         addFeature(nameContainsExecute,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature nameContainsQuery = new MethodNameContainsFeature("query");
         ((WeightedFeature) nameContainsQuery).setWeight(17);
         addFeature(nameContainsQuery,
-                new HashSet<>(Arrays.asList(Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature nameContainsRole = new MethodNameContainsFeature("role");
         ((WeightedFeature) nameContainsRole).setWeight(-8);
@@ -978,8 +978,8 @@ public class CodeFeatureHandlerOld {
         addFeature(parameterOfTypeString,
                 new HashSet<>(Arrays.asList(Category.SOURCE, Category.SINK,
                         Category.SANITIZER, Category.AUTHENTICATION_NEUTRAL,
-                        Category.AUTHENTICATION_TO_HIGH, Category.CWE089, Category.CWE306,
-                        Category.CWE078, Category.CWE862, Category.CWE863, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                        Category.AUTHENTICATION_TO_HIGH, Category.CWE89, Category.CWE306,
+                        Category.CWE78, Category.CWE862, Category.CWE863, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature parameterOfTypeCharArray = new ParameterContainsTypeOrNameFeature("char[]");
         ((WeightedFeature) parameterOfTypeCharArray).setWeight(12);
@@ -1019,7 +1019,7 @@ public class CodeFeatureHandlerOld {
         IFeature parameterOfTypeSql = new ParameterContainsTypeOrNameFeature("sql");
         ((WeightedFeature) parameterOfTypeSql).setWeight(2);
         addFeature(parameterOfTypeSql, new HashSet<>(Arrays.asList(Category.SOURCE,
-                Category.SINK, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                Category.SINK, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature parameterOfTypeDb = new ParameterContainsTypeOrNameFeature("db");
         ((WeightedFeature) parameterOfTypeDb).setWeight(12);
@@ -1030,7 +1030,7 @@ public class CodeFeatureHandlerOld {
         ((WeightedFeature) parameterOfTypeCredential).setWeight(137);
         addFeature(parameterOfTypeCredential,
                 new HashSet<>(Arrays.asList(Category.CWE306, Category.CWE862,
-                        Category.CWE863, Category.CWE078, Category.NONE, Category.RELEVANT)));
+                        Category.CWE863, Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature parameterOfTypeUrl = new ParameterContainsTypeOrNameFeature("url");
         ((WeightedFeature) parameterOfTypeUrl).setWeight(21);
@@ -1114,19 +1114,19 @@ public class CodeFeatureHandlerOld {
         ((WeightedFeature) paramTypeMathcesReturn).setWeight(-5);
         addFeature(paramTypeMathcesReturn,
                 new HashSet<>(Arrays.asList(
-                        Category.SANITIZER, Category.CWE078, Category.CWE079, Category.CWE862,
-                        Category.CWE863, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                        Category.SANITIZER, Category.CWE78, Category.CWE79, Category.CWE862,
+                        Category.CWE863, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         // ReturnTypeContainsNameFeature
         IFeature returnContainsDocument = new ReturnTypeContainsNameFeature("Document");
         ((WeightedFeature) returnContainsDocument).setWeight(5);
         addFeature(returnContainsDocument,
-                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature returnContainsNode = new ReturnTypeContainsNameFeature("Node");
         ((WeightedFeature) returnContainsNode).setWeight(11);
         addFeature(returnContainsNode,
-                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         IFeature returnContainsUser = new ReturnTypeContainsNameFeature("User");
         ((WeightedFeature) returnContainsUser).setWeight(-17);
@@ -1141,12 +1141,12 @@ public class CodeFeatureHandlerOld {
         IFeature returnContainsServlet = new ReturnTypeContainsNameFeature("Servlet");
         ((WeightedFeature) returnContainsServlet).setWeight(-11);
         addFeature(returnContainsServlet,
-                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.CWE078, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE79, Category.CWE78, Category.NONE, Category.RELEVANT)));
 
         IFeature returnContainsRequest = new ReturnTypeContainsNameFeature("Request");
         ((WeightedFeature) returnContainsRequest).setWeight(-8);
         addFeature(returnContainsRequest,
-                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SOURCE, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         // Return types (ReturnTypeFeature).
         IFeature byteArrayReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("byte[]");
@@ -1157,7 +1157,7 @@ public class CodeFeatureHandlerOld {
         IFeature stringReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.lang.String");
         ((WeightedFeature) stringReturnType).setWeight(27);
         addFeature(stringReturnType,
-                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.CWE079, Category.CWE078, Category.CWE089, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SANITIZER, Category.SOURCE, Category.CWE79, Category.CWE78, Category.CWE89, Category.NONE, Category.RELEVANT)));
 
         IFeature charSequenceReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.lang.CharSequence");
         ((WeightedFeature) charSequenceReturnType).setWeight(-8);
@@ -1174,7 +1174,7 @@ public class CodeFeatureHandlerOld {
         IFeature resultsetReturnType = new de.fraunhofer.iem.swan.features.code.type.ReturnTypeFeature("java.sql.ResultSet");
         ((WeightedFeature) resultsetReturnType).setWeight(21);
         addFeature(resultsetReturnType,
-                new HashSet<>(Arrays.asList(Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE089)));
+                new HashSet<>(Arrays.asList(Category.SINK, Category.NONE, Category.RELEVANT, Category.CWE89)));
 
         // Source to return.
         IFeature sourceGetToReturn = new SourceToReturnFeature("get");
@@ -1215,7 +1215,7 @@ public class CodeFeatureHandlerOld {
         IFeature voidOn = new VoidOnMethodFeature();
         ((WeightedFeature) voidOn).setWeight(5);
         addFeature(voidOn,
-                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE079, Category.NONE, Category.RELEVANT)));
+                new HashSet<>(Arrays.asList(Category.SINK, Category.CWE79, Category.NONE, Category.RELEVANT)));
 
         getFeaturesSize();
     }

@@ -23,7 +23,7 @@
 @attribute '<Method is part of class that ends with Request>' {true,false}
 @attribute '<Method is part of class that contains the name hibernate>' {true,false}
 @attribute '<Parameter type contains java.lang.string>' {true,false}
-@attribute CWE089 {0,1}
+@attribute CWE89 {0,1}
 
 @data
 '<org.apache.commons.httpclient.auth.DigestScheme: java.lang.String authenticate(org.apache.commons.httpclient.Credentials+org.apache.commons.httpclient.HttpMethod)>',false,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,0

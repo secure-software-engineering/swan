@@ -33,7 +33,7 @@ public class SwanCli {
         }
 
         if (options.getCweClasses().contains("all")) {
-            options.setCweClasses(Arrays.asList("cwe078", "cwe079", "cwe089", "cwe306", "cwe601", "cwe862", "cwe863"));
+            options.setCweClasses(Arrays.asList("cwe78", "cwe79", "cwe89", "cwe306", "cwe601", "cwe862", "cwe863"));
         }
 
         if (options.getFeatureSet().contains("all")) {

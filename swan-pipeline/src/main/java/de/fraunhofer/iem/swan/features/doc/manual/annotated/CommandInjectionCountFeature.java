@@ -10,8 +10,8 @@ import de.fraunhofer.iem.swan.features.doc.manual.SecurityVocabulary;
  * Evaluates if Command Injection words are found in the doc comment.
  * * <p>
  * * The number of Command Injection verbs and nouns is based on the
- * * {@link SecurityVocabulary#CWE078_VERBS}
- * * and {@link SecurityVocabulary#CWE078_NOUNS} lists.
+ * * {@link SecurityVocabulary#CWE78_VERBS}
+ * * and {@link SecurityVocabulary#CWE78_NOUNS} lists.
  *
  * @author Oshando Johnson on 30.09.20
  */
@@ -25,8 +25,8 @@ public class CommandInjectionCountFeature extends WordCountFeature implements ID
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE078));
-        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE078));
+        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE78));
+        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE78));
 
         return featureResult;
     }

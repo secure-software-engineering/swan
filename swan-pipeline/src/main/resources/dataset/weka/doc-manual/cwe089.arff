@@ -40,7 +40,7 @@
 @attribute OpenRedirectCountFeature numeric
 @attribute IncorrectAuthorizationCountFeature numeric
 @attribute TokenCountFeature numeric
-@attribute CWE089 {0,1}
+@attribute CWE89 {0,1}
 
 @data
 '<org.apache.commons.httpclient.auth.DigestScheme: java.lang.String authenticate(org.apache.commons.httpclient.Credentials+org.apache.commons.httpclient.HttpMethod)>',3,0,707,0,9.844643,5,0,50,0,4,0,3,12,1,1,1,0,34,9,0,0,0,110,0,54,110,54,0,0,0,50,4,26,54,3,24,0,24,132,0

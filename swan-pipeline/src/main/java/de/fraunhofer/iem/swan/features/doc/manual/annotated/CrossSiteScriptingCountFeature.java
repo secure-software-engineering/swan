@@ -11,8 +11,8 @@ import de.fraunhofer.iem.swan.features.doc.manual.SecurityVocabulary;
  * Evaluates if cross-site scripting words are found in the doc comment.
  * * <p>
  * * The number of cross-site scripting verbs and nouns is based on the
- * * {@link SecurityVocabulary#CWE079_VERBS}
- * * and {@link SecurityVocabulary#CWE079_NOUNS} lists.
+ * * {@link SecurityVocabulary#CWE79_VERBS}
+ * * and {@link SecurityVocabulary#CWE79_NOUNS} lists.
  *
  * @author Oshando Johnson on 30.09.20
  */
@@ -25,8 +25,8 @@ public class CrossSiteScriptingCountFeature extends WordCountFeature implements 
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE079));
-        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE079));
+        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE79));
+        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE79));
 
         return featureResult;
     }

@@ -89,32 +89,32 @@ public class SecurityVocabulary {
             .collect(Collectors.toSet());
 
     /**
-     * CWE078 verbs and sinks
+     * CWE78 verbs and sinks
      */
-    public static final Set<String> CWE078_VERBS = Stream.of("encode", "execute", "make", "process", "run", "delete",
+    public static final Set<String> CWE78_VERBS = Stream.of("encode", "execute", "make", "process", "run", "delete",
             "sanitize", "compile", "sanitize")
             .collect(Collectors.toSet());
-    public static final Set<String> CWE078_NOUNS = Stream.of("system", "command", "credential", "runtime", "encoder", "os",
+    public static final Set<String> CWE78_NOUNS = Stream.of("system", "command", "credential", "runtime", "encoder", "os",
             "operating", "host", "shell")
             .collect(Collectors.toSet());
 
     /**
-     * CWE079 verbs and sinks
+     * CWE79 verbs and sinks
      */
-    public static final Set<String> CWE079_VERBS = Stream.of("render", "input", "hibernate",
+    public static final Set<String> CWE79_VERBS = Stream.of("render", "input", "hibernate",
             "set", "sanitize")
             .collect(Collectors.toSet());
-    public static final Set<String> CWE079_NOUNS = Stream.of("web", "website", "request", "html", "page", "css", "dom",
+    public static final Set<String> CWE79_NOUNS = Stream.of("web", "website", "request", "html", "page", "css", "dom",
             "header", "document", "node")
             .collect(Collectors.toSet());
 
     /**
-     * CWE089 verbs and sinks
+     * CWE89 verbs and sinks
      */
-    public static final Set<String> CWE089_VERBS = Stream.of("create", "delete", "execute", "insert", "make", "persist","query",
+    public static final Set<String> CWE89_VERBS = Stream.of("create", "delete", "execute", "insert", "make", "persist","query",
             "remove", "run", "sanitize", "save", "schema", "script", "transact", "write", "update")
             .collect(Collectors.toSet());
-    public static final Set<String> CWE089_NOUNS = Stream.of("data", "datum", "database", "db", "encoder", "jdbc", "query",
+    public static final Set<String> CWE89_NOUNS = Stream.of("data", "datum", "database", "db", "encoder", "jdbc", "query",
             "request", "row", "table", "tuple", "transaction", "value", "sql")
             .collect(Collectors.toSet());
 

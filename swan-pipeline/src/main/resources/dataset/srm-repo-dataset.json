@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "methods": [
     {
       "name": "javax.servlet.http.Cookie.<init>",
@@ -248,7 +248,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -474,7 +474,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -627,7 +627,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -1032,7 +1032,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -1067,7 +1067,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -1253,7 +1253,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -1285,7 +1285,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -1345,7 +1345,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -1410,7 +1410,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -1441,7 +1441,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -1473,7 +1473,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call setIntHeader(String name, int value) on the wrapped response object.",
@@ -1601,7 +1601,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -1845,7 +1845,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -1876,7 +1876,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -1972,7 +1972,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -2006,7 +2006,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -2161,7 +2161,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Persist the given transient instance, first assigning a generated identifier. (Or using the current value of the identifier property if the assigned generator is used.) This operation cascades to associated instances if the association is mapped with {@code cascade=\"save-update\"}",
@@ -2229,7 +2229,7 @@
       },
       "cwe": [
         "CWE306",
-        "CWE089",
+        "CWE89",
         "CWE863",
         "CWE862"
       ],
@@ -2262,7 +2262,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -2361,7 +2361,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Find by primary key and lock. Search for an entity of the specified class and primary key and lock it with respect to the specified lock type. If the entity instance is contained in the persistence context, it is returned from there, and the effect of this method is the same as if the lock method had been called on the entity. If the entity is found within the persistence context and the lock mode type is pessimistic and the entity has a version attribute, the persistence provider must perform optimistic version checks when obtaining the database lock. If these checks fail, the OptimisticLockException will be thrown. If the lock mode type is pessimistic and the entity instance is found but cannot be locked: the PessimisticLockException will be thrown if the database locking failure causes transaction-level rollback the LockTimeoutException will be thrown if the database locking failure causes only statement-level rollback",
@@ -2397,7 +2397,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -2429,7 +2429,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -2553,9 +2553,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -2591,7 +2591,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -2685,7 +2685,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -3035,7 +3035,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Execute a query given static SQL, reading the ResultSet with a ResultSetExtractor. Uses a JDBC Statement, not a PreparedStatement. If you want to execute a static query with a PreparedStatement, use the overloaded {@code query} method with {@code null} as argument array.",
@@ -3102,7 +3102,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Performs a request with the clients default configuration.",
@@ -3141,7 +3141,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3202,7 +3202,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -3447,7 +3447,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3482,7 +3482,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -3545,7 +3545,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -3578,7 +3578,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3641,7 +3641,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3704,7 +3704,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3742,7 +3742,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -3836,7 +3836,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -3869,7 +3869,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -3970,7 +3970,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -4068,7 +4068,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -4227,7 +4227,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -4258,7 +4258,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -4382,7 +4382,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -4511,7 +4511,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -4609,7 +4609,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -4831,7 +4831,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -4865,7 +4865,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -4962,7 +4962,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Process the given request, generating a response.",
@@ -4996,7 +4996,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "HTML escape an input string. That is, {@code &lt;} is returned as {@code &lt;}",
@@ -5034,7 +5034,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -5070,7 +5070,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -5128,7 +5128,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -5221,7 +5221,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -5316,7 +5316,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -5414,7 +5414,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -5447,7 +5447,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -5572,7 +5572,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -5605,7 +5605,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -5697,7 +5697,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Either {@link #save(String, Object)} or {@link #update(String, Object)} the given instance, depending upon resolution of the unsaved-value checks (see the manual for discussion of unsaved-value checking). This operation cascades to associated instances if the association is mapped with {@code cascade=\"save-update\"}",
@@ -5793,7 +5793,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Run all {@link AfterTransaction @AfterTransaction} methods for the specified {@linkplain TestContext test context}. If one of the methods fails, the caught exception will be logged as an error, and the remaining methods will be given a chance to execute. After all methods have executed, the first caught exception, if any, will be rethrown.",
@@ -5891,7 +5891,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -5923,7 +5923,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -6018,7 +6018,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -6082,7 +6082,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -6133,7 +6133,7 @@
       ],
       "framework": "spring",
       "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/object/RdbmsOperation.html",
-      "comment": "Counter example for cwe089",
+      "comment": "Counter example for cwe89",
       "discovery": "swan",
       "dataIn": {
         "parameters": [],
@@ -6173,8 +6173,8 @@
         "return": true
       },
       "cwe": [
-        "CWE089",
-        "CWE078",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -6209,7 +6209,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Used during \"compiling\" a JPA criteria query.",
@@ -6241,7 +6241,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -6272,7 +6272,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -6334,8 +6334,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -6370,7 +6370,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -6643,7 +6643,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -6796,7 +6796,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call setDateHeader(String name, long date) on the wrapped response object.",
@@ -6830,7 +6830,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -6865,7 +6865,7 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -7023,7 +7023,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Update the persistent instance with the identifier of the given detached instance. If there is a persistent instance with the same identifier, an exception is thrown. This operation cascades to associated instances if the association is mapped with {@code cascade=\"save-update\"}",
@@ -7083,7 +7083,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -7172,7 +7172,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Given a string containing entity escapes, returns a string containing the actual Unicode characters corresponding to the escapes. Adapted from http://www.purpletech.com/code/src/com/purpletech/util/Utils.java.",
@@ -7275,7 +7275,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -7307,7 +7307,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -7558,7 +7558,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds plus the specified number of nanoseconds, subject to the precision and accuracy of system timers and schedulers. The thread does not lose ownership of any monitors.",
@@ -7589,7 +7589,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -7689,8 +7689,8 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
-        "CWE078"
+        "CWE79",
+        "CWE78"
       ],
       "javadoc": {
         "method": "Processes the servlet request.",
@@ -7750,7 +7750,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -7811,7 +7811,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -7845,9 +7845,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -7880,7 +7880,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8046,7 +8046,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -8078,7 +8078,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -8168,7 +8168,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8199,7 +8199,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8261,7 +8261,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -8388,7 +8388,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -8422,7 +8422,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8453,7 +8453,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8546,7 +8546,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Description of the Method",
@@ -8734,7 +8734,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -8800,9 +8800,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -8866,7 +8866,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Return the persistent instance of the given entity class with the given identifier, assuming that the instance exists. This method might return a proxied instance that is initialized on-demand, when a non-identifier method is accessed. You should not use this method to determine if an instance exists (use get() instead). Use this only to retrieve an instance that you assume exists, where non-existence would be an actual error.",
@@ -8930,8 +8930,8 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
-        "CWE078"
+        "CWE79",
+        "CWE78"
       ],
       "javadoc": {
         "method": "Performs a synchronous request. The client worker extends this interface with the ability to perform asynchronous requests.",
@@ -8965,7 +8965,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -9025,7 +9025,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -9058,7 +9058,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -9093,7 +9093,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -9316,7 +9316,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -9387,7 +9387,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -9543,7 +9543,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -9667,7 +9667,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Loads the native library specified by the filename argument. The filename argument must be an absolute path name. If the filename argument, when stripped of any platform-specific library prefix, path, and file extension, indicates a library whose name is, for example, L, and a native library called L is statically linked with the VM, then the JNI_OnLoad_L function exported by the library is invoked rather than attempting to load a dynamic library. A filename matching the argument does not have to exist in the file system. See the JNI Specification for more details. Otherwise, the filename argument is mapped to a native library image in an implementation-dependent manner. The call System.load(name) is effectively equivalent to the call:  Runtime.getRuntime().load(name)",
@@ -9727,8 +9727,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -9818,7 +9818,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -9889,9 +9889,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -9924,7 +9924,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Encode data for use in HTML attributes.",
@@ -9956,7 +9956,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -10020,7 +10020,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -10051,7 +10051,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -10083,7 +10083,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -10207,8 +10207,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -10270,7 +10270,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -10334,7 +10334,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -10422,7 +10422,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -10551,7 +10551,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -10584,7 +10584,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -10772,7 +10772,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -10862,9 +10862,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -10898,7 +10898,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -10929,7 +10929,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -11136,7 +11136,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -11176,7 +11176,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -11208,7 +11208,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -11242,7 +11242,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -11273,7 +11273,7 @@
         "return": false
       },
       "cwe": [
-        "CWE091"
+        "CWE91"
       ],
       "javadoc": {
         "method": "Encode data for use in an XML element. The implementation should follow the XML Encoding Standard from the W3C. The use of a real XML parser is strongly encouraged. However, in the hopefully rare case that you need to make sure that data is safe for inclusion in an XML document and cannot use a parse, this method provides a safe mechanism to do so.",
@@ -11501,7 +11501,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -11532,7 +11532,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -11662,7 +11662,7 @@
       },
       "cwe": [
         "CWE306",
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -11853,7 +11853,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -11916,7 +11916,7 @@
         "return": false
       },
       "cwe": [
-        "CWE091"
+        "CWE91"
       ],
       "javadoc": {
         "method": "",
@@ -12040,7 +12040,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -12108,7 +12108,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -12140,7 +12140,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -12235,7 +12235,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -12366,7 +12366,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -12400,7 +12400,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -12495,7 +12495,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -12557,7 +12557,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -12621,7 +12621,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -12653,7 +12653,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -12719,7 +12719,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -12784,7 +12784,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -12847,7 +12847,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Remove a persistent instance from the datastore. The object argument may be an instance associated with the receiving Session or a transient instance with an identifier associated with existing persistent state. This operation cascades to associated instances if the association is mapped with {@code cascade=\"delete\"}",
@@ -12878,8 +12878,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -12910,7 +12910,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call setCharacterEncoding(String charset) on the wrapped response object.",
@@ -12939,7 +12939,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -12972,7 +12972,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -13003,7 +13003,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -13066,7 +13066,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -13097,7 +13097,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -13318,7 +13318,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -13349,7 +13349,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -13440,8 +13440,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -13502,7 +13502,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -13534,7 +13534,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -13690,7 +13690,7 @@
         "return": false
       },
       "cwe": [
-        "CWE077"
+        "CWE77"
       ],
       "javadoc": {
         "method": "Encode for an operating system command shell according to the selected codec (appropriate codecs include the WindowsCodec and UnixCodec). Please note the following recommendations before choosing to use this method: 1) It is strongly recommended that applications avoid making direct OS system calls if possible as such calls are not portable, and they are potentially unsafe. Please use language provided features if at all possible, rather than native OS calls to implement the desired feature. 2) If an OS call cannot be avoided, then it is recommended that the program to be invoked be invoked directly (e.g., System.exec(\"nameofcommand\" + \"parameterstocommand\");) as this avoids the use of the command shell. The \"parameterstocommand\" should of course be validated before passing them to the OS command. 3) If you must use this method, then we recommend validating all user supplied input passed to the command shell as well, in addition to using this method in order to make the command shell invocation safe. An example use of this method would be: System.exec(\"dir \" + ESAPI.encodeForOS(WindowsCodec, \"parameter(s)tocommandwithuserinput\");",
@@ -13730,7 +13730,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -13762,7 +13762,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -13863,7 +13863,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -13982,7 +13982,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -14131,7 +14131,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -14163,7 +14163,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call addIntHeader(String name, int value) on the wrapped response object.",
@@ -14284,7 +14284,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -14316,7 +14316,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -14476,9 +14476,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078"
+        "CWE79",
+        "CWE89",
+        "CWE78"
       ],
       "javadoc": {
         "method": "The method is similar to ValidationRuile.getSafe except that it returns a harmless object that may or may not have any similarity to the original input (in some cases you may not care). In most cases this should be the same as the getSafe method only instead of throwing an exception, return some default value.",
@@ -14513,7 +14513,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -14644,7 +14644,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -15081,7 +15081,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -15114,7 +15114,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -15249,7 +15249,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15281,7 +15281,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -15313,7 +15313,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -15372,7 +15372,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -15404,7 +15404,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15437,7 +15437,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15468,7 +15468,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15628,7 +15628,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15657,7 +15657,7 @@
         "return": true
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15748,7 +15748,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15838,7 +15838,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -15870,7 +15870,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -16249,7 +16249,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -16282,7 +16282,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Compile an XPath expression for later evaluation. If expression contains any {@link XPathFunction}s, they must be available via the {@link XPathFunctionResolver}. An {@link XPathExpressionException} will be thrown if the XPathFunction cannot be resovled with the XPathFunctionResolver. If expression is null, a NullPointerException is thrown.",
@@ -16414,7 +16414,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -16540,7 +16540,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -16571,7 +16571,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call sendError(int sc) on the wrapped response object.",
@@ -16664,7 +16664,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -16730,8 +16730,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -16941,7 +16941,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -16975,7 +16975,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -17069,7 +17069,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -17225,7 +17225,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -17376,7 +17376,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Insert the specified HTML into the DOM before this node (i.e. as a preceding sibling).",
@@ -17471,7 +17471,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -17656,7 +17656,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Writes the response header to the output stream.",
@@ -17781,7 +17781,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -17814,7 +17814,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -17935,7 +17935,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -17969,7 +17969,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -18032,7 +18032,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -18069,7 +18069,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -18132,7 +18132,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -18292,7 +18292,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "Encode data for use in LDAP queries.",
@@ -18411,7 +18411,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -18479,7 +18479,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -18605,7 +18605,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -18636,7 +18636,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -18733,7 +18733,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -18793,7 +18793,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -18825,7 +18825,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -18890,7 +18890,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -19014,7 +19014,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -19108,7 +19108,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -19416,7 +19416,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -19448,7 +19448,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -19481,8 +19481,8 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
-        "CWE078"
+        "CWE79",
+        "CWE78"
       ],
       "javadoc": {
         "method": "Performs the request and returns the result object.",
@@ -19514,7 +19514,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -19577,7 +19577,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -19731,7 +19731,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -19793,7 +19793,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -19926,7 +19926,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -19989,7 +19989,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -20023,7 +20023,7 @@
       },
       "cwe": [
         "CWE306",
-        "CWE089",
+        "CWE89",
         "CWE601"
       ],
       "javadoc": {
@@ -20085,7 +20085,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -20229,7 +20229,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -20265,7 +20265,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Parse parameters from the given request, handle any servlet commands, and update this session based on the parameters.",
@@ -20352,7 +20352,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -20387,7 +20387,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -20479,7 +20479,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -20537,7 +20537,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -20659,7 +20659,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -20692,7 +20692,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Execute a SQL statement that retruns a single ResultSet",
@@ -20761,7 +20761,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Decodes a {@code application/x-www-form-urlencoded} string using a specific encoding scheme. The supplied encoding is used to determine what characters are represented by any consecutive sequences of the form \"{@code %xy}\". Note: The World Wide Web Consortium Recommendation states that UTF-8 should be used. Not doing so may introduce incompatibilities.",
@@ -20828,7 +20828,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -20859,7 +20859,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Gets the real path corresponding to the given virtual path. For example, if path is equal to /index.html, this method will return the absolute file path on the server's filesystem to which a request of the form http://&lt;host&gt;:&lt;port&gt;/&lt;contextPath&gt;/index.html would be mapped, where &lt;contextPath&gt; corresponds to the context path of this ServletContext. The real path returned will be in a form appropriate to the computer and operating system on which the servlet container is running, including the proper path separators. Resources inside the /META-INF/resources directories of JAR files bundled in the application's /WEB-INF/lib directory must be considered only if the container has unpacked them from their containing JAR file, in which case the path to the unpacked location must be returned. This method returns null if the servlet container is unable to translate the given virtual path to a real path.",
@@ -20925,7 +20925,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -21262,7 +21262,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -21392,7 +21392,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -21426,7 +21426,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -21647,7 +21647,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -21680,7 +21680,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -21716,7 +21716,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -21781,7 +21781,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -21812,7 +21812,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -21845,7 +21845,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Insert the specified HTML into the DOM after this node (i.e. as a following sibling).",
@@ -21978,7 +21978,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Runs the main method of the given class with the arguments passed in argv",
@@ -22042,7 +22042,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -22140,7 +22140,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -22174,7 +22174,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -22206,7 +22206,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "Loads the native library specified by the libname argument. The libname argument must not contain any platform specific prefix, file extension or path. If a native library called libname is statically linked with the VM, then the JNI_OnLoad_libname function exported by the library is invoked. See the JNI Specification for more details. Otherwise, the libname argument is loaded from a system library location and mapped to a native library image in an implementation- dependent manner. The call System.loadLibrary(name) is effectively equivalent to the call  Runtime.getRuntime().loadLibrary(name)",
@@ -22299,7 +22299,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -22332,7 +22332,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -22425,7 +22425,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Prints an integer. The string produced by {@link java.lang.String#valueOf(int)} is translated into bytes according to the platform's default character encoding, and these bytes are written in exactly the manner of the {@link #write(int)} method.",
@@ -22458,7 +22458,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -22516,8 +22516,8 @@
         "return": false
       },
       "cwe": [
-        "CWE089",
-        "CWE079"
+        "CWE89",
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -22642,7 +22642,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -22737,7 +22737,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Constructs a cookie with the specified name and value. The name must conform to RFC 2109. However, vendors may provide a configuration option that allows cookie names conforming to the original Netscape Cookie Specification to be accepted. The name of a cookie cannot be changed once the cookie has been created. The value can be anything the server chooses to send. Its value is probably of interest only to the server. The cookie's value can be changed after creation with the setValue method. By default, cookies are created according to the Netscape cookie specification. The version can be changed with the setVersion method.",
@@ -22962,7 +22962,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -23030,7 +23030,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -23098,7 +23098,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -23263,7 +23263,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -23362,7 +23362,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -23420,7 +23420,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -23484,9 +23484,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -23518,7 +23518,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -23585,7 +23585,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to set the character encoding on the wrapped request object.",
@@ -23800,7 +23800,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -23864,7 +23864,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -23922,7 +23922,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -24277,7 +24277,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -24340,9 +24340,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -24417,9 +24417,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -24450,7 +24450,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -24575,7 +24575,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Print an array of characters and then terminate the line. This method behaves as though it invokes print(char[]) and then println().",
@@ -24670,7 +24670,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -24733,7 +24733,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -24855,7 +24855,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -24981,7 +24981,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -25013,7 +25013,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to return setAttribute(String name, Object o) on the wrapped request object.",
@@ -25167,7 +25167,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Encode string for use in CSS.",
@@ -25264,7 +25264,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -25326,7 +25326,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -25419,7 +25419,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -25450,7 +25450,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -25483,7 +25483,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -25521,9 +25521,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -25594,7 +25594,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -25625,7 +25625,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -25717,7 +25717,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call addDateHeader(String name, long date) on the wrapped response object.",
@@ -25911,7 +25911,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -26006,7 +26006,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26072,7 +26072,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26163,7 +26163,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26194,7 +26194,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -26225,7 +26225,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26281,7 +26281,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Decodes HTML entities.",
@@ -26339,7 +26339,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26374,7 +26374,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26570,7 +26570,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -26608,7 +26608,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26667,7 +26667,7 @@
         "return": false
       },
       "cwe": [
-        "CWE091"
+        "CWE91"
       ],
       "javadoc": {
         "method": "",
@@ -26758,8 +26758,8 @@
         "return": false
       },
       "cwe": [
-        "CWE079",
-        "CWE089"
+        "CWE79",
+        "CWE89"
       ],
       "javadoc": {
         "method": "Encode data for use in HTML using HTML entity encoding Note that the following characters: 00-08, 0B-0C, 0E-1F, and 7F-9F cannot be used in HTML.",
@@ -26893,7 +26893,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -26955,7 +26955,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -26987,7 +26987,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Encode input for use in a SQL query, according to the selected codec (appropriate codecs include the MySQLCodec and OracleCodec). This method is not recommended. The use of the PreparedStatement interface is the preferred approach. However, if for some reason this is impossible, then this method is provided as a weaker alternative. The best approach is to make sure any single-quotes are double-quoted. Another possible approach is to use the {escape} syntax described in the JDBC specification in section 1.5.6. However, this syntax does not work with all drivers, and requires modification of all queries.",
@@ -27085,7 +27085,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -27299,7 +27299,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -27359,7 +27359,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -27417,7 +27417,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -27632,7 +27632,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -27665,7 +27665,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -27918,7 +27918,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -27983,7 +27983,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -28014,7 +28014,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28108,7 +28108,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28265,7 +28265,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28327,7 +28327,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -28393,7 +28393,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28482,7 +28482,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "The default behavior of this method is to call setContentType(String type) on the wrapped response object.",
@@ -28515,7 +28515,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -28643,7 +28643,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -28798,7 +28798,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28830,7 +28830,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -28897,9 +28897,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -29257,9 +29257,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078"
+        "CWE79",
+        "CWE89",
+        "CWE78"
       ],
       "javadoc": {
         "method": "The method is similar to ValidationRuile.getSafe except that it returns a harmless object that may or may not have any similarity to the original input (in some cases you may not care). In most cases this should be the same as the getSafe method only instead of throwing an exception, return some default value. Calls sanitize(String, String, DateFormat) with DateFormat.getInstance()",
@@ -29292,7 +29292,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "Issue a single SQL execute, typically a DDL statement.",
@@ -29324,7 +29324,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -29386,7 +29386,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -29489,9 +29489,9 @@
       },
       "cwe": [
         "CWE306",
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {
@@ -29526,7 +29526,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -29590,7 +29590,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -29625,7 +29625,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Parse HTML into a Document.",
@@ -29750,7 +29750,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "A convenience function that sanitizes a string of HTML.",
@@ -29781,7 +29781,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -29991,7 +29991,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -30107,7 +30107,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "",
@@ -30347,7 +30347,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -30411,7 +30411,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Writes a double value to the client, with no carriage return-line feed (CRLF) at the end.",
@@ -30440,7 +30440,7 @@
         "return": false
       },
       "cwe": [
-        "CWE035"
+        "CWE35"
       ],
       "javadoc": {
         "method": "",
@@ -30472,7 +30472,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -30724,7 +30724,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -30816,7 +30816,7 @@
         "return": false
       },
       "cwe": [
-        "CWE078"
+        "CWE78"
       ],
       "javadoc": {
         "method": "",
@@ -31096,7 +31096,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -31218,7 +31218,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -31378,7 +31378,7 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
+        "CWE79",
         "CWE601"
       ],
       "javadoc": {
@@ -31411,7 +31411,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -31480,7 +31480,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -31514,7 +31514,7 @@
         "return": false
       },
       "cwe": [
-        "CWE079"
+        "CWE79"
       ],
       "javadoc": {
         "method": "Description of the Method",
@@ -31671,7 +31671,7 @@
         "return": false
       },
       "cwe": [
-        "CWE089"
+        "CWE89"
       ],
       "javadoc": {
         "method": "",
@@ -31736,7 +31736,7 @@
         "return": false
       },
       "cwe": [
-        "CWE090"
+        "CWE90"
       ],
       "javadoc": {
         "method": "",
@@ -31770,9 +31770,9 @@
         "return": true
       },
       "cwe": [
-        "CWE079",
-        "CWE089",
-        "CWE078",
+        "CWE79",
+        "CWE89",
+        "CWE78",
         "CWE601"
       ],
       "javadoc": {

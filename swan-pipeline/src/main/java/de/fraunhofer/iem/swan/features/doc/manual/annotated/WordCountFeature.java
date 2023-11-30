@@ -52,17 +52,17 @@ public abstract class WordCountFeature {
                 nounList = SecurityVocabulary.SANITIZER_NOUNS;
                 verbList = SecurityVocabulary.SANITIZER_VERBS;
                 break;
-            case CWE078:
-                nounList = SecurityVocabulary.CWE078_NOUNS;
-                verbList = SecurityVocabulary.CWE078_VERBS;
+            case CWE78:
+                nounList = SecurityVocabulary.CWE78_NOUNS;
+                verbList = SecurityVocabulary.CWE78_VERBS;
                 break;
-            case CWE079:
-                nounList = SecurityVocabulary.CWE079_NOUNS;
-                verbList = SecurityVocabulary.CWE079_VERBS;
+            case CWE79:
+                nounList = SecurityVocabulary.CWE79_NOUNS;
+                verbList = SecurityVocabulary.CWE79_VERBS;
                 break;
-            case CWE089:
-                nounList = SecurityVocabulary.CWE089_NOUNS;
-                verbList = SecurityVocabulary.CWE089_VERBS;
+            case CWE89:
+                nounList = SecurityVocabulary.CWE89_NOUNS;
+                verbList = SecurityVocabulary.CWE89_VERBS;
                 break;
             case CWE306:
                 nounList = SecurityVocabulary.CWE306_NOUNS;

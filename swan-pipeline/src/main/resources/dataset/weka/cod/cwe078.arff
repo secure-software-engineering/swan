@@ -20,7 +20,7 @@
 @attribute '<Parameter type contains credential>' {true,false}
 @attribute '<Method name contains compile>' {true,false}
 @attribute '<Parameter type contains java.lang.string>' {true,false}
-@attribute CWE078 {0,1}
+@attribute CWE78 {0,1}
 
 @data
 '<org.apache.commons.httpclient.auth.DigestScheme: java.lang.String authenticate(org.apache.commons.httpclient.Credentials+org.apache.commons.httpclient.HttpMethod)>',false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,true,false,false,0
