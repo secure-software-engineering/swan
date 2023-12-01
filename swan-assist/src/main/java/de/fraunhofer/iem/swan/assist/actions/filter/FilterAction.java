@@ -8,6 +8,7 @@
 package de.fraunhofer.iem.swan.assist.actions.filter;
 
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -66,7 +67,7 @@ public class FilterAction extends AnAction {
 
         //Set/unset icon for filters
         if ( MethodListTree.TREE_FILTERS.contains(filterPair))
-            event.getPresentation().setIcon(PluginIcons.SELECTED);
+            event.getPresentation().setIcon(AllIcons.Actions.Checked_selected);
         else
             event.getPresentation().setIcon(null);
     }

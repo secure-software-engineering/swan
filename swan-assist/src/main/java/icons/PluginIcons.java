@@ -17,16 +17,7 @@ import javax.swing.*;
 public interface PluginIcons {
 
     Icon SWAN_ASSIST = IconLoader.getIcon("/icons/swan_assist.png");
-    Icon IMPORT_ACTION = IconLoader.getIcon("/icons/import.png");
-    Icon REFRESH_SWAN = IconLoader.getIcon("/icons/refresh.png");
-    Icon HELP_ACTION = IconLoader.getIcon("/icons/help.png");
-    Icon FILTER_ACTION = IconLoader.getIcon("/icons/filter.png");
     Icon ACTIVE_FILTER_ACTION = IconLoader.getIcon("/icons/activeFilter.png");
-    Icon ADD_METHOD_ACTION = IconLoader.getIcon("/icons/add.png");
-    Icon EXPORT_ACTION = IconLoader.getIcon("/icons/export.png");
-    Icon SUGGEST_ACTION = IconLoader.getIcon("/icons/suggest.png");
-    Icon EXPAND = IconLoader.getIcon("/icons/expand.png");
-    Icon COLLAPSE = IconLoader.getIcon("/icons/collapse.png");
 
     Icon SOURCE = IconLoader.getIcon("/icons/sou.png");
     Icon SANITIZER = IconLoader.getIcon("/icons/san.png");
@@ -37,7 +28,4 @@ public interface PluginIcons {
     Icon CWE = IconLoader.getIcon("/icons/cwe.png");
     Icon DEFAULT = IconLoader.getIcon("/icons/default.png");
 
-    Icon SELECTED = IconLoader.getIcon("/icons/selected.png");
-
-    Icon CLASS = IconLoader.getIcon("/icons/class.png");
 }

@@ -7,6 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.ui;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.ui.JBColor;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.assist.util.Constants;
@@ -90,7 +91,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
 
                 text.setToolTipText("<html>" + classPair.getValue() + " methods in <b>" + classname + "</b></html>");
                 text.setText("<html>" + classname.substring(classname.lastIndexOf(".") + 1) + "  <font color='" + HIGHLIGHT_COLOR + "'>" + classPair.getValue() + " " + getPlural(Integer.parseInt(classPair.getValue().toString()), "method", "methods") + "</font></html>");
-                text.setIcon(PluginIcons.CLASS);
+                text.setIcon(AllIcons.Nodes.Class);
             } else {
 
                 text.setText(value.toString().replace("color='gray'", "color='" + HIGHLIGHT_COLOR + "'"));

@@ -11,7 +11,6 @@ import com.intellij.openapi.util.IconLoader;
 import de.fraunhofer.iem.swan.data.Constants;
 import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -69,7 +68,7 @@ public class IconUtils {
         Icon icon;
 
         try{
-             icon = IconLoader.findIcon("/icons/" + joinedList + ".png");
+             icon = IconLoader.findIcon("/icons/" + joinedList + ".png" );
         }catch (Exception e){
             icon = PluginIcons.DEFAULT;
         }

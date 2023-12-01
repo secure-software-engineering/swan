@@ -7,6 +7,7 @@
 
 package de.fraunhofer.iem.swan.assist.actions.filter;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -65,9 +66,9 @@ public class FilterActionGroup extends ActionGroup {
         else
             event.getPresentation().setEnabled(false);
 
-        if(!MethodListTree.TREE_FILTERS.isEmpty())
-            event.getPresentation().setIcon(PluginIcons.ACTIVE_FILTER_ACTION);
+        if(MethodListTree.TREE_FILTERS.isEmpty())
+            event.getPresentation().setIcon(AllIcons.General.Filter);
         else
-            event.getPresentation().setIcon(PluginIcons.FILTER_ACTION);
+            event.getPresentation().setIcon(PluginIcons.ACTIVE_FILTER_ACTION);
     }
 }

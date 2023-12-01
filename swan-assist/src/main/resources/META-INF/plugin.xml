@@ -29,20 +29,22 @@
 
             <action id="SWAN_Assist.LaunchSWANAction"
                     class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
-                    icon="PluginIcons.REFRESH_SWAN"
+                    icon="AllIcons.Toolwindows.ToolWindowRun"
                     text="Run Analysis">
             </action>
 
+                    icon="AllIcons.ToolbarDecorator.Import"
+                    icon="AllIcons.ToolbarDecorator.Export"
             <!--action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.suggest.SuggestAction" text="Suggest Methods"
                     description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/-->
             <separator/>
             <group id="SWAN_Assist.FilterActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.FilterActionGroup"
                    text="Filter Methods"
-                   popup="true" icon="PluginIcons.FILTER_ACTION">
+                   popup="true" icon="AllIcons.General.Filter">
             </group>
             <action id="SWAN_Assist.ExpandAll" class="de.fraunhofer.iem.swan.assist.actions.ExpandAllAction"
                     text="Expand All"
-                    icon="PluginIcons.EXPAND"
+                    icon="AllIcons.Actions.Expandall"
                     description="Expand or collapse the method tree">
             </action>
             <separator/>
@@ -52,6 +54,7 @@
                     text="Import File"
                     icon="PluginIcons.IMPORT_ACTION"
                     description="Import configuration file">
+                    icon="AllIcons.ToolbarDecorator.Export"
             </action>
 
             <action id="SWAN_Assist.ExportAction"
@@ -59,24 +62,26 @@
                     icon="PluginIcons.EXPORT_ACTION"
                     text="Export File"
                     description="Export configuration file">
+                   popup="true" icon="AllIcons.Actions.RunAll">
             </action>
 
             <separator/>
 
+                    icon="AllIcons.General.Settings"
 
             <action id="SWAN_Assist.HelpAction"
                     class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
-                    text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
+                    text="Help" description="Resources" icon="AllIcons.Actions.Help">
             </action>
         </group>
 
         <group id="SWAN_Assist.MethodActionGroup" class="de.fraunhofer.iem.swan.assist.actions.method.MethodActionGroup" text="Method Options"
-               popup="true" icon="PluginIcons.FILTER_ACTION">
+               popup="true" icon="AllIcons.General.Filter">
 
         </group>
 
         <group id="SWAN_Assist.CategoryActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.CategoryActionGroup" text="Filter List"
-               popup="true" icon="PluginIcons.FILTER_ACTION">
+               popup="true" icon="AllIcons.General.Filter">
 
         </group>
 
@@ -84,14 +89,14 @@
             <add-to-group group-id="EditorPopupMenu" />
             <action id="SWAN_Assist.Editor.LaunchSWANAction"
                     class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
-                    icon="PluginIcons.REFRESH_SWAN"
+                    icon="AllIcons.Toolwindows.ToolWindowRun"
                     text="Run Analysis">
             </action>
 
             <separator/>
 
             <action id="SWAN_Assist.AddMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.AddMethodAction"
-                    text="Classify/Re-Classify Method" icon="PluginIcons.ADD_METHOD_ACTION">
+                    text="Classify/Re-Classify Method" icon="AllIcons.General.Add">
             </action>
 
             <action id="SWAN_Assist.RestoreMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.RestoreMethodAction"
@@ -111,15 +116,15 @@
             </action>
             <separator/>
             <action id="SWAN_Assist.Editor.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
-                    text="Import File" icon="PluginIcons.IMPORT_ACTION">
+                    text="Import File" icon="AllIcons.ToolbarDecorator.Import">
             </action>
             <action id="SWAN_Assist.Editor.ExportAction" class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
-                    text="Export File" icon="PluginIcons.EXPORT_ACTION">
+                    text="Export File" icon="AllIcons.ToolbarDecorator.Export">
             </action>
             <separator/>
             <action id="SWAN_Assist.Editor.HelpAction"
                     class="de.fraunhofer.iem.swan.assist.actions.HelpAction"
-                    text="Help" description="Resources" icon="PluginIcons.HELP_ACTION">
+                    text="Help" description="Resources" icon="AllIcons.Actions.Help">
             </action>
         </group>
     </actions>

@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.swan.assist.actions;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
@@ -40,10 +41,10 @@ public class ExpandAllAction extends AnAction {
 
         //Disable/Enable action button
         if (MethodListTree.TREE_EXPANDED){
-            event.getPresentation().setIcon(PluginIcons.COLLAPSE);
+            event.getPresentation().setIcon(AllIcons.Actions.Collapseall);
             event.getPresentation().setText("Collapse Tree");
         } else{
-            event.getPresentation().setIcon(PluginIcons.EXPAND);
+            event.getPresentation().setIcon(AllIcons.Actions.Expandall);
             event.getPresentation().setText("Expand Tree");
         }
     }
