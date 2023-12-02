@@ -10,7 +10,7 @@ package de.fraunhofer.iem.swan.assist.data;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import de.fraunhofer.iem.swan.assist.ui.dialog.RunAnalysisDialog;
+import de.fraunhofer.iem.swan.assist.ui.dialog.SettingsDialog;
 
 import java.io.File;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class PropertiesManager {
     private static void showSettingsDialog(Project project) {
 
         //Launch SWAN Properties Dialog
-        RunAnalysisDialog dialog = new RunAnalysisDialog(project, true);
+        SettingsDialog dialog = new SettingsDialog(project, true);
         dialog.show();
 
         if (dialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {

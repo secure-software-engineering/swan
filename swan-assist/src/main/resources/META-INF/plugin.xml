@@ -67,7 +67,11 @@
 
             <separator/>
 
+            <action id="SWAN_Assist.SettingsAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.SettingsAction"
                     icon="AllIcons.General.Settings"
+                    text="Configure">
+            </action>
 
             <action id="SWAN_Assist.HelpAction"
                     class="de.fraunhofer.iem.swan.assist.actions.HelpAction"

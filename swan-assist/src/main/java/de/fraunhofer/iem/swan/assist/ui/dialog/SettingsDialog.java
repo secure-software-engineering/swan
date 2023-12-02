@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
  * Dialog to launch configuration window for SWAN before running the application.
  */
 
-public class RunAnalysisDialog extends DialogWrapper {
+public class SettingsDialog extends DialogWrapper {
 
     private JPanel contentPane;
     private JButton buttonOK;
@@ -47,8 +47,9 @@ public class RunAnalysisDialog extends DialogWrapper {
     private JButton trainButton;
     private JPanel trainingPanel;
     private JCheckBox trainingPathCheckbox;
-    private JRadioButton WEKARadioButton;
-    private JRadioButton MEKARadioButton;
+    private JRadioButton wekaRadioButton;
+    private JRadioButton mekaRadioButton;
+    private ButtonGroup toolkitButtonGroup;
     private JPanel toolkitPanel;
     private HashMap<String, String> parameters = new HashMap<String, String>();
     private ResourceBundle resourceBundle;
@@ -61,12 +62,18 @@ public class RunAnalysisDialog extends DialogWrapper {
      * @param project Active project in the editor
      * @param modal   Modal setting for dialog
      */
-    public RunAnalysisDialog(Project project, boolean modal) {
+    public SettingsDialog(Project project, boolean modal) {
 
         super(project, modal);
         this.project = project;
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
-        setTitle(resourceBundle.getString("Launcher.Title"));
+        setTitle(resourceBundle.getString("SettingsDialog.Title"));
+
+        toolkitButtonGroup = new ButtonGroup();
+        mekaRadioButton.setActionCommand("meka");
+        toolkitButtonGroup.add(mekaRadioButton);
+        wekaRadioButton.setActionCommand("weka");
+        toolkitButtonGroup.add(wekaRadioButton);
 
         config = new Properties();
         InputStream input = null;
@@ -89,17 +96,14 @@ public class RunAnalysisDialog extends DialogWrapper {
         File configurationFile = new File(JSONFileLoader.getConfigurationFile(true));
 
         //Use value for source path, if available. Otherwise set the default path
+        sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY,
+                project.getBasePath() + "/target/classes"));
 
-        if (!PropertiesComponent.getInstance(project).isValueSet(Constants.SOURCE_DIRECTORY))
-            sourceDirTextbox.setText(project.getBasePath() + "/target/classes");
-        else
-            sourceDirTextbox.setText(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY));
 
         //Use value for the output path, if available. Otherwise set the default path
-        if (PropertiesComponent.getInstance(project).isValueSet(Constants.OUTPUT_DIRECTORY))
-            outputDir.setText(project.getBasePath() + File.separator + config.getProperty("output_dir_name"));
-        else
-            outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY));
+        outputDir.setText(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY,
+                project.getBasePath() + File.separator + config.getProperty("output_dir_name")));
+
 
         //Set value for using training path
         trainingPathCheckbox.setSelected(PropertiesComponent.getInstance(project).getBoolean(Constants.DEFAULT_TRAINING_PATH, false));
@@ -193,7 +197,7 @@ public class RunAnalysisDialog extends DialogWrapper {
         if (isOKActionEnabled()) {
 
             //ensure that required fields are populated
-            if (sourceDirTextbox.getText().trim().isEmpty() || outputDir.getText().isEmpty()
+            if (sourceDirTextbox.getText().trim().isEmpty()
                     || !(new File(sourceDirTextbox.getText().trim()).exists())
                     || (FileUtils.listFiles(new File(sourceDirTextbox.getText()), new String[]{"class", "jar"}, true)).size() == 0) {
 
@@ -201,20 +205,25 @@ public class RunAnalysisDialog extends DialogWrapper {
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
-            } else if (trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
-
+            } else if (outputDir.getText().isEmpty()){
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
-                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
-            } else {
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(outputDir), Balloon.Position.below);
+        } else if (trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
 
-                setParameters();
-                //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
-                //analysisCompleted.notify();
-            }
+            JBPopupFactory.getInstance()
+                    .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
+                    .createBalloon()
+                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
+        } else {
+
+            setParameters();
+            //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
+            //analysisCompleted.notify();
         }
     }
+}
 
     private void setParameters() {
 
@@ -232,11 +241,6 @@ public class RunAnalysisDialog extends DialogWrapper {
         } else */
         //set the configuration file to default
         parameters.put(Constants.CONFIGURATION_FILE, config.getProperty("swan_default_param_value"));
-
-        if (MEKARadioButton.isSelected()) {
-            parameters.put(Constants.TOOLKIT, MEKARadioButton.getText());
-        } else {  parameters.put(Constants.TOOLKIT, WEKARadioButton.getText());
-        }
         parameters.put(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         parameters.put(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         parameters.put(Constants.OUTPUT_LOG, config.getProperty("log_suffix"));
@@ -244,6 +248,8 @@ public class RunAnalysisDialog extends DialogWrapper {
 
         PropertiesComponent.getInstance(project).setValue(Constants.OUTPUT_DIRECTORY, outputDir.getText());
         PropertiesComponent.getInstance(project).setValue(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
+        PropertiesComponent.getInstance(project).setValue(Constants.LAST_SRM_LIST, parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("output_json_suffix"));
+        PropertiesComponent.getInstance(project).setValue(Constants.TOOLKIT, toolkitButtonGroup.getSelection().getActionCommand());
 
         super.doOKAction();
     }
