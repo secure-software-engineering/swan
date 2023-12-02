@@ -50,8 +50,6 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
 
                 MethodWrapper method = (MethodWrapper) object;
 
-
-
                 String methodName = Formatter.trimProperty(method.getMethodName(false));
 
                 if (methodName.contains("<init>"))

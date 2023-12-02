@@ -71,8 +71,8 @@ public class MethodListTree extends Tree {
     private ResourceBundle resource;
     public static boolean TREE_EXPANDED;
 
-    private static final NotificationGroup TOOL_GROUP= new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
-            NotificationDisplayType.TOOL_WINDOW, true);;
+    private static final NotificationGroup TOOL_GROUP = new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
+            NotificationDisplayType.TOOL_WINDOW, true);
 
     /**
      * Initialises method list tree
@@ -233,6 +233,7 @@ public class MethodListTree extends Tree {
                         ApplicationManager.getApplication().runReadAction(new Runnable() {
                             public void run() {
 
+                                PropertiesComponent.getInstance(project).setValue(Constants.LAST_SRM_LIST, fileName);
                                 JSONFileLoader.setConfigurationFile(fileName, project);
                                 JSONFileLoader.loadInitialFile();
                             }
@@ -552,9 +553,13 @@ public class MethodListTree extends Tree {
 
         TreeMap<String, ArrayList<MethodWrapper>> methods = JSONFileLoader.getMethodsForTree(TREE_FILTERS, currentFile, project);
 
-        if (methods.size() > 0) {
+        if (!methods.isEmpty()) {
 
-            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html><b>SRMs</b> <font color='gray'>[<i>" + JSONFileLoader.getConfigurationFile(false) + "</i>]</font></html>");
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("<html>" + "<b>Security Relevant Methods</b></html>");
+
+            DefaultMutableTreeNode currentProject = new DefaultMutableTreeNode("Project");
+            DefaultMutableTreeNode standardSrms = new DefaultMutableTreeNode("Standard");
+
 
             int methodCount = 0;
             int totalMethods = 0;
@@ -570,14 +575,22 @@ public class MethodListTree extends Tree {
                 for (MethodWrapper method : sortedList) {
 
                     classNode.add(addCategoriesToNode(method));
-                    root.add(classNode);
+
+                    if (method.getMethod().isKnown())
+                        standardSrms.add(classNode);
+                    else
+                        currentProject.add(classNode);
                 }
             }
 
             String pattern = "###,###";
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
-            root.setUserObject("<html><b>SRMs</b> <font color='gray'>(" + decimalFormat.format(totalMethods) + " in " + decimalFormat.format(methods.size()) + " classes)</font></html>");
+            currentProject.setUserObject("<html><b>" + project.getName() + "</b> <font color='gray'>(" + currentProject.getLeafCount() + " in " + currentProject.getChildCount() + " classes)</font></html>");
+            root.add(currentProject);
+
+            standardSrms.setUserObject("<html><b>Known SRMs</b> <font color='gray'>(" + standardSrms.getLeafCount() + " in " + standardSrms.getChildCount()+ " classes)</font></html>");
+            root.add(standardSrms);
 
             treeModel.setRoot(root);
             TREE_EXPANDED = false;
