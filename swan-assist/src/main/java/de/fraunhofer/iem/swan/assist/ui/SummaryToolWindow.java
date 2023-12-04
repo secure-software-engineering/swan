@@ -26,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Objects;
 
 /**
  * Tool Window implementation for the Plugin.
@@ -53,14 +54,15 @@ public class SummaryToolWindow implements ToolWindowFactory {
         toolPanel.add(new JBScrollPane(new MethodListTree(project)), BorderLayout.CENTER);
 
         //If a configuration file was already selected, load it
-        if(PropertiesComponent.getInstance(project).isValueSet(Constants.CONFIGURATION_FILE)){
+        if(PropertiesComponent.getInstance(project).isValueSet(Constants.LAST_SRM_LIST)){
 
-            File configFile = new File(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
+          File configFile = new File(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.LAST_SRM_LIST)));
 
             if(configFile.exists()){
+
                 MessageBus messageBus = project.getMessageBus();
                 ConfigurationFileNotifier publisher = messageBus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
-                publisher.loadInitialFile(PropertiesComponent.getInstance(project).getValue(Constants.CONFIGURATION_FILE));
+                publisher.loadInitialFile(PropertiesComponent.getInstance(project).getValue(Constants.LAST_SRM_LIST));
 
                 actionToolbar.updateActionsImmediately();
             }
