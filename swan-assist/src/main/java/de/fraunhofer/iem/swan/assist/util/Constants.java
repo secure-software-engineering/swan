@@ -53,7 +53,4 @@ public class Constants {
 
     //Notification titles/strings
     public final static String PLUGIN_GROUP_DISPLAY_ID = "Plugin-1";
-
-
-
 }
