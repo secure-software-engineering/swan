@@ -1,5 +1,6 @@
-package de.fraunhofer.iem.swan.assist.actions;
+package de.fraunhofer.iem.swan.assist.analysis;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.progress.PerformInBackgroundOption;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
@@ -22,16 +23,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
-public class RunSwanTask extends Task.Backgroundable {
+public class SwanBackgroundTask extends Task.Backgroundable {
 
     private Project project;
     private HashMap<String, String> parameters;
     private long duration;
 
-    public RunSwanTask(@Nullable Project project, @NlsContexts.ProgressTitle @NotNull String title, boolean canBeCancelled, @Nullable PerformInBackgroundOption backgroundOption, HashMap<String, String> parameters) {
+    public SwanBackgroundTask(@Nullable Project project, @NlsContexts.ProgressTitle @NotNull String title, boolean canBeCancelled, @Nullable PerformInBackgroundOption backgroundOption) {
         super(project, title, canBeCancelled, backgroundOption);
-        this.parameters = parameters;
         this.project = project;
     }
 
@@ -42,12 +43,14 @@ public class RunSwanTask extends Task.Backgroundable {
 
         indicator.setText("Configuring SWAN");
         SwanOptions options = new CliRunner().initializeOptions();
-        options.setTestDataDir(parameters.get(Constants.SOURCE_DIRECTORY));
-        options.setOutputDir(parameters.get(Constants.OUTPUT_DIRECTORY));
-        options.setToolkit(parameters.get(Constants.TOOLKIT).toLowerCase());
+
+        options.setTestDataDir(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY)));
+        options.setOutputDir(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY)));
+        options.setToolkit(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.TOOLKIT)).toLowerCase());
         options.setSrmClasses(List.of("all"));
         options.setPhase("predict");
         options.setTrainDataDir("");
+        options.setAddSrmRepo(true);
 
 
         indicator.setText("Running SWAN");
@@ -64,7 +67,7 @@ public class RunSwanTask extends Task.Backgroundable {
         int s = (int) ((duration / 1000) % 60);
 
         indicator.setText("Exporting SRMs");
-        String filename = parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + "srm-" + getCurrentTimestamp() + ".json";
+        String filename = Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY)) + File.separator + "srm-" + getCurrentTimestamp() + ".json";
         SrmList srmList = swan.getSwanPipeline().getModelEvaluator().getPredictedSrmList();
 
         try {
@@ -75,6 +78,8 @@ public class RunSwanTask extends Task.Backgroundable {
         }
 
         HashMap<String, String> results = new HashMap<>();
+
+        PropertiesComponent.getInstance(project).setValue(Constants.LAST_SRM_LIST, filename);
         results.put(Constants.OUTPUT_FILE, filename);
         results.put(Constants.OUTPUT_LOG, "");
         results.put(Constants.ANALYSIS_RESULT, srmList.getMethods().size() + " methods found in " + m + " mins " + s + " secs");

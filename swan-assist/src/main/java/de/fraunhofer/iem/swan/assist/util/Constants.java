@@ -26,13 +26,14 @@ public class Constants {
     public final static String TRAIN_DIRECTORY = PLUGIN_ID + "trainingPath";
     public final static String SOURCE_DIRECTORY = PLUGIN_ID + "projectJarFiles"; //Test Library (or the project)
     public final static String CONFIGURATION_FILE = PLUGIN_ID + "configurationFile";
+    public final static String SWAN_SETTINGS = PLUGIN_ID + "projectConfigured";
     public final static String OUTPUT_DIRECTORY = PLUGIN_ID + "outputPath";
     public final static String OUTPUT_FILE = PLUGIN_ID + "outputFile";
     public final static String OUTPUT_LOG = PLUGIN_ID + "outputLogs";
     public final static String ANALYSIS_RESULT = PLUGIN_ID + "analysisResult";
     public final static String TRAIN_FILE_SUGGESTED = PLUGIN_ID + "file_suggested_methods";
 
-    public final static String TOOLKIT = "toolkit";
+    public final static String TOOLKIT = PLUGIN_ID + "toolkit";
     public final static String DEFAULT_TRAINING_PATH = PLUGIN_ID + "defaultTrainingPath";
     public final static String PROJECT_CONFIGURATION_FILE = PLUGIN_ID + "defaultConfigurationFile";
 
