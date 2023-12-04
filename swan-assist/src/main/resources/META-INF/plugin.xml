@@ -33,11 +33,22 @@
                     text="Run Analysis">
             </action>
 
+            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
+                    text="Import File"
                     icon="AllIcons.ToolbarDecorator.Import"
+                    description="Import configuration file">
+            </action>
+
+            <action id="SWAN_Assist.ExportAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
                     icon="AllIcons.ToolbarDecorator.Export"
+                    text="Export File"
+                    description="Export configuration file">
+            </action>
+
             <!--action id="SuggestAction" class="de.fraunhofer.iem.swan.assist.actions.suggest.SuggestAction" text="Suggest Methods"
                     description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/-->
-            <separator/>
+
             <group id="SWAN_Assist.FilterActionGroup" class="de.fraunhofer.iem.swan.assist.actions.filter.FilterActionGroup"
                    text="Filter Methods"
                    popup="true" icon="AllIcons.General.Filter">
@@ -82,7 +93,7 @@
         <group id="EditorGroup" text="SWAN-Assist" popup="true" icon="PluginIcons.SWAN_ASSIST">
             <add-to-group group-id="EditorPopupMenu" />
             <action id="SWAN_Assist.Editor.LaunchSWANAction"
-                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAction"
                     icon="AllIcons.Toolwindows.ToolWindowRun"
                     text="Run Analysis">
             </action>
@@ -90,21 +101,15 @@
             <separator/>
 
             <action id="SWAN_Assist.AddMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.AddMethodAction"
-                    text="Classify/Re-Classify Method" icon="AllIcons.General.Add">
-            </action>
-
-            <action id="SWAN_Assist.RestoreMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.RestoreMethodAction"
-                    text="Restore Method" >
+                    text="Add/Edit Method" icon="AllIcons.General.Add">
             </action>
 
             <action id="SWAN_Assist.DeleteMethodAction" class="de.fraunhofer.iem.swan.assist.actions.method.DeleteMethodAction"
-                    text="Delete Classification">
+                    icon="AllIcons.General.Reset"
+                    text="Reset">
             </action>
 
-            <action id="SWAN_Assist.MethodPropertiesAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodPropertiesAction"
-                    text="Classification Properties" >
-            </action>
-
+            <separator/>
             <action id="SWAN_Assist.MethodListAction" class="de.fraunhofer.iem.swan.assist.actions.method.MethodListAction"
                     text="View Tool Window">
             </action>

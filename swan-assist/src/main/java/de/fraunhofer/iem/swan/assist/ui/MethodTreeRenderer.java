@@ -55,7 +55,7 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
                 if (methodName.contains("<init>"))
                     methodName = Formatter.trimProperty(method.getClassName(false));
 
-                text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>"+ methodName + "</b>( ) <font color='" +CWE_COLOR + "'>"+StringUtils.join(method.getCWEList(),", ").replaceAll("CWE","")+"</font></html>");
+                text.setText("<html><font color='" + HIGHLIGHT_COLOR + "'>" + Formatter.trimProperty(method.getReturnType(false)) + "</font> <b>"+ methodName + "</b>( ) <font color='" +CWE_COLOR + "'>"+StringUtils.join(method.getCWEList(),", ")+"</font></html>");
                 text.setIcon(IconUtils.getNodeIcon(method.getTypesList(false)));
 
                 if (method.getUpdateOperation() != null && method.getUpdateOperation().equals(Constants.METHOD_ADDED) && !selected)
