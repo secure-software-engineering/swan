@@ -37,6 +37,7 @@ public class Method {
     private RelevantPart dataOut;
     private Set<Category> srm;
     private Set<Category> cwe;
+    private boolean known;
 
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
@@ -49,6 +50,8 @@ public class Method {
     public Method() {
         cwe = new HashSet<>();
         srm = new HashSet<>();
+        known = false;
+
     }
 
     public Method(String name, String returnType, String className) {
@@ -388,6 +391,14 @@ public class Method {
 
     public void setSootClass(SootClass sootClass) {
         this.sootClass = sootClass;
+    }
+
+    public boolean isKnown() {
+        return known;
+    }
+
+    public void setKnown(boolean known) {
+        this.known = known;
     }
 
     @Override
