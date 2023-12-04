@@ -50,7 +50,7 @@ public class SwanBackgroundTask extends Task.Backgroundable {
         options.setSrmClasses(List.of("all"));
         options.setPhase("predict");
         options.setTrainDataDir("");
-        options.setAddSrmRepo(true);
+        options.setAddKnownSrms(true);
 
 
         indicator.setText("Running SWAN");
