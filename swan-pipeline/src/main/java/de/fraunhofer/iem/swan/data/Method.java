@@ -30,7 +30,7 @@ public class Method {
     private String framework;
     private String link;
     @JsonProperty("interface")
-    private String isInterface;
+    private boolean isInterface;
     private String comment;
     private String discovery;
     private RelevantPart dataIn;
@@ -51,6 +51,7 @@ public class Method {
         cwe = new HashSet<>();
         srm = new HashSet<>();
         known = false;
+        isInterface = false;
 
     }
 
@@ -189,11 +190,11 @@ public class Method {
         return this.cwe;
     }
 
-    public String getIsInterface() {
+    public boolean getIsInterface() {
         return isInterface;
     }
 
-    public void setIsInterface(String isInterface) {
+    public void setIsInterface(boolean isInterface) {
         this.isInterface = isInterface;
     }
 
