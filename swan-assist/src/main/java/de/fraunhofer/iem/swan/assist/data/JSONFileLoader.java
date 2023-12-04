@@ -234,16 +234,21 @@ public class JSONFileLoader {
 
         Set<Category> categorySet = new HashSet<>();
 
-        Set<Category> exclude = new HashSet<>();
-        exclude.add(Category.CWETEST);
-        exclude.add(Category.NONE);
-        exclude.add(Category.RELEVANT);
-        exclude.add(Category.AUTHENTICATION);
-        exclude.add(Category.CWE_NONE);
+        Set<Category> supportedCategories = new HashSet<>();
+        supportedCategories.add(Category.SOURCE);
+        supportedCategories.add(Category.SINK);
+        supportedCategories.add(Category.SANITIZER);
+        supportedCategories.add(Category.CWE601);
+        supportedCategories.add(Category.CWE78);
+        supportedCategories.add(Category.CWE79);
+        supportedCategories.add(Category.CWE89);
+        supportedCategories.add(Category.CWE862);
+        supportedCategories.add(Category.CWE306);
+        supportedCategories.add(Category.CWE863);
 
         for (Category category : Category.values()) {
 
-            if (!exclude.contains(category)) {
+            if (supportedCategories.contains(category)) {
                 categorySet.add(category);
             }
         }
