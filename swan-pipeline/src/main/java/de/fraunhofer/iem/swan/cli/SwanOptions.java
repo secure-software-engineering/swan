@@ -30,6 +30,7 @@ public class SwanOptions {
     private List<String> arffInstancesFiles;
     private List<String> discovery;
     private int timeLimit;
+    private boolean addKnownSrms;
 
     public SwanOptions(){
 
@@ -237,6 +238,14 @@ public class SwanOptions {
 
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public boolean isAddKnownSrms() {
+        return addKnownSrms;
+    }
+
+    public void setAddKnownSrms(boolean addKnownSrms) {
+        this.addKnownSrms = addKnownSrms;
     }
 
     @Override

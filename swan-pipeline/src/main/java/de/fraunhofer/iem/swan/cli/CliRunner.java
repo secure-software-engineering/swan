@@ -65,6 +65,9 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;
 
+    @CommandLine.Option(names = {"-sr", "--known-srms"}, description = {"Add know SRMs from dataset"})
+    private boolean addKnownSrms = true;
+
     @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
     private List<String> discovery =  new ArrayList<>();//  Collections.singletonList("manual");
 
@@ -95,6 +98,7 @@ public class CliRunner implements Callable<Integer> {
         options.setIterations(iterations);
         options.setTrainTestSplit(split);
         options.setPredictionThreshold(predictionThreshold);
+        options.setAddKnownSrms(addKnownSrms);
         options.setReduceAttributes(false);
         options.setDiscovery(discovery);
         options.setTimeLimit(timeLimit);
