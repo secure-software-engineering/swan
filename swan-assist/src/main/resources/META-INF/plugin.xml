@@ -28,7 +28,7 @@
         <group id="SWAN_Assist.ActionBar" text="SWAN_Assist" popup="false" >
 
             <action id="SWAN_Assist.LaunchSWANAction"
-                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAnalysisAction"
+                    class="de.fraunhofer.iem.swan.assist.actions.RunSwanAction"
                     icon="AllIcons.Toolwindows.ToolWindowRun"
                     text="Run Analysis">
             </action>
@@ -49,19 +49,9 @@
             </action>
             <separator/>
 
-            <separator/>
-            <action id="SWAN_Assist.ImportAction" class="de.fraunhofer.iem.swan.assist.actions.ImportAction"
-                    text="Import File"
-                    icon="PluginIcons.IMPORT_ACTION"
-                    description="Import configuration file">
-                    icon="AllIcons.ToolbarDecorator.Export"
-            </action>
-
-            <action id="SWAN_Assist.ExportAction"
-                    class="de.fraunhofer.iem.swan.assist.actions.ExportAction"
-                    icon="PluginIcons.EXPORT_ACTION"
-                    text="Export File"
-                    description="Export configuration file">
+            <action id="SWAN_Assist.RunSecuCheck"
+                   class="de.fraunhofer.iem.swan.assist.actions.RunSecucheckAction"
+                   text="Run Taint Analysis"
                    popup="true" icon="AllIcons.Actions.RunAll">
             </action>
 

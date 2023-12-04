@@ -385,6 +385,17 @@ public class MethodListTree extends Tree {
             }
         });
 
+        //Update notification button when SWAN completes running
+        bus.connect().subscribe(SecucheckNotifier.END_SECUCHECK_PROCESS_TOPIC, new SecucheckNotifier() {
+            @Override
+            public void launchSecuCheck() {
+                Notification analysisCompleted = TOOL_GROUP.createNotification("",
+                        "SecuCheck results exported to "+PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY),
+                        NotificationType.INFORMATION);
+                Notifications.Bus.notify(analysisCompleted, project);
+            }
+        });
+
         //Notify user that Suggest method process started or that the methods were generated
         bus.connect().subscribe(SuggestNotifier.SUGGEST_METHOD_TOPIC, new SuggestNotifier() {
 
