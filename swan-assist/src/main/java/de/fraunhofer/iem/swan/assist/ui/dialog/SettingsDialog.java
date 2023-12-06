@@ -13,6 +13,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
+import de.fraunhofer.iem.swan.assist.actions.RunSwanAction;
 import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
 import de.fraunhofer.iem.swan.assist.util.Constants;
 import org.apache.commons.io.FileUtils;
@@ -250,7 +251,8 @@ public class SettingsDialog extends DialogWrapper {
         PropertiesComponent.getInstance(project).setValue(Constants.SOURCE_DIRECTORY, sourceDirTextbox.getText());
         PropertiesComponent.getInstance(project).setValue(Constants.LAST_SRM_LIST, parameters.get(Constants.OUTPUT_DIRECTORY) + File.separator + config.getProperty("output_json_suffix"));
         PropertiesComponent.getInstance(project).setValue(Constants.TOOLKIT, toolkitButtonGroup.getSelection().getActionCommand());
-
+        RunSwanAction runSwanAction = new RunSwanAction();
+        runSwanAction.runSwan(project);
         super.doOKAction();
     }
 
