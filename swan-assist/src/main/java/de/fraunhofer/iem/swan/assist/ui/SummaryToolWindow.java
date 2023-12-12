@@ -40,6 +40,7 @@ public class SummaryToolWindow implements ToolWindowFactory {
         //Toolbar action panel
         final DefaultActionGroup actions = (DefaultActionGroup) ActionManager.getInstance().getAction("SWAN_Assist.ActionBar");
         final ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("SummaryToolbar", actions, true);
+        actionToolbar.setTargetComponent(toolPanel);
 
         if (toolWindow.getAnchor().isHorizontal()) {
             actionToolbar.setOrientation(SwingConstants.VERTICAL);
