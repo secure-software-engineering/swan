@@ -56,8 +56,7 @@ public class Formatter {
        // List<String> param = new ArrayList<>(parameters);
 
         if (!isFullyQualifiedName)
-            for (int counter = 0; counter < param.size(); counter++)
-                param.set(counter, trimProperty(param.get(counter)));
+            param.replaceAll(Formatter::trimProperty);
 
         return StringUtils.join(param, ", ");
     }
