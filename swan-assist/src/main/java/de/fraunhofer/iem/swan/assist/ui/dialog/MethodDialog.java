@@ -10,6 +10,8 @@ package de.fraunhofer.iem.swan.assist.ui.dialog;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.table.JBTable;
+import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.swan.assist.comm.MethodNotifier;
 import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.RelevantPart;
@@ -46,6 +48,8 @@ public class MethodDialog extends DialogWrapper {
     private JPanel parametersTabPanel;
     private List<JCheckBox> dataInCheckBoxes, dataOutCheckBoxes;
     private ResourceBundle resourceBundle;
+    private MethodWrapper method;
+    private Project project;
 
 
     /**
@@ -58,7 +62,13 @@ public class MethodDialog extends DialogWrapper {
      */
     public MethodDialog(HashMap<String, MethodWrapper> methods, String signature, Project project, Set<Category> categories) {
         super(project);
+        this.project = project;
         this.resourceBundle = ResourceBundle.getBundle("dialog_messages");
+
+        resourceBundle = ResourceBundle.getBundle("dialog_messages");
+        setTitle(resourceBundle.getString("MethodDialog.Title"));
+
+
         for (MethodWrapper methodWrapper : methods.values()) {
             signatureCbx.addItem(methodWrapper);
         }
@@ -66,6 +76,7 @@ public class MethodDialog extends DialogWrapper {
         signatureCbx.setSelectedItem(methods.get(signature));
         previousItem = methods.get(signature);
 
+        method = methods.get(signature);
         updateCategoryTab(methods.get(signature), categories);
         updateParametersTab(methods.get(signature));
         updatePropertiesTab(methods.get(signature));
@@ -161,7 +172,6 @@ public class MethodDialog extends DialogWrapper {
                 } catch (Exception e) {
                     checkBox.setToolTipText(category.toString());
                 }
-               // cweCheckBoxPanel.setPreferredSize(new java.awt.Dimension(200, 200));
                 cweCheckBoxPanel.add(checkBox);
             } else {
                 //srmCheckBoxPanel.setPreferredSize(new java.awt.Dimension(200, 200));
@@ -274,7 +284,15 @@ public class MethodDialog extends DialogWrapper {
 
         if (isOKActionEnabled()) {
             updateMethodData((MethodWrapper) signatureCbx.getSelectedItem());
-            super.doOKAction();
+
+            if (method.getStatus().equals(MethodWrapper.MethodStatus.NEW)) {
+                //Notify Summary Tool window that new method was added
+                MessageBus messageBus = project.getMessageBus();
+
+                MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
+                publisher.addNewExistingMethod(method);
+                super.doOKAction();
+            }
         }
     }
 
