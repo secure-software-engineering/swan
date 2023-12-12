@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2018 Fraunhofer IEM, Paderborn, Germany.
- *
  * Contributors:
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
  ******************************************************************************/
@@ -42,10 +41,10 @@ public class SummaryToolWindow implements ToolWindowFactory {
         final DefaultActionGroup actions = (DefaultActionGroup) ActionManager.getInstance().getAction("SWAN_Assist.ActionBar");
         final ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("SummaryToolbar", actions, true);
 
-        if(toolWindow.getAnchor().isHorizontal()){
+        if (toolWindow.getAnchor().isHorizontal()) {
             actionToolbar.setOrientation(SwingConstants.VERTICAL);
             toolPanel.add(actionToolbar.getComponent(), BorderLayout.LINE_START);
-        }else{
+        } else {
             actionToolbar.setOrientation(SwingConstants.HORIZONTAL);
             toolPanel.add(actionToolbar.getComponent(), BorderLayout.PAGE_START);
         }
@@ -54,11 +53,11 @@ public class SummaryToolWindow implements ToolWindowFactory {
         toolPanel.add(new JBScrollPane(new MethodListTree(project)), BorderLayout.CENTER);
 
         //If a configuration file was already selected, load it
-        if(PropertiesComponent.getInstance(project).isValueSet(Constants.LAST_SRM_LIST)){
+        if (PropertiesComponent.getInstance(project).isValueSet(Constants.LAST_SRM_LIST)) {
 
-          File configFile = new File(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.LAST_SRM_LIST)));
+            File configFile = new File(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.LAST_SRM_LIST)));
 
-            if(configFile.exists()){
+            if (configFile.exists()) {
 
                 MessageBus messageBus = project.getMessageBus();
                 ConfigurationFileNotifier publisher = messageBus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);

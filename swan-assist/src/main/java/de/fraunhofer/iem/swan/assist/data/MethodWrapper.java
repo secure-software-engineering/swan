@@ -49,6 +49,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Initializes MethodWrapper Object
+     *
      * @param method Method
      */
     public MethodWrapper(Method method) {
@@ -58,6 +59,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Initialises MethodWrapper object
+     *
      * @param methodName Name of method
      * @param parameters List of method's parameters
      * @param returnType Method's return type
@@ -76,6 +78,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns Method object
+     *
      * @return Method object
      */
     public Method getMethod() {
@@ -84,6 +87,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Trim argument and returns last string
+     *
      * @param property Classname or data to be trimmed
      * @return Trimmed data
      */
@@ -93,6 +97,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns classname for method
+     *
      * @param fullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return Method name
      */
@@ -106,6 +111,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns classname for method
+     *
      * @param fullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return Method's classname
      */
@@ -119,6 +125,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns filename for method
+     *
      * @return Filename with extension
      */
     public String getFileName() {
@@ -128,6 +135,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns method's signature
+     *
      * @param isfullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return Method's signature
      */
@@ -139,6 +147,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns the list of parameters
+     *
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return List of parameters
      */
@@ -158,6 +167,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns the return type of the function
+     *
      * @param isFullyQualifiedName Condition to determine if fully qualified name of class should be returned
      * @return Method's return type
      */
@@ -171,6 +181,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns array list of CWEs that are assigned to the method
+     *
      * @return Array list of CWE's
      */
     public ArrayList<String> getCWEList() {
@@ -178,7 +189,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
         ArrayList<String> cweList = new ArrayList<String>();
 
         for (Category category : method.getCwe()) {
-                cweList.add(category.toString());
+            cweList.add(category.toString());
         }
 
         return cweList;
@@ -186,6 +197,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns array list of types that are assigned to the method
+     *
      * @param capitalize Condition to capitalize first character of types
      * @return Array list of types
      */
@@ -205,6 +217,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns set of method categories
+     *
      * @return Set of Method categories
      */
     public Set<Category> getCategories() {
@@ -213,6 +226,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Set method categories
+     *
      * @param categories Method categories
      */
     public void setCategories(Set<Category> categories) {
@@ -220,7 +234,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
         Set<Category> cweCategories = new HashSet<>();
         Set<Category> srmCategories = new HashSet<>();
 
-        for(Category category: categories) {
+        for (Category category : categories) {
             if (category.isCwe()) {
                 cweCategories.add(category);
             } else {
@@ -233,6 +247,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns update operation for method: new, delete, etc.
+     *
      * @return Update operation for method.
      */
     public String getUpdateOperation() {
@@ -241,6 +256,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns whether the method is a training method
+     *
      * @return Whether the method is a training method
      */
     public boolean isTrainingMethod() {
@@ -249,6 +265,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Set whether the method is a training method
+     *
      * @param trainingMethod Whether the method is a training method
      */
     public void setTrainingMethod(boolean trainingMethod) {
@@ -257,6 +274,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Set method's update operation
+     *
      * @param updateOperation Method's update operation
      */
     public void setUpdateOperation(String updateOperation) {
@@ -267,21 +285,23 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Generates and returns the message for the editor marker
+     *
      * @return Message for editor marker
      */
     public String getMarkerMessage() {
 
         String message = "<html><i>Potential</i> <b>" + StringUtils.join(getTypesList(true), ", ") + "</b> method";
 
-        if(getCWEList().size()>0)
-        message += " of sensitive information relevant for <b>" + StringUtils.join(getCWEList(), ", ")+"</b";
+        if (!getCWEList().isEmpty())
+            message += " of sensitive information relevant for <b>" + StringUtils.join(getCWEList(), ", ") + "</b";
 
-        message+=".</html>";
+        message += ".</html>";
         return message;
     }
 
     /**
      * Set message that should be used for marker.
+     *
      * @param markerMessage Method's message
      */
     public void setMarkerMessage(String markerMessage) {
@@ -290,6 +310,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Status of method: suggested, etc.
+     *
      * @return Method's status/origin
      */
     public MethodStatus getStatus() {
@@ -298,6 +319,7 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Set method status
+     *
      * @param status Method's status/origin
      */
     public void setStatus(MethodStatus status) {
@@ -306,9 +328,10 @@ public class MethodWrapper implements Comparable<MethodWrapper> {
 
     /**
      * Returns method as string: method signature
+     *
      * @return Method signature
      */
-    public String toString(){
+    public String toString() {
         return getSignature(false);
     }
 }

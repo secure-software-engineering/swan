@@ -512,7 +512,6 @@ public class MethodListTree extends Tree {
             if (node.getUserObject() instanceof MethodWrapper) {
 
                 MethodWrapper methodWrapper = (MethodWrapper) node.getUserObject();
-
                 if (query.equals(methodWrapper.getSignature(true))) {
                     return node;
                 }

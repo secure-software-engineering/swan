@@ -72,7 +72,6 @@ public class MethodTreeRenderer extends JLabel implements TreeCellRenderer {
             } else if (object instanceof Category) {
 
                 Category category = (Category) object;
-
                 text.setIcon(IconUtils.getIcon(category.toString()));
 
                 if (category.isCwe()) {
