@@ -587,10 +587,12 @@ public class MethodListTree extends Tree {
 
                     classNode.add(addCategoriesToNode(method));
 
-                    if (method.getMethod().isKnown())
+                    if (method.getMethod().isKnown()) {
+                        method.setTrainingMethod(true);
                         standardSrms.add(classNode);
-                    else
+                    }else{
                         currentProject.add(classNode);
+                    }
                 }
             }
 
