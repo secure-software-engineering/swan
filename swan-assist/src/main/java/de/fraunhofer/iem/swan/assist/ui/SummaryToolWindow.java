@@ -69,7 +69,7 @@ public class SummaryToolWindow implements ToolWindowFactory {
         }
 
         //Add Content to ToolWindow
-        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+        ContentFactory contentFactory = ContentFactory.getInstance();
         Content toolContent = contentFactory.createContent(toolPanel, "", false);
         toolWindow.getContentManager().addContent(toolContent);
     }
