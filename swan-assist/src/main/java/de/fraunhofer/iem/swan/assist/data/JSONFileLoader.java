@@ -140,7 +140,7 @@ public class JSONFileLoader {
             for (MethodWrapper method : methods.values()) {
 
 
-                if (method.getUpdateOperation().equals(Constants.METHOD_DELETED) || method.isTrainingMethod())
+                if (method.getUpdateOperation().equals(Constants.METHOD_DELETED))
                     continue;
 
                 filteredList.add(method);
@@ -187,20 +187,31 @@ public class JSONFileLoader {
 
         for (String methodSignature : methods.keySet()) {
 
-            if ((filters.contains(Constants.FILE_FILTER) && !methodSignature.contains(currentFile))
-                    || (!filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED))
-                    || (methods.get(methodSignature).isTrainingMethod() && !filters.contains(Constants.TRAIN_FILTER)))
-                continue;
-
-            for (Category category : methods.get(methodSignature).getCategories()) {
-
-                if ((filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED))
-                        || filters.contains(new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString())))
-                        || filters.contains(new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString())))
-                        || (methods.get(methodSignature).isTrainingMethod() && filters.contains(Constants.TRAIN_FILTER))) {
-
-                    filteredList.add(methods.get(methodSignature));
-                    break;
+            if(filters.size()==1 && filters.contains(Constants.TRAIN_FILTER) && methods.get(methodSignature).isTrainingMethod()){
+                filteredList.add(methods.get(methodSignature));
+            }else if((filters.contains(Constants.FILE_FILTER) && !methodSignature.contains(currentFile))
+                    || (!filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED))){
+            } else if (filters.size()>1 && filters.contains(Constants.TRAIN_FILTER)) {
+                for (Category category : methods.get(methodSignature).getCategories()) {
+                    Pair<String, String> typePair = new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString()));
+                    Pair<String, String> cwePair = new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString()));
+                    boolean isDeleted = filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED);
+                    boolean isTypeFilter = filters.contains(typePair) || filters.contains(cwePair);
+                    if  ((isDeleted || isTypeFilter) && methods.get(methodSignature).isTrainingMethod()){
+                        filteredList.add(methods.get(methodSignature));
+                        break;
+                    }
+                }
+            } else{
+                for (Category category : methods.get(methodSignature).getCategories()) {
+                    Pair<String, String> typePair = new Pair<>(Constants.FILTER_TYPE, Formatter.toTitleCase(category.toString()));
+                    Pair<String, String> cwePair = new Pair<>(Constants.FILTER_CWE, Formatter.toTitleCase(category.toString()));
+                    boolean isDeleted = filters.contains(Constants.DELETED_FILTER) && methods.get(methodSignature).getUpdateOperation().equals(Constants.METHOD_DELETED);
+                    boolean isTypeFilter = filters.contains(typePair) || filters.contains(cwePair);
+                    if  (isDeleted || isTypeFilter ){
+                        filteredList.add(methods.get(methodSignature));
+                        break;
+                    }
                 }
             }
         }
