@@ -6,14 +6,15 @@
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - plugin integration
  ******************************************************************************/
 
-package de.fraunhofer.iem.swan.assist.actions.suggest;
+package de.fraunhofer.iem.devassist.actions.suggest;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import de.fraunhofer.iem.devassist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 

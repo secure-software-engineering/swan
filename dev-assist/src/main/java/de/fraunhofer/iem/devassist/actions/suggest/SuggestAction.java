@@ -5,7 +5,7 @@
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - initial implementation
  ******************************************************************************/
 
-package de.fraunhofer.iem.swan.assist.actions.suggest;
+package de.fraunhofer.iem.devassist.actions.suggest;
 
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -13,10 +13,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.assist.comm.SuggestNotifier;
-import de.fraunhofer.iem.swan.assist.data.JSONFileLoader;
-import de.fraunhofer.iem.swan.assist.data.PropertiesManager;
-import de.fraunhofer.iem.swan.assist.util.Constants;
+import de.fraunhofer.iem.devassist.util.Constants;
+import de.fraunhofer.iem.devassist.comm.SuggestNotifier;
+import de.fraunhofer.iem.devassist.data.JSONFileLoader;
+import de.fraunhofer.iem.devassist.data.PropertiesManager;
 
 public class SuggestAction extends AnAction {
 

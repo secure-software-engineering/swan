@@ -6,10 +6,9 @@
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - plugin integration
  ******************************************************************************/
 
-package de.fraunhofer.iem.swan.assist.actions.suggest;
+package de.fraunhofer.iem.devassist.actions.suggest;
 
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.devassist.data.MethodWrapper;
 
 public class MethodPair {
     private MethodWrapper m1;

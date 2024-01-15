@@ -6,27 +6,9 @@
  * Oshando Johnson (oshando.johnson@iem.fraunhofer.de ) - plugin integration
  ******************************************************************************/
 
-package de.fraunhofer.iem.swan.assist.actions.suggest;
+package de.fraunhofer.iem.devassist.actions.suggest;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.MessageBus;
-import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
-import de.fraunhofer.iem.swan.features.FeatureSet;
-import de.fraunhofer.iem.swan.features.code.ICodeFeature;
-import de.fraunhofer.iem.swan.features.code.type.IFeature;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
-import de.fraunhofer.iem.swan.assist.comm.SuggestNotifier;
-import de.fraunhofer.iem.swan.assist.data.MethodWrapper;
-import de.fraunhofer.iem.swan.assist.data.TrainingFileManager;
-import de.fraunhofer.iem.swan.assist.ui.MethodListTree;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class SuggestThread extends Thread {
 
