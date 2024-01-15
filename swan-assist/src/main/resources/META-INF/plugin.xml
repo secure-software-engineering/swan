@@ -22,6 +22,7 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="de.fraunhofer.iem.swan.assist.ui.markers.ErrorLineMarker"/>
         <toolWindow id="SWAN-Assist" anchor="right" factoryClass="de.fraunhofer.iem.swan.assist.ui.SummaryToolWindow" icon="PluginIcons.SWAN_ASSIST"/>
+        <notificationGroup id="Plugin-1" displayType="TOOL_WINDOW"/>
     </extensions>
 
     <actions>

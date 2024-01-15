@@ -71,8 +71,6 @@ public class MethodListTree extends Tree {
     private ResourceBundle resource;
     public static boolean TREE_EXPANDED;
 
-    private static final NotificationGroup TOOL_GROUP = new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
-            NotificationDisplayType.TOOL_WINDOW, true);
 
     /**
      * Initialises method list tree
@@ -377,8 +375,8 @@ public class MethodListTree extends Tree {
 
                 JSONFileLoader.setReloading(false);
 
-                Notification analysisCompleted = TOOL_GROUP.createNotification("", "SRM List updated", NotificationType.INFORMATION);
-                Notifications.Bus.notify(analysisCompleted, project);
+                String notificationContent = "SRM List updated";
+                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
 
                 ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
                 fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
@@ -389,10 +387,8 @@ public class MethodListTree extends Tree {
         bus.connect().subscribe(SecucheckNotifier.END_SECUCHECK_PROCESS_TOPIC, new SecucheckNotifier() {
             @Override
             public void launchSecuCheck() {
-                Notification analysisCompleted = TOOL_GROUP.createNotification("",
-                        "SecuCheck results exported to "+PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY),
-                        NotificationType.INFORMATION);
-                Notifications.Bus.notify(analysisCompleted, project);
+                String notificationContent = "SecuCheck results exported to "+PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY);
+                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
             }
         });
 
