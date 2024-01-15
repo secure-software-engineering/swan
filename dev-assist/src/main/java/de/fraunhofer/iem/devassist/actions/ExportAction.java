@@ -28,9 +28,6 @@ import java.io.IOException;
  */
 
 public class ExportAction extends AnAction {
-
-    private static final NotificationGroup TOOL_GROUP = new NotificationGroup(Constants.PLUGIN_GROUP_DISPLAY_ID,
-            NotificationDisplayType.TOOL_WINDOW, true);
     /**
      * Obtains list of methods and creates new JSON file in the location specified by the user.
      *
@@ -72,8 +69,9 @@ public class ExportAction extends AnAction {
             try {
                 exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
 
-                Notification analysisCompleted = TOOL_GROUP.createNotification("", JSONFileLoader.getMethods().size() + " methods exported to: " + filePath, NotificationType.INFORMATION);
-                Notifications.Bus.notify(analysisCompleted, project);
+                String notificationContent = JSONFileLoader.getMethods().size() + " methods exported to: " + filePath;
+                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
