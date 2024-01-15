@@ -1,0 +1,131 @@
+<idea-plugin>
+    <id>de.fraunhofer.iem.devassist</id>
+    <name>Dev-Assist</name>
+    <vendor email="support@iem.fraunhofer.de" url="https://www.iem.fraunhofer.de/">Fraunhofer IEM</vendor>
+
+    <description>Dev-Assist provides a GUI support for SWAN -a machine-learning approach for detection of
+        methods of interest for security in Java libraries. The user is able to interact with the learning
+        process by giving feedback on the methods of interest. The tool helps users that write static analyses
+        to create list of security methods for weakness detection for their specific Java libraries.
+        Users can manually inspect the proper usage of the methods detected by SWAN.
+    </description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products-->
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="de.fraunhofer.iem.devassist.ui.markers.ErrorLineMarker"/>
+        <toolWindow id="Dev-Assist" anchor="right" factoryClass="de.fraunhofer.iem.devassist.ui.SummaryToolWindow" icon="PluginIcons.DEV_ASSIST"/>
+    </extensions>
+
+    <actions>
+        <group id="Dev_Assist.ActionBar" text="Dev-Assist" popup="false" >
+
+            <action id="Dev_Assist.LaunchSWANAction"
+                    class="de.fraunhofer.iem.devassist.actions.RunSwanAction"
+                    icon="AllIcons.Toolwindows.ToolWindowRun"
+                    text="Run Analysis">
+            </action>
+
+            <action id="Dev_Assist.ImportAction" class="de.fraunhofer.iem.devassist.actions.ImportAction"
+                    text="Import File"
+                    icon="AllIcons.ToolbarDecorator.Import"
+                    description="Import configuration file">
+            </action>
+
+            <action id="Dev_Assist.ExportAction"
+                    class="de.fraunhofer.iem.devassist.actions.ExportAction"
+                    icon="AllIcons.ToolbarDecorator.Export"
+                    text="Export File"
+                    description="Export configuration file">
+            </action>
+
+            <!--action id="SuggestAction" class="suggest.actions.de.fraunhofer.iem.devassist.SuggestAction" text="Suggest Methods"
+                    description="Classify suggested methods" icon="PluginIcons.SUGGEST_ACTION"/-->
+
+            <group id="Dev_Assist.FilterActionGroup" class="de.fraunhofer.iem.devassist.actions.filter.FilterActionGroup"
+                   text="Filter Methods"
+                   popup="true" icon="AllIcons.General.Filter">
+            </group>
+            <action id="Dev_Assist.ExpandAll" class="de.fraunhofer.iem.devassist.actions.ExpandAllAction"
+                    text="Expand All"
+                    icon="AllIcons.Actions.Expandall"
+                    description="Expand or collapse the method tree">
+            </action>
+            <separator/>
+
+            <action id="Dev_Assist.RunSecuCheck"
+                   class="de.fraunhofer.iem.devassist.actions.RunSecucheckAction"
+                   text="Run Taint Analysis"
+                   popup="true" icon="AllIcons.Actions.RunAll">
+            </action>
+
+            <separator/>
+
+            <action id="Dev_Assist.SettingsAction"
+                    class="de.fraunhofer.iem.devassist.actions.SettingsAction"
+                    icon="AllIcons.General.Settings"
+                    text="Configure">
+            </action>
+
+            <action id="Dev_Assist.HelpAction"
+                    class="de.fraunhofer.iem.devassist.actions.HelpAction"
+                    text="Help" description="Resources" icon="AllIcons.Actions.Help">
+            </action>
+        </group>
+
+        <group id="Dev_Assist.MethodActionGroup" class="de.fraunhofer.iem.devassist.actions.method.MethodActionGroup" text="Method Options"
+               popup="true" icon="AllIcons.General.Filter">
+
+        </group>
+
+        <group id="Dev_Assist.CategoryActionGroup" class="de.fraunhofer.iem.devassist.actions.filter.CategoryActionGroup" text="Filter List"
+               popup="true" icon="AllIcons.General.Filter">
+
+        </group>
+
+        <group id="EditorGroup" text="Dev-Assist" popup="true" icon="PluginIcons.DEV_ASSIST">
+            <add-to-group group-id="EditorPopupMenu" />
+            <action id="Dev_Assist.Editor.LaunchSWANAction"
+                    class="de.fraunhofer.iem.devassist.actions.RunSwanAction"
+                    icon="AllIcons.Toolwindows.ToolWindowRun"
+                    text="Run Analysis">
+            </action>
+
+            <separator/>
+
+            <action id="Dev_Assist.AddMethodAction" class="de.fraunhofer.iem.devassist.actions.method.AddMethodAction"
+                    text="Add/Edit Method" icon="AllIcons.General.Add">
+            </action>
+
+            <action id="Dev_Assist.DeleteMethodAction" class="de.fraunhofer.iem.devassist.actions.method.DeleteMethodAction"
+                    icon="AllIcons.General.Reset"
+                    text="Reset">
+            </action>
+
+            <separator/>
+            <action id="Dev_Assist.MethodListAction" class="de.fraunhofer.iem.devassist.actions.method.MethodListAction"
+                    text="View Tool Window">
+            </action>
+            <separator/>
+            <action id="Dev_Assist.Editor.ImportAction" class="de.fraunhofer.iem.devassist.actions.ImportAction"
+                    text="Import File" icon="AllIcons.ToolbarDecorator.Import">
+            </action>
+            <action id="Dev_Assist.Editor.ExportAction" class="de.fraunhofer.iem.devassist.actions.ExportAction"
+                    text="Export File" icon="AllIcons.ToolbarDecorator.Export">
+            </action>
+            <separator/>
+            <action id="Dev_Assist.Editor.HelpAction"
+                    class="de.fraunhofer.iem.devassist.actions.HelpAction"
+                    text="Help" description="Resources" icon="AllIcons.Actions.Help">
+            </action>
+        </group>
+    </actions>
+
+</idea-plugin>
