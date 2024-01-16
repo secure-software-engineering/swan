@@ -22,7 +22,7 @@
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="de.fraunhofer.iem.devassist.ui.markers.ErrorLineMarker"/>
         <toolWindow id="Dev-Assist" anchor="right" factoryClass="de.fraunhofer.iem.devassist.ui.SummaryToolWindow" icon="PluginIcons.DEV_ASSIST"/>
-        <notificationGroup id="Plugin-1" displayType="TOOL_WINDOW"/>
+        <notificationGroup id="Process_Completed" displayType="TOOL_WINDOW"/>
     </extensions>
 
     <actions>

@@ -376,7 +376,7 @@ public class MethodListTree extends Tree {
                 JSONFileLoader.setReloading(false);
 
                 String notificationContent = "SRM List updated";
-                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+                NotificationGroupManager.getInstance().getNotificationGroup("Process_Completed").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
 
                 ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
                 fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
@@ -388,7 +388,7 @@ public class MethodListTree extends Tree {
             @Override
             public void launchSecuCheck() {
                 String notificationContent = "SecuCheck results exported to "+PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY);
-                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+                NotificationGroupManager.getInstance().getNotificationGroup("Process_Completed").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
             }
         });
 

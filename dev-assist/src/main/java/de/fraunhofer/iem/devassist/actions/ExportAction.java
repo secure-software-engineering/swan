@@ -70,7 +70,7 @@ public class ExportAction extends AnAction {
                 exportFile.writeToJsonFile(JSONFileLoader.getMethods(), filePath);
 
                 String notificationContent = JSONFileLoader.getMethods().size() + " methods exported to: " + filePath;
-                NotificationGroupManager.getInstance().getNotificationGroup("Plugin-1").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+                NotificationGroupManager.getInstance().getNotificationGroup("Process_Completed").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
 
 
             } catch (IOException e) {
