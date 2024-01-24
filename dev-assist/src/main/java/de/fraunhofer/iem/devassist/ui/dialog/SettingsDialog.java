@@ -65,6 +65,8 @@ public class SettingsDialog extends DialogWrapper {
     public SettingsDialog(Project project, boolean modal) {
 
         super(project, modal);
+        trainingPathCheckbox.setVisible(false);
+        trainingPanel.setVisible(false);
         this.project = project;
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
         setTitle(resourceBundle.getString("SettingsDialog.Title"));
@@ -193,7 +195,6 @@ public class SettingsDialog extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-
         if (isOKActionEnabled()) {
 
             //ensure that required fields are populated
