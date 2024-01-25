@@ -29,13 +29,15 @@ public class Method {
     private int hashCode = 0;
     private String framework;
     private String link;
+    @JsonProperty("interface")
+    private boolean isInterface;
     private String comment;
     private String discovery;
     private RelevantPart dataIn;
     private RelevantPart dataOut;
-    @JsonProperty("type")
     private Set<Category> srm;
     private Set<Category> cwe;
+    private boolean known;
 
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
@@ -48,6 +50,9 @@ public class Method {
     public Method() {
         cwe = new HashSet<>();
         srm = new HashSet<>();
+        known = false;
+        isInterface = false;
+
     }
 
     public Method(String name, String returnType, String className) {
@@ -185,6 +190,14 @@ public class Method {
         return this.cwe;
     }
 
+    public boolean getIsInterface() {
+        return isInterface;
+    }
+
+    public void setIsInterface(boolean isInterface) {
+        this.isInterface = isInterface;
+    }
+
     @JsonIgnore
     public Set<Category> getAllCategories() {
         if (srm != null || cwe != null)
@@ -197,6 +210,12 @@ public class Method {
         if (category.isCwe())
             cwe.add(category);
         else srm.add(category);
+    }
+
+    public void removeCategory(Category category) {
+        if (category.isCwe())
+            cwe.remove(category);
+        else srm.remove(category);
     }
 
     // Inherited from SootMethodAndClass (from Soot Infoflow)
@@ -373,6 +392,14 @@ public class Method {
 
     public void setSootClass(SootClass sootClass) {
         this.sootClass = sootClass;
+    }
+
+    public boolean isKnown() {
+        return known;
+    }
+
+    public void setKnown(boolean known) {
+        this.known = known;
     }
 
     @Override

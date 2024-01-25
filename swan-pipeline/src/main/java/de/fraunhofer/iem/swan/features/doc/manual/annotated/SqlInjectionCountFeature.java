@@ -10,8 +10,8 @@ import de.fraunhofer.iem.swan.features.doc.manual.SecurityVocabulary;
  * Evaluates if SQL Injection words are found in the doc comment.
  * <p>
  * The number of SQL Injection verbs and nouns based on the
- * {@link SecurityVocabulary#CWE089_VERBS}
- * and {@link SecurityVocabulary#CWE089_NOUNS} lists.
+ * {@link SecurityVocabulary#CWE89_VERBS}
+ * and {@link SecurityVocabulary#CWE89_NOUNS} lists.
  *
  * @author Oshando Johnson on 07.08.20
  */
@@ -24,8 +24,8 @@ public class SqlInjectionCountFeature extends WordCountFeature implements IDocFe
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE089));
-        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE089));
+        featureResult.setMethodValue(wordCounter(annotatedMethod.getMethodMap(), Category.CWE89));
+        featureResult.setClassValue(wordCounter(annotatedMethod.getClassMap(), Category.CWE89));
 
         return featureResult;
     }

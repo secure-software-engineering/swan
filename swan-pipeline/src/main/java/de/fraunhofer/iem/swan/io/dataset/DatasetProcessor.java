@@ -31,6 +31,7 @@ public class DatasetProcessor {
         try {
             dataset.setTrain(SrmListUtils.importFile(options.getDatasetJson()));
 
+            System.out.println();
             if (!options.getTrainDataDir().isEmpty())
                 soot.cleanupList(dataset.getTrain());
 
@@ -39,16 +40,22 @@ public class DatasetProcessor {
                     Util.countCategories(dataset.getTrainMethods()));
 
             //Apply filters to dataset
-            if (options.getDiscovery().size() > 0 || options.isDocumented()) {
+            if (!options.getDiscovery().isEmpty() || options.isDocumented()) {
+
+                logger.info("Filters applied to dataset: discovery={}, documented={}",
+                        options.getDiscovery(), options.isDocumented());
 
                 for (Method method : new HashSet<>(dataset.getTrainMethods())) {
 
-                    if ((!options.getDiscovery().contains(method.getDiscovery()) && options.getDiscovery().size() > 0) ||
-                            ((method.getJavadoc().getMethodComment().length() == 0
+                    if ((!options.getDiscovery().contains(method.getDiscovery()) && !options.getDiscovery().isEmpty()) ||
+                            ((method.getJavadoc().getMethodComment().isEmpty()
                                     || StringUtils.split(method.getJavadoc().getMethodComment(), " ").size() <= 1) && options.isDocumented())) {
                         dataset.getTrainMethods().remove(method);
                     }
                 }
+                logger.info("Importing {} SRMs from dataset {}, distribution={}",
+                        dataset.getTrainMethods().size(), options.getDatasetJson(),
+                        Util.countCategories(dataset.getTrainMethods()));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

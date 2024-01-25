@@ -24,7 +24,7 @@ public class SwanCli {
 
         FileUtility fileUtility = new FileUtility();
 
-        if (options.getDatasetJson().contentEquals("/dataset/swan-dataset.json")) {
+        if (options.getDatasetJson().contentEquals("/dataset/srm-repo-dataset.json")) {
             options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson(), null).getAbsolutePath());
         }
 
@@ -33,7 +33,7 @@ public class SwanCli {
         }
 
         if (options.getCweClasses().contains("all")) {
-            options.setCweClasses(Arrays.asList("cwe078", "cwe079", "cwe089", "cwe306", "cwe601", "cwe862", "cwe863"));
+            options.setCweClasses(Arrays.asList("cwe78", "cwe79", "cwe89", "cwe306", "cwe601", "cwe862", "cwe863"));
         }
 
         if (options.getFeatureSet().contains("all")) {
@@ -49,12 +49,11 @@ public class SwanCli {
             switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
                 case MEKA:
-                    dataset = options.getToolkit();
+                case MLPLAN:
+                    dataset = "meka";
                     break;
                 case WEKA:
-                case MLPLAN:
-                case AUTOWEKA:
-                    dataset = "weka";
+                    dataset = options.getToolkit();
                     break;
             }
 

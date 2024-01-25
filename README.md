@@ -20,7 +20,7 @@ The easiest way to get started with SWAN is to use the pre-built binary from the
 
 After downloading the necessary files from the most recent release, SWAN can be executed on the command line with the following command:
 
-<code>java -jar swan-<swan-version>.jar -test <java-project-path> -output <output-directory></code>
+<code>java -jar swan-&lt;swan-version&gt;.jar-test <project-path> -output <output-directory></code>
 
 This command runs the application and exports the detected security-relevant methods to a JSON file in the provided output directory. The available command line options can be found in the Wiki or by using the <code>-help</code> command line option.
 

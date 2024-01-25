@@ -19,13 +19,24 @@ public enum Category {
     AUTHENTICATION("authentication", false, true),
     RELEVANT(Constants.RELEVANT, false, false),
     NONE(Constants.NONE, false, false),
-    CWE078("CWE078", true, false),
-    CWE079("CWE079", true, false),
-    CWE089("CWE089", true, false),
+    CWE35("CWE35", true, false),
+    CWE77("CWE77", true, false),
+    CWE78("CWE78", true, false),
+    CWE79("CWE79", true, false),
+    CWE89("CWE89", true, false),
+    CWE90("CWE90", true, false),
+    CWE91("CWE91", true, false),
+    CWE117("CWE117", true, false),
+    CWE233("CWE233", true, false),
     CWE306("CWE306", true, false),
+    CWE443("CWE443", true, false),
+    CWE501("CWE501", true, false),
     CWE601("CWE601", true, false),
+    CWE643("CWE643", true, false),
     CWE862("CWE862", true, false),
     CWE863("CWE863", true, false),
+    CWE917("CWE917", true, false),
+    CWE918("CWE918", true, false),
     CWETEST("CWEtest", true, false),
     CWE_NONE("cwe-none", true, false);
 
@@ -63,7 +74,7 @@ public enum Category {
 
     public static Category getCategoryForCWE(String cweName) {
         for (Category c : Category.values())
-            if (c.id.toLowerCase().equals(cweName.toLowerCase()))
+            if (c.id.equalsIgnoreCase(cweName))
                 return c;
         return null;
     }

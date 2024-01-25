@@ -99,7 +99,6 @@ public class Soot {
         }
 
         c.setApplicationClass();
-        if (c.isInterface()) return null;
 
         while (c != null) {
             // Does the current class declare the method we are looking for?
@@ -131,7 +130,7 @@ public class Soot {
 
             SootMethod sootMethod = getMethod(method);
 
-            if (sootMethod == null || sootMethod.isAbstract()) {
+            if (sootMethod == null) {
                 abstractMethods.add(method);
                 logger.info("Method purged from list {}", method.getSignature());
             } else {

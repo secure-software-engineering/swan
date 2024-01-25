@@ -21,10 +21,10 @@ public class CliRunner implements Callable<Integer> {
     private String testDataSourceDir = "";
 
     @CommandLine.Option(names = {"-train-source", "--train-data-source"}, description = {"Path of training source files"})
-    private String trainDataDirSource = "";
+    private String trainDataSourceDir = "";
 
     @CommandLine.Option(names = {"-d", "--dataset"}, description = {"Path to JSON dataset file"})
-    private String datasetJson = "/dataset/swan-dataset.json";
+    private String datasetJson = "/dataset/srm-repo-dataset.json";
 
     @CommandLine.Option(names = {"-in", "--train-instances"}, description = {"Path to ARFF files that contain training instances"})
     private List<String> arffInstancesFiles = new ArrayList<>();
@@ -60,13 +60,16 @@ public class CliRunner implements Callable<Integer> {
     private double split = 0.7;
 
     @CommandLine.Option(names = {"-p", "--phase"}, description = {"Phase: validate, predict"})
-    private String phase = "predict";
+    private String phase = "validate";
 
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;
 
+    @CommandLine.Option(names = {"-sr", "--known-srms"}, description = {"Add know SRMs from dataset"})
+    private boolean addKnownSrms = true;
+
     @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
-    private List<String> discovery =  Collections.singletonList("manual");
+    private List<String> discovery =  new ArrayList<>();//  Collections.singletonList("manual");
 
     @CommandLine.Option(names = {"-tl", "--timelimit"}, description = {"Time (minutes) to execute operation "})
     private int timeLimit = 1;
@@ -95,6 +98,7 @@ public class CliRunner implements Callable<Integer> {
         options.setIterations(iterations);
         options.setTrainTestSplit(split);
         options.setPredictionThreshold(predictionThreshold);
+        options.setAddKnownSrms(addKnownSrms);
         options.setReduceAttributes(false);
         options.setDiscovery(discovery);
         options.setTimeLimit(timeLimit);

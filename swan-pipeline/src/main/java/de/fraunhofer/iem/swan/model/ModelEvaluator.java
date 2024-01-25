@@ -7,8 +7,7 @@ import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
-import de.fraunhofer.iem.swan.model.toolkit.AutoWeka;
-import de.fraunhofer.iem.swan.model.toolkit.MLPlan;
+import de.fraunhofer.iem.swan.model.toolkit.ML2Plan;
 import de.fraunhofer.iem.swan.model.toolkit.Meka;
 import de.fraunhofer.iem.swan.model.toolkit.Weka;
 import org.slf4j.Logger;
@@ -69,14 +68,10 @@ public class ModelEvaluator {
                 Weka weka = new Weka((WekaFeatureSet) features, options, methods);
                 processResults(weka.trainModel());
                 break;
-            case AUTOWEKA:
-                AutoWeka autoWeka = new AutoWeka((WekaFeatureSet) features, options);
-                autoWeka.trainModel();
-                break;
             case MLPLAN:
                 logger.info("Evaluating model with ML-PLAN");
-                MLPlan mlPlan = new MLPlan((WekaFeatureSet) features, options);
-                mlPlan.trainModel();
+                ML2Plan mlPlan = new ML2Plan((MekaFeatureSet) features, options);
+                processResults(mlPlan.trainModel());
                 break;
         }
     }
