@@ -75,7 +75,6 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
         this.trainInstances.put("meka", convertToMekaInstances(trainingInstances));
 
-        //Set attributed for the test instances
         //Set attributes for the test instances
         if (options.getPhase().toUpperCase().contentEquals(ModelEvaluator.Phase.PREDICT.name())) {
 
