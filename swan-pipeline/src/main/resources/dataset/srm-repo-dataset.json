@@ -219,7 +219,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -518,7 +517,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -678,7 +676,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -744,7 +741,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -809,7 +805,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1032,7 +1027,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1196,7 +1190,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1549,7 +1542,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1685,7 +1677,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1715,7 +1706,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1780,7 +1770,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1810,7 +1799,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -1840,7 +1828,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2132,7 +2119,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2162,7 +2148,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2401,7 +2386,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2704,7 +2688,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2863,7 +2846,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2893,7 +2875,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2923,7 +2904,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -2959,7 +2939,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -3062,7 +3041,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -3095,7 +3073,3358 @@
         "return": false
       },
       "cwe": [
-        "none"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xwork-core-2.2.3.jar"
+    },
+    {
+      "name": "org.springframework.jdbc.core.JdbcTemplate.query",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.jdbc.core.ResultSetExtractor"
+      ],
+      "framework": "spring",
+      "link": "https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html",
+      "comment": "sql query",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "Execute a query given static SQL, reading the ResultSet with a ResultSetExtractor. Uses a JDBC Statement, not a PreparedStatement. If you want to execute a static query with a PreparedStatement, use the overloaded {@code query} method with {@code null} as argument array.",
+        "class": "This is the central class in the JDBC core package. It simplifies the use of JDBC and helps to avoid common errors. It executes core JDBC workflow, leaving application code to provide SQL and extract results. This class executes SQL queries or updates, initiating iteration over ResultSets and catching JDBC exceptions and translating them to the generic, more informative exception hierarchy defined in the org.springframework.dao package. Code using this class need only implement callback interfaces, giving them a clearly defined contract. The {@link PreparedStatementCreator} callback interface creates a prepared statement given a Connection, providing SQL and any necessary parameters. The {@link ResultSetExtractor} interface extracts values from a ResultSet. See also {@link PreparedStatementSetter} and {@link RowMapper} for two popular alternative callback interfaces. Can be used within a service implementation via direct instantiation with a DataSource reference, or get prepared in an application context and given to services as bean reference. Note: The DataSource should always be configured as a bean in the application context, in the first case given to the service directly, in the second case to the prepared template. Because this class is parameterizable by the callback interfaces and the {@link org.springframework.jdbc.support.SQLExceptionTranslator} interface, there should be no need to subclass it. All SQL operations performed by this class are logged at debug level, using \"org.springframework.jdbc.core.JdbcTemplate\" as log category."
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.pmw.tinylog.Logger.debug",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.pmw.tinylog.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tinylog-1.1.jar"
+    },
+    {
+      "name": "org.apache.xmlrpc.client.XmlRpcClient.execute",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "apache",
+      "link": "https://ws.apache.org/xmlrpc/apidocs/org/apache/xmlrpc/client/XmlRpcClient.html",
+      "comment": "Performes a request for the method provided as the first argument.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0,
+          1
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE78"
+      ],
+      "javadoc": {
+        "method": "Performs a request with the clients default configuration.",
+        "class": "The main access point of an XML-RPC client. This object serves mainly as an object factory. It is designed with singletons in mind: Basically, an application should be able to hold a single instance of XmlRpcClient in a static variable, unless you would be working with different factories. Until Apache XML-RPC 2.0, this object was used both as an object factory and as a place, where configuration details (server URL, suggested encoding, user credentials and the like) have been stored. In Apache XML-RPC 3.0, the configuration details has been moved to the {@link org.apache.xmlrpc.client.XmlRpcClientConfig} object. The configuration object is designed for being passed through the actual worker methods. A configured XmlRpcClient object is thread safe: In other words, the suggested use is, that you configure the client using {@link #setTransportFactory(XmlRpcTransportFactory)} and similar methods, store it in a field and never modify it again. Without modifications, the client may be used for an arbitrary number of concurrent requests."
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "android.database.sqlite.SQLiteQueryBuilder.query",
+      "parameters": [
+        "android.database.sqlite.SQLiteDatabase",
+        "java.lang.String[]",
+        "java.lang.String",
+        "java.lang.String[]",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "android.os.CancellationSignal"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "android.database.sqlite.SQLiteQueryBuilder",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "android.database.Cursor",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "android-2.3.1.jar"
+    },
+    {
+      "name": "org.springframework.web.socket.BinaryMessage.<init>",
+      "parameters": [
+        "byte[]"
+      ],
+      "framework": "spring",
+      "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/socket/BinaryMessage.html",
+      "comment": "Counter example for sanitizer (byte[] as param, but init)",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Create a new binary WebSocket message with the given byte[] payload.",
+        "class": "A binary WebSocket message."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "javax.naming.directory.DirContext.search",
+      "parameters": [
+        "javax.naming.Name",
+        "java.lang.String",
+        "java.lang.Object[]",
+        "javax.naming.directory.SearchControls"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.naming.directory.DirContext",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "javax.naming.NamingEnumeration",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jndi-1.2.1.jar"
+    },
+    {
+      "name": "org.owasp.webgoat.session.RandomLessonTracker.hasCompleted",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "webgoat",
+      "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/session/RandomLessonTracker.java",
+      "comment": "Counter example for sanitizer (has)",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "hasCompleted.",
+        "class": "RandomLessonTracker class."
+      },
+      "interface": false,
+      "return": "boolean",
+      "srm": [],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "javax.servlet.http.Cookie.<init>",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.http.Cookie",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE443"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "org.slf4j.Logger.error",
+      "parameters": [
+        "org.slf4j.Marker",
+        "java.lang.String",
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.slf4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "slf4j-api-2.0.6.jar"
+    },
+    {
+      "name": "org.apache.commons.httpclient.auth.BasicScheme.authenticate",
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
+      "framework": "apache",
+      "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/BasicScheme.html",
+      "comment": "When the input is true, the tocken should be trusted.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE863",
+        "CWE862"
+      ],
+      "javadoc": {
+        "method": "Produces basic authorization string for the given set of {@link Credentials}.",
+        "class": "Basic authentication scheme as defined in RFC 2617."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "auth-safe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.pmw.tinylog.Logger.warn",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.pmw.tinylog.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tinylog-1.1.jar"
+    },
+    {
+      "name": "org.apache.xpath.XPathAPI.selectNodeIterator",
+      "parameters": [
+        "org.w3c.dom.Node",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.xpath.XPathAPI",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "org.w3c.dom.traversal.NodeIterator",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xalan-j2-2.7.0.jar"
+    },
+    {
+      "name": "org.apache.http.client.methods.HttpGet.<init>",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.http.client.methods.HttpGet",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE233"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-httpcomponents-httpclient.jar"
+    },
+    {
+      "name": "com.opensymphony.xwork2.ognl.OgnlUtil.setProperties",
+      "parameters": [
+        "java.util.Map",
+        "java.lang.Object",
+        "java.util.Map"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.opensymphony.xwork2.ognl.OgnlUtil",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xwork-core-2.2.3.jar"
+    },
+    {
+      "name": "org.springframework.ldap.core.LdapOperations.search",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "int",
+        "java.lang.String[]",
+        "org.springframework.ldap.core.ContextMapper"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.springframework.ldap.core.LdapOperations",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.util.List",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "spring-ldap-1.3.1.RELEASE-all.jar"
+    },
+    {
+      "name": "org.apache.log4j.Logger.log",
+      "parameters": [
+        "org.apache.log4j.Priority",
+        "java.lang.Object",
+        "java.lang.Throwable"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.log4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-logging-log4j.jar"
+    },
+    {
+      "name": "java.util.logging.Logger.entering",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.util.logging.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.apache.log4j.Logger.fatal",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.log4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-logging-log4j.jar"
+    },
+    {
+      "name": "org.slf4j.Logger.error",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.slf4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "slf4j-api-2.0.6.jar"
+    },
+    {
+      "name": "org.jboss.seam.log.Log.trace",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Throwable",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.jboss.seam.log.Log",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jboss-seam.jar"
+    },
+    {
+      "name": "com.sun.org.apache.xpath.internal.XPathAPI.selectSingleNode",
+      "parameters": [
+        "org.w3c.dom.Node",
+        "java.lang.String",
+        "org.w3c.dom.Node"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.sun.org.apache.xpath.internal.XPathAPI",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "org.w3c.dom.NodeList",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jaxp-ri-5.2.0.jar"
+    },
+    {
+      "name": "java.sql.PreparedStatement.executeQuery",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.sql.PreparedStatement",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.sql.ResultSet",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.swing.text.JTextComponent.getText",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.swing.text.JTextComponent",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.xml.xpath.XPath.evaluate",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.xml.xpath.XPath",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.String",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.ldapAuthentication",
+      "parameters": [],
+      "framework": "spring",
+      "link": "https://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/apidocs/org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
+      "comment": "Authentication to LDAP. The owner of the return object can manipulate users to a LDAP connection.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "org.springframework.security.config.'annotation'.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer",
+      "srm": [
+        "auth-safe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "javax.servlet.http.HttpSession.putValue",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.http.HttpSession",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE501"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "java.sql.Statement.executeLargeUpdate",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.sql.Statement",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "long",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "java.lang.System.clearProperty",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.System",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.apache.commons.io.HexDump.dump",
+      "parameters": [
+        "byte[]",
+        "long",
+        "java.io.OutputStream",
+        "int"
+      ],
+      "framework": "apache",
+      "link": "https://commons.apache.org/proper/commons-io/javadocs/api-2.5/org/apache/commons/io/HexDump.html",
+      "comment": "Sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0,
+          2
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Dump an array of bytes to an OutputStream. The output is formatted for human inspection, with a hexadecimal offset followed by the hexadecimal values of the next 16 bytes of data and the printable ASCII characters (if any) that those bytes represent printed per each line of output. The offset argument specifies the start offset of the data array within a larger entity like a file or an incoming stream. For example, if the data array contains the third kibibyte of a file, then the offset argument should be set to 2048. The offset value printed at the beginning of each line indicates where in that larger entity the first byte on that line is located. All bytes between the given index (inclusive) and the end of the data array are dumped.",
+        "class": "Dumps data in hexadecimal format. Provides a single function to take an array of bytes and display it in hexadecimal form. Origin of code: POI."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.apache.wicket.protocol.http.ClientProperties.getNavigatorAppCodeName",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.wicket.protocol.http.ClientProperties",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "org.apache.wicket-all-1.0.4.release.jar"
+    },
+    {
+      "name": "javax.naming.directory.InitialDirContext.<init>",
+      "parameters": [
+        "java.util.Hashtable"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Constructs an initial DirContext using the supplied environment. Environment properties are discussed in the javax.naming.InitialContext class description. This constructor will not modify environment or save a reference to it, but may save a clone. Caller should not modify mutable keys and values in environment after it has been passed to the constructor.",
+        "class": "This class is the starting context for performing directory operations. The documentation in the class description of InitialContext (including those for synchronization) apply here."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jndi-1.2.1.jar"
+    },
+    {
+      "name": "com.opensymphony.xwork2.util.TextParseUtil.translateVariables",
+      "parameters": [
+        "char",
+        "java.lang.String",
+        "com.opensymphony.xwork2.util.ValueStack",
+        "java.lang.Class"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.opensymphony.xwork2.util.TextParseUtil",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xwork-core-2.2.3.jar"
+    },
+    {
+      "name": "org.apache.wicket.protocol.http.servlet.ServletPartFileItem.getString",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Returns the contents of the file item as a String, using the default character encoding. This method uses {@link #get()} to retrieve the contents of the item.",
+        "class": "An adapter of Servlet 3.0 {@link Part} to Apache Commons FileUpload's {@link FileItem}"
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "wicket-core-7.8.0.jar"
+    },
+    {
+      "name": "org.jboss.seam.log.Log.info",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.jboss.seam.log.Log",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jboss-seam.jar"
+    },
+    {
+      "name": "org.apache.xpath.XPathAPI.selectNodeIterator",
+      "parameters": [
+        "org.w3c.dom.Node",
+        "java.lang.String",
+        "org.w3c.dom.Node"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.xpath.XPathAPI",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "org.w3c.dom.traversal.NodeIterator",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xalan-j2-2.7.0.jar"
+    },
+    {
+      "name": "org.slf4j.Logger.warn",
+      "parameters": [
+        "org.slf4j.Marker",
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.slf4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "slf4j-api-2.0.6.jar"
+    },
+    {
+      "name": "org.springframework.expression.ExpressionParser.parseExpression",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.springframework.expression.ExpressionParser",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE917"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "org.springframework.expression.Expression",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "org.springframework.expression-3.1.0.release.jar"
+    },
+    {
+      "name": "org.owasp.esapi.reference.DefaultEncoder.decodeFromURL",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "Decode from URL. Implementations should first canonicalize and detect any double-encoding. If this check passes, then the data is decoded using URL decoding.",
+        "class": "Reference implementation of the Encoder interface. This implementation takes a whitelist approach to encoding, meaning that everything not specifically identified in a list of \"immune\" characters is encoded."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "sanitizer"
+      ],
+      "known": true,
+      "jar": "esapi-2.0_rc10.jar"
+    },
+    {
+      "name": "java.util.Scanner.nextLine",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "java.util.Scanner",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.naming.Context.lookup",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.naming.Context",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jndi-1.2.1.jar"
+    },
+    {
+      "name": "kotlin.io.FilesKt.createTempFile$default",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.io.File",
+        "int",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "kotlin.io.FilesKt",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE35"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.io.File",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "kotlin-stdlib-1.0.6.jar"
+    },
+    {
+      "name": "org.apache.commons.lang3.StringEscapeUtils.escapeJava",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Escapes the characters in a {@code String} using Java String rules. Deals correctly with quotes and control-chars (tab, backslash, cr, ff, etc.) So a tab becomes the characters {@code '\\\\'} and {@code 't'}. The only difference between Java strings and JavaScript strings is that in JavaScript, a single quote and forward-slash (/) are escaped. Example:  input string: He didn't say, \"Stop!\"\n output string: He didn't say, \\\"Stop!\\\"",
+        "class": "Escapes and unescapes {@code String}s for Java, Java Script, HTML and XML. #ThreadSafe#"
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "sanitizer"
+      ],
+      "known": true,
+      "jar": "commons-lang3-3.10.jar"
+    },
+    {
+      "name": "org.slf4j.Logger.info",
+      "parameters": [
+        "org.slf4j.Marker",
+        "java.lang.String",
+        "java.lang.Throwable"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.slf4j.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "slf4j-api-2.0.6.jar"
+    },
+    {
+      "name": "javax.servlet.http.HttpServletRequestWrapper.getParameterValues",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.http.HttpServletRequestWrapper",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String[]",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "org.apache.commons.logging.Log.debug",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.commons.logging.Log",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-commons.jar"
+    },
+    {
+      "name": "javax.servlet.ServletRequestWrapper.getParameter",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "javageneral",
+      "link": "https://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequestWrapper.html",
+      "comment": "",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE601"
+      ],
+      "javadoc": {
+        "method": "The default behavior of this method is to return getParameter(String name) on the wrapped request object.",
+        "class": "Provides a convenient implementation of the ServletRequest interface that can be subclassed by developers wishing to adapt the request to a Servlet. This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped request object."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "java.lang.Runtime.exec",
+      "parameters": [
+        "java.lang.String[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.Runtime",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE78"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Process",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "com.novell.ldap.LDAPConnection.connect",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.novell.ldap.LDAPConnection",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "ldap.jar"
+    },
+    {
+      "name": "org.apache.commons.logging.Log.error",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.commons.logging.Log",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-commons.jar"
+    },
+    {
+      "name": "java.lang.ProcessBuilder.<init>",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.ProcessBuilder",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE78"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "com.sun.org.apache.xpath.internal.XPathAPI.eval",
+      "parameters": [
+        "org.w3c.dom.Node",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.sun.org.apache.xpath.internal.XPathAPI",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "com.sun.org.apache.xpath.internal.objects.XObject",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jaxp-ri-5.2.0.jar"
+    },
+    {
+      "name": "org.apache.torque.util.BasePeer.executeQuery",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "boolean"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.torque.util.BasePeer",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.util.List",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "torque-3.1.jar"
+    },
+    {
+      "name": "java.sql.PreparedStatement.execute",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.sql.PreparedStatement",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "boolean",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.servlet.http.HttpServletResponseWrapper.setIntHeader",
+      "parameters": [
+        "java.lang.String",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE79"
+      ],
+      "javadoc": {
+        "method": "The default behavior of this method is to call setIntHeader(String name, int value) on the wrapped response object.",
+        "class": "Provides a convenient implementation of the HttpServletResponse interface that can be subclassed by developers wishing to adapt the response from a Servlet. This class implements the Wrapper or Decorator pattern. Methods default to calling through to the wrapped response object."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tomcat-5.5-servlet-api.jar"
+    },
+    {
+      "name": "javax.portlet.ClientDataRequest.getContentType",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.portlet.ClientDataRequest",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "portlet-2.0.jar"
+    },
+    {
+      "name": "java.util.logging.Logger.logp",
+      "parameters": [
+        "java.util.logging.Level",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.Throwable",
+        "java.util.function.Supplier"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.util.logging.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.servlet.http.HttpSession.setAttribute",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.http.HttpSession",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE501"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "anorm.SimpleSql.as",
+      "parameters": [
+        "anorm.ResultSetParser",
+        "java.sql.Connection"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "anorm.SimpleSql",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "anorm_2.10.jar"
+    },
+    {
+      "name": "com.opensymphony.xwork2.ognl.OgnlUtil.getValue",
+      "parameters": [
+        "java.lang.String",
+        "java.util.Map",
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.opensymphony.xwork2.ognl.OgnlUtil",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xwork-core-2.2.3.jar"
+    },
+    {
+      "name": "org.apache.wicket.protocol.http.ClientProperties.getNavigatorAppVersion",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.wicket.protocol.http.ClientProperties",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "org.apache.wicket-all-1.0.4.release.jar"
+    },
+    {
+      "name": "org.pmw.tinylog.Logger.trace",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.pmw.tinylog.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tinylog-1.1.jar"
+    },
+    {
+      "name": "java.lang.System.getenv",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.System",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "java.awt.TextComponent.getText",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "java.awt.TextComponent",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.swing.text.JTextComponent.getSelectedText",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.swing.text.JTextComponent",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.springframework.web.util.HtmlUtils.htmlEscape",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Turn special characters into HTML character references. Handles complete character set defined in HTML 4.01 recommendation. Escapes all special characters to their corresponding entity reference (e.g. {@code <}). Reference: http://www.w3.org/TR/html4/sgml/entities.html",
+        "class": "Utility class for HTML escaping. Escapes and unescapes based on the W3C HTML 4.01 recommendation, handling character entity references. Reference: http://www.w3.org/TR/html4/charset.html For a comprehensive set of String escaping utilities, consider Apache Commons Lang and its StringEscapeUtils class. We are not using that class here to avoid a runtime dependency on Commons Lang just for HTML escaping. Furthermore, Spring's HTML escaping is more flexible and 100% HTML 4.0 compliant."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "sanitizer"
+      ],
+      "known": true,
+      "jar": "spring-web-4.3.9.RELEASE.jar"
+    },
+    {
+      "name": "java.lang.Runtime.exec",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.Runtime",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE78"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Process",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "java.sql.Statement.addBatch",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.sql.Statement",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "javax.servlet.http.Cookie.setComment",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Specifies a comment that describes a cookie's purpose. The comment is useful if the browser presents the cookie to the user. Comments are not supported by Netscape Version 0 cookies.",
+        "class": "Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server. A cookie's value can uniquely identify a client, so cookies are commonly used for session management. A cookie has a name, a single value, and optional attributes such as a comment, path and domain qualifiers, a maximum age, and a version number. Some Web browsers have bugs in how they handle the optional attributes, so use them sparingly to improve the interoperability of your servlets. The servlet sends cookies to the browser by using the {@link HttpServletResponse#addCookie} method, which adds fields to HTTP response headers to send cookies to the browser, one at a time. The browser is expected to support 20 cookies for each Web server, 300 cookies total, and may limit cookie size to 4 KB each. The browser returns cookies to the servlet by adding fields to HTTP request headers. Cookies can be retrieved from a request by using the {@link HttpServletRequest#getCookies} method. Several cookies might have the same name but different path attributes. Cookies affect the caching of the Web pages that use them. HTTP 1.0 does not cache pages that use cookies created with this class. This class does not support the cache control defined with HTTP 1.1. This class supports both the Version 0 (by Netscape) and Version 1 (by RFC 2109) cookie specifications. By default, cookies are created using Version 0 to ensure the best interoperability."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tomcat-5.5-servlet-api.jar"
+    },
+    {
+      "name": "com.sun.org.apache.xpath.internal.XPathAPI.selectSingleNode",
+      "parameters": [
+        "org.w3c.dom.Node",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.sun.org.apache.xpath.internal.XPathAPI",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE643"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "org.w3c.dom.Node",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jaxp-ri-5.2.0.jar"
+    },
+    {
+      "name": "org.springframework.mock.web.portlet.MockPortletRequest.setParameter",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "framework": "spring",
+      "link": "",
+      "comment": "Sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0,
+          1
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE79"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": "Mock implementation of the {@link javax.portlet.PortletRequest} interface."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "kotlin.io.FilesKt.createTempDir$default",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.io.File",
+        "Ijava.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "kotlin.io.FilesKt",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE35"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.io.File",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "kotlin-stdlib-1.0.6.jar"
+    },
+    {
+      "name": "java.lang.Class.getDeclaredMethod",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Class[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Returns a {@code Method} object that reflects the specified declared method of the class or interface represented by this {@code Class} object. The {@code name} parameter is a {@code String} that specifies the simple name of the desired method, and the {@code parameterTypes} parameter is an array of {@code Class} objects that identify the method's formal parameter types, in declared order. If more than one method with the same parameter types is declared in a class, and one of these methods has a return type that is more specific than any of the others, that method is returned; otherwise one of the methods is chosen arbitrarily. If the name is \"\"or \"\" a {@code NoSuchMethodException} is raised. If this {@code Class} object represents an array type, then this method does not find the {@code clone()} method.",
+        "class": "Instances of the class {@code Class} represent classes and interfaces in a running Java application. An enum is a kind of class and an annotation is a kind of interface. Every array also belongs to a class that is reflected as a {@code Class} object that is shared by all arrays with the same element type and number of dimensions. The primitive Java types ({@code boolean}, {@code byte}, {@code char}, {@code short}, {@code int}, {@code long}, {@code float}, and {@code double}), and the keyword {@code void} are also represented as {@code Class} objects. {@code Class} has no public constructor. Instead {@code Class} objects are constructed automatically by the Java Virtual Machine as classes are loaded and by calls to the {@code defineClass} method in the class loader. The following example uses a {@code Class} object to print the class name of an object:      void printClassName(Object obj) {\n         System.out.println(\"The class of \" + obj +\n                            \" is \" + obj.getClass().getName());\n     }\n It is also possible to get the {@code Class} object for a named type (or for void) using a class literal. See Section 15.8.2 of The Java™ Language Specification. For example: {@code System.out.println(\"The name of class Foo is: \"+Foo.class.getName());}"
+      },
+      "interface": false,
+      "return": "java.lang.reflect.Method",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "java.lang.Class.getResourceAsStream",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.Class",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.io.InputStream",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "java.lang.System.getenv",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "java.lang.System",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.util.Map",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.apache.log4j.Category.log",
+      "parameters": [
+        "java.lang.String",
+        "org.apache.log4j.Priority",
+        "java.lang.Object",
+        "java.lang.Throwable"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.log4j.Category",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-logging-log4j.jar"
+    },
+    {
+      "name": "org.hibernate.internal.SessionImpl.save",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "Persist the given transient instance, first assigning a generated identifier. (Or using the current value of the identifier property if the assigned generator is used.) This operation cascades to associated instances if the association is mapped with {@code cascade=\"save-update\"}",
+        "class": "Concrete implementation of a Session. Exposes two interfaces: {@link org.hibernate.Session} to the application {@link org.hibernate.engine.spi.SessionImplementor} to other Hibernate components (SPI) This class is not thread-safe."
+      },
+      "interface": false,
+      "return": "java.io.Serializable",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "hibernate-core-5.2.10.Final.jar"
+    },
+    {
+      "name": "org.owasp.webgoat.sql_injection.introduction.SqlInjectionLesson5a.completed",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "return": "org.owasp.webgoat.assignments.AttackResult",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "org.apache.commons.httpclient.auth.NTLMScheme.authenticate",
+      "parameters": [
+        "org.apache.commons.httpclient.NTCredentials",
+        "java.lang.String"
+      ],
+      "framework": "apache",
+      "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/NTLMScheme.html",
+      "comment": "Depricated method. The credentials are provided. The authentication string is returned.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE863",
+        "CWE862"
+      ],
+      "javadoc": {
+        "method": "Create a NTLM authorization string for the given challenge and NT credentials.",
+        "class": "An implementation of the Microsoft proprietary NTLM authentication scheme. For a detailed explanation of the NTLM scheme please see http://davenport.sourceforge.net/ntlm.html."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "auth-safe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.springframework.orm.hibernate3.LocalDataSourceConnectionProvider.closeConnection",
+      "parameters": [
+        "java.sql.Connection"
+      ],
+      "framework": "spring",
+      "link": "https://static.javadoc.io/org.springframework/spring/2.0.4/org/springframework/orm/hibernate3/LocalDataSourceConnectionProvider.html",
+      "comment": "Puts the state of the program to unauthenticated.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE306",
+        "CWE89",
+        "CWE863",
+        "CWE862"
+      ],
+      "javadoc": {
+        "method": "This implementation simply calls Connection.close.",
+        "class": "Hibernate connection provider for local DataSource instances in an application context. This provider will be used if LocalSessionFactoryBean's \"dataSource\" property is set without a Hibernate TransactionManagerLookup."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "auth-unsafe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "javax.naming.event.EventDirContext.lookup",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.naming.event.EventDirContext",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jndi-1.2.1.jar"
+    },
+    {
+      "name": "org.apache.shiro.mgt.DefaultSecurityManager.login",
+      "parameters": [
+        "org.apache.shiro.subject.Subject",
+        "org.apache.shiro.authc.AuthenticationToken"
+      ],
+      "framework": "apache",
+      "link": "https://shiro.apache.org/static/1.2.6/apidocs/org/apache/shiro/mgt/DefaultSecurityManager.html",
+      "comment": "Login the specified subject with the tocken and return the subject.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0,
+          1
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE863",
+        "CWE862"
+      ],
+      "javadoc": {
+        "method": "First authenticates the {@code AuthenticationToken} argument, and if successful, constructs a {@code Subject} instance representing the authenticated account's identity. Once constructed, the {@code Subject} instance is then {@link #bind bound} to the application for subsequent access before being returned to the caller.",
+        "class": "The Shiro framework's default concrete implementation of the {@link SecurityManager} interface, based around a collection of {@link org.apache.shiro.realm.Realm}s. This implementation delegates its authentication, authorization, and session operations to wrapped {@link Authenticator}, {@link Authorizer}, and {@link org.apache.shiro.session.mgt.SessionManager SessionManager} instances respectively via superclass implementation. To greatly reduce and simplify configuration, this implementation (and its superclasses) will create suitable defaults for all of its required dependencies, except the required one or more {@link Realm Realm}s. Because {@code Realm} implementations usually interact with an application's data model, they are almost always application specific; you will want to specify at least one custom {@code Realm} implementation that 'knows' about your application's data/security model (via {@link #setRealm} or one of the overloaded constructors). All other attributes in this class hierarchy will have suitable defaults for most enterprise applications. RememberMe notice: This class supports the ability to configure a {@link #setRememberMeManager RememberMeManager} for {@code RememberMe} identity services for login/logout, BUT, a default instance will not be created for this attribute at startup. Because RememberMe services are inherently client tier-specific and therefore aplication-dependent, if you want {@code RememberMe} services enabled, you will have to specify an instance yourself via the {@link #setRememberMeManager(RememberMeManager) setRememberMeManager} mutator. However if you're reading this JavaDoc with the expectation of operating in a Web environment, take a look at the {@code org.apache.shiro.web.DefaultWebSecurityManager} implementation, which does support {@code RememberMe} services by default at startup."
+      },
+      "interface": false,
+      "return": "org.apache.shiro.subject.Subject",
+      "srm": [
+        "auth-safe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "java.util.Scanner.<init>",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "java.util.Scanner",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "java-rt-jar-stubs-1.5.0.jar"
+    },
+    {
+      "name": "org.hibernate.internal.SessionImpl.find",
+      "parameters": [
+        "java.lang.Class",
+        "java.lang.Object",
+        "javax.persistence.LockModeType"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "Find by primary key and lock. Search for an entity of the specified class and primary key and lock it with respect to the specified lock type. If the entity instance is contained in the persistence context, it is returned from there, and the effect of this method is the same as if the lock method had been called on the entity. If the entity is found within the persistence context and the lock mode type is pessimistic and the entity has a version attribute, the persistence provider must perform optimistic version checks when obtaining the database lock. If these checks fail, the OptimisticLockException will be thrown. If the lock mode type is pessimistic and the entity instance is found but cannot be locked: the PessimisticLockException will be thrown if the database locking failure causes transaction-level rollback the LockTimeoutException will be thrown if the database locking failure causes only statement-level rollback",
+        "class": "Concrete implementation of a Session. Exposes two interfaces: {@link org.hibernate.Session} to the application {@link org.hibernate.engine.spi.SessionImplementor} to other Hibernate components (SPI) This class is not thread-safe."
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "hibernate-core-5.2.10.Final.jar"
+    },
+    {
+      "name": "android.database.sqlite.SQLiteQueryBuilder.buildQuery",
+      "parameters": [
+        "java.lang.String[]",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "android.database.sqlite.SQLiteQueryBuilder",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE89"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "android-2.3.1.jar"
+    },
+    {
+      "name": "org.springframework.ldap.core.LdapOperations.list",
+      "parameters": [
+        "java.lang.String",
+        "org.springframework.ldap.core.NameClassPairMapper"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.springframework.ldap.core.LdapOperations",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.util.List",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "spring-ldap-1.3.1.RELEASE-all.jar"
+    },
+    {
+      "name": "org.springframework.test.context.MergedContextConfiguration.nullSafeToString",
+      "parameters": [
+        "org.springframework.test.context.ContextLoader"
+      ],
+      "framework": "spring",
+      "link": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/MergedContextConfiguration.html",
+      "comment": "Counter example for sanitizer",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Generate a null-safe {@link String} representation of the supplied {@link ContextLoader} based solely on the fully qualified name of the loader or \"null\" if the supplied loaded is {@code null}.",
+        "class": "{@code MergedContextConfiguration} encapsulates the merged context configuration declared on a test class and all of its superclasses via {@link ContextConfiguration @ContextConfiguration}, {@link ActiveProfiles @ActiveProfiles}, and {@link TestPropertySource @TestPropertySource}. Merged context resource locations, annotated classes, active profiles, property resource locations, and in-lined properties represent all declared values in the test class hierarchy taking into consideration the semantics of the {@link ContextConfiguration#inheritLocations}, {@link ActiveProfiles#inheritProfiles}, {@link TestPropertySource#inheritLocations}, and {@link TestPropertySource#inheritProperties} flags. A {@link SmartContextLoader} uses {@code MergedContextConfiguration} to load an {@link org.springframework.context.ApplicationContext ApplicationContext}. {@code MergedContextConfiguration} is also used by the {@link org.springframework.test.context.cache.ContextCache ContextCache} as the key for caching an {@link org.springframework.context.ApplicationContext ApplicationContext} that was loaded using properties of this {@code MergedContextConfiguration}."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.apache.commons.logging.Log.warn",
+      "parameters": [
+        "java.lang.Object",
+        "java.lang.Throwable"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.apache.commons.logging.Log",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-commons.jar"
+    },
+    {
+      "name": "org.owasp.webgoat.plugins.Plugin.loadFiles",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "framework": "webgoat",
+      "link": "",
+      "comment": "Source training set",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "loadFiles.",
+        "class": "Plugin class."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.apache.commons.lang3.text.StrSubstitutor.replace",
+      "parameters": [
+        "char[]"
+      ],
+      "framework": "apache",
+      "link": "https://commons.apache.org/proper/commons-lang/javadocs/api-3.1/org/apache/commons/lang3/text/StrSubstitutor.html",
+      "comment": "",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE79",
+        "CWE89",
+        "CWE78",
+        "CWE601"
+      ],
+      "javadoc": {
+        "method": "Replaces all the occurrences of variables with their matching values from the resolver using the given source array as a template. The array is not altered by this method.",
+        "class": "Substitutes variables within a string by values. This class takes a piece of text and substitutes all the variables within it. The default definition of a variable is {@code ${variableName}}. The prefix and suffix can be changed via constructors and set methods. Variable values are typically resolved from a map, but could also be resolved from system properties, or by supplying a custom variable resolver. The simplest example is to use this class to replace Java System properties. For example:  StrSubstitutor.replaceSystemProperties(\n      \"You are running with java.version = ${java.version} and os.name = ${os.name}.\");\n Typical usage of this class follows the following pattern: First an instance is created and initialized with the map that contains the values for the available variables. If a prefix and/or suffix for variables should be used other than the default ones, the appropriate settings can be performed. After that the {@code replace()} method can be called passing in the source text for interpolation. In the returned text all variable references (as long as their values are known) will be resolved. The following example demonstrates this:  Map valuesMap = HashMap();\n valuesMap.put(\"animal\", \"quick brown fox\");\n valuesMap.put(\"target\", \"lazy dog\");\n String templateString = \"The ${animal} jumps over the ${target}.\";\n StrSubstitutor sub = new StrSubstitutor(valuesMap);\n String resolvedString = sub.replace(templateString);\n yielding:       The quick brown fox jumps over the lazy dog.\n Also, this class allows to set a default value for unresolved variables. The default value for a variable can be appended to the variable name after the variable default value delimiter. The default value of the variable default value delimiter is ':-', as in bash and other *nix shells, as those are arguably where the default ${} delimiter set originated. The variable default value delimiter can be manually set by calling {@link #setValueDelimiterMatcher(StrMatcher)}, {@link #setValueDelimiter(char)} or {@link #setValueDelimiter(String)}. The following shows an example with variable default value settings:  Map valuesMap = HashMap();\n valuesMap.put(\"animal\", \"quick brown fox\");\n valuesMap.put(\"target\", \"lazy dog\");\n String templateString = \"The ${animal} jumps over the ${target}. ${undefined.number:-1234567890}.\";\n StrSubstitutor sub = new StrSubstitutor(valuesMap);\n String resolvedString = sub.replace(templateString);\n yielding:       The quick brown fox jumps over the lazy dog. 1234567890.\n In addition to this usage pattern there are some static convenience methods that cover the most common use cases. These methods can be used without the need of manually creating an instance. However if multiple replace operations are to be performed, creating and reusing an instance of this class will be more efficient. Variable replacement works in a recursive way. Thus, if a variable value contains a variable then that variable will also be replaced. Cyclic replacements are detected and will cause an exception to be thrown. Sometimes the interpolation's result must contain a variable prefix. As an example take the following source text:    The variable ${${name}} must be used.\n Here only the variable's name referred to in the text should be replaced resulting in the text (assuming that the value of the {@code name} variable is {@code x}):    The variable ${x} must be used.\n To achieve this effect there are two possibilities: Either set a different prefix and suffix for variables which do not conflict with the result text you want to produce. The other possibility is to use the escape character, by default '$'. If this character is placed before a variable reference, this reference is ignored and won't be replaced. For example:    The variable $${${name}} must be used.\n In some complex scenarios you might even want to perform substitution in the names of variables, for instance  ${jre-${java.specification.version}}\n {@code StrSubstitutor} supports this recursive substitution in variable names, but it has to be enabled explicitly by setting the {@link #setEnableSubstitutionInVariables(boolean) enableSubstitutionInVariables} property to true. This class is not thread safe."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "sanitizer",
+        "sink"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "com.novell.ldap.LDAPConnection.search",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String",
+        "boolean"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.novell.ldap.LDAPConnection",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "com.novell.ldap.LDAPSearchQueue",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "ldap.jar"
+    },
+    {
+      "name": "javax.mail.Message.setDescription",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.mail.Message",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "javax.mail.jar"
+    },
+    {
+      "name": "org.apache.xpath.XPath.<init>",
+      "parameters": [
+        "java.lang.String",
+        "javax.xml.transform.SourceLocator",
+        "org.apache.xml.utils.PrefixResolver",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Construct an XPath object. (Needs review -sc) This method initializes an XPathParser/ Compiler and compiles the expression.",
+        "class": "The XPath class wraps an expression object and provides general services for execution of that expression."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "apache-xml-xalan.jar"
+    },
+    {
+      "name": "com.sun.jndi.ldap.LdapCtx.lookup",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.sun.jndi.ldap.LdapCtx",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE90"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.Object",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "sun-jndi-ldap.jar"
+    },
+    {
+      "name": "org.pmw.tinylog.Logger.debug",
+      "parameters": [
+        "java.lang.Throwable",
+        "java.lang.String",
+        "java.lang.Object[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "org.pmw.tinylog.Logger",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+        "CWE117"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "tinylog-1.1.jar"
+    },
+    {
+      "name": "javax.naming.directory.SearchControls.setReturningAttributes",
+      "parameters": [
+        "java.lang.String[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "thecodemaster.com",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [],
+      "javadoc": {
+        "method": "Specifies the attributes that will be returned as part of the search. null indicates that all attributes will be returned. An empty array indicates no attributes are returned.",
+        "class": "This class encapsulates factors that determine scope of search and what gets returned as a result of the search. A SearchControls instance is not synchronized against concurrent multithreaded access. Multiple threads trying to access and modify a single SearchControls instance should lock the object."
+      },
+      "interface": false,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "jndi-1.2.1.jar"
+    },
+    {
+      "name": "javax.servlet.http.HttpServletRequest.getLocalAddr",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.http.HttpServletRequest",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "javax.servlet.ServletRequest.getRemoteHost",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.ServletRequest",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "org.eclipse.jetty.http.HttpField.getValue",
+      "parameters": [],
+      "framework": "",
+      "link": "",
+      "comment": "org.eclipse.jetty.http.HttpField",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "jetty-http-11.0.14.jar"
+    },
+    {
+      "name": "com.opensymphony.xwork2.util.reflection.ReflectionProvider.setProperty",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Object",
+        "java.lang.Object",
+        "java.util.Map",
+        "boolean"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.opensymphony.xwork2.util.reflection.ReflectionProvider",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "void",
+      "srm": [
+        "sink"
+      ],
+      "known": true,
+      "jar": "xwork-core-2.2.3.jar"
+    },
+    {
+      "name": "org.springframework.security.config.http.FormLoginBeanDefinitionParser.getLoginProcessingUrl",
+      "parameters": [],
+      "framework": "spring",
+      "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/http/FormLoginBeanDefinitionParser.html",
+      "comment": "",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE863",
+        "CWE862",
+        "CWE601"
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "auth-no-change",
+        "source"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "org.apache.commons.httpclient.auth.NTLMScheme.authenticate",
+      "parameters": [
+        "org.apache.commons.httpclient.Credentials",
+        "org.apache.commons.httpclient.HttpMethod"
+      ],
+      "framework": "apache",
+      "link": "https://hc.apache.org/httpclient-3.x/apidocs/org/apache/commons/httpclient/auth/NTLMScheme.html",
+      "comment": "Depricated method. The credentials are provided. The authentication string is returned.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "cwe": [
+        "CWE306",
+        "CWE863",
+        "CWE862"
+      ],
+      "javadoc": {
+        "method": "Produces NTLM authorization string for the given set of {@link Credentials}.",
+        "class": "An implementation of the Microsoft proprietary NTLM authentication scheme. For a detailed explanation of the NTLM scheme please see http://davenport.sourceforge.net/ntlm.html."
+      },
+      "interface": false,
+      "return": "java.lang.String",
+      "srm": [
+        "auth-safe-state"
+      ],
+      "known": true,
+      "jar": null
+    },
+    {
+      "name": "javax.servlet.ServletRequest.getParameter",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "javax.servlet.ServletRequest",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
+      ],
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "interface": true,
+      "return": "java.lang.String",
+      "srm": [
+        "source"
+      ],
+      "known": true,
+      "jar": "javax.servlet.jar"
+    },
+    {
+      "name": "com.opensymphony.xwork2.util.ValueStack.findValue",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.Class"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "com.opensymphony.xwork2.util.ValueStack",
+      "discovery": "find-sec-bugs",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "cwe": [
       ],
       "javadoc": {
         "method": "",
@@ -3514,7 +6843,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -3722,7 +7050,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -3788,7 +7115,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -3889,7 +7215,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -4451,7 +7776,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -4849,7 +8173,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -4882,7 +8205,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -5351,7 +8673,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -5548,7 +8869,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -5842,7 +9162,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6004,7 +9323,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6037,7 +9355,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6239,7 +9556,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6661,7 +9977,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6723,7 +10038,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6819,7 +10133,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -6950,7 +10263,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -7468,7 +10780,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -7477,7 +10788,6 @@
       "interface": false,
       "return": "javax.naming.NamingEnumeration",
       "srm": [
-        "none"
       ],
       "known": true,
       "jar": "jndi-1.2.1.jar"
@@ -7566,7 +10876,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -7600,7 +10909,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -7734,7 +11042,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -7862,7 +11169,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8026,7 +11332,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8164,7 +11469,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8194,7 +11498,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8363,7 +11666,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8847,7 +12149,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8880,7 +12181,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -8947,7 +12247,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -9176,7 +12475,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -9476,7 +12774,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -9640,7 +12937,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -9746,7 +13042,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -9905,7 +13200,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -10429,7 +13723,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -10624,7 +13917,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -10715,7 +14007,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -10819,7 +14110,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -10948,7 +14238,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -11425,7 +14714,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -11797,7 +15085,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -11926,7 +15213,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12383,7 +15669,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12551,7 +15836,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12686,7 +15970,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12819,7 +16102,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12853,7 +16135,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -12917,7 +16198,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -13082,7 +16362,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -13609,7 +16888,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -13703,7 +16981,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -13830,7 +17107,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14021,7 +17297,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14087,7 +17362,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14330,7 +17604,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14360,7 +17633,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14477,7 +17749,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14512,7 +17783,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14799,7 +18069,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14831,7 +18100,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -14866,7 +18134,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -15520,7 +18787,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16211,7 +19477,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16591,7 +19856,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16660,7 +19924,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16724,7 +19987,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16895,7 +20157,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -16963,7 +20224,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17023,7 +20283,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17122,7 +20381,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17154,7 +20412,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17290,7 +20547,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17539,7 +20795,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17571,7 +20826,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17734,7 +20988,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17829,7 +21082,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -17889,7 +21141,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18275,7 +21526,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18408,7 +21658,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18567,7 +21816,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18668,7 +21916,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18738,7 +21985,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18770,7 +22016,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18802,7 +22047,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -18959,7 +22203,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19092,7 +22335,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19122,7 +22364,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19253,7 +22494,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19353,7 +22593,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19545,7 +22784,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19740,7 +22978,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -19995,7 +23232,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -20260,7 +23496,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -20451,7 +23686,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -20685,7 +23919,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -20934,7 +24167,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -21215,7 +24447,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -21651,7 +24882,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -21809,7 +25039,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -21839,7 +25068,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22033,7 +25261,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22168,7 +25395,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22264,7 +25490,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22297,7 +25522,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22435,7 +25659,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22570,7 +25793,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -22636,7 +25858,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23066,7 +26287,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23100,7 +26320,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23196,7 +26415,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23262,7 +26480,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23322,7 +26539,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23547,7 +26763,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -23722,7 +26937,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24128,7 +27342,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24455,7 +27668,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24490,7 +27702,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24520,7 +27731,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24582,7 +27792,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24737,7 +27946,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24769,7 +27977,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24799,7 +28006,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24831,7 +28037,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -24927,7 +28132,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -25073,7 +28277,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -25576,7 +28779,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -25735,7 +28937,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -26028,7 +29229,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -26861,7 +30061,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -26924,7 +30123,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -26956,7 +30154,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -27304,7 +30501,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28067,7 +31263,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28342,7 +31537,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28438,7 +31632,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28568,7 +31761,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28598,7 +31790,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28666,7 +31857,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -28736,7 +31926,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29028,7 +32217,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29319,7 +32507,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29349,7 +32536,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29445,7 +32631,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29510,7 +32695,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29578,7 +32762,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -29929,7 +33112,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30029,7 +33211,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30118,7 +33299,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30383,7 +33563,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30492,7 +33671,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30751,7 +33929,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30781,7 +33958,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -30906,7 +34082,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31146,7 +34321,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31273,7 +34447,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31564,7 +34737,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31596,7 +34768,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31629,7 +34800,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31659,7 +34829,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31758,7 +34927,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31852,7 +35020,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -31980,7 +35147,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32047,7 +35213,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32137,7 +35302,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32270,7 +35434,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32336,7 +35499,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32542,7 +35704,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32572,7 +35733,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32637,7 +35797,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -32976,7 +36135,6 @@
         "return": false
       },
       "cwe": [
-        "none"
       ],
       "javadoc": {
         "method": "",
@@ -33008,7 +36166,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33039,7 +36196,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33069,7 +36225,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33099,7 +36254,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33127,7 +36281,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33157,7 +36310,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33191,7 +36343,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33222,7 +36373,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33252,7 +36402,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33288,7 +36437,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33316,7 +36464,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33433,7 +36580,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33461,7 +36607,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33493,7 +36638,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33524,7 +36668,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33554,7 +36697,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33586,7 +36728,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33617,7 +36758,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33649,7 +36789,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33680,7 +36819,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33711,7 +36849,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33778,7 +36915,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33870,7 +37006,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33901,7 +37036,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33931,7 +37065,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33961,7 +37094,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -33991,7 +37123,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34021,7 +37152,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34081,7 +37211,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34112,7 +37241,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34143,7 +37271,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34174,7 +37301,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34202,7 +37328,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34319,7 +37444,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34536,7 +37660,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34568,7 +37691,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34626,7 +37748,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34657,7 +37778,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34713,7 +37833,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34743,7 +37862,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34771,7 +37889,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34802,7 +37919,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34865,7 +37981,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34893,7 +38008,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34925,7 +38039,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -34985,7 +38098,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35013,7 +38125,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35041,7 +38152,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35071,7 +38181,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35101,7 +38210,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35131,7 +38239,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35197,7 +38304,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35256,7 +38362,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35284,7 +38389,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35410,7 +38514,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35501,7 +38604,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35529,7 +38631,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35560,7 +38661,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35744,7 +38844,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35807,7 +38906,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35866,7 +38964,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -35894,7 +38991,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36010,7 +39106,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36042,7 +39137,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36100,7 +39194,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36158,7 +39251,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36247,7 +39339,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36305,7 +39396,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36333,7 +39423,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36424,7 +39513,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36454,7 +39542,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36515,7 +39602,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36546,7 +39632,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36574,7 +39659,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36636,7 +39720,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36670,7 +39753,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36701,7 +39783,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36729,7 +39810,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36757,7 +39837,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36876,7 +39955,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36966,7 +40044,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -36998,7 +40075,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37029,7 +40105,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37062,7 +40137,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37093,7 +40167,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37153,7 +40226,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37183,7 +40255,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37214,7 +40285,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37244,7 +40314,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37272,7 +40341,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37335,7 +40403,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37395,7 +40462,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37425,7 +40491,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37487,7 +40552,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37515,7 +40579,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37574,7 +40637,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37662,7 +40724,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37690,7 +40751,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37783,7 +40843,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37814,7 +40873,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37905,7 +40963,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -37994,7 +41051,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38022,7 +41078,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38083,7 +41138,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38113,7 +41167,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38143,7 +41196,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38327,7 +41379,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38357,7 +41408,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38482,7 +41532,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38605,7 +41654,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38637,7 +41685,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38696,7 +41743,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38727,7 +41773,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38759,7 +41804,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38845,7 +41889,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38905,7 +41948,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38935,7 +41977,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -38993,7 +42034,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39023,7 +42063,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39053,7 +42092,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39083,7 +42121,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39146,7 +42183,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39183,7 +42219,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39244,7 +42279,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39272,7 +42306,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39302,7 +42335,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39332,7 +42364,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39427,7 +42458,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39457,7 +42487,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39518,7 +42547,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39548,7 +42576,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39578,7 +42605,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39695,7 +42721,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39755,7 +42780,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39786,7 +42810,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39846,7 +42869,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39878,7 +42900,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39937,7 +42958,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39968,7 +42988,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -39999,7 +43018,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40030,7 +43048,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40067,7 +43084,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40097,7 +43113,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40125,7 +43140,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40153,7 +43167,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40243,7 +43256,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40305,7 +43317,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40399,7 +43410,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40430,7 +43440,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40462,7 +43471,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40554,7 +43562,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40585,7 +43592,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40615,7 +43621,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40706,7 +43711,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40736,7 +43740,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40764,7 +43767,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40795,7 +43797,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40825,7 +43826,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40857,7 +43857,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40890,7 +43889,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -40920,7 +43918,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41011,7 +44008,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41039,7 +44035,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41071,7 +44066,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41160,7 +44154,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41254,7 +44247,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41282,7 +44274,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41312,7 +44303,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41436,7 +44426,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41526,7 +44515,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41582,7 +44570,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41643,7 +44630,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41673,7 +44659,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41738,7 +44723,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41768,7 +44752,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41830,7 +44813,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41858,7 +44840,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41889,7 +44870,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -41948,7 +44928,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42041,7 +45020,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42072,7 +45050,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42128,7 +45105,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42159,7 +45135,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42187,7 +45162,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42219,7 +45193,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42252,7 +45225,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42312,7 +45284,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42370,7 +45341,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42398,7 +45368,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42515,7 +45484,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42546,7 +45514,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42606,7 +45573,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42758,7 +45724,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42818,7 +45783,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42846,7 +45810,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42874,7 +45837,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42904,7 +45866,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -42998,7 +45959,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43026,7 +45986,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43054,7 +46013,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43144,7 +46102,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43233,7 +46190,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43264,7 +46220,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43294,7 +46249,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43419,7 +46373,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43451,7 +46404,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43482,7 +46434,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43510,7 +46461,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43540,7 +46490,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43570,7 +46519,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43602,7 +46550,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43630,7 +46577,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43658,7 +46604,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43690,7 +46635,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43749,7 +46693,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43807,7 +46750,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43837,7 +46779,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43867,7 +46808,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43899,7 +46839,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43929,7 +46868,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43959,7 +46897,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -43987,7 +46924,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44018,7 +46954,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44048,7 +46983,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44076,7 +47010,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44108,7 +47041,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44143,7 +47075,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44204,7 +47135,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44234,7 +47164,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44264,7 +47193,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44326,7 +47254,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44358,7 +47285,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44482,7 +47408,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44512,7 +47437,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44573,7 +47497,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44605,7 +47528,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44647,7 +47569,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44677,7 +47598,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44707,7 +47627,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44737,7 +47656,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44885,7 +47803,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -44915,7 +47832,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45034,7 +47950,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45066,7 +47981,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45128,7 +48042,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45158,7 +48071,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45189,7 +48101,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45219,7 +48130,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45281,7 +48191,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45309,7 +48218,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45339,7 +48247,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45399,7 +48306,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45429,7 +48335,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45460,7 +48365,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45491,7 +48395,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45522,7 +48425,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45583,7 +48485,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45699,7 +48600,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45730,7 +48630,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -45761,7 +48660,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46040,7 +48938,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46102,7 +48999,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46133,7 +49029,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46163,7 +49058,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46196,7 +49090,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46289,7 +49182,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46377,7 +49269,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46438,7 +49329,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46498,7 +49388,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46592,7 +49481,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46624,7 +49512,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46685,7 +49572,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46776,7 +49662,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46838,7 +49723,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46866,7 +49750,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -46989,7 +49872,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47019,7 +49901,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47079,7 +49960,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47262,7 +50142,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47292,7 +50171,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47320,7 +50198,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47440,7 +50317,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47470,7 +50346,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47507,7 +50382,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47535,7 +50409,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47567,7 +50440,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47597,7 +50469,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47628,7 +50499,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47658,7 +50528,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47688,7 +50557,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47750,7 +50618,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47780,7 +50647,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47811,7 +50677,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47901,7 +50766,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47957,7 +50821,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -47985,7 +50848,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48015,7 +50877,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48047,7 +50908,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48075,7 +50935,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48106,7 +50965,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48205,7 +51063,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48265,7 +51122,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48327,7 +51183,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48355,7 +51210,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48383,7 +51237,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48411,7 +51264,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48439,7 +51291,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48467,7 +51318,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48497,7 +51347,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48565,7 +51414,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48626,7 +51474,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48656,7 +51503,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48686,7 +51532,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48744,7 +51589,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48895,7 +51739,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48925,7 +51768,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -48986,7 +51828,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49014,7 +51855,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49045,7 +51885,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49103,7 +51942,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49196,7 +52034,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49226,7 +52063,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49254,7 +52090,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49375,7 +52210,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49467,7 +52301,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49497,7 +52330,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49528,7 +52360,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49558,7 +52389,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49591,7 +52421,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49621,7 +52450,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49653,7 +52481,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49739,7 +52566,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49769,7 +52595,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49799,7 +52624,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49829,7 +52653,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49945,7 +52768,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -49982,7 +52804,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50012,7 +52833,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50070,7 +52890,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50132,7 +52951,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50165,7 +52983,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50317,7 +53134,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50376,7 +53192,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50406,7 +53221,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50438,7 +53252,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50535,7 +53348,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50565,7 +53377,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50595,7 +53406,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50623,7 +53433,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50683,7 +53492,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50713,7 +53521,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50745,7 +53552,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50777,7 +53583,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50807,7 +53612,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50839,7 +53643,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50869,7 +53672,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50899,7 +53701,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -50927,7 +53728,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51102,7 +53902,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51192,7 +53991,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51254,7 +54052,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51315,7 +54112,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51343,7 +54139,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51464,7 +54259,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51494,7 +54288,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51524,7 +54317,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51552,7 +54344,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51582,7 +54373,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51642,7 +54432,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51681,7 +54470,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51740,7 +54528,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51755,7 +54542,7 @@
     {
       "name": "org.apache.commons.io.input.Tailer.readLines",
       "parameters": [
-        "java.io.RandomAccessFile"
+        "org.apache.commons.io.input.Tailer.RandomAccessResourceBridge"
       ],
       "framework": "",
       "link": "",
@@ -51798,7 +54585,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51856,7 +54642,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51886,7 +54671,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51918,7 +54702,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51948,7 +54731,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -51978,7 +54760,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52038,7 +54819,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52099,7 +54879,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52131,7 +54910,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52282,7 +55060,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52312,7 +55089,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52343,7 +55119,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52404,7 +55179,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52496,7 +55270,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52558,7 +55331,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52586,7 +55358,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52616,7 +55387,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52646,7 +55416,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52734,7 +55503,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52762,7 +55530,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52792,7 +55559,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52851,7 +55617,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52912,7 +55677,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52942,7 +55706,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -52972,7 +55735,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53002,7 +55764,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53093,7 +55854,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53123,7 +55883,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53214,7 +55973,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53244,7 +56002,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53275,7 +56032,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53335,7 +56091,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53365,7 +56120,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53395,7 +56149,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53426,7 +56179,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53456,7 +56208,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53486,7 +56237,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53542,7 +56292,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53573,7 +56322,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53603,7 +56351,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53635,7 +56382,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53665,7 +56411,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53695,7 +56440,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53726,7 +56470,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53849,7 +56592,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53879,7 +56621,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53907,7 +56648,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53935,7 +56675,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -53998,7 +56737,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -54026,7 +56764,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -54054,7 +56791,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -54112,7 +56848,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
@@ -54175,7 +56910,6 @@
         "return": false
       },
       "srm": [
-        "none"
       ],
       "cwe": [],
       "javadoc": {
