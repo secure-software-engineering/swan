@@ -16,16 +16,16 @@ import javax.swing.*;
  */
 public interface PluginIcons {
 
-    Icon DEV_ASSIST = IconLoader.getIcon("/icons/swan_assist.png");
-    Icon ACTIVE_FILTER_ACTION = IconLoader.getIcon("/icons/activeFilter.png");
+    Icon DEV_ASSIST = IconLoader.findIcon("/icons/swan_assist.png", PluginIcons.class);
+    Icon ACTIVE_FILTER_ACTION = IconLoader.findIcon("/icons/activeFilter.png", PluginIcons.class);
 
-    Icon SOURCE = IconLoader.getIcon("/icons/sou.png");
-    Icon SANITIZER = IconLoader.getIcon("/icons/san.png");
-    Icon SINK = IconLoader.getIcon("/icons/sin.png");
-    Icon AUTHENTICATION_SAFE = IconLoader.getIcon("/icons/auth_safe.png");
-    Icon AUTHENTICATION_UNSAFE = IconLoader.getIcon("/icons/auth_unsafe.png");
-    Icon AUTHENTICATION_NOCHANGE = IconLoader.getIcon("/icons/auth_no.png");
-    Icon CWE = IconLoader.getIcon("/icons/cwe.png");
-    Icon DEFAULT = IconLoader.getIcon("/icons/default.png");
+    Icon SOURCE = IconLoader.findIcon("/icons/sou.png", PluginIcons.class);
+    Icon SANITIZER = IconLoader.findIcon("/icons/san.png", PluginIcons.class);
+    Icon SINK = IconLoader.findIcon("/icons/sin.png", PluginIcons.class);
+    Icon AUTHENTICATION_SAFE = IconLoader.findIcon("/icons/auth_safe.png", PluginIcons.class);
+    Icon AUTHENTICATION_UNSAFE = IconLoader.findIcon("/icons/auth_unsafe.png", PluginIcons.class);
+    Icon AUTHENTICATION_NOCHANGE = IconLoader.findIcon("/icons/auth_no.png", PluginIcons.class);
+    Icon CWE = IconLoader.findIcon("/icons/cwe.png", PluginIcons.class);
+    Icon DEFAULT = IconLoader.findIcon("/icons/default.png", PluginIcons.class);
 
 }
