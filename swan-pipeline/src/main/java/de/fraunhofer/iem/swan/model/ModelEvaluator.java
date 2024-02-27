@@ -28,8 +28,7 @@ public class ModelEvaluator {
     public enum Toolkit {
         WEKA,
         MEKA,
-        MLPLAN,
-        AUTOWEKA
+        ML2PLAN
     }
 
     public enum Phase {
@@ -68,7 +67,7 @@ public class ModelEvaluator {
                 Weka weka = new Weka((WekaFeatureSet) features, options, methods);
                 processResults(weka.trainModel());
                 break;
-            case MLPLAN:
+            case ML2PLAN:
                 logger.info("Evaluating model with ML-PLAN");
                 ML2Plan mlPlan = new ML2Plan((MekaFeatureSet) features, options);
                 processResults(mlPlan.trainModel());

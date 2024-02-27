@@ -49,7 +49,7 @@ public class SwanCli {
             switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
                 case MEKA:
-                case MLPLAN:
+                case ML2PLAN:
                     dataset = "meka";
                     break;
                 case WEKA:
