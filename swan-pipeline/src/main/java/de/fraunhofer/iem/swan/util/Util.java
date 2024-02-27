@@ -342,7 +342,7 @@ public class Util {
 
             results.put("all-methods", results.get("all-methods") + 1);
 
-            for (Category cat : met.getSrm()) {
+            for (Category cat : met.getAllCategories()) {
                 results.put(cat.toString(), results.get(cat.toString()) + 1);
             }
         }

@@ -1,10 +1,12 @@
 package de.fraunhofer.iem.swan.model;
 
 import de.fraunhofer.iem.swan.cli.SwanOptions;
+import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
+import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.model.toolkit.ML2Plan;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -38,14 +41,14 @@ public class ModelEvaluator {
 
     private IFeatureSet features;
     private SwanOptions options;
-    private Set<Method> methods;
+    private Dataset dataset;
     private SrmList predictedSrmList;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
-    public ModelEvaluator(IFeatureSet features, SwanOptions options, Set<Method> methods) {
+    public ModelEvaluator(IFeatureSet features, SwanOptions options, Dataset dataset) {
         this.features = features;
         this.options = options;
-        this.methods = methods;
+        this.dataset = dataset;
         predictedSrmList = new SrmList();
     }
 
@@ -60,11 +63,11 @@ public class ModelEvaluator {
 
             case MEKA:
                 logger.info("Evaluating model with MEKA");
-                Meka meka = new Meka((MekaFeatureSet) features, options, methods);
+                Meka meka = new Meka((MekaFeatureSet) features, options, dataset.getTestMethods());
                 processResults(meka.trainModel());
                 break;
             case WEKA:
-                Weka weka = new Weka((WekaFeatureSet) features, options, methods);
+                Weka weka = new Weka((WekaFeatureSet) features, options, dataset.getTestMethods());
                 processResults(weka.trainModel());
                 break;
             case ML2PLAN:

@@ -46,7 +46,7 @@ public class SwanPipeline {
         IFeatureSet featureSet = featureSetSelector.select(dataset, options);
 
         //Train and evaluate model for SRM and CWE categories
-        modelEvaluator = new ModelEvaluator(featureSet, options, dataset.getTestMethods());
+        modelEvaluator = new ModelEvaluator(featureSet, options, dataset);
         modelEvaluator.trainModel();
 
         long analysisTime = System.currentTimeMillis() - startAnalysisTime;
