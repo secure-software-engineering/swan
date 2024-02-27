@@ -24,7 +24,7 @@ public class CliRunner implements Callable<Integer> {
     private String trainDataSourceDir = "";
 
     @CommandLine.Option(names = {"-d", "--dataset"}, description = {"Path to JSON dataset file"})
-    private String datasetJson = "/dataset/srm-repo-dataset.json";
+    private String datasetJson = "/dataset/srm-dataset.json";
 
     @CommandLine.Option(names = {"-in", "--train-instances"}, description = {"Path to ARFF files that contain training instances"})
     private List<String> arffInstancesFiles = new ArrayList<>();

@@ -24,7 +24,7 @@ public class SwanCli {
 
         FileUtility fileUtility = new FileUtility();
 
-        if (options.getDatasetJson().contentEquals("/dataset/srm-repo-dataset.json")) {
+        if (options.getDatasetJson().contentEquals("/dataset/srm-dataset.json")) {
             options.setDatasetJson(fileUtility.getResourceFile(options.getDatasetJson(), null).getAbsolutePath());
         }
 
