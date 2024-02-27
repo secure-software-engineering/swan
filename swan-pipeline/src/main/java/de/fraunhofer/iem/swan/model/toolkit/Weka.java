@@ -10,7 +10,6 @@ import de.fraunhofer.iem.swan.model.MonteCarloValidator;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.BayesNet;
@@ -71,8 +70,9 @@ public class Weka {
 
                 //Phase 1: classify SRM classes
                 logger.info("Performing {}-fold cross-validation for {} using WEKA", options.getIterations(), options.getSrmClasses());
-                for (String srm : options.getSrmClasses())
+                for (String srm : options.getSrmClasses()) {
                     crossValidateModel(features.getTrainInstances().get(srm));
+                }
 
                 //Filter methods from CWE instances that were not classified into one of the SRM classes
                 //Phase 2: classify CWE classes
@@ -186,7 +186,7 @@ public class Weka {
                 } else
                     measure.put(classifier.getClass().getSimpleName(), evaluator.getFMeasure().get(key));
 
-                logger.info("{} Average F-measure ({}), Precision ({}) and Recall ({}) for {}({}) ", classifier.getClass().getSimpleName(), averageFMeasure,averagePrecision, averageRecall, category, key);
+                logger.debug("{}({}): {} (F1, P, R) {}, {}, {}", category, key, classifier.getClass().getSimpleName(), averageFMeasure, averagePrecision, averageRecall);
             }
             if (!category.contains("authentication"))
                 results.put(category, measure);
