@@ -1,16 +1,15 @@
-@relation 'swan-srm:-C 11-meka.filters.unsupervised.attribute.MekaClassAttributes-R1-11'
+@relation 'swan-srm-code-br-dataset:-C 11'
 
 @attribute authentication {0,1}
 @attribute CWE601 {0,1}
-@attribute CWE078 {0,1}
+@attribute CWE78 {0,1}
 @attribute CWE306 {0,1}
 @attribute sanitizer {0,1}
-@attribute CWE079 {0,1}
+@attribute CWE79 {0,1}
 @attribute CWE862 {0,1}
 @attribute sink {0,1}
 @attribute source {0,1}
 @attribute CWE863 {0,1}
-@attribute CWE089 {0,1}
 @attribute CWE89 {0,1}
 @attribute '<Method is part of an anonymous class>' {true,false}
 @attribute '<Method name contains getparameter>' {true,false}
