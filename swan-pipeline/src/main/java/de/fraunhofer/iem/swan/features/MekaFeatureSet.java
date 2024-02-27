@@ -7,6 +7,8 @@ import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
 import meka.filters.unsupervised.attribute.MekaClassAttributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
@@ -18,6 +20,7 @@ import java.util.*;
 public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
 
     Instances structure = null;
+    private static final Logger logger = LoggerFactory.getLogger(MekaFeatureSet.class);
 
     public MekaFeatureSet(Dataset dataset, SwanOptions options) {
         super(dataset, options, ModelEvaluator.Toolkit.MEKA);
@@ -46,7 +49,8 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             evaluateFeatureData(methods);
 
             trainingInstances = createInstances(new Instances(structure), trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
-            Util.exportInstancesToArff(trainingInstances, options.getFeatureSet().get(0));
+            logger.info("Instances exported to: {}", Util.exportInstancesToArff(trainingInstances, options.getFeatureSet().get(0)));
+
         } else {
 
             ArffLoader loader = new ArffLoader();
