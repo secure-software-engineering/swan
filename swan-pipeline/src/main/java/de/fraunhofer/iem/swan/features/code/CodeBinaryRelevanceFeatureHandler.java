@@ -16,15 +16,15 @@ import java.util.*;
  * @author Lisa Nguyen Quang Do, Goran Piskachev
  */
 
-public class CodeFeatureHandlerOld {
+public class CodeBinaryRelevanceFeatureHandler {
 
     private Map<Category, Set<IFeature>> featuresMap;
-    private static final Logger logger = LoggerFactory.getLogger(CodeFeatureHandlerOld.class);
+    private static final Logger logger = LoggerFactory.getLogger(CodeBinaryRelevanceFeatureHandler.class);
     public Map<Category, Set<IFeature>> features() {
         return featuresMap;
     }
 
-    public CodeFeatureHandlerOld() {
+    public CodeBinaryRelevanceFeatureHandler() {
 
     }
 

@@ -4,7 +4,7 @@ import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
-import de.fraunhofer.iem.swan.features.code.CodeFeatureHandlerOld;
+import de.fraunhofer.iem.swan.features.code.CodeBinaryRelevanceFeatureHandler;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import de.fraunhofer.iem.swan.features.code.type.IFeature;
 import de.fraunhofer.iem.swan.features.doc.DocFeatureHandler;
@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
 public abstract class FeatureSet {
 
     protected Map<ICodeFeature, Attribute> codeAttributes;
-    protected Map<IFeature, Attribute> codeAttributesOld;
+    protected Map<IFeature, Attribute> codeBRAttributes;
     protected final HashMap<String, Integer> instanceMap;
     protected final SwanOptions options;
     protected Dataset dataset;
     protected CodeFeatureHandler codeFeatureHandler;
-    protected CodeFeatureHandlerOld codeFeatureHandlerOld;
+    protected CodeBinaryRelevanceFeatureHandler codeBinaryRelevanceFeatureHandler;
     protected DocFeatureHandler docFeatureHandler;
     protected HashMap<String, Instances> trainInstances;
     protected HashMap<String, Instances> testInstances;
@@ -46,7 +46,7 @@ public abstract class FeatureSet {
      */
     public enum Type {
         CODE("CODE"),
-        CODX("CODX"),
+        CODE_BR("CODE-BR"),
         DOC_AUTO("DOC-AUTO"),
         DOC_MANUAL("DOC-MANUAL");
 
@@ -90,13 +90,13 @@ public abstract class FeatureSet {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
-                case CODX:
+                case CODE:
                     codeFeatureHandler = new CodeFeatureHandler();
                     codeFeatureHandler.initializeFeatures();
                     break;
-                case CODE:
-                    codeFeatureHandlerOld = new CodeFeatureHandlerOld();
-                    codeFeatureHandlerOld.initializeFeatures();
+                case CODE_BR:
+                    codeBinaryRelevanceFeatureHandler = new CodeBinaryRelevanceFeatureHandler();
+                    codeBinaryRelevanceFeatureHandler.initializeFeatures();
                     break;
                 case DOC_MANUAL:
                     docFeatureHandler = new DocFeatureHandler();
@@ -124,7 +124,7 @@ public abstract class FeatureSet {
             switch (featureSet) {
 
                 case CODE:
-                case CODX:
+                case CODE_BR:
                     attributes.addAll(addCodeAttributes(categories));
                     break;
                 case DOC_MANUAL:
@@ -150,7 +150,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
 
-                case CODX:
+                case CODE:
                     codeAttributes = new HashMap<>();
                     for (Category type : codeFeatureHandler.features().keySet()) {
                         if (type == Category.NONE) continue;
@@ -175,23 +175,23 @@ public abstract class FeatureSet {
                         }
                     }
                     break;
-                case CODE:
-                    codeAttributesOld = new HashMap<>();
+                case CODE_BR:
+                    codeBRAttributes = new HashMap<>();
                     ArrayList<String> ordinal = new ArrayList<>();
                     ordinal.add("true");
                     ordinal.add("false");
 
                     // Collect all attributes for the categories we classify into, and create the instance set.
 
-                    for (Category type : codeFeatureHandlerOld.features().keySet()) {
+                    for (Category type : codeBinaryRelevanceFeatureHandler.features().keySet()) {
 
                         if (type == Category.NONE) continue;
 
                         if (categories.contains(type)) {
-                            for (IFeature f : codeFeatureHandlerOld.features().get(type)) {
+                            for (IFeature f : codeBinaryRelevanceFeatureHandler.features().get(type)) {
                                 Attribute attr = new Attribute(f.toString(), ordinal);
-                                if (!codeAttributesOld.containsKey(f) && !attributes.contains(attr)) {
-                                    codeAttributesOld.put(f, attr);
+                                if (!codeBRAttributes.containsKey(f) && !attributes.contains(attr)) {
+                                    codeBRAttributes.put(f, attr);
                                     attributes.add(attr);
                                 }
                             }
@@ -235,11 +235,11 @@ public abstract class FeatureSet {
 
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
-                case CODX:
+                case CODE:
                     codeFeatureHandler.evaluateCodeFeatureData(methods);
                     break;
-                case CODE:
-                    codeFeatureHandlerOld.evaluateCodeFeatureData(methods);
+                case CODE_BR:
+                    codeBinaryRelevanceFeatureHandler.evaluateCodeFeatureData(methods);
                     break;
                 case DOC_MANUAL:
                     docFeatureHandler.evaluateManualFeatureData(methods);
@@ -256,7 +256,7 @@ public abstract class FeatureSet {
         for (FeatureSet.Type featureSet : featureSets)
             switch (featureSet) {
                 case CODE:
-                case CODX:
+                case CODE_BR:
                     instances.addAll(getCodeInstances(instances, methods, categories, attributes));
                     break;
                 case DOC_MANUAL:
@@ -319,7 +319,7 @@ public abstract class FeatureSet {
 
             switch (featureSet) {
 
-                case CODX:
+                case CODE:
 
                     for (Method method : methods) {
 
@@ -334,7 +334,6 @@ public abstract class FeatureSet {
                                     inst.setValue(instances.attribute(entry.getKey().toString()), String.valueOf(booleanData));
                                     break;
                                 case CATEGORICAL:
-
                                     String stringData = entry.getKey().applies(method).getStringValue();
                                     inst.setValue(instances.attribute(entry.getKey().toString()), stringData);
                                     break;
@@ -348,14 +347,14 @@ public abstract class FeatureSet {
                         instanceMap.put(method.getSignature(), instanceIndex++);
                     }
                     break;
-                case CODE:
+                case CODE_BR:
                     // Evaluate all methods against the features.
                     for (Method method : methods) {
 
                         Instance inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
                         inst.setDataset(instances);
 
-                        for (Map.Entry<IFeature, Attribute> entry : codeAttributesOld.entrySet()) {
+                        for (Map.Entry<IFeature, Attribute> entry : codeBRAttributes.entrySet()) {
 
                             switch (entry.getKey().applies(method)) {
                                 case TRUE:
