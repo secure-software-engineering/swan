@@ -6,6 +6,7 @@ import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import soot.G;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -33,6 +34,8 @@ public class Soot {
      * @param classpath test and/or train source code classpath
      */
     private void configure(String classpath) {
+
+        G.reset();
 
         Options.v().set_allow_phantom_refs(true);
         Options.v().set_prepend_classpath(true);
@@ -132,7 +135,8 @@ public class Soot {
 
             if (sootMethod == null) {
                 abstractMethods.add(method);
-                logger.info("Method purged from list {}", method.getSignature());
+
+                logger.info("Null method {} purged", method.getSignature());
             } else {
                 method.setSootMethod(sootMethod);
                 method.setSootClass(getClass(method));
