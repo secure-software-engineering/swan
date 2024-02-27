@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "SWAN CLI", mixinStandardHelpOptions = true,
-        version = "SWAN 3.2.0", description = "")
+        version = "SWAN 3.2.2", description = "")
 public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})
@@ -32,23 +32,23 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-o", "--output"}, description = {"Directory to save output files"})
     private String outputDir = "";
 
-    @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, doc-auto or doc-manual"})
+    @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, code-br, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
 
-    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, autoweka, mlplan"})
+    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, ml2plan"})
     private String toolkit = "meka";
 
-    @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication, relevant"})
+    @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication"})
     private List<String> srmClasses = Collections.singletonList("all");
 
-    @CommandLine.Option(names = {"-c", "--cwe"}, description = {"CWE: all, cwe078, cwe079, cwe089, cwe306, cwe601, cwe862, cwe863"})
+    @CommandLine.Option(names = {"-c", "--cwe"}, description = {"CWE: all, cwe78, cwe79, cwe89, cwe306, cwe601, cwe862, cwe863"})
     private List<String> cweClasses = Collections.singletonList("all");
 
     @CommandLine.Option(names = {"-arff", "--arff-data"}, description = {"Export training ARFF files"})
     private boolean exportArffData = true;
 
     @CommandLine.Option(names = {"-doc", "--documented"}, description = {"Use only methods with Javadoc"})
-    private boolean isDocumented = true;
+    private boolean isDocumented = false;
 
     @CommandLine.Option(names = {"-att", "--attribute-selection"}, description = {"Use attribute selection"})
     private boolean reduceAttributes = false;
@@ -66,10 +66,10 @@ public class CliRunner implements Callable<Integer> {
     private double predictionThreshold = 0.5;
 
     @CommandLine.Option(names = {"-sr", "--known-srms"}, description = {"Add know SRMs from dataset"})
-    private boolean addKnownSrms = true;
+    private boolean addKnownSrms = false;
 
     @CommandLine.Option(names = {"-ds", "--discovery"}, arity = "1..*", description = {"Select discovery for training set SRMs"})
-    private List<String> discovery =  new ArrayList<>();//  Collections.singletonList("manual");
+    private List<String> discovery = new ArrayList<>();
 
     @CommandLine.Option(names = {"-tl", "--timelimit"}, description = {"Time (minutes) to execute operation "})
     private int timeLimit = 1;
