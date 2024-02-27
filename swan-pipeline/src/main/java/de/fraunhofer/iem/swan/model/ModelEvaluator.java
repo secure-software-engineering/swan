@@ -87,6 +87,20 @@ public class ModelEvaluator {
                 predictedSrmList.removeUnclassifiedMethods();
                 logger.info("{} SRMs detected", predictedSrmList.getMethods().size());
 
+                Set<Method> srmRepo = new HashSet<>();
+
+                if (options.isAddKnownSrms()) {
+                    for (Method method : dataset.getTrainMethods()) {
+                        if (!method.getSrm().isEmpty() && !method.getSrm().contains(Category.NONE)
+                        ) {
+                            srmRepo.add(method);
+                        }
+                    }
+                    logger.info("Adding {} SRMs from repository", srmRepo.size());
+                    predictedSrmList.addMethods(srmRepo);
+
+                }
+
                 try {
                     if (!options.getOutputDir().isEmpty())
                         SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");

@@ -71,4 +71,8 @@ public class SrmList {
         methods = methods.stream().filter(m -> m.getAllCategories().size() > 0)
                 .collect(Collectors.toSet());
     }
+
+    public void addMethods(Set<Method> m){
+        methods.addAll(m);
+    }
 }
