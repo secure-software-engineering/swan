@@ -24,7 +24,7 @@ public class ExceptionsCountFeature implements ICodeFeature {
 
     @Override
     public FeatureType getFeatureType() {
-       return FeatureType.NUMERICAL;
+        return FeatureType.NUMERICAL;
     }
 
     @Override

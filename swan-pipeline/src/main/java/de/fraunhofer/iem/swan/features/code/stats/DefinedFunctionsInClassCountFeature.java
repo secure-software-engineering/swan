@@ -14,7 +14,7 @@ public class DefinedFunctionsInClassCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private int numberOfDefinedFunctions;
 
-    public DefinedFunctionsInClassCountFeature(){
+    public DefinedFunctionsInClassCountFeature() {
         this.featureResult = new FeatureResult();
         this.numberOfDefinedFunctions = 0;
     }

@@ -14,7 +14,7 @@ public class ClassModifierFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
-    public enum Modifier{
+    public enum Modifier {
         STATIC, ABSTRACT, FINAL, DEFAULT
     }
 
@@ -36,15 +36,15 @@ public class ClassModifierFeature implements ICodeFeature {
         this.featureResult.setStringValue(String.valueOf(this.modifier));
         return this.featureResult;
     }
+
     @Override
     public FeatureType getFeatureType() {
         return FeatureType.CATEGORICAL;
     }
 
 
-
     @Override
-    public String toString(){
+    public String toString() {
         return "ClassModifier";
     }
 

@@ -106,6 +106,7 @@ public class MethodTypeFeature implements ICodeFeature {
     }
 
     private Boolean isSetter(Method method) {
+
         //Check if Method is Setter
         if (!method.getSootMethod().getName().startsWith("set")) {
             return true;

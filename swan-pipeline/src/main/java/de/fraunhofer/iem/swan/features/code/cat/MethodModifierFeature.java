@@ -14,7 +14,7 @@ public class MethodModifierFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
-    public enum Modifier{
+    public enum Modifier {
         FINAL, STATIC, ABSTRACT, SYNCHRONIZED, DEFAULT
     }
 
@@ -45,7 +45,7 @@ public class MethodModifierFeature implements ICodeFeature {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "MethodModifier";
     }
 

@@ -14,7 +14,7 @@ public class MethodAccessModifierFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
 
-    public enum Modifier{
+    public enum Modifier {
         PRIVATE, PUBLIC, PROTECTED, DEFAULT
     }
 
@@ -43,7 +43,7 @@ public class MethodAccessModifierFeature implements ICodeFeature {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "MethodAccessModifier";
     }
 

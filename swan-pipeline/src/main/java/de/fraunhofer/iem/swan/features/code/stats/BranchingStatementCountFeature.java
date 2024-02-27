@@ -11,10 +11,11 @@ public class BranchingStatementCountFeature implements ICodeFeature {
     private int numberOfBranchingStatements;
     private FeatureResult featureResult;
 
-    public BranchingStatementCountFeature(){
+    public BranchingStatementCountFeature() {
         this.featureResult = new FeatureResult();
         this.numberOfBranchingStatements = 0;
     }
+
     @Override
     public FeatureResult applies(Method method) {
         if(method.getSootMethod().hasActiveBody()){
