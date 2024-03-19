@@ -8,9 +8,7 @@
     <description>Javadoc NLP Corpus Generation Doclet</description>
     <url>https://www.semanticsoftware.info/javadoclet</url>
 
-    <groupId>de.fraunhofer.iem.doclet</groupId>
     <artifactId>xml-doclet</artifactId>
-    <version>1.4</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
