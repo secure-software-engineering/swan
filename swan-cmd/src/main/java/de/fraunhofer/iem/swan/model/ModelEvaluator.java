@@ -105,7 +105,7 @@ public class ModelEvaluator {
 
                 try {
                     if (!options.getOutputDir().isEmpty())
-                        SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "swan-srm-cwe-list.json");
+                        SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "detected-srm.json");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
