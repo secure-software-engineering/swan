@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class Soot {
 
-    private static final Logger logger = LoggerFactory.getLogger(SrmListUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(Soot.class);
     private String classpath;
 
     public Soot(String... path) {
