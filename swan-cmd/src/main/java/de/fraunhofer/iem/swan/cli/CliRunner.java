@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(name = "SWAN CLI", mixinStandardHelpOptions = true,
-        version = "SWAN 3.2.2", description = "")
+@CommandLine.Command(name = "swan", mixinStandardHelpOptions = true,
+        version = "swan-cmd-3.3.0", description = "Detects security-relevant methods using multi-label machine learning")
 public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})
@@ -60,7 +60,7 @@ public class CliRunner implements Callable<Integer> {
     private double split = 0.7;
 
     @CommandLine.Option(names = {"-p", "--phase"}, description = {"Phase: validate, predict"})
-    private String phase = "validate";
+    private String phase = "predict";
 
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;
