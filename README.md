@@ -20,7 +20,7 @@ How do I get started with SWAN?
 -------------
 To run SWAN, you will need to provide a path to the Java project to be analyzed (JAR files or compiled classes) as well an output directory where SWAN will export its results. The easiest way to get started with SWAN is to use the pre-built binary from the newest release. After downloading the necessary files from the most recent release, SWAN can be executed on the command line with the following command:
 
-<code>**java -jar swan-cmd-3.x.x.jar -test** */path/to/project/files* **-output** */output/directory* </code>
+<code>**java -jar swan-cmd-3.x.x.jar -test** */path/to/project/files* **-o** */output/directory* </code>
 
 This command runs the application and exports the detected security-relevant methods to a JSON file in the provided output directory. This command uses the following default settings: training dataset <code>-in [dataset](/swan-cmd/src/main/resources/dataset)</code>, code features <code>-f code</code>, and the MEKA toolkit <code>-t meka</code>. The remaining default options are found in [CLIRunner](/swan-cmd/src/main/java/de/fraunhofer/iem/swan/cli/CliRunner.java). The available command line options can be found in the Wiki or by using the <code>-help</code> command line option.
 
