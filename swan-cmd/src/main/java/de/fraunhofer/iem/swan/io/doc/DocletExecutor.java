@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.io.doc;
 import javax.tools.DocumentationTool;
 import javax.tools.ToolProvider;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * @author Oshando Johnson on 03.06.20
@@ -35,7 +35,7 @@ public class DocletExecutor {
 
     public void runDoclet(String sourcePath, String packages, String outputPath) {
 
-        ArrayList<String> docletArgs = new ArrayList<>(List.of(
+        ArrayList<String> docletArgs = new ArrayList<>(Arrays.asList(
                 "-doclet", doclet,
                 "-docletpath", getDocletPath(doclet),
                 "-sourcepath", sourcePath,
@@ -56,7 +56,7 @@ public class DocletExecutor {
     }
 
     /**
-     * Returns jar location for the the specified doclet.
+     * Returns jar location for the specified doclet.
      *
      * @param doclet name of doclet
      * @return path to doclet jar
@@ -70,6 +70,6 @@ public class DocletExecutor {
             case STANDARD_DOCLET:
                 return "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/lib/tools.jar";
         }
-        return null;
+        return "";
     }
 }
