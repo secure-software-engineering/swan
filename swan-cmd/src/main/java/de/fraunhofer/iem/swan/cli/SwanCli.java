@@ -44,28 +44,34 @@ public class SwanCli {
 
             List<String> instances = new ArrayList<>();
 
-            String dataset = "";
+            String toolkit = "";
 
             switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
 
                 case MEKA:
                 case ML2PLAN:
-                    dataset = "meka";
+                    toolkit = "meka";
                     break;
                 case WEKA:
-                    dataset = options.getToolkit();
+                    toolkit = options.getToolkit();
                     break;
             }
 
             for (String feature : options.getFeatureSet()) {
-                String filepath = File.separator + "dataset" + File.separator + dataset
-                        + File.separator + feature + File.separator;
 
-                ArrayList<String> files = new ArrayList<>();
-                for (File f : Objects.requireNonNull(fileUtility.getResourceDirectory(filepath).listFiles())) {
-                    files.add(f.getAbsolutePath());
+                String filepath = File.separator + "dataset" + File.separator + toolkit
+                        + File.separator;
+
+                if (toolkit.contentEquals("meka")) {
+
+                    instances.add(fileUtility.getResourceFile(filepath + toolkit + "-" + feature + ".arff",
+                            null).getAbsolutePath());
+                } else {
+                    for (String srm : options.getAllClasses()) {
+                        instances.add(fileUtility.getResourceFile(filepath + feature + File.separator + srm + ".arff",
+                                null).getAbsolutePath());
+                    }
                 }
-                instances.addAll(files);
             }
             options.setInstances(instances);
         }
@@ -77,10 +83,12 @@ public class SwanCli {
             swanPipeline.run();
 
             return 0;
-        } catch (CancellationException e) {
+        } catch (
+                CancellationException e) {
             logger.warn("Analysis run was cancelled");
             return 66;
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             logger.error("Analysis run terminated with error", e);
             return 500;
         } finally {
