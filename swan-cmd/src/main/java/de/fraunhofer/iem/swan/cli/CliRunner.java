@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "swan", mixinStandardHelpOptions = true,
-        version = "swan-cmd-3.3.0", description = "Detects security-relevant methods using multi-label machine learning")
+        version = "swan-cmd-3.3.1", description = "Detects security-relevant methods using multi-label machine learning")
 public class CliRunner implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-test", "--test-data"}, description = {"Path of test JARs or class files"})

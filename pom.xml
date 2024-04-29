@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iem</groupId>
     <artifactId>swan</artifactId>
     <packaging>pom</packaging>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
     <name>SWAN</name>
 
     <description>SWAN uses fully automated machine-learning approaches to classify Java methods into security-relevant
@@ -65,9 +65,10 @@
     </properties>
 
     <modules>
-        <module>swan-cmd</module>
         <module>training-data-jars</module>
         <module>coverage-doclet</module>
         <module>xml-doclet</module>
+        <module>ml2plan-model-selection</module>
+        <module>swan-cmd</module>
     </modules>
 </project>
