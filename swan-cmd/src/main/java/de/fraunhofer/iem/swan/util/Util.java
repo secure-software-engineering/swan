@@ -143,8 +143,11 @@ public class Util {
 
             File folder = new File(dir);
 
+            if (dir.isEmpty() || !folder.exists() || !Files.isDirectory(folder.toPath()))
+                continue;
+
             //If folder contains .class files, add path to classpath
-            if (FileUtils.listFiles(folder, new String[]{"class"}, true).size() > 0)
+            if (!FileUtils.listFiles(folder, new String[]{"class"}, true).isEmpty())
                 paths.add(dir);
             else {
                 for (File file : FileUtils.listFiles(folder, new String[]{"jar", "apk"}, true)) {

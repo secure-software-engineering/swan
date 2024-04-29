@@ -44,27 +44,13 @@ public class SwanCli {
 
             List<String> instances = new ArrayList<>();
 
-            String toolkit = "";
-
-            switch (ModelEvaluator.Toolkit.valueOf(options.getToolkit().toUpperCase())) {
-
-                case MEKA:
-                case ML2PLAN:
-                    toolkit = "meka";
-                    break;
-                case WEKA:
-                    toolkit = options.getToolkit();
-                    break;
-            }
-
             for (String feature : options.getFeatureSet()) {
 
-                String filepath = File.separator + "dataset" + File.separator + toolkit
+                String filepath = File.separator + "dataset" + File.separator + options.getToolkit().toLowerCase()
                         + File.separator;
 
-                if (toolkit.contentEquals("meka")) {
-
-                    instances.add(fileUtility.getResourceFile(filepath + toolkit + "-" + feature + ".arff",
+                if (options.getToolkit().toLowerCase().contentEquals("meka")) {
+                            instances.add(fileUtility.getResourceFile(filepath + options.getToolkit().toLowerCase() + "-" + feature + ".arff",
                             null).getAbsolutePath());
                 } else {
                     for (String srm : options.getAllClasses()) {
