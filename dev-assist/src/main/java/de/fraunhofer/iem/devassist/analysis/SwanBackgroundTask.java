@@ -52,7 +52,6 @@ public class SwanBackgroundTask extends Task.Backgroundable {
         options.setTrainDataDir("");
         options.setAddKnownSrms(true);
 
-
         indicator.setText("Running SWAN");
         SwanCli swan = new SwanCli();
 

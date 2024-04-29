@@ -64,7 +64,6 @@ public class SettingsAction extends AnAction {
 
             HashMap<String, String> settings = dialog.getParameters();
 
-            System.out.println("PPP: "+settings);
             for (String property : settings.keySet())
                 PropertiesComponent.getInstance(project).setValue(property, settings.get(property));
         }
