@@ -9,7 +9,6 @@ import de.fraunhofer.iem.swan.features.WekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
-import de.fraunhofer.iem.swan.model.toolkit.ML2Plan;
 import de.fraunhofer.iem.swan.model.toolkit.Meka;
 import de.fraunhofer.iem.swan.model.toolkit.Weka;
 import org.slf4j.Logger;
@@ -30,8 +29,7 @@ public class ModelEvaluator {
 
     public enum Toolkit {
         WEKA,
-        MEKA,
-        ML2PLAN
+        MEKA
     }
 
     public enum Phase {
@@ -69,11 +67,6 @@ public class ModelEvaluator {
             case WEKA:
                 Weka weka = new Weka((WekaFeatureSet) features, options, dataset.getTestMethods());
                 processResults(weka.trainModel());
-                break;
-            case ML2PLAN:
-                logger.info("Evaluating model with ML-PLAN");
-                ML2Plan mlPlan = new ML2Plan((MekaFeatureSet) features, options);
-                processResults(mlPlan.trainModel());
                 break;
         }
     }

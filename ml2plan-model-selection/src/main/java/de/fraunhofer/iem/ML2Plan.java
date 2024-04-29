@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.model.toolkit;
+package de.fraunhofer.iem;
 
 import ai.libs.jaicore.ml.classification.multilabel.dataset.IMekaInstances;
 import ai.libs.jaicore.ml.classification.multilabel.dataset.MekaInstances;
@@ -8,10 +8,6 @@ import ai.libs.jaicore.ml.core.evaluation.evaluator.SupervisedLearnerExecutor;
 import ai.libs.jaicore.ml.core.filter.SplitterUtil;
 import ai.libs.mlplan.core.MLPlan;
 import ai.libs.mlplan.meka.ML2PlanMekaBuilder;
-import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.features.MekaFeatureSet;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import meka.core.MLUtils;
 import org.api4.java.ai.ml.classification.multilabel.evaluation.IMultiLabelClassification;
 import org.api4.java.ai.ml.core.dataset.supervised.ILabeledDataset;
@@ -32,34 +28,14 @@ import java.util.concurrent.TimeUnit;
 public class ML2Plan {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ML2Plan.class);
-    private MekaFeatureSet featureSet;
+   /* private MekaFeatureSet featureSet;
     private SwanOptions swanOptions;
 
     public ML2Plan(MekaFeatureSet features, SwanOptions options) {
         this.featureSet = features;
         swanOptions = options;
-    }
+    }*/
 
-    /**
-     * Trains and evaluates the model with the given training data and specified classification mode.
-     *
-     * @return Hashmap containing the name of the classifier and it's F-Measure
-     */
-    public SrmList trainModel() {
-
-        switch (ModelEvaluator.Phase.valueOf(swanOptions.getPhase().toUpperCase())) {
-            case VALIDATE:
-
-                try {
-                    crossValidate(featureSet.getTrainInstances().get("meka"));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                return null;
-            case PREDICT:
-        }
-        return null;
-    }
 
     public void crossValidate(Instances instances) throws Exception {
 

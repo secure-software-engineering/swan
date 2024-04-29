@@ -35,7 +35,7 @@ public class CliRunner implements Callable<Integer> {
     @CommandLine.Option(names = {"-f", "--feature"}, arity = "1..*", description = {"Select one or more feature sets: all, code, code-br, doc-auto or doc-manual"})
     private List<String> featureSet =  Collections.singletonList("code");
 
-    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka, ml2plan"})
+    @CommandLine.Option(names = {"-t", "--toolkit"}, description = {"ML toolkit: meka, weka"})
     private String toolkit = "meka";
 
     @CommandLine.Option(names = {"-s", "--srm"}, description = {"SRM: all, source, sink, sanitizer, authentication"})
