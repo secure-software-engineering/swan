@@ -1,18 +1,24 @@
 package de.fraunhofer.iem.devassist.analysis;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.progress.PerformInBackgroundOption;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.util.messages.MessageBus;
+import de.fraunhofer.iem.aidevassist.sa.cli.AIDevAssistCli;
+import de.fraunhofer.iem.aidevassist.sa.cli.CliRunner;
 import de.fraunhofer.iem.devassist.comm.SecucheckNotifier;
+import de.fraunhofer.iem.devassist.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import picocli.CommandLine;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class SecucheckBackgroundTask extends Task.Backgroundable {
@@ -31,24 +37,25 @@ public class SecucheckBackgroundTask extends Task.Backgroundable {
 
         long start = System.currentTimeMillis();
 
-        //TODO add implementation to run SecuCheck
-        indicator.setText("Generating fluentTQL Specifications");
-
         indicator.setText("Configuring SecuCheck");
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        indicator.setText("Configuring analysis");
+        String[] args = new String[]{
+                "--analysis", "0",
+                Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY)),
+                "--output", Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY)),
+                "--inclusion", "*",
+                "--entry", "*"};
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        CliRunner cliRunner = new CliRunner(args);
+        CommandLine.ParseResult cmd = new CommandLine(cliRunner).parseArgs(args);
+
+        indicator.setText("Running analysis");
+
+        if (cmd.errors().isEmpty()) {
+            AIDevAssistCli cli = new AIDevAssistCli();
+            cli.run(cliRunner.createOptions());
+            PropertiesComponent.getInstance(project).setValue(Constants.LAST_SARIF_FILE, cli.getResults().getResultFile());
         }
-        indicator.setText("Exporting analysis results");
 
         MessageBus messageBus = project.getMessageBus();
         SecucheckNotifier publisher = messageBus.syncPublisher(SecucheckNotifier.END_SECUCHECK_PROCESS_TOPIC);
