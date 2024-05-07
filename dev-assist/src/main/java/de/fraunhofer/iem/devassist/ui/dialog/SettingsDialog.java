@@ -67,14 +67,16 @@ public class SettingsDialog extends DialogWrapper {
         super(project, modal);
         trainingPathCheckbox.setVisible(false);
         trainingPanel.setVisible(false);
+        toolkitPanel.setVisible(false);
         this.project = project;
         resourceBundle = ResourceBundle.getBundle("dialog_messages");
         setTitle(resourceBundle.getString("SettingsDialog.Title"));
 
-        toolkitButtonGroup = new ButtonGroup();
         mekaRadioButton.setActionCommand("meka");
-        toolkitButtonGroup.add(mekaRadioButton);
         wekaRadioButton.setActionCommand("weka");
+
+        toolkitButtonGroup = new ButtonGroup();
+        toolkitButtonGroup.add(mekaRadioButton);
         toolkitButtonGroup.add(wekaRadioButton);
 
         config = new Properties();
@@ -206,25 +208,24 @@ public class SettingsDialog extends DialogWrapper {
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(sourceDirTextbox), Balloon.Position.below);
-            } else if (outputDir.getText().isEmpty()){
+            } else if (outputDir.getText().isEmpty()) {
                 JBPopupFactory.getInstance()
                         .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
                         .createBalloon()
                         .show(JBPopupFactory.getInstance().guessBestPopupLocation(outputDir), Balloon.Position.below);
-        } else if (trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
+            } else if (trainingPathCheckbox.isSelected() && trainingTextbox.getText().isEmpty()) {
 
-            JBPopupFactory.getInstance()
-                    .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
-                    .createBalloon()
-                    .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
-        } else {
-
-            setParameters();
-            //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
-            //analysisCompleted.notify();
+                JBPopupFactory.getInstance()
+                        .createHtmlTextBalloonBuilder(resourceBundle.getString("Messages.Error.PathNotFound"), MessageType.ERROR, null)
+                        .createBalloon()
+                        .show(JBPopupFactory.getInstance().guessBestPopupLocation(trainingPathCheckbox), Balloon.Position.below);
+            } else {
+                setParameters();
+                //Notification analysisCompleted = new Notification(Constants.PLUGIN_GROUP_DISPLAY_ID, "Starting Analysis", "Analysis completed", NotificationType.INFORMATION);
+                //analysisCompleted.notify();
+            }
         }
     }
-}
 
     private void setParameters() {
 

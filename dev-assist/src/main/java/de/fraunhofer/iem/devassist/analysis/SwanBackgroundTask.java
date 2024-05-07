@@ -43,10 +43,10 @@ public class SwanBackgroundTask extends Task.Backgroundable {
 
         indicator.setText("Configuring SWAN");
         SwanOptions options = new CliRunner().initializeOptions();
-
         options.setTestDataDir(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.SOURCE_DIRECTORY)));
         options.setOutputDir(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY)));
-        options.setToolkit(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.TOOLKIT)).toLowerCase());
+        options.setToolkit("meka");
+        options.setFeatureSet(Collections.singletonList("code"));
         options.setSrmClasses(List.of("all"));
         options.setPhase("predict");
         options.setTrainDataDir("");
