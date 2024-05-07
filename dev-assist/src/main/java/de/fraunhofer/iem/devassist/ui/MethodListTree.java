@@ -12,6 +12,7 @@ import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.notification.*;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.*;
@@ -54,6 +55,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -389,8 +391,23 @@ public class MethodListTree extends Tree {
         bus.connect().subscribe(SecucheckNotifier.END_SECUCHECK_PROCESS_TOPIC, new SecucheckNotifier() {
             @Override
             public void launchSecuCheck() {
-                String notificationContent = "SecuCheck results exported to "+PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY);
-                NotificationGroupManager.getInstance().getNotificationGroup("Process_Completed").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+                String notificationContent = "Taint analysis results exported successfully.";
+                NotificationGroupManager.getInstance()
+                        .getNotificationGroup("Analysis Notification")
+                        .createNotification(notificationContent, NotificationType.INFORMATION)
+                        .addAction(new NotificationAction("Open Results") {
+                            @Override
+                            public void actionPerformed(@NotNull AnActionEvent anActionEvent, @NotNull Notification notification) {
+
+                                File results = new File(Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.LAST_SARIF_FILE)));
+                                Optional<VirtualFile> file = FilenameIndex
+                                        .getVirtualFilesByName(results.getName(),
+                                                GlobalSearchScope.projectScope(project)).stream().findFirst();
+
+                                file.ifPresent(virtualFile -> new OpenFileDescriptor(project, virtualFile).navigate(true));
+                            }
+                        })
+                        .notify(project);
             }
         });
 
