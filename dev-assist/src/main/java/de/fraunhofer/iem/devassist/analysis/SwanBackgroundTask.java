@@ -21,9 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class SwanBackgroundTask extends Task.Backgroundable {
 
@@ -61,9 +59,8 @@ public class SwanBackgroundTask extends Task.Backgroundable {
             throw new RuntimeException(e);
         }
 
-        duration = System.currentTimeMillis() - start;
-        int m = (int) (((duration / 1000) / 60) % 60);
-        int s = (int) ((duration / 1000) % 60);
+        duration = (int) ((System.currentTimeMillis() - start)/ 1000);
+
 
         indicator.setText("Exporting SRMs");
         String filename = Objects.requireNonNull(PropertiesComponent.getInstance(project).getValue(Constants.OUTPUT_DIRECTORY)) + File.separator + "srm-" + getCurrentTimestamp() + ".json";
@@ -80,8 +77,13 @@ public class SwanBackgroundTask extends Task.Backgroundable {
 
         PropertiesComponent.getInstance(project).setValue(Constants.LAST_SRM_LIST, filename);
         results.put(Constants.OUTPUT_FILE, filename);
+        File outputFile = new File(filename);
+
         results.put(Constants.OUTPUT_LOG, "");
-        results.put(Constants.ANALYSIS_RESULT, srmList.getMethods().size() + " methods found in " + m + " mins " + s + " secs");
+        results.put(Constants.ANALYSIS_RESULT,
+                srmList.getMethods().stream().filter(n -> !n.isKnown()).count()
+                        + " SRMs found in " + duration + "s and exported to "
+                        + outputFile.getName());
 
         MessageBus messageBus = project.getMessageBus();
         SwanNotifier publisher = messageBus.syncPublisher(SwanNotifier.END_SWAN_PROCESS_TOPIC);

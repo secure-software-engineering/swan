@@ -375,8 +375,10 @@ public class MethodListTree extends Tree {
 
                 JSONFileLoader.setReloading(false);
 
-                String notificationContent = "SRM List updated";
-                NotificationGroupManager.getInstance().getNotificationGroup("Process_Completed").createNotification(notificationContent, NotificationType.INFORMATION).notify(project);
+                NotificationGroupManager.getInstance()
+                        .getNotificationGroup("SRM Notification")
+                        .createNotification(values.get(Constants.ANALYSIS_RESULT), NotificationType.INFORMATION)
+                        .notify(project);
 
                 ConfigurationFileNotifier fileNotifier = bus.syncPublisher(ConfigurationFileNotifier.FILE_NOTIFIER_TOPIC);
                 fileNotifier.loadUpdatedFile(values.get(Constants.OUTPUT_FILE));
@@ -585,7 +587,7 @@ public class MethodListTree extends Tree {
                     if (method.getMethod().isKnown()) {
                         method.setTrainingMethod(true);
                         standardSrms.add(classNode);
-                    }else{
+                    } else {
                         currentProject.add(classNode);
                     }
                 }
@@ -597,7 +599,7 @@ public class MethodListTree extends Tree {
             currentProject.setUserObject("<html><b>" + project.getName() + "</b> <font color='gray'>(" + currentProject.getLeafCount() + " in " + currentProject.getChildCount() + " classes)</font></html>");
             root.add(currentProject);
 
-            standardSrms.setUserObject("<html><b>Known SRMs</b> <font color='gray'>(" + standardSrms.getLeafCount() + " in " + standardSrms.getChildCount()+ " classes)</font></html>");
+            standardSrms.setUserObject("<html><b>Known SRMs</b> <font color='gray'>(" + standardSrms.getLeafCount() + " in " + standardSrms.getChildCount() + " classes)</font></html>");
             root.add(standardSrms);
 
             treeModel.setRoot(root);
