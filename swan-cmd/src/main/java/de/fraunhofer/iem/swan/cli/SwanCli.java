@@ -1,15 +1,12 @@
 package de.fraunhofer.iem.swan.cli;
 
 import de.fraunhofer.iem.swan.SwanPipeline;
-import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CancellationException;
 
 /**
@@ -46,15 +43,18 @@ public class SwanCli {
 
             for (String feature : options.getFeatureSet()) {
 
-                String filepath = File.separator + "dataset" + File.separator + options.getToolkit().toLowerCase()
-                        + File.separator;
+                String filepath = "/dataset/" + options.getToolkit().toLowerCase() + "/";
 
                 if (options.getToolkit().toLowerCase().contentEquals("meka")) {
-                            instances.add(fileUtility.getResourceFile(filepath + options.getToolkit().toLowerCase() + "-" + feature + ".arff",
+
+                    instances.add(fileUtility.getResourceFile(filepath
+                                    + options.getToolkit().toLowerCase() + "-" + feature + ".arff",
                             null).getAbsolutePath());
                 } else {
                     for (String srm : options.getAllClasses()) {
-                        instances.add(fileUtility.getResourceFile(filepath + feature + File.separator + srm + ".arff",
+
+                        instances.add(fileUtility.getResourceFile(filepath +
+                                        feature + "/" + srm + ".arff",
                                 null).getAbsolutePath());
                     }
                 }
