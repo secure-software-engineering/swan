@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.fraunhofer.iem</groupId>
+        <artifactId>swan</artifactId>
+        <version>3.3.1</version>
+    </parent>
+
+    <artifactId>ml2plan-model-selection</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>scijava-public</id>
+            <url>https://maven.scijava.org/content/repositories/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>ai.libs</groupId>
+            <artifactId>hasco-core</artifactId>
+            <version>0.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.libs</groupId>
+            <artifactId>jaicore-algorithminspector</artifactId>
+            <version>0.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.libs</groupId>
+            <artifactId>mlplan-meka</artifactId>
+            <version>0.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graphstream</groupId>
+            <artifactId>gs-ui-javafx</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mwever</groupId>
+            <artifactId>gs-core</artifactId>
+            <version>2.0.2-synchrofix</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

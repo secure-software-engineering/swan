@@ -68,7 +68,7 @@ public class IconUtils {
         Icon icon;
 
         try{
-             icon = IconLoader.findIcon("/icons/" + joinedList + ".png" );
+             icon = IconLoader.findIcon("/icons/" + joinedList + ".png", IconUtils.class );
         }catch (Exception e){
             icon = PluginIcons.DEFAULT;
         }

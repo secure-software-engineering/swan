@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.fraunhofer.iem</groupId>
+    <artifactId>swan</artifactId>
+    <packaging>pom</packaging>
+    <version>3.3.1</version>
+    <name>SWAN</name>
+
+    <description>SWAN uses fully automated machine-learning approaches to classify Java methods into security-relevant
+        methods (SRM) and software vulnerabilities categories.
+        The methods are classified into the following security-relevant method categories sources, sinks, sanitizers and
+        authentication. For the software vulnerability classes,
+        the following Common Weakness Enumeration (CWE) vulnerabilities are supported: OS Command Injection, Cross-site
+        Scripting, SQL Injection, Missing Authentication, Open Redirect, Missing Authorisation, and Incorrect
+        Authorisation.
+        SWAN detects methods from the provided source code and outputs a list of methods that can be used to configure
+        static analysis tools.
+    </description>
+    <url>https://github.com/secure-software-engineering/swan</url>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>piskachev</id>
+            <name>Goran Piskachev</name>
+            <email>goran.piskachev@iem.fraunhofer.de</email>
+        </developer>
+        <developer>
+            <id>nguyen</id>
+            <name>Lisa Nguyen</name>
+            <email>lisa.nguyen@uni-paderborn.de</email>
+        </developer>
+        <developer>
+            <id>johnson</id>
+            <name>Oshando Johnson</name>
+            <email>oshando.johnson@iem.fraunhofer.de</email>
+        </developer>
+        <developer>
+            <id>budde</id>
+            <name>Ingo Budde</name>
+            <email>ingo.budde@iem.fraunhofer.de</email>
+        </developer>
+        <developer>
+            <id>bodden</id>
+            <name>Eric Bodden</name>
+            <email>eric.bodden@uni-paderborn.de</email>
+        </developer>
+
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <module>training-data-jars</module>
+        <module>coverage-doclet</module>
+        <module>xml-doclet</module>
+        <module>ml2plan-model-selection</module>
+        <module>swan-cmd</module>
+    </modules>
+</project>

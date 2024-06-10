@@ -291,8 +291,8 @@ public class MethodDialog extends DialogWrapper {
 
                 MethodNotifier publisher = messageBus.syncPublisher(MethodNotifier.ADD_UPDATE_DELETE_METHOD);
                 publisher.addNewExistingMethod(method);
-                super.doOKAction();
             }
+            super.doOKAction();
         }
     }
 

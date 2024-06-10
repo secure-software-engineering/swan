@@ -1,60 +1,32 @@
-# dev-assist
-IntelliJ IDEA Plug-in for the Security methods for WeAkNess detection (SWAN) tool.
+## Dev-Assist IntelliJ Plugin
 
-Description: 
--------------
-SWAN_Assist provides a GUI support for SWAN. The user is able to interact with the learning process by giving feedback on the methods of interest. 
-The tool helps users that write static analyses to create list of SWAN for their specific Java libraries. 
-Moreover, users can manually inspect the proper usage of the methods detected by SWAN. 
+Dev-Assist is an IntelliJ IDEA plugin that uses [SWAN](https://github.com/secure-software-engineering/swan) to detect security-relevant methods (SRMs) that are required when configuring static analysis tools. After automatically detecting SRMs, the plugin can be used to adjust the list of security-relevant methods and also generate the tainit-flow specifications required to run the taint analysis tool [SecuCheck](https://github.com/secure-software-engineering/secucheck/).
 
+The plugin works with IntelliJ IDEA 2022.2 and higher. 
 
-## Downloading the Project
+### Plugin Features
+The plugin has the following main features which are accessible in the plugin's tool window and from the editor:
 
-The project can be downloaded using either of the following methods:
+- Detect security-relevant methods in Java programs with SWAN's machine learning approach
+- Update security-relevant methods list using method dialog
+  - Import existing SRM list
+  - Add new SRMs from the editor
+  - Update existing method (SRM labels, data-in/data-out and meta properties)
+  - Delete SRMs
+  - Filter SRM list
+  - Expand/collapse method list
+  - Export updated SRM list
+- Generate [*fluent*TQL](https://github.com/secure-software-engineering/secucheck/tree/master) taint-flow specifications necessary to configure SecuCheck in order to detect vulnerabilities
+- Run SecuCheck and displays results using Qodana 
 
-##### Method 1: Cloning the Project 
-1) Select the **File>Project from Version Control>Git** option, enter the repository’s URL and then select **Clone** to import the project. The project will contain the following directories: ``swan_core`` (SWAN core application), ``swan_assist`` (IntelliJ Plugin) and ``swan_datasets`` (datasets for the research paper).
-2) To configure the project settings and modules, go to **File>Project Structure**. 
-3) For **Project SDK**, select the corresponding Java SDK version.
-4) Select **Modules** from the left panel and remove the existing module that was automatically created.
-5) Click the **Add** button and then **Import Module** to create the SWAN Core module. Follow the steps in the [Setting up the Project Modules](https://github.com/secure-software-engineering/swan/tree/master/swan_assist#setting-up-the-project-modules) section to finish configuring the core module as well as the plugin module.
+### Installation
 
-		
-##### Method 2: Downloading Project ZIP
-1) Download and extract the project resources from GitHub.
-2) In Intellij, use the **File>Project from Existing Resources** to import the project modules. This can also be done from the IntelliJ start screen.  
-3) Follow the steps in the [Setting up the Project Modules](https://github.com/secure-software-engineering/swan/tree/master/swan_assist#setting-up-the-project-modules) section to finish configuring the core module as well as the plugin module.
-
-## Setting up the Project Modules
-
-##### SWAN Core
-1) In the window that appears, open the ``/swan_core`` directory of the project. 
-2) Select the **Import module from external Model** radio button and also select **Maven**. 
-3) The default settings in the dialogs that appear can be used. 
-4) Close the **Project Settings** dialog so that IntelliJ will index the new project module.
-
-##### SWAN Assist
-1) Return to the **Project Structure** dialog and Select **Modules** from the left panel.
-2) Click the **Add** button and then **Import Module**. 
-3) In the window that appears, open the ``/swan_assist`` directory. Select the **Import module from external Model** radio button and also select **Gradle**. 
-4) The default settings in the dialogs that appear can be used. The plugin module should now be indexed. 
-
-The core and plugin modules should now be imported. 
-
-## Running the Plugin
-
-The plugin uses ``swan_core`` dependency from [Maven Central](https://mvnrepository.com/artifact/de.upb.cs.swt/swan_core). If the version in the plugin's ``build.gradle`` file is not available on Maven Central, perform the following steps:
-1) Run the Maven ``install`` command of the ``swan_core`` project from the console or using the Maven Plugin.
-2) Add ``mavenLocal()`` in the ``repositories`` section of the ``build.gradle`` file. The locally installed library can now be use by the plugin.
-
-##### To run the plugin:
-
-1) Select the **Run Configuration** drop down menu and select **Edit Configurations** or from the **Run** menu, select **Edit Configurations**. 
-2) Click the **Add** button and select **Gradle**. 
-3) Select the **swan_assist** Gradle module that was just created and enter ``:runIde`` as the value for **Tasks** - this task will run the plugin in a new instance of IntelliJ. The plugin can also be executed using the Gradle Plugin in IntelliJ: Open the Gradle Tool Window, expand the ``intellij`` task and double click on ``runIde``. The other tasks can be used as necessary.
-4) When the new instance of IntelliJ launches, use the open option to select the project found in ``/test-project`` directory. You may need to set a project SDK, if one isn’t automatically configured for the project. 
-
-Logs for the plugin will appear in the initial instance of IntelliJ.
-
+To install the plugin in IntelliJ IDEA:
+- Download the [latest](https://github.com/secure-software-engineering/swan/releases) plugin archive file (ZIP or JAR) 
+- Open the IDE settings and select <kbd>Plugins</kbd>
+- On the <kbd>Plugins</kbd> page, click <kbd>Gear</kbd> icon and then click <kbd>Install plugin from disk...</kbd>.
+- Select the Dev-Assist plugin archive file and select <kbd>OK</kbd>
+- Click <kbd>OK</kbd> to apply the changes.
+- Restart the IDE to complete the installation
 
 

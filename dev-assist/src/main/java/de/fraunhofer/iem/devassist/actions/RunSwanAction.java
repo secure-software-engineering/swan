@@ -64,7 +64,7 @@ public class RunSwanAction extends AnAction {
         }
 
         if (!PropertiesComponent.getInstance(project).isTrueValue(Constants.SWAN_SETTINGS)) {
-            anActionEvent.getActionManager().getAction("SWAN_Assist.SettingsAction").actionPerformed(anActionEvent);
+            anActionEvent.getActionManager().getAction("Dev_Assist.SettingsAction").actionPerformed(anActionEvent);
             //TODO Run SWAN if the tool has been configured
         } else {
             runSwan(project);

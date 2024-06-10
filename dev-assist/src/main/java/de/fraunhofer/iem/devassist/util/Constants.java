@@ -25,6 +25,7 @@ public class Constants {
     public final static String SOURCE_DIRECTORY = PLUGIN_ID + "projectJarFiles"; //Test Library (or the project)
     public final static String CONFIGURATION_FILE = PLUGIN_ID + "configurationFile";
     public final static String LAST_SRM_LIST = PLUGIN_ID + "lastSrmList";
+    public final static String LAST_SARIF_FILE = PLUGIN_ID + "lastSarifFile";
     public final static String SWAN_SETTINGS = PLUGIN_ID + "projectConfigured";
     public final static String OUTPUT_DIRECTORY = PLUGIN_ID + "outputPath";
     public final static String OUTPUT_FILE = PLUGIN_ID + "outputFile";

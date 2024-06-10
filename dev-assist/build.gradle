@@ -13,7 +13,8 @@ repositories {
 
 dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1'
-    implementation 'de.fraunhofer.iem:swan:3.2.2'
+    implementation 'de.fraunhofer.iem:swan:3.3.1'
+    implementation 'de.fraunhofer.iem:swan-cmd:3.3.1'
     implementation 'org.slf4j:slf4j-api:1.7.29'
     implementation 'org.slf4j:slf4j-simple:1.7.29'
     implementation 'org.apache.commons:commons-lang3:3.0'
@@ -32,7 +33,7 @@ patchPluginXml {
             "<br>- filter list" +
             "<br>- import and export configuration file"
     sinceBuild = "221.*"
-    untilBuild = "233.*"
+    untilBuild = "242.*"
 }
 
 runIde {
