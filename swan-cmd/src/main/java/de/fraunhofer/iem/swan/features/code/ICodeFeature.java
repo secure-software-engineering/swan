@@ -32,4 +32,7 @@ public interface ICodeFeature {
     ArrayList<String> getFeatureValues();
 
     AnalysisType getFeatureAnalysisType();
+
+    String getDefaultStringValue();
+
 }
