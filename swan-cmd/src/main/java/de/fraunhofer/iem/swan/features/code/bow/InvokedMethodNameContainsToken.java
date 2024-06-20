@@ -73,4 +73,9 @@ public class InvokedMethodNameContainsToken extends WeightedFeature implements I
     public String toString() {
         return "InvokedMethodNameContains" + this.token.toUpperCase();
     }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

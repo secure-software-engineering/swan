@@ -41,4 +41,8 @@ public class ParametersCountFeature implements ICodeFeature {
         return AnalysisType.SIGNATURE;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

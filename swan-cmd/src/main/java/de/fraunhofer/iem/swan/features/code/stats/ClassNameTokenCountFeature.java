@@ -59,4 +59,9 @@ public class ClassNameTokenCountFeature implements ICodeFeature {
     public AnalysisType getFeatureAnalysisType() {
         return AnalysisType.SIGNATURE;
     }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

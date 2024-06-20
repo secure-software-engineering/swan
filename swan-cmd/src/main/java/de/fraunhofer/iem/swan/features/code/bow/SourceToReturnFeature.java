@@ -106,4 +106,9 @@ public class SourceToReturnFeature extends WeightedFeature implements ICodeFeatu
     public String toString() {
         return "SourceToReturnContains" + this.token.toUpperCase();
     }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

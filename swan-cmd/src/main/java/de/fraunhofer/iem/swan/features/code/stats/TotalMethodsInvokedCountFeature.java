@@ -72,4 +72,8 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
         return AnalysisType.BODY;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

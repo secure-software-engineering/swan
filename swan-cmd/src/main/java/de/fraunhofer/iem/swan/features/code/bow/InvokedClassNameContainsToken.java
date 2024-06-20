@@ -75,4 +75,8 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
         return AnalysisType.BODY;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

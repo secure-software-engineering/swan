@@ -60,4 +60,8 @@ public class ClassModifierFeature implements ICodeFeature {
         return AnalysisType.SIGNATURE;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return Modifier.DEFAULT.name();
+    }
 }

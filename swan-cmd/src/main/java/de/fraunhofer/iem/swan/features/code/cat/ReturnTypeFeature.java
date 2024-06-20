@@ -78,4 +78,9 @@ public class ReturnTypeFeature implements ICodeFeature {
         return AnalysisType.SIGNATURE;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return Values.Others.name();
+    }
+
 }

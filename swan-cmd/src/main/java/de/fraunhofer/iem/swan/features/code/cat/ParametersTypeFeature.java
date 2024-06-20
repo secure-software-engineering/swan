@@ -59,4 +59,9 @@ public class ParametersTypeFeature extends WeightedFeature implements ICodeFeatu
     public String toString(){
         return "MethodParametersTypes";
     }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

@@ -55,4 +55,8 @@ public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implemen
         return AnalysisType.SIGNATURE;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

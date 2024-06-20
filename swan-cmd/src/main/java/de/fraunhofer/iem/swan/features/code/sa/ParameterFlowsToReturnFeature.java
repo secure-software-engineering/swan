@@ -85,4 +85,8 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
         return AnalysisType.BODY;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

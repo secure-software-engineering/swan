@@ -151,4 +151,8 @@ public class MethodTypeFeature implements ICodeFeature {
         return AnalysisType.BODY;
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return Values.None.name();
+    }
 }
