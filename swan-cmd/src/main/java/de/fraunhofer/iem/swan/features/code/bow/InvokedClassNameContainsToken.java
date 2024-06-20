@@ -69,4 +69,10 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
         this.featureValues.add("false");
         return this.featureValues;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
 }

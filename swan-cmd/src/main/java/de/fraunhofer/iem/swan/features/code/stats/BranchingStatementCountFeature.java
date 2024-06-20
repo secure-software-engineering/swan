@@ -40,6 +40,11 @@ public class BranchingStatementCountFeature implements ICodeFeature {
     }
 
     @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
     public String toString() {
         return "BranchingStatementCount";
     }

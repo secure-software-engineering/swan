@@ -18,6 +18,11 @@ public interface ICodeFeature {
         CATEGORICAL,
         BOOLEAN
     }
+
+    enum AnalysisType{
+        BODY,
+        SIGNATURE
+    }
     FeatureResult applies(Method method);
 
     String toString();
@@ -26,4 +31,5 @@ public interface ICodeFeature {
 
     ArrayList<String> getFeatureValues();
 
+    AnalysisType getFeatureAnalysisType();
 }

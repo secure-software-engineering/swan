@@ -63,6 +63,11 @@ public class MethodInnerOrAnonymousClassFeature implements ICodeFeature {
     }
 
     @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.SIGNATURE;
+    }
+
+    @Override
     public String toString(){
         return "MethodInnerOrAnonymousClass";
     }

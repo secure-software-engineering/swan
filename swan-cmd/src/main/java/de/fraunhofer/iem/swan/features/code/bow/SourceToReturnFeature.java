@@ -98,6 +98,11 @@ public class SourceToReturnFeature extends WeightedFeature implements ICodeFeatu
     }
 
     @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
     public String toString() {
         return "SourceToReturnContains" + this.token.toUpperCase();
     }
