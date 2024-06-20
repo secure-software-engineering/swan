@@ -1,4 +1,4 @@
-package de.fraunhofer.iem.swan.features.code.stats;
+package de.fraunhofer.iem.swan.features.code.cat;
 
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.FeatureResult;
@@ -6,44 +6,44 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
-public class ExceptionsCountFeature implements ICodeFeature {
+public class IsClassConcreteFeature implements ICodeFeature {
     private FeatureResult featureResult;
-    private int numberOfExceptions;
+    private ArrayList<String> featureValues;
 
-    public ExceptionsCountFeature() {
+    public IsClassConcreteFeature() {
         this.featureResult = new FeatureResult();
-        this.numberOfExceptions = 0;
     }
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfExceptions = method.getSootMethod().getExceptions().size();
-        featureResult.setIntegerValue(this.numberOfExceptions);
+        this.featureResult.setBooleanValue(!method.getClass().isInterface());
         return this.featureResult;
     }
 
     @Override
     public FeatureType getFeatureType() {
-        return FeatureType.NUMERICAL;
-    }
-
-    @Override
-    public String toString() {
-        return "ExceptionsCount";
+        return FeatureType.BOOLEAN;
     }
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        return null;
+        this.featureValues = new ArrayList<>();
+        this.featureValues.add("true");
+        this.featureValues.add("false");
+        return this.featureValues;
     }
 
     @Override
     public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.BODY;
+        return AnalysisType.SIGNATURE;
     }
 
     @Override
+    public String toString(){ return "IsClassConcrete"; }
+
+    @Override
     public String getDefaultStringValue() {
-        return String.valueOf(0);
+        return String.valueOf(false);
     }
+
 }

@@ -40,4 +40,14 @@ public class IsMethodImplicitFeature implements ICodeFeature {
         this.featureValues.add("false");
         return this.featureValues;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.SIGNATURE;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

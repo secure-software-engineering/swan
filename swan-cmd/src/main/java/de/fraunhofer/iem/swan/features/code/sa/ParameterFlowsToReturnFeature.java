@@ -79,4 +79,14 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
         this.featureValues.add("false");
         return this.featureValues;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

@@ -54,4 +54,14 @@ public class ClassAccessModifierFeature implements ICodeFeature {
         this.featureValues = new ArrayList<>(Stream.of(Modifier.values()).map(Modifier::name).collect(Collectors.toList()));
         return this.featureValues;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.SIGNATURE;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return Modifier.DEFAULT.name();
+    }
 }

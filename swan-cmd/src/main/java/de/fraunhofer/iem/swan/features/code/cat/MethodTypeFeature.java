@@ -145,4 +145,14 @@ public class MethodTypeFeature implements ICodeFeature {
         this.featureValues = new ArrayList<>(Stream.of(Values.values()).map(Values::name).collect(Collectors.toList()));
         return this.featureValues;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return Values.None.name();
+    }
 }

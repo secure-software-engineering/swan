@@ -70,4 +70,14 @@ public class ClassesInvokedCountFeature implements ICodeFeature {
     public ArrayList<String> getFeatureValues() {
         return null;
     }
+
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }
