@@ -15,7 +15,7 @@ public class CliRunner implements Callable<Integer> {
     private String testDataDir = "";
 
     @CommandLine.Option(names = {"-train", "--train-data"}, description = {"Path of training JARs or class files"})
-    private String trainDataDir = "";
+    private String trainDataDir = "/home/x260/Desktop/Work/Training-Jars/dev-assist";
 
     @CommandLine.Option(names = {"-test-source", "--test-data-source"}, description = {"Path of test source files"})
     private String testDataSourceDir = "";
@@ -60,7 +60,7 @@ public class CliRunner implements Callable<Integer> {
     private double split = 0.7;
 
     @CommandLine.Option(names = {"-p", "--phase"}, description = {"Phase: validate, predict"})
-    private String phase = "predict";
+    private String phase = "validate";
 
     @CommandLine.Option(names = {"-pt", "--prediction-threshold"}, description = {"Threshold for predicting categories"})
     private double predictionThreshold = 0.5;

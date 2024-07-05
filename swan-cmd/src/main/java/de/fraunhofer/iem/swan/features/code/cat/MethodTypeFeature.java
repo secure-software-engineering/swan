@@ -146,13 +146,4 @@ public class MethodTypeFeature implements ICodeFeature {
         return this.featureValues;
     }
 
-    @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.BODY;
-    }
-
-    @Override
-    public String getDefaultStringValue() {
-        return Values.None.name();
-    }
 }

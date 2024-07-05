@@ -36,13 +36,4 @@ public class ParametersCountFeature implements ICodeFeature {
     @Override
     public ArrayList<String> getFeatureValues() {return null;}
 
-    @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.SIGNATURE;
-    }
-
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(0);
-    }
 }

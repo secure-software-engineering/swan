@@ -9,7 +9,6 @@ import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Evaluates whether method's class name contains tokens in the security vocabulary.
@@ -70,13 +69,4 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
         return this.featureValues;
     }
 
-    @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.BODY;
-    }
-
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(false);
-    }
 }
