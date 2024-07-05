@@ -52,13 +52,4 @@ public class MethodNameContainsToken extends WeightedFeature implements ICodeFea
         return this.featureValues;
     }
 
-    @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.SIGNATURE;
-    }
-
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(false);
-    }
 }

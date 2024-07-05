@@ -54,13 +54,4 @@ public class MethodAccessModifierFeature implements ICodeFeature {
         return this.featureValues;
     }
 
-    @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.SIGNATURE;
-    }
-
-    @Override
-    public String getDefaultStringValue() {
-        return Modifier.DEFAULT.name();
-    }
 }

@@ -9,7 +9,6 @@ import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Evaluates whether invoked method name contains tokens in the security vocabulary.
@@ -65,17 +64,8 @@ public class InvokedMethodNameContainsToken extends WeightedFeature implements I
     }
 
     @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.BODY;
-    }
-
-    @Override
     public String toString() {
         return "InvokedMethodNameContains" + this.token.toUpperCase();
     }
 
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(false);
-    }
 }

@@ -43,17 +43,8 @@ public class ClassNameContainsToken extends WeightedFeature implements ICodeFeat
     }
 
     @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.SIGNATURE;
-    }
-
-    @Override
     public String toString() {
         return "ClassNameContains" + this.token.toUpperCase();
     }
 
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(false);
-    }
 }

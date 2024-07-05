@@ -1,6 +1,5 @@
 package de.fraunhofer.iem.swan.features.code;
 
-import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
 
 import java.util.ArrayList;
@@ -30,9 +29,5 @@ public interface ICodeFeature {
     FeatureType getFeatureType();
 
     ArrayList<String> getFeatureValues();
-
-    AnalysisType getFeatureAnalysisType();
-
-    String getDefaultStringValue();
 
 }

@@ -40,17 +40,8 @@ public class BranchingStatementCountFeature implements ICodeFeature {
     }
 
     @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.BODY;
-    }
-
-    @Override
     public String toString() {
         return "BranchingStatementCount";
     }
 
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(0);
-    }
 }

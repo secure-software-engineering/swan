@@ -51,17 +51,8 @@ public class ParametersTypeFeature extends WeightedFeature implements ICodeFeatu
     public ArrayList<String> getFeatureValues() {return null;}
 
     @Override
-    public AnalysisType getFeatureAnalysisType() {
-        return AnalysisType.SIGNATURE;
-    }
-
-    @Override
     public String toString(){
         return "MethodParametersTypes";
     }
 
-    @Override
-    public String getDefaultStringValue() {
-        return String.valueOf(0);
-    }
 }
