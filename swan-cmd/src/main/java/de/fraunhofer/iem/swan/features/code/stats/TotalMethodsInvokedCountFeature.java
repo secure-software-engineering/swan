@@ -8,6 +8,10 @@ import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
 public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
@@ -63,4 +67,13 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
         return null;
     }
 
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

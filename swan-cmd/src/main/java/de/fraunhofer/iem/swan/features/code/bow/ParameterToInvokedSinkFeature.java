@@ -91,8 +91,17 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
     }
 
     @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
     public String toString() {
         return "ParameterToInvokedSinkContains" + this.token.toUpperCase();
     }
 
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 }

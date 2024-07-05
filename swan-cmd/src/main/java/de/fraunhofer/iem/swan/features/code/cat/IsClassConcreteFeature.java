@@ -34,6 +34,16 @@ public class IsClassConcreteFeature implements ICodeFeature {
     }
 
     @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.SIGNATURE;
+    }
+
+    @Override
     public String toString(){ return "IsClassConcrete"; }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(false);
+    }
 
 }

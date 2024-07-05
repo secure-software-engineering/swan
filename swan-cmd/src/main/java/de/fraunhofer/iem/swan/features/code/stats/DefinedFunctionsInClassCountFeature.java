@@ -4,6 +4,9 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.FeatureResult;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.SootMethod;
+import soot.Unit;
+import soot.jimple.InstanceInvokeExpr;
+import soot.jimple.Stmt;
 
 import java.util.ArrayList;
 
@@ -47,4 +50,13 @@ public class DefinedFunctionsInClassCountFeature implements ICodeFeature {
         return null;
     }
 
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }

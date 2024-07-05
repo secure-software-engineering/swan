@@ -37,4 +37,13 @@ public class ExceptionsCountFeature implements ICodeFeature {
         return null;
     }
 
+    @Override
+    public AnalysisType getFeatureAnalysisType() {
+        return AnalysisType.BODY;
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        return String.valueOf(0);
+    }
 }
