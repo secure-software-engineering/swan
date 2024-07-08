@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/**
+ * Evaluates whether method's class is an interface or not.
+ *
+ * @author Rohith Kumar
+ */
+
 public class IsClassConcreteFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
