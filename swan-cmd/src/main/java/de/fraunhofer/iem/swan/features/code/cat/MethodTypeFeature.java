@@ -13,6 +13,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates whether a method is a Getter, Setter, Constructor or None.
+ *
+ * @author Rohith Kumar
+ */
+
 public class MethodTypeFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;

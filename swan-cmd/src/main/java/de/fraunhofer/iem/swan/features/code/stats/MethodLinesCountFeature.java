@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates the number lines in the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class MethodLinesCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private int numberOfLines;

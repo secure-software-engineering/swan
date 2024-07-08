@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates the return type of the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ReturnTypeFeature implements ICodeFeature {
 
     private Values category;

@@ -4,11 +4,14 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.code.FeatureResult;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 import soot.SootMethod;
-import soot.Unit;
-import soot.jimple.InstanceInvokeExpr;
-import soot.jimple.Stmt;
 
 import java.util.ArrayList;
+
+/***
+ * Evaluates the number of defined functions in the method's class.
+ *
+ * @author Rohith Kumar
+ */
 
 public class DefinedFunctionsInClassCountFeature implements ICodeFeature {
     private FeatureResult featureResult;

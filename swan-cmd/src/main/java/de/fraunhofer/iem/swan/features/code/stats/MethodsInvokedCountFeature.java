@@ -13,6 +13,11 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
+/***
+ * Evaluates the number methods invoked in the method.
+ *
+ * @author Rohith Kumar
+ */
 public class MethodsInvokedCountFeature implements ICodeFeature {
 
     private Set<String> methodsList;

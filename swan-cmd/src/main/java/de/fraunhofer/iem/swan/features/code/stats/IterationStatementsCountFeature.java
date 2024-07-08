@@ -8,6 +8,11 @@ import soot.jimple.LookupSwitchStmt;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates the number iteration statements in the method.
+ *
+ * @author Rohith Kumar
+ */
 public class IterationStatementsCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private int numberOfIterationStatements;

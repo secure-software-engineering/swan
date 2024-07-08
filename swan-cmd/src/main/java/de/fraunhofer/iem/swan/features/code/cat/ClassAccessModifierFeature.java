@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates the access modifier of the method's class.
+ *
+ * @author Rohith Kumar
+ */
 public class ClassAccessModifierFeature implements ICodeFeature {
 
     private Modifier modifier;

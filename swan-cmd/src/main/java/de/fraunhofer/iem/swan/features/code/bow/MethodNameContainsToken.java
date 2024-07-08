@@ -8,7 +8,7 @@ import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 import java.util.ArrayList;
 
 /**
- * Evaluates whether method name contains tokens in the security vocabulary.
+ * Evaluates whether method name contains the specified token.
  *
  * @author Lisa Nguyen Quang Do
  */

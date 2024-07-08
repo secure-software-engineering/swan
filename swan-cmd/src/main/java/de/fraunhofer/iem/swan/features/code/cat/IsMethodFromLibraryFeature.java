@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates whether the method is an application method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class IsMethodFromLibraryFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;

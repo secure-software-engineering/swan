@@ -11,15 +11,21 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
+/***
+ * Evaluates the number of parameter types that match with the security vocabulary.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ParametersTypeFeature extends WeightedFeature implements ICodeFeature {
 
     //TODO make sure that use use camel case for all variable names
-    private int NumberOfParameters;
+    private int numberOfParameters;
     private Set<String> parametersList;
     private FeatureResult featureResult;
 
     public ParametersTypeFeature() {
-        this.NumberOfParameters = 0;
+        this.numberOfParameters = 0;
         this.featureResult = new FeatureResult();
         this.parametersList = new HashSet<>();
     }
@@ -36,11 +42,11 @@ public class ParametersTypeFeature extends WeightedFeature implements ICodeFeatu
         for (String methodParameter: method.getParameters()){
             for(String parameter: this.parametersList){
                 if(methodParameter.contains(parameter)){
-                    this.NumberOfParameters +=1;
+                    this.numberOfParameters +=1;
                 }
             }
         }
-        this.featureResult.setIntegerValue(this.NumberOfParameters);
+        this.featureResult.setIntegerValue(this.numberOfParameters);
         return featureResult;
     }
 

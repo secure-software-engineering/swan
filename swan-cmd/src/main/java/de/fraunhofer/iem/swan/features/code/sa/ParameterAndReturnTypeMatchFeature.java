@@ -8,6 +8,12 @@ import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Evaluates whether parameter and return type match.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ParameterAndReturnTypeMatchFeature extends WeightedFeature implements ICodeFeature {
 
     private ArrayList<String> featureValues;

@@ -9,6 +9,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates whether the method's class is an inner or anonymous class.
+ *
+ * @author Rohith Kumar
+ */
+
 public class MethodInnerOrAnonymousClassFeature implements ICodeFeature {
     private ArrayList<String> featureValues;
     private FeatureResult featureResult;

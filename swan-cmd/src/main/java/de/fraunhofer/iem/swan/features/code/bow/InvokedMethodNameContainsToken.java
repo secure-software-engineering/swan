@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- * Evaluates whether invoked method name contains tokens in the security vocabulary.
+ * Evaluates whether invoked method name contains the specified token.
  *
  * @author Rohith Kumar
  */

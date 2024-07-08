@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates the number parameters of the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ParametersCountFeature implements ICodeFeature {
 
     private int numberOfParameters;

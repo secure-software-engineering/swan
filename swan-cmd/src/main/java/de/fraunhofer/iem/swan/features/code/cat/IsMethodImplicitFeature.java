@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates whether the method is implicit.
+ *
+ * @author Rohith Kumar
+ */
+
 public class IsMethodImplicitFeature implements ICodeFeature {
 
     private FeatureResult featureResult;
