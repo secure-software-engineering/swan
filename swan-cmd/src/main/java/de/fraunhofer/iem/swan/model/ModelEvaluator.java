@@ -1,5 +1,6 @@
 package de.fraunhofer.iem.swan.model;
 
+import de.fraunhofer.iem.swan.io.dataset.InvokedMethodsFilter;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
 import de.fraunhofer.iem.swan.data.Category;
 import de.fraunhofer.iem.swan.data.Method;
@@ -97,8 +98,10 @@ public class ModelEvaluator {
                 }
 
                 try {
-                    if (!options.getOutputDir().isEmpty())
+                    if (!options.getOutputDir().isEmpty()){
+                        predictedSrmList.addMethods(InvokedMethodsFilter.getKnownInvokedMethods());
                         SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "detected-srm.json");
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
