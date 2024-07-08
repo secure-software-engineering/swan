@@ -2,14 +2,11 @@ package de.fraunhofer.iem.swan.soot;
 
 import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import soot.G;
-import soot.Scene;
-import soot.SootClass;
-import soot.SootMethod;
+import soot.*;
+import soot.jimple.InvokeStmt;
 import soot.options.Options;
 
 import java.io.IOException;
@@ -37,11 +34,13 @@ public class Soot {
 
         G.reset();
 
+        Options.v().set_soot_classpath(classpath);
+        Options.v().set_soot_classpath(System.getProperty("java.class.path") + System.getProperty("path.separator") + Options.v().soot_classpath());
+
         Options.v().set_allow_phantom_refs(true);
         Options.v().set_prepend_classpath(true);
         Options.v().set_whole_program(true);
         Options.v().set_include_all(true);
-        Options.v().set_soot_classpath(classpath);
 
         Scene.v().loadNecessaryClasses();
     }
@@ -149,9 +148,11 @@ public class Soot {
     public Set<Method> loadMethods(Set<String> testClasses) {
         Set<Method> methods = new HashSet<>();
 
+        Scene.v().loadNecessaryClasses();
+
         for (String className : testClasses) {
 
-            SootClass sc = Scene.v().forceResolve(className, SootClass.BODIES);
+            SootClass sc = Scene.v().forceResolve(className, SootClass.BODIES);;
 
             if (sc == null || !testClasses.contains(sc.getName()))
                 continue;
@@ -168,7 +169,25 @@ public class Soot {
                         Method method = SootUtils.convertSootSignature(sm.getSignature());
                         method.setSootMethod(sm);
                         method.setSootClass(sc);
+                        method.setFullClassName(sm.getDeclaringClass().getName())   ;
+                        method.setApplicationMethod(true);
+                        methods.remove(method);
                         methods.add(method);
+
+                        for(Unit unit : sm.retrieveActiveBody().getUnits()){
+                            if (unit instanceof InvokeStmt) {
+                                InvokeStmt invokeStmt = (InvokeStmt) unit;
+                                SootMethod invokedSootMethod = invokeStmt.getInvokeExpr().getMethod();
+                                Method invokedmethod = SootUtils.convertSootSignature(invokedSootMethod.getSignature());
+                                invokedmethod.setSootMethod(invokedSootMethod);
+                                invokedmethod.setSootClass(invokedSootMethod.getDeclaringClass());
+                                if(!testClasses.contains(invokedmethod.getClassName().substring(invokedmethod.getClassName().lastIndexOf(".")+1))){
+                                    invokedmethod.setApplicationMethod(false);
+                                    invokedmethod.setFullClassName(invokedSootMethod.getDeclaringClass().getName());
+                                    methods.add(invokedmethod);
+                                }
+                            }
+                        }
                     }
                 }
             }
