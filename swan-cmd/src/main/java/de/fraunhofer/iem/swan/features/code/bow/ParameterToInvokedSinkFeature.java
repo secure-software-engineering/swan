@@ -34,9 +34,7 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
             this.featureResult.setBooleanValue(Boolean.FALSE);
             return this.featureResult;
         }
-        // We are only interested in setters
-        if (!method.getSootMethod().isConcrete()){
-            this.featureResult.setBooleanValue(Boolean.FALSE);
+        if (!method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()){
             return this.featureResult;
         }
         try {
@@ -51,7 +49,7 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
                 if (u instanceof AssignStmt) {
                     Value leftOp = ((AssignStmt) u).getLeftOp();
                     Value rightOp = ((AssignStmt) u).getRightOp();
-                    if (paramVals.contains(leftOp)) paramVals.remove(leftOp);
+                    paramVals.remove(leftOp);
                     if (paramVals.contains(rightOp)) {
                         paramVals.add(leftOp);
                     }

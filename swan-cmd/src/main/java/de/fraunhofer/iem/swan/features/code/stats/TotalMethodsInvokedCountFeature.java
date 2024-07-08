@@ -27,7 +27,7 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method){
-        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()) {
             this.featureResult.setIntegerValue(this.numberOfFunctions);
             return this.featureResult;
         }

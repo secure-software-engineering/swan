@@ -24,19 +24,24 @@ public class MethodTypeFeature implements ICodeFeature {
     }
 
     public enum Values {
-        Getter, Setter, Constructor, None
+        GETTER, SETTER, CONSTRUCTOR, NONE
     }
 
     @Override
     public FeatureResult applies(Method method) {
+        if(!method.getSootMethod().hasActiveBody()){
+            this.category = Values.NONE;
+            this.featureResult.setStringValue(this.category.toString());
+            return featureResult;
+        }
         if (method.getName().equals("<init>") || method.getName().equals("<clinit>"))
-            this.category = Values.Constructor;
+            this.category = Values.CONSTRUCTOR;
         else if (isGetter(method))
-            this.category = Values.Getter;
+            this.category = Values.GETTER;
         else if (isSetter(method))
-            this.category = Values.Setter;
+            this.category = Values.SETTER;
         else
-            this.category = Values.None;
+            this.category = Values.NONE;
 
         this.featureResult.setStringValue(this.category.toString());
         return this.featureResult;
@@ -45,7 +50,7 @@ public class MethodTypeFeature implements ICodeFeature {
     private Boolean isGetter(Method method) {
         //Check if method is Getter
         if (!method.getSootMethod().getName().startsWith("get") && !method.getSootMethod().getName().startsWith("set"))
-            category = Values.None;
+            category = Values.NONE;
 
         if (method.getSootMethod().getName().length() > 4) {
             String baseName = method.getSootMethod().getName().substring(3);
@@ -96,10 +101,10 @@ public class MethodTypeFeature implements ICodeFeature {
                         }
                     }
                 if (accessPath.isEmpty())
-                    category = Values.None;
+                    category = Values.NONE;
                 return true;
             } catch (Exception ex) {
-                category = Values.None;
+                category = Values.NONE;
             }
         }
         return false;

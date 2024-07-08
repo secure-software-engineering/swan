@@ -17,7 +17,9 @@ public class ExceptionsCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfExceptions = method.getSootMethod().getExceptions().size();
+        if(method.getSootMethod().hasActiveBody()){
+            this.numberOfExceptions = method.getSootMethod().getExceptions().size();
+        }
         featureResult.setIntegerValue(this.numberOfExceptions);
         return this.featureResult;
     }

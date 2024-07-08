@@ -47,6 +47,8 @@ public class InvokedMethodNameContainsToken extends WeightedFeature implements I
                     }
                 }
             }
+        } else {
+            this.featureResult.setBooleanValue(Boolean.FALSE);
         }
         return this.featureResult;
     }

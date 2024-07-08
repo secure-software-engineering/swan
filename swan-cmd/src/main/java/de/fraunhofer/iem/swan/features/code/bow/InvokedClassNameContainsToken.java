@@ -46,6 +46,9 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
                     }
                 }
             }
+            else{
+                this.featureResult.setBooleanValue(Boolean.FALSE);
+            }
         } catch (Exception ex) {
             this.featureResult.setBooleanValue(Boolean.FALSE);
         }

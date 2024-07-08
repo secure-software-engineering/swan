@@ -16,7 +16,7 @@ public class MethodInnerOrAnonymousClassFeature implements ICodeFeature {
     private Values category;
 
     private enum Values{
-        INNER_CLASS, ANONYMOUS_CLASS, None
+        INNER_CLASS, ANONYMOUS_CLASS, NONE
     }
 
     public MethodInnerOrAnonymousClassFeature() {
@@ -28,26 +28,26 @@ public class MethodInnerOrAnonymousClassFeature implements ICodeFeature {
         int index = method.getClassName().lastIndexOf("$");
         if (index != -1) {
             String subclassName = method.getClassName().substring(index + 1);
-            this.category =  Pattern.matches("^\\d+$", subclassName) ? Values.ANONYMOUS_CLASS : Values.None;
+            this.category =  Pattern.matches("^\\d+$", subclassName) ? Values.ANONYMOUS_CLASS : Values.NONE;
         }
-        if(this.category == Values.None){
+        if(this.category == Values.NONE){
             if (method.getSootMethod() == null)
-                this.category = Values.None;
+                this.category = Values.NONE;
             try {
                 if (method.getSootMethod().getDeclaringClass().hasOuterClass())
                     this.category = Values.INNER_CLASS;
                 else if (!method.getSootMethod().getDeclaringClass().hasOuterClass())
-                    this.category = Values.None;
+                    this.category = Values.NONE;
                 else if (method.getSootMethod().getDeclaringClass().hasOuterClass())
-                    this.category = Values.None;
+                    this.category = Values.NONE;
                 else this.category = Values.INNER_CLASS;
             } catch (Exception ex) {
                 System.err.println("Something went wrong: " + ex.getMessage());
-                this.category = Values.None;
+                this.category = Values.NONE;
             }
         }
         if(this.category == null){
-            this.category = Values.None;
+            this.category = Values.NONE;
         }
         this.featureResult.setStringValue(String.valueOf(this.category));
         return this.featureResult;

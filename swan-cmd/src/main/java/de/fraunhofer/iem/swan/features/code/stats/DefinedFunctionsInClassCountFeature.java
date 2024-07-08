@@ -21,15 +21,12 @@ public class DefinedFunctionsInClassCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method) {
-        try {
-//            Check all the methods in the declaring class
+        if(method.getSootMethod().getDeclaringClass() != null) {
             for (SootMethod m : method.getSootMethod().getDeclaringClass().getMethods()) {
-                if( m.isConcrete() && !m.isAbstract() && m.hasActiveBody()){
+                if (m.isConcrete() && !m.isAbstract() && m.hasActiveBody()) {
                     this.numberOfDefinedFunctions += 1;
                 }
             }
-        } catch (Exception ex) {
-            throw (ex);
         }
         this.featureResult.setIntegerValue(this.numberOfDefinedFunctions);
         return this.featureResult;

@@ -38,7 +38,7 @@ public class SourceToReturnFeature extends WeightedFeature implements ICodeFeatu
             return this.featureResult;
         }
         // We are only interested in setters
-        if (!method.getSootMethod().isConcrete()) {
+        if (!method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()) {
             this.featureResult.setBooleanValue(Boolean.FALSE);
             return this.featureResult;
         }

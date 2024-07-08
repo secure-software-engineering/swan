@@ -35,7 +35,7 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
         methodsList.addAll(SINK_METHOD_INVOKED);
         methodsList.addAll(SOURCE_METHOD_INVOKED);
 
-        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()) {
             this.featureResult.setIntegerValue(this.numberOfMatches);
             return this.featureResult;
         }
