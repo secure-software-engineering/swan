@@ -32,4 +32,9 @@ public class IsClassConcreteFeature implements ICodeFeature {
         this.featureValues.add("false");
         return this.featureValues;
     }
+
+    @Override
+    public String toString() {
+        return "IsClassConcrete";
+    }
 }

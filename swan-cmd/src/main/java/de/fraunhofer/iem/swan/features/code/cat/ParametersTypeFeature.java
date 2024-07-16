@@ -18,8 +18,6 @@ import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
  */
 
 public class ParametersTypeFeature extends WeightedFeature implements ICodeFeature {
-
-    //TODO make sure that use use camel case for all variable names
     private int numberOfParameters;
     private Set<String> parametersList;
     private FeatureResult featureResult;

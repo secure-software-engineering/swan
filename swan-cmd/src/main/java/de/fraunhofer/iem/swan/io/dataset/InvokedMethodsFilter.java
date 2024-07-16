@@ -4,6 +4,8 @@ import de.fraunhofer.iem.swan.data.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Filters invoked methods in the application that are already part of the dataset
  *
@@ -15,6 +17,7 @@ public class InvokedMethodsFilter {
     static Set<Method> invokedMethodsInDataset;
     Set<Method> filteredTestMethods;
     Set<Method> datasetMethods;
+    private static final Logger logger = LoggerFactory.getLogger(InvokedMethodsFilter.class);
 
     public InvokedMethodsFilter(Set<Method> testMethods, Set<Method> datasetMethods){
         this.testMethods = testMethods;
@@ -34,7 +37,7 @@ public class InvokedMethodsFilter {
                 String testMethodSignature = method.getTrimmedSignature();
                 if(datasetMethod.getTrimmedSignature().equals((testMethodSignature))){
                     method.setKnown(true);
-                    method.setComment("Invoked method '" + method.getName() + "' is known & part of the Dataset.");
+                    logger.info("Invoked method: {} is part of the dataset.", method.getTrimmedSignature());
                     invokedMethodsInDataset.add(method);
                     inDataset = true;
                     break;
@@ -50,16 +53,5 @@ public class InvokedMethodsFilter {
 
     public static Set<Method> getKnownInvokedMethods() {
         return invokedMethodsInDataset;
-    }
-
-    public String getTestMethodSignature(Method m){
-        StringBuilder sb = new StringBuilder();
-        sb.append("<").append(m.getFullClassName());
-        sb.append(": ").append(m.getReturnType());
-        sb.append(" ").append(m.getName());
-        sb.append("(");
-        sb.append(String.join(", ", m.getParameters()));
-        sb.append(")").append(">");
-        return sb.toString();
     }
 }
