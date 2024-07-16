@@ -232,10 +232,8 @@ public class Method {
         else
             return name;
     }
-    public void setFullClassName(String fullClassName) {this.className = fullClassName; }
-
-    public String getFullClassName() {
-        return this.className;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getReturnType() {

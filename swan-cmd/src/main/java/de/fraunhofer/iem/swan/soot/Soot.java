@@ -169,7 +169,7 @@ public class Soot {
                         Method method = SootUtils.convertSootSignature(sm.getSignature());
                         method.setSootMethod(sm);
                         method.setSootClass(sc);
-                        method.setFullClassName(sm.getDeclaringClass().getName())   ;
+                        method.setClassName(sm.getDeclaringClass().getName())   ;
                         method.setApplicationMethod(true);
                         methods.remove(method);
                         methods.add(method);
@@ -183,7 +183,7 @@ public class Soot {
                                 invokedmethod.setSootClass(invokedSootMethod.getDeclaringClass());
                                 if(!testClasses.contains(invokedmethod.getClassName().substring(invokedmethod.getClassName().lastIndexOf(".")+1))){
                                     invokedmethod.setApplicationMethod(false);
-                                    invokedmethod.setFullClassName(invokedSootMethod.getDeclaringClass().getName());
+                                    invokedmethod.setClassName(invokedSootMethod.getDeclaringClass().getName());
                                     methods.add(invokedmethod);
                                 }
                             }
