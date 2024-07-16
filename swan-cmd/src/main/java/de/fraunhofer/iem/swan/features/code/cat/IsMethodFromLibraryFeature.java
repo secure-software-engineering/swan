@@ -5,6 +5,8 @@ import de.fraunhofer.iem.swan.features.code.FeatureResult;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /***
  * Evaluates whether the method is an application method.
@@ -13,28 +15,44 @@ import java.util.ArrayList;
  */
 
 public class IsMethodFromLibraryFeature implements ICodeFeature {
+    private MethodType methodType;
     private FeatureResult featureResult;
     private ArrayList<String> featureValues;
+
+    public enum MethodType {
+        LIBRARY, JAVA_LIBRARY, APPLICATION
+    }
 
     public IsMethodFromLibraryFeature(){
         this.featureResult = new FeatureResult();
     }
     @Override
     public FeatureResult applies(Method method) {
-        this.featureResult.setBooleanValue(!method.isApplicationMethod());
+        if(method.getSootMethod().getDeclaringClass().isJavaLibraryClass()){
+            this.methodType = MethodType.JAVA_LIBRARY;
+        } else if (method.getSootMethod().getDeclaringClass().isLibraryClass()) {
+            this.methodType = MethodType.LIBRARY;
+        } else {
+            this.methodType = MethodType.APPLICATION;
+        }
+        this.featureResult.setStringValue(String.valueOf(this.methodType));
         return this.featureResult;
     }
 
     @Override
     public FeatureType getFeatureType() {
-        return FeatureType.BOOLEAN;
+        return FeatureType.CATEGORICAL;
     }
 
     @Override
     public ArrayList<String> getFeatureValues() {
-        this.featureValues = new ArrayList<>();
-        this.featureValues.add("true");
-        this.featureValues.add("false");
+        //Converting Enum Values to ArrayList
+        this.featureValues = Stream.of(MethodType.values()).map(MethodType::name).collect(Collectors.toCollection(ArrayList::new));
         return this.featureValues;
+    }
+
+    @Override
+    public String toString() {
+        return "MethodOrigin";
     }
 }
