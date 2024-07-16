@@ -30,11 +30,8 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
     }
     @Override
     public FeatureResult applies(Method method) {
-        if (method.getSootMethod() == null) {
-            this.featureResult.setBooleanValue(Boolean.FALSE);
-            return this.featureResult;
-        }
-        if (!method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()){
+        this.featureResult.setBooleanValue(Boolean.FALSE);
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()){
             return this.featureResult;
         }
         try {
