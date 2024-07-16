@@ -38,6 +38,7 @@ public class Method {
     private Set<Category> srm;
     private Set<Category> cwe;
     private boolean known;
+    @JsonIgnore
     private boolean isApplicationMethod;
 
     private Javadoc javadoc = new Javadoc();
