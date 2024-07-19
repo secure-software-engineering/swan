@@ -73,6 +73,8 @@ public class SrmList {
     }
 
     public void addMethods(Set<Method> m){
-        methods.addAll(m);
+        if(m!=null && !m.isEmpty()){
+            methods.addAll(m);
+        }
     }
 }
