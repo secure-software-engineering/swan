@@ -10,6 +10,12 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
+/***
+ * Evaluates the number of tokens in the method's class name.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ClassNameTokenCountFeature implements ICodeFeature {
 
     private Set<String> keywords;

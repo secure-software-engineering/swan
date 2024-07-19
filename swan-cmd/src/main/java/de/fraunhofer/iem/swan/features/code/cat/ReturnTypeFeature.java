@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates the return type of the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ReturnTypeFeature implements ICodeFeature {
 
     private Values category;
@@ -15,7 +21,7 @@ public class ReturnTypeFeature implements ICodeFeature {
     private ArrayList<String> featureValues;
 
     public enum Values{
-        String, Native, Custom, Others
+        STRING, NATIVE, CUSTOM, OTHERS
     }
 
     public ReturnTypeFeature() {
@@ -27,13 +33,13 @@ public class ReturnTypeFeature implements ICodeFeature {
         switch (method.getReturnType()){
             case "java.lang.CharSequence":
             case "java.lang.String":
-                this.category = Values.String;
+                this.category = Values.STRING;
                 break;
             //TODO maybe split the categories for numerical, bytes and boolean
             case "byte[]":
             case "int":
             case "boolean":
-                this.category = Values.Native;
+                this.category = Values.NATIVE;
                 break;
             //TODO we could find a way to split these into more categories
             case "User":
@@ -43,10 +49,10 @@ public class ReturnTypeFeature implements ICodeFeature {
             case "Node":
             case "Servlet":
             case "Request":
-                this.category = Values.Custom;
+                this.category = Values.CUSTOM;
                 break;
             default:
-                this.category = Values.Others;
+                this.category = Values.OTHERS;
                 break;
         }
 

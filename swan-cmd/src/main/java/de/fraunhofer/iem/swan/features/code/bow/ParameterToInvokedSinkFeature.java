@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 /**
- * Checks if there is parameter flow from a method to the invoked Sink
+ * Evaluates parameter flow from a method to the invoked Sink.
  *
  * @author Rohith Kumar
  */
@@ -30,13 +30,8 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
     }
     @Override
     public FeatureResult applies(Method method) {
-        if (method.getSootMethod() == null) {
-            this.featureResult.setBooleanValue(Boolean.FALSE);
-            return this.featureResult;
-        }
-        // We are only interested in setters
-        if (!method.getSootMethod().isConcrete()){
-            this.featureResult.setBooleanValue(Boolean.FALSE);
+        this.featureResult.setBooleanValue(Boolean.FALSE);
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()){
             return this.featureResult;
         }
         try {
@@ -51,7 +46,7 @@ public class ParameterToInvokedSinkFeature extends WeightedFeature implements IC
                 if (u instanceof AssignStmt) {
                     Value leftOp = ((AssignStmt) u).getLeftOp();
                     Value rightOp = ((AssignStmt) u).getRightOp();
-                    if (paramVals.contains(leftOp)) paramVals.remove(leftOp);
+                    paramVals.remove(leftOp);
                     if (paramVals.contains(rightOp)) {
                         paramVals.add(leftOp);
                     }

@@ -65,6 +65,10 @@ public class DatasetProcessor {
             dataset.setTest(new SrmList(options.getTestDataDir()));
             dataset.getTest().setMethods(soot.loadMethods(dataset.getTest().getTestClasses()));
 
+            //Filter known methods in the test set.
+            InvokedMethodsFilter filter = new InvokedMethodsFilter(dataset.getTestMethods(), dataset.getTrainMethods());
+            dataset.getTest().setMethods(filter.filterUnknownInvokedMethods());
+
             logger.info("Importing {} TEST methods from {}",
                     dataset.getTestMethods().size(), options.getTestDataDir());
 

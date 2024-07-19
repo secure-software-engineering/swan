@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/***
+ * Evaluates the number variables used in the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class VariablesUsageCountFeature implements ICodeFeature {
 
     private Set<String> methodsList;
@@ -28,7 +34,6 @@ public class VariablesUsageCountFeature implements ICodeFeature {
     public FeatureResult applies(Method method){
         if(method.getSootMethod().hasActiveBody()){
             for (Unit u: method.getSootMethod().retrieveActiveBody().getUnits()){
-//                System.out.println(u.getUseAndDefBoxes());
                 this.variablesUsageCount += u.getUseAndDefBoxes().size();
             }
         }

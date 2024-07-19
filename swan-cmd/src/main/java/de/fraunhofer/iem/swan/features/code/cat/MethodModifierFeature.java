@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/***
+ * Evaluates the modifier of the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class MethodModifierFeature implements ICodeFeature {
 
     private Modifier modifier;

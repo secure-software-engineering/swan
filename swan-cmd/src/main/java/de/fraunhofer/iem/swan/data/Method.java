@@ -38,6 +38,8 @@ public class Method {
     private Set<Category> srm;
     private Set<Category> cwe;
     private boolean known;
+    @JsonIgnore
+    private boolean isApplicationMethod;
 
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
@@ -231,6 +233,9 @@ public class Method {
         else
             return name;
     }
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public String getReturnType() {
         return this.returnType;
@@ -401,6 +406,10 @@ public class Method {
     public void setKnown(boolean known) {
         this.known = known;
     }
+
+    public boolean isApplicationMethod() { return isApplicationMethod; }
+
+    public void setApplicationMethod(boolean applicationMethod) { isApplicationMethod = applicationMethod; }
 
     @Override
     public boolean equals(Object another) {

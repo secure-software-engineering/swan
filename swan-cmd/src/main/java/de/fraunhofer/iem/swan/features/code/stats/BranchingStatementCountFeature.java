@@ -7,6 +7,12 @@ import soot.Unit;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates the number of branching statements in the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class BranchingStatementCountFeature implements ICodeFeature {
     private int numberOfBranchingStatements;
     private FeatureResult featureResult;

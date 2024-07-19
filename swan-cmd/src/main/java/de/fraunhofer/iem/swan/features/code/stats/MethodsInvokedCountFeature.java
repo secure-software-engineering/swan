@@ -13,6 +13,11 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
+/***
+ * Evaluates the number methods invoked in the method.
+ *
+ * @author Rohith Kumar
+ */
 public class MethodsInvokedCountFeature implements ICodeFeature {
 
     private Set<String> methodsList;
@@ -35,7 +40,7 @@ public class MethodsInvokedCountFeature implements ICodeFeature {
         methodsList.addAll(SINK_METHOD_INVOKED);
         methodsList.addAll(SOURCE_METHOD_INVOKED);
 
-        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()) {
             this.featureResult.setIntegerValue(this.numberOfMatches);
             return this.featureResult;
         }

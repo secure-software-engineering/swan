@@ -6,6 +6,12 @@ import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates the number exceptions in the method.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ExceptionsCountFeature implements ICodeFeature {
     private FeatureResult featureResult;
     private int numberOfExceptions;
@@ -17,7 +23,9 @@ public class ExceptionsCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method) {
-        this.numberOfExceptions = method.getSootMethod().getExceptions().size();
+        if(method.getSootMethod().hasActiveBody()){
+            this.numberOfExceptions = method.getSootMethod().getExceptions().size();
+        }
         featureResult.setIntegerValue(this.numberOfExceptions);
         return this.featureResult;
     }

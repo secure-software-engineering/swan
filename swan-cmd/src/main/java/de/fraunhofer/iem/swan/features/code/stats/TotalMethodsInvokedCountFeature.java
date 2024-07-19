@@ -8,11 +8,12 @@ import soot.jimple.InstanceInvokeExpr;
 import soot.jimple.Stmt;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
-
+/***
+ * Evaluates the total number of invoked methods.
+ *
+ * @author Rohith Kumar
+ */
 public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
     private int numberOfFunctions;
@@ -27,7 +28,7 @@ public class TotalMethodsInvokedCountFeature implements ICodeFeature {
 
     @Override
     public FeatureResult applies(Method method){
-        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete()) {
+        if (method.getSootMethod() == null || !method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()) {
             this.featureResult.setIntegerValue(this.numberOfFunctions);
             return this.featureResult;
         }

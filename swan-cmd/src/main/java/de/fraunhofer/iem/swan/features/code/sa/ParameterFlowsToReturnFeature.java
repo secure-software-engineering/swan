@@ -28,7 +28,8 @@ public class ParameterFlowsToReturnFeature implements ICodeFeature {
         if (method.getSootMethod() == null) {
             return this.featureResult;
         }
-        if (!method.getSootMethod().isConcrete()){
+        if (!method.getSootMethod().isConcrete() || !method.getSootMethod().hasActiveBody()){
+            this.featureResult.setBooleanValue(Boolean.FALSE);
             return this.featureResult;
         }
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- * Evaluates whether method's class name contains tokens in the security vocabulary.
+ * Evaluates whether invoked class name contains the specified token.
  *
  * @author Rohith Kumar
  */
@@ -45,6 +45,9 @@ public class InvokedClassNameContainsToken extends WeightedFeature implements IC
                             }
                     }
                 }
+            }
+            else{
+                this.featureResult.setBooleanValue(Boolean.FALSE);
             }
         } catch (Exception ex) {
             this.featureResult.setBooleanValue(Boolean.FALSE);

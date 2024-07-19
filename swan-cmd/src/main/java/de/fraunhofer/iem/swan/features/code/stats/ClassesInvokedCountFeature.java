@@ -13,6 +13,12 @@ import java.util.Set;
 
 import static de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary.*;
 
+/***
+ * Evaluates the number of classes invoked that are part of the security vocabulary.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ClassesInvokedCountFeature implements ICodeFeature {
 
     private FeatureResult featureResult;

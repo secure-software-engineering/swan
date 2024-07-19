@@ -7,6 +7,12 @@ import de.fraunhofer.iem.swan.features.code.type.WeightedFeature;
 
 import java.util.ArrayList;
 
+/***
+ * Evaluates whether the method's class name contains the specified token.
+ *
+ * @author Rohith Kumar
+ */
+
 public class ClassNameContainsToken extends WeightedFeature implements ICodeFeature {
 
     private final String token;
