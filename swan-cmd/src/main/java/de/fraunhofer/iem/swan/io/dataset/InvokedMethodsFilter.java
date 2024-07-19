@@ -36,9 +36,9 @@ public class InvokedMethodsFilter {
             for(Method datasetMethod : datasetMethods){
                 String testMethodSignature = method.getTrimmedSignature();
                 if(datasetMethod.getTrimmedSignature().equals((testMethodSignature))){
-                    method.setKnown(true);
-                    logger.info("Invoked method: {} is part of the dataset.", method.getTrimmedSignature());
-                    invokedMethodsInDataset.add(method);
+                    datasetMethod.setKnown(true);
+                    logger.info("Invoked method: {} is part of the dataset.", datasetMethod.getTrimmedSignature());
+                    invokedMethodsInDataset.add(datasetMethod);
                     inDataset = true;
                     break;
                 }
