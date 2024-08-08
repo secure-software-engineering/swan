@@ -1,0 +1,431 @@
+{
+  "version": "3",
+  "methods": [
+    {
+      "name": "org.owasp.webgoat.plugins.Plugin.loadFiles",
+      "parameters": [
+        "java.nio.file.Path"
+      ],
+      "signature": "void org.owasp.webgoat.plugins.Plugin.loadFiles(java.nio.file.Path)",
+      "framework": "webgoat",
+      "link": "",
+      "comment": "Source training set",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "loadFiles.",
+        "class": "Plugin class."
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.controller.Logout.logout",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "signature": "org.springframework.web.servlet.ModelAndView org.owasp.webgoat.controller.Logout.logout(java.lang.String, java.lang.String)",
+      "framework": "webgoat",
+      "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/controller/Logout.java",
+      "comment": "Puts the program in an un-authenticated state.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "auth-unsafe-state"
+      ],
+      "cwe": [
+        "CWE862",
+        "CWE306",
+        "CWE863"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "logout.",
+        "class": "Logout class."
+      },
+      "applicationMethod": false,
+      "return": "org.springframework.web.servlet.ModelAndView",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.service.LessonInfoService.handleException",
+      "parameters": [
+        "java.lang.Exception"
+      ],
+      "signature": "java.lang.String org.owasp.webgoat.service.LessonInfoService.handleException(java.lang.Exception)",
+      "framework": "webgoat",
+      "link": "https://github.com/sanketsahoo25/webgoat/blob/master/webgoat-container/src/main/java/org/owasp/webgoat/service/LessonInfoService.java",
+      "comment": "Counter example for sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "srm": [],
+      "cwe": [],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "handleException.",
+        "class": ""
+      },
+      "applicationMethod": false,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.util.HtmlEncoder.decode",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "signature": "java.lang.String org.owasp.webgoat.util.HtmlEncoder.decode(java.lang.String)",
+      "framework": "webgoat",
+      "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/util/HtmlEncoder.java",
+      "comment": "Source training set",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [
+        "CWE79"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "Given a string containing entity escapes, returns a string containing the actual Unicode characters corresponding to the escapes. Adapted from http://www.purpletech.com/code/src/com/purpletech/util/Utils.java.",
+        "class": "This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.session.WebSession.isAuthenticated",
+      "parameters": [],
+      "signature": "boolean org.owasp.webgoat.session.WebSession.isAuthenticated()",
+      "framework": "webgoat",
+      "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/session/WebSession.java",
+      "comment": "Puts the program is an unauthenticated state.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "srm": [
+        "auth-no-change"
+      ],
+      "cwe": [
+        "CWE862",
+        "CWE306",
+        "CWE863"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "Gets the authenticated attribute of the WebSession object",
+        "class": "************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "boolean",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.sql_injection.introduction.SqlInjectionLesson5a.completed",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "signature": "org.owasp.webgoat.assignments.AttackResult org.owasp.webgoat.sql_injection.introduction.SqlInjectionLesson5a.completed(java.lang.String, java.lang.String, java.lang.String)",
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": false,
+      "return": "org.owasp.webgoat.assignments.AttackResult",
+      "interface": false,
+      "jar": ""
+    },{
+      "name": "org.owasp.webgoat.session.RandomLessonTracker.hasCompleted",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "signature": "boolean org.owasp.webgoat.session.RandomLessonTracker.hasCompleted(java.lang.String)",
+      "framework": "webgoat",
+      "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/session/RandomLessonTracker.java",
+      "comment": "Counter example for sanitizer (has)",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [],
+      "cwe": [],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "hasCompleted.",
+        "class": "RandomLessonTracker class."
+      },
+      "applicationMethod": false,
+      "return": "boolean",
+      "interface": false,
+      "jar": null
+    }, {
+      "name": "org.owasp.webgoat.session.WebSession.update",
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse",
+        "java.lang.String"
+      ],
+      "signature": "void org.owasp.webgoat.session.WebSession.update(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String)",
+      "framework": "webgoat",
+      "link": "",
+      "comment": "Sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0,
+          1
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [
+        "CWE79"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "Parse parameters from the given request, handle any servlet commands, and update this session based on the parameters.",
+        "class": "************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.session.ParameterParser.update",
+      "parameters": [
+        "javax.servlet.ServletRequest"
+      ],
+      "signature": "void org.owasp.webgoat.session.ParameterParser.update(javax.servlet.ServletRequest)",
+      "framework": "webgoat",
+      "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/session/ParameterParser.java",
+      "comment": "Sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [
+        "CWE79"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "Description of the Method",
+        "class": "************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": null
+    }, {
+      "name": "org.owasp.webgoat.session.LessonSession.setAuthenticated",
+      "parameters": [
+        "boolean"
+      ],
+      "signature": "void org.owasp.webgoat.session.LessonSession.setAuthenticated(boolean)",
+      "framework": "webgoat",
+      "link": "https://github.com/sonatype/WebGoat/blob/master/src/main/java/org/owasp/webgoat/session/LessonSession.java",
+      "comment": "When the input is true, the tocken should be trusted.",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "srm": [
+        "sink",
+        "auth-safe-state"
+      ],
+      "cwe": [
+        "CWE862",
+        "CWE306",
+        "CWE863"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "setAuthenticated.",
+        "class": "This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects. Represents a virtual session for a lesson. Lesson-specific session data may be stored here."
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.session.DatabaseUtilities.getHsqldbConnection",
+      "parameters": [
+        "java.lang.String",
+        "org.owasp.webgoat.session.WebgoatContext"
+      ],
+      "signature": "java.sql.Connection org.owasp.webgoat.session.DatabaseUtilities.getHsqldbConnection(java.lang.String, org.owasp.webgoat.session.WebgoatContext)",
+      "framework": "webgoat",
+      "link": "https://github.com/WebGoat/WebGoat-Legacy/blob/master/src/main/java/org/owasp/webgoat/session/DatabaseUtilities.java",
+      "comment": "creates a database connection",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          0
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": true
+      },
+      "srm": [
+        "sink",
+        "auth-no-change"
+      ],
+      "cwe": [
+        "CWE306",
+        "CWE89"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "",
+        "class": "This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "java.sql.Connection",
+      "interface": false,
+      "jar": null
+    },{
+      "name": "org.owasp.webgoat.HammerHead.log",
+      "parameters": [
+        "javax.servlet.http.HttpServletRequest",
+        "java.lang.String"
+      ],
+      "signature": "void org.owasp.webgoat.HammerHead.log(javax.servlet.http.HttpServletRequest, java.lang.String)",
+      "framework": "webgoat",
+      "link": "https://github.com/OWASP/WebGoat/blob/master/webgoat/src/main/java/org/owasp/webgoat/HammerHead.java",
+      "comment": "Sink",
+      "discovery": "swan",
+      "dataIn": {
+        "parameters": [
+          1
+        ],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [
+        "CWE79"
+      ],
+      "known": true,
+      "body": null,
+      "javadoc": {
+        "method": "Description of the Method",
+        "class": "************************************************************************************************* This file is part of WebGoat, an Open Web Application Security Project utility. For details, please see http://www.owasp.org/ Copyright (c) 2002 - 20014 Bruce Mayhew This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. Getting Source ============== Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects."
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": null
+    }
+  ]
+}
