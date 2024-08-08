@@ -40,7 +40,7 @@ public class Method {
     private boolean known;
     @JsonIgnore
     private boolean isApplicationMethod;
-
+    private String body;
     private Javadoc javadoc = new Javadoc();
     @JsonProperty("jar")
     private String sourceJar;
@@ -301,6 +301,22 @@ public class Method {
         this.signature = sb.toString();
 
         return this.signature;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     /**
