@@ -18,6 +18,7 @@ public enum Category {
     AUTHENTICATION_NEUTRAL(Constants.AUTHENTICATION_NOCHANGE, false, true),
     AUTHENTICATION("authentication", false, true),
     RELEVANT(Constants.RELEVANT, false, false),
+    PROPAGATOR(Constants.PROPAGATOR, false, false),
     NONE(Constants.NONE, false, false),
     CWE35("CWE35", true, false),
     CWE77("CWE77", true, false),

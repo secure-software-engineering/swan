@@ -33,6 +33,7 @@ public final class Constants {
 	public final static String AUTHENTICATION_UNSAFE = "auth-unsafe-state";
 	public final static String NONE = "none";
 	public final static String TEST = "test";
+	public final static String PROPAGATOR = "propagator";
 
 	//Authentication states
 	public final static String AUTH_SAFE = "high";

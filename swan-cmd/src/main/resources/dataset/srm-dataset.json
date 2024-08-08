@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "2",
   "methods": [
     {
       "name": "javax.servlet.http.Cookie.<init>",
@@ -24656,7 +24656,7 @@
       "interface": false,
       "return": "java.lang.String",
       "srm": [
-        "sanitizer"
+        "propagator"
       ],
       "known": true,
       "jar": "java-rt-jar-stubs-1.5.0.jar"
@@ -40963,6 +40963,7 @@
         "return": false
       },
       "srm": [
+        "propagator"
       ],
       "cwe": [],
       "javadoc": {
@@ -56950,6 +56951,1009 @@
       "return": "java.lang.String",
       "interface": null,
       "known": true,
+      "jar": ""
+    },
+    {
+      "name": "java.io.PrintWriter.print",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.util.logging.Logger.info",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.util.logging.Logger.entering",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "org.xml.sax.XMLReader.parse",
+      "parameters": [
+        "org.xml.sax.InputSource"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [
+        "CWE643"
+      ],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": false,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.getBytes",
+      "parameters": [
+        ""
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "byte[]",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "char[]"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.ClassLoader.getResource",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.net.URL",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "long"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.toString",
+      "parameters": [
+        ""
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "float"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "char[]",
+        "int",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.valueOf",
+      "parameters": [
+        "java.lang.Object"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "double"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.substring",
+      "parameters": [
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.concat",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.util.logging.Logger.exiting",
+      "parameters": [
+        "java.lang.String",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.toCharArray",
+      "parameters": [
+        ""
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "char[]",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "boolean"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.util.logging.Logger.log",
+      "parameters": [
+        "java.util.logging.Level",
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "source"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.net.URL.getFile",
+      "parameters": [
+        ""
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.getBytes",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "byte[]",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.substring",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.String",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.String.subSequence",
+      "parameters": [
+        "int",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.CharSequence",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "java.lang.CharSequence",
+        "int",
+        "int"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.io.PrintWriter.append",
+      "parameters": [
+        "java.lang.CharSequence"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.io.PrintWriter",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "java.lang.StringBuffer"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.lang.StringBuilder.append",
+      "parameters": [
+        "char"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "propagator"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "java.lang.StringBuilder",
+      "interface": false,
+      "jar": ""
+    },
+    {
+      "name": "java.io.PrintWriter.println",
+      "parameters": [
+        "java.lang.String"
+      ],
+      "framework": "",
+      "link": "",
+      "comment": "",
+      "discovery": "Secucheck",
+      "dataIn": {
+        "parameters": [],
+        "return": false
+      },
+      "dataOut": {
+        "parameters": [],
+        "return": false
+      },
+      "srm": [
+        "sink"
+      ],
+      "cwe": [],
+      "known": false,
+      "javadoc": {
+        "method": "",
+        "class": ""
+      },
+      "applicationMethod": true,
+      "return": "void",
+      "interface": false,
       "jar": ""
     }
   ]
