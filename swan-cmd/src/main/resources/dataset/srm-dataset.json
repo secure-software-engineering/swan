@@ -12003,7 +12003,7 @@
       "jar": "android-2.3.1.jar"
     },
     {
-      "name": "java.sql.PreparedStatement.executeUpdate",
+      "name": "java.sql.Statement.executeUpdate",
       "parameters": [
         "java.lang.String"
       ],
@@ -12289,7 +12289,7 @@
       "jar": "wicket-core-7.8.0.jar"
     },
     {
-      "name": "java.sql.PreparedStatement.executeUpdate",
+      "name": "java.sql.Statement.executeUpdate",
       "parameters": [
         "java.lang.String",
         "java.lang.String[]"
@@ -26041,7 +26041,7 @@
       "jar": null
     },
     {
-      "name": "java.sql.PreparedStatement.executeUpdate",
+      "name": "java.sql.Statement.executeUpdate",
       "parameters": [
         "java.lang.String",
         "int"
