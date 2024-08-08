@@ -5571,7 +5571,7 @@
         "source"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -56974,7 +56974,7 @@
         "sink"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57005,7 +57005,7 @@
         "source"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57037,7 +57037,7 @@
         "source"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57070,7 +57070,7 @@
       "cwe": [
         "CWE643"
       ],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57101,7 +57101,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57132,7 +57132,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57163,7 +57163,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57194,7 +57194,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57225,7 +57225,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57256,7 +57256,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57287,7 +57287,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57318,7 +57318,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57349,7 +57349,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57380,7 +57380,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57413,7 +57413,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57444,7 +57444,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57475,7 +57475,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57506,7 +57506,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57537,7 +57537,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57569,7 +57569,7 @@
         "source"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57600,7 +57600,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57631,7 +57631,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57663,7 +57663,7 @@
         "source"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57694,7 +57694,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57725,7 +57725,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57757,7 +57757,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57789,7 +57789,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57822,7 +57822,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57853,7 +57853,7 @@
         "sink"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57884,7 +57884,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57915,7 +57915,7 @@
         "propagator"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
@@ -57946,7 +57946,7 @@
         "sink"
       ],
       "cwe": [],
-      "known": false,
+      "known": true,
       "javadoc": {
         "method": "",
         "class": ""
