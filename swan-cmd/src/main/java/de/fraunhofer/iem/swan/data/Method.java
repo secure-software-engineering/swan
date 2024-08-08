@@ -272,12 +272,12 @@ public class Method {
     @JsonIgnore
     public String getTrimmedSignature() {
 
-        String signature = getSignature();
+        String signature = getSootSignature();
         return signature.substring(1, signature.length() - 1);
     }
 
     @JsonIgnore
-    public String getSignature() {
+    public String getSootSignature() {
         if (signature != null)
             return signature;
 
@@ -364,7 +364,7 @@ public class Method {
     @JsonIgnore
     public String getArffSafeSignature() {
 
-        return getSignature().replace(",", "+");
+        return getSootSignature().replace(",", "+");
     }
 
     public void setJavadoc(Javadoc javadoc) {
@@ -419,13 +419,13 @@ public class Method {
             return false;
         Method otherMethod = (Method) another;
 
-        return this.getSignature().equals(otherMethod.getSignature());
+        return this.getSootSignature().equals(otherMethod.getSootSignature());
     }
 
     @Override
     public int hashCode() {
         if (this.hashCode == 0)
-            this.hashCode = this.getSignature().hashCode() * 5;
+            this.hashCode = this.getSootSignature().hashCode() * 5;
         // The parameter list is available from the outside, so we can't cache it
         return this.hashCode + this.parameters.hashCode() * 7;
     }

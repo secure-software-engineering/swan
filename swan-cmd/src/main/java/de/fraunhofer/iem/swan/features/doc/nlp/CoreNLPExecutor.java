@@ -48,7 +48,7 @@ public class CoreNLPExecutor {
             if (method.getJavadoc().getClassComment().length() > 0) {
                 result.setClassMap(getAnnotation(method.getJavadoc().getClassComment()));
             }
-            results.put(method.getSignature(), result);
+            results.put(method.getSootSignature(), result);
         }
         return results;
     }

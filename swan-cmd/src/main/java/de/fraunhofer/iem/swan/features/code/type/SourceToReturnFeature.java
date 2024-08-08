@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import de.fraunhofer.iem.swan.data.Method;
-import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.AssignStmt;
@@ -70,7 +69,7 @@ public class SourceToReturnFeature extends AbstractSootFeature {
                 }
             }
             throw new RuntimeException(
-                    "No return statement in method " + method.getSignature());
+                    "No return statement in method " + method.getSootSignature());
         } catch (Exception ex) {
             return Type.NOT_SUPPORTED;
         }

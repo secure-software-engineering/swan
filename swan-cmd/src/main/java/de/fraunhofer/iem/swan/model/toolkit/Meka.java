@@ -43,7 +43,7 @@ public class Meka {
                 HashMap<Integer, ArrayList<Category>> predictions = predictModel(features.getTrainInstances().get("meka"), features.getTestInstances().get("meka"), options.getPredictionThreshold());
 
                 for (Method method : methods) {
-                    for (Category category : predictions.get(features.getInstanceIndex(method.getSignature()))) {
+                    for (Category category : predictions.get(features.getInstanceIndex(method.getSootSignature()))) {
                         method.addCategory(category);
                     }
                 }

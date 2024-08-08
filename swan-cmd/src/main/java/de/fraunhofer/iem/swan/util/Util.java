@@ -35,7 +35,7 @@ public class Util {
 
         Map<String, Method> signatureToMethod = new HashMap<>();
         for (Method m1 : methods) {
-            String sig = m1.getSignature();
+            String sig = m1.getSootSignature();
             Method m2 = signatureToMethod.get(sig);
             if (m2 == null)
                 signatureToMethod.put(sig, m1);

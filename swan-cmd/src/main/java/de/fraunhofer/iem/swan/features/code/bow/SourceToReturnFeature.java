@@ -73,7 +73,7 @@ public class SourceToReturnFeature extends WeightedFeature implements ICodeFeatu
                 }
             }
             throw new RuntimeException(
-                    "No return statement in method " + method.getSignature());
+                    "No return statement in method " + method.getSootSignature());
         } catch (Exception ex) {
             this.featureResult.setBooleanValue(Boolean.FALSE);
             return this.featureResult;

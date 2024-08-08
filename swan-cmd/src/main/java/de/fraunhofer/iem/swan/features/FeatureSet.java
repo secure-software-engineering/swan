@@ -344,7 +344,7 @@ public abstract class FeatureSet {
                             }
                         }
                         instanceList.add(inst);
-                        instanceMap.put(method.getSignature(), instanceIndex++);
+                        instanceMap.put(method.getSootSignature(), instanceIndex++);
                     }
                     break;
                 case CODE_BR:
@@ -369,7 +369,7 @@ public abstract class FeatureSet {
                         }
 
                         instanceList.add(inst);
-                        instanceMap.put(method.getSignature(), instanceIndex++);
+                        instanceMap.put(method.getSootSignature(), instanceIndex++);
                     }
                     break;
             }
@@ -393,14 +393,14 @@ public abstract class FeatureSet {
             boolean isNewInstance = false;
 
             //If instance exists already, update it. Otherwise, create a new instance
-            if (instanceMap.containsKey(method.getSignature())) {
-                inst = instances.instance(instanceMap.get(method.getSignature()));
+            if (instanceMap.containsKey(method.getSootSignature())) {
+                inst = instances.instance(instanceMap.get(method.getSootSignature()));
             } else {
                 inst = setClassValues(categories, method, instances, new DenseInstance(attributes.size()));
                 inst.setDataset(instances);
                 isNewInstance = true;
 
-                inst.setValue(instances.attribute("id"), method.getSignature());
+                inst.setValue(instances.attribute("id"), method.getSootSignature());
             }
 
             switch (instanceSet) {
@@ -409,7 +409,7 @@ public abstract class FeatureSet {
 
                         try {
                             IDocFeature javadocFeature = feature.getDeclaredConstructor().newInstance();
-                            AnnotatedMethod annotatedMethod = docFeatureHandler.getManualFeatureData().get(method.getSignature());
+                            AnnotatedMethod annotatedMethod = docFeatureHandler.getManualFeatureData().get(method.getSootSignature());
 
                             if (annotatedMethod != null)
                                 inst.setValue(instances.attribute(feature.getSimpleName()), javadocFeature.evaluate(annotatedMethod).getTotalValue());
@@ -421,7 +421,7 @@ public abstract class FeatureSet {
                     }
                     break;
                 case DOC_AUTO:
-                    HashMap<String, Double> vectorValues = docFeatureHandler.getAutomaticFeatureData().get(method.getSignature());
+                    HashMap<String, Double> vectorValues = docFeatureHandler.getAutomaticFeatureData().get(method.getSootSignature());
 
                     if (vectorValues != null) {
                         for (String key : vectorValues.keySet()) {

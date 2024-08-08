@@ -40,7 +40,7 @@ public class MethodModifierFeature implements ICodeFeature {
             this.modifier = Modifier.SYNCHRONIZED;
         } else {
             this.modifier = Modifier.DEFAULT;
-        }
+        } 
         this.featureResult.setStringValue(String.valueOf(this.modifier));
         return this.featureResult;
     }

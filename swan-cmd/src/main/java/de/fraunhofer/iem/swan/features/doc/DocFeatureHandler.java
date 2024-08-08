@@ -63,7 +63,7 @@ public class DocFeatureHandler {
 
                 NDArray average = (NDArray) array.mean(1);
                 vectorValues.put("dl4j-avg", average.getDouble(0));
-                automaticFeatureData.put(method.getSignature(), vectorValues);
+                automaticFeatureData.put(method.getSootSignature(), vectorValues);
             }
         }
     }
