@@ -48,6 +48,8 @@ public class Method {
     private SootMethod sootMethod;
     @JsonIgnore
     private SootClass sootClass;
+    private Artifacts artifacts;
+    private List<Usage> usages;
 
     public Method() {
         cwe = new HashSet<>();
@@ -426,6 +428,22 @@ public class Method {
     public boolean isApplicationMethod() { return isApplicationMethod; }
 
     public void setApplicationMethod(boolean applicationMethod) { isApplicationMethod = applicationMethod; }
+
+    public Artifacts getArtifacts() {
+        return artifacts;
+    }
+
+    public void setArtifacts(Artifacts artifacts) {
+        this.artifacts = artifacts;
+    }
+
+    public List<Usage> getUsages() {
+        return usages;
+    }
+
+    public void setUsages(List<Usage> usages) {
+        this.usages = usages;
+    }
 
     @Override
     public boolean equals(Object another) {
