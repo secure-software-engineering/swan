@@ -1,0 +1,12 @@
+mem.max = 3800
+cpu.max = 4
+
+keyfields = datasets:varchar(100), classifiers:varchar(150), options:varchar(250), seeds:int(3)
+
+datasets = /home/oshando/IdeaProjects/swan/swan-cmd/src/main/resources/dataset/meka/meka-code.arff
+classifiers = meka.classifiers.multilabel.BR
+options = none
+seeds = 0,1,2,3,4,5,6,7,8,9,10,
+
+
+resultfields = info:varchar(300), avgPrecision:double, avgRecall:double, microPrecision:double, microRecall:double, lblPrecision:varchar(500), lblRecall:varchar(500), lblHarmonic:varchar(500)
