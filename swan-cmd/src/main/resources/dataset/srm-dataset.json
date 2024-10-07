@@ -9956,7 +9956,8 @@
       "name": "android.database.sqlite.SQLiteDatabase.queryWithFactory",
       "parameters": [
         "android.database.sqlite.SQLiteDatabase$CursorFactory",
-        "Zjava.lang.String",
+        "boolean",
+        "java.lang.String",
         "java.lang.String[]",
         "java.lang.String",
         "java.lang.String[]",
@@ -13687,7 +13688,7 @@
         "java.lang.String",
         "java.util.Map"
       ],
-      "signature": "java.lang.String[] org.eclipse.jetty.http.HttpFields.valueParameters(java.lang.String, java.util.Map)",
+      "signature": "java.lang.String org.eclipse.jetty.http.HttpFields.valueParameters(java.lang.String, java.util.Map)",
       "framework": "",
       "link": "",
       "comment": "org.eclipse.jetty.http.HttpFields",
@@ -13711,7 +13712,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "java.lang.String[]",
+      "return": "java.lang.String",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -34221,9 +34222,10 @@
       "parameters": [
         "android.content.Context",
         "java.lang.String",
-        "Ijava.lang.String"
+        "int",
+        "java.lang.String"
       ],
-      "signature": "void android.database.DatabaseUtils.createDbFromSqlStatements(android.content.Context, java.lang.String, Ijava.lang.String)",
+      "signature": "void android.database.DatabaseUtils.createDbFromSqlStatements(android.content.Context, java.lang.String, int, java.lang.String)",
       "framework": "",
       "link": "",
       "comment": "android.database.DatabaseUtils",
@@ -36501,9 +36503,9 @@
       "name": "com.mysql.jdbc.CallableStatement.getObject",
       "parameters": [
         "java.lang.String",
-        "java.lang.Class"
+        "java.util.Map"
       ],
-      "signature": "java.lang.Object com.mysql.jdbc.CallableStatement.getObject(java.lang.String, java.lang.Class)",
+      "signature": "java.lang.Object com.mysql.jdbc.CallableStatement.getObject(java.lang.String, java.util.Map)",
       "framework": "",
       "link": "",
       "comment": "com.mysql.jdbc.CallableStatement",
@@ -44868,9 +44870,9 @@
     {
       "name": "com.mysql.jdbc.ConnectionImpl.registerStatement",
       "parameters": [
-        "com.mysql.jdbc.Statement"
+        "com.mysql.jdbc.StatementImpl"
       ],
-      "signature": "void com.mysql.jdbc.ConnectionImpl.registerStatement(com.mysql.jdbc.Statement)",
+      "signature": "void com.mysql.jdbc.ConnectionImpl.registerStatement(com.mysql.jdbc.StatementImpl)",
       "framework": "",
       "link": "",
       "comment": "com.mysql.jdbc.ConnectionImpl",
@@ -59009,11 +59011,11 @@
         "java.sql.ResultSet",
         "boolean",
         "java.lang.String",
-        "java.util.List",
+        "java.util.Map",
         "int",
         "com.mysql.jdbc.Field[]"
       ],
-      "signature": "void com.mysql.jdbc.DatabaseMetaData.convertToJdbcFunctionList(java.lang.String, java.sql.ResultSet, boolean, java.lang.String, java.util.List, int, com.mysql.jdbc.Field[])",
+      "signature": "void com.mysql.jdbc.DatabaseMetaData.convertToJdbcFunctionList(java.lang.String, java.sql.ResultSet, boolean, java.lang.String, java.util.Map, int, com.mysql.jdbc.Field[])",
       "framework": "",
       "link": "",
       "comment": "com.mysql.jdbc.DatabaseMetaData",
@@ -59055,11 +59057,10 @@
       "name": "com.mysql.jdbc.ByteArrayRow.getNativeDate",
       "parameters": [
         "int",
-        "com.mysql.jdbc.MySQLConnection",
-        "com.mysql.jdbc.ResultSetImpl",
-        "java.util.Calendar"
+        "com.mysql.jdbc.ConnectionImpl",
+        "com.mysql.jdbc.ResultSetImpl"
       ],
-      "signature": "java.sql.Date com.mysql.jdbc.ByteArrayRow.getNativeDate(int, com.mysql.jdbc.MySQLConnection, com.mysql.jdbc.ResultSetImpl, java.util.Calendar)",
+      "signature": "java.sql.Date com.mysql.jdbc.ByteArrayRow.getNativeDate(int, com.mysql.jdbc.MySQLConnection, com.mysql.jdbc.ResultSetImpl)",
       "framework": "",
       "link": "",
       "comment": "com.mysql.jdbc.ByteArrayRow",
