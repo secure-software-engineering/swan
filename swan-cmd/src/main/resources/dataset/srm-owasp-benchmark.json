@@ -1,0 +1,966 @@
+{
+  "version": "6",
+  "methods": [
+    {
+      "name" : "org.owasp.benchmark.helpers.ThingFactory.createThing",
+      "parameters" : [ ],
+      "signature" : "org.owasp.benchmark.helpers.ThingInterface org.owasp.benchmark.helpers.ThingFactory.createThing()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static ThingInterface createThing() {\r\n    Properties props = new Properties();\r\n    // create a thing using reflection\r\n    try (InputStream thingproperties = ThingFactory.class.getClassLoader().getResourceAsStream(\"thing.properties\")) {\r\n        if (thingproperties == null) {\r\n            System.out.println(\"Can't find thing.properties\");\r\n            return new Thing2();\r\n        }\r\n        props.load(thingproperties);\r\n        String which = \"org.owasp.benchmark.helpers.\" + props.getProperty(\"thing\");\r\n        Class<?> thing = Class.forName(which);\r\n        Constructor<?> thingConstructor = thing.getConstructor();\r\n        Object thingInstance = thingConstructor.newInstance();\r\n        return (ThingInterface) thingInstance;\r\n    } catch (Exception e) {\r\n        System.out.println(\"Error constructing Thing.\");\r\n        e.printStackTrace();\r\n        return new Thing1();\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00067.java",
+        "lineNumber" : 84
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00072.java",
+        "lineNumber" : 66
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00084.java",
+        "lineNumber" : 66
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00102.java",
+        "lineNumber" : 66
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00107.java",
+        "lineNumber" : 84
+      } ],
+      "return" : "org.owasp.benchmark.helpers.ThingInterface",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.ThingInterface.doSomething",
+      "parameters" : [ "java.lang.String" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.ThingInterface.doSomething(java.lang.String)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "propagator" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public abstract String doSomething(String i) {}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00067.java",
+        "lineNumber" : 86
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00072.java",
+        "lineNumber" : 67
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00084.java",
+        "lineNumber" : 67
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00102.java",
+        "lineNumber" : 67
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00107.java",
+        "lineNumber" : 86
+      } ],
+      "return" : "java.lang.String",
+      "interface" : true
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.getOSCommandString",
+      "parameters" : [ "java.lang.String" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.Utils.getOSCommandString(java.lang.String)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "propagator" ],
+      "cwe" : [ "CWE78" ],
+      "known" : false,
+      "body" : "public static String getOSCommandString(String append) {\r\n    String command = null;\r\n    String osName = System.getProperty(\"os.name\");\r\n    if (osName.indexOf(\"Windows\") != -1) {\r\n        command = \"cmd.exe /c \" + append + \" \";\r\n    } else {\r\n        command = append + \" \";\r\n    }\r\n    return command;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00017.java",
+        "lineNumber" : 57
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00090.java",
+        "lineNumber" : 75
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00093.java",
+        "lineNumber" : 80
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00171.java",
+        "lineNumber" : 73
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00176.java",
+        "lineNumber" : 56
+      } ],
+      "return" : "java.lang.String",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString",
+      "parameters" : [ "java.lang.ClassLoader" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(java.lang.ClassLoader)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static String getInsecureOSCommandString(ClassLoader classLoader) {\r\n    String command = null;\r\n    String osName = System.getProperty(\"os.name\");\r\n    if (osName.indexOf(\"Windows\") != -1) {\r\n        command = Utils.getFileFromClasspath(\"insecureCmd.bat\", classLoader).getAbsolutePath();\r\n    } else {\r\n        command = Utils.getFileFromClasspath(\"insecureCmd.sh\", classLoader).getAbsolutePath();\r\n    }\r\n    return command;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00007.java",
+        "lineNumber" : 53
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00091.java",
+        "lineNumber" : 68
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00092.java",
+        "lineNumber" : 87
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00172.java",
+        "lineNumber" : 59
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00173.java",
+        "lineNumber" : 59
+      } ],
+      "return" : "java.lang.String",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.printOSCommandResults",
+      "parameters" : [ "java.lang.Process", "javax.servlet.http.HttpServletResponse" ],
+      "signature" : "void org.owasp.benchmark.helpers.Utils.printOSCommandResults(java.lang.Process,javax.servlet.http.HttpServletResponse)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "sink" ],
+      "cwe" : [ "CWE209", "CWE78" ],
+      "known" : false,
+      "body" : "public static void printOSCommandResults(java.lang.Process proc, HttpServletResponse response) throws IOException {\r\n    PrintWriter out = response.getWriter();\r\n    out.write(\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD HTML 4.01 Transitional//EN\\\" \\\"http://www.w3.org/TR/html4/loose.dtd\\\">\\n\" + \"<html>\\n\" + \"<head>\\n\" + \"<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=UTF-8\\\">\\n\" + \"</head>\\n\" + \"<body>\\n\" + \"<p>\\n\");\r\n    BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));\r\n    BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));\r\n    try {\r\n        // read the output from the command\r\n        // System.out.println(\"Here is the standard output of the\r\n        // command:\\n\");\r\n        out.write(\"Here is the standard output of the command:<br>\");\r\n        String s = null;\r\n        while ((s = stdInput.readLine()) != null) {\r\n            out.write(ESAPI.encoder().encodeForHTML(s));\r\n            out.write(\"<br>\");\r\n        }\r\n        // read any errors from the attempted command\r\n        // System.out.println(\"Here is the standard error of the command (if\r\n        // any):\\n\");\r\n        out.write(\"<br>Here is the std err of the command (if any):<br>\");\r\n        while ((s = stdError.readLine()) != null) {\r\n            out.write(ESAPI.encoder().encodeForHTML(s));\r\n            out.write(\"<br>\");\r\n        }\r\n    } catch (IOException e) {\r\n        System.out.println(\"An error occurred while reading OSCommandResults\");\r\n        e.printStackTrace();\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "/**\n A method used by the Benchmark JAVA test cases to format OS Command Output\n */\n",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00006.java",
+        "lineNumber" : 70
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00007.java",
+        "lineNumber" : 62
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00015.java",
+        "lineNumber" : 72
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00017.java",
+        "lineNumber" : 64
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00051.java",
+        "lineNumber" : 64
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.getFileFromClasspath",
+      "parameters" : [ "java.lang.String", "java.lang.ClassLoader" ],
+      "signature" : "java.io.File org.owasp.benchmark.helpers.Utils.getFileFromClasspath(java.lang.String,java.lang.ClassLoader)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "propagator" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static File getFileFromClasspath(String fileName, ClassLoader classLoader) {\r\n    URL url = classLoader.getResource(fileName);\r\n    if (url != null) {\r\n        try {\r\n            return new File(url.toURI().getPath());\r\n        } catch (URISyntaxException e) {\r\n            System.out.println(\"The file '\" + fileName + \"' cannot be loaded from the classpath.\");\r\n            e.printStackTrace();\r\n        }\r\n    } else\r\n        System.out.println(\"The file '\" + fileName + \"' cannot be found on the classpath.\");\r\n    return null;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00116.java",
+        "lineNumber" : 76
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00117.java",
+        "lineNumber" : 75
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00118.java",
+        "lineNumber" : 75
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00207.java",
+        "lineNumber" : 63
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00442.java",
+        "lineNumber" : 56
+      } ],
+      "return" : "java.io.File",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.encodeForHTML",
+      "parameters" : [ "java.lang.Object" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.Utils.encodeForHTML(java.lang.Object)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "sanitizer" ],
+      "cwe" : [ "CWE79" ],
+      "known" : false,
+      "body" : "public static String encodeForHTML(Object param) {\r\n    String value = \"objectTypeUnknown\";\r\n    if (param instanceof String) {\r\n        value = (String) param;\r\n    } else if (param instanceof java.io.InputStream) {\r\n        byte[] buff = new byte[1000];\r\n        int length = 0;\r\n        try {\r\n            java.io.InputStream stream = (java.io.InputStream) param;\r\n            stream.reset();\r\n            length = stream.read(buff);\r\n        } catch (IOException e) {\r\n            buff[0] = (byte) '?';\r\n            length = 1;\r\n        }\r\n        ByteArrayOutputStream b = new ByteArrayOutputStream();\r\n        b.write(buff, 0, length);\r\n        value = b.toString();\r\n    }\r\n    return ESAPI.encoder().encodeForHTML(value);\r\n}",
+      "javadoc" : {
+        "method" : "/**\n * Encodes the supplied parameter using ESAPI's encodeForHTML(). Only supports Strings and\n * InputStreams.\n *\n * @param param - The String or InputStream to encode.\n * @return - HTML Entity encoded version of input, or \"objectTypeUnknown\" if not a supported\n *     type.\n */\n",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00004.java",
+        "lineNumber" : 72
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00031.java",
+        "lineNumber" : 57
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00097.java",
+        "lineNumber" : 78
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00098.java",
+        "lineNumber" : 73
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00099.java",
+        "lineNumber" : 83
+      } ],
+      "return" : "java.lang.String",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.Utils.getCipher",
+      "parameters" : [ ],
+      "signature" : "javax.crypto.Cipher org.owasp.benchmark.helpers.Utils.getCipher()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static Cipher getCipher() {\r\n    if (cipher == null) {\r\n        try {\r\n            cipher = javax.crypto.Cipher.getInstance(\"RSA/ECB/OAEPWithSHA-512AndMGF1Padding\", \"SunJCE\");\r\n            // Prepare the cipher to encrypt\r\n            java.security.KeyPairGenerator keyGen = java.security.KeyPairGenerator.getInstance(\"RSA\");\r\n            keyGen.initialize(4096);\r\n            java.security.PublicKey publicKey = keyGen.genKeyPair().getPublic();\r\n            cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, publicKey);\r\n        } catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException | InvalidKeyException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n    return cipher;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00209.java",
+        "lineNumber" : 68
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00259.java",
+        "lineNumber" : 59
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00260.java",
+        "lineNumber" : 59
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00350.java",
+        "lineNumber" : 58
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00351.java",
+        "lineNumber" : 57
+      } ],
+      "return" : "javax.crypto.Cipher",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.getSqlStatement",
+      "parameters" : [ ],
+      "signature" : "java.sql.Statement org.owasp.benchmark.helpers.DatabaseHelper.getSqlStatement()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ "CWE89" ],
+      "known" : false,
+      "body" : "public static java.sql.Statement getSqlStatement() {\r\n    if (conn == null) {\r\n        getSqlConnection();\r\n    }\r\n    Statement stmt = null;\r\n    try {\r\n        stmt = conn.createStatement();\r\n    } catch (SQLException e) {\r\n        System.out.println(\"Problem with database init.\");\r\n    }\r\n    return stmt;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00018.java",
+        "lineNumber" : 58
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00027.java",
+        "lineNumber" : 51
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00034.java",
+        "lineNumber" : 55
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00043.java",
+        "lineNumber" : 53
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00105.java",
+        "lineNumber" : 76
+      } ],
+      "return" : "java.sql.Statement",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection",
+      "parameters" : [ ],
+      "signature" : "java.sql.Connection org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ "CWE89" ],
+      "known" : false,
+      "body" : "public static java.sql.Connection getSqlConnection() {\r\n    if (conn == null) {\r\n        try {\r\n            InitialContext ctx = new InitialContext();\r\n            DataSource datasource = (DataSource) ctx.lookup(\"java:comp/env/jdbc/BenchmarkDB\");\r\n            conn = datasource.getConnection();\r\n            conn.setAutoCommit(false);\r\n        } catch (SQLException | NamingException e) {\r\n            System.out.println(\"Problem with getSqlConnection.\");\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n    return conn;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00008.java",
+        "lineNumber" : 56
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00024.java",
+        "lineNumber" : 51
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00037.java",
+        "lineNumber" : 65
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00052.java",
+        "lineNumber" : 52
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00100.java",
+        "lineNumber" : 76
+      } ],
+      "return" : "java.sql.Connection",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.outputUpdateComplete",
+      "parameters" : [ "java.lang.String", "javax.servlet.http.HttpServletResponse" ],
+      "signature" : "void org.owasp.benchmark.helpers.DatabaseHelper.outputUpdateComplete(java.lang.String,javax.servlet.http.HttpServletResponse)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static void outputUpdateComplete(String sql, HttpServletResponse response) throws java.sql.SQLException, IOException {\r\n    PrintWriter out = response.getWriter();\r\n    out.write(\"<!DOCTYPE html>\\n<html>\\n<body>\\n<p>\");\r\n    out.write(\"Update complete for query: \" + org.owasp.esapi.ESAPI.encoder().encodeForHTML(sql) + \"<br>\\n\");\r\n    out.write(\"</p>\\n</body>\\n</html>\");\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00018.java",
+        "lineNumber" : 60
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00027.java",
+        "lineNumber" : 53
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00043.java",
+        "lineNumber" : 55
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00111.java",
+        "lineNumber" : 83
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00112.java",
+        "lineNumber" : 75
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.printResults",
+      "parameters" : [ "java.sql.Statement", "java.lang.String", "javax.servlet.http.HttpServletResponse" ],
+      "signature" : "void org.owasp.benchmark.helpers.DatabaseHelper.printResults(java.sql.Statement,java.lang.String,javax.servlet.http.HttpServletResponse)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "sink" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static void printResults(java.sql.Statement statement, String sql, HttpServletResponse response) throws java.sql.SQLException, IOException {\r\n    PrintWriter out = response.getWriter();\r\n    out.write(\"<!DOCTYPE html PUBLIC \\\"-//W3C//DTD HTML 4.01 Transitional//EN\\\" \\\"http://www.w3.org/TR/html4/loose.dtd\\\">\\n\" + \"<html>\\n\" + \"<head>\\n\" + \"<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=UTF-8\\\">\\n\" + \"</head>\\n\" + \"<body>\\n\" + \"<p>\\n\");\r\n    try {\r\n        ResultSet rs = statement.getResultSet();\r\n        if (rs == null) {\r\n            out.write(\"Results set is empty for query: \" + org.owasp.esapi.ESAPI.encoder().encodeForHTML(sql));\r\n            return;\r\n        }\r\n        ResultSetMetaData rsmd = rs.getMetaData();\r\n        int numberOfColumns = rsmd.getColumnCount();\r\n        out.write(\"Your results are:<br>\\n\");\r\n        while (rs.next()) {\r\n            for (int i = 1; i <= numberOfColumns; i++) {\r\n                if (i > 1) {\r\n                    out.write(\",  \");\r\n                }\r\n                String columnValue = rs.getString(i);\r\n                out.write(ESAPI.encoder().encodeForHTML(columnValue));\r\n            }\r\n            out.write(\"<br>\\n\");\r\n        }\r\n    } finally {\r\n        out.write(\"</p>\\n</body>\\n</html>\");\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00024.java",
+        "lineNumber" : 60
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00034.java",
+        "lineNumber" : 57
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00037.java",
+        "lineNumber" : 74
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00100.java",
+        "lineNumber" : 85
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00101.java",
+        "lineNumber" : 86
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.printResults",
+      "parameters" : [ "java.sql.ResultSet", "java.lang.String", "javax.servlet.http.HttpServletResponse" ],
+      "signature" : "void org.owasp.benchmark.helpers.DatabaseHelper.printResults(java.sql.ResultSet,java.lang.String,javax.servlet.http.HttpServletResponse)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "sink" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static void printResults(java.sql.ResultSet rs, String sql, HttpServletResponse response) throws java.sql.SQLException, IOException {\r\n    PrintWriter out = response.getWriter();\r\n    out.write(\"<!DOCTYPE html>\\n<html>\\n<body>\\n<p>\");\r\n    try {\r\n        if (rs == null) {\r\n            out.write(\"Results set is empty for query: \" + org.owasp.esapi.ESAPI.encoder().encodeForHTML(sql));\r\n            return;\r\n        }\r\n        ResultSetMetaData rsmd = rs.getMetaData();\r\n        int numberOfColumns = rsmd.getColumnCount();\r\n        out.write(\"Your results are:<br>\\n\");\r\n        while (rs.next()) {\r\n            for (int i = 1; i <= numberOfColumns; i++) {\r\n                String columnValue = rs.getString(i);\r\n                out.write(ESAPI.encoder().encodeForHTML(columnValue));\r\n            }\r\n            out.write(\"<br>\\n\");\r\n        }\r\n    } finally {\r\n        out.write(\"</p>\\n</body>\\n</html>\");\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00008.java",
+        "lineNumber" : 59
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00052.java",
+        "lineNumber" : 60
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00190.java",
+        "lineNumber" : 74
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00191.java",
+        "lineNumber" : 83
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00328.java",
+        "lineNumber" : 67
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.DatabaseHelper.printResults",
+      "parameters" : [ "java.lang.String", "int[]", "javax.servlet.http.HttpServletResponse" ],
+      "signature" : "void org.owasp.benchmark.helpers.DatabaseHelper.printResults(java.lang.String,int[],javax.servlet.http.HttpServletResponse)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "sink" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public static void printResults(String query, int[] counts, HttpServletResponse response) throws IOException {\r\n    PrintWriter out = response.getWriter();\r\n    out.write(\"<!DOCTYPE html>\\n<html>\\n<body>\\n<p>\");\r\n    out.write(\"For query: \" + ESAPI.encoder().encodeForHTML(query) + \"<br>\");\r\n    try {\r\n        if (counts.length > 0) {\r\n            if (counts[0] == Statement.SUCCESS_NO_INFO) {\r\n                out.write(\"The SQL query was processed successfully but the number of rows affected is unknown.\");\r\n            } else if (counts[0] == Statement.EXECUTE_FAILED) {\r\n                out.write(\"The SQL query failed to execute successfully and occurs only if a driver continues to process commands after a command fails\");\r\n            } else {\r\n                out.write(\"The number of affected rows are: \" + counts[0]);\r\n            }\r\n        }\r\n    } finally {\r\n        out.write(\"</p>\\n</body>\\n</html>\");\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00105.java",
+        "lineNumber" : 79
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00435.java",
+        "lineNumber" : 60
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00601.java",
+        "lineNumber" : 74
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00770.java",
+        "lineNumber" : 67
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00847.java",
+        "lineNumber" : 89
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.LDAPManager.<init>",
+      "parameters" : [ ],
+      "signature" : "void org.owasp.benchmark.helpers.LDAPManager.<init>()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public LDAPManager() {\r\n    try {\r\n        ctx = getDirContext();\r\n    } catch (NamingException e) {\r\n        // FIXME: Don't eat exceptions!\r\n        System.out.println(\"Failed to get Directory Context: \" + e.getMessage());\r\n        e.printStackTrace();\r\n    }\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : "/**\n * A simple example exposing how to embed Apache Directory Server into an application.\n *\n * @author <a href=\"mailto:dev@directory.apache.org\">Apache Directory Project</a>\n * @version $Rev$, $Date$\n */\n"
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00012.java",
+        "lineNumber" : 54
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00021.java",
+        "lineNumber" : 47
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00044.java",
+        "lineNumber" : 49
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00138.java",
+        "lineNumber" : 58
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00139.java",
+        "lineNumber" : 74
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.LDAPManager.getDirContext",
+      "parameters" : [ ],
+      "signature" : "javax.naming.directory.DirContext org.owasp.benchmark.helpers.LDAPManager.getDirContext()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public DirContext getDirContext() throws NamingException {\r\n    if (ctx == null) {\r\n        return new InitialDirContext(createEnv());\r\n    }\r\n    return ctx;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : "/**\n * A simple example exposing how to embed Apache Directory Server into an application.\n *\n * @author <a href=\"mailto:dev@directory.apache.org\">Apache Directory Project</a>\n * @version $Rev$, $Date$\n */\n"
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00012.java",
+        "lineNumber" : 63
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00021.java",
+        "lineNumber" : 50
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00044.java",
+        "lineNumber" : 52
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00138.java",
+        "lineNumber" : 67
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00139.java",
+        "lineNumber" : 82
+      } ],
+      "return" : "javax.naming.directory.DirContext",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.LDAPManager.closeDirContext",
+      "parameters" : [ ],
+      "signature" : "void org.owasp.benchmark.helpers.LDAPManager.closeDirContext()",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public void closeDirContext() throws NamingException {\r\n    if (ctx != null)\r\n        ctx.close();\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : "/**\n * A simple example exposing how to embed Apache Directory Server into an application.\n *\n * @author <a href=\"mailto:dev@directory.apache.org\">Apache Directory Project</a>\n * @version $Rev$, $Date$\n */\n"
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00012.java",
+        "lineNumber" : 100
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00012.java",
+        "lineNumber" : 100
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00021.java",
+        "lineNumber" : 91
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00021.java",
+        "lineNumber" : 91
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00044.java",
+        "lineNumber" : 92
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.SeparateClassRequest.<init>",
+      "parameters" : [ "javax.servlet.http.HttpServletRequest" ],
+      "signature" : "void org.owasp.benchmark.helpers.SeparateClassRequest.<init>(javax.servlet.http.HttpServletRequest)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public SeparateClassRequest(HttpServletRequest request) {\r\n    this.request = request;\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00040.java",
+        "lineNumber" : 44
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00041.java",
+        "lineNumber" : 44
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00042.java",
+        "lineNumber" : 44
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00043.java",
+        "lineNumber" : 44
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00050.java",
+        "lineNumber" : 44
+      } ],
+      "return" : "void",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.SeparateClassRequest.getTheParameter",
+      "parameters" : [ "java.lang.String" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.SeparateClassRequest.getTheParameter(java.lang.String)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "source" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public String getTheParameter(String p) {\r\n    return request.getParameter(p);\r\n}",
+      "javadoc" : {
+        "method" : "",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00040.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00041.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00042.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00043.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00608.java",
+        "lineNumber" : 45
+      } ],
+      "return" : "java.lang.String",
+      "interface" : false
+    }, {
+      "name" : "org.owasp.benchmark.helpers.SeparateClassRequest.getTheValue",
+      "parameters" : [ "java.lang.String" ],
+      "signature" : "java.lang.String org.owasp.benchmark.helpers.SeparateClassRequest.getTheValue(java.lang.String)",
+      "framework" : "",
+      "link" : "",
+      "comment" : "",
+      "discovery" : "",
+      "dataIn" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "dataOut" : {
+        "parameters" : [ ],
+        "return" : false
+      },
+      "srm" : [ "none" ],
+      "cwe" : [ ],
+      "known" : false,
+      "body" : "public String getTheValue(String p) {\r\n    return \"bar\";\r\n}",
+      "javadoc" : {
+        "method" : "/**\n This method is a 'safe' source.\n */\n",
+        "class" : ""
+      },
+      "applicationMethod" : true,
+      "artifacts" : {
+        "identifier" : null,
+        "sources" : "BenchmarkJava_src.zip",
+        "compiled" : null
+      },
+      "usages" : [ {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00050.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00051.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00052.java",
+        "lineNumber" : 46
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00853.java",
+        "lineNumber" : 45
+      }, {
+        "path" : "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00854.java",
+        "lineNumber" : 52
+      } ],
+      "return" : "java.lang.String",
+      "interface" : false
+    }
+  ]
+}
