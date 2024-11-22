@@ -21,7 +21,6 @@ public class Soot {
     public Soot(String... path) {
 
         this.classpath = Util.buildCP(path);
-        logger.info("Soot Classpath {}", classpath);
         configure(classpath);
     }
 
@@ -36,6 +35,7 @@ public class Soot {
 
         Options.v().set_soot_classpath(classpath);
         Options.v().set_soot_classpath(System.getProperty("java.class.path") + System.getProperty("path.separator") + Options.v().soot_classpath());
+        logger.info("Setting Soot Classpath {}",  Options.v().soot_classpath());
 
         Options.v().set_allow_phantom_refs(true);
         Options.v().set_prepend_classpath(true);
@@ -52,6 +52,7 @@ public class Soot {
      */
     public void cleanupList(SrmList srmList) throws IOException {
 
+        logger.info("Extracting {} methods from classpath", srmList.getMethods().size());
         prefilterInterfaces(srmList.getMethods());
 
         Util.createSubclassAnnotations(srmList.getMethods(), classpath);
@@ -135,7 +136,7 @@ public class Soot {
             if (sootMethod == null) {
                 abstractMethods.add(method);
 
-                logger.info("Null method {} purged", method.getSignature());
+                logger.info("{} implementation not found", method.getSignature());
             } else {
                 method.setSootMethod(sootMethod);
                 method.setSootClass(getClass(method));
