@@ -6,7 +6,7 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
-import meka.classifiers.multilabel.BR;
+import meka.classifiers.multilabel.BCC;
 import meka.classifiers.multilabel.Evaluation;
 import meka.core.Result;
 import org.slf4j.Logger;
@@ -15,6 +15,7 @@ import weka.core.Instances;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 public class Meka {
@@ -23,6 +24,11 @@ public class Meka {
     private SwanOptions options;
     private Set<Method> methods;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
+    private String[] classifierOptions = {"-X", "C", "-S", "0", "-W",
+            "weka.classifiers.functions.Logistic", "--", "-R",
+            "2.1030996739872245", "-M", "921", "-num-decimal-places", "4"};
+    private BCC classifier = new BCC();
+
 
     public Meka(MekaFeatureSet features, SwanOptions options, Set<Method> methods) {
         this.features = features;
@@ -61,9 +67,13 @@ public class Meka {
 
         try {
 
-            BR classifier = new BR();
-            String top = "PCut1";
+            instances.randomize(new Random(0));
+
+            String top = "PCutL";
             String verbosity = "7";
+
+            classifier.setOptions(classifierOptions);
+
             Result result = Evaluation.cvModel(classifier, instances, options.getIterations(), top, verbosity);
 
             logger.info("Model cross-validation results {}", result);
@@ -84,7 +94,8 @@ public class Meka {
 
         HashMap<Integer, ArrayList<Category>> predictions = new HashMap<>();
         try {
-            BR classifier = new BR();
+
+            classifier.setOptions(classifierOptions);
             classifier.buildClassifier(train);
 
             for (int i = 0; i < test.numInstances(); i++) {
