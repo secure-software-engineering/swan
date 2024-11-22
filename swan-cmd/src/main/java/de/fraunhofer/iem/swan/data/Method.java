@@ -280,8 +280,6 @@ public class Method {
 
     @JsonIgnore
     public String getSootSignature() {
-        if (signature != null)
-            return signature;
 
         StringBuilder sb = new StringBuilder();
         sb.append("<");
@@ -300,9 +298,8 @@ public class Method {
             sb.append(this.parameters.get(i).trim());
         }
         sb.append(")>");
-        this.signature = sb.toString();
 
-        return this.signature;
+        return sb.toString();
     }
 
     public String getSignature() {
