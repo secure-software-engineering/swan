@@ -20,7 +20,7 @@ public class ParameterIsInterfaceFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
         for (String paramType : method.getParameters()) {
             SootClass sc = Scene.v().forceResolve(paramType, SootClass.HIERARCHY);
-            if (sc == null) return Type.NOT_SUPPORTED;
+            if (sc == null) return Type.FALSE;
             return sc.isInterface() ? Type.TRUE : Type.FALSE;
         }
         // No interface type found

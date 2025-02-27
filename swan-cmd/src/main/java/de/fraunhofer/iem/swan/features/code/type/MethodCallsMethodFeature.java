@@ -42,21 +42,21 @@ public class MethodCallsMethodFeature extends AbstractSootFeature {
         try {
 
             if (method.getSootMethod() == null) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
             return checkMethod(method.getSootMethod(), new ArrayList<>());
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 
     public Type checkMethod(SootMethod method, List<SootMethod> doneList) {
         if (doneList.contains(method))
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         if (!method.isConcrete())
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         doneList.add(method);
 
         try {
@@ -64,7 +64,7 @@ public class MethodCallsMethodFeature extends AbstractSootFeature {
             try {
                 body = method.retrieveActiveBody();
             } catch (Exception ex) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
 
             for (Unit u : body.getUnits()) {
@@ -87,7 +87,7 @@ public class MethodCallsMethodFeature extends AbstractSootFeature {
             return Type.FALSE;
         } catch (Exception ex) {
             System.err.println("Oops: " + ex);
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

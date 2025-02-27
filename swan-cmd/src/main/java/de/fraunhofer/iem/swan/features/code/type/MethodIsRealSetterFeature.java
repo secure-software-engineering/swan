@@ -29,14 +29,14 @@ public class MethodIsRealSetterFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
 
         // We are only interested in setters
         if (!method.getSootMethod().getName().startsWith("set"))
             return Type.FALSE;
         if (!method.getSootMethod().isConcrete())
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
 
         try {
             Set<Value> paramVals = new HashSet<>();
@@ -66,7 +66,7 @@ public class MethodIsRealSetterFeature extends AbstractSootFeature {
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

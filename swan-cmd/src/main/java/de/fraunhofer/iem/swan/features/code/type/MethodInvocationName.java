@@ -24,10 +24,10 @@ public class MethodInvocationName extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
 
-        if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
+        if (!method.getSootMethod().isConcrete()) return Type.FALSE;
 
         try {
             for (Unit u : method.getSootMethod().retrieveActiveBody().getUnits()) {
@@ -43,7 +43,7 @@ public class MethodInvocationName extends AbstractSootFeature {
             }
             return Type.FALSE;
         } catch (Exception ex) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

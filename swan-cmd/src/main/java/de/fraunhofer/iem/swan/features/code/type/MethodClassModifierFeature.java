@@ -26,7 +26,7 @@ public class MethodClassModifierFeature extends AbstractSootFeature {
         try {
 
             if (method.getSootMethod() == null)
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             SootClass sClass = method.getSootMethod().getDeclaringClass();
             switch (classModifier) {
                 case ABSTRACT:
@@ -48,7 +48,7 @@ public class MethodClassModifierFeature extends AbstractSootFeature {
             throw new Exception("Modifier not declared!");
         } catch (Exception ex) {
             System.err.println("Something went wrong: " + ex.getMessage());
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

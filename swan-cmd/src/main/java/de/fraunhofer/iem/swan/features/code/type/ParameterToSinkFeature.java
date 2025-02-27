@@ -32,11 +32,11 @@ public class ParameterToSinkFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
 
         // We are only interested in setters
-        if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
+        if (!method.getSootMethod().isConcrete()) return Type.FALSE;
 
         try {
             Set<Value> paramVals = new HashSet<>();
@@ -69,7 +69,7 @@ public class ParameterToSinkFeature extends AbstractSootFeature {
             }
             return Type.FALSE;
         } catch (Exception ex) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

@@ -31,7 +31,7 @@ public class MethodIsGetterNoSetterFeature extends AbstractSootFeature {
 
         // We are only interested in getters and setters
         if (!method.getSootMethod().getName().startsWith("get") && !method.getSootMethod().getName().startsWith("set"))
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         String baseName = method.getSootMethod().getName().substring(3);
         String getterName = "get" + baseName;
         String setterName = "set" + baseName;
@@ -46,13 +46,13 @@ public class MethodIsGetterNoSetterFeature extends AbstractSootFeature {
                 return Type.FALSE;
 
             if (!setter.isConcrete() || !getter.isConcrete())
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
 
             Body bodyGetter;
             try {
                 bodyGetter = getter.retrieveActiveBody();
             } catch (Exception ex) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
 
             // Find the local that gets returned
@@ -120,7 +120,7 @@ public class MethodIsGetterNoSetterFeature extends AbstractSootFeature {
              */
             return Type.TRUE;
         } catch (Exception ex) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

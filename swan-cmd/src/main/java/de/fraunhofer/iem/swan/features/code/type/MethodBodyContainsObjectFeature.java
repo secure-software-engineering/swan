@@ -21,15 +21,15 @@ public class MethodBodyContainsObjectFeature extends AbstractSootFeature {
         try {
 
             if (method.getSootMethod() == null) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
-            if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
+            if (!method.getSootMethod().isConcrete()) return Type.FALSE;
 
             Body body;
             try {
                 body = method.getSootMethod().retrieveActiveBody();
             } catch (Exception ex) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
 
             if (body.toString().toLowerCase().contains(objectName)) return Type.TRUE;
@@ -45,7 +45,7 @@ public class MethodBodyContainsObjectFeature extends AbstractSootFeature {
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

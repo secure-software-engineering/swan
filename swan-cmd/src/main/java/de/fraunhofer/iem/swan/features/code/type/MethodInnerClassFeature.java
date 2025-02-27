@@ -15,7 +15,7 @@ public class MethodInnerClassFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null)
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         try {
             if (method.getSootMethod().getDeclaringClass().hasOuterClass() && innerClass)
                 return Type.TRUE;
@@ -26,7 +26,7 @@ public class MethodInnerClassFeature extends AbstractSootFeature {
             else return Type.TRUE;
         } catch (Exception ex) {
             System.err.println("Something went wrong: " + ex.getMessage());
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

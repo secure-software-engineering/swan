@@ -85,10 +85,10 @@ public class ParameterInCallFeature extends AbstractSootFeature {
         try {
 
             if (method.getSootMethod() == null) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
 
-            if (!method.getSootMethod().isConcrete()) return Type.NOT_SUPPORTED;
+            if (!method.getSootMethod().isConcrete()) return Type.FALSE;
 
             // Collect the sources and then find calls where the parameter is
             // actually sent out
@@ -102,7 +102,7 @@ public class ParameterInCallFeature extends AbstractSootFeature {
                 try {
                     body = method.getSootMethod().retrieveActiveBody();
                 } catch (Exception ex) {
-                    return Type.NOT_SUPPORTED;
+                    return Type.FALSE;
                 }
                 for (Unit u : body.getUnits()) {
                     if (!(u instanceof Stmt)) continue;
@@ -255,7 +255,7 @@ public class ParameterInCallFeature extends AbstractSootFeature {
             }
             return Type.FALSE;
         } catch (Exception ex) {
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

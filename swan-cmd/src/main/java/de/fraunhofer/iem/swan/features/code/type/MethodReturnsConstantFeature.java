@@ -22,13 +22,13 @@ public class MethodReturnsConstantFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null || !method.getSootMethod().isConcrete())
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         try {
             Body body;
             try {
                 body = method.getSootMethod().retrieveActiveBody();
             } catch (Exception ex) {
-                return Type.NOT_SUPPORTED;
+                return Type.FALSE;
             }
 
             for (Unit u : body.getUnits())
@@ -41,7 +41,7 @@ public class MethodReturnsConstantFeature extends AbstractSootFeature {
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

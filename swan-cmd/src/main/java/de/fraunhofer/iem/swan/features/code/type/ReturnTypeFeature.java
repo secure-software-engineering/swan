@@ -23,7 +23,7 @@ public class ReturnTypeFeature extends AbstractSootFeature {
             return Type.TRUE;
 
         if (method.getSootMethod() == null)
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         try {
             if (this.isOfType(method.getSootMethod().getReturnType(), this.returnType))
                 return Type.TRUE;
@@ -31,7 +31,7 @@ public class ReturnTypeFeature extends AbstractSootFeature {
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

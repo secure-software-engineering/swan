@@ -1,7 +1,6 @@
 package de.fraunhofer.iem.swan.features.code.type;
 
 import de.fraunhofer.iem.swan.data.Method;
-import soot.SootMethod;
 
 /**
  * Feature that checks whether the current method is the run method of a thread
@@ -20,7 +19,7 @@ public class IsThreadRunFeature extends AbstractSootFeature {
             return Type.FALSE;
 
         if (method.getSootMethod() == null)
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         try {
             if (this.isOfType(method.getSootMethod().getDeclaringClass().getType(), "java.lang.Runnable"))
                 return Type.TRUE;
@@ -28,7 +27,7 @@ public class IsThreadRunFeature extends AbstractSootFeature {
         } catch (Exception ex) {
             System.err.println("Something went wrong:");
             ex.printStackTrace();
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 

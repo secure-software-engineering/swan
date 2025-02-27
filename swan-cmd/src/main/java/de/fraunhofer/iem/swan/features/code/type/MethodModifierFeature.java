@@ -24,7 +24,7 @@ public class MethodModifierFeature extends AbstractSootFeature {
     public Type appliesInternal(Method method) {
 
         if (method.getSootMethod() == null)
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         try {
             switch (modifier) {
                 case PUBLIC:
@@ -47,7 +47,7 @@ public class MethodModifierFeature extends AbstractSootFeature {
             throw new Exception("Modifier not declared!");
         } catch (Exception ex) {
             System.err.println("Something went wrong: " + ex.getMessage());
-            return Type.NOT_SUPPORTED;
+            return Type.FALSE;
         }
     }
 
