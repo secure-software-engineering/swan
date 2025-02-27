@@ -6,8 +6,8 @@ import de.fraunhofer.iem.swan.data.Method;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
-import meka.classifiers.multilabel.BCC;
 import meka.classifiers.multilabel.Evaluation;
+import meka.classifiers.multilabel.LC;
 import meka.core.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +24,10 @@ public class Meka {
     private SwanOptions options;
     private Set<Method> methods;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
-    private String[] classifierOptions = {"-X", "C", "-S", "0", "-W",
-            "weka.classifiers.functions.Logistic", "--", "-R",
-            "2.1030996739872245", "-M", "921", "-num-decimal-places", "4"};
-    private BCC classifier = new BCC();
+    private String[] classifierOptions = {"-W", "weka.classifiers.trees.RandomForest",
+            "--", "-P", "65", "-I", "45", "-num-slots", "1", "-K", "0", "-M", "4.0",
+            "-V", "1.0E-5", "-S", "1", "-B"};
+    private LC classifier = new LC();
 
 
     public Meka(MekaFeatureSet features, SwanOptions options, Set<Method> methods) {
