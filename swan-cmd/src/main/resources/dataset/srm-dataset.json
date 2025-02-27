@@ -3307,7 +3307,7 @@
     {
       "name": "org.springframework.security.config.annotation.web.builders.HttpSecurity.headers",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.web.configurers.HeadersConfigurer org.springframework.security.config.annotation.web.builders.HttpSecurity.headers()",
+      "signature": "org.springframework.security.config.annotation.web.configurers.HeadersConfigurer org.springframework.security.config.annotation.web.builders.HttpSecurity.headers()",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/annotation/web/builders/HttpSecurity.html",
       "comment": "Counter example for authentication (none)",
@@ -3333,7 +3333,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.web.configurers.HeadersConfigurer",
+      "return": "org.springframework.security.config.annotation.web.configurers.HeadersConfigurer",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -11813,7 +11813,7 @@
     {
       "name": "org.springframework.security.config.annotation.web.builders.HttpSecurity.rememberMe",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.web.configurers.RememberMeConfigurer org.springframework.security.config.annotation.web.builders.HttpSecurity.rememberMe()",
+      "signature": "org.springframework.security.config.annotation.web.configurers.RememberMeConfigurer org.springframework.security.config.annotation.web.builders.HttpSecurity.rememberMe()",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/annotation/web/builders/HttpSecurity.html",
       "comment": "Counter example for authentication (none)",
@@ -11835,7 +11835,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.web.configurers.RememberMeConfigurer",
+      "return": "org.springframework.security.config.annotation.web.configurers.RememberMeConfigurer",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -42692,7 +42692,7 @@
     {
       "name": "org.springframework.security.config.annotation.SecurityConfigurerAdapter.and",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.SecurityBuilder org.springframework.security.config.annotation.SecurityConfigurerAdapter.and()",
+      "signature": "org.springframework.security.config.annotation.SecurityBuilder org.springframework.security.config.annotation.SecurityConfigurerAdapter.and()",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/current/apidocs/org/springframework/security/config/annotation/SecurityConfigurerAdapter.html",
       "comment": "Counter example for authentication (none)",
@@ -42714,7 +42714,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.SecurityBuilder",
+      "return": "org.springframework.security.config.annotation.SecurityBuilder",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -60967,7 +60967,7 @@
     {
       "name": "org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.ldapAuthentication",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.ldapAuthentication()",
+      "signature": "org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.ldapAuthentication()",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/apidocs/org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
       "comment": "Authentication to LDAP. The owner of the return object can manipulate users to a LDAP connection.",
@@ -60993,7 +60993,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer",
+      "return": "org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -65771,7 +65771,7 @@
     {
       "name": "org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.inMemoryAuthentication",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.inMemoryAuthentication()",
+      "signature": "org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.inMemoryAuthentication()",
       "framework": "spring",
       "link": "http://docs.spring.io/autorepo/docs/spring-security/4.0.0.M1/apidocs/index.html?org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
       "comment": "the method returns a configurator for manipulation of users' details. The return object is authenticated and the owner may execute critical ops.",
@@ -65799,7 +65799,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer",
+      "return": "org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer",
       "interface": false,
       "artifacts": {
         "identifier": "",
@@ -66908,7 +66908,7 @@
     {
       "name": "org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.jdbcAuthentication",
       "parameters": [],
-      "signature": "org.springframework.security.config.'annotation'.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.jdbcAuthentication()",
+      "signature": "org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder.jdbcAuthentication()",
       "framework": "spring",
       "link": "https://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/apidocs/org/springframework/security/config/annotation/authentication/builders/AuthenticationManagerBuilder.html",
       "comment": "Authentication to JDBC. The owner of the return object can manipulate users to a JDBC connection.",
@@ -66934,7 +66934,7 @@
         "class": ""
       },
       "applicationMethod": false,
-      "return": "org.springframework.security.config.'annotation'.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer",
+      "return": "org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer",
       "interface": false,
       "artifacts": {
         "identifier": "",
