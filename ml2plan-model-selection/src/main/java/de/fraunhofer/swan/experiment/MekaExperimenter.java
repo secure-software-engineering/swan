@@ -64,11 +64,6 @@ public class MekaExperimenter {
                         Instances data = source.getDataSet();
                         data.randomize(new Random(seed));
                         MLUtils.prepareData(data);
-                        
-                        String[] cls = {"-X", "C", "-S", "0", "-W",
-                                "weka.classifiers.functions.Logistic", "--", "-R",
-                                "2.1030996739872245", "-M", "921", "-num-decimal-places", "4"
-                        };
 
                         //create the classifier
                         MultiLabelClassifier classifier = (MultiLabelClassifier) Class.forName(classifierName)
