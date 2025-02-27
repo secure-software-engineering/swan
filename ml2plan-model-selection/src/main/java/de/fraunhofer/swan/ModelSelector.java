@@ -19,9 +19,6 @@ import org.api4.java.ai.ml.classification.singlelabel.evaluation.ISingleLabelCla
 import org.api4.java.ai.ml.core.dataset.supervised.ILabeledDataset;
 import org.api4.java.ai.ml.core.evaluation.execution.ILearnerRunReport;
 import org.api4.java.algorithm.Timeout;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import weka.core.Instances;
 
 import java.io.FileReader;
@@ -29,6 +26,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Oshando Johnson on 27.09.20
@@ -39,12 +39,13 @@ public class ModelSelector {
 
     public static void main(String[] args) throws Exception {
 
-        LOGGER.info("Args: TOOLKIT {}, CPU {}, Dataset {}, Duration {}", args[0], args[1], args[2], args[3]);
+        LOGGER.info("Args: TOOLKIT {}, CPU {}, Dataset {}, Duration {}, Seed {}", args[0], args[1], args[2], args[3], args[4]);
 
         if (args[0].contains("weka"))
-            selectWekaModel(Integer.parseInt(args[1]), args[2], Long.parseLong(args[3]));
+            selectWekaModel(Integer.parseInt(args[1]), args[2], Long.parseLong(args[3]), Long.parseLong(args[4]));
         else
-            selectMekaModel(Integer.parseInt(args[1]), args[2], Long.parseLong(args[3]));
+            selectMekaModel(Integer.parseInt(args[1]), args[2], Long.parseLong(args[3]), Long.parseLong(args[4]));
+
     }
 
     /**
@@ -53,14 +54,15 @@ public class ModelSelector {
      * @param arffFile path to ARFF dataset file
      * @throws Exception
      */
-    public static void selectMekaModel(int cpu, String arffFile, long duration) throws Exception {
+    public static void selectMekaModel(int cpu, String arffFile, long duration, long seed) throws Exception {
 
         Instances instances = new Instances(new FileReader(arffFile));
         LOGGER.info("Loaded {} instances from {}", instances.numInstances(), arffFile);
         //Prepare instances and split into train and test datasets
         MLUtils.prepareData(instances);
+
         IMekaInstances dataset = new MekaInstances(instances);
-        List<ILabeledDataset<?>> split = SplitterUtil.getSimpleTrainTestSplit(dataset, new Random(0), .7);
+        List<ILabeledDataset<?>> split = SplitterUtil.getSimpleTrainTestSplit(dataset, new Random(seed), .7);
         LOGGER.info("Loading {} instances from {}", instances.numInstances(), arffFile);
 
         // Initialize ML2-Plan
@@ -91,7 +93,7 @@ public class ModelSelector {
      * @param arffFile path to ARFF dataset file
      * @throws Exception
      */
-    public static void selectWekaModel(int cpu, String arffFile, long duration) throws Exception {
+    public static void selectWekaModel(int cpu, String arffFile, long duration, long seed) throws Exception {
 
         Instances instances = new Instances(new FileReader(arffFile));
         LOGGER.info("Loaded {} instances from {}", instances.numInstances(), arffFile);
@@ -99,7 +101,7 @@ public class ModelSelector {
 
         MLUtils.prepareData(instances);
         IWekaInstances dataset = new WekaInstances(instances);
-        List<ILabeledDataset<?>> split = SplitterUtil.getSimpleTrainTestSplit(dataset, new Random(0), .7);
+        List<ILabeledDataset<?>> split = SplitterUtil.getLabelStratifiedTrainTestSplit(dataset, new Random(seed), .7);
         LOGGER.info("Loading {} instances from {}", instances.numInstances(), arffFile);
 
         // Initialize ML2-Plan
