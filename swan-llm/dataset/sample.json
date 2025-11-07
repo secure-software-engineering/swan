@@ -1,0 +1,312 @@
+{
+  "version" : "3",
+  "methods" : [ {
+    "name" : "java.io.PrintWriter.write",
+    "parameters" : [ "char[]" ],
+    "signature" : "void java.io.PrintWriter.write(char[])",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.io.PrintWriter",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE79" ],
+    "known" : true,
+    "body" : "public void write(char[] buf) {\r\n    write(buf, 0, buf.length);\r\n}",
+    "javadoc" : {
+      "method" : "/**\n * Writes an array of characters.  This method cannot be inherited from the\n * Writer class because it must suppress I/O exceptions.\n * @param buf Array of characters to be written\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "void",
+    "interface" : false
+  }, {
+    "name" : "java.io.PrintWriter.print",
+    "parameters" : [ "char[]" ],
+    "signature" : "void java.io.PrintWriter.print(char[])",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.io.PrintWriter",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE79" ],
+    "known" : true,
+    "body" : "public void print(char[] s) {\r\n    write(s);\r\n}",
+    "javadoc" : {
+      "method" : "/**\n * Prints an array of characters.  The characters are converted into bytes\n * according to the platform's default character encoding, and these bytes\n * are written in exactly the manner of the {@link #write(int)}\n * method.\n *\n * @param      s   The array of chars to be printed\n *\n * @throws  NullPointerException  If {@code s} is {@code null}\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "void",
+    "interface" : false
+  }, {
+    "name" : "java.io.PrintWriter.println",
+    "parameters" : [ "char[]" ],
+    "signature" : "void java.io.PrintWriter.println(char[])",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.io.PrintWriter",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE79" ],
+    "known" : true,
+    "body" : "public void println(char[] x) {\r\n    synchronized (lock) {\r\n        print(x);\r\n        println();\r\n    }\r\n}",
+    "javadoc" : {
+      "method" : "/**\n * Prints an array of characters and then terminates the line.  This method\n * behaves as though it invokes {@link #print(char[])} and then\n * {@link #println()}.\n *\n * @param x the array of {@code char} values to be printed\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "void",
+    "interface" : false
+  }, {
+    "name" : "java.net.URLDecoder.decode",
+    "parameters" : [ "java.lang.String", "java.lang.String" ],
+    "signature" : "java.lang.String java.net.URLDecoder.decode(java.lang.String, java.lang.String)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "",
+    "discovery" : "thecodemaster.com",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "propagator" ],
+    "cwe" : [ "CWE89" ],
+    "known" : true,
+    "body" : "public static String decode(String s, String enc) throws UnsupportedEncodingException {\r\n    if (enc.isEmpty()) {\r\n        throw new UnsupportedEncodingException(\"URLDecoder: empty string enc parameter\");\r\n    }\r\n    try {\r\n        Charset charset = Charset.forName(enc);\r\n        return decode(s, charset);\r\n    } catch (IllegalCharsetNameException | UnsupportedCharsetException e) {\r\n        throw new UnsupportedEncodingException(enc);\r\n    }\r\n}",
+    "javadoc" : {
+      "method" : "/**\n * Decodes an {@code application/x-www-form-urlencoded} string using\n * a specific encoding scheme.\n *\n * <p>\n * This method behaves the same as {@linkplain decode(String s, Charset charset)}\n * except that it will {@linkplain java.nio.charset.Charset#forName look up the charset}\n * using the given encoding name.\n *\n * @implNote This implementation will throw an {@link java.lang.IllegalArgumentException}\n * when illegal strings are encountered.\n *\n * @param s the {@code String} to decode\n * @param enc   The name of a supported\n *    <a href=\"../lang/package-summary.html#charenc\">character\n *    encoding</a>.\n * @return the newly decoded {@code String}\n * @throws UnsupportedEncodingException\n *             If character encoding needs to be consulted, but\n *             named character encoding is not supported\n * @see URLEncoder#encode(java.lang.String, java.lang.String)\n * @since 1.4\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "java.lang.String",
+    "interface" : false
+  }, {
+    "name" : "javax.naming.directory.DirContext.search",
+    "parameters" : [ "java.lang.String", "java.lang.String", "javax.naming.directory.SearchControls" ],
+    "signature" : "javax.naming.NamingEnumeration javax.naming.directory.DirContext.search(java.lang.String, java.lang.String, javax.naming.directory.SearchControls)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "javax.naming.directory.DirContext",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE90" ],
+    "known" : true,
+    "body" : "public abstract NamingEnumeration<SearchResult> search(String name, String filter, SearchControls cons) throws NamingException {}",
+    "javadoc" : {
+      "method" : "/**\n * Searches in the named context or object for entries that satisfy the\n * given search filter.  Performs the search as specified by\n * the search controls.\n * See {@link #search(Name, String, SearchControls)} for details.\n *\n * @param name\n *          the name of the context or object to search\n * @param filter\n *          the filter expression to use for the search; may not be null\n * @param cons\n *          the search controls that control the search.  If null,\n *          the default search controls are used (equivalent\n *          to {@code (new SearchControls())}).\n *\n * @return  an enumeration of {@code SearchResult}s for\n *          the objects that satisfy the filter.\n * @throws  InvalidSearchFilterException if the search filter specified is\n *          not supported or understood by the underlying directory\n * @throws  InvalidSearchControlsException if the search controls\n *          contain invalid settings\n * @throws  NamingException if a naming exception is encountered\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "javax.naming.NamingEnumeration",
+    "interface" : true
+  }, {
+    "name" : "javax.naming.directory.DirContext.search",
+    "parameters" : [ "java.lang.String", "java.lang.String", "java.lang.Object[]", "javax.naming.directory.SearchControls" ],
+    "signature" : "javax.naming.NamingEnumeration javax.naming.directory.DirContext.search(java.lang.String, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "javax.naming.directory.DirContext",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE90" ],
+    "known" : true,
+    "body" : "public abstract NamingEnumeration<SearchResult> search(String name, String filterExpr, Object[] filterArgs, SearchControls cons) throws NamingException {}",
+    "javadoc" : {
+      "method" : "/**\n * Searches in the named context or object for entries that satisfy the\n * given search filter.  Performs the search as specified by\n * the search controls.\n * See {@link #search(Name, String, Object[], SearchControls)} for details.\n *\n * @param name\n *          the name of the context or object to search\n * @param filterExpr\n *          the filter expression to use for the search.\n *          The expression may contain variables of the\n *          form \"<code>{i}</code>\" where <code>i</code>\n *          is a nonnegative integer.  May not be null.\n * @param filterArgs\n *          the array of arguments to substitute for the variables\n *          in <code>filterExpr</code>.  The value of\n *          <code>filterArgs[i]</code> will replace each\n *          occurrence of \"<code>{i}</code>\".\n *          If null, equivalent to an empty array.\n * @param cons\n *          the search controls that control the search.  If null,\n *          the default search controls are used (equivalent\n *          to {@code (new SearchControls())}).\n * @return  an enumeration of {@code SearchResult}s of the objects\n *          that satisfy the filter; never null\n *\n * @throws  ArrayIndexOutOfBoundsException if {@code filterExpr} contains\n *          <code>{i}</code> expressions where <code>i</code> is outside\n *          the bounds of the array <code>filterArgs</code>\n * @throws  InvalidSearchControlsException if {@code cons} contains\n *          invalid settings\n * @throws  InvalidSearchFilterException if {@code filterExpr} with\n *          {@code filterArgs} represents an invalid search filter\n * @throws  NamingException if a naming exception is encountered\n */\n",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "javax.naming.NamingEnumeration",
+    "interface" : true
+  }, {
+    "name" : "javax.naming.directory.InitialDirContext.search",
+    "parameters" : [ "java.lang.String", "java.lang.String", "javax.naming.directory.SearchControls" ],
+    "signature" : "javax.naming.NamingEnumeration javax.naming.directory.InitialDirContext.search(java.lang.String, java.lang.String, javax.naming.directory.SearchControls)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "javax.naming.directory.InitialDirContext",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE90" ],
+    "known" : true,
+    "body" : "public NamingEnumeration<SearchResult> search(String name, String filter, SearchControls cons) throws NamingException {\r\n    return getURLOrDefaultInitDirCtx(name).search(name, filter, cons);\r\n}",
+    "javadoc" : {
+      "method" : "",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "javax.naming.NamingEnumeration",
+    "interface" : false
+  }, {
+    "name" : "javax.naming.directory.InitialDirContext.search",
+    "parameters" : [ "java.lang.String", "java.lang.String", "java.lang.Object[]", "javax.naming.directory.SearchControls" ],
+    "signature" : "javax.naming.NamingEnumeration javax.naming.directory.InitialDirContext.search(java.lang.String, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "javax.naming.directory.InitialDirContext",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE90" ],
+    "known" : true,
+    "body" : "public NamingEnumeration<SearchResult> search(String name, String filterExpr, Object[] filterArgs, SearchControls cons) throws NamingException {\r\n    return getURLOrDefaultInitDirCtx(name).search(name, filterExpr, filterArgs, cons);\r\n}",
+    "javadoc" : {
+      "method" : "",
+      "class" : ""
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "javax.naming.NamingEnumeration",
+    "interface" : false
+  }, {
+    "name" : "java.sql.Connection.prepareStatement",
+    "parameters" : [ "java.lang.String" ],
+    "signature" : "java.sql.PreparedStatement java.sql.Connection.prepareStatement(java.lang.String)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.sql.Connection",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE89" ],
+    "known" : true,
+    "body" : " abstract PreparedStatement prepareStatement(String sql) throws SQLException {}",
+    "javadoc" : {
+      "method" : "/**\n * Creates a {@code PreparedStatement} object for sending\n * parameterized SQL statements to the database.\n * <P>\n * A SQL statement with or without IN parameters can be\n * pre-compiled and stored in a {@code PreparedStatement} object. This\n * object can then be used to efficiently execute this statement\n * multiple times.\n *\n * <P><B>Note:</B> This method is optimized for handling\n * parametric SQL statements that benefit from precompilation. If\n * the driver supports precompilation,\n * the method {@code prepareStatement} will send\n * the statement to the database for precompilation. Some drivers\n * may not support precompilation. In this case, the statement may\n * not be sent to the database until the {@code PreparedStatement}\n * object is executed.  This has no direct effect on users; however, it does\n * affect which methods throw certain {@code SQLException} objects.\n * <P>\n * Result sets created using the returned {@code PreparedStatement}\n * object will by default be type {@code TYPE_FORWARD_ONLY}\n * and have a concurrency level of {@code CONCUR_READ_ONLY}.\n * The holdability of the created result sets can be determined by\n * calling {@link #getHoldability}.\n *\n * @param sql an SQL statement that may contain one or more '?' IN\n * parameter placeholders\n * @return a new default {@code PreparedStatement} object containing the\n * pre-compiled SQL statement\n * @throws SQLException if a database access error occurs\n * or this method is called on a closed connection\n */\n",
+      "class" : "/**\n * <P>A connection (session) with a specific\n * database. SQL statements are executed and results are returned\n * within the context of a connection.\n * <P>\n * A {@code Connection} object's database is able to provide information\n * describing its tables, its supported SQL grammar, its stored\n * procedures, the capabilities of this connection, and so on. This\n * information is obtained with the {@code getMetaData} method.\n *\n * <P><B>Note:</B> When configuring a {@code Connection}, JDBC applications\n *  should use the appropriate {@code Connection} method such as\n *  {@code setAutoCommit} or {@code setTransactionIsolation}.\n *  Applications should not invoke SQL commands directly to change the connection's\n *   configuration when there is a JDBC method available.  By default a {@code Connection} object is in\n * auto-commit mode, which means that it automatically commits changes\n * after executing each statement. If auto-commit mode has been\n * disabled, the method {@code commit} must be called explicitly in\n * order to commit changes; otherwise, database changes will not be saved.\n * <P>\n * A new {@code Connection} object created using the JDBC 2.1 core API\n * has an initially empty type map associated with it. A user may enter a\n * custom mapping for a UDT in this type map.\n * When a UDT is retrieved from a data source with the\n * method {@code ResultSet.getObject}, the {@code getObject} method\n * will check the connection's type map to see if there is an entry for that\n * UDT.  If so, the {@code getObject} method will map the UDT to the\n * class indicated.  If there is no entry, the UDT will be mapped using the\n * standard mapping.\n * <p>\n * A user may create a new type map, which is a {@code java.util.Map}\n * object, make an entry in it, and pass it to the {@code java.sql}\n * methods that can perform custom mapping.  In this case, the method\n * will use the given type map instead of the one associated with\n * the connection.\n * <p>\n * For example, the following code fragment specifies that the SQL\n * type {@code ATHLETES} will be mapped to the class\n * {@code Athletes} in the Java programming language.\n * The code fragment retrieves the type map for the {@code Connection\n * } object {@code con}, inserts the entry into it, and then sets\n * the type map with the new entry as the connection's type map.\n * <pre>\n *      java.util.Map map = con.getTypeMap();\n *      map.put(\"mySchemaName.ATHLETES\", Class.forName(\"Athletes\"));\n *      con.setTypeMap(map);\n * </pre>\n *\n * @see DriverManager#getConnection\n * @see Statement\n * @see ResultSet\n * @see DatabaseMetaData\n * @since 1.1\n */\n"
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "java.sql.PreparedStatement",
+    "interface" : true
+  }, {
+    "name" : "java.sql.Connection.prepareCall",
+    "parameters" : [ "java.lang.String" ],
+    "signature" : "java.sql.CallableStatement java.sql.Connection.prepareCall(java.lang.String)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.sql.Connection",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE89" ],
+    "known" : true,
+    "body" : " abstract CallableStatement prepareCall(String sql) throws SQLException {}",
+    "javadoc" : {
+      "method" : "/**\n * Creates a {@code CallableStatement} object for calling\n * database stored procedures.\n * The {@code CallableStatement} object provides\n * methods for setting up its IN and OUT parameters, and\n * methods for executing the call to a stored procedure.\n *\n * <P><B>Note:</B> This method is optimized for handling stored\n * procedure call statements. Some drivers may send the call\n * statement to the database when the method {@code prepareCall}\n * is done; others\n * may wait until the {@code CallableStatement} object\n * is executed. This has no\n * direct effect on users; however, it does affect which method\n * throws certain SQLExceptions.\n * <P>\n * Result sets created using the returned {@code CallableStatement}\n * object will by default be type {@code TYPE_FORWARD_ONLY}\n * and have a concurrency level of {@code CONCUR_READ_ONLY}.\n * The holdability of the created result sets can be determined by\n * calling {@link #getHoldability}.\n *\n * @param sql an SQL statement that may contain one or more '?'\n * parameter placeholders. Typically this statement is specified using JDBC\n * call escape syntax.\n * @return a new default {@code CallableStatement} object containing the\n * pre-compiled SQL statement\n * @throws SQLException if a database access error occurs\n * or this method is called on a closed connection\n */\n",
+      "class" : "/**\n * <P>A connection (session) with a specific\n * database. SQL statements are executed and results are returned\n * within the context of a connection.\n * <P>\n * A {@code Connection} object's database is able to provide information\n * describing its tables, its supported SQL grammar, its stored\n * procedures, the capabilities of this connection, and so on. This\n * information is obtained with the {@code getMetaData} method.\n *\n * <P><B>Note:</B> When configuring a {@code Connection}, JDBC applications\n *  should use the appropriate {@code Connection} method such as\n *  {@code setAutoCommit} or {@code setTransactionIsolation}.\n *  Applications should not invoke SQL commands directly to change the connection's\n *   configuration when there is a JDBC method available.  By default a {@code Connection} object is in\n * auto-commit mode, which means that it automatically commits changes\n * after executing each statement. If auto-commit mode has been\n * disabled, the method {@code commit} must be called explicitly in\n * order to commit changes; otherwise, database changes will not be saved.\n * <P>\n * A new {@code Connection} object created using the JDBC 2.1 core API\n * has an initially empty type map associated with it. A user may enter a\n * custom mapping for a UDT in this type map.\n * When a UDT is retrieved from a data source with the\n * method {@code ResultSet.getObject}, the {@code getObject} method\n * will check the connection's type map to see if there is an entry for that\n * UDT.  If so, the {@code getObject} method will map the UDT to the\n * class indicated.  If there is no entry, the UDT will be mapped using the\n * standard mapping.\n * <p>\n * A user may create a new type map, which is a {@code java.util.Map}\n * object, make an entry in it, and pass it to the {@code java.sql}\n * methods that can perform custom mapping.  In this case, the method\n * will use the given type map instead of the one associated with\n * the connection.\n * <p>\n * For example, the following code fragment specifies that the SQL\n * type {@code ATHLETES} will be mapped to the class\n * {@code Athletes} in the Java programming language.\n * The code fragment retrieves the type map for the {@code Connection\n * } object {@code con}, inserts the entry into it, and then sets\n * the type map with the new entry as the connection's type map.\n * <pre>\n *      java.util.Map map = con.getTypeMap();\n *      map.put(\"mySchemaName.ATHLETES\", Class.forName(\"Athletes\"));\n *      con.setTypeMap(map);\n * </pre>\n *\n * @see DriverManager#getConnection\n * @see Statement\n * @see ResultSet\n * @see DatabaseMetaData\n * @since 1.1\n */\n"
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "java.sql.CallableStatement",
+    "interface" : true
+  }, {
+    "name" : "java.sql.Connection.prepareStatement",
+    "parameters" : [ "java.lang.String", "int", "int" ],
+    "signature" : "java.sql.PreparedStatement java.sql.Connection.prepareStatement(java.lang.String, int, int)",
+    "framework" : "",
+    "link" : "",
+    "comment" : "java.sql.Connection",
+    "discovery" : "find-sec-bugs",
+    "dataIn" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "dataOut" : {
+      "parameters" : [ ],
+      "return" : false
+    },
+    "srm" : [ "sink" ],
+    "cwe" : [ "CWE89" ],
+    "known" : true,
+    "body" : " abstract PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {}",
+    "javadoc" : {
+      "method" : "/**\n *\n * Creates a {@code PreparedStatement} object that will generate\n * {@code ResultSet} objects with the given type and concurrency.\n * This method is the same as the {@code prepareStatement} method\n * above, but it allows the default result set\n * type and concurrency to be overridden.\n * The holdability of the created result sets can be determined by\n * calling {@link #getHoldability}.\n *\n * @param sql a {@code String} object that is the SQL statement to\n *            be sent to the database; may contain one or more '?' IN\n *            parameters\n * @param resultSetType a result set type; one of\n *         {@code ResultSet.TYPE_FORWARD_ONLY},\n *         {@code ResultSet.TYPE_SCROLL_INSENSITIVE}, or\n *         {@code ResultSet.TYPE_SCROLL_SENSITIVE}\n * @param resultSetConcurrency a concurrency type; one of\n *         {@code ResultSet.CONCUR_READ_ONLY} or\n *         {@code ResultSet.CONCUR_UPDATABLE}\n * @return a new PreparedStatement object containing the\n * pre-compiled SQL statement that will produce {@code ResultSet}\n * objects with the given type and concurrency\n * @throws SQLException if a database access error occurs, this\n * method is called on a closed connection\n *         or the given parameters are not {@code ResultSet}\n *         constants indicating type and concurrency\n * @throws SQLFeatureNotSupportedException if the JDBC driver does not support\n * this method or this method is not supported for the specified result\n * set type and result set concurrency.\n * @since 1.2\n */\n",
+      "class" : "/**\n * <P>A connection (session) with a specific\n * database. SQL statements are executed and results are returned\n * within the context of a connection.\n * <P>\n * A {@code Connection} object's database is able to provide information\n * describing its tables, its supported SQL grammar, its stored\n * procedures, the capabilities of this connection, and so on. This\n * information is obtained with the {@code getMetaData} method.\n *\n * <P><B>Note:</B> When configuring a {@code Connection}, JDBC applications\n *  should use the appropriate {@code Connection} method such as\n *  {@code setAutoCommit} or {@code setTransactionIsolation}.\n *  Applications should not invoke SQL commands directly to change the connection's\n *   configuration when there is a JDBC method available.  By default a {@code Connection} object is in\n * auto-commit mode, which means that it automatically commits changes\n * after executing each statement. If auto-commit mode has been\n * disabled, the method {@code commit} must be called explicitly in\n * order to commit changes; otherwise, database changes will not be saved.\n * <P>\n * A new {@code Connection} object created using the JDBC 2.1 core API\n * has an initially empty type map associated with it. A user may enter a\n * custom mapping for a UDT in this type map.\n * When a UDT is retrieved from a data source with the\n * method {@code ResultSet.getObject}, the {@code getObject} method\n * will check the connection's type map to see if there is an entry for that\n * UDT.  If so, the {@code getObject} method will map the UDT to the\n * class indicated.  If there is no entry, the UDT will be mapped using the\n * standard mapping.\n * <p>\n * A user may create a new type map, which is a {@code java.util.Map}\n * object, make an entry in it, and pass it to the {@code java.sql}\n * methods that can perform custom mapping.  In this case, the method\n * will use the given type map instead of the one associated with\n * the connection.\n * <p>\n * For example, the following code fragment specifies that the SQL\n * type {@code ATHLETES} will be mapped to the class\n * {@code Athletes} in the Java programming language.\n * The code fragment retrieves the type map for the {@code Connection\n * } object {@code con}, inserts the entry into it, and then sets\n * the type map with the new entry as the connection's type map.\n * <pre>\n *      java.util.Map map = con.getTypeMap();\n *      map.put(\"mySchemaName.ATHLETES\", Class.forName(\"Athletes\"));\n *      con.setTypeMap(map);\n * </pre>\n *\n * @see DriverManager#getConnection\n * @see Statement\n * @see ResultSet\n * @see DatabaseMetaData\n * @since 1.1\n */\n"
+    },
+    "applicationMethod" : false,
+    "jar" : "jdk-17-src.zip",
+    "return" : "java.sql.PreparedStatement",
+    "interface" : true
+  } ]
+}
