@@ -1,0 +1,6 @@
+requests
+langchain_openai
+openai
+vllm
+scikit-learn
+pytest
