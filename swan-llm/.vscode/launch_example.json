@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Eval Runner",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/llm_eval/src/runner.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--bechmark_path",
+                "${workspaceFolder}/dataset/sample.json",
+                "--prompt_id",
+                "prompt_1",
+                // MODELS
+                // "--models",
+                // "qwen2-it:7b",
+                // "qwen2-it:72b",
+                // "gemma-it:9b",
+                // "gemma-it:27b",
+                // "gemma-it:2b",
+                // "codellama-it:7b",
+                // "codellama-it:13b",
+                // "codellama-it:34b",
+                // "metaLlama-it:8b",
+                // "metaLlama-it:70b",
+                // "codellama-python:7b",
+                // "codellama-python:13b",
+                // "codellama-python:34b",
+                // "tinyllama:1.1b",
+                // "phi3-small-it:7.3b",
+                // "phi3-medium-it:14b",
+                // "phi3-mini-it:3.8b",
+                // "mixtral-v0.1-it:8x22b",
+                // "mixtral-v0.1-it:8x7b",
+                // "mistral-v0.3-it:7b",
+                // "mistral-nemo-it-2407:12.2b",
+                // "mistral-large-it-2407:123b",
+                // "codestral-v0.1:22b",
+                // CUSTOM MODELS
+                // "--custom_models",
+                // "TinyLlama-1.1B-Chat-v1.0-finetuned",
+                // OPENAI MODELS
+                "--openai_models",
+                "gpt-3.5-turbo",
+                // OTHER ARGS
+                "--hf_token",
+                "hf_<>",
+                "--openai_key",
+                "sk-<>",
+                "--enable_streaming",
+                "True",
+                "--models_config",
+                "${work${workspaceFolder}/llm_eval/src/models_config.yaml",
+                "--results_dir",
+                "${work${workspaceFolder}/.scrapy/results"
+            ]
+        }
+    ]
+}
