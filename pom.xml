@@ -65,8 +65,8 @@
     </properties>
 
     <modules>
-        <module>coverage-doclet</module>
-        <module>xml-doclet</module>
-        <module>swan-cmd</module>
+        <module>cli</module>
+        <module>doclets/coverage-doclet</module>
+        <module>doclets/xml-doclet</module>
     </modules>
 </project>
