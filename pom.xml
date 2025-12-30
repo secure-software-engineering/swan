@@ -67,7 +67,6 @@
     <modules>
         <module>coverage-doclet</module>
         <module>xml-doclet</module>
-        <module>ml2plan-model-selection</module>
         <module>swan-cmd</module>
     </modules>
 </project>
