@@ -1,4 +1,4 @@
-@relation weka-code-br-v6
+@relation 'weka-code-br-v6:-C 25'
 
 @attribute '<Return type is User>' {true,false}
 @attribute '<Method is part of class that contains the name bind>' {true,false}
@@ -25,7 +25,7 @@
 @attribute '<Method credential invoked>' {true,false}
 @attribute '<Method name contains authori>' {true,false}
 @attribute '<Method is part of inner class>' {true,false}
-@attribute CWE863 {0,1}
+@attribute CWE862 {0,1}
 
 @data
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,true,false,false,false,false,false,1
@@ -158,7 +158,7 @@ false,false,false,false,false,false,false,false,false,false,false,false,true,fal
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,true,true,?,false,false,?,true,true,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,true,true,?,false,false,?,true,true,?,false,false,false,?,false,false,false,?,false,false,0
-true,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false,false,0
+true,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false,false,1
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -352,7 +352,7 @@ false,false,false,false,false,false,false,false,false,false,false,false,true,fal
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,false,false,false,false,false,false,false,true,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,1
+false,false,false,false,false,false,false,false,false,true,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
@@ -421,7 +421,7 @@ false,false,false,false,false,false,false,true,false,false,true,false,true,false
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
+false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,1
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,true,true,?,false,false,?,true,true,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -786,7 +786,7 @@ false,false,false,false,false,false,false,false,false,false,false,false,true,fal
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
+false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,1
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -1239,7 +1239,7 @@ false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,fals
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
+false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,1
 false,false,false,false,false,false,false,false,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -1318,7 +1318,7 @@ false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,fals
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
-true,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false,false,0
+true,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false,false,1
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -1415,7 +1415,7 @@ false,true,false,false,false,false,false,false,false,false,false,false,true,fals
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,true,false,false,false,0
+false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,true,false,false,false,1
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,1
@@ -1498,7 +1498,7 @@ false,false,false,false,false,false,false,false,false,false,false,false,true,fal
 false,false,false,false,false,false,false,false,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,false,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
+false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,1
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -1558,7 +1558,7 @@ false,false,false,false,false,false,false,true,false,false,false,false,true,fals
 false,false,false,false,false,false,true,true,?,false,false,?,true,true,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,true,false,false,false,0
+false,false,true,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,true,false,false,false,1
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
@@ -1623,7 +1623,7 @@ false,false,false,false,false,false,false,false,false,false,false,false,true,fal
 false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
-true,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,true,true,false,true,false,0
+true,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,true,true,false,true,false,1
 false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0
 false,false,false,false,false,false,false,true,?,false,false,?,true,false,?,false,false,false,?,false,false,false,?,false,false,0
 false,false,false,false,false,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,0

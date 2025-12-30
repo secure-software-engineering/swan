@@ -1,4 +1,4 @@
-@relation weka-code-br-v6
+@relation 'weka-code-br-v6:-C 50'
 
 @attribute '<Method is part of class that contains the name authen>' {true,false}
 @attribute '<Method name contains authen>' {true,false}

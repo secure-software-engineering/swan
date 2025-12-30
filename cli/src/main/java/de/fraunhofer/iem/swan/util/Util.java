@@ -351,4 +351,129 @@ public class Util {
         }
         return results.toString();
     }
+
+    /**
+     * Counts the number of methods that have doc comments for each class.
+     *
+     * @param methods set of methods
+     * @return report showing distribution of categories
+     */
+    public static String countCategoriesGroup(Set<Method> methods) {
+
+        HashMap<String, Integer> results = new HashMap<>();
+
+        //Add counters for classes and methods
+        results.put("all-methods", 0);
+        results.put("all-classes", 0);
+
+        //Add counters for all categories
+        for (Category category : Category.values())
+            results.put(category.toString(), 0);
+
+        Set<Category> cats = new HashSet<>();
+        cats.add(Category.SOURCE);
+        cats.add(Category.SINK);
+        cats.add(Category.SANITIZER);
+        cats.add(Category.PROPAGATOR);
+        cats.add(Category.AUTHENTICATION);
+        cats.add(Category.NONE);
+        cats.add(Category.CWE78);
+        cats.add(Category.CWE79);
+        cats.add(Category.CWE89);
+        cats.add(Category.CWE306);
+        cats.add(Category.CWE601);
+        cats.add(Category.CWE862);
+        cats.add(Category.CWE863);
+        cats.add(Category.CWE_NONE);
+
+        //System.out.println("method, sink, source, sanitizer, propagator, auth, srm-none, cwe78, cwe79, cwe89, cwe306, cwe601 cwe862, cwe863, cwe-none, cwe-other");
+
+        for (Method met : methods) {
+
+            StringBuffer bf = new StringBuffer();
+
+            bf.append(met.getArffSafeSignature() + ",");
+
+            /*
+            if (met.getSrm().contains(Category.SINK))
+                System.out.println(met.getArffSafeSignature() + ",sink");
+
+
+            if (met.getSrm().contains(Category.SOURCE))
+                System.out.println(met.getArffSafeSignature() + ",source");
+
+
+            if (met.getSrm().contains(Category.SANITIZER))
+                System.out.println(met.getArffSafeSignature() + ",sanitizer");
+
+
+            if (met.getSrm().contains(Category.PROPAGATOR))
+                System.out.println(met.getArffSafeSignature() + ",propagator");
+
+
+            if (met.getSrm().contains(Category.AUTHENTICATION_NEUTRAL) ||
+                    met.getSrm().contains(Category.AUTHENTICATION_TO_HIGH)
+                    || met.getSrm().contains(Category.AUTHENTICATION_TO_LOW))
+                System.out.println(met.getArffSafeSignature() + ",auth");
+
+
+            if (met.getSrm().isEmpty())
+                System.out.println(met.getArffSafeSignature() + ",srm-none");
+
+
+            if (met.getCwe().contains(Category.CWE78))
+                System.out.println(met.getArffSafeSignature() + ",cwe78");
+
+
+            if (met.getCwe().contains(Category.CWE79))
+                System.out.println(met.getArffSafeSignature() + ",cwe79");
+
+
+            if (met.getCwe().contains(Category.CWE89))
+                System.out.println(met.getArffSafeSignature() + ",cwe89");
+
+
+            if (met.getCwe().contains(Category.CWE306))
+                System.out.println(met.getArffSafeSignature() + ",cwe306");
+
+
+            if (met.getCwe().contains(Category.CWE601))
+                System.out.println(met.getArffSafeSignature() + ",cwe601");
+
+
+            if (met.getCwe().contains(Category.CWE862))
+                System.out.println(met.getArffSafeSignature() + ",cwe862");
+
+
+            if (met.getCwe().contains(Category.CWE863))
+                System.out.println(met.getArffSafeSignature() + ",cwe863");
+
+
+            if (met.getCwe().isEmpty())
+                System.out.println(met.getArffSafeSignature() + ",cwe-none");
+*/
+
+            int count = 0;
+            for (Category category : met.getCwe()) {
+
+                if (!category.name().contains(Category.CWE78.toString()) || !category.name().contains(Category.CWE79.toString())
+                        || !category.name().contains(Category.CWE89.toString()) || !category.name().contains(Category.CWE306.toString())
+                        || !category.name().contains(Category.CWE601.toString()) || !category.name().contains(Category.CWE862.toString())
+                        || !category.name().contains(Category.CWE863.toString()))
+                    count++;
+            }
+
+            /*if (count > 0)
+                System.out.println(met.getArffSafeSignature() + ",other");*/
+
+
+            // System.out.println(met.getArffSafeSignature());
+
+            results.put("all-methods", results.get("all-methods") + 1);
+
+
+        }
+        System.out.println("---------------");
+        return results.toString();
+    }
 }
