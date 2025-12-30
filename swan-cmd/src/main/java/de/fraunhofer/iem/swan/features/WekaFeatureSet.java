@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan.features;
 
+import de.fraunhofer.iem.srm.dataset.Category;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
@@ -52,7 +52,6 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
                 //Create and set attributes for the train instances
                 ArrayList<Attribute> trainAttributes = createAttributes(category, dataset.getTrainMethods());
-                structures.put(category.getId().toLowerCase(), new Instances("weka-", trainAttributes, 0));
 
                 Instances trainInstances = createInstances(trainAttributes, dataset.getTrainMethods(), Collections.singleton(category));
 
@@ -61,7 +60,9 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
                 trainInstances.setClassIndex(trainInstances.numAttributes() - 1);
                 this.trainInstances.put(category.getId().toLowerCase(), trainInstances);
-                Util.exportInstancesToArff(trainInstances, category.getId());
+
+                logger.info("Instances exported to: {}", Util.exportInstancesToArff(trainInstances, "swan-" + category.getId()));
+
             }
         } else {
 
@@ -140,6 +141,7 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
         }
     }
 
+
     public Instances filterInstances(Instances instances, Set<Method> methods) {
 
         Set<String> train = methods.stream().map(Method::getArffSafeSignature).collect(Collectors.toSet());
@@ -186,7 +188,6 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
             attributeSelection.SelectAttributes(instances);
             filteredInstances = attributeSelection.reduceDimensionality(instances);
 
-            System.out.println(attributeSelection.toResultsString());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -231,7 +232,6 @@ public class WekaFeatureSet extends FeatureSet implements IFeatureSet {
 
         return attributes;
     }
-
 
     public HashSet<Category> getCategories(Category cat) {
 

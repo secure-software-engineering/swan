@@ -19,9 +19,9 @@ public class DeprecatedTagCountFeature extends TagCountFeature implements IDocFe
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getJavadoc().getClassComment(),
+        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getDocumentation().getClassComment(),
                 Constants.TAG.DEPRECATED));
-        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getJavadoc().getMethodComment(),
+        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getDocumentation().getMethodComment(),
                 Constants.TAG.DEPRECATED));
 
         return unprocessedDocResult;

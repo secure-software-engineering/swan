@@ -1,7 +1,9 @@
 package de.fraunhofer.iem.swan.io.dataset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
+import de.fraunhofer.iem.srm.dataset.Documentation;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.io.doc.Javadoc;
 import de.fraunhofer.iem.swan.io.doc.ssldoclet.MethodBlockType;
 import org.slf4j.Logger;
@@ -18,9 +20,9 @@ import java.util.Set;
  * @author Lisa Nguyen Quang Do
  */
 
-public class SrmListUtils {
+public class SrmDatasetUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(SrmListUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(SrmDatasetUtils.class);
 
     /**
      * Imports SRMs from JSON file.
@@ -28,24 +30,24 @@ public class SrmListUtils {
      * @param file JSON File that stores security-relevant methods
      * @return object containing all security-relevant methods
      */
-    public static SrmList importFile(String file) throws IOException {
+    public static SrmDataset importFile(String file) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        return objectMapper.readValue(new File(file), SrmList.class);
+        return objectMapper.readValue(new File(file), SrmDataset.class);
     }
 
     /**
      * Exports SRM list to JSON file.
      *
-     * @param srmList list of SRMa
+     * @param SrmDataset list of SRMa
      * @param file    path of JSON file
      */
-    public static void exportFile(SrmList srmList, String file) throws IOException {
+    public static void exportFile(SrmDataset SrmDataset, String file) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File(file), srmList);
-        logger.info("Exporting {} SRMs to {}", srmList.getMethods().size(), file);
+        objectMapper.writeValue(new File(file), SrmDataset);
+        logger.info("Exporting {} SRMs to {}", SrmDataset.getMethods().size(), file);
     }
 
     /**
@@ -66,20 +68,20 @@ public class SrmListUtils {
 
                 if (method != null) {
 
-                    de.fraunhofer.iem.swan.data.Javadoc javadoc = new de.fraunhofer.iem.swan.data.Javadoc();
+                    Documentation documentation = new Documentation();
 
                     if (doc.getPackageBlock().getClassBlock().getClassCommentBlock() != null) {
                         String classComment = doc.getPackageBlock().getClassBlock().getClassCommentBlock().getClassComment().getValue();
 
-                        javadoc.setClassComment(classComment);
+                        documentation.setClassComment(classComment);
                     }
 
                     if (methodBlock.getMethodCommentBlock() != null) {
                         String methodComment = methodBlock.getMethodCommentBlock().getMethodComment().getValue();
 
-                        javadoc.setMethodComment(methodComment);
+                        documentation.setMethodComment(methodComment);
                     }
-                    method.setJavadoc(javadoc);
+                    method.setDocumentation(documentation);
                 }
             }
         }

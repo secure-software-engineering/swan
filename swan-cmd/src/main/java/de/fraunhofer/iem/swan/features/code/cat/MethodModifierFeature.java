@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.code.cat;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.code.FeatureResult;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
 

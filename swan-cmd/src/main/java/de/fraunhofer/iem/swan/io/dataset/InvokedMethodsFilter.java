@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.io.dataset;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import java.util.HashSet;
 import java.util.Set;
 

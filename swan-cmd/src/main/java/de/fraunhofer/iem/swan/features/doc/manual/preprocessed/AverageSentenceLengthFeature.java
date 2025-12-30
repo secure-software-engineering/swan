@@ -22,8 +22,8 @@ public class AverageSentenceLengthFeature implements IDocFeature {
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        Document classComment = new Document(annotatedMethod.getMethod().getJavadoc().getClassComment());
-        Document methodComment = new Document(annotatedMethod.getMethod().getJavadoc().getMethodComment());
+        Document classComment = new Document(annotatedMethod.getMethod().getDocumentation().getClassComment());
+        Document methodComment = new Document(annotatedMethod.getMethod().getDocumentation().getMethodComment());
 
         unprocessedDocResult.setClassValue(calculateAverage(classComment));
         unprocessedDocResult.setMethodValue(calculateAverage(methodComment));

@@ -1,10 +1,10 @@
 package de.fraunhofer.iem.swan.model.toolkit;
 
+import de.fraunhofer.iem.srm.dataset.Category;
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import meka.classifiers.multilabel.Evaluation;
 import meka.classifiers.multilabel.LC;
@@ -39,7 +39,7 @@ public class Meka {
     /**
      * Trains and evaluates the model with the given training data and specified classification mode.
      */
-    public SrmList trainModel() {
+    public SrmDataset trainModel() {
 
         switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
             case VALIDATE:
@@ -53,7 +53,7 @@ public class Meka {
                         method.addCategory(category);
                     }
                 }
-                return new SrmList(methods);
+                return new SrmDataset(methods);
         }
         return null;
     }

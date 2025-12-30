@@ -3,7 +3,7 @@ package de.fraunhofer.iem.swan.features.code.type;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import soot.Body;
 import soot.Local;
 import soot.SootMethod;

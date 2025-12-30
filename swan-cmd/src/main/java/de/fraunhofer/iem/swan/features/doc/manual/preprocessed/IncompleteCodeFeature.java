@@ -25,8 +25,8 @@ public class IncompleteCodeFeature implements IDocFeature {
 
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
-        featureResult.setMethodValue(countWords(annotatedMethod.getMethod().getJavadoc().getMethodComment()));
-        featureResult.setClassValue(countWords(annotatedMethod.getMethod().getJavadoc().getClassComment()));
+        featureResult.setMethodValue(countWords(annotatedMethod.getMethod().getDocumentation().getMethodComment()));
+        featureResult.setClassValue(countWords(annotatedMethod.getMethod().getDocumentation().getClassComment()));
 
         return featureResult;
     }

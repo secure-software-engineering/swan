@@ -2,7 +2,7 @@ package de.fraunhofer.iem.swan.features.code.type;
 
 import java.util.regex.Pattern;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 
 /**
  * This feature checks wether the method is part of an anonymous class or not.

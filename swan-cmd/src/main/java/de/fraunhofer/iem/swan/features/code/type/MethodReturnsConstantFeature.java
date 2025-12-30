@@ -1,8 +1,7 @@
 package de.fraunhofer.iem.swan.features.code.type;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import soot.Body;
-import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.Constant;
 import soot.jimple.ReturnStmt;

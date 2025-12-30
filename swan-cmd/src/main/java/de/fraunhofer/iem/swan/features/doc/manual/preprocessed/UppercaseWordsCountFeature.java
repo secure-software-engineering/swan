@@ -23,8 +23,8 @@ public class UppercaseWordsCountFeature implements IDocFeature {
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        unprocessedDocResult.setClassValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getJavadoc().getClassComment(), Constants.UPPERCASE_WORD_PATTERN));
-        unprocessedDocResult.setMethodValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getJavadoc().getMethodComment(), Constants.UPPERCASE_WORD_PATTERN));
+        unprocessedDocResult.setClassValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getDocumentation().getClassComment(), Constants.UPPERCASE_WORD_PATTERN));
+        unprocessedDocResult.setMethodValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getDocumentation().getMethodComment(), Constants.UPPERCASE_WORD_PATTERN));
 
         return unprocessedDocResult;
     }

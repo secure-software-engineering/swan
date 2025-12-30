@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.code.type;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import soot.Hierarchy;
 import soot.RefType;
 import soot.Scene;

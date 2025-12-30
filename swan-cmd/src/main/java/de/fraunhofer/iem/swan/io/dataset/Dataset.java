@@ -1,32 +1,33 @@
 package de.fraunhofer.iem.swan.io.dataset;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
 
 import java.util.Set;
 
 public class Dataset {
 
-    private SrmList train;
-    private SrmList test;
+    private SrmDataset train;
+    private SrmDataset test;
 
     public Dataset() {
-        train = new SrmList();
-        test = new SrmList();
+        train = new SrmDataset();
+        test = new SrmDataset();
     }
 
-    public SrmList getTrain() {
+    public SrmDataset getTrain() {
         return train;
     }
 
-    public void setTrain(SrmList train) {
+    public void setTrain(SrmDataset train) {
         this.train = train;
     }
 
-    public SrmList getTest() {
+    public SrmDataset getTest() {
         return test;
     }
 
-    public void setTest(SrmList test) {
+    public void setTest(SrmDataset test) {
         this.test = test;
     }
 

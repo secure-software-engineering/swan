@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.doc.nlp;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -42,11 +42,11 @@ public class CoreNLPExecutor {
 
             //Process method comments
             logger.debug("Annotating method {}", method.getSimpleSignature());
-            result.setMethodMap(getAnnotation(method.getJavadoc().getMethodComment()));
+            result.setMethodMap(getAnnotation(method.getDocumentation().getMethodComment()));
 
             //Process class comment
-            if (method.getJavadoc().getClassComment().length() > 0) {
-                result.setClassMap(getAnnotation(method.getJavadoc().getClassComment()));
+            if (method.getDocumentation().getClassComment().length() > 0) {
+                result.setClassMap(getAnnotation(method.getDocumentation().getClassComment()));
             }
             results.put(method.getSootSignature(), result);
         }

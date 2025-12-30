@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.features.code;
 
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Category;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.code.bow.SecurityVocabulary;
 import org.reflections.Reflections;
 import org.slf4j.Logger;

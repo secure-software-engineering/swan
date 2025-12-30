@@ -2,10 +2,9 @@ package de.fraunhofer.iem.swan.features.code.type;
 
 import java.util.*;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import soot.Body;
 import soot.SootClass;
-import soot.SootMethod;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.AssignStmt;

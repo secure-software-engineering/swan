@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.features.code;
 
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Category;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.code.type.*;
 import de.fraunhofer.iem.swan.features.code.type.MethodClassModifierFeature.ClassModifier;
 import de.fraunhofer.iem.swan.features.code.type.MethodModifierFeature.Modifier;

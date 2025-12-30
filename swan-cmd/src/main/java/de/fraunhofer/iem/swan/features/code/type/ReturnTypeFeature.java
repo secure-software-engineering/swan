@@ -1,7 +1,6 @@
 package de.fraunhofer.iem.swan.features.code.type;
 
-import de.fraunhofer.iem.swan.data.Method;
-import soot.SootMethod;
+import de.fraunhofer.iem.srm.dataset.Method;
 
 /**
  * Feature which checks the return type of a method

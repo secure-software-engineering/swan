@@ -1,10 +1,10 @@
 package de.fraunhofer.iem.swan.model.toolkit;
 
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Category;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.model.MonteCarloValidator;
 import javafx.util.Pair;
@@ -63,7 +63,7 @@ public class Weka {
      *
      * @return Hashmap containing the name of the classifier and it's F-Measure
      */
-    public SrmList trainModel() {
+    public SrmDataset trainModel() {
 
         switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
             case VALIDATE:
@@ -101,7 +101,7 @@ public class Weka {
                         method.addCategory(category);
                     }
                 }
-                return new SrmList(methods);
+                return new SrmDataset(methods);
         }
         return null;
     }

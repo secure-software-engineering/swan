@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan.io.doc;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.FeatureSet;
-import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
+import de.fraunhofer.iem.swan.io.dataset.SrmDatasetUtils;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.util.ArrayList;
@@ -39,10 +39,10 @@ public class JavadocProcessor {
 
             if (sourceDirectory.isDirectory()) {
                 for (File file : FileUtils.listFiles(sourceDirectory, new String[]{"jar"}, true)) {
-                    SrmListUtils.addDocComments(methods, processJar(file));
+                    SrmDatasetUtils.addDocComments(methods, processJar(file));
                 }
             } else {
-                SrmListUtils.addDocComments(methods, processJar(sourceDirectory));
+                SrmDatasetUtils.addDocComments(methods, processJar(sourceDirectory));
             }
         }
     }

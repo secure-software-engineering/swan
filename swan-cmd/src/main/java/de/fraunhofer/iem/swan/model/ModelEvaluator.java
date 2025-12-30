@@ -1,15 +1,15 @@
 package de.fraunhofer.iem.swan.model;
 
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
 import de.fraunhofer.iem.swan.io.dataset.InvokedMethodsFilter;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Category;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.IFeatureSet;
 import de.fraunhofer.iem.swan.features.MekaFeatureSet;
 import de.fraunhofer.iem.swan.features.WekaFeatureSet;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
-import de.fraunhofer.iem.swan.io.dataset.SrmListUtils;
+import de.fraunhofer.iem.swan.io.dataset.SrmDatasetUtils;
 import de.fraunhofer.iem.swan.model.toolkit.Meka;
 import de.fraunhofer.iem.swan.model.toolkit.Weka;
 import org.slf4j.Logger;
@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Finds possible sources and sinks in a given set of system methods using a
@@ -41,14 +42,14 @@ public class ModelEvaluator {
     private IFeatureSet features;
     private SwanOptions options;
     private Dataset dataset;
-    private SrmList predictedSrmList;
+    private SrmDataset srmDataset;
     private static final Logger logger = LoggerFactory.getLogger(ModelEvaluator.class);
 
     public ModelEvaluator(IFeatureSet features, SwanOptions options, Dataset dataset) {
         this.features = features;
         this.options = options;
         this.dataset = dataset;
-        predictedSrmList = new SrmList();
+        srmDataset = new SrmDataset();
     }
 
     /**
@@ -72,16 +73,19 @@ public class ModelEvaluator {
         }
     }
 
-    public void processResults(SrmList srmList) {
+    public void processResults(SrmDataset srmDataset) {
 
         switch (ModelEvaluator.Phase.valueOf(options.getPhase().toUpperCase())) {
             case PREDICT:
 
-                if (srmList != null)
-                    predictedSrmList = srmList;
+                if (srmDataset != null)
+                    this.srmDataset = srmDataset;
 
-                predictedSrmList.removeUnclassifiedMethods();
-                logger.info("{} SRMs detected", predictedSrmList.getMethods().size());
+                this.srmDataset.getMethods().stream().filter(m -> m.getAllCategories().size() > 0)
+                        .collect(Collectors.toSet());
+
+
+                logger.info("{} SRMs detected", this.srmDataset.getMethods().size());
 
                 Set<Method> srmRepo = new HashSet<>();
 
@@ -93,14 +97,14 @@ public class ModelEvaluator {
                         }
                     }
                     logger.info("Adding {} SRMs from repository", srmRepo.size());
-                    predictedSrmList.addMethods(srmRepo);
+                    this.srmDataset.getMethods().addAll(srmRepo);
 
                 }
 
                 try {
                     if (!options.getOutputDir().isEmpty()){
-                        predictedSrmList.addMethods(InvokedMethodsFilter.getKnownInvokedMethods());
-                        SrmListUtils.exportFile(predictedSrmList, options.getOutputDir() + File.separator + "detected-srm.json");
+                        this.srmDataset.getMethods().addAll(InvokedMethodsFilter.getKnownInvokedMethods());
+                        SrmDatasetUtils.exportFile(this.srmDataset, options.getOutputDir() + File.separator + "detected-srm.json");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -109,7 +113,7 @@ public class ModelEvaluator {
         }
     }
 
-    public SrmList getPredictedSrmList() {
-        return predictedSrmList;
+    public SrmDataset getSrmDataset() {
+        return srmDataset;
     }
 }

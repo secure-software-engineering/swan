@@ -20,9 +20,9 @@ public class LinkTagCountFeature extends TagCountFeature implements IDocFeature 
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getJavadoc().getClassComment(),
+        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getDocumentation().getClassComment(),
                 Constants.TAG.LINK));
-        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getJavadoc().getMethodComment(),
+        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getDocumentation().getMethodComment(),
                 Constants.TAG.LINK));
 
         return unprocessedDocResult;

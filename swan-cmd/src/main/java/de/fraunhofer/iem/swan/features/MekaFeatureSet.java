@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan.features;
 
+import de.fraunhofer.iem.srm.dataset.Category;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
 import de.fraunhofer.iem.swan.util.Util;
@@ -39,7 +39,10 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         if (options.getArffInstancesFiles().isEmpty()) {
 
             ArrayList<Attribute> trainAttributes = createAttributes(getCategories(options.getAllClasses()), dataset.getTrainMethods());
-            structure = new Instances("meka", trainAttributes, 0);
+            structure = new Instances("dev-assist:-C " +
+                    options.getAllClasses().size() +
+                    " -meka.filters.unsupervised.attribute.MekaClassAttributes-R1-" + options.getAllClasses().size(),
+                    trainAttributes, 0);
 
             Set<Method> methods = new HashSet<>(dataset.getTrainMethods());
 
@@ -49,8 +52,6 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             evaluateFeatureData(methods);
 
             trainingInstances = createInstances(new Instances(structure), trainAttributes, dataset.getTrainMethods(), getCategories(options.getAllClasses()));
-            logger.info("Instances exported to: {}", Util.exportInstancesToArff(trainingInstances, options.getFeatureSet().get(0)));
-
         } else {
 
             ArffLoader loader = new ArffLoader();
@@ -77,7 +78,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             }
         }
 
-        this.trainInstances.put("meka", convertToMekaInstances(trainingInstances));
+        this.trainInstances.put("meka", convertToMekaInstances(trainingInstances, options.getAllClasses().size()));
 
         //Set attributes for the test instances
         if (options.getPhase().toUpperCase().contentEquals(ModelEvaluator.Phase.PREDICT.name())) {
@@ -85,7 +86,7 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
             createAttributes(getCategories(options.getAllClasses()), dataset.getTestMethods());
             evaluateFeatureData(dataset.getTestMethods());
 
-            this.testInstances.put("meka", convertToMekaInstances(createTestSet()));
+            this.testInstances.put("meka", convertToMekaInstances(createTestSet(), options.getAllClasses().size()));
         }
     }
 
@@ -135,17 +136,18 @@ public class MekaFeatureSet extends FeatureSet implements IFeatureSet {
         return attributes;
     }
 
-    public Instances convertToMekaInstances(Instances instances) {
+    public Instances convertToMekaInstances(Instances instances, int classes) {
 
         MekaClassAttributes filter = new MekaClassAttributes();
         Instances output = null;
         try {
-            filter.setAttributeIndices("1-11");
+            filter.setAttributeIndices("1-" + classes);
             filter.setInputFormat(instances);
             output = Filter.useFilter(instances, filter);
-            output.setRelationName("swan-srm:" + output.relationName());
+            output.setRelationName("dev-assist:" + output.relationName());
 
-            Util.exportInstancesToArff(output, "meka");
+            logger.info("Instances exported to: {}", Util.exportInstancesToArff(output, "dev-assist"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

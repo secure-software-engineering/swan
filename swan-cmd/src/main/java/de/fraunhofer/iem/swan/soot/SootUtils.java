@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.soot;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import java.util.Arrays;
 
 public class SootUtils {

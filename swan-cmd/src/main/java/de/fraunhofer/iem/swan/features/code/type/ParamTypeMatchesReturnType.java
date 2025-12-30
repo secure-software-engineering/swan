@@ -2,7 +2,7 @@ package de.fraunhofer.iem.swan.features.code.type;
 
 import java.util.List;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 
 /**
  * Feature which checks the return type of a method

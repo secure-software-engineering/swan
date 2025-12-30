@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.doc;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.doc.embedding.DocCommentVector;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
@@ -48,12 +48,12 @@ public class DocFeatureHandler {
 
         for (Method method : methodSet) {
 
-            String docComment = NLPUtils.cleanFirstSentence(method.getJavadoc().getMethodComment()) + " " +
-                    NLPUtils.cleanFirstSentence(method.getJavadoc().getClassComment());
+            String docComment = NLPUtils.cleanFirstSentence(method.getDocumentation().getMethodComment()) + " " +
+                    NLPUtils.cleanFirstSentence(method.getDocumentation().getClassComment());
 
-            List<String> words = StringUtils.split(method.getJavadoc().getMethodComment(), " ");
+            List<String> words = StringUtils.split(method.getDocumentation().getMethodComment(), " ");
 
-            if (method.getJavadoc().getMethodComment().length() > 0 && words.size() > 1) {
+            if (method.getDocumentation().getMethodComment().length() > 0 && words.size() > 1) {
                 NDArray array = (NDArray) docCommentVector.getParagraphVectors().inferVector(docComment);
                 HashMap<String, Double> vectorValues = new HashMap<>();
 

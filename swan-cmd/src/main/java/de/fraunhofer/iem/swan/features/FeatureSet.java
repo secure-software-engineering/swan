@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan.features;
 
+import de.fraunhofer.iem.srm.dataset.Category;
 import de.fraunhofer.iem.swan.cli.SwanOptions;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import de.fraunhofer.iem.swan.features.code.CodeFeatureHandler;
 import de.fraunhofer.iem.swan.features.code.CodeBinaryRelevanceFeatureHandler;
 import de.fraunhofer.iem.swan.features.code.ICodeFeature;
@@ -12,6 +12,7 @@ import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;
 import de.fraunhofer.iem.swan.io.dataset.Dataset;
 import de.fraunhofer.iem.swan.model.ModelEvaluator;
+import org.apache.commons.lang3.StringUtils;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
@@ -271,7 +272,7 @@ public abstract class FeatureSet {
     public Instances createInstances(ArrayList<Attribute> attributes,
                                      Set<Method> methods, Set<Category> categories) {
 
-        Instances instances = new Instances("swan-srm", attributes, 0);
+        Instances instances = new Instances("swan-" + StringUtils.join(categories, "-") + ":-C " + (attributes.size()-1), attributes, 0);
 
         return createInstances(instances, attributes, methods, categories);
     }
@@ -469,8 +470,9 @@ public abstract class FeatureSet {
                 }
             } else if (method.getAllCategories().contains(cat)) {
                 inst.setValue(instances.attribute(cat.getId()), "1");
-            } else
+            } else {
                 inst.setValue(instances.attribute(cat.getId()), "0");
+            }
         }
         return inst;
     }

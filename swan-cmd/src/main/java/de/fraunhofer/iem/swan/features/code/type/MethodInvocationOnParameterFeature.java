@@ -3,8 +3,7 @@ package de.fraunhofer.iem.swan.features.code.type;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.fraunhofer.iem.swan.data.Method;
-import soot.SootMethod;
+import de.fraunhofer.iem.srm.dataset.Method;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.IdentityStmt;

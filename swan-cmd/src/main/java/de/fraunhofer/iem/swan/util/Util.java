@@ -1,8 +1,8 @@
 package de.fraunhofer.iem.swan.util;
 
+import de.fraunhofer.iem.srm.dataset.Category;
 import de.fraunhofer.iem.swan.SwanPipeline;
-import de.fraunhofer.iem.swan.data.Category;
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import org.apache.commons.io.FileUtils;
 import org.nd4j.common.io.ClassUtils;
 import org.slf4j.Logger;

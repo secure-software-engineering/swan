@@ -19,9 +19,9 @@ public class SeeTagCountFeature extends TagCountFeature implements IDocFeature {
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getJavadoc().getClassComment(),
+        unprocessedDocResult.setClassValue(countTags(annotatedMethod.getMethod().getDocumentation().getClassComment(),
                 Constants.TAG.SEE));
-        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getJavadoc().getMethodComment(),
+        unprocessedDocResult.setMethodValue(countTags(annotatedMethod.getMethod().getDocumentation().getMethodComment(),
                 Constants.TAG.SEE));
 
         return unprocessedDocResult;

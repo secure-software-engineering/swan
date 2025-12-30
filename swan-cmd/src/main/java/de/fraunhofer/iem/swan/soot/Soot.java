@@ -1,7 +1,7 @@
 package de.fraunhofer.iem.swan.soot;
 
-import de.fraunhofer.iem.swan.data.Method;
-import de.fraunhofer.iem.swan.io.dataset.SrmList;
+import de.fraunhofer.iem.srm.dataset.Method;
+import de.fraunhofer.iem.srm.dataset.SrmDataset;
 import de.fraunhofer.iem.swan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,15 +48,15 @@ public class Soot {
     /**
      * Purges list of methods and performs sanity check.
      *
-     * @param srmList SRM list to be cleaned.
+     * @param srmDataset SRM list to be cleaned.
      */
-    public void cleanupList(SrmList srmList) throws IOException {
+    public void cleanupList(SrmDataset srmDataset) throws IOException {
 
-        logger.info("Extracting {} methods from classpath", srmList.getMethods().size());
-        prefilterInterfaces(srmList.getMethods());
+        logger.info("Extracting {} methods from classpath", srmDataset.getMethods().size());
+        prefilterInterfaces(srmDataset.getMethods());
 
-        Util.createSubclassAnnotations(srmList.getMethods(), classpath);
-        Util.sanityCheck(srmList.getMethods(), new HashSet<>());
+        Util.createSubclassAnnotations(srmDataset.getMethods(), classpath);
+        Util.sanityCheck(srmDataset.getMethods(), new HashSet<>());
     }
 
     /**

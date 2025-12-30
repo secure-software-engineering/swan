@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.doc.manual.annotated;
 
-import de.fraunhofer.iem.swan.data.Category;
+import de.fraunhofer.iem.srm.dataset.Category;
 import de.fraunhofer.iem.swan.features.doc.manual.FeatureResult;
 import de.fraunhofer.iem.swan.features.doc.manual.IDocFeature;
 import de.fraunhofer.iem.swan.features.doc.nlp.AnnotatedMethod;

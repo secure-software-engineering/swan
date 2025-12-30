@@ -1,6 +1,6 @@
 package de.fraunhofer.iem.swan.features.doc.nlp;
 
-import de.fraunhofer.iem.swan.data.Method;
+import de.fraunhofer.iem.srm.dataset.Method;
 import edu.stanford.nlp.util.CoreMap;
 
 import java.util.List;

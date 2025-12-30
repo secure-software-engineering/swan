@@ -21,8 +21,8 @@ public class NumberCountFeature implements IDocFeature {
     @Override
     public FeatureResult evaluate(AnnotatedMethod annotatedMethod) {
 
-        unprocessedDocResult.setClassValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getJavadoc().getClassComment(), Constants.NUMBER_PATTERN));
-        unprocessedDocResult.setMethodValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getJavadoc().getMethodComment(), Constants.NUMBER_PATTERN));
+        unprocessedDocResult.setClassValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getDocumentation().getClassComment(), Constants.NUMBER_PATTERN));
+        unprocessedDocResult.setMethodValue(NLPUtils.regexCounter(annotatedMethod.getMethod().getDocumentation().getMethodComment(), Constants.NUMBER_PATTERN));
 
         return unprocessedDocResult;
     }
