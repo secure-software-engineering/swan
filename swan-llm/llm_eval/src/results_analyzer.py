@@ -9,40 +9,10 @@ import pandas as pd
 from pathlib import Path
 from sklearn.preprocessing import MultiLabelBinarizer
 
-VALID_LABELS_SRM = ["source", "propagator", "sanitizer", "sink", "none"]
+VALID_LABELS_SRM = ["source", "sanitizer", "sink", "none"]
 VALID_LABELS_CWE = [
-    "CWE-20",
-    "CWE-22",
-    "CWE-77",
-    "CWE-78",
     "CWE-79",
     "CWE-89",
-    "CWE-90",
-    "CWE-94",
-    "CWE-119",
-    "CWE-125",
-    "CWE-190",
-    "CWE-269",
-    "CWE-276",
-    "CWE-287",
-    "CWE-306",
-    "CWE-327",
-    "CWE-328",
-    "CWE-330",
-    "CWE-352",
-    "CWE-362",
-    "CWE-416",
-    "CWE-434",
-    "CWE-476",
-    "CWE-501",
-    "CWE-502",
-    "CWE-614",
-    "CWE-643",
-    "CWE-787",
-    "CWE-798",
-    "CWE-862",
-    "CWE-863",
-    "CWE-918",
     "none",
 ]
 
