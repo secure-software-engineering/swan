@@ -27,6 +27,8 @@ import torch
 import results_analyzer
 from tqdm import tqdm
 
+from openai_helpers import process_requests_for_azure
+
 AUTOFIX_WITH_OPENAI = False
 REQUEST_TIMEOUT = 60
 USE_MULTIPROCESSING_FOR_TERMINATION = True
@@ -192,6 +194,7 @@ def model_evaluation_openai(
     results_dst,
     use_system_prompt=False,
     evaluation_type="srm",
+    temperature: float = 0.0,
 ):
 
     results_dump_file = results_dst / f"{model_name}-{prompt_template}_results_dump.csv"
@@ -206,11 +209,22 @@ def model_evaluation_openai(
         for prompt in prompts:
             f.write(f"{prompt}\n")
 
-    request_outputs = openai_helpers.process_requests(
-        model_name,
-        prompts,
-        openai_key,
-        max_new_tokens=MAX_NEW_TOKENS,
+#    request_outputs = openai_helpers.process_requests(
+#        model_name,
+#        prompts,
+#        openai_key,
+#        max_new_tokens=MAX_NEW_TOKENS,
+#        max_workers=16,
+#    )
+
+    # Use the below for Azure OpenAI models and use the above for direct OpenAI models.
+    request_outputs = process_requests_for_azure(
+        prompts=prompts,
+        azure_endpoint="https://fhgenie-api-iem-dev-assist.openai.azure.com/",
+        azure_deployment=model_name,
+        azure_api_key=openai_key,
+        api_version="2024-06-01",
+        temperature=temperature,
         max_workers=16,
     )
 
@@ -244,43 +258,43 @@ def main_runner(args, runner_config, models_to_run, openai_models_models_to_run)
 
     dataset = load_dataset(bechmark_path)
 
-    for model in models_to_run:
+    for openai_model in models_to_run:
         gc.collect()
         torch.cuda.empty_cache()
-        if model["use_vllms_for_evaluation"]:
+        if openai_model["use_vllms_for_evaluation"]:
             pipe = vllm_helpers.initialize_engine(
-                model["model_path"],
-                model["quantization"],
-                model["lora_repo"],
-                model["max_model_len"],
+                openai_model["model_path"],
+                openai_model["quantization"],
+                openai_model["lora_repo"],
+                openai_model["max_model_len"],
             )
             lora_request = None
-            if model["lora_repo"] is not None:
+            if openai_model["lora_repo"] is not None:
                 lora_request = LoRARequest(
-                    f"{model['name']}-lora", 1, model["lora_repo"]
+                    f"{openai_model['name']}-lora", 1, openai_model["lora_repo"]
                 )
 
             sampling_params = SamplingParams(
                 temperature=TEMPARATURE, top_p=0.95, max_tokens=MAX_TOKENS
             )
         else:
-            if model["lora_repo"] is None:
-                model_path = model["model_path"]
+            if openai_model["lora_repo"] is None:
+                model_path = openai_model["model_path"]
             else:
-                model_path = model["lora_repo"]
+                model_path = openai_model["lora_repo"]
 
             try:
                 pipe = transformers_helpers.load_model_and_configurations(
                     args.hf_token, model_path, TEMPARATURE
                 )
             except Exception as e:
-                logger.error(f"Error loading model {model['name']}: {e}")
+                logger.error(f"Error loading model {openai_model['name']}: {e}")
                 continue
 
         for prompt_id in args.prompt_id:
             model_start_time = time.time()
 
-            logger.info(f"Running model {model['name']} with prompt {prompt_id}")
+            logger.info(f"Running model {openai_model['name']} with prompt {prompt_id}")
             error_count = 0
             timeout_count = 0
             json_count = 0
@@ -293,43 +307,43 @@ def main_runner(args, runner_config, models_to_run, openai_models_models_to_run)
                     bechmark_path.parent
                     / ".scrapy/results"
                     / current_time
-                    / f"{model}-{prompt_id}"
+                    / f"{openai_model}-{prompt_id}"
                 )
             else:
                 results_dst = (
                     Path(args.results_dir)
                     / current_time
-                    / f'{model["name"]}-{prompt_id}'
+                    / f'{openai_model["name"]}-{prompt_id}'
                 )
 
             os.makedirs(results_dst, exist_ok=True)
 
-            if model["use_vllms_for_evaluation"]:
+            if openai_model["use_vllms_for_evaluation"]:
                 model_evaluation_vllm(
-                    model["name"],
+                    openai_model["name"],
                     prompt_id,
                     dataset,
                     pipe,
                     results_dst,
-                    use_system_prompt=model["use_system_prompt"],
+                    use_system_prompt=openai_model["use_system_prompt"],
                     lora_request=lora_request,
                     sampling_params=sampling_params,
                 )
 
             else:
                 model_evaluation_transformers(
-                    model["name"],
+                    openai_model["name"],
                     prompt_id,
                     dataset,
                     pipe,
                     results_dst,
-                    use_system_prompt=model["use_system_prompt"],
-                    batch_size=model["batch_size"],
+                    use_system_prompt=openai_model["use_system_prompt"],
+                    batch_size=openai_model["batch_size"],
                     evaluation_type=args.evaluation_type,
                 )
 
             logger.info(
-                f"Model {model['name']} finished in {time.time()-model_start_time:.2f} seconds"
+                f"Model {openai_model['name']} finished in {time.time() - model_start_time:.2f} seconds"
             )
 
         del pipe
@@ -337,7 +351,9 @@ def main_runner(args, runner_config, models_to_run, openai_models_models_to_run)
         torch.cuda.empty_cache()
 
     # running gpt models
-    for model in openai_models_models_to_run:
+    error_count = 0
+    json_count = 0
+    for openai_model in openai_models_models_to_run:
         for prompt_id in args.prompt_id:
 
             error_count = 0
@@ -352,30 +368,31 @@ def main_runner(args, runner_config, models_to_run, openai_models_models_to_run)
                     bechmark_path.parent
                     / ".scrapy/results"
                     / current_time
-                    / f"{model}-{prompt_id}"
+                    / f"{openai_model}-{prompt_id}"
                 )
             else:
                 results_dst = (
                     Path(args.results_dir)
                     / current_time
-                    / f'{model["name"]}-{prompt_id}'
+                    / f'{openai_model["name"]}-{prompt_id}'
                 )
 
             os.makedirs(results_dst, exist_ok=True)
 
             model_start_time = time.time()
             model_evaluation_openai(
-                model["name"],
+                openai_model["name"],
                 prompt_id,
                 args.openai_key,
                 dataset,
                 results_dst,
-                use_system_prompt=model["use_system_prompt"],
+                use_system_prompt=openai_model["use_system_prompt"],
                 evaluation_type=args.evaluation_type,
+                temperature=openai_model.get("temperature", 0),
             )
 
             logger.info(
-                f"Model {model['name']} finished in {time.time()-model_start_time:.2f} seconds"
+                f"Model {openai_model['name']} finished in {time.time() - model_start_time:.2f} seconds"
             )
             logger.info("Running translator")
 
