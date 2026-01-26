@@ -4,3 +4,6 @@ openai
 vllm
 scikit-learn
 pytest
+pandas
+bitsandbytes
+accelerate
