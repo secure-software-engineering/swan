@@ -54,3 +54,56 @@ def process_requests(
     # sort dict based on keys
     responses = dict(sorted(responses.items()))
     return responses.values()
+
+
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from langchain_openai import AzureChatOpenAI
+
+
+def process_requests_for_azure(
+    prompts,
+    azure_endpoint,
+    azure_deployment,
+    azure_api_key,
+    api_version,
+    temperature=0,
+    print_responses: bool = False,
+    max_new_tokens: int = 128,
+    max_workers: int = 1,
+):
+    """Continuously process a list of prompts and handle the outputs."""
+
+    # Azure OpenAI model
+    model = AzureChatOpenAI(
+        azure_endpoint=azure_endpoint,
+        azure_deployment=azure_deployment,
+        api_version=api_version,
+        api_key=azure_api_key,
+        temperature=temperature,
+    )
+
+    responses = {}
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_article = {
+            executor.submit(
+                get_response,
+                model,
+                prompt,
+            ): req_id
+            for req_id, prompt in enumerate(prompts)
+        }
+
+        total_prompts = len(prompts)
+        completed_prompts = 0
+
+        for future in as_completed(future_to_article):
+            result = future.result()
+            req_id = future_to_article[future]
+            responses[req_id] = result
+            completed_prompts += 1
+            print(f"Processed {completed_prompts}/{total_prompts}")
+
+    # Sort responses by request id
+    responses = dict(sorted(responses.items()))
+    return responses.values()
