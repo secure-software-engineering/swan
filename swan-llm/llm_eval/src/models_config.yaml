@@ -280,3 +280,36 @@ openai_models:
   use_system_prompt: true
   use_vllms_for_evaluation: false
   max_model_len: null
+
+- name: "gpt-5.1-2025-11-13"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
+
+- name: "gpt-5-2025-08-07"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
+  temperature: 1.0
+
+- name: "gpt-5-mini-2025-08-07"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
+  temperature: 1.0
+
+- name: "gpt-5-nano-2025-08-07"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
+  temperature: 1.0
+
+- name: "gpt-4o-2024-11-20"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
+
+- name: "gpt-4.1-2025-04-14"
+  use_system_prompt: true
+  use_vllms_for_evaluation: false
+  max_model_len: null
